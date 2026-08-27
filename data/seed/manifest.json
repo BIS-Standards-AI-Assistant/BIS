@@ -1,0 +1,46 @@
+[
+  {
+    "file": "is-5522-2014.txt",
+    "standardNumber": "IS 5522:2014",
+    "title": "Stainless Steel Sheets and Strips for Utensils",
+    "documentType": "product_manual",
+    "sourceUrl": "https://bis.gov.in/wp-content/uploads/2019/05/PM5522-final.pdf",
+    "sourceOrg": "BIS",
+    "version": "PM/IS 5522/1, May 2019",
+    "publicationDate": "2019-05",
+    "retrievedAt": "2026-08-27T00:00:00.000Z"
+  },
+  {
+    "file": "is-14756-2017.txt",
+    "standardNumber": "IS 14756:2017",
+    "title": "Stainless Steel Cookware",
+    "documentType": "product_manual",
+    "sourceUrl": "https://bis.gov.in/wp-content/uploads/2020/05/PM-IS-14756-May-2020.pdf",
+    "sourceOrg": "BIS",
+    "version": "PM/IS 14756/1, May 2020",
+    "publicationDate": "2020-05",
+    "retrievedAt": "2026-08-27T00:00:00.000Z"
+  },
+  {
+    "file": "is-15410-2003.txt",
+    "standardNumber": "IS 15410:2003",
+    "title": "Plastics Bottles/Containers for Packaged Natural Mineral Water and Packaged Drinking Water - Specification",
+    "documentType": "product_manual",
+    "sourceUrl": "https://bis.gov.in/wp-content/uploads/2020/07/PM-15410-CMD2.pdf",
+    "sourceOrg": "BIS",
+    "version": "PM/15410/1, July 2020",
+    "publicationDate": "2020-07",
+    "retrievedAt": "2026-08-27T00:00:00.000Z"
+  },
+  {
+    "file": "is-14543-2016.txt",
+    "standardNumber": "IS 14543:2016",
+    "title": "Packaged Drinking Water (other than Packaged Natural Mineral Water)",
+    "documentType": "product_manual",
+    "sourceUrl": "https://bis.gov.in/wp-content/uploads/2020/07/Revised-PDW-manual.pdf",
+    "sourceOrg": "BIS",
+    "version": "PM/14543/3, July 2020",
+    "publicationDate": "2020-07",
+    "retrievedAt": "2026-08-27T00:00:00.000Z"
+  }
+]

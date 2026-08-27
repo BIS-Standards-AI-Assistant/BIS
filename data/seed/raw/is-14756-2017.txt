@@ -1,0 +1,302 @@
+
+
+ 
+ 
+PM/ IS 14756/ 1/ May 2020 
+   
+ 
+BUREAU OF INDIAN STANDARDS  
+Manak Bhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+1 
+ 
+PRODUCT MANUAL FOR 
+STAINLESS STEEL COOKWARE  
+ACCORDING TO IS 14756: 2017  
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees  to  ensure  coherence  of  practice  and  transparency  in  operation  of  certification  under 
+Scheme-I of Bureau of Indian Standards (Conformity Assessment) Regulations, 2018 for various 
+products.  The  document  may  also  be  used  by  prospective  applicants  desirous  of  obtaining  BIS 
+certification licence/certificate. 
+1. 
+Product 
+: IS 14756: 2017 
+ 
+Title 
+: STAINLESS STEEL COOKWARE 
+ 
+No. of Amendments 
+: NIL 
+    
+2. 
+Sampling Guidelines: 
+a) 
+Raw material 
+: 
+a) Stainless Steel - IS 5522 or IS 15997 
+b) Material for composite bottom - IS 15960 
+c) Handles - IS13395 
+b) 
+Grouping guidelines 
+: Please refer ANNEX –A 
+c) 
+Sample Size 
+: 2 Pcs 
+    
+3. 
+List of Test Equipment 
+: Please refer ANNEX –B 
+ 
+ 
+  
+4. 
+Scheme   of   Inspection 
+and Testing 
+: Please refer ANNEX –C 
+ 
+ 
+ 
+ 
+5. 
+Possible tests in a day  : 
+All test except Staining Test. 
+6. 
+Scope of the Licence:       
+ “Licence is granted to use Standard Mark as per IS 14756:2017 with the following scope: 
+ 
+Name of the product Stainless Steel Cookware 
+Type of utensil  
+Type of bottom  
+With/without handle 
+ 
+
+PM/ IS 14756/ 1/ May 2020 
+ 
+2 
+ 
+ANNEX A 
+Grouping Guidelines  
+ 
+1. Stainless-Steel cookware as per IS 14756 shall be grouped based on the following: 
+a. Type of Utensils 
+ Cooking utensils 
+ Serving utensils/ Table utensils/ Storage utensils  
+b. Type of Bottom (Base) 
+ Composite Bottom  
+- Copper electro-deposited 
+- Cladded Base 
+o Copper clad 2 ply and 3 ply 
+o Aluminium clad 2 ply and 3 ply 
+ Without Composite Bottom 
+c. Handle - With or without handle 
+ 
+2. The guidelines given below shall be followed for GoL/CSoL: 
+a) One  Article of any shape  and  dimension from  Cooking  Utensils shall  be  tested for  all 
+requirements to cover that type in the scope of licence. 
+b) One Article of any shape and dimension from Serving utensils/ Table utensils/ Storage utensils 
+shall be tested for all requirements to cover all the types in the scope of licence. 
+c) For Composite Bottom utensils, sample of each type (Copper electro-deposited/Cladded base) 
+shall be tested to cover that particular variety in the scope of licence. For Cladded base, sample 
+of any base/construction shall be tested to cover all the varieties of Cladded base utensils. When 
+a sample of Composite bottom is tested, then utensils without composite bottom may also be 
+covered. 
+3. If utensil with handle is tested, utensils without handle may also be covered. 
+ 
+4. The Firm shall declare the varieties intended to be covered in the  Licence. The Scope of  Licence 
+may be restricted based on the Manufacturing and Testing capabilities of the Manufacturer.   
+  
+5. During the operation of the Licence, BO shall ensure that all the varieties covered in the Licence are 
+tested in rotation, to the extent possible. 
+ 
+ 
+  
+
+ 
+PM/ IS 14756/ 1/ May 2020 
+ 
+3 
+ 
+ANNEX-B 
+ 
+List of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+ 
+Sl. No. Tests used in with Clause 
+Reference 
+Test Equipment 
+1.  Shape and Dimension, Cl. 4.1 Measuring Scale 
+Vernier Caliper 
+2.  Thickness    of    Utensils and 
+material, Cl. 4.2 & 4.3 
+Micrometer 
+3.  Staining Test, Cl. 6.1 Hot Soapy Water 
+Acetone or methylated Spirits 
+Soft Cloth 
+Conditioning Chamber  
+Glacial Acetic Acid 
+Distilled Water 
+Sodium Chloride 
+4.  Mechanical Shock Test,     Cl. 
+6.2 
+Arrangement  for Mechanical  Shock  test  equipped  with 
+Steel  Ball  of  half  a  kilogram  and  dropping  arrangement 
+from a Height of 500mm 
+5.  Thermal Shock Test,  Cl. 6.3 Oven  
+6.  Dry Heat Test, Cl. 6.4 Induction Heater  
+Thermometer  
+LPG Cylinder and Domestic Gas Stove 
+7.  Coating Thickness Test,    Cl. 
+6.5 
+Coat Thickness meter 
+ 
+The above list is indicative only and may not be treated as exhaustive. 
+
+PM/ IS 14756/ 1/ May 2020 
+ 
+4 
+ 
+ANNEX C 
+ 
+Scheme of Inspection And Testing  
+ 
+1. LABORATORY - A laboratory shall be maintained which shall be suitably equipped (as 
+per the requirement given in column 2 of Table 1) and staffed, where different tests given in 
+the specification shall be carried out in accordance with the methods given in the specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipments. 
+ 
+2. TEST RECORDS – The manufacturer shall maintain test records for the tests carried out 
+to establish conformity. 
+ 
+3. LABELLING AND MARKING – As per the requirement of IS 14756:2017.  
+ 
+4. CONTROL UNIT – Cookware of the same type manufactured in a day shall constitute a 
+control unit.  
+ 
+5. LEVELS OF CONTROL - The tests as indicated in column 1 of Table 1 and the levels of 
+control  in  column  3  of  Table  1,  shall  be  carried  out  on  the  whole  production  of  the  factory 
+which  is  covered  by  this  plan  and  appropriate  records  maintained  in  accordance  with    
+paragraph 2 above.  
+ 
+5.1 All the production which conforms to the Indian Standard and covered by the licence should 
+be marked with Standard Mark 
+ 
+6. REJECTIONS – Disposal of non-conforming product shall be done in such a way so as to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+PM/ IS 14756/ 1/ May 2020 
+ 
+5 
+ 
+ 
+TABLE 1 
+ 
+(1) (2) (3) 
+Test Details Test equipment 
+requirement 
+R: required (or)  
+S: Sub-contracting 
+permitted 
+Levels of Control 
+Cl. Requirement Test Method No. of Sample Frequency Remarks 
+Clause Reference 
+3 Material 3 IS 14756 
+S 
+One Each 
+Consignment 
+Material as per IS 5522 and IS  15997 shall 
+be  ISI  Marked.  For  other  materials,  no 
+further  testing  is  required  if  accompanied 
+with Test Certificate or ISI marked. 
+4 
+ 
+Shapes and 
+Dimensions 
+4.1 IS 14756 R One 
+ 
+Each Control 
+Unit 
+ 
+4.2, 4.3 
+Table 1 
+IS 14756 
+ 
+R Three 
+ 
+Each Control 
+Unit 
+ 
+5 
+ 
+Workmanship 
+and Finish 
+5.1, 5.2 
+and 5.3 
+IS 14756 R Each cookware  
+Handles 
+(if required) 
+5.4 IS 14576 
+IS 13395 
+S One Each 
+Consignment 
+No     further     testing     is     required     if 
+accompanied  with  Test  Certificate  or  ISI 
+marked. 
+6 
+TESTS 
+  
+    
+6.1 
+Staining Test 
+       6.1 IS 14576 
+R One sample of each 
+type for each solution 
+Once in a 
+week 
+ 
+6.2 
+ 
+Mechanical 
+Shock 
+6.2 
+ 
+IS 14576 
+ 
+R One 
+sample 
+Daily 
+For cladded utensils only 
+ 
+6.3 Thermal Shock 6.3 IS 14576 R 
+6.4 
+ 
+Dry Heat Test 6.4 
+ 
+IS 14576 R One 
+sample 
+Once in a 
+week 
+6.5 Coating 
+Thickness Test 
+6.5 IS 14576 R One sample of each 
+type 
+Once in a 
+week 
+For electro-deposition of copper 
+ 
+Note 1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empaneled by the Bureau. 
+Note 2: Levels of control given in column 3 are only recommendatory in nature. The manufacturer may define the control unit/batch/lot and submit his own levels of 
+control in column 3 with proper justification to BO Head.  

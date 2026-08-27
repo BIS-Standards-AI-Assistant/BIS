@@ -1,0 +1,737 @@
+
+
+ 
+ 
+PM/IS 5522/1 
+May 2019 
+ 
+PRODUCT MANUAL FOR 
+Stainless Steel Sheets and Stripsfor Utensils 
+According to IS 5522:2014 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees  to  ensure  coherence  of  practice  and  transparency  in  operation  of  certification  under 
+Scheme-I of Bureau of Indian Standards (Conformity Assessment) Regulations, 2018 for various 
+products. The document may also be used by prospective applicants desirous of obtaining BIS 
+certification licence/certificate. 
+ 
+1. 
+Product : 
+IS 5522:2014 
+ 
+Title : 
+Stainless Steel Sheets and Strips for Utensils 
+ 
+No. of amendments : 
+NIL 
+2. 
+Sampling Guidelines   
+a) 
+Raw material : 
+No specific requirement 
+b) 
+Grouping Guidelines : 
+Please refer Annex - A 
+c) 
+Sample Size : 
+Mechanical: 2 pcs of 0.5m, Chemical: 5 pcs of 5cm x 5cm 
+(for OES/instrumental method) or 100 g drilling (for 
+chemical method) 
+3. 
+List of Test Equipment : 
+Please refer Annex –B 
+4. 
+Scheme of Inspection and 
+Testing 
+: 
+Please refer Annex –C 
+5. 
+Possible tests in a day  : 
+Please refer Annex – D 
+6. 
+Scope of the Licence : 
+ Licence is granted to use Standard Mark as per IS 5522:2014 with the following scope: 
+ Name of the product 
+Stainless Steel Sheets and Strips for Utensils 
+ 
+Grade Grade with Letter symbol and Numerical symbol 
+ 
+Size Thickness and Width(with trimmed edge) 
+ 
+Finish Surface Finish 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+PM/IS 5522/1 
+May 2019 
+ 
+ANNEXURE A 
+TO PRODUCT MANUAL FOR 
+Stainless Steel Sheets and Strips for Utensils 
+According to IS 5522:2014 
+ 
+GROUPING GUIDELINES 
+ 
+ 
+In order to align with existing guidelines for steel items and uniform practice is followed, the 
+following procedure to be adopted towards grant of licence andinclusion of additional varieties. 
+ 
+1.   Grouping   as   per   different variety   of   stainless steel   on   the   basis   of   chemical 
+composition/alloying elements: 
+ 
+ Grade Designation 
+ 
+ 
+Group 1 Austenitic 304 and 302 
+ 
+Group 2 Ferritic 430 
+ 
+ 
+2. One sample from each group of any grade designation of Stainless Steel Sheets and 
+Strips for  Utensils  applied  for  licence/inclusion  may  be drawn  and  has  to  be  tested  for all  the 
+requirements of the specification and applicable to the variety tested. If the sample passes, then 
+licence  may  be  granted/inclusion  be  done  for  the  Grade designation  of  Stainless  Steel  Sheets 
+and  Strips  for all  sizes  for  Utensils  for  the Group,  provided  that  the  firm  is  having  all  the 
+necessary   manufacturing   and   testing facilities   for   the   manufacture   and   testing   of   the 
+sizes/grades  designation/varieties of  Stainless  Steel  Sheets  and  Strips  for  Utensils  to  be 
+included in the licence. 
+ 
+3.  Surface  Finish:  Certain  surface finishes get  converted  to  superior surface finishes based  on 
+further  processing.  Further,  some  surface  finishes  are  independent  of  each other.  Hence, 
+surface  finish  type  shall  be  restricted  depending  upon  the manufacturing  facility  available  with 
+the firm. 
+ 
+4.  Manufacturing/Testing  facilities  &  capabilities  including  online  to  be  verified  with respect  to 
+sizes/grades  designation/varieties  and  accordingly  same  may  be  covered  in the  scope  of 
+license. 
+ 
+5. While considering GOL/Inclusion of additional varieties, it shall be ensured that the applicant/ 
+licensee    has    got    the    complete    manufacturing    and testing    facilities    for    all    the 
+sizes/grades/designation/varieties applied. 
+ 
+6.  Erichsen  Cupping  Test  (Clause  8.5  of  IS  5522  :  2014) is  subject  to  agreement  between 
+purchaser  and  the  manufacturer.  Exclusion  /  Inclusion  of  Erichsen  Cupping  Test  in scope  of 
+licence will be based accordingly. 
+ 
+7. During the operation of license, BO shall ensure that all thesizes/grades/designation/varieties 
+covered in the license are drawn for independent testing on rotation over a period of time. 
+
+ 
+ 
+PM/IS 5522/1 
+May 2019 
+ANNEXURE B 
+TO PRODUCT MANUAL FOR 
+Stainless Steel Sheets and Strips for Utensils 
+According to IS 5522:2014 
+ 
+LIST OF TESTING EQUIPMENT 
+ 
+Major test equipment required to test as per requirements of Indian Standard. 
+ 
+Sr No.  Test Equipment Tests used in with Clause 
+    Reference 
+1. 
+ 
+Visual Examination 
+FREEDOM FROM 
+DEFECTS 
+    Cl. 6 
+2.  (i) Analytical method  
+CHEMICAL 
+COMPOSITION 
+  
+(1) Carbon & Sulphur: IS 228(P-I) Carbon – 
+Cl. 7 
+  Sulphur (Strohlein’s type) apparatus- complete set  
+  (consisting of glass parts assembled on wooden  
+  stand, combustion furnace, thyrister based  
+  electronic control panel, Oxygen cylinder,  
+  
+Sulphur cup, combustion boats Barometer, Room 
+ 
+  temperature thermometer etc. Standard steel of  
+  appropriate values of carbon & Sulphur.  
+  
+(2) Silicon: IS 228 (Part 8) Hydrochloric acid, 
+ 
+  Sulphuric acid, Nitric acid ,Silver Nitrate,  
+  Perchloric acid, Hydrofluoric acid,  
+  Weighing balance 200g, LC 0.1 mg, Muffle  
+  furnace up to 1100°C, Platinum Crucibles, Hot  
+  
+Plate, Porcelain dish 300ml, Filter paper pulp. Filter 
+ 
+  papers General lab glassware  
+  
+(3) Manganese IS 228 (Part 2): Sulphuric Acid, 
+ 
+  Concentrated .Nitric Acid - Relative density 1.42,  
+  Phosphoric Acid, Ammonium persulphate, Silver  
+  Ntrate,Sodium Chloride, Sodium carbonate,  
+  Sodium arsenite, Steel sample of known  
+  Manganese Content  
+  
+(4) Nickel:Cl 6,2 of 228(P-5): Hydrochloric 
+ 
+  Acid, Nitric Acid-, Perchloric Acid -, Tartaric  
+  Acid, Ammonium hydroxide, Dimethylglyoxime,  
+  Methyl Red , Ammonium Nitrate, Hydrofluoric  
+  Acid – Sintered glass crucible No. 3,  
+  
+(5) Chromium IS 228 (Part 6): Wide mouth 
+ 
+  conical Flask, glass beads, Phosphoric Acid,  
+  Sulphuric Acid, Concentrated Nitric Acid,  
+  Hydrochloric Acid - , Silver Nitrate, Ammonium  
+  Persulphate Solution, Ferrous Ammonium  
+  Sulphate, Ammonium persulphate, Potasium  
+  Permangnate(AR) Sodium Oxalate(GR )  
+ 
+
+  PM/ IS 5522/ 1 
+May 2019 
+  
+(6) Phosphorus: IS 228 (Part 3). Nitric Acid 
+ 
+  conc., Potassium Permanganate, ted Ammonium  
+  Hydroxide, Sodium Nitrite, ammonium  
+  molybdate , Phenolphthalein Solution ( 1% ),  
+  Sodium Hydroxide, Potassium hydroxide,  
+  Potassium Nitrate, sodium carbonate,  
+  Hydrochloric Acid-, Hydrofluoric Acid,  
+  Perchloric Acid ferrous sulphate crystals ( FeSO4,  
+  7H,O ), Sulphurous Acid, Hydrobromic Acid -  
+  filter paper pulp pad.  
+  
+(7) Nitrogen: IS 228 (Part 19) APPARATUS FOR 
+ 
+  DETERMINATION OF NITROGEN B STEAM  
+  DISTILLATION(as per Fig 1 of IS 228 (Part 19)  
+  Nessler’s Reagent(potassium iodide, mercuric  
+  chloride, potassium hydroxide)  Potassium  
+  Sulphate, Crystals, Copper Sulphate Crystals,  
+  Sulphuric Acid rd=1.84, Barium Chloride, Mixed  
+  Indicator Solution (Bromocresol green, Methyl  
+  Red) Devarda’s Alloy, (50 Cu, 5 Al, 5 Zn.), Boric  
+  Acid, Sodium Hydroxide-Tartaric Acid,  
+  Potassium acid phthalate  
+  Note: Availability of General lab equipment  
+  Balance 200g (LC =0.1 mg), Hot plates, Fuming  
+  chambers & Glass ware i.e beakers, flasks,  
+  burette, pipettes, volumetric flask round bottom  
+  flask, funnels, Filter paper shall be insured during  
+  the visit.  
+    
+  
+ii) Instrumental Method -  Optical Emission 
+Spectrometer (OES) with requisite channels and 
+certified reference materials -do- 
+    
+3. 
+ 
+Universal Tensile testing machine(0-100KN), Tensile & Elongation Cl. 8.2 
+  Vernier Clippers 150mm LC 0.2 mm)  
+4. 
+ 
+Hardness tester (Brinell /Rockwell/Vickers) Hardness test Cl 8.3 
+5. 
+ 
+Universal Tensile testing machine with mandrel Bend Test Cl. 8.4 
+  of suitable sizes  
+6. 
+ 
+Cupping test Equipment Erichsen Cupping Test Cl 8.5 
+    (Optional Test) 
+7. 
+ 
+Steel Scale 1000 mm LC 0.5mm 
+DIMENSIONS  Cl 9 & Cl 10 
+  Vernier Clipper 600mm LC 0.02mm  
+  Measuring Tape 400cm LC 1mm  
+8. 
+ 
+Surface plate size 2000mm X1000 mmx 5mm, Flatness(Cl. 10.4) 
+  Feeler Gauge, Vernier clippers  
+9 
+ 
+Surface plate size 2000mm X1000mmx5mm, Camber (Cl. 10.5) 
+  Feeler Gauge, Vernier calipers  
+10 
+ 
+Visual 
+Surface Finish (Cl 11) 
+ 
+ 
+
+  PM/ IS 5522/ 1 
+May 2019 
+ 
+Least Count and Range should match the values/parameters/tolerances mentioned in the 
+Indian Standard. 
+ 
+The above list is meant only for guidance and may not be treated as exhaustive. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+  PM/ IS 5522/ 1 
+May 2019 
+ANNEXURE C 
+TO PRODUCT MANUAL FOR 
+Stainless Steel Sheets and Strips for Utensils 
+According to IS 5522:2014 
+ 
+SCHEME OF INSPECTION AND TESTING 
+ 
+ 
+1.  LABORATORY - A laboratory shall be maintained which shall be suitably equipped 
+(as per the requirement given in column 2 of Table 1) and staffed, where different tests given 
+in  the  specification  shall  be  carried  out  in  accordance  with  the  methods  given  in  the 
+specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipments. 
+ 
+2.  TEST RECORDS – The manufacturer shall maintain test records for the tests carried 
+out to establish conformity. 
+ 
+3.  PACKING AND  MARKING –The  Standard  Mark,  as  given  in  the  Schedule  of  the 
+license shall be incorporated on each package of sheets, strips and coils provided that the 
+stainless  steel  contained  in  the  package thus  marked  conforms  to  the  requirement  of  the 
+specification. 
+ 
+3.1 Packing and Marking shall be done as per the provisions of IS 5522. In addition, details 
+of BIS Certification i.e. BIS Licence Number CM/L—and BIS website shall be marked on the 
+package as follows ―For details of BIS certification please visit www.bis.gov.in‖ 
+ 
+4.  CONTROL UNIT – For the purpose of this scheme the material or part thereof 
+representing the same cast/heat-treatment batch and of the same thickness per shift shall 
+constitute a control unit. 
+ 
+5.  LEVELS  OF  CONTROL - The  tests  as  indicated  in  column  1  of  Table  1  and  the 
+levels of control in column 3 of Table 1, shall be carried out on the whole production of the 
+factory which is covered by this plan and appropriate records maintained in accordance with 
+paragraph 2 above. 
+ 
+5.1  All  the  production  which  conforms  to  the  Indian  Standards  and  covered  by  the  licence 
+should be marked with Standard Mark. 
+ 
+6. TEST  CERTIFICATE-For  each  consignment  of  BIS  Certified  material  conforming  to  this 
+specification  there  shall  be  a  test certificate  which  shall  contain  the  Standard  Mark,  the 
+lot/cast number and the corresponding test results (as given in Annexure I enclosed). 
+ 
+7.  REJECTIONS – Disposal of non-conforming product shall be done in such a way so 
+as  to  ensure  that  there  is  no violation  of  provisions  of  BIS  Act,  2016.Any  rejected  material 
+which is potentially resalable be sheared or cut or deformed in such a manner that it cannot 
+be used for any other purpose. A separate record shall be maintained giving information on 
+quantity and   batch   number/control   unit   number,   as   applicable,   relating   to   all   such 
+rejections/defective/substandard   material   of   the   production   not   conforming   to   the 
+requirements  of  the  Specification  and  the  method  of  its  disposal.  Such  material  shall  in  no 
+case  be stored  together  with  that  conforming  to  the  Specification.  The  Standard  Mark  (if 
+already applied) on rejected material should be defaced. 
+
+                      PM/ IS 15997/1 
+May 2019 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+ 
+TABLE 1  
+LEVELS OFCONTROL 
+(Clause 5ofSIT) 
+ 
+(1) (2) (3) 
+TEST DETAILS Test 
+Equipment  
+R: required 
+S: Sub 
+Contracting 
+LEVELS OFCONTROL 
+Cl. 
+Requirement 
+TestMethods 
+ 
+ 
+ 
+ 
+ 
+No. 
+of samples 
+Frequency Remarks 
+Clause Reference 
+6 
+Freedom from 
+defects 
+6 IS 5522 R Each 
+sheet/coil 
+Each sheet/coil 
+The inspection shall be doneover 
+the entire cross-section on both 
+sides. 
+7 
+Chemical 
+Composition 
+      
+ 
+a) Ladle 
+Analysis 
+7 -do- R One Each heat Applicable for primary stainless 
+steel producers only 
+ 
+b) Check 
+analysis 
+  S One Each heat Not required if raw material is ISI 
+marked and accompanied by test 
+certificate 
+8 
+Mechanical tests 
+      
+8.2 
+Tensile test 
+ IS 1608 (Pt. 
+1) 
+R One Each coil 
+In case of material annealed in coil 
+form through continuous annealing 
+line 
+
+                      PM/ IS 15997/1 
+May 2019 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+ 
+ 
+   One 
+each 100 or less 
+number of pieces of the 
+same cut and nominal 
+thickness annealed as 
+a batch 
+In case material annealed in batch 
+process 
+8.3 
+Hardness test 
+ IS 1500 or IS 
+1501 (Part 1) 
+or IS 1586 
+R One Each coil 
+In case of material annealed in coil 
+form through continuous annealing 
+line 
+ 
+ 
+   One 
+each 100 or less 
+number of pieces of the 
+same cut and nominal 
+thickness annealed as 
+a batch 
+In case material annealed in batch 
+process 
+8.4 
+Bend Test (for 
+gradeX07Cr17) 
+ 
+ 
+8.4.2 
+IS 1599 
+ 
+IS 5522 
+R One Each coil 
+In case of material annealed in coil 
+form through continuous annealing 
+line 
+ 
+ 
+   One 
+each 100 or less 
+number of pieces of the 
+same cut and nominal 
+thickness annealed as 
+a batch 
+In case material annealed in batch 
+process 
+8.5 
+Erichsen Cupping 
+test* 
+ IS 10175 S One Each coil 
+In case of material annealed in coil 
+form through continuous annealing 
+line 
+ 
+*Subject to 
+agreement between 
+purchaser and 
+manufacturer and 
+applicable only for 
+sheetsof drawing, 
+deep drawing and 
+extra deep drawing 
+typeshaving 
+thickness from 0.5 
+mm to 1.25 mm 
+   One 
+each 100 or less 
+number of pieces of the 
+same cut and nominal 
+thickness annealed as 
+a batch 
+In case material annealed in batch 
+process 
+
+                      PM/ IS 15997/1 
+May 2019 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+9, 10 
+Dimensional 
+tolerances 
+9, 10 IS 5522 R One 
+Each control unit every 
+half hour 
+Measurement of thickness shall be 
+made at least 10mm away from 
+edge of sheet orcoil at least at two 
+places at plate or sheet or strip at 
+every 10 metre in case of coil 
+11 
+Surface finish 
+11 -do- R One 
+Each sheet/coil The inspection shall be doneover 
+the entire cross-sectionon both 
+sides. 
+ 
+Note-1: Whether test equipment is required or sub-contracting is permitted in column 2 shall be decided by the Bureau and shall be mandatory. 
+Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empaneled by the Bureau. 
+ 
+Note-2: The control unit and levels of control as decided by the Bureau are obligatory to which the licensee shall comply with. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+                      PM/ IS 15997/1 
+May 2019 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+ 
+ 
+ 
+ 
+ 
+ 
+ANNEXURE I 
+               (Para 6 of the Scheme of Inspection and Testing)      
+                                    XYZ IRON AND STEEL COMPANY  
+                                                                            (Registered office Address and works address) 
+TEST CERTIFICATE FOR  
+Stainless Steel Sheets and Strips for Utensils According to IS 5522:2014 
+ 
+TEST CERTIFICATE No.__________________________________________________________                                            
+DATE_____________           
+To M/s_________________________________________________________________________________                                                                                                  
+We certified that the material described below fully conforms to IS 5522:2014. Chemical composition and Physical properties of the product, as 
+tested in accordance with the Scheme of Inspection and Testing contained in the BIS Certification Marks 
+LicenceNo.CM/L_____________________ are as indicated below against each order No. 
+(PLEASE REFER TO IS 5522:2014 FOR DETAILS OF SPECIFICATION REQUIREMENTS)  TEST RESULTS 
+        
+Orde
+r No. 
+& 
+Date  
+ (nom 
+Size)  
+Contro
+l Unit 
+No. 
+/Cast 
+Numb
+er 
+Grade  Quantit
+y in 
+tonnes 
+CHEMICAL COMPOSITION  PHYSICAL PROPERTIES                          
+Remar
+ks 
+C 
+% 
+S 
+% 
+P 
+% 
+Si 
+% 
+Mn 
+% 
+Ni 
+% 
+Cr 
+   % 
+N% 0.2% 
+proof 
+stress 
+Tensile
+Strengt
+h 
+ 
+(N/mm
+2
+) 
+ 
+%age 
+elongation 
+Hardne
+ss 
+Bend 
+test* 
+Erichsen 
+cupping 
+test# 
+ 
+   # 
+If agreed between purchaser and manufacturer 
+* If applicable 
+
+                      PM/ IS 15997/1 
+May 2019 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+REMARKS 
+WAGON NO.   
+TRUCK NO.                                                                                                                                                                FOR XYZ IRON AND STEEL 
+COMPANY  
+(It is suggested that size A4 paper be used for this test certificate)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+ 
+ 
+ 
+ 
+ 
+ANNEXURE D 
+TO PRODUCT MANUAL FOR 
+Stainless Steel Sheets and Strips for Utensils 
+According to IS 5522:2014 
+ 
+POSSIBLE TESTS IN A DAY 
+ 
+ 
+Test 
+ 
+Clause IS 5522 
+ 
+Freedom from defects 
+ 
+Cl. 6 
+ 
+Chemical composition , 
+ 
+Cl. 7 
+ possible elements    
+ 
+Tensile & Elongation 
+ 
+Cl. 8.2 
+ 
+Hardness test 
+ 
+Cl 8.3 
+ 
+Bend Test 
+ 
+Cl. 8.4 
+ 
+Erichsen Cupping Test 
+ 
+Cl. 8.5 
+ (Optional Test)    
+ 
+Dimensions 
+ 
+Cl. 9 & Cl. 10 
+ 
+Flatness 
+ 
+Cl. 10.4 
+ 
+Camber 
+ 
+Cl. 10.5 
+ 
+Surface Finish 
+ 
+Cl. 11 
+ 

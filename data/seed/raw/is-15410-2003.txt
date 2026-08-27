@@ -1,0 +1,464 @@
+
+
+                        PM/ 15410/ 1  
+July 2020 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+PRODUCT MANUAL FOR 
+Plastics Bottles /Containers for Packaged Natural Mineral Water and Packaged Drinking Water 
+According to IS 15410:2003 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  &  licensees  to 
+ensure coherence  of  practice  and  transparency  in  operation  of  certification  under  Scheme-I  of  Bureau  of 
+Indian Standards (Conformity Assessment) Regulations, 2018 for various products. The document may also 
+be used by prospective applicants desirous of obtaining BIS certification licence/certificate. 
+ 
+1. Product : IS 15410:2003 
+ Title : Plastics   Bottles   /Containers   for   Packaged   Natural   Mineral 
+Water and Packaged Drinking Water - Specification 
+ No. of amendments : 5 
+2. Sampling Guidelines   
+a) Raw material : Material    used    for    plastic    containers    shall    meet    the 
+requirements of Clause 4.1 of IS 15410:2003 and the materials 
+used for top lids etc shall meet the requirements of Cl 4.2 
+b) Grouping Guidelines : Not applicable – samples of each type of bottle/container shall 
+be tested 
+c) Sample Size : 10   Filled   +   6   Empty   +   30   Caps   for   each   variety/size   of 
+containers  
+(Declaration of declared wall thickness shall be obtained during 
+the drawl of sample) 
+3. List of Test Equipment : Please refer Annex - B 
+4. Scheme of Inspection and 
+Testing 
+: Please refer Annex –C 
+5. Possible tests in a day  : Please refer Annex – D 
+6. Scope of the Licence : 
+ Licence is granted to use Standard Mark as per IS 15410:2003 with the following scope: 
+ Name of the product Plastics Bottles /Containers for Packaged Natural Mineral Water 
+and Packaged Drinking Water 
+ Material PE/PVC/PET/PBT/PP/Polycarbonate/Polystyrene 
+ Type of container Bottle, Jar, glasses, cups etc 
+ Nominal Capacity In ml or litres 
+
+                        PM/ 15410/ 1  
+July 2020 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+ 
+ 
+ANNEXURE B 
+LIST OF TEST EQUIPMENT 
+ 
+Major test equipment essentially required to test as per requirements of Indian Standard. 
+ 
+Sr. No Test Equipment Tests used in with 
+Clause Reference 
+1 Brimful Capacity: 
+i) Suitable   plastic   disc   to   cover   the   neck   face   of   the 
+container 
+ii) Suitable weighing balance to an accuracy of 0.1g 
+iii) Equipments to maintain temperature 27±2°C 
+(or) 
+Suitable measuring cylinders  
+Cl. 4.4 of IS 15410  
+ 
+2 Wall Thickness: 
+i) Ball  ended  micrometer  or  dial  caliper  gauge  fitted  with 
+spherical anvils, to an accuracy of 0.02mm 
+ 
+Cl. 4.5 of IS 15410  
+ 
+3 Transparency: 
+Integration  ball  type  light  transmittance  measurement  device  as 
+described in Annex A of IS 15410. 
+ 
+Cl. 4.6.2 of IS 15410  
+ 
+4 Leakage Test 
+(a) Closure leakage test  
+(i) Blotting paper 
+(ii) Stop watch 
+(b) Vibration Leakage Test 
+(i)    Device /methods meeting conditions mentioned in 
+               Cl.6.2.1 of IS 2798 
+   (c)Air Pressure Leakage Test 
+   (i)       Device /methods meeting conditions mentioned in 
+               Cl.6.3.2 of IS 2798 
+Cl. 4.6.3 of IS 15410 
+ 
+ 
+ 
+ 
+ 
+5 Drop  Test 
+     (i)       Equipment /methods meeting conditions mentioned in 
+                Cl.8.2 of IS 2798 
+(ii) Scale to measure a height of 0.5m/1.0m/1.2m 
+ 
+Cl. 4.6.4 of IS 15410 
+ 
+6 Migration Test 
+i) Electric    oven/Water  bath  equipped  with  temperature 
+controller  to maintain  desired  temperature  up  to  ±1°C 
+accuracy 
+ii) Electric hot plate with temperature control regulator 
+iii) Weighing  balance with a sensitivity of 0.1mg 
+iv) Beaker 
+v) Evaporating Dish 
+vi) Suitable scale /caliper to measure dimensions 
+ 
+ 
+Cl. 4.6.5 of IS 15410 
+ 
+
+                        PM/ 15410/ 1  
+July 2020 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+7 Water PotabilityTest 
+i) Water Heater (to heat water to a temperature of 38±2°C) 
+ii) Equipment to keep the container at a temperature of 38±2°C , 
+for a period of 30 days. 
+iii) Equipments mentioned in IS 3025(Part 5) and IS 3025 (Part 8)   
+ 
+Cl. 4.6.6 of IS 15410 
+ 
+ 
+ 
+ 
+The list above is meant for guidance and may not be taken as exhaustive. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+                        PM/ 15410/ 1  
+July 2020 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+ANNEXURE C  
+ 
+SCHEME OF INSPECTION AND TESTING 
+ 
+1.  LABORATORY - A  laboratory   shall  be   maintained  which  shall  be   suitably   equipped  (as  per  the 
+requirement given in column 2 of Table 1) and staffed, where different tests given in the specification shall 
+be carried out in accordance with the methods given in the specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipment. 
+ 
+2.  TEST  RECORDS – The  manufacturer  shall  maintain  test  records  for  the  tests  carried  out  to  establish 
+conformity. 
+ 
+3.  PACKING  AND  MARKING –– The  Standard  Mark,  as  given in  the  Schedule  of  the  licence,  shall  be 
+marked  on  each  container  provided  always  that  the  product  so  marked  conform  to  requirements  of 
+the specification. 
+ 
+3.1  Packing  and  Marking  shall  be  done  as  per  the  provisions  of  the  Indian  Standard.  In  addition,  the 
+following shall be incorporated on each container: 
+i) BIS Licence Number CM/L ............ and 
+ii) BIS website details i.e. “For details of BIS certification please visit www.bis.gov.in”. 
+ 
+4. CONTROL UNIT – For the  purpose of this scheme all the containers of the  same type of material, same 
+design/shape manufactured in one shift and manufactured from same consignment of raw material shall be 
+grouped together to constitute a Control Unit. 
+ 
+5. LEVELS OF CONTROL – The test as indicated in column 1 of Table 1 and at the levels of control specified 
+in column 3 of Table 1, shall be carried out on the whole  production of the factory which is covered by this 
+plan and appropriate records maintained in accordance with paragraph 2 above.                                                                                                                                                                                                                                                                            
+ 
+5.1  All  the  production  which  conforms  to  the  Indian  Standards  and  covered  by  the  licence  should  be 
+marked with Standard Mark. 
+ 
+6.  REJECTIONS – Disposal  of  non-conforming  product  shall  be  done  in  such  a  way  so  as  to  ensure  that   
+there is no violation of provisions of BIS Act, 2016.  A separate record shallbe maintained giving information 
+relating to the rejection of lots of plastic bottles/containers which do not conform to the specification and 
+the  method  of  their  disposal. Such  lots,  if    packed,    shall  in  no  case  be  stored  together    with    those  
+conforming  to    the  specification    and    Standard  Mark(if  already  applied)  on  the  rejected  lots  shall  be 
+removed/defaced.   
+ 
+ 
+  
+
+                        PM/ 15410/ 1  
+July 2020 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+TABLE 1  
+LEVELS OF CONTROL 
+ 
+(Para 5 of Scheme of Inspection and Testing) 
+ 
+(1) (2) (3) 
+Test Details 
+Test 
+equipmentre
+quirement                        
+R - required 
+(or)                              
+S : Sub 
+Contracting 
+permitted 
+Levels of Control 
+C1 Requirement 
+Test Methods  
+Cl Ref 
+No. of 
+Sample 
+Frequency Remarks 
+4.1 
+ 
+Material 4.1 IS 
+15410:
+2003 
+R One Every 
+consignment 
+The  sample  may  be 
+got    tested    in    an 
+approved outside 
+lab.     In     case     the 
+consignment is 
+accompanied  with  a 
+test  certificate  from 
+manufacturer, no 
+testing shall be 
+required. 
+4.2 Design 
+Shapes & 
+Dimensions 
+4.2 -do- R One Every half an 
+hour 
+- 
+4.3 Manufacture
+, 
+Workmanshi
+p, finish & 
+appearance 
+4.3 -do- R  Each container - 
+4.4 Capacity 5 IS 2798 R One Every half an 
+hour 
+During   the   beginning 
+five consecutive 
+samples shall be 
+tested  and afterwards 
+one  sample  every  half 
+an     hour     for     each 
+machine.   In   case   of 
+failure, all the 
+containers    from    the 
+preceding half an hour 
+production    shall    be 
+checked. 
+
+                        PM/ 15410/ 1  
+July 2020 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+(1) (2) (3) 
+Test Details 
+Test 
+equipmentre
+quirement                        
+R - required 
+(or)                              
+S : Sub 
+Contracting 
+permitted 
+Levels of Control 
+C1 Requirement 
+Test Methods  
+Cl Ref 
+No. of 
+Sample 
+Frequency Remarks 
+4.5 Wall 
+thickness 
+4.5 IS 2798 R One Every half an 
+hour 
+During   the   beginning 
+five consecutive 
+samples shall be 
+tested  and  afterwards 
+one  sample  every  half 
+an     hour     for     each 
+machine.   In   case   of 
+failure, all the 
+containers    from    the 
+preceding half an hour 
+production    shall    be 
+checked. 
+4.6.2 Transparenc
+y  
+ 
+Annex 
+A  
+ 
+IS 
+15410:
+2003  
+ 
+R One Every half an 
+hour  
+ 
+During   the   beginning 
+five consecutive 
+samples shall be 
+tested  and  afterwards 
+one  sample  every  half 
+an     hour     for     each 
+machine.   In   case   of 
+failure, all the 
+containers    from    the 
+preceding half an hour 
+production    shall    be 
+checked.  
+4.6.3 Leakage test  
+ 
+6 IS 2798  
+ 
+R One Every hour  
+ 
+In  case  of  failure,  five 
+samples    from    every 
+hour  production  to  be 
+tested.  For  this  every 
+hour  production  is  to 
+be   kept   separate.   In 
+case of failure another 
+two    samples    to    be 
+tested, in case another 
+failure is observed, the 
+whole lot is rejected.  
+4.6.4 Drop test 8 IS 2798  
+ 
+R One Every 4 hours  - do - 
+
+                        PM/ 15410/ 1  
+July 2020 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+(1) (2) (3) 
+Test Details 
+Test 
+equipmentre
+quirement                        
+R - required 
+(or)                              
+S : Sub 
+Contracting 
+permitted 
+Levels of Control 
+C1 Requirement 
+Test Methods  
+Cl Ref 
+No. of 
+Sample 
+Frequency Remarks 
+4.6.5 Migration 
+test  
+ 
+6 IS 9845  
+ 
+R One Every 24 hours  
+ 
+In  case  of  failure,  one 
+sample     from     every 
+hour  production  to  be 
+tested.  For  this  every 
+hour  production  is  to 
+be   kept   separate.   In 
+case of failure another 
+two    samples    to    be 
+tested, in case another 
+failure is observed, the 
+whole lot to be 
+rejected. Separate 
+tests  shall  be  done  for 
+different mixture.  
+4.6.6 Water 
+potability 
+ 
+Annex 
+B  
+ 
+IS 
+15410:
+2003  
+ 
+S 6 Every month 
+ 
+- 
+ 
+Note-1: Whether test equipment is required or sub-contracting is permitted in column 2 shall be decided by 
+the Bureau and shall be mandatory. Sub-contracting is permitted to a laboratory recognized by the Bureau 
+or Government laboratories empanelled by the Bureau. 
+ 
+Note-2:  Levels  of  control  given  in  column  3  are  only  recommendatory  in  nature.  The  manufacturer  may 
+define the control unit/batch/lot and submit his own levels of control in column 3 with proper justification 
+for approval by BO head.  
+  
+
+                        PM/ 15410/ 1  
+July 2020 
+BUREAU OF INDIAN STANDARDS  
+ManakBhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+ 
+ANNEXURE D 
+ 
+POSSIBLE TESTS IN A DAY 
+ 
+i) Design, Shape and Dimensions 
+ii) Manufacture, Workmanship, Finish and Appearance 
+iii) Capacity 
+iv) Wall thickness 
+v) Transparency 
+vi) Closure Leakage    
+vii) Air pressure leakage  
+viii) Drop test 
+ 
