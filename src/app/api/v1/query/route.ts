@@ -45,6 +45,15 @@ export async function POST(req: NextRequest) {
     const response = {
       answer: structuredAnswer.answer,
       intent: intent.intent,
+      interpretation: {
+        product: intent.product,
+        material: intent.material,
+        useCase: intent.useCase,
+        targetUser: intent.targetUser,
+        sector: intent.sector,
+        certificationRequested: intent.certificationRequested,
+        testingRequested: intent.testingRequested,
+      },
       clarificationNeeded: intent.missingInformation.length > 0 ? intent.missingInformation : undefined,
       recommendations: recommendations.map((r) => ({
         standardNumber: r.standardNumber,
@@ -53,7 +62,17 @@ export async function POST(req: NextRequest) {
         reason: r.reason,
         evidence: r.evidenceChunkIds.map((id) => {
           const c = evidenceById.get(id)!;
-          return { chunkId: c.chunkId, document: c.title, standardNumber: c.standardNumber, section: c.section, clause: c.clause, sourceUrl: c.sourceUrl };
+          return {
+            chunkId: c.chunkId,
+            documentId: c.documentId,
+            document: c.title,
+            standardNumber: c.standardNumber,
+            section: c.section,
+            clause: c.clause,
+            page: c.page,
+            text: c.text,
+            sourceUrl: c.sourceUrl,
+          };
         }),
       })),
       certification: {
