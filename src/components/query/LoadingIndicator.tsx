@@ -6,8 +6,8 @@
  */
 export function LoadingIndicator() {
   return (
-    <div className="flex items-center gap-3 rounded-lg border border-border bg-surface-raised px-5 py-4">
-      <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-border-strong border-t-accent" aria-hidden="true" />
+    <div className="flex items-center gap-3 border border-border bg-surface-raised px-5 py-4">
+      <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-border-strong border-t-navy" aria-hidden="true" />
       <p className="text-sm text-ink-soft">
         Searching BIS sources and preparing an evidence-backed answer…
       </p>

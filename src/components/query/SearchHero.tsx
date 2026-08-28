@@ -34,7 +34,7 @@ export function SearchHero({
         }}
         className="mt-8"
       >
-        <div className="flex items-center gap-2 rounded-xl border border-border-strong bg-surface-raised p-2 shadow-sm focus-within:border-accent">
+        <div className="flex items-center gap-2 rounded-md border border-border-strong bg-surface-raised p-2 shadow-sm focus-within:border-navy">
           <input
             value={value}
             onChange={(e) => setValue(e.target.value)}
@@ -45,7 +45,7 @@ export function SearchHero({
           <button
             type="submit"
             disabled={loading || !value.trim()}
-            className="shrink-0 rounded-lg bg-ink px-5 py-2.5 text-sm font-medium text-surface transition-colors hover:bg-ink/90 disabled:opacity-40"
+            className="shrink-0 rounded-sm bg-navy px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-navy-deep disabled:opacity-40"
           >
             {loading ? "Searching…" : "Find applicable standard"}
           </button>
@@ -62,7 +62,7 @@ export function SearchHero({
               setValue(ex);
               onSubmit(ex);
             }}
-            className="rounded-full border border-border px-3 py-1 text-xs text-ink-soft transition-colors hover:border-accent hover:text-accent-ink"
+            className="rounded-sm border border-border px-3 py-1 text-xs text-ink-soft transition-colors hover:border-navy hover:text-navy"
           >
             {ex}
           </button>
