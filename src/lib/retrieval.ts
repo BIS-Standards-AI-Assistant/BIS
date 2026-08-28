@@ -27,6 +27,55 @@ export interface RetrievedChunk {
 const RRF_K = 60;
 
 /**
+ * websearch_to_tsquery requires every term (or quoted phrase/AND-group) in
+ * the query to match within a single chunk. That's precise for short
+ * queries, but a full question sentence — e.g. "What tests are performed
+ * on plastic bottles for packaged natural mineral water?" — often has no
+ * single chunk containing every one of those words together, so it
+ * silently returns zero candidates and keyword search contributes nothing
+ * to the fused ranking (measured root cause of a real retrieval miss: see
+ * data/evaluation/golden-queries.json Q17).
+ *
+ * Falling back to an OR-across-lexemes query only when the strict query
+ * finds nothing keeps the precise AND/phrase behavior for every query that
+ * already works, and only broadens matching for the specific failure mode
+ * that caused Q17 — validated against the full 20-query golden set
+ * (scripts/experiment-retrieval.ts): unconditional OR gave 12/12 recall
+ * and 8/8 on the no-false-match queries, and since every query other than
+ * Q17 already had a nonzero AND match, this fallback produces identical
+ * results to unconditional OR on that set while leaving already-working
+ * queries untouched.
+ */
+async function keywordSearch(
+  db: ReturnType<typeof getDb>,
+  query: string,
+  limit: number,
+): Promise<Array<{ id: string; rank: number }>> {
+  const strict = await db.execute(sql`
+    SELECT id, row_number() OVER (ORDER BY ts_rank(to_tsvector('english', text), websearch_to_tsquery('english', ${query})) DESC) AS rank
+    FROM chunks
+    WHERE to_tsvector('english', text) @@ websearch_to_tsquery('english', ${query})
+    ORDER BY ts_rank(to_tsvector('english', text), websearch_to_tsquery('english', ${query})) DESC
+    LIMIT ${limit}
+  `);
+  const strictRows = strict.rows as unknown as Array<{ id: string; rank: number }>;
+  if (strictRows.length > 0) return strictRows;
+
+  const lexemes = await db.execute(sql`SELECT string_agg(lexeme, ' | ') AS q FROM unnest(to_tsvector('english', ${query})) AS lexeme`);
+  const orQuery = (lexemes.rows as unknown as Array<{ q: string | null }>)[0]?.q;
+  if (!orQuery) return [];
+
+  const broad = await db.execute(sql`
+    SELECT id, row_number() OVER (ORDER BY ts_rank(to_tsvector('english', text), to_tsquery('english', ${orQuery})) DESC) AS rank
+    FROM chunks
+    WHERE to_tsvector('english', text) @@ to_tsquery('english', ${orQuery})
+    ORDER BY ts_rank(to_tsvector('english', text), to_tsquery('english', ${orQuery})) DESC
+    LIMIT ${limit}
+  `);
+  return broad.rows as unknown as Array<{ id: string; rank: number }>;
+}
+
+/**
  * Hybrid retrieval: semantic search over embeddings (pgvector cosine
  * distance) fused with keyword search (Postgres full-text ts_rank) via
  * reciprocal rank fusion. Falls back to keyword-only if embedding fails.
@@ -54,14 +103,7 @@ export async function retrieveChunks(
     console.error("[retrieval] semantic search failed, falling back to keyword-only", err);
   }
 
-  const keywordResult = await db.execute(sql`
-    SELECT id, row_number() OVER (ORDER BY ts_rank(to_tsvector('english', text), websearch_to_tsquery('english', ${query})) DESC) AS rank
-    FROM chunks
-    WHERE to_tsvector('english', text) @@ websearch_to_tsquery('english', ${query})
-    ORDER BY ts_rank(to_tsvector('english', text), websearch_to_tsquery('english', ${query})) DESC
-    LIMIT ${candidatePoolSize}
-  `);
-  const keywordRows = keywordResult.rows as unknown as Array<{ id: string; rank: number }>;
+  const keywordRows = await keywordSearch(db, query, candidatePoolSize);
 
   // Standards Identifier Resolver: if the query names a specific IS number
   // ("IS 5522:2014", "5522:2014", "IS 302 Part 2/Sec 6"), find chunks whose
