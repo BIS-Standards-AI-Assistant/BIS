@@ -3,6 +3,13 @@ import { Footer } from "@/components/layout/Footer";
 import { StandardsListClient, type StandardSummary } from "@/components/standards/StandardsListClient";
 import { getDb } from "@/db";
 
+// This page has no dynamic route segment, so Next.js would otherwise try to
+// statically prerender it at build time — which means it would need a live
+// database connection during `next build`, breaking CI (and any build
+// environment without DATABASE_URL). The list of ingested standards changes
+// as documents are ingested, so it should be rendered per-request anyway.
+export const dynamic = "force-dynamic";
+
 async function getStandards(): Promise<StandardSummary[]> {
   const db = getDb();
   const docs = await db.query.documents.findMany({
