@@ -19,6 +19,13 @@ jobs:
 
       - run: npm ci
 
+      # tsc needs .next/types (route/layout prop types), which only exists
+      # after a build or dev run has generated it — a fresh checkout has
+      # neither, so this step exists specifically to unblock the typecheck
+      # step below without running a full build first.
+      - name: Generate route types
+        run: npx next typegen
+
       - name: Typecheck
         run: npx tsc --noEmit
 
