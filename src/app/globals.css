@@ -44,48 +44,12 @@
 }
 
 /*
-  Dark mode is togglable, not just system-driven: the toggle sets
-  data-theme="dark" | "light" on <html>; absence of that attribute falls
-  back to the OS preference. "Bluish" dark — deep navy surfaces, not black —
-  so the institutional identity carries into dark mode.
+  Dark mode is opt-in only, via the toggle — it never follows the OS
+  preference. The toggle sets data-theme="dark" | "light" on <html>;
+  the init script in layout.tsx defaults to "light" unless the user has
+  explicitly chosen dark before. "Bluish" dark — deep navy surfaces, not
+  black — so the institutional identity carries into dark mode.
 */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --color-navy: #7fb3e8;
-    --color-navy-deep: #04294f;
-    --color-blue: #4fa3e3;
-    --color-gold: #f4c400;
-    --color-gold-soft: #3a2f0a;
-    --color-gold-ink: #f0c94a;
-    --color-orange: #f0824a;
-
-    --color-surface: #0a1420;
-    --color-surface-raised: #101d2e;
-    --color-surface-alt: #16293b;
-    --color-surface-sunken: #0a141d;
-    --color-border: #223447;
-    --color-border-strong: #2e455b;
-
-    --color-ink: #edf1f5;
-    --color-ink-soft: #a9b7c4;
-    --color-ink-faint: #74879a;
-
-    --color-accent: #f4c400;
-    --color-accent-soft: #3a2f0a;
-    --color-accent-ink: #f0c94a;
-
-    --color-success: #4fae87;
-    --color-success-soft: #123024;
-    --color-warning: #d9a542;
-    --color-warning-soft: #33260d;
-    --color-danger: #d97b7b;
-    --color-danger-soft: #3a1f1f;
-    --color-info: #4fa3e3;
-    --color-info-soft: #112a3d;
-    --color-neutral-soft: #1c2b3a;
-  }
-}
-
 :root[data-theme="dark"] {
   --color-navy: #7fb3e8;
   --color-navy-deep: #04294f;
@@ -159,7 +123,11 @@
 }
 
 html {
-  color-scheme: light dark;
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 body {

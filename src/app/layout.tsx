@@ -18,13 +18,12 @@ export const metadata: Metadata = {
   description: "AI-powered assistant for discovering applicable Indian Standards, certification routes, and testing requirements — backed by authoritative BIS sources.",
 };
 
+/** Defaults to light regardless of OS preference — dark mode is opt-in only, via the toggle. */
 const THEME_INIT_SCRIPT = `
 (function () {
   try {
     var stored = localStorage.getItem("bis-theme");
-    var theme = stored === "dark" || stored === "light"
-      ? stored
-      : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    var theme = stored === "dark" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", theme);
   } catch (e) {}
 })();
