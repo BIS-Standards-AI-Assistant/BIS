@@ -2,50 +2,61 @@
 
 /*
   Design system for the BIS Standards Navigator.
-  Institutional navy + restrained saffron accent, warm-white surfaces.
-  Evidence excerpts always render in the mono face with a saffron rail —
-  that's the one recurring signature that separates "sourced text" from
-  "AI-generated text" everywhere it appears in the product.
+  Government-service register: white/light-neutral surfaces, institutional
+  navy as the primary color, a muted gold used only as a small accent (never
+  a block color). Evidence excerpts always render in the mono face with a
+  navy rail — the one recurring signature that separates "sourced document
+  text" from "AI-generated text" everywhere it appears in the product.
 */
 :root {
-  --color-surface: #f7f6f2;
+  --color-surface: #ffffff;
   --color-surface-raised: #ffffff;
-  --color-surface-alt: #eef1f4;
+  --color-surface-alt: #f3f5f7;
+  --color-surface-sunken: #eef1f4;
   --color-border: #dde2e8;
-  --color-border-strong: #c4ccd6;
+  --color-border-strong: #c1c9d1;
 
-  --color-ink: #0f2540;
-  --color-ink-soft: #46586b;
-  --color-ink-faint: #7c8a99;
+  --color-ink: #14202c;
+  --color-ink-soft: #4b5b6b;
+  --color-ink-faint: #7c8a97;
 
-  --color-accent: #c76a1f;
-  --color-accent-soft: #f3e3d1;
-  --color-accent-ink: #7a3f0f;
+  --color-navy: #0b3d66;
+  --color-navy-deep: #062a47;
 
-  --color-success: #1f6b4f;
-  --color-success-soft: #dcece5;
-  --color-warning: #93650f;
-  --color-warning-soft: #f3e6cc;
+  --color-accent: #96660f;
+  --color-accent-soft: #f1e8d5;
+  --color-accent-ink: #6b490a;
+
+  --color-success: #1e7145;
+  --color-success-soft: #e1f0e6;
+  --color-warning: #92650b;
+  --color-warning-soft: #f5ecd6;
   --color-danger: #a33a3a;
-  --color-danger-soft: #f3dede;
-  --color-neutral-soft: #e6e8eb;
+  --color-danger-soft: #f6e4e4;
+  --color-info: #205a8f;
+  --color-info-soft: #e3edf5;
+  --color-neutral-soft: #eaedf0;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-surface: #0b1420;
-    --color-surface-raised: #111e2d;
-    --color-surface-alt: #16293b;
-    --color-border: #223447;
-    --color-border-strong: #2e455b;
+  :root:not([data-theme="light"]) {
+    --color-surface: #0c1620;
+    --color-surface-raised: #101d29;
+    --color-surface-alt: #15232f;
+    --color-surface-sunken: #0a141d;
+    --color-border: #24333f;
+    --color-border-strong: #33454f;
 
-    --color-ink: #edf1f5;
-    --color-ink-soft: #a9b7c4;
-    --color-ink-faint: #74879a;
+    --color-ink: #e8edf1;
+    --color-ink-soft: #a9b7c2;
+    --color-ink-faint: #778794;
 
-    --color-accent: #e2924a;
-    --color-accent-soft: #3a2a17;
-    --color-accent-ink: #f0b47c;
+    --color-navy: #2d6fa8;
+    --color-navy-deep: #0f2d47;
+
+    --color-accent: #d3a44e;
+    --color-accent-soft: #33290f;
+    --color-accent-ink: #e6bd72;
 
     --color-success: #4fae87;
     --color-success-soft: #123024;
@@ -53,19 +64,54 @@
     --color-warning-soft: #33260d;
     --color-danger: #d97b7b;
     --color-danger-soft: #3a1f1f;
-    --color-neutral-soft: #1c2b3a;
+    --color-info: #6fa3d1;
+    --color-info-soft: #112a3d;
+    --color-neutral-soft: #1a2733;
   }
+}
+
+:root[data-theme="dark"] {
+  --color-surface: #0c1620;
+  --color-surface-raised: #101d29;
+  --color-surface-alt: #15232f;
+  --color-surface-sunken: #0a141d;
+  --color-border: #24333f;
+  --color-border-strong: #33454f;
+
+  --color-ink: #e8edf1;
+  --color-ink-soft: #a9b7c2;
+  --color-ink-faint: #778794;
+
+  --color-navy: #2d6fa8;
+  --color-navy-deep: #0f2d47;
+
+  --color-accent: #d3a44e;
+  --color-accent-soft: #33290f;
+  --color-accent-ink: #e6bd72;
+
+  --color-success: #4fae87;
+  --color-success-soft: #123024;
+  --color-warning: #d9a542;
+  --color-warning-soft: #33260d;
+  --color-danger: #d97b7b;
+  --color-danger-soft: #3a1f1f;
+  --color-info: #6fa3d1;
+  --color-info-soft: #112a3d;
+  --color-neutral-soft: #1a2733;
 }
 
 @theme inline {
   --color-surface: var(--color-surface);
   --color-surface-raised: var(--color-surface-raised);
   --color-surface-alt: var(--color-surface-alt);
+  --color-surface-sunken: var(--color-surface-sunken);
   --color-border: var(--color-border);
   --color-border-strong: var(--color-border-strong);
   --color-ink: var(--color-ink);
   --color-ink-soft: var(--color-ink-soft);
   --color-ink-faint: var(--color-ink-faint);
+  --color-navy: var(--color-navy);
+  --color-navy-deep: var(--color-navy-deep);
   --color-accent: var(--color-accent);
   --color-accent-soft: var(--color-accent-soft);
   --color-accent-ink: var(--color-accent-ink);
@@ -75,6 +121,8 @@
   --color-warning-soft: var(--color-warning-soft);
   --color-danger: var(--color-danger);
   --color-danger-soft: var(--color-danger-soft);
+  --color-info: var(--color-info);
+  --color-info-soft: var(--color-info-soft);
   --color-neutral-soft: var(--color-neutral-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -100,7 +148,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-navy);
   outline-offset: 2px;
   border-radius: 2px;
 }
