@@ -91,7 +91,7 @@ export default function Home() {
               <div className="mt-10 space-y-8">
                 <section className="flex items-start justify-between gap-4 rounded-lg border border-border bg-surface-raised p-5">
                   <div>
-                    <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Answer</h2>
+                    <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">AI-assisted summary</h2>
                     <p className="mt-2 text-[15px] leading-relaxed text-ink">{result.answer}</p>
                   </div>
                   <div className="shrink-0 pt-5">
@@ -108,7 +108,7 @@ export default function Home() {
 
                   <div className="space-y-4">
                     <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-                      Recommended standards
+                      Candidate standards
                     </h2>
                     {result.recommendations.length === 0 ? (
                       <EmptyState

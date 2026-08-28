@@ -7,10 +7,10 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
   const documentId = recommendation.evidence[0]?.documentId;
 
   return (
-    <article className="rounded-lg border border-border bg-surface-raised p-5">
+    <article className="border border-border bg-surface-raised p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="font-mono text-sm font-medium text-accent-ink">
+          <p className="font-mono text-sm font-medium text-navy">
             {recommendation.standardNumber ?? "Unnumbered reference"}
           </p>
           <h3 className="mt-0.5 text-base font-semibold text-ink">{recommendation.title}</h3>
@@ -18,12 +18,15 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
         <RelevanceMeter score={recommendation.relevanceScore} />
       </div>
 
-      <p className="mt-3 text-sm leading-relaxed text-ink-soft">{recommendation.reason}</p>
+      <div className="mt-3">
+        <p className="text-[10.5px] font-semibold uppercase tracking-wide text-ink-faint">Why this appears relevant</p>
+        <p className="mt-1 text-sm leading-relaxed text-ink-soft">{recommendation.reason}</p>
+      </div>
 
       {recommendation.evidence.length > 0 && (
         <div className="mt-4 space-y-2">
           <h4 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-            Evidence · {recommendation.evidence.length} source{recommendation.evidence.length > 1 ? "s" : ""}
+            {recommendation.evidence.length} supporting source{recommendation.evidence.length > 1 ? "s" : ""}
           </h4>
           {recommendation.evidence.map((ev) => (
             <EvidenceExcerpt
@@ -44,7 +47,7 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
       {documentId && (
         <Link
           href={`/standards/${documentId}`}
-          className="mt-4 inline-block text-sm font-medium text-ink hover:text-accent-ink"
+          className="mt-4 inline-block text-sm font-medium text-navy hover:underline"
         >
           View standard →
         </Link>

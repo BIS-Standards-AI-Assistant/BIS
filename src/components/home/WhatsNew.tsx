@@ -5,21 +5,31 @@ import Link from "next/link";
 import { CalendarIcon, DocumentIcon } from "@/components/ui/icons";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
+/**
+ * Sourced verbatim from data/seed/manifest.json — the actual documents
+ * ingested into this build's retrieval index. Never invent entries here;
+ * see docs/ui/UI_DATA_AND_TRUTH_RULES.md.
+ */
 const ITEMS = [
   {
-    title: "IS 302 (Part 1):2024",
-    description: "Steel tubes for structural purposes",
-    meta: "Published on 15 May 2024",
+    title: "IS 5522:2014",
+    description: "Stainless Steel Sheets and Strips for Utensils",
+    meta: "Manual version May 2019",
   },
   {
-    title: "Revision of IS 456:2000",
-    description: "Plain and reinforced concrete",
-    meta: "Under revision",
+    title: "IS 14756:2017",
+    description: "Stainless Steel Cookware",
+    meta: "Manual version May 2020",
   },
   {
-    title: "IS 15410:2024",
-    description: "Stainless steel water bottles — specification",
-    meta: "Published on 02 Feb 2024",
+    title: "IS 15410:2003",
+    description: "Plastics Bottles/Containers for Packaged Drinking Water",
+    meta: "Manual version July 2020",
+  },
+  {
+    title: "IS 14543:2016",
+    description: "Packaged Drinking Water (other than Natural Mineral Water)",
+    meta: "Manual version July 2020",
   },
 ];
 

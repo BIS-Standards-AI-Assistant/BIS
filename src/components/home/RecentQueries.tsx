@@ -5,21 +5,26 @@ import { Badge } from "@/components/ui/Badge";
 import { ChevronRightIcon } from "@/components/ui/icons";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
+/**
+ * Illustrative example queries only — every standard number shown is drawn
+ * from data/seed/manifest.json (the documents actually ingested into this
+ * build's index), never invented. See docs/ui/UI_DATA_AND_TRUTH_RULES.md.
+ */
 const QUERIES = [
   {
-    query: "Stainless steel water bottle for kids",
-    standards: ["IS 15410:2003", "IS 14756:2017"],
-    lastSearched: "2 hours ago",
+    query: "Stainless steel utensils for daily use",
+    standards: ["IS 5522:2014"],
+    type: "Example",
   },
   {
-    query: "LED Bulb for domestic use",
-    standards: ["IS 16102:2012", "IS 15885:2010"],
-    lastSearched: "5 hours ago",
+    query: "Stainless steel cookware",
+    standards: ["IS 14756:2017"],
+    type: "Example",
   },
   {
-    query: "Pressure cooker aluminium",
-    standards: ["IS 2347:2017", "IS 3074:2018"],
-    lastSearched: "Yesterday",
+    query: "Packaged drinking water bottle",
+    standards: ["IS 15410:2003", "IS 14543:2016"],
+    type: "Example",
   },
 ];
 
@@ -60,7 +65,7 @@ export function RecentQueries() {
                     ))}
                   </div>
                 </td>
-                <td className="px-4 py-3.5 text-ink-soft">{row.lastSearched}</td>
+                <td className="px-4 py-3.5 text-ink-soft">{row.type}</td>
                 <td className="px-4 py-3.5 text-ink-faint">
                   <ChevronRightIcon className="h-4 w-4" />
                 </td>
@@ -87,7 +92,7 @@ export function RecentQueries() {
                 </Badge>
               ))}
             </div>
-            <p className="mt-2 text-xs text-ink-faint">{row.lastSearched}</p>
+            <p className="mt-2 text-xs text-ink-faint">{row.type}</p>
           </li>
         ))}
       </ul>
