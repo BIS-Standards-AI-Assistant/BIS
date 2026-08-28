@@ -1,19 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { SearchIcon, ArrowRightIcon } from "@/components/ui/icons";
+import { SearchIcon, ArrowRightIcon, CloseIcon } from "@/components/ui/icons";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function SearchHero({
   onSubmit,
   loading,
   compact = false,
+  initialValue = "",
+  onClear,
 }: {
   onSubmit: (query: string) => void;
   loading: boolean;
   compact?: boolean;
+  initialValue?: string;
+  onClear?: () => void;
 }) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(initialValue);
   const { t } = useLanguage();
 
   function submit(q: string) {
@@ -43,6 +47,19 @@ export function SearchHero({
               compact ? "py-2 text-sm" : "py-3 text-[15px]"
             }`}
           />
+          {compact && value && onClear && (
+            <button
+              type="button"
+              onClick={() => {
+                setValue("");
+                onClear();
+              }}
+              aria-label="Clear search"
+              className="rounded-md p-1.5 text-ink-faint transition-colors hover:bg-surface-alt hover:text-ink"
+            >
+              <CloseIcon className="h-4 w-4" />
+            </button>
+          )}
           <button
             type="submit"
             disabled={loading || !value.trim()}
