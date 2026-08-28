@@ -12,24 +12,14 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
  */
 const ITEMS = [
   {
-    title: "IS 5522:2014",
-    description: "Stainless Steel Sheets and Strips for Utensils",
-    meta: "Manual version May 2019",
+    title: "IS 302 (Part 1):2024",
+    description: "Steel tubes for structural purposes",
+    meta: "Published on 15 May 2024",
   },
   {
-    title: "IS 14756:2017",
-    description: "Stainless Steel Cookware",
-    meta: "Manual version May 2020",
-  },
-  {
-    title: "IS 15410:2003",
-    description: "Plastics Bottles/Containers for Packaged Drinking Water",
-    meta: "Manual version July 2020",
-  },
-  {
-    title: "IS 14543:2016",
-    description: "Packaged Drinking Water (other than Natural Mineral Water)",
-    meta: "Manual version July 2020",
+    title: "Revision of IS 456:2000",
+    description: "Plain and reinforced concrete",
+    meta: "Under revision",
   },
 ];
 
@@ -40,23 +30,26 @@ export function WhatsNew() {
   return (
     <div className="rounded-xl border border-border bg-surface-raised p-5 shadow-sm">
       <div className="flex items-center justify-between">
-        <h2 className="text-[15px] font-semibold text-navy">{t.whatsnew.heading}</h2>
-        <Link href="/search" className="text-xs font-medium text-blue hover:underline">
-          {t.whatsnew.viewAll} →
+        <h2 className="text-[15px] font-bold text-navy">{t.whatsnew.heading}</h2>
+        <Link href="/search" className="flex items-center gap-0.5 text-xs font-bold text-blue hover:underline">
+          {t.whatsnew.viewAll} <span className="text-[10px]">→</span>
         </Link>
       </div>
 
-      <ul className="mt-4 space-y-4">
+      <ul className="mt-5 space-y-5">
         {ITEMS.map((item) => (
-          <li key={item.title} className="flex gap-3">
-            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-alt text-navy">
-              <DocumentIcon className="h-4 w-4" />
+          <li key={item.title} className="flex gap-3.5">
+            <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-alt text-blue dark:bg-surface-alt/10">
+              <CalendarIcon className="h-4.5 w-4.5 stroke-[2]" />
             </span>
             <div className="min-w-0">
-              <p className="truncate text-[13.5px] font-medium text-ink">{item.title}</p>
-              <p className="text-[12.5px] text-ink-soft">{item.description}</p>
-              <p className="mt-0.5 flex items-center gap-1 text-[11.5px] text-ink-faint">
-                <CalendarIcon className="h-3 w-3" />
+              <p className="text-[13.5px] font-bold text-navy hover:text-blue cursor-pointer transition-colors">
+                {item.title}
+              </p>
+              <p className="text-[12.5px] font-semibold text-ink-soft leading-snug mt-0.5">
+                {item.description}
+              </p>
+              <p className="mt-1 text-[11.5px] font-medium text-ink-faint">
                 {item.meta}
               </p>
             </div>
@@ -64,15 +57,15 @@ export function WhatsNew() {
         ))}
       </ul>
 
-      <div className="mt-4 flex justify-center gap-1.5 border-t border-border pt-4">
-        {ITEMS.map((item, i) => (
+      <div className="mt-6 flex justify-center gap-1.5 border-t border-border pt-4">
+        {Array.from({ length: 6 }).map((_, i) => (
           <button
-            key={item.title}
+            key={i}
             type="button"
             onClick={() => setActive(i)}
             aria-label={`Show update ${i + 1}`}
-            className={`h-1.5 rounded-full transition-all ${
-              i === active ? "w-4 bg-blue" : "w-1.5 bg-border-strong"
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === active ? "w-4 bg-blue" : "w-2 bg-border-strong hover:bg-ink-faint"
             }`}
           />
         ))}
