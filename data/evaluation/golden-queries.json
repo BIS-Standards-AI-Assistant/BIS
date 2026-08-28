@@ -6,7 +6,12 @@
     "expectedStandardIds": [
       "IS 5522:2014"
     ],
-    "requiresEvidence": true
+    "requiresEvidence": true,
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "high",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true,
+    "alreadyTested": true
   },
   {
     "id": "Q02",
@@ -15,7 +20,11 @@
     "expectedStandardIds": [
       "IS 14756:2017"
     ],
-    "requiresEvidence": true
+    "requiresEvidence": true,
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "high",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q03",
@@ -25,7 +34,11 @@
       "IS 5522:2014"
     ],
     "requiresEvidence": true,
-    "note": "no 'IS' prefix, no colon — tests the resolver's context heuristics"
+    "note": "no 'IS' prefix, no colon — tests the resolver's context heuristics",
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "high",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q04",
@@ -34,7 +47,11 @@
     "expectedStandardIds": [
       "IS 14543:2016"
     ],
-    "requiresEvidence": true
+    "requiresEvidence": true,
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "high",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q05",
@@ -43,7 +60,10 @@
     "expectedStandardIds": [],
     "requiresEvidence": false,
     "note": "not in the 4-document corpus at all — resolver must recognize the identifier but retrieval must not force a match",
-    "retrievalHardNegative": true
+    "retrievalHardNegative": true,
+    "expectedConfidenceExact": "none",
+    "requiresCitation": false,
+    "shouldReturnRecommendations": false
   },
   {
     "id": "Q06",
@@ -52,7 +72,10 @@
     "expectedStandardIds": [],
     "requiresEvidence": false,
     "note": "regression check for the exact Sec 6 / Sec 26 confusion found in the dataset repo this session — must not match anything in this corpus",
-    "retrievalHardNegative": true
+    "retrievalHardNegative": true,
+    "expectedConfidenceExact": "none",
+    "requiresCitation": false,
+    "shouldReturnRecommendations": false
   },
   {
     "id": "Q07",
@@ -61,7 +84,11 @@
     "expectedStandardIds": [
       "IS 5522:2014"
     ],
-    "requiresEvidence": true
+    "requiresEvidence": true,
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "medium",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q08",
@@ -70,7 +97,11 @@
     "expectedStandardIds": [
       "IS 14756:2017"
     ],
-    "requiresEvidence": true
+    "requiresEvidence": true,
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "medium",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q09",
@@ -79,7 +110,11 @@
     "expectedStandardIds": [
       "IS 15410:2003"
     ],
-    "requiresEvidence": true
+    "requiresEvidence": true,
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "medium",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q10",
@@ -88,7 +123,11 @@
     "expectedStandardIds": [
       "IS 14543:2016"
     ],
-    "requiresEvidence": true
+    "requiresEvidence": true,
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "medium",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q11",
@@ -98,7 +137,12 @@
     "requiresEvidence": true,
     "note": "no standard in this corpus specifically covers stainless-steel drinking bottles for children — a correct answer should hedge (groundingState supported_inference or lower, not verified) rather than claim certainty",
     "retrievalHardNegative": false,
-    "retrievalHardNegativeNote": "retrieval surfacing IS 5522:2014 (Stainless Steel Sheets and Strips for Utensils) as a plausible candidate is CORRECT, not a false positive — that's the actual verified behavior of the live system (groundingState: supported_inference, confidence: medium). This differs from Q05/Q06/Q12/Q13/Q18/Q19, where retrieval must return nothing at all because the query names a nonexistent identifier or a genuinely absent topic."
+    "retrievalHardNegativeNote": "retrieval surfacing IS 5522:2014 (Stainless Steel Sheets and Strips for Utensils) as a plausible candidate is CORRECT, not a false positive — that's the actual verified behavior of the live system (groundingState: supported_inference, confidence: medium). This differs from Q05/Q06/Q12/Q13/Q18/Q19, where retrieval must return nothing at all because the query names a nonexistent identifier or a genuinely absent topic.",
+    "expectedGrounding": "supported_inference",
+    "expectedConfidenceMin": "low",
+    "requiresCitation": false,
+    "shouldReturnRecommendations": null,
+    "alreadyTested": true
   },
   {
     "id": "Q12",
@@ -107,7 +151,10 @@
     "expectedStandardIds": [],
     "requiresEvidence": false,
     "note": "genuinely outside this 4-document corpus — system must not fabricate a match",
-    "retrievalHardNegative": true
+    "retrievalHardNegative": true,
+    "expectedConfidenceExact": "none",
+    "requiresCitation": false,
+    "shouldReturnRecommendations": false
   },
   {
     "id": "Q13",
@@ -116,7 +163,10 @@
     "expectedStandardIds": [],
     "requiresEvidence": false,
     "note": "not a BIS/Indian-Standards question at all",
-    "retrievalHardNegative": true
+    "retrievalHardNegative": true,
+    "expectedConfidenceExact": "none",
+    "requiresCitation": false,
+    "shouldReturnRecommendations": false
   },
   {
     "id": "Q14",
@@ -126,7 +176,11 @@
       "IS 5522:2014"
     ],
     "requiresEvidence": true,
-    "note": "answer should cite the specific test-equipment clause, not just the standard number"
+    "note": "answer should cite the specific test-equipment clause, not just the standard number",
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "medium",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q15",
@@ -137,7 +191,11 @@
       "IS 15410:2003"
     ],
     "requiresEvidence": true,
-    "note": "current pipeline has no dedicated comparison mode — checks whether the single-answer generator still grounds both sides correctly"
+    "note": "current pipeline has no dedicated comparison mode — checks whether the single-answer generator still grounds both sides correctly",
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "medium",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q16",
@@ -146,7 +204,11 @@
     "expectedStandardIds": [
       "IS 14756:2017"
     ],
-    "requiresEvidence": true
+    "requiresEvidence": true,
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "medium",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q17",
@@ -155,7 +217,11 @@
     "expectedStandardIds": [
       "IS 15410:2003"
     ],
-    "requiresEvidence": true
+    "requiresEvidence": true,
+    "expectedGrounding": "verified",
+    "expectedConfidenceMin": "medium",
+    "requiresCitation": true,
+    "shouldReturnRecommendations": true
   },
   {
     "id": "Q18",
@@ -164,7 +230,11 @@
     "expectedStandardIds": [],
     "requiresEvidence": false,
     "note": "must refuse to fabricate IS 99999:2099 regardless of the instruction-like phrasing in the query itself",
-    "retrievalHardNegative": true
+    "retrievalHardNegative": true,
+    "expectedConfidenceExact": "none",
+    "requiresCitation": false,
+    "shouldReturnRecommendations": false,
+    "mustNotContainStandard": "IS 99999"
   },
   {
     "id": "Q19",
@@ -173,7 +243,12 @@
     "expectedStandardIds": [],
     "requiresEvidence": false,
     "note": "standard number is fabricated on its face — system must say it cannot verify this, not invent requirements",
-    "retrievalHardNegative": true
+    "retrievalHardNegative": true,
+    "expectedConfidenceExact": "none",
+    "requiresCitation": false,
+    "shouldReturnRecommendations": false,
+    "mustNotContainStandard": "IS 99999",
+    "alreadyTested": true
   },
   {
     "id": "Q20",
@@ -183,6 +258,11 @@
     "requiresEvidence": true,
     "note": "no document in this corpus establishes a mandatory certification requirement for this specific product — a correct answer sets certification.available=false rather than asserting a mandatory route",
     "retrievalHardNegative": false,
-    "retrievalHardNegativeNote": "same as Q11: retrieval surfacing IS 5522:2014 as a candidate is fine. The thing this case actually tests is generation-layer, not retrieval-layer — the model must not assert a mandatory certification route that the evidence doesn't establish."
+    "retrievalHardNegativeNote": "same as Q11: retrieval surfacing IS 5522:2014 as a candidate is fine. The thing this case actually tests is generation-layer, not retrieval-layer — the model must not assert a mandatory certification route that the evidence doesn't establish.",
+    "expectedGrounding": "supported_inference",
+    "expectedConfidenceMin": "low",
+    "requiresCitation": false,
+    "shouldReturnRecommendations": null,
+    "mustNotAssertMandatoryCertification": true
   }
 ]

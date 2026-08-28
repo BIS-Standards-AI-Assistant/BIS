@@ -10,7 +10,9 @@
     "db:push": "dotenv -e .env.local -- drizzle-kit push",
     "db:studio": "dotenv -e .env.local -- drizzle-kit studio",
     "ingest": "dotenv -e .env.local -- tsx scripts/ingest.ts",
-    "eval:retrieval": "tsx scripts/eval-retrieval.ts"
+    "eval:retrieval": "tsx scripts/eval-retrieval.ts",
+    "eval:generation": "tsx scripts/eval-generation.ts",
+    "eval:validate": "dotenv -e .env.local -- tsx scripts/validate-generation.ts"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.86",
