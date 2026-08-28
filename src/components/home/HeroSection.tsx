@@ -16,27 +16,42 @@ export function HeroSection({
   const { t } = useLanguage();
 
   return (
-    <section className="relative overflow-hidden border-b border-border bg-surface-alt">
-      <ArchitecturalIllustration className="pointer-events-none absolute inset-y-0 right-0 h-full w-[62%] text-navy opacity-[0.12]" />
-      <BisLogo className="pointer-events-none absolute -right-16 -bottom-10 h-80 w-80 opacity-[0.06]" />
+    <section className="relative overflow-hidden border-b border-border bg-surface min-h-[480px] lg:min-h-[520px] flex items-center">
+      {/* Blended Animated Technical/Laboratory Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-[0.24] dark:opacity-[0.16] animate-kenburns pointer-events-none transition-all duration-700"
+        style={{ backgroundImage: "var(--hero-bg)" }}
+      />
 
-      <div className="relative mx-auto max-w-[1380px] px-6 py-14 lg:py-16">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_340px] lg:gap-12">
+      {/* Soft gradient masks to blend background and ensure text is highly readable */}
+      <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/90 to-surface/20 dark:from-surface dark:via-surface/90 dark:to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent pointer-events-none" />
+
+      {/* Floating premium gradient glowing nodes */}
+      <div className="absolute top-1/4 right-1/4 w-80 h-80 rounded-full bg-blue/15 dark:bg-blue/10 blur-[90px] animate-pulse-slow pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] rounded-full bg-orange/8 dark:bg-orange/4 blur-[110px] animate-pulse-slow pointer-events-none" />
+
+      {/* Fine-line illustrations for background details */}
+      <ArchitecturalIllustration className="pointer-events-none absolute inset-y-0 right-0 h-full w-[55%] text-navy opacity-[0.07] dark:opacity-[0.05]" />
+      <BisLogo className="pointer-events-none absolute -right-16 -bottom-10 h-80 w-80 opacity-[0.03] dark:opacity-[0.02] animate-rotate" />
+
+      <div className="relative z-10 mx-auto w-full max-w-[1380px] px-6 py-14 lg:py-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_360px] lg:gap-12 items-center">
           <div>
-            <h1 className="text-3xl font-semibold leading-tight tracking-tight text-navy sm:text-4xl lg:text-[42px]">
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-navy sm:text-4xl lg:text-[42px]">
               {t.hero.titleLine1}
               <br />
               {t.hero.titlePre}
               <span className="text-orange">{t.hero.titleHighlight}</span>
             </h1>
-            <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink-soft">{t.hero.subtitle}</p>
+            <p className="mt-4 max-w-xl text-[15px] font-medium leading-relaxed text-ink-soft">{t.hero.subtitle}</p>
 
-            <div className="mt-8 max-w-3xl">
+            <div className="mt-8 max-w-2xl transform transition-transform duration-300 hover:scale-[1.005]">
               <SearchHero onSubmit={onSubmit} loading={loading} />
             </div>
           </div>
 
-          <div className="lg:pt-1">
+          <div className="lg:pt-1 animate-float">
             <TrustCard />
           </div>
         </div>
@@ -44,3 +59,4 @@ export function HeroSection({
     </section>
   );
 }
+

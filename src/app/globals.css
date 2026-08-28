@@ -2,35 +2,31 @@
 
 /*
   Design system for BIS Assistant — the official BIS institutional palette.
-  Navy/blue dominant, gold used only as a restrained accent (borders, rails,
-  small highlights) — never as a primary fill. Evidence excerpts always
-  render in the mono face with a gold rail — that's the one recurring
-  signature that separates "sourced text" from "AI-generated text"
-  everywhere it appears in the product.
+  Navy/blue dominant, orange/coral used as an accent.
 */
 :root {
   --color-navy: #063b73;
-  --color-navy-deep: #04294f;
+  --color-navy-deep: #002244;
   --color-blue: #075da8;
   --color-gold: #f4c400;
   --color-gold-soft: #fff4c7;
   --color-gold-ink: #8a6d00;
   --color-orange: #e8622a;
 
-  --color-surface: #f8fafc;
+  --color-surface: #f3f7fb;
   --color-surface-raised: #ffffff;
   --color-surface-alt: #eef4fb;
   --color-surface-sunken: #e5edf6;
   --color-border: #e2e8f0;
   --color-border-strong: #cbd5e1;
 
-  --color-ink: #172033;
-  --color-ink-soft: #43526a;
+  --color-ink: #1e293b;
+  --color-ink-soft: #475569;
   --color-ink-faint: #64748b;
 
-  --color-accent: #f4c400;
-  --color-accent-soft: #fff4c7;
-  --color-accent-ink: #8a6d00;
+  --color-accent: #e8622a;
+  --color-accent-soft: #ffeedb;
+  --color-accent-ink: #a63200;
 
   --color-success: #16743f;
   --color-success-soft: #dcf0e3;
@@ -41,38 +37,37 @@
   --color-info: #075da8;
   --color-info-soft: #e3edf5;
   --color-neutral-soft: #e6e8eb;
+
+  --hero-bg: url('/bis_bg_engineering.jpg');
 }
 
 /*
   Dark mode is opt-in only, via the toggle — it never follows the OS
-  preference. The toggle sets data-theme="dark" | "light" on <html>;
-  the init script in layout.tsx defaults to "light" unless the user has
-  explicitly chosen dark before. "Bluish" dark — deep navy surfaces, not
-  black — so the institutional identity carries into dark mode.
+  preference. The toggle sets data-theme="dark" | "light" on <html>.
 */
 :root[data-theme="dark"] {
-  --color-navy: #7fb3e8;
-  --color-navy-deep: #04294f;
-  --color-blue: #4fa3e3;
+  --color-navy: #8fc2f2;
+  --color-navy-deep: #020c1b;
+  --color-blue: #5baef2;
   --color-gold: #f4c400;
   --color-gold-soft: #3a2f0a;
   --color-gold-ink: #f0c94a;
-  --color-orange: #f0824a;
+  --color-orange: #f27c49;
 
-  --color-surface: #0a1420;
-  --color-surface-raised: #101d2e;
-  --color-surface-alt: #16293b;
-  --color-surface-sunken: #0a141d;
-  --color-border: #223447;
-  --color-border-strong: #2e455b;
+  --color-surface: #060d18;
+  --color-surface-raised: #0d1624;
+  --color-surface-alt: #121e30;
+  --color-surface-sunken: #040910;
+  --color-border: #1a293d;
+  --color-border-strong: #243b59;
 
-  --color-ink: #edf1f5;
-  --color-ink-soft: #a9b7c4;
-  --color-ink-faint: #74879a;
+  --color-ink: #f1f5f9;
+  --color-ink-soft: #cbd5e1;
+  --color-ink-faint: #94a3b8;
 
-  --color-accent: #f4c400;
-  --color-accent-soft: #3a2f0a;
-  --color-accent-ink: #f0c94a;
+  --color-accent: #f27c49;
+  --color-accent-soft: #381f14;
+  --color-accent-ink: #f2976b;
 
   --color-success: #4fae87;
   --color-success-soft: #123024;
@@ -83,6 +78,8 @@
   --color-info: #4fa3e3;
   --color-info-soft: #112a3d;
   --color-neutral-soft: #1c2b3a;
+
+  --hero-bg: url('/bis_bg_engineering_dark.jpg');
 }
 
 @theme inline {
@@ -120,10 +117,12 @@
 
 * {
   border-color: var(--color-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease;
 }
 
 html {
   color-scheme: light;
+  scroll-behavior: smooth;
 }
 
 html[data-theme="dark"] {
@@ -134,6 +133,7 @@ body {
   background: var(--color-surface);
   color: var(--color-ink);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -144,7 +144,84 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-blue);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 4px;
+}
+
+/* Animations */
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.04) translate(-0.8%, -0.5%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.28;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 30s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.animate-rotate {
+  animation: rotate-slow 40s linear infinite;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface-sunken);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-faint);
 }
 
 @media (prefers-reduced-motion: reduce) {

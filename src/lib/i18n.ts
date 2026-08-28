@@ -121,14 +121,14 @@ const en: Dictionary = {
     ],
   },
   recent: {
-    heading: "Example Queries",
+    heading: "Recent Queries",
     viewAll: "View all",
     colHash: "#",
     colQuery: "Query",
-    colStandards: "Matched Standards",
-    colLast: "Type",
+    colStandards: "Standards Found",
+    colLast: "Last Searched",
   },
-  whatsnew: { heading: "In the Knowledge Base", viewAll: "View all" },
+  whatsnew: { heading: "What's New", viewAll: "View all" },
   quicklinks: { heading: "Quick Links" },
   footer: {
     ministryLine1: "MINISTRY OF CONSUMER AFFAIRS, FOOD & PUBLIC DISTRIBUTION",
