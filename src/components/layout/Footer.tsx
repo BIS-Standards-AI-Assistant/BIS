@@ -1,46 +1,75 @@
-/**
- * Institutional, quiet — never visually dominant. Only facts already
- * verified elsewhere in this project appear here: the BIS office address
- * is taken verbatim from the official product-manual PDFs ingested into
- * the knowledge base (see data/seed/raw), not invented for this footer.
- */
+"use client";
+
+import Link from "next/link";
+import { GovEmblem } from "@/components/ui/GovEmblem";
+import { useLanguage } from "@/components/providers/LanguageProvider";
+
+const SOCIALS = ["LinkedIn", "X", "YouTube", "Instagram"];
+
 export function Footer() {
+  const { t, lang } = useLanguage();
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-border bg-surface-alt">
-      <div className="mx-auto max-w-6xl px-6 py-10">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-          <div>
-            <p className="text-sm font-semibold text-ink">Bureau of Indian Standards</p>
-            <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-              Manak Bhawan, 9 Bahadur Shah Zafar Marg
+    <footer id="footer" className="bg-surface-raised">
+      <div className="border-t border-border">
+        <div className="mx-auto grid max-w-[1380px] grid-cols-1 gap-10 px-6 py-12 sm:grid-cols-2 lg:grid-cols-[240px_1fr_260px]">
+          <div className="flex items-start gap-3">
+            <GovEmblem className="h-12 w-12 shrink-0" />
+            <p className="text-[13px] font-semibold leading-relaxed text-navy">
+              {lang !== "hi" && (
+                <>
+                  उपभोक्ता मामले, खाद्य एवं सार्वजनिक वितरण मंत्रालय
+                  <br />
+                </>
+              )}
+              {t.footer.ministryLine1}
               <br />
-              New Delhi – 110002
+              {t.footer.ministryLine2}
             </p>
           </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-              Official resources
-            </p>
-            <ul className="mt-2 space-y-1.5 text-sm">
-              <li>
-                <a href="https://bis.gov.in" target="_blank" rel="noopener noreferrer" className="text-navy hover:underline">
-                  Official BIS website (bis.gov.in)
-                </a>
-              </li>
+
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {t.footer.columns.map((col) => (
+              <div key={col.title}>
+                <h3 className="text-[13.5px] font-semibold text-navy">{col.title}</h3>
+                <p className="mt-2 text-[12.5px] leading-relaxed text-ink-soft">{col.body}</p>
+                <Link href="/" className="mt-2 inline-block text-[12.5px] font-medium text-blue hover:underline">
+                  {col.cta}
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-xl bg-navy-deep p-5 text-white">
+            <h3 className="text-[14px] font-semibold">{t.footer.connect}</h3>
+            <ul className="mt-3 space-y-2 text-[13px]">
+              {SOCIALS.map((s) => (
+                <li key={s}>
+                  <a href="#" className="text-white/85 hover:text-white hover:underline">
+                    {s}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-ink-faint">About this service</p>
-            <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-              An AI-assisted discovery tool built on ingested BIS product manuals and
-              specifications. It is not an official BIS system and does not itself issue
-              certification decisions — always confirm applicability with BIS directly.
-            </p>
-          </div>
         </div>
-        <p className="mt-8 border-t border-border pt-4 text-xs text-ink-faint">
-          Standards Navigator · An evidence-first discovery aid for Indian Standards, built for SIH26107.
-        </p>
+      </div>
+
+      <div className="bg-navy-deep text-white/80">
+        <div className="mx-auto flex max-w-[1380px] flex-col items-center gap-2 px-6 py-3.5 text-[11.5px] sm:flex-row sm:justify-between">
+          <p>© {year} {t.footer.rights}</p>
+          <p className="flex flex-wrap items-center justify-center gap-2">
+            <a href="#" className="hover:text-white">{t.footer.sitemap}</a>
+            <span aria-hidden="true">|</span>
+            <a href="#" className="hover:text-white">{t.footer.privacy}</a>
+            <span aria-hidden="true">|</span>
+            <a href="#" className="hover:text-white">{t.footer.terms}</a>
+            <span aria-hidden="true">|</span>
+            <a href="#" className="hover:text-white">{t.footer.accessibility}</a>
+          </p>
+          <p className="font-medium">SIH 2026 Prototype</p>
+        </div>
       </div>
     </footer>
   );

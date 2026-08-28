@@ -1,99 +1,89 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
-
-/**
- * Only routes the application actually implements are linked here.
- * The BIS service taxonomy also includes Certification, Testing,
- * Resources, e-Services, and About BIS — those are not shown because
- * this app has no real content for them yet. Adding placeholder links
- * would violate the project's own truthfulness rule (never present an
- * unsupported destination as if it were a working feature).
- */
-const NAV_ITEMS = [
-  { href: "/", label: "Home" },
-  { href: "/standards", label: "Standards" },
-  { href: "/search", label: "Search" },
-  { href: "/compare", label: "Compare" },
-] as const;
+import Link from "next/link";
+import { BisLogo } from "@/components/ui/BisLogo";
+import { ChevronDownIcon, MenuIcon, CloseIcon, SearchIcon } from "@/components/ui/icons";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function Header() {
-  const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const navItems: { label: string; href: string; hasMenu?: boolean }[] = [
+    { label: t.nav.standards, href: "/search", hasMenu: true },
+    { label: t.nav.certification, href: "/#services", hasMenu: true },
+    { label: t.nav.testing, href: "/#services", hasMenu: true },
+    { label: t.nav.resources, href: "/#footer", hasMenu: true },
+    { label: t.nav.eservices, href: "/#services", hasMenu: true },
+    { label: t.nav.about, href: "/#footer", hasMenu: true },
+    { label: t.nav.contact, href: "/#footer" },
+  ];
 
   return (
-    <div className="border-b border-border">
-      <div className="bg-navy-deep text-white/90">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-1.5 text-[11.5px]">
-          <span>Government of India · Ministry of Consumer Affairs, Food &amp; Public Distribution</span>
-          <a href="https://bis.gov.in" target="_blank" rel="noopener noreferrer" className="hover:underline">
-            bis.gov.in
-          </a>
-        </div>
+    <header className="border-b border-border bg-surface-raised">
+      <div className="mx-auto flex h-[86px] max-w-[1380px] items-center justify-between gap-6 px-6">
+        <Link href="/" className="flex shrink-0 items-center gap-3">
+          <BisLogo className="h-11 w-11 shrink-0" />
+          <span className="leading-tight">
+            <span className="block text-[17px] font-semibold tracking-tight text-navy">
+              भारतीय मानक ब्यूरो
+            </span>
+            <span className="block text-[13px] font-bold uppercase tracking-wide text-ink">
+              Bureau of Indian Standards
+            </span>
+            <span className="block text-[11px] text-ink-faint">{t.header.tagline}</span>
+          </span>
+        </Link>
+
+        <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="flex items-center gap-1 text-[14px] font-medium text-ink-soft transition-colors hover:text-blue"
+            >
+              {item.label}
+              {item.hasMenu && <ChevronDownIcon className="h-3.5 w-3.5 text-ink-faint" />}
+            </Link>
+          ))}
+          <button
+            type="button"
+            aria-label={t.nav.search}
+            className="rounded-full p-2 text-ink-soft transition-colors hover:bg-surface-alt hover:text-blue"
+          >
+            <SearchIcon className="h-[18px] w-[18px]" />
+          </button>
+        </nav>
+
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          className="rounded-md p-2 text-navy lg:hidden"
+        >
+          {open ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
+        </button>
       </div>
 
-      <header className="bg-surface-raised">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
-          <Link href="/" className="flex items-center gap-3">
-            <span
-              aria-hidden="true"
-              className="flex h-9 w-9 items-center justify-center rounded-sm bg-navy text-[13px] font-bold text-white"
-            >
-              BIS
-            </span>
-            <span className="flex flex-col leading-tight">
-              <span className="text-[15px] font-semibold text-ink">Standards Navigator</span>
-              <span className="text-[11.5px] text-ink-faint">Bureau of Indian Standards</span>
-            </span>
-          </Link>
-
-          <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
-            {NAV_ITEMS.map((item) => {
-              const active = pathname === item.href;
-              return (
+      {open && (
+        <nav aria-label="Primary mobile" className="border-t border-border bg-surface-raised px-6 py-3 lg:hidden">
+          <ul className="flex flex-col gap-1">
+            {navItems.map((item) => (
+              <li key={item.label}>
                 <Link
-                  key={item.href}
                   href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`rounded-sm px-3 py-2 text-sm font-medium transition-colors ${
-                    active ? "text-navy" : "text-ink-soft hover:text-ink"
-                  }`}
-                  style={active ? { boxShadow: "inset 0 -2px 0 0 var(--color-navy)" } : undefined}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-md px-2 py-2.5 text-[15px] font-medium text-ink-soft hover:bg-surface-alt hover:text-blue"
                 >
                   {item.label}
                 </Link>
-              );
-            })}
-          </nav>
-
-          <button
-            type="button"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-nav"
-            onClick={() => setMenuOpen((v) => !v)}
-            className="rounded-sm border border-border px-3 py-1.5 text-sm font-medium text-ink-soft md:hidden"
-          >
-            {menuOpen ? "Close" : "Menu"}
-          </button>
-        </div>
-
-        {menuOpen && (
-          <nav id="mobile-nav" aria-label="Primary" className="border-t border-border px-6 py-2 md:hidden">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="block py-2.5 text-sm font-medium text-ink-soft hover:text-ink"
-              >
-                {item.label}
-              </Link>
+              </li>
             ))}
-          </nav>
-        )}
-      </header>
-    </div>
+          </ul>
+        </nav>
+      )}
+    </header>
   );
 }
