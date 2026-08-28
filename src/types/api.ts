@@ -14,10 +14,13 @@ export interface EvidenceRef {
   sourceUrl: string;
 }
 
+export type GroundingState = "verified" | "supported_inference" | "insufficient_evidence";
+
 export interface Recommendation {
   standardNumber: string | null;
   title: string;
   relevanceScore: number;
+  groundingState: GroundingState;
   reason: string;
   evidence: EvidenceRef[];
 }
@@ -59,6 +62,7 @@ export interface RetrievedChunk {
   text: string;
   semanticScore: number;
   keywordScore: number;
+  identifierMatch: boolean;
   score: number;
 }
 

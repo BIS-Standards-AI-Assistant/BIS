@@ -1,7 +1,19 @@
 import Link from "next/link";
-import type { Recommendation } from "@/types/api";
+import type { GroundingState, Recommendation } from "@/types/api";
 import { RelevanceMeter } from "@/components/ui/RelevanceMeter";
 import { EvidenceExcerpt } from "@/components/evidence/EvidenceExcerpt";
+import { Badge } from "@/components/ui/Badge";
+
+const GROUNDING_LABEL: Record<GroundingState, string> = {
+  verified: "Directly supported by evidence",
+  supported_inference: "Inferred from related evidence",
+  insufficient_evidence: "Evidence doesn't fully establish this",
+};
+const GROUNDING_TONE: Record<GroundingState, "success" | "warning" | "danger"> = {
+  verified: "success",
+  supported_inference: "warning",
+  insufficient_evidence: "danger",
+};
 
 export function RecommendationCard({ recommendation }: { recommendation: Recommendation }) {
   const documentId = recommendation.evidence[0]?.documentId;
@@ -19,7 +31,10 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
       </div>
 
       <div className="mt-3">
-        <p className="text-[10.5px] font-semibold uppercase tracking-wide text-ink-faint">Why this appears relevant</p>
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="text-[10.5px] font-semibold uppercase tracking-wide text-ink-faint">Why this appears relevant</p>
+          <Badge tone={GROUNDING_TONE[recommendation.groundingState]}>{GROUNDING_LABEL[recommendation.groundingState]}</Badge>
+        </div>
         <p className="mt-1 text-sm leading-relaxed text-ink-soft">{recommendation.reason}</p>
       </div>
 

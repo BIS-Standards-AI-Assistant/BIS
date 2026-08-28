@@ -1,6 +1,7 @@
 import { embed } from "ai";
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db";
+import { resolveStandardIds, matchesResolvedId } from "./standards-id";
 
 export interface RetrievedChunk {
   chunkId: string;
@@ -14,6 +15,7 @@ export interface RetrievedChunk {
   text: string;
   semanticScore: number;
   keywordScore: number;
+  identifierMatch: boolean;
   score: number;
 }
 
@@ -60,7 +62,36 @@ export async function retrieveChunks(
   `);
   const keywordRows = keywordResult.rows as unknown as Array<{ id: string; rank: number }>;
 
+  // Standards Identifier Resolver: if the query names a specific IS number
+  // ("IS 5522:2014", "5522:2014", "IS 302 Part 2/Sec 6"), find chunks whose
+  // document actually carries a matching standard_number and treat them as
+  // rank-1 hits in a third ranking list fused into RRF below. This is a
+  // deterministic, no-LLM signal — it works even when the AI Gateway is
+  // unavailable, and it never invents a match: matchesResolvedId only
+  // returns true when the resolved number/part/section/year are all
+  // present in the candidate's actual standard_number string.
+  const resolvedIds = resolveStandardIds(query);
+  const identifierChunkIds = new Set<string>();
+  if (resolvedIds.length > 0) {
+    const idMatchResult = await db.execute(sql`
+      SELECT c.id, d.standard_number
+      FROM chunks c
+      JOIN documents d ON d.id = c.document_id
+      WHERE d.standard_number IS NOT NULL
+    `);
+    for (const row of idMatchResult.rows as unknown as Array<{ id: string; standard_number: string }>) {
+      if (resolvedIds.some((r) => matchesResolvedId(row.standard_number, r))) {
+        identifierChunkIds.add(row.id);
+      }
+    }
+  }
+
   const fused = new Map<string, { rrf: number; semRank?: number; kwRank?: number }>();
+  for (const id of identifierChunkIds) {
+    const entry = fused.get(id) ?? { rrf: 0 };
+    entry.rrf += 1 / RRF_K; // equivalent to a rank-1 hit in its own ranking list
+    fused.set(id, entry);
+  }
   for (const row of semanticRows) {
     const entry = fused.get(row.id) ?? { rrf: 0 };
     entry.rrf += 1 / (RRF_K + Number(row.rank));
@@ -114,6 +145,7 @@ export async function retrieveChunks(
         text: row.text as string,
         semanticScore: fusion.semRank ? 1 / fusion.semRank : 0,
         keywordScore: fusion.kwRank ? 1 / fusion.kwRank : 0,
+        identifierMatch: identifierChunkIds.has(id),
         score: fusion.rrf,
       } satisfies RetrievedChunk;
     })

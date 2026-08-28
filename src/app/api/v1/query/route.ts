@@ -59,6 +59,7 @@ export async function POST(req: NextRequest) {
         standardNumber: r.standardNumber,
         title: r.title,
         relevanceScore: r.relevanceScore,
+        groundingState: r.groundingState,
         reason: r.reason,
         evidence: r.evidenceChunkIds.map((id) => {
           const c = evidenceById.get(id)!;
