@@ -2,6 +2,7 @@ import { generateObject } from "ai";
 import { z } from "zod";
 import type { RetrievedChunk } from "./retrieval";
 import type { QueryIntent } from "./intent";
+import { chatModel } from "./providers";
 
 // Truth-layer claim states (AGENTS.md-style domain reasoning, not a raw
 // confidence score): each recommendation's underlying claim — "this
@@ -36,8 +37,6 @@ export const AnswerSchema = z.object({
 });
 
 export type StructuredAnswer = z.infer<typeof AnswerSchema>;
-
-const GENERATION_MODEL = "anthropic/claude-sonnet-5";
 
 const SYSTEM_PROMPT = `You are a BIS (Bureau of Indian Standards) information assistant. You answer ONLY from the evidence chunks provided below — you have no other source of truth about Indian Standards.
 
@@ -80,10 +79,11 @@ export async function generateAnswer(
     .join("\n\n");
 
   const { object } = await generateObject({
-    model: GENERATION_MODEL,
+    model: chatModel(),
     schema: AnswerSchema,
     system: SYSTEM_PROMPT,
     prompt: `User query: ${query}\n\nExtracted intent: ${JSON.stringify(intent)}\n\nEvidence chunks:\n${evidenceBlock}`,
+    maxOutputTokens: 2048, // enough for a few recommendations + citations; default (tens of thousands) is wasteful
   });
   return object;
 }

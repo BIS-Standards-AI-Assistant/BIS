@@ -1,7 +1,9 @@
 import { embed } from "ai";
-import { sql } from "drizzle-orm";
+import { sql, inArray } from "drizzle-orm";
 import { getDb } from "@/db";
+import { chunks } from "@/db/schema";
 import { resolveStandardIds, matchesResolvedId } from "./standards-id";
+import { embeddingModel } from "./providers";
 
 export interface RetrievedChunk {
   chunkId: string;
@@ -19,7 +21,6 @@ export interface RetrievedChunk {
   score: number;
 }
 
-const EMBEDDING_MODEL = "openai/text-embedding-3-small";
 
 // Reciprocal Rank Fusion — combines the semantic and keyword rankings
 // without needing scores on a common scale. See AGENTS.md sec 11.
@@ -39,7 +40,7 @@ export async function retrieveChunks(
 
   let semanticRows: Array<{ id: string; rank: number }> = [];
   try {
-    const { embedding } = await embed({ model: EMBEDDING_MODEL, value: query });
+    const { embedding } = await embed({ model: embeddingModel(), value: query });
     const vectorLiteral = `[${embedding.join(",")}]`;
     const result = await db.execute(sql`
       SELECT id, row_number() OVER (ORDER BY embedding <=> ${vectorLiteral}::vector) AS rank
@@ -112,21 +113,18 @@ export async function retrieveChunks(
     .slice(0, limit)
     .map(([id]) => id);
 
-  const rows = await db.execute(sql`
-    SELECT
-      c.id AS chunk_id, c.document_id, c.section, c.clause, c.page, c.text,
-      d.standard_number, d.title, d.source_url
-    FROM chunks c
-    JOIN documents d ON d.id = c.document_id
-    WHERE c.id = ANY(${topIds})
-  `);
+  // Fetched via the query builder's inArray + relation, not a raw
+  // `= ANY(${array})` SQL template: the neon-http driver expands a JS
+  // array into individual $1, $2, ... parameters, which makes
+  // `ANY(($1, $2, ...))` a tuple rather than a Postgres array and fails
+  // with "op ANY/ALL (array) requires array on right side" — a bug that
+  // only surfaced once real chunk ids existed to retrieve.
+  const rows = await db.query.chunks.findMany({
+    where: inArray(chunks.id, topIds),
+    with: { document: true },
+  });
 
-  const byId = new Map(
-    (rows.rows as unknown as Array<Record<string, unknown>>).map((r) => [
-      r.chunk_id as string,
-      r,
-    ]),
-  );
+  const byId = new Map(rows.map((r) => [r.id, r]));
 
   return topIds
     .map((id) => {
@@ -135,14 +133,14 @@ export async function retrieveChunks(
       if (!row) return null;
       return {
         chunkId: id,
-        documentId: row.document_id as string,
-        standardNumber: row.standard_number as string | null,
-        title: row.title as string,
-        sourceUrl: row.source_url as string,
-        section: row.section as string | null,
-        clause: row.clause as string | null,
-        page: row.page as number | null,
-        text: row.text as string,
+        documentId: row.documentId,
+        standardNumber: row.document.standardNumber,
+        title: row.document.title,
+        sourceUrl: row.document.sourceUrl,
+        section: row.section,
+        clause: row.clause,
+        page: row.page,
+        text: row.text,
         semanticScore: fusion.semRank ? 1 / fusion.semRank : 0,
         keywordScore: fusion.kwRank ? 1 / fusion.kwRank : 0,
         identifierMatch: identifierChunkIds.has(id),

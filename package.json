@@ -14,6 +14,7 @@
   "dependencies": {
     "@ai-sdk/react": "^4.0.86",
     "@neondatabase/serverless": "^1.1.0",
+    "@openrouter/ai-sdk-provider": "^3.0.0",
     "ai": "^7.0.83",
     "drizzle-orm": "^0.45.2",
     "next": "16.3.3",

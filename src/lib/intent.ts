@@ -1,5 +1,6 @@
 import { generateObject } from "ai";
 import { z } from "zod";
+import { chatModel } from "./providers";
 
 export const QueryIntentSchema = z.object({
   intent: z
@@ -28,8 +29,6 @@ export const QueryIntentSchema = z.object({
 
 export type QueryIntent = z.infer<typeof QueryIntentSchema>;
 
-const GENERATION_MODEL = "anthropic/claude-sonnet-5";
-
 /**
  * Converts a free-text user query into structured intent (AGENTS.md sec 12).
  * Never invents field values — the model is instructed to use null for
@@ -37,12 +36,13 @@ const GENERATION_MODEL = "anthropic/claude-sonnet-5";
  */
 export async function extractQueryIntent(query: string): Promise<QueryIntent> {
   const { object } = await generateObject({
-    model: GENERATION_MODEL,
+    model: chatModel(),
     schema: QueryIntentSchema,
     system: `You extract structured intent from user questions about Indian Standards (BIS) applicability, certification, and testing.
 Use null for any field that is not stated or cannot be reasonably inferred from the text — never invent or guess a value.
 List every piece of information that, if known, would materially change which standard applies (e.g. target age group, material grade, intended use) in missingInformation.`,
     prompt: query,
+    maxOutputTokens: 1024, // this schema is small; no reason to let the default (tens of thousands) burn budget
   });
   return object;
 }
