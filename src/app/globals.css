@@ -1,29 +1,38 @@
 @import "tailwindcss";
 
 /*
-  Design system for the BIS Standards Navigator.
-  Institutional navy + restrained saffron accent, warm-white surfaces.
-  Evidence excerpts always render in the mono face with a saffron rail —
-  that's the one recurring signature that separates "sourced text" from
-  "AI-generated text" everywhere it appears in the product.
+  Design system for BIS Assistant — the official BIS institutional palette.
+  Navy/blue dominant, gold used only as a restrained accent (borders, rails,
+  small highlights) — never as a primary fill. Evidence excerpts always
+  render in the mono face with a gold rail — that's the one recurring
+  signature that separates "sourced text" from "AI-generated text"
+  everywhere it appears in the product.
 */
 :root {
-  --color-surface: #f7f6f2;
+  --color-navy: #063b73;
+  --color-navy-deep: #04294f;
+  --color-blue: #075da8;
+  --color-gold: #f4c400;
+  --color-gold-soft: #fff4c7;
+  --color-gold-ink: #8a6d00;
+  --color-orange: #e8622a;
+
+  --color-surface: #f8fafc;
   --color-surface-raised: #ffffff;
-  --color-surface-alt: #eef1f4;
-  --color-border: #dde2e8;
-  --color-border-strong: #c4ccd6;
+  --color-surface-alt: #eef4fb;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
 
-  --color-ink: #0f2540;
-  --color-ink-soft: #46586b;
-  --color-ink-faint: #7c8a99;
+  --color-ink: #172033;
+  --color-ink-soft: #43526a;
+  --color-ink-faint: #64748b;
 
-  --color-accent: #c76a1f;
-  --color-accent-soft: #f3e3d1;
-  --color-accent-ink: #7a3f0f;
+  --color-accent: #f4c400;
+  --color-accent-soft: #fff4c7;
+  --color-accent-ink: #8a6d00;
 
-  --color-success: #1f6b4f;
-  --color-success-soft: #dcece5;
+  --color-success: #16743f;
+  --color-success-soft: #dcf0e3;
   --color-warning: #93650f;
   --color-warning-soft: #f3e6cc;
   --color-danger: #a33a3a;
@@ -31,10 +40,24 @@
   --color-neutral-soft: #e6e8eb;
 }
 
+/*
+  Dark mode is togglable, not just system-driven: the toggle sets
+  data-theme="dark" | "light" on <html>; absence of that attribute falls
+  back to the OS preference. "Bluish" dark — deep navy surfaces, not black —
+  so the institutional identity carries into dark mode.
+*/
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-surface: #0b1420;
-    --color-surface-raised: #111e2d;
+  :root:not([data-theme="light"]) {
+    --color-navy: #7fb3e8;
+    --color-navy-deep: #04294f;
+    --color-blue: #4fa3e3;
+    --color-gold: #f4c400;
+    --color-gold-soft: #3a2f0a;
+    --color-gold-ink: #f0c94a;
+    --color-orange: #f0824a;
+
+    --color-surface: #0a1420;
+    --color-surface-raised: #101d2e;
     --color-surface-alt: #16293b;
     --color-border: #223447;
     --color-border-strong: #2e455b;
@@ -43,9 +66,9 @@
     --color-ink-soft: #a9b7c4;
     --color-ink-faint: #74879a;
 
-    --color-accent: #e2924a;
-    --color-accent-soft: #3a2a17;
-    --color-accent-ink: #f0b47c;
+    --color-accent: #f4c400;
+    --color-accent-soft: #3a2f0a;
+    --color-accent-ink: #f0c94a;
 
     --color-success: #4fae87;
     --color-success-soft: #123024;
@@ -57,7 +80,46 @@
   }
 }
 
+:root[data-theme="dark"] {
+  --color-navy: #7fb3e8;
+  --color-navy-deep: #04294f;
+  --color-blue: #4fa3e3;
+  --color-gold: #f4c400;
+  --color-gold-soft: #3a2f0a;
+  --color-gold-ink: #f0c94a;
+  --color-orange: #f0824a;
+
+  --color-surface: #0a1420;
+  --color-surface-raised: #101d2e;
+  --color-surface-alt: #16293b;
+  --color-border: #223447;
+  --color-border-strong: #2e455b;
+
+  --color-ink: #edf1f5;
+  --color-ink-soft: #a9b7c4;
+  --color-ink-faint: #74879a;
+
+  --color-accent: #f4c400;
+  --color-accent-soft: #3a2f0a;
+  --color-accent-ink: #f0c94a;
+
+  --color-success: #4fae87;
+  --color-success-soft: #123024;
+  --color-warning: #d9a542;
+  --color-warning-soft: #33260d;
+  --color-danger: #d97b7b;
+  --color-danger-soft: #3a1f1f;
+  --color-neutral-soft: #1c2b3a;
+}
+
 @theme inline {
+  --color-navy: var(--color-navy);
+  --color-navy-deep: var(--color-navy-deep);
+  --color-blue: var(--color-blue);
+  --color-gold: var(--color-gold);
+  --color-gold-soft: var(--color-gold-soft);
+  --color-gold-ink: var(--color-gold-ink);
+  --color-orange: var(--color-orange);
   --color-surface: var(--color-surface);
   --color-surface-raised: var(--color-surface-raised);
   --color-surface-alt: var(--color-surface-alt);
@@ -100,7 +162,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-blue);
   outline-offset: 2px;
   border-radius: 2px;
 }
