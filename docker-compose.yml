@@ -1,0 +1,54 @@
+# Two ways to run the BIS Standards Navigator, same image, same code —
+# only the LLM provider path differs. Both still need a real Postgres/
+# pgvector database (DATABASE_URL) — this compose file does not provision
+# one; point it at your Neon project (or any Postgres with the pgvector
+# extension) via .env.local. See .env.example.
+#
+# OpenRouter path (no local model, needs an API key):
+#   docker compose --profile openrouter up --build
+#
+# Ollama path (fully local, no API key, needs a model pulled first):
+#   docker compose --profile local up --build
+#   docker compose --profile local exec ollama ollama pull llama3
+#
+# Both paths use LLM_PROVIDER=auto by default — see docs/ARCHITECTURE.md.
+# If neither provider is configured/reachable, the app still runs: it falls
+# back to deterministic intent extraction and evidence-only answers.
+
+services:
+  app-openrouter:
+    profiles: ["openrouter"]
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local
+    environment:
+      LLM_PROVIDER: "${LLM_PROVIDER:-openrouter-free}"
+      OPENROUTER_API_KEY: "${OPENROUTER_API_KEY}"
+      OPENROUTER_MODEL: "${OPENROUTER_MODEL:-openai/gpt-4o}"
+
+  app-local:
+    profiles: ["local"]
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local
+    environment:
+      LLM_PROVIDER: "${LLM_PROVIDER:-local}"
+      LOCAL_LLM_BASE_URL: "http://ollama:11434/v1"
+      LOCAL_LLM_MODEL: "${LOCAL_LLM_MODEL:-llama3}"
+    depends_on:
+      - ollama
+
+  ollama:
+    profiles: ["local"]
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+
+volumes:
+  ollama-data:

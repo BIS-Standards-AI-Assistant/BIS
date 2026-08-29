@@ -16,16 +16,45 @@ export interface EvidenceRef {
 
 export type GroundingState = "verified" | "supported_inference" | "insufficient_evidence";
 
+export type CoverageStatus = "covered" | "not_covered" | "unknown";
+
+export interface CoverageResult {
+  product: CoverageStatus;
+  material: CoverageStatus;
+  application: CoverageStatus;
+  targetUser: CoverageStatus;
+  sector: CoverageStatus;
+  testing: CoverageStatus;
+  certification: CoverageStatus;
+  identifier: CoverageStatus;
+  overallCoverageRatio: number;
+}
+
 export interface Recommendation {
   standardNumber: string | null;
   title: string;
   relevanceScore: number;
   groundingState: GroundingState;
   reason: string;
+  coverage: CoverageResult;
   evidence: EvidenceRef[];
 }
 
 export type Confidence = "high" | "medium" | "low" | "none";
+
+export interface EngineConfidence {
+  score: number;
+  band: Confidence;
+  groundingState: GroundingState;
+  supportingSignals: string[];
+  limitingSignals: string[];
+}
+
+export interface Conflict {
+  type: "version_conflict" | "superseded_standard" | "evidence_conflict";
+  description: string;
+  affectedStandards: string[];
+}
 
 export interface QueryInterpretation {
   product: string | null;
@@ -47,6 +76,8 @@ export interface QueryResponse {
   testing: { available: boolean; notes: string | null };
   nextSteps: string[];
   confidence: Confidence;
+  engineConfidence: EngineConfidence;
+  conflicts: Conflict[];
   limitations: string[];
 }
 
@@ -56,6 +87,7 @@ export interface RetrievedChunk {
   standardNumber: string | null;
   title: string;
   sourceUrl: string;
+  sourceOrg: string;
   section: string | null;
   clause: string | null;
   page: number | null;
@@ -64,6 +96,7 @@ export interface RetrievedChunk {
   keywordScore: number;
   identifierMatch: boolean;
   score: number;
+  rerankReason: string;
 }
 
 export interface SearchResponse {

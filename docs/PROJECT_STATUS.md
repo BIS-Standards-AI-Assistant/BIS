@@ -1,0 +1,108 @@
+# Project Status
+
+Last updated: 2026-08-29. Categories: DONE, PARTIAL, BLOCKED, PLANNED — only
+recording what was actually observed this session or in prior sessions'
+verified work, never projected.
+
+## Application
+
+| Area | Status | Notes |
+|---|---|---|
+| Government-style navigation (7 sections, mega menus) | DONE | Verified visually; all placeholder routes load (never 404 for a real nav item) |
+| Search overlay + `/search` page | DONE | Wired to real `/api/v1/search` |
+| Homepage | DONE | Static hero (floating/glowing decorations removed this session — see below) |
+| Standards browse/detail/compare | DONE | Pre-existing, unaffected this session |
+| Placeholder pages for unbuilt sections (Certification, Testing, Resources, e-Services, About BIS) | DONE | Honest "Coming soon" state, not fabricated content |
+
+## Frontend fixes (this session)
+
+| Issue | Status | Fix |
+|---|---|---|
+| Floating/glowing/rotating decorative elements (violated the project's own "no AI-slop" rule) | DONE | Removed `animate-float`, `animate-pulse-slow` blobs, `animate-rotate`, dead CSS keyframes |
+| Header logo tilting on hover | DONE | Removed `group-hover:rotate-12` |
+| Navigation reverted to dead `#anchor` links by an unrelated merge | DONE | Restored mega-menu wiring to real routes |
+| Missing Government of India emblem | DONE | Added Ashoka Chakra to the government bar and footer; re-fixed after a subsequent merge silently reverted it back to the placeholder |
+| Unused-import lint warnings (`WhatsNew.tsx`, `Footer.tsx`) | DONE | Cleaned up — `npm run lint` now reports zero warnings |
+
+## ML / Intelligence engine
+
+See `docs/ML_ENGINE.md` for full detail. Summary:
+
+| Stage | Status |
+|---|---|
+| Query normalization, hybrid retrieval, reranking, evidence aggregation, coverage analysis, conflict detection, deterministic grounding, deterministic confidence, citation/standard validation | DONE — 45 unit/integration tests passing, live-smoke-tested against the real database |
+| LLM answer synthesis (`generateAnswer`) | PARTIAL — schema round-trip verified via mocked responses; never successfully executed live this session (OpenRouter credit exhaustion) |
+| Confidence calibration | BLOCKED | Correctly reports "calibration data insufficient" (7 real samples, need 20+) rather than fabricating a curve |
+| Deterministic intent extraction (reducing the 2 LLM-calls/query to fewer) | PARTIAL | Exact-ID queries now skip the LLM entirely (`deterministicIntentFastPath`); general natural-language queries still use the LLM path when a capable provider is available |
+
+## Provider-independent LLM architecture (this session)
+
+See `docs/ARCHITECTURE.md` for full detail. `intent.ts`/`answer.ts` no
+longer call an LLM SDK directly — both route through `src/lib/providers/`.
+
+| Item | Status | Notes |
+|---|---|---|
+| Provider adapter (local / OpenRouter free / paid) + automatic fallback | DONE | 23 unit tests, mocked, no real API key required |
+| Evidence-only fallback (never fabricates prose) | DONE | Used whenever every configured provider fails |
+| Structured-output capability detection | DONE | Small verified allowlist; nothing assumed capable by default |
+| Cost-control (timeout, cooldown, no-retry policy) | DONE | See docs/ARCHITECTURE.md's cost-control section |
+| Real local (Ollama) inference | PLANNED | Never tested against a real local server |
+| Real paid-tier OpenRouter call | PLANNED | Only the free tier has been exercised live, and only intermittently |
+
+## Testing infrastructure (this session)
+
+Vitest added (`vitest.config.ts`, `vitest.setup.ts`) — previously there was
+no frontend or provider-level test runner, only the tsx-script convention
+for the deterministic ML pipeline.
+
+| Suite | Tests | Status |
+|---|---|---|
+| Provider architecture (`src/lib/providers/provider-architecture.test.ts`) | 23 | DONE — all passing |
+| Frontend components (Header, MegaMenu, SearchOverlay, PlaceholderPage) | 23 | DONE — all passing |
+| `npm run verify` (lint + typecheck + all tests + build) | — | DONE — single command, green |
+
+## Known bug found and fixed this session
+
+A live smoke test against real retrieval data surfaced a genuine grounding
+defect (a fabricated-identifier query nearly passed as `supported_inference`
+because a post-reranking score field was miscalibrated against a stale
+assumption). Fixed and covered by a regression test using the real observed
+score magnitudes. Full writeup in `docs/ML_ENGINE.md`.
+
+## Resource constraints
+
+OpenRouter (`openai/gpt-4o`) is the active LLM provider. The Vercel AI
+Gateway remains blocked (`customer_verification_required`, unresolved across
+every session so far). OpenRouter's free-tier balance is effectively
+exhausted — every live `generateAnswer()` call this session failed with a
+credit-insufficiency error from the provider. This blocks:
+
+- Full golden-query generation-layer evaluation (7/20 tested, from a prior
+  session)
+- Live verification of the new reduced LLM answer schema
+- Confidence calibration (needs more real generation runs)
+
+None of these are code defects. No production behavior (token limits,
+model choice, prompt content) was changed to work around the credit
+constraint.
+
+## Docker (this session)
+
+`Dockerfile` (multi-stage, `next.config.ts`'s `output: "standalone"`) +
+`docker-compose.yml` with two profiles, both using the same image:
+
+| Path | Command | Status |
+|---|---|---|
+| OpenRouter | `docker compose --profile openrouter up --build` | DONE — image builds clean, container starts, homepage verified with `curl` (200) |
+| Ollama (local) | `docker compose --profile local up --build` | PARTIAL — compose config written and reviewed; the `ollama` container itself and a real local-model round trip were not started/tested this session |
+
+Neither path provisions a database — both need a real `DATABASE_URL`
+(Neon or any pgvector-capable Postgres) via `.env.local`, which the compose
+file passes through via `env_file`.
+
+## Immediate next step
+
+Get OpenRouter credit topped up (even a small amount) and re-run
+`scripts/smoke-test-pipeline.ts` for the same 3 queries already
+deterministic-verified this session — that closes the single largest
+unverified gap (`generateAnswer()` in live production) with minimal spend.

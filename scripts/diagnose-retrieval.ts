@@ -9,7 +9,7 @@
 import { embed } from "ai";
 import { sql } from "drizzle-orm";
 import { getDb } from "../src/db";
-import { embeddingModel } from "../src/lib/providers";
+import { embeddingModel } from "../src/lib/embedding-provider";
 
 const RRF_K = 60;
 

@@ -13,7 +13,7 @@ This  Product  Manual  shall  be  used  as  reference  material  by  all  Region
 ensure coherence  of  practice  and  transparency  in  operation  of  certification  under  Scheme-I  of  Bureau  of 
 Indian Standards (Conformity Assessment) Regulations, 2018 for various products. The document may also 
 be used by prospective applicants desirous of obtaining BIS certification licence/certificate. 
- 
+
 1. Product : IS 15410:2003 
  Title : Plastics   Bottles   /Containers   for   Packaged   Natural   Mineral 
 Water and Packaged Drinking Water - Specification 

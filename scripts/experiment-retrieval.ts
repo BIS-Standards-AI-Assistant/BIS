@@ -11,7 +11,7 @@ import { sql } from "drizzle-orm";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { getDb } from "../src/db";
-import { embeddingModel } from "../src/lib/providers";
+import { embeddingModel } from "../src/lib/embedding-provider";
 import { resolveStandardIds, matchesResolvedId } from "../src/lib/standards-id";
 
 const RRF_K = 60;

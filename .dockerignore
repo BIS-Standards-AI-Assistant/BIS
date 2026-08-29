@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.env*
+!.env.example
+npm-debug.log*
+.vercel
+.claude
+.agents
+*.md
+!README.md
+tsconfig.tsbuildinfo
+coverage

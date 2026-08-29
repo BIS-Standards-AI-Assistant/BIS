@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CalendarIcon, DocumentIcon } from "@/components/ui/icons";
+import { CalendarIcon } from "@/components/ui/icons";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 /**

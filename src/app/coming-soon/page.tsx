@@ -9,12 +9,8 @@ export default function ComingSoon() {
     <div className="flex min-h-screen flex-col bg-surface">
       <NavBar />
       
-      <main className="flex-1 flex items-center justify-center px-6 py-16 relative overflow-hidden">
-        {/* Animated background glows */}
-        <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-blue/10 dark:bg-blue/5 blur-[90px] animate-pulse-slow pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-orange/5 dark:bg-orange/2 blur-[90px] animate-pulse-slow pointer-events-none" />
-
-        <div className="relative z-10 max-w-xl w-full text-center p-8 md:p-10 rounded-2xl border border-border bg-surface-raised shadow-xl transform transition-all duration-500 hover:scale-[1.01]">
+      <main className="flex-1 flex items-center justify-center px-6 py-16">
+        <div className="max-w-xl w-full text-center p-8 md:p-10 rounded-2xl border border-border bg-surface-raised shadow-sm">
           {/* Official BIS Logo SVG with standard mark and Sanskrit Motto */}
           <div className="flex justify-center mb-6">
             <svg

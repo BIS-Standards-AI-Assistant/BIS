@@ -3,7 +3,9 @@ import { sql, inArray } from "drizzle-orm";
 import { getDb } from "@/db";
 import { chunks } from "@/db/schema";
 import { resolveStandardIds, matchesResolvedId } from "./standards-id";
-import { embeddingModel } from "./providers";
+import { embeddingModel } from "./embedding-provider";
+import { documentDiversityReranker } from "./ml/reranker";
+import type { Reranker, RetrievalCandidate } from "./ml/types";
 
 export interface RetrievedChunk {
   chunkId: string;
@@ -11,6 +13,7 @@ export interface RetrievedChunk {
   standardNumber: string | null;
   title: string;
   sourceUrl: string;
+  sourceOrg: string;
   section: string | null;
   clause: string | null;
   page: number | null;
@@ -19,6 +22,8 @@ export interface RetrievedChunk {
   keywordScore: number;
   identifierMatch: boolean;
   score: number;
+  /** Deterministic rerank explanation from the ML layer (src/lib/ml) */
+  rerankReason: string;
 }
 
 
@@ -82,7 +87,7 @@ async function keywordSearch(
  */
 export async function retrieveChunks(
   query: string,
-  { limit = 8 }: { limit?: number } = {},
+  { limit = 8, reranker = documentDiversityReranker }: { limit?: number; reranker?: Reranker } = {},
 ): Promise<RetrievedChunk[]> {
   const db = getDb();
   const candidatePoolSize = limit * 4;
@@ -150,10 +155,13 @@ export async function retrieveChunks(
 
   if (fused.size === 0) return [];
 
-  const topIds = [...fused.entries()]
-    .sort((a, b) => b[1].rrf - a[1].rrf)
-    .slice(0, limit)
-    .map(([id]) => id);
+  // The full fused candidate pool (not just the top `limit`) is fetched so
+  // the reranker has enough of the ranking to work with — e.g. the
+  // document-diversity reranker needs to see every document's candidates
+  // to know which document's best chunk is being crowded out by another
+  // document's volume. Bounded by candidatePoolSize (limit * 4), so this
+  // stays a small query.
+  const poolIds = [...fused.keys()];
 
   // Fetched via the query builder's inArray + relation, not a raw
   // `= ANY(${array})` SQL template: the neon-http driver expands a JS
@@ -162,13 +170,13 @@ export async function retrieveChunks(
   // with "op ANY/ALL (array) requires array on right side" — a bug that
   // only surfaced once real chunk ids existed to retrieve.
   const rows = await db.query.chunks.findMany({
-    where: inArray(chunks.id, topIds),
+    where: inArray(chunks.id, poolIds),
     with: { document: true },
   });
 
   const byId = new Map(rows.map((r) => [r.id, r]));
 
-  return topIds
+  const candidates: RetrievalCandidate[] = poolIds
     .map((id) => {
       const row = byId.get(id);
       const fusion = fused.get(id)!;
@@ -177,17 +185,37 @@ export async function retrieveChunks(
         chunkId: id,
         documentId: row.documentId,
         standardNumber: row.document.standardNumber,
-        title: row.document.title,
-        sourceUrl: row.document.sourceUrl,
         section: row.section,
         clause: row.clause,
-        page: row.page,
         text: row.text,
         semanticScore: fusion.semRank ? 1 / fusion.semRank : 0,
         keywordScore: fusion.kwRank ? 1 / fusion.kwRank : 0,
         identifierMatch: identifierChunkIds.has(id),
-        score: fusion.rrf,
-      } satisfies RetrievedChunk;
+        fusedScore: fusion.rrf,
+      } satisfies RetrievalCandidate;
     })
-    .filter((r): r is RetrievedChunk => r !== null);
+    .filter((c): c is RetrievalCandidate => c !== null);
+
+  const ranked = await reranker.rerank(query, candidates);
+
+  return ranked.slice(0, limit).map((c) => {
+    const row = byId.get(c.chunkId)!;
+    return {
+      chunkId: c.chunkId,
+      documentId: c.documentId,
+      standardNumber: c.standardNumber,
+      title: row.document.title,
+      sourceUrl: row.document.sourceUrl,
+      sourceOrg: row.document.sourceOrg,
+      section: c.section,
+      clause: c.clause,
+      page: row.page,
+      text: c.text,
+      semanticScore: c.semanticScore,
+      keywordScore: c.keywordScore,
+      identifierMatch: c.identifierMatch,
+      score: c.rerankScore,
+      rerankReason: c.rerankReason,
+    } satisfies RetrievedChunk;
+  });
 }

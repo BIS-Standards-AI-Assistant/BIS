@@ -7,12 +7,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "db:push": "dotenv -e .env.local -- drizzle-kit push",
     "db:studio": "dotenv -e .env.local -- drizzle-kit studio",
     "ingest": "dotenv -e .env.local -- tsx scripts/ingest.ts",
+    "test:ml": "tsx scripts/test-query-normalization.ts && tsx scripts/test-evidence-aggregation.ts && tsx scripts/test-grounding-pipeline.ts && tsx scripts/test-answer-schema-validation.ts",
+    "test:unit": "vitest run",
+    "test": "npm run test:ml && npm run test:unit",
     "eval:retrieval": "tsx scripts/eval-retrieval.ts",
+    "eval:reranker": "dotenv -e .env.local -- tsx scripts/eval-reranker.ts",
     "eval:generation": "tsx scripts/eval-generation.ts",
-    "eval:validate": "dotenv -e .env.local -- tsx scripts/validate-generation.ts"
+    "eval:validate": "dotenv -e .env.local -- tsx scripts/validate-generation.ts",
+    "eval:calibration": "tsx scripts/calibrate-confidence.ts",
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.86",
@@ -28,15 +35,22 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.1.1",
     "dotenv-cli": "^11.0.0",
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.3.3",
+    "jsdom": "^30.0.1",
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.11"
   }
 }

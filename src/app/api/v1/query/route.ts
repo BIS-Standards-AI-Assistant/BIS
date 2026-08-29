@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { normalizeQuery } from "@/lib/query-normalization";
 import { extractQueryIntent } from "@/lib/intent";
 import { retrieveChunks } from "@/lib/retrieval";
-import { generateAnswer, type StructuredAnswer } from "@/lib/answer";
+import { aggregateEvidence, type AggregatedEvidence } from "@/lib/evidence-aggregation";
+import { analyzeCoverage } from "@/lib/coverage-analysis";
+import { detectConflicts } from "@/lib/conflict-detection";
+import { computeGrounding } from "@/lib/grounding";
+import { computeEngineConfidence } from "@/lib/confidence";
+import { generateAnswer, validateRecommendationExplanations, type EvidencePackage, type EvidencePackageCandidate } from "@/lib/answer";
 import { getDb } from "@/db";
 import { queryLogs } from "@/db/schema";
 
@@ -10,21 +16,23 @@ const QueryRequestSchema = z.object({
   query: z.string().min(1).max(2000),
 });
 
-/**
- * Drops any evidenceChunkIds the model cited that weren't actually part of
- * the retrieved evidence set — a cheap guard against fabricated citations
- * (AGENTS.md sec 21, "Citation Validation" stage of the RAG architecture).
- */
-function validateCitations(
-  recommendations: StructuredAnswer["recommendations"],
-  validChunkIds: Set<string>,
-) {
-  return recommendations.map((r) => ({
-    ...r,
-    evidenceChunkIds: r.evidenceChunkIds.filter((id) => validChunkIds.has(id)),
-  }));
-}
+// How many top-ranked candidate standards get full coverage/grounding
+// analysis and are shown to the LLM. Bounded so the prompt stays small on
+// this 4-document corpus while leaving room to grow with the corpus later.
+const MAX_CANDIDATES = 4;
+const RETRIEVAL_LIMIT = 12;
 
+/**
+ * Pipeline: normalize -> intent (LLM #1) -> hybrid retrieval + reranking ->
+ * evidence aggregation -> coverage analysis -> conflict detection ->
+ * deterministic grounding -> deterministic confidence -> LLM answer (LLM
+ * #2, prose only) -> citation/standard validation -> response.
+ *
+ * Exactly 2 LLM calls per query, same as before this milestone — nothing
+ * here adds a call. The engine (everything between retrieval and the LLM
+ * answer call) is pure deterministic code: no API key, no network call,
+ * fully unit-tested (scripts/test-*.ts).
+ */
 export async function POST(req: NextRequest) {
   const start = Date.now();
   const parsed = QueryRequestSchema.safeParse(await req.json().catch(() => null));
@@ -32,18 +40,88 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request", details: parsed.error.flatten() }, { status: 400 });
   }
   const { query } = parsed.data;
+  const debug = req.nextUrl.searchParams.get("debug") === "1";
 
   try {
-    const intent = await extractQueryIntent(query);
-    const evidence = await retrieveChunks(intent.searchQuery || query, { limit: 8 });
-    const validChunkIds = new Set(evidence.map((e) => e.chunkId));
+    const normalized = normalizeQuery(query);
+    const intent = await extractQueryIntent(normalized.normalizedQuery);
 
-    const structuredAnswer = await generateAnswer(query, intent, evidence);
-    const recommendations = validateCitations(structuredAnswer.recommendations, validChunkIds);
+    const chunks = await retrieveChunks(intent.searchQuery || normalized.normalizedQuery, { limit: RETRIEVAL_LIMIT });
+    const aggregated = aggregateEvidence(chunks).slice(0, MAX_CANDIDATES);
 
-    const evidenceById = new Map(evidence.map((e) => [e.chunkId, e]));
+    const coverageByStandard = new Map(
+      aggregated.map((c) => [c.documentId, analyzeCoverage(intent, c, normalized.identifiers)]),
+    );
+    const conflicts = detectConflicts(aggregated);
+    const groundingByStandard = new Map(
+      aggregated.map((c) => [c.documentId, computeGrounding(c, aggregated, coverageByStandard.get(c.documentId)!, conflicts)]),
+    );
+
+    const topCandidate: AggregatedEvidence | null = aggregated[0] ?? null;
+    const engineConfidence = computeEngineConfidence(
+      topCandidate,
+      topCandidate ? coverageByStandard.get(topCandidate.documentId)! : null,
+      conflicts,
+      topCandidate ? groundingByStandard.get(topCandidate.documentId)! : null,
+    );
+
+    const evidencePackageCandidates: EvidencePackageCandidate[] = aggregated.map((c) => ({
+      standardNumber: c.standardNumber,
+      title: c.title,
+      groundingState: groundingByStandard.get(c.documentId)!.state,
+      coverage: coverageByStandard.get(c.documentId)!,
+      chunks: c.chunks.map((ch) => ({ chunkId: ch.chunkId, section: ch.section, clause: ch.clause, text: ch.text })),
+    }));
+
+    const evidencePackage: EvidencePackage = {
+      query,
+      intent,
+      candidates: evidencePackageCandidates,
+      conflicts,
+      engineConfidence,
+    };
+
+    const llmAnswer = await generateAnswer(evidencePackage);
+
+    // The LLM may only explain candidates the engine already selected —
+    // any standardNumber it mentions that isn't in the engine's candidate
+    // list is dropped rather than surfaced, regardless of how the LLM
+    // phrased it.
+    const validStandardNumbers = new Set(aggregated.map((c) => c.standardNumber));
+    const { accepted } = validateRecommendationExplanations(llmAnswer.recommendationExplanations, validStandardNumbers);
+    const reasonByStandard = new Map<string | null, string>(accepted.map((exp) => [exp.standardNumber, exp.reason]));
+
+    const recommendations = aggregated.map((c) => {
+      const grounding = groundingByStandard.get(c.documentId)!;
+      const coverage = coverageByStandard.get(c.documentId)!;
+      return {
+        standardNumber: c.standardNumber,
+        title: c.title,
+        relevanceScore: grounding.score,
+        groundingState: grounding.state,
+        reason: reasonByStandard.get(c.standardNumber) ?? "This standard was retrieved as evidence for the query; no further explanation was provided.",
+        coverage,
+        evidence: c.chunks.map((ch) => ({
+          chunkId: ch.chunkId,
+          documentId: ch.documentId,
+          document: ch.title,
+          standardNumber: ch.standardNumber,
+          section: ch.section,
+          clause: ch.clause,
+          page: ch.page,
+          text: ch.text,
+          sourceUrl: ch.sourceUrl,
+        })),
+      };
+    });
+
+    // Engine-derived limiting signals are authoritative facts about missing
+    // coverage/conflicts — they're always included regardless of whether
+    // the LLM's free-text limitations happen to mention the same thing.
+    const limitations = [...new Set([...engineConfidence.limitingSignals, ...llmAnswer.limitations])];
+
     const response = {
-      answer: structuredAnswer.answer,
+      answer: llmAnswer.answer,
       intent: intent.intent,
       interpretation: {
         product: intent.product,
@@ -55,46 +133,46 @@ export async function POST(req: NextRequest) {
         testingRequested: intent.testingRequested,
       },
       clarificationNeeded: intent.missingInformation.length > 0 ? intent.missingInformation : undefined,
-      recommendations: recommendations.map((r) => ({
-        standardNumber: r.standardNumber,
-        title: r.title,
-        relevanceScore: r.relevanceScore,
-        groundingState: r.groundingState,
-        reason: r.reason,
-        evidence: r.evidenceChunkIds.map((id) => {
-          const c = evidenceById.get(id)!;
-          return {
-            chunkId: c.chunkId,
-            documentId: c.documentId,
-            document: c.title,
-            standardNumber: c.standardNumber,
-            section: c.section,
-            clause: c.clause,
-            page: c.page,
-            text: c.text,
-            sourceUrl: c.sourceUrl,
-          };
-        }),
-      })),
+      recommendations,
       certification: {
-        available: structuredAnswer.certificationNotes !== null,
-        notes: structuredAnswer.certificationNotes,
+        available: llmAnswer.certificationNotes !== null,
+        notes: llmAnswer.certificationNotes,
       },
       testing: {
-        available: structuredAnswer.testingNotes !== null,
-        notes: structuredAnswer.testingNotes,
+        available: llmAnswer.testingNotes !== null,
+        notes: llmAnswer.testingNotes,
       },
-      nextSteps: structuredAnswer.nextSteps,
-      confidence: structuredAnswer.confidence,
-      limitations: structuredAnswer.limitations,
+      nextSteps: llmAnswer.nextSteps,
+      confidence: engineConfidence.band,
+      engineConfidence,
+      conflicts,
+      limitations,
+      ...(debug && {
+        _debug: {
+          normalizedQuery: normalized,
+          retrievedChunkCount: chunks.length,
+          aggregatedEvidence: aggregated.map((c) => ({
+            documentId: c.documentId,
+            standardNumber: c.standardNumber,
+            chunkCount: c.chunkCount,
+            bestChunkScore: c.bestChunkScore,
+            weightedScore: c.weightedScore,
+            clauseDiversity: c.clauseDiversity,
+            multiSourceChunkCount: c.multiSourceChunkCount,
+          })),
+          groundingByStandard: Object.fromEntries(
+            [...groundingByStandard.entries()].map(([docId, g]) => [docId, g]),
+          ),
+        },
+      }),
     };
 
     const db = getDb();
     await db.insert(queryLogs).values({
       query,
       intent: intent.intent,
-      retrievedChunkIds: evidence.map((e) => e.chunkId),
-      confidence: structuredAnswer.confidence,
+      retrievedChunkIds: chunks.map((c) => c.chunkId),
+      confidence: engineConfidence.band,
       latencyMs: Date.now() - start,
     });
 

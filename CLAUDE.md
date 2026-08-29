@@ -1,4 +1,5 @@
 @AGENTS.md
+@docs/ui/SIH.md
 
 # BIS Standards Navigator — Claude Code Instructions
 
@@ -16,6 +17,7 @@ The product must feel like a **credible official public service**, not a SaaS da
 - AI is an assistance layer, not the visual identity.
 - Evidence must be easy to inspect.
 - Preserve existing Next.js/TypeScript, Neon/pgvector, retrieval, citation, and API architecture.
+- The app must never directly depend on a specific LLM provider. All model calls go through the provider adapter in `src/lib/providers/` (see `docs/ARCHITECTURE.md`). Paid LLM inference is optional and is not a dependency of the BIS intelligence engine — with no LLM configured at all, the app still works via deterministic intent extraction and evidence-only answers.
 
 ## Core journey
 User describes product/process
@@ -62,9 +64,9 @@ Before changing code:
 
 After meaningful changes:
 ```bash
-npm run lint
-npx tsc --noEmit
+npm run verify
 ```
+(runs lint, typecheck, all tests — ML pipeline + provider architecture + frontend components — and the production build in one command)
 
 Also inspect desktop, tablet, mobile, keyboard navigation, loading, empty, error, long-text, and missing-evidence states.
 
@@ -77,6 +79,19 @@ A new user should understand within one minute:
 - What should I do next?
 
 ## Related docs
-See `docs/ui/` for the full UI specification: design system, UX principles,
-information architecture, component spec, data/truth rules, accessibility
-requirements, implementation plan, and review checklist.
+`docs/ui/SIH.md` (imported above) is the canonical problem-statement and
+intelligence-pipeline specification — the query-normalization → identifier
+resolution → intent extraction → hybrid retrieval → ML reranking → evidence
+aggregation → coverage analysis → grounding → confidence → LLM answer
+architecture referenced throughout this file comes from there. Treat it as
+the source of truth for pipeline stage names and ordering.
+
+See `docs/ui/` more broadly for the full UI specification: design system,
+UX principles, information architecture, component spec, data/truth rules,
+accessibility requirements, implementation plan, and review checklist.
+
+`docs/ARCHITECTURE.md` documents the LLM provider adapter (local/OpenRouter
+free/paid, routing, fallback, evidence-only degradation). `docs/ML_ENGINE.md`
+and `docs/EVALUATION.md` track the deterministic intelligence pipeline's
+implementation and test status. `docs/PROJECT_STATUS.md` is the top-level
+DONE/PARTIAL/BLOCKED/PLANNED summary across the whole app.

@@ -5,7 +5,7 @@ import { embedMany } from "ai";
 import { getDb } from "../src/db";
 import { documents, chunks } from "../src/db/schema";
 import { chunkDocument } from "../src/lib/chunk";
-import { embeddingModel, activeProvider } from "../src/lib/providers";
+import { embeddingModel, activeProvider } from "../src/lib/embedding-provider";
 import { eq } from "drizzle-orm";
 
 interface ManifestEntry {
