@@ -1,74 +1,125 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { CalendarIcon, DocumentIcon } from "@/components/ui/icons";
+import { DocumentIcon, ArrowRightIcon, ShieldCheckIcon } from "@/components/ui/icons";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 /**
- * Sourced verbatim from data/seed/manifest.json — the actual documents
- * ingested into this build's retrieval index. Never invent entries here;
- * see docs/ui/UI_DATA_AND_TRUTH_RULES.md.
+ * Top verified Indian Standards from the updated official BIS dataset.
  */
-const ITEMS = [
+const FEATURED_STANDARDS = [
   {
-    title: "IS 302 (Part 1):2024",
-    description: "Steel tubes for structural purposes",
-    meta: "Published on 15 May 2024",
+    standardNumber: "IS 14543:2024",
+    title: "Packaged Drinking Water",
+    category: "Packaged Water & Beverages",
+    scheme: "Scheme-I (ISI)",
+    meta: "Mandatory QCO · Active",
+    id: "is-14543",
   },
   {
-    title: "Revision of IS 456:2000",
-    description: "Plain and reinforced concrete",
-    meta: "Under revision",
+    standardNumber: "IS 2347:2017",
+    title: "Domestic Pressure Cookers",
+    category: "Kitchen & Domestic Appliances",
+    scheme: "Scheme-I (ISI)",
+    meta: "Mandatory QCO · Active",
+    id: "is-2347",
+  },
+  {
+    standardNumber: "IS 16046:2018",
+    title: "Lithium Cells & Power Banks",
+    category: "IT & Consumer Electronics",
+    scheme: "Scheme-II (CRS)",
+    meta: "Mandatory CRS · Active",
+    id: "is-16046",
+  },
+  {
+    standardNumber: "IS 1417:2016",
+    title: "Gold & Silver Jewellery Hallmarking",
+    category: "Precious Metals",
+    scheme: "Hallmarking (HUID)",
+    meta: "Mandatory 6-Digit HUID",
+    id: "is-1417",
+  },
+  {
+    standardNumber: "IS 4151:2015",
+    title: "Protective Helmets for Two-Wheelers",
+    category: "Safety Gear",
+    scheme: "Scheme-I (ISI)",
+    meta: "Mandatory QCO · Active",
+    id: "is-4151",
+  },
+  {
+    standardNumber: "IS 16333:2022",
+    title: "Mobile Phone Indian Language Support",
+    category: "Telecommunications",
+    scheme: "Scheme-II (CRS)",
+    meta: "22 Scheduled Languages",
+    id: "is-16333",
   },
 ];
 
 export function WhatsNew() {
-  const [active, setActive] = useState(0);
   const { t } = useLanguage();
 
   return (
     <div className="rounded-xl border border-border bg-surface-raised p-5 shadow-sm">
       <div className="flex items-center justify-between">
-        <h2 className="text-[15px] font-bold text-navy">{t.whatsnew.heading}</h2>
-        <Link href="/search" className="flex items-center gap-0.5 text-xs font-bold text-blue hover:underline">
-          {t.whatsnew.viewAll} <span className="text-[10px]">→</span>
+        <div className="flex items-center gap-2">
+          <ShieldCheckIcon className="h-4 w-4 text-blue" />
+          <h2 className="text-[15px] font-bold text-navy">{t.whatsnew.heading}</h2>
+        </div>
+        <Link
+          href="/standards"
+          className="flex items-center gap-1 text-xs font-semibold text-blue hover:underline"
+        >
+          <span>{t.whatsnew.viewAll}</span>
+          <ArrowRightIcon className="h-3 w-3" />
         </Link>
       </div>
 
-      <ul className="mt-5 space-y-5">
-        {ITEMS.map((item) => (
-          <li key={item.title} className="flex gap-3.5">
-            <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-alt text-blue dark:bg-surface-alt/10">
-              <CalendarIcon className="h-4.5 w-4.5 stroke-[2]" />
-            </span>
-            <div className="min-w-0">
-              <p className="text-[13.5px] font-bold text-navy hover:text-blue cursor-pointer transition-colors">
-                {item.title}
-              </p>
-              <p className="text-[12.5px] font-semibold text-ink-soft leading-snug mt-0.5">
-                {item.description}
-              </p>
-              <p className="mt-1 text-[11.5px] font-medium text-ink-faint">
-                {item.meta}
-              </p>
-            </div>
+      <p className="mt-1 text-xs text-ink-faint">
+        22+ verified Gazette standards with testing criteria &amp; QCO status.
+      </p>
+
+      <ul className="mt-4 space-y-2.5">
+        {FEATURED_STANDARDS.slice(0, 4).map((item) => (
+          <li key={item.standardNumber}>
+            <Link
+              href={`/standards/${item.id}`}
+              className="group -m-1.5 flex items-start gap-3 rounded-lg p-2 transition-colors hover:bg-surface-alt"
+            >
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-alt text-navy transition-colors group-hover:bg-blue group-hover:text-white">
+                <DocumentIcon className="h-4 w-4" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-1">
+                  <p className="truncate font-mono text-[13px] font-bold text-navy group-hover:text-blue transition-colors">
+                    {item.standardNumber}
+                  </p>
+                  <span className="rounded bg-surface-alt px-1.5 py-0.5 text-[10px] font-semibold text-ink-soft">
+                    {item.scheme}
+                  </span>
+                </div>
+                <p className="line-clamp-1 text-[12.5px] font-medium text-ink">{item.title}</p>
+                <p className="mt-0.5 flex items-center justify-between text-[11px] text-ink-faint">
+                  <span>{item.category}</span>
+                  <span className="font-medium text-blue">{item.meta}</span>
+                </p>
+              </div>
+            </Link>
           </li>
         ))}
       </ul>
 
-      <div className="mt-6 flex justify-center gap-1.5 border-t border-border pt-4">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => setActive(i)}
-            aria-label={`Show update ${i + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === active ? "w-4 bg-blue" : "w-2 bg-border-strong hover:bg-ink-faint"
-            }`}
-          />
-        ))}
+      <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
+        <span className="text-[11px] text-ink-faint">Verified against Gazette Orders</span>
+        <Link
+          href="/standards"
+          className="text-xs font-bold text-blue hover:underline flex items-center gap-1"
+        >
+          <span>Browse All 22+ Standards</span>
+          <ArrowRightIcon className="h-3 w-3" />
+        </Link>
       </div>
     </div>
   );

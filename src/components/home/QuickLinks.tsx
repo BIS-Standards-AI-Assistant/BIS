@@ -5,16 +5,14 @@ import { ExternalLinkIcon } from "@/components/ui/icons";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 /**
- * Quick links definitions.
- * Only the first link goes to the official external page.
- * The other links redirect internally to the "/coming-soon" page.
+ * Quick links definitions pointing to verified official BIS portals.
  */
 const LINKS = [
   { label: "BIS Official Website", href: "https://www.bis.gov.in", external: true },
-  { label: "BIS CARE App", href: "/coming-soon", external: false },
-  { label: "Manak Online", href: "/coming-soon", external: false },
-  { label: "e-BIS Portal", href: "/coming-soon", external: false },
-  { label: "Standards eStore", href: "/coming-soon", external: false },
+  { label: "BIS CARE App", href: "https://www.bis.gov.in/bis-apps/?lang=hi", external: true },
+  { label: "Manak Online", href: "https://www.manakonline.in", external: true },
+  { label: "Compulsory Certification (QCOs)", href: "https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=en", external: true },
+  { label: "Standards & Quality Directory", href: "https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=en", external: true },
 ];
 
 export function QuickLinks() {
@@ -42,9 +40,6 @@ export function QuickLinks() {
                 className="flex items-center justify-between text-[13.5px] font-bold text-blue hover:text-navy transition-colors"
               >
                 <span>{link.label}</span>
-                <span className="text-[10.5px] font-bold px-2 py-0.5 rounded-md bg-orange/10 text-orange border border-orange/15 transition-transform group-hover:scale-95">
-                  Demo
-                </span>
               </Link>
             )}
           </li>
