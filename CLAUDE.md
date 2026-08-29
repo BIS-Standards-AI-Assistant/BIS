@@ -90,6 +90,10 @@ See `docs/ui/` more broadly for the full UI specification: design system,
 UX principles, information architecture, component spec, data/truth rules,
 accessibility requirements, implementation plan, and review checklist.
 
+`docs/HLD.md` has the high-level architecture diagrams (system context,
+intelligence pipeline, provider fallback, data model, deployment) —
+start there for a visual overview before diving into individual docs.
+
 `docs/ARCHITECTURE.md` documents the LLM provider adapter (local/OpenRouter
 free/paid, routing, fallback, evidence-only degradation). `docs/ML_ENGINE.md`
 and `docs/EVALUATION.md` track the deterministic intelligence pipeline's
