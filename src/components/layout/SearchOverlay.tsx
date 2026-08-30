@@ -2,9 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { SearchIcon, CloseIcon } from "@/components/ui/icons";
 
-const CHIPS = ["Standards", "Certification", "Testing", "Services"] as const;
+const SHORTCUT_LINKS = [
+  { label: "Standards", href: "/standards" },
+  { label: "Certification", href: "/certification" },
+  { label: "Testing", href: "/testing" },
+  { label: "Search Documents", href: "/search" },
+  { label: "Compare", href: "/compare" },
+] as const;
 
 const EXAMPLE = "I manufacture stainless steel kitchen utensils. Which Indian Standards should I look at?";
 
@@ -82,17 +89,20 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
             &ldquo;{EXAMPLE}&rdquo;
           </button>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            {CHIPS.map((chip) => (
-              <button
-                key={chip}
-                type="button"
-                onClick={() => submit(chip)}
-                className="rounded-full border border-border-strong px-3.5 py-1.5 text-[12.5px] font-medium text-ink-soft transition-colors hover:border-blue hover:text-blue"
-              >
-                {chip}
-              </button>
-            ))}
+          <div className="mt-4">
+            <p className="mb-2 text-[10.5px] font-semibold uppercase tracking-wide text-ink-faint">Browse by section</p>
+            <div className="flex flex-wrap gap-2">
+              {SHORTCUT_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={onClose}
+                  className="rounded-full border border-border-strong px-3.5 py-1.5 text-[12.5px] font-medium text-ink-soft transition-colors hover:border-blue hover:text-blue"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
           <p className="mt-4 text-[11.5px] text-ink-faint">
