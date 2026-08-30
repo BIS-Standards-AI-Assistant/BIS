@@ -41,7 +41,7 @@ describe("PlaceholderPage", () => {
 
   test("honestly labels itself as not-yet-available, never fabricating content", () => {
     renderPlaceholder();
-    expect(screen.getByText("Coming soon")).toBeInTheDocument();
+    expect(screen.getByText("Not yet available in this system")).toBeInTheDocument();
     expect(screen.getByText(/honest placeholder/i)).toBeInTheDocument();
   });
 
@@ -49,5 +49,29 @@ describe("PlaceholderPage", () => {
     renderPlaceholder();
     expect(screen.getByText("Browse Standards").closest("a")).toHaveAttribute("href", "/standards");
     expect(screen.getByText("Ask about a Standard").closest("a")).toHaveAttribute("href", "/");
+  });
+
+  test("renders a portal link when portalHref is provided", () => {
+    render(
+      <LanguageProvider>
+        <PlaceholderPage
+          crumbs={[{ label: "e-Services", href: "/e-services" }]}
+          title="Apply for Certification"
+          description="Start a certification application."
+          portalHref="https://www.manakonline.in"
+          portalLabel="Open BIS Manak Online Portal"
+        />
+      </LanguageProvider>,
+    );
+    const link = screen.getByText("Open BIS Manak Online Portal").closest("a");
+    expect(link).toHaveAttribute("href", "https://www.manakonline.in");
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  });
+
+  test("does not render a portal link when portalHref is omitted", () => {
+    renderPlaceholder();
+    expect(screen.queryByText("Open BIS Manak Online Portal")).not.toBeInTheDocument();
+    expect(screen.queryByText("Use on BIS Portal")).not.toBeInTheDocument();
   });
 });
