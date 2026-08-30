@@ -56,7 +56,7 @@ const CONFIRMING_TOOLS = new Set(["resolveStandard", "getStandard", "checkMandat
 
 type ExecuteToolFn = (name: string, input: unknown) => Promise<ToolResult<unknown>>;
 
-function buildInput(task: string, query: string, candidateStandard: string | null): unknown | null {
+function buildInput(task: string, query: string, candidateStandard: string | null, identifiers: string[]): unknown | null {
   switch (task) {
     case "resolveStandard":
     case "searchStandards":
@@ -67,6 +67,12 @@ function buildInput(task: string, query: string, candidateStandard: string | nul
     case "findQCO":
     case "getCertificationScheme":
       return candidateStandard ? { canonicalNumber: candidateStandard } : null;
+    case "compareStandards":
+      // Uses the two identifiers the planner already parsed from the
+      // query text directly — planQuery only assigns the COMPARISON
+      // plan type when identifiers.length >= 2, so this is always
+      // available whenever this task is actually in a real plan.
+      return identifiers.length >= 2 ? { canonicalNumberA: identifiers[0], canonicalNumberB: identifiers[1] } : null;
     default:
       return null;
   }
@@ -144,7 +150,7 @@ export async function runAgent(
     let madeProgress = false;
     for (const task of runnableNow) {
       pending.delete(task);
-      const input = buildInput(task, query, workingIdentifier);
+      const input = buildInput(task, query, workingIdentifier, plan.identifiers);
       if (input === null) continue;
 
       const result = await exec(task, input);

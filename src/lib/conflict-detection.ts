@@ -20,8 +20,11 @@ const SUPERSEDED_PATTERN = /\b(superseded|withdrawn|obsolete)\b/i;
 const MANDATORY_PATTERN = /\b(mandatory|compulsory)\b/i;
 const VOLUNTARY_PATTERN = /\b(voluntary|not mandatory|not compulsory)\b/i;
 
+// Exported for reuse by src/lib/tools/comparison-tools.ts, which needs
+// the same "same base standard, different edition/part" definition to
+// flag a genuine version relationship — not a second, drifting copy.
 /** Strips part/section/year to compare the base standard number, e.g. "IS 302 (Part 2/Sec 6):2009" -> "IS 302" */
-function baseStandardNumber(standardNumber: string): string | null {
+export function baseStandardNumber(standardNumber: string): string | null {
   const match = standardNumber.match(/\bIS\s*(\d{2,6})\b/i);
   return match ? `IS ${match[1]}` : null;
 }

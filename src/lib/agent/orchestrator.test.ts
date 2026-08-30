@@ -126,14 +126,18 @@ describe("runAgent", () => {
     expect(run.resolvedStandard).toBe("IS 269:2015");
   });
 
-  test("COMPARISON plan: resolves identifiers but skips the unimplemented compareStandards tool", async () => {
+  test("COMPARISON plan: resolves the first identifier and calls compareStandards with both identifiers from the query text", async () => {
     const executeTool = fakeExecutor({
       resolveStandard: () => ({ status: "ok", data: [{ canonicalNumber: "IS 5522:2014" }] }),
+      compareStandards: (input) => {
+        expect(input).toEqual({ canonicalNumberA: "IS 5522:2014", canonicalNumberB: "IS 14756:2017" });
+        return { status: "ok", data: { sameBaseStandard: false } };
+      },
     });
 
     const run = await runAgent("IS 5522:2014 vs IS 14756:2017", { executeTool });
     expect(run.plan.type).toBe("COMPARISON");
-    expect(run.skippedTasks).toContain("compareStandards");
+    expect(run.skippedTasks).toEqual([]);
     expect(run.stopReason).toBe("required_evidence_covered");
   });
 });

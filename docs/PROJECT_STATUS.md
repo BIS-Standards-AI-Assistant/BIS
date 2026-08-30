@@ -297,3 +297,37 @@ Still not wired into `/api/v1/query`. Wiring the orchestrator into that
 route (replacing or supplementing the existing intent→retrieval call) is
 the natural next phase once a relationship-extraction script exists to
 make Phase 4 (graph retrieval) worthwhile too.
+
+### "Standard Reasoning" / cross-standard comparison (this session, follow-up)
+
+User request (2026-08-30) asked for a "Truth Layer" that reasons across
+standards for hybrid products and automatically flags upcoming mandatory
+enforcement dates. Checked both against real data before writing any
+code: **0 of the 21 migrated QCO rows have a real `effectiveDate` or
+`notificationDate`** (all null), and the `relationships` table is still
+at 0 rows. Automatic enforcement-date flagging and legal-precedence
+reasoning would have nothing real to work from — building either now
+would be a feature that either shows nothing or has the LLM assert an
+unsupported legal conclusion, which CLAUDE.md's "never manufacture
+certainty" and rag.md §9 both forbid. Declined to build those two
+pieces; told the user why.
+
+What IS real and was built: `compareStandardsTool`
+(`src/lib/tools/comparison-tools.ts`, registered in the tool registry,
+wired into the orchestrator's `COMPARISON` plan type). Reports only:
+factual metadata differences (edition/status/domain/classification) from
+the `standards` table, a genuine same-base-standard flag (reusing
+`conflict-detection.ts`'s existing definition — not a new, drifting
+copy), and real textual term-overlap between two standards' *actually
+ingested* evidence chunks (reusing `coverage-analysis.ts`'s
+`significantTerms`). Every result carries an explicit `limitations`
+array stating it is not a legal-precedence ruling, and an
+`evidenceAvailable` flag per standard — since only 4 of 25 standards
+have ingested document text, most real comparisons will honestly report
+"insufficient evidence to compare content," not fabricate one.
+Live-verified via `npm run tools:smoke` against 4 real cases: two parts
+of the same base standard (`sameBaseStandard: true`), two unrelated
+standards with real overlap terms, one side missing evidence, and one
+fabricated identifier (`not_found`). `npm run verify` green (170 vitest
+tests), retrieval regression unchanged at 12/12 recall, 8/8
+no-false-match.

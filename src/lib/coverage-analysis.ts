@@ -35,7 +35,11 @@ const STOPWORDS = new Set([
   "that", "used", "use", "product", "item", "general", "general-purpose",
 ]);
 
-function significantTerms(value: string): string[] {
+// Exported for reuse by src/lib/tools/comparison-tools.ts, which needs
+// the same "meaningful word, not a stopword" definition to find genuine
+// textual overlap between two standards' evidence — one definition, not
+// a second copy.
+export function significantTerms(value: string): string[] {
   return value
     .toLowerCase()
     .split(/[^a-z0-9]+/)

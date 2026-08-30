@@ -24,6 +24,13 @@ async function main() {
     { tool: "checkMandatoryStatus", input: { canonicalNumber: "IS 99999:2099" } },
     { tool: "findQCO", input: { canonicalNumber: "IS 14543:2016" } },
     { tool: "getCertificationScheme", input: { canonicalNumber: "IS 269:2015" } },
+    // same base standard (IS 302), different part/section — sameBaseStandard must be true
+    { tool: "compareStandards", input: { canonicalNumberA: "IS 302 (Part 2/Sec 6):2009", canonicalNumberB: "IS 302 (Part 2/Sec 3):2007" } },
+    // two unrelated standards, both with ingested evidence — real term overlap only
+    { tool: "compareStandards", input: { canonicalNumberA: "IS 5522:2014", canonicalNumberB: "IS 14543:2016" } },
+    // one side has no ingested document — must report insufficient evidence, not fabricate overlap
+    { tool: "compareStandards", input: { canonicalNumberA: "IS 5522:2014", canonicalNumberB: "IS 269:2015" } },
+    { tool: "compareStandards", input: { canonicalNumberA: "IS 5522:2014", canonicalNumberB: "IS 99999:2099" } },
     { tool: "unknownTool", input: {} },
     { tool: "getStandard", input: { notAField: true } }, // invalid input
   ];
