@@ -123,9 +123,9 @@ export function Footer() {
             <span aria-hidden="true" className="opacity-30">|</span>
             <a href="https://www.bis.gov.in/privacy-policy/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.privacy}</a>
             <span aria-hidden="true" className="opacity-30">|</span>
-            <a href="https://www.bis.gov.in/terms-conditions/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.terms}</a>
+            <a href="https://www.bis.gov.in/terms-and-conditions/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.terms}</a>
             <span aria-hidden="true" className="opacity-30">|</span>
-            <a href="https://www.bis.gov.in/accessibility/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.accessibility}</a>
+            <a href="https://www.bis.gov.in/accessibility-statement/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.accessibility}</a>
           </p>
 
         </div>
