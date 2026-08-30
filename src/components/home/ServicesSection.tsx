@@ -12,7 +12,7 @@ const ICONS = [
 ];
 
 const TONES = ["blue", "green", "orange", "purple"] as const;
-const HREFS = ["/", "/", "/", "/search"];
+const HREFS = ["/standards", "/certification", "/testing", "/compare"];
 
 export function ServicesSection() {
   const { t } = useLanguage();

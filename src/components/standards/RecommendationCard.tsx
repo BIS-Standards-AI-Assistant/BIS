@@ -3,6 +3,7 @@ import type { GroundingState, Recommendation } from "@/types/api";
 import { RelevanceMeter } from "@/components/ui/RelevanceMeter";
 import { EvidenceExcerpt } from "@/components/evidence/EvidenceExcerpt";
 import { Badge } from "@/components/ui/Badge";
+import { CoveragePanel } from "@/components/standards/CoveragePanel";
 
 const GROUNDING_LABEL: Record<GroundingState, string> = {
   verified: "Directly supported by evidence",
@@ -36,6 +37,10 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
           <Badge tone={GROUNDING_TONE[recommendation.groundingState]}>{GROUNDING_LABEL[recommendation.groundingState]}</Badge>
         </div>
         <p className="mt-1 text-sm leading-relaxed text-ink-soft">{recommendation.reason}</p>
+      </div>
+
+      <div className="mt-3">
+        <CoveragePanel coverage={recommendation.coverage} />
       </div>
 
       {recommendation.evidence.length > 0 && (

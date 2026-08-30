@@ -16,6 +16,7 @@ import { LoadingIndicator } from "@/components/query/LoadingIndicator";
 import { ConfidenceBadge } from "@/components/query/ConfidenceBadge";
 import { InfoCard } from "@/components/query/InfoCard";
 import { RecommendationCard } from "@/components/standards/RecommendationCard";
+import { ConflictPanel } from "@/components/standards/ConflictPanel";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { ErrorState } from "@/components/feedback/ErrorState";
 import { addRecentQuery } from "@/lib/recent-queries";
@@ -77,8 +78,10 @@ export function HomeClient() {
           body: JSON.stringify({ query: trimmed }),
         });
         if (!res.ok) {
-          const body = await res.json().catch(() => ({}));
-          throw new Error(body.message || body.error || `Request failed (${res.status})`);
+          // Never surface a raw backend/provider error string to the user
+          // (e.g. a token-limit or credit message) — only a generic,
+          // actionable message. See docs/ui/SIH.md's error-experience rules.
+          throw new Error("service_unavailable");
         }
         const data: QueryResponse = await res.json();
         setResult(data);
@@ -93,8 +96,8 @@ export function HomeClient() {
           confidence: data.confidence,
           timestamp: Date.now(),
         });
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "We couldn't connect to the BIS Navigator service.");
+      } catch {
+        setError("The BIS Navigator service is temporarily unavailable. Please try again in a moment.");
       } finally {
         setLoading(false);
       }
@@ -169,7 +172,7 @@ export function HomeClient() {
               <div className="mt-10 space-y-8">
                 <section className="flex items-start justify-between gap-4 rounded-lg border border-border bg-surface-raised p-5">
                   <div>
-                    <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">AI-assisted summary</h2>
+                    <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Summary</h2>
                     <p className="mt-2 text-[15px] leading-relaxed text-ink">{result.answer}</p>
                   </div>
                   <div className="shrink-0 pt-5">
@@ -180,6 +183,8 @@ export function HomeClient() {
                 {result.clarificationNeeded && result.clarificationNeeded.length > 0 && (
                   <ClarificationPanel items={result.clarificationNeeded} />
                 )}
+
+                {result.conflicts.length > 0 && <ConflictPanel conflicts={result.conflicts} />}
 
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr]">
                   <InterpretationPanel interpretation={result.interpretation} />
