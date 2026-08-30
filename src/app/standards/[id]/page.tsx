@@ -250,7 +250,7 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
       <main className="flex-1">
-        <div className="mx-auto max-w-3xl px-6 py-14">
+        <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-14">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[12.5px] text-ink-faint">
             <Link href="/" className="hover:text-blue hover:underline">
               Home
@@ -278,7 +278,7 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
           <dl className="mt-6 grid grid-cols-2 gap-4 border-y border-border py-4 text-sm sm:grid-cols-3">
             <div>
               <dt className="text-xs text-ink-faint">Category</dt>
-              <dd className="mt-0.5 font-medium text-ink">{standard.documentType || "Not specified"}</dd>
+              <dd className="mt-0.5 font-medium text-ink">{standard.documentType ? standard.documentType.replaceAll("_", " ") : "Not specified"}</dd>
             </div>
             <div>
               <dt className="text-xs text-ink-faint">Edition</dt>
@@ -291,23 +291,23 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
           </dl>
 
           {/* Actions */}
-          <div className="mt-5 flex flex-wrap items-center gap-3">
+          <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
             <a
               href="#evidence"
-              className="inline-flex items-center gap-1.5 rounded-md border border-border-strong px-3.5 py-2 text-xs font-semibold text-ink-soft transition-colors hover:border-navy hover:text-navy"
+              className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-border-strong px-3.5 py-2.5 text-xs font-semibold text-ink-soft transition-colors hover:border-navy hover:text-navy sm:w-auto sm:justify-start sm:py-2"
             >
               View evidence
             </a>
             <Link
               href={`/?q=${askQuery}`}
-              className="inline-flex items-center gap-1.5 rounded-md bg-navy px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-navy-deep"
+              className="inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-navy px-3.5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-navy-deep sm:w-auto sm:justify-start sm:py-2"
             >
               <SearchIcon className="h-3.5 w-3.5" />
               Ask about this standard
             </Link>
             <Link
               href={`/compare?ids=${standard.id}`}
-              className="inline-flex items-center gap-1.5 rounded-md border border-border-strong px-3.5 py-2 text-xs font-semibold text-ink-soft transition-colors hover:border-navy hover:text-navy"
+              className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-border-strong px-3.5 py-2.5 text-xs font-semibold text-ink-soft transition-colors hover:border-navy hover:text-navy sm:w-auto sm:justify-start sm:py-2"
             >
               <CompareIcon className="h-3.5 w-3.5" />
               Add to comparison
@@ -316,7 +316,7 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
               href={standard.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:underline"
+              className="inline-flex w-full items-center justify-center gap-1.5 text-xs font-semibold text-navy hover:underline sm:w-auto sm:justify-start"
             >
               Official BIS source <ExternalLinkIcon className="h-3.5 w-3.5" />
             </a>

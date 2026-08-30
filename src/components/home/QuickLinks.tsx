@@ -12,7 +12,7 @@ const LINKS = [
   { label: "BIS CARE App", href: "https://www.bis.gov.in/bis-apps/?lang=hi", external: true },
   { label: "Manak Online", href: "https://www.manakonline.in", external: true },
   { label: "Compulsory Certification (QCOs)", href: "https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=en", external: true },
-  { label: "Standards & Quality Directory", href: "https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=en", external: true },
+  { label: "BIS Laboratory Services", href: "https://www.bis.gov.in/testing/?lang=en", external: true },
 ];
 
 export function QuickLinks() {

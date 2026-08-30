@@ -17,12 +17,13 @@ describe("SearchOverlay", () => {
     expect(screen.queryByPlaceholderText("Search BIS Standards, Services & Documents")).not.toBeInTheDocument();
   });
 
-  test("renders the search input, example, and category chips when open", () => {
+  test("renders the search input, example, and section shortcut links when open", () => {
     render(<SearchOverlay open onClose={() => {}} />);
     expect(screen.getByPlaceholderText("Search BIS Standards, Services & Documents")).toBeInTheDocument();
     expect(screen.getByText("Try asking")).toBeInTheDocument();
-    for (const chip of ["Standards", "Certification", "Testing", "Services"]) {
-      expect(screen.getByText(chip)).toBeInTheDocument();
+    expect(screen.getByText("Browse by section")).toBeInTheDocument();
+    for (const label of ["Standards", "Certification", "Testing", "Search Documents", "Compare"]) {
+      expect(screen.getByText(label)).toBeInTheDocument();
     }
   });
 
@@ -41,10 +42,16 @@ describe("SearchOverlay", () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  test("clicking a category chip navigates using the chip's own label as the query", () => {
+  test("section shortcut links navigate to their real routes, not submit as search queries", () => {
     render(<SearchOverlay open onClose={() => {}} />);
-    fireEvent.click(screen.getByText("Certification"));
-    expect(pushMock).toHaveBeenCalledWith("/search?q=Certification");
+    const certLink = screen.getByText("Certification").closest("a");
+    expect(certLink).toHaveAttribute("href", "/certification");
+    const testingLink = screen.getByText("Testing").closest("a");
+    expect(testingLink).toHaveAttribute("href", "/testing");
+    const standardsLink = screen.getByText("Standards").closest("a");
+    expect(standardsLink).toHaveAttribute("href", "/standards");
+    // shortcut links do NOT invoke router.push
+    expect(pushMock).not.toHaveBeenCalled();
   });
 
   test("submitting an empty query does not navigate", () => {
