@@ -45,7 +45,7 @@ export const STANDARDS_SECTION: NavSection = {
     {
       title: "Discover Standards",
       items: [
-        { label: "Find an Indian Standard", slug: "", real: true, href: "/", description: "Describe a product or process and get evidence-backed standard recommendations." },
+        { label: "Find an Indian Standard", slug: "", real: true, href: "/?focus=search", description: "Describe a product or process and get evidence-backed standard recommendations." },
         { label: "Browse Standards", slug: "", real: true, href: "/standards", description: "See every ingested standard directly." },
         { label: "Standards by Product", slug: "by-product", description: "Browse standards grouped by product category." },
         { label: "Standards by Industry", slug: "by-industry", description: "Browse standards grouped by industry sector." },
@@ -66,8 +66,8 @@ export const STANDARDS_SECTION: NavSection = {
     {
       title: "Standards Intelligence",
       items: [
-        { label: "Ask about a Standard", slug: "", real: true, href: "/", description: "Ask a natural-language question and get a grounded, cited answer." },
-        { label: "Find Relevant Standards", slug: "", real: true, href: "/", description: "Describe your product to discover potentially applicable standards." },
+        { label: "Ask about a Standard", slug: "", real: true, href: "/?focus=search", description: "Ask a natural-language question and get a grounded, cited answer." },
+        { label: "Find Relevant Standards", slug: "", real: true, href: "/standards", description: "Describe your product to discover potentially applicable standards." },
         { label: "Why is this Standard Relevant?", slug: "why-relevant", description: "Every recommendation from the query engine already includes a grounded relevance explanation — this page explains how to read it." },
         { label: "Explore Related Standards", slug: "related", description: "Standards connected to one another by scope, material, or reference." },
       ],
@@ -77,7 +77,7 @@ export const STANDARDS_SECTION: NavSection = {
     heading: "Can't find the right standard?",
     body: "Describe your product or requirement and explore potentially relevant BIS standards.",
     ctaLabel: "Find Relevant Standards →",
-    ctaHref: "/",
+    ctaHref: "/standards",
   },
 };
 
@@ -124,7 +124,7 @@ export const CERTIFICATION_SECTION: NavSection = {
     heading: "Not sure which certification information applies?",
     body: "Describe your product and see what evidence-backed certification information exists for it — the query engine never determines legal compliance on its own.",
     ctaLabel: "Explore Certification Information →",
-    ctaHref: "/",
+    ctaHref: "/certification",
   },
 };
 
@@ -168,7 +168,7 @@ export const TESTING_SECTION: NavSection = {
     heading: "Looking for testing information?",
     body: "Ask about a product and see what testing information the ingested standards actually establish for it.",
     ctaLabel: "Explore Testing Information →",
-    ctaHref: "/",
+    ctaHref: "/testing",
   },
 };
 
@@ -212,10 +212,9 @@ export const RESOURCES_SECTION: NavSection = {
     {
       title: "Tools",
       items: [
-        { label: "Standards Explorer", slug: "", real: true, href: "/standards/explore/explorer", description: "Structured exploration of a standard's scope, sections, and clauses." },
         { label: "Standards Comparison", slug: "", real: true, href: "/compare", description: "Compare two or more standards side by side." },
         { label: "Document Search", slug: "", real: true, href: "/search", description: "Keyword and semantic search across ingested BIS documents." },
-        { label: "BIS Standards Assistant", slug: "", real: true, href: "/", description: "Ask a question and get a grounded, cited answer." },
+        { label: "BIS Standards Assistant", slug: "", real: true, href: "/?focus=search", description: "Ask a question and get a grounded, cited answer." },
       ],
     },
   ],

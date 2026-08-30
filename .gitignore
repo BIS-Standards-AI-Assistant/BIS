@@ -44,3 +44,4 @@ next-env.d.ts
 # template with no secrets and is meant to be committed.
 .env*
 !.env.example
+/prompts

@@ -51,8 +51,11 @@ function termCoverage(value: string | null, haystack: string): CoverageStatus {
   return matched.length / terms.length >= 0.5 ? "covered" : "not_covered";
 }
 
-const TESTING_KEYWORDS = /\b(test|testing|tested|sample|inspection|method of test)\b/i;
-const CERTIFICATION_KEYWORDS = /\b(certif|licen[cs]e|scheme|mark|registration)\b/i;
+// Exported so other consumers (e.g. the Standard Passport page) can group
+// evidence chunks by the same testing/certification signal this module
+// uses for coverage scoring — one definition, not a second copy.
+export const TESTING_KEYWORDS = /\b(test|testing|tested|sample|inspection|method of test)\b/i;
+export const CERTIFICATION_KEYWORDS = /\b(certif|licen[cs]e|scheme|mark|registration)\b/i;
 
 function keywordCoverage(requested: boolean, pattern: RegExp, haystack: string): CoverageStatus {
   if (!requested) return "unknown";

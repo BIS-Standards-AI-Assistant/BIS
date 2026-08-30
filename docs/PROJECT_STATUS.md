@@ -1,6 +1,6 @@
 # Project Status
 
-Last updated: 2026-08-29. Categories: DONE, PARTIAL, BLOCKED, PLANNED — only
+Last updated: 2026-08-30. Categories: DONE, PARTIAL, BLOCKED, PLANNED — only
 recording what was actually observed this session or in prior sessions'
 verified work, never projected.
 
@@ -9,10 +9,57 @@ verified work, never projected.
 | Area | Status | Notes |
 |---|---|---|
 | Government-style navigation (7 sections, mega menus) | DONE | Verified visually; all placeholder routes load (never 404 for a real nav item) |
-| Search overlay + `/search` page | DONE | Wired to real `/api/v1/search` |
+| Search overlay + `/search` page | DONE | Wired to real `/api/v1/search`; global search state-machine overhaul (suggestions, grouped results) NOT attempted — see "Not attempted this session" below |
 | Homepage | DONE | Static hero (floating/glowing decorations removed this session — see below) |
-| Standards browse/detail/compare | DONE | Pre-existing, unaffected this session |
-| Placeholder pages for unbuilt sections (Certification, Testing, Resources, e-Services, About BIS) | DONE | Honest "Coming soon" state, not fabricated content |
+| Standards browse/compare | DONE | Pre-existing, unaffected this session |
+| Standard Passport (`/standards/[id]`) | DONE | Rebuilt this session — see below |
+| Certification page (`/certification`) | DONE | Rebuilt in a prior session (discovery search + scheme explorer); this session added certification-relationship linking from the Standard Passport |
+| Placeholder pages for unbuilt sections (Testing, Resources, e-Services, About BIS) | DONE | Honest "Coming soon" state, not fabricated content |
+
+## Standard Passport rebuild (this session)
+
+Replaced `src/app/standards/[id]/page.tsx`'s ad hoc evidence dump with a
+real information-record layout: identity header, overview (only fields
+actually present — no fabricated "Mandatory Active" status, which the
+previous version hardcoded unconditionally), certification relationships
+(cross-referenced against the real `data/bis-standards-dataset/
+qco-standards.json` reference set via a shared `src/lib/
+certification-schemes.ts` module — matches only on exact standard number,
+never guesses across editions), a testing section (chunks matched against
+the same `TESTING_KEYWORDS` pattern `coverage-analysis.ts` already uses,
+exported for reuse rather than duplicated), an honest "related standards
+not yet available" section (no relationship data exists in the schema),
+and the evidence list. "Search in AI Assistant" was renamed "Ask about
+this standard," routing to the homepage query flow instead of a separate
+chat surface.
+
+Verified live against the real database: a real ingested standard
+(IS 14543:2016) renders all new sections correctly, the fabricated status
+text no longer appears, and a standard with no matching certification
+reference entry correctly shows the honest "not available" message rather
+than a false positive.
+
+**Known limitation**: the testing/evidence keyword split is a simple
+regex match against chunk text, not true section classification — a
+testing-heavy product manual (like IS 14543's) can have the majority of
+its chunks classified as "Testing" because the underlying document
+genuinely discusses sampling/testing throughout. This is a real match on
+real text, not fabrication, but it's a coarse heuristic, not a proper
+information-architecture parse.
+
+## Not attempted this session (scope explicitly deferred, not silently dropped)
+
+- **Global search overhaul** (search state machine, grouped
+  standards/certification/testing/resources results, typed suggestions
+  from indexed data) — this was one of three milestone objectives handed
+  down this session; only the Standard Passport (milestone A) was built
+  to completion. Recommended as the next milestone.
+- **Testing discovery page upgrade** — `/testing` remains the existing
+  honest placeholder; no dedicated testing search/discovery UI was built.
+- Dedicated responsive/accessibility/dark-mode audit passes — not
+  performed this session (no browser tooling available); existing
+  token/utility patterns were reused, which are already dark-mode-aware,
+  but nothing was screenshot-verified at any breakpoint.
 
 ## Frontend fixes (this session)
 

@@ -119,17 +119,15 @@ export function Footer() {
         <div className="mx-auto flex max-w-[1380px] flex-col items-center gap-3 px-6 py-4 text-[11.5px] md:flex-row md:justify-between font-semibold tracking-wide">
           <p className="text-center md:text-left">© {year} {t.footer.rights}</p>
           <p className="flex flex-wrap items-center justify-center gap-2.5">
-            <a href="#" className="hover:text-white transition-colors">{t.footer.sitemap}</a>
+            <a href="https://www.bis.gov.in/sitemap/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.sitemap}</a>
             <span aria-hidden="true" className="opacity-30">|</span>
-            <a href="#" className="hover:text-white transition-colors">{t.footer.privacy}</a>
+            <a href="https://www.bis.gov.in/privacy-policy/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.privacy}</a>
             <span aria-hidden="true" className="opacity-30">|</span>
-            <a href="#" className="hover:text-white transition-colors">{t.footer.terms}</a>
+            <a href="https://www.bis.gov.in/terms-conditions/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.terms}</a>
             <span aria-hidden="true" className="opacity-30">|</span>
-            <a href="#" className="hover:text-white transition-colors">{t.footer.accessibility}</a>
+            <a href="https://www.bis.gov.in/accessibility/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.accessibility}</a>
           </p>
-          <p className="text-white/60 text-center md:text-right">
-            Last Updated: 28 May 2024
-          </p>
+
         </div>
       </div>
     </footer>

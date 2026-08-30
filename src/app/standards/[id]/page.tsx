@@ -4,12 +4,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Badge } from "@/components/ui/Badge";
+import { EvidenceExcerpt } from "@/components/evidence/EvidenceExcerpt";
 import { eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { documents } from "@/db/schema";
 import type { StandardDetail } from "@/types/api";
-import { ExternalLinkIcon, SearchIcon, CompareIcon } from "@/components/ui/icons";
+import { findCertificationSchemeForStandard, type CertificationSchemeItem } from "@/lib/certification-schemes";
+import { TESTING_KEYWORDS } from "@/lib/coverage-analysis";
+import { ExternalLinkIcon, SearchIcon, CompareIcon, ChevronRightIcon } from "@/components/ui/icons";
 
 function sanitizeOfficialUrl(url?: string | null): string {
   const defaultUrl = "https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=en";
@@ -77,56 +79,33 @@ async function getStandard(id: string): Promise<StandardDetail | null> {
         : (found.is_number ?? "Indian Standard");
 
       const title = found.full_title || found.short_title || found.title || "Standard Specification";
-      const cat = found.product_category || found.category || "Indian Standard";
-      const route = found.certification_route || found.scheme || "Scheme-I (ISI)";
+      const cat = found.product_category || found.category || null;
 
-      const rawSource = found.document_url || found.source_url || "https://www.standardsbis.in";
+      const rawSource = found.document_url || found.source_url || null;
       const safeSourceUrl = sanitizeOfficialUrl(rawSource);
 
-      const chunks = [
-        {
+      const chunks = [];
+      if (found.scope || found.scope_summary) {
+        chunks.push({
           id: `${id}-scope`,
           documentId: id,
-          section: "Scope & Objectives",
-          clause: "1.0",
-          page: 1,
-          text: found.scope || found.scope_summary || title,
-          metadata: null,
-          createdAt: new Date().toISOString(),
-        },
-        {
-          id: `${id}-scheme`,
-          documentId: id,
-          section: "Certification Route & Legal Mandate",
-          clause: "2.0",
-          page: 1,
-          text: `Certification Scheme: ${route}\nMandatory Quality Control Order: ${found.mandatory_qco ? "Yes (Strict Statutory Mandate)" : "Voluntary Standard"}\nStatus: ${found.status || "Active"}\nIndustry Sector: ${found.industry || cat}`,
-          metadata: null,
-          createdAt: new Date().toISOString(),
-        },
-      ];
-
-      if (found.key_testing_parameters && Array.isArray(found.key_testing_parameters)) {
-        chunks.push({
-          id: `${id}-testing`,
-          documentId: id,
-          section: "Mandatory Laboratory Testing Parameters",
-          clause: "3.0",
-          page: 2,
-          text: `Key Tests Required for Conformity:\n• ${found.key_testing_parameters.join("\n• ")}`,
+          section: "Scope",
+          clause: null,
+          page: null,
+          text: found.scope || found.scope_summary,
           metadata: null,
           createdAt: new Date().toISOString(),
         });
       }
 
-      if (found.materials && Array.isArray(found.materials) && found.materials.length > 0) {
+      if (found.key_testing_parameters && Array.isArray(found.key_testing_parameters) && found.key_testing_parameters.length > 0) {
         chunks.push({
-          id: `${id}-materials`,
+          id: `${id}-testing`,
           documentId: id,
-          section: "Permitted Materials & Specifications",
-          clause: "4.0",
-          page: 2,
-          text: `Specified Materials:\n• ${found.materials.join("\n• ")}`,
+          section: "Testing",
+          clause: null,
+          page: null,
+          text: `Key testing parameters:\n• ${found.key_testing_parameters.join("\n• ")}`,
           metadata: null,
           createdAt: new Date().toISOString(),
         });
@@ -137,10 +116,15 @@ async function getStandard(id: string): Promise<StandardDetail | null> {
         chunks.push({
           id: `${id}-legal`,
           documentId: id,
-          section: "Official Gazette Notification Source",
-          clause: "5.0",
-          page: 3,
-          text: `Gazette Order: ${ls.gazette_order || "QCO Notification"}\nNotification No: ${ls.notification_number || "N/A"}\nIssuing Authority: ${ls.issuing_ministry || "Ministry of Consumer Affairs"}\nEnactment Date: ${ls.enactment_date || "N/A"}`,
+          section: "Official Gazette Notification",
+          clause: null,
+          page: null,
+          text: [
+            ls.gazette_order ? `Gazette Order: ${ls.gazette_order}` : null,
+            ls.notification_number ? `Notification No: ${ls.notification_number}` : null,
+            ls.issuing_ministry ? `Issuing Authority: ${ls.issuing_ministry}` : null,
+            ls.enactment_date ? `Enactment Date: ${ls.enactment_date}` : null,
+          ].filter(Boolean).join("\n"),
           metadata: null,
           createdAt: new Date().toISOString(),
         });
@@ -150,13 +134,13 @@ async function getStandard(id: string): Promise<StandardDetail | null> {
         id,
         standardNumber: stdNumber,
         title,
-        documentType: `${found.scheme || "Scheme-I"} · ${cat}`,
+        documentType: cat ?? "Indian Standard",
         sourceUrl: safeSourceUrl,
         sourceOrg: "Bureau of Indian Standards (BIS)",
-        version: found.year ? `Edition ${found.year}` : (found.verification_status || "Active QCO Standard"),
-        publicationDate: found.publication_date || found.source_date || "2024",
+        version: found.year ? `${found.year}` : null,
+        publicationDate: found.publication_date || found.source_date || null,
         retrievedAt: found.retrieved_at || new Date().toISOString(),
-        checksum: "verified_authentic_gazette",
+        checksum: "reference_dataset",
         createdAt: new Date().toISOString(),
         chunks,
       };
@@ -189,18 +173,7 @@ async function getStandard(id: string): Promise<StandardDetail | null> {
         retrievedAt: found.retrievedAt,
         checksum: "seed_manifest",
         createdAt: new Date().toISOString(),
-        chunks: [
-          {
-            id: `${id}-chunk-1`,
-            documentId: id,
-            section: "Product Manual Overview",
-            clause: "1.0",
-            page: 1,
-            text: `Official BIS Product Manual for ${found.title} (${found.standardNumber}). Covers product guidelines, scheme requirements, sampling procedures, and testing parameters.`,
-            metadata: null,
-            createdAt: new Date().toISOString(),
-          },
-        ],
+        chunks: [],
       };
     }
   } catch {
@@ -210,113 +183,209 @@ async function getStandard(id: string): Promise<StandardDetail | null> {
   return null;
 }
 
+function CertificationRelationship({ scheme }: { scheme: CertificationSchemeItem | null }) {
+  if (!scheme) {
+    return (
+      <p className="text-sm text-ink-faint">
+        Certification relationship information is not available in the current BIS Navigator knowledge base for this
+        standard.
+      </p>
+    );
+  }
+  return (
+    <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {scheme.scheme && (
+        <div>
+          <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Certification scheme</dt>
+          <dd className="mt-0.5 text-sm font-medium text-ink">{scheme.scheme}</dd>
+        </div>
+      )}
+      {scheme.certificationRoute && (
+        <div>
+          <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Certification route</dt>
+          <dd className="mt-0.5 text-sm text-ink-soft">{scheme.certificationRoute}</dd>
+        </div>
+      )}
+      <div>
+        <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Mandatory QCO</dt>
+        <dd className="mt-0.5 text-sm text-ink-soft">{scheme.mandatoryQco ? "Yes" : "Not established as mandatory"}</dd>
+      </div>
+      {scheme.verificationStatus && (
+        <div>
+          <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Verification</dt>
+          <dd className="mt-0.5 text-sm text-ink-soft">{scheme.verificationStatus === "verified_accurate" ? "Verified" : scheme.verificationStatus}</dd>
+        </div>
+      )}
+      {scheme.sourceUrl && (
+        <div className="sm:col-span-2">
+          <a
+            href={scheme.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm font-medium text-navy hover:underline"
+          >
+            View source <ExternalLinkIcon className="h-3.5 w-3.5" />
+          </a>
+        </div>
+      )}
+      <p className="sm:col-span-2 text-[11.5px] text-ink-faint">
+        From BIS Navigator&apos;s fact-checked certification reference set — see data/bis-standards-dataset/README.md.
+      </p>
+    </dl>
+  );
+}
+
 export default async function StandardDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const standard = await getStandard(id);
   if (!standard) notFound();
 
-  const searchQuery = encodeURIComponent(standard.standardNumber || standard.title);
+  const scheme = await findCertificationSchemeForStandard(standard.standardNumber);
+
+  const testingChunks = standard.chunks.filter((c) => TESTING_KEYWORDS.test(`${c.section ?? ""} ${c.text}`));
+  const evidenceChunks = standard.chunks.filter((c) => !testingChunks.includes(c));
+  const askQuery = encodeURIComponent(`Tell me about ${standard.standardNumber ?? standard.title}`);
 
   return (
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
       <main className="flex-1">
         <div className="mx-auto max-w-3xl px-6 py-14">
-          <nav aria-label="Breadcrumb" className="text-xs text-ink-faint">
-            <Link href="/" className="hover:text-ink hover:underline">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[12.5px] text-ink-faint">
+            <Link href="/" className="hover:text-blue hover:underline">
               Home
             </Link>
-            <span aria-hidden="true"> / </span>
-            <Link href="/standards" className="hover:text-ink hover:underline">
+            <ChevronRightIcon className="h-3 w-3" />
+            <Link href="/standards" className="hover:text-blue hover:underline">
               Standards
             </Link>
-            <span aria-hidden="true"> / </span>
-            <span className="text-ink-soft">{standard.standardNumber ?? "Standard"}</span>
+            <ChevronRightIcon className="h-3 w-3" />
+            <span>{standard.standardNumber ?? "Standard"}</span>
           </nav>
 
-          <div className="mt-4 flex items-center gap-2">
-            <Badge tone="neutral">{standard.sourceOrg}</Badge>
-            <span className="rounded bg-surface-alt px-2.5 py-0.5 text-xs font-semibold text-blue">
-              Verified Gazette Standard
-            </span>
+          {/* Identity header */}
+          <div className="mt-5">
+            <p className="text-[11.5px] font-semibold uppercase tracking-wide text-blue">{standard.sourceOrg}</p>
+            <p className="mt-1.5 font-mono text-[15px] font-semibold text-navy">
+              {standard.standardNumber ?? "Unnumbered reference"}
+            </p>
+            <h1 className="mt-1 text-2xl font-semibold leading-snug tracking-tight text-ink sm:text-[28px]">
+              {standard.title}
+            </h1>
           </div>
 
-          <p className="mt-4 font-mono text-sm font-bold text-navy">
-            {standard.standardNumber ?? "Unnumbered reference"}
-          </p>
-          <h1 className="mt-1 text-2xl font-bold leading-snug tracking-tight text-ink sm:text-3xl">
-            {standard.title}
-          </h1>
-
-          <dl className="mt-6 grid grid-cols-2 gap-4 border-y border-border py-4 text-sm sm:grid-cols-4">
+          {/* Overview — only fields actually present */}
+          <dl className="mt-6 grid grid-cols-2 gap-4 border-y border-border py-4 text-sm sm:grid-cols-3">
             <div>
-              <dt className="text-xs text-ink-faint">Category & Scheme</dt>
-              <dd className="mt-0.5 font-medium text-ink">{standard.documentType.replace("_", " ")}</dd>
+              <dt className="text-xs text-ink-faint">Category</dt>
+              <dd className="mt-0.5 font-medium text-ink">{standard.documentType || "Not specified"}</dd>
             </div>
             <div>
-              <dt className="text-xs text-ink-faint">Edition / Version</dt>
-              <dd className="mt-0.5 font-medium text-ink">{standard.version ?? "Not specified"}</dd>
+              <dt className="text-xs text-ink-faint">Edition</dt>
+              <dd className="mt-0.5 font-medium text-ink">{standard.version || "Not specified"}</dd>
             </div>
             <div>
-              <dt className="text-xs text-ink-faint">Enacted / Published</dt>
-              <dd className="mt-0.5 font-medium text-ink">{standard.publicationDate ?? "Not specified"}</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-ink-faint">Status</dt>
-              <dd className="mt-0.5 font-medium text-success">Mandatory Active</dd>
+              <dt className="text-xs text-ink-faint">Published</dt>
+              <dd className="mt-0.5 font-medium text-ink">{standard.publicationDate || "Not specified"}</dd>
             </div>
           </dl>
 
-          {/* Action Links Bar */}
+          {/* Actions */}
           <div className="mt-5 flex flex-wrap items-center gap-3">
+            <a
+              href="#evidence"
+              className="inline-flex items-center gap-1.5 rounded-md border border-border-strong px-3.5 py-2 text-xs font-semibold text-ink-soft transition-colors hover:border-navy hover:text-navy"
+            >
+              View evidence
+            </a>
+            <Link
+              href={`/?q=${askQuery}`}
+              className="inline-flex items-center gap-1.5 rounded-md bg-navy px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-navy-deep"
+            >
+              <SearchIcon className="h-3.5 w-3.5" />
+              Ask about this standard
+            </Link>
+            <Link
+              href={`/compare?ids=${standard.id}`}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border-strong px-3.5 py-2 text-xs font-semibold text-ink-soft transition-colors hover:border-navy hover:text-navy"
+            >
+              <CompareIcon className="h-3.5 w-3.5" />
+              Add to comparison
+            </Link>
             <a
               href={standard.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-blue px-3.5 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-navy"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-navy hover:underline"
             >
-              <span>Open Official BIS Portal / e-Store</span>
-              <ExternalLinkIcon className="h-3.5 w-3.5" />
+              Official BIS source <ExternalLinkIcon className="h-3.5 w-3.5" />
             </a>
-
-            <Link
-              href={`/search?q=${searchQuery}`}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-raised px-3.5 py-2 text-xs font-semibold text-ink-soft shadow-sm transition-colors hover:bg-surface-alt hover:text-blue"
-            >
-              <SearchIcon className="h-3.5 w-3.5" />
-              <span>Search in AI Assistant</span>
-            </Link>
-
-            <Link
-              href={`/compare?ids=${standard.id}`}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-raised px-3.5 py-2 text-xs font-semibold text-ink-soft shadow-sm transition-colors hover:bg-surface-alt hover:text-blue"
-            >
-              <CompareIcon className="h-3.5 w-3.5" />
-              <span>Add to Comparison</span>
-            </Link>
           </div>
 
+          {/* Certification relationships */}
           <section className="mt-10">
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Certification relationships</h2>
+            <div className="mt-3">
+              <CertificationRelationship scheme={scheme} />
+            </div>
+          </section>
+
+          {/* Testing */}
+          <section className="mt-10">
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Testing</h2>
+            {testingChunks.length === 0 ? (
+              <p className="mt-3 text-sm text-ink-faint">
+                Testing information is not available in the current BIS Navigator knowledge base for this standard.
+              </p>
+            ) : (
+              <div className="mt-3 space-y-3">
+                {testingChunks.map((c) => (
+                  <EvidenceExcerpt
+                    key={c.id}
+                    standardNumber={standard.standardNumber}
+                    documentTitle={standard.title}
+                    section={c.section}
+                    clause={c.clause}
+                    page={c.page}
+                    text={c.text}
+                    sourceUrl={standard.sourceUrl}
+                  />
+                ))}
+              </div>
+            )}
+          </section>
+
+          {/* Related standards — honest: no relationship data exists yet */}
+          <section className="mt-10">
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Related standards</h2>
+            <p className="mt-3 text-sm text-ink-faint">
+              BIS Navigator does not yet have verified standard-to-standard relationship data (referenced by,
+              supersedes, amended by, etc.) for this standard.
+            </p>
+          </section>
+
+          {/* Evidence */}
+          <section id="evidence" className="mt-10">
             <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-              Standard Specifications &amp; Evidence ({standard.chunks.length} sections)
+              Evidence {evidenceChunks.length > 0 ? `(${evidenceChunks.length})` : ""}
             </h2>
-            {standard.chunks.length === 0 ? (
+            {evidenceChunks.length === 0 ? (
               <p className="mt-3 text-sm text-ink-faint">
                 This document has not been fully ingested into the retrieval index yet.
               </p>
             ) : (
               <div className="mt-3 space-y-3">
-                {standard.chunks.map((c) => (
-                  <div key={c.id} className="rounded-r-lg border-l-4 border-navy bg-surface-alt py-3.5 pl-4 pr-4">
-                    <p className="text-xs font-bold text-navy">
-                      {[c.section, c.clause ? `clause ${c.clause}` : null, c.page ? `p. ${c.page}` : null]
-                        .filter(Boolean)
-                        .join(" · ") || "General"}
-                    </p>
-                    <p className="mt-2 whitespace-pre-line font-mono text-[13px] leading-relaxed text-ink-soft">
-                      {c.text}
-                    </p>
-                  </div>
+                {evidenceChunks.map((c) => (
+                  <EvidenceExcerpt
+                    key={c.id}
+                    standardNumber={standard.standardNumber}
+                    documentTitle={standard.title}
+                    section={c.section}
+                    clause={c.clause}
+                    page={c.page}
+                    text={c.text}
+                    sourceUrl={standard.sourceUrl}
+                  />
                 ))}
               </div>
             )}
