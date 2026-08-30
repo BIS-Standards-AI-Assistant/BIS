@@ -47,6 +47,33 @@ genuinely discusses sampling/testing throughout. This is a real match on
 real text, not fabrication, but it's a coarse heuristic, not a proper
 information-architecture parse.
 
+## Knowledge graph foundation (this session, prompts/dataAcquisition.md)
+
+A 45-section, multi-week data-engineering mission. This session built the
+**foundation only** — schema, provenance model, one real (small) discovery
+pass, and migration of already-verified data — not the full acquisition
+pipeline. Nothing here was faked to look more complete than it is.
+
+| Item | Status | Notes |
+|---|---|---|
+| Schema (`standards`, `sources`, `certification_schemes`, `qcos`, `relationships` tables) | DONE | Additive only — pushed to the live shared Neon DB (confirmed with the user first), existing `documents`/`chunks`/`query_logs` untouched |
+| `src/lib/knowledge-graph.ts` (relationship-type vocabulary + anti-fabrication validator) | DONE | 10 tests — a relationship candidate with no source/document or empty evidence text is rejected outright, matching §43's "never fabricate a relationship" |
+| `scripts/data-discover.ts` (Phase 1 discovery) | DONE, real | The only stage that touched the network this session. Verified live: bis.gov.in's certification-listing pages are JS/AJAX-rendered (confirmed by fetching one — no data in the static HTML), so discovery used BIS's own sitemap.xml instead (real, static, robots.txt-published). One real, rate-limited (politeFetch, 1.5s between requests) crawl found 415 genuine candidate URLs, written to `data/manifests/discovered-sources.json`, every one `needs_review` |
+| `scripts/data-migrate-existing.ts` | DONE, real, idempotent | Migrated the 22 already fact-checked `qco-standards.json` entries and the 4 already-ingested seed documents into the new schema — 25 real `standards` rows, 3 certification schemes, 21 QCOs, all 4 documents linked. Re-ran twice live to confirm idempotency (0 duplicates second run) |
+| `scripts/data-report.ts` | DONE, real | Generates `data/reports/coverage-report.md` from live DB counts — not projected numbers |
+| Retrieval regression after schema/data changes | DONE | Re-ran live: still 12/12 recall, 8/8 no-false-match |
+| PDF download/extraction (Phase 2+) | NOT ATTEMPTED | No PDFs downloaded or parsed this session |
+| Amendment/revision graph, laboratories, committees, testing-facility matrix, domain taxonomy beyond existing `category` field | NOT ATTEMPTED | No tables or data exist for these yet |
+| Relationship extraction (populating the `relationships` table itself) | NOT ATTEMPTED | Table exists and is validated (`knowledge-graph.ts`), but no script has inserted a single relationship row yet — `data-report.ts` correctly reports 0 |
+| 100-question golden dataset (§36) | NOT ATTEMPTED | The existing 20-question `golden-queries.json` was not expanded — doing this well requires more standards with real evidence than the 25 currently migrated, and rushing it risks the exact "expected answer without real backing" problem this mission explicitly prohibits |
+
+**Known limitation found while building this**: the discovery keyword
+filter (`isRelevant` in `data-discover.ts`) is a coarse substring match —
+verified live and covered by a test that it also matches unrelated pages
+(e.g. a "World Standards Day" regional-office photo gallery, because its
+URL slug contains "standards"). This is exactly why every discovered
+source is `needs_review`, never auto-confirmed.
+
 ## Global search overhaul (this session, prompts/globalSearch.md — Milestone C)
 
 Scoped to the search *overlay*'s typeahead, not a full grouped multi-vertical
