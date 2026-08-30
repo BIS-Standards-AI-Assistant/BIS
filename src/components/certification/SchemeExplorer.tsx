@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { ExternalLinkIcon } from "@/components/ui/icons";
 import type { CertificationSchemeItem } from "@/app/api/v1/certification-schemes/route";
+import { VERIFICATION_STATUS_LABELS } from "@/lib/verification-status";
 
 /**
- * Searches the small, fact-checked reference dataset (22 entries at time of
- * writing — see data/bis-standards-dataset/README.md), never the
- * intelligence engine. Labeled honestly as a reference list, not a
- * comprehensive scheme directory — BIS Navigator does not claim to cover
- * every certification scheme BIS operates.
+ * Searches the small, fact-checked reference dataset (48 entries at time
+ * of writing, 22 independently verified/corrected + 26 pulled from an
+ * upstream update and marked needs_review pending independent checking —
+ * see data/bis-standards-dataset/README.md), never the intelligence
+ * engine. Labeled honestly as a reference list, not a comprehensive
+ * scheme directory — BIS Navigator does not claim to cover every
+ * certification scheme BIS operates.
  */
 export function SchemeExplorer() {
   const [query, setQuery] = useState("");
@@ -125,8 +128,14 @@ export function SchemeExplorer() {
                 )}
                 <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[11px] text-ink-faint">
                   {item.verificationStatus && (
-                    <span className="rounded bg-success-soft px-1.5 py-0.5 font-medium text-success">
-                      {item.verificationStatus === "verified_accurate" ? "Verified" : item.verificationStatus}
+                    <span
+                      className={
+                        item.verificationStatus === "verified_accurate" || item.verificationStatus === "corrected"
+                          ? "rounded bg-success-soft px-1.5 py-0.5 font-medium text-success"
+                          : "rounded bg-warning-soft px-1.5 py-0.5 font-medium text-warning"
+                      }
+                    >
+                      {VERIFICATION_STATUS_LABELS[item.verificationStatus] ?? item.verificationStatus}
                     </span>
                   )}
                   {item.sourceUrl && (

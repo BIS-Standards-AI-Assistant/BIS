@@ -30,7 +30,8 @@ describe("loadCertificationSchemes", () => {
     const items = await loadCertificationSchemes();
     expect(items.length).toBeGreaterThan(0);
     for (const item of items) {
-      expect(item.standardNumber).toMatch(/^IS \d/);
+      // Matches "IS 5522:2014" and the joint "IS/ISO 80601-2-56:2017" form.
+      expect(item.standardNumber).toMatch(/^IS[/ ]/);
     }
   });
 });

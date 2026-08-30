@@ -6,7 +6,12 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Requirements for packaged drinking water other than mineral water.",
-    "key_testing_parameters": ["Total Dissolved Solids", "Microbial count", "Pesticide residues", "Heavy metals"],
+    "key_testing_parameters": [
+      "Total Dissolved Solids",
+      "Microbial count",
+      "Pesticide residues",
+      "Heavy metals"
+    ],
     "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
     "verification_status": "corrected",
     "verification_note": "Source dataset listed \"IS 14543:2024\" — no such edition exists. Current specification is IS 14543:2016 (Third Revision); a QCO guideline amendment was issued 2024-11-05, which is likely what got conflated into an edition year.",
@@ -21,7 +26,10 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Natural mineral water packaged directly at source.",
-    "key_testing_parameters": ["Mineral composition", "Absence of chemical treatment"],
+    "key_testing_parameters": [
+      "Mineral composition",
+      "Absence of chemical treatment"
+    ],
     "certification_route": "Scheme-I ISI Mark",
     "verification_status": "corrected",
     "verification_note": "Source dataset listed \"IS 13428:2024\" — no such edition exists. Current specification is IS 13428:2005.",
@@ -36,7 +44,11 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Moisture, fat content, and hygiene for whole milk powder.",
-    "key_testing_parameters": ["Moisture %", "Milk fat", "Bacterial colony count"],
+    "key_testing_parameters": [
+      "Moisture %",
+      "Milk fat",
+      "Bacterial colony count"
+    ],
     "certification_route": "Scheme-I ISI Mark",
     "verification_status": "corrected",
     "verification_note": "Source dataset listed \"IS 1165:2020\" and title \"Milk Powder Specification\" — current edition is IS 1165:2022 (Sixth Revision), titled \"Whole Milk Powder — Specification\".",
@@ -51,7 +63,10 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Nutritional standards for follow-up formula, the liquid weaning-diet component for infants from 6 months to 2 years.",
-    "key_testing_parameters": ["Protein composition", "Vitamin assay"],
+    "key_testing_parameters": [
+      "Protein composition",
+      "Vitamin assay"
+    ],
     "certification_route": "Scheme-I ISI Mark",
     "verification_status": "corrected",
     "verification_note": "Source dataset listed \"IS 15757:2007\" — that edition existed but was superseded by IS 15757:2022 (First Revision, amendments established 2022-09-28). Listing the 2007 edition as current is stale.",
@@ -66,7 +81,11 @@
     "scheme": "Scheme-II (CRS)",
     "mandatory_qco": true,
     "scope_summary": "Safety requirements (electric shock, fire, overheating) for IT equipment including laptops, power adaptors, mobile handsets, and POS machines. Identical under dual numbering with IEC 60950-1:2005.",
-    "key_testing_parameters": ["Electric strength", "Insulation resistance", "Leakage current"],
+    "key_testing_parameters": [
+      "Electric strength",
+      "Insulation resistance",
+      "Leakage current"
+    ],
     "certification_route": "Scheme-II CRS Self-Declaration via Recognized Lab",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset.",
@@ -81,7 +100,11 @@
     "scheme": "Scheme-II (CRS)",
     "mandatory_qco": true,
     "scope_summary": "Safety and short-circuit testing for portable lithium rechargeable batteries. Equivalent to IEC 62133-2:2017.",
-    "key_testing_parameters": ["Continuous charge", "High temp stress", "External short circuit"],
+    "key_testing_parameters": [
+      "Continuous charge",
+      "High temp stress",
+      "External short circuit"
+    ],
     "certification_route": "Scheme-II CRS Registration",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset.",
@@ -96,7 +119,10 @@
     "scheme": "Scheme-II (CRS)",
     "mandatory_qco": true,
     "scope_summary": "Safety standards for televisions (non-Plasma/LCD/LED), speakers, power amplifiers, and similar apparatus. Equivalent to IEC 60065:2014.",
-    "key_testing_parameters": ["Surge test", "Fire resistance"],
+    "key_testing_parameters": [
+      "Surge test",
+      "Fire resistance"
+    ],
     "certification_route": "Scheme-II CRS Registration",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset.",
@@ -111,7 +137,9 @@
     "scheme": "Scheme-II (CRS)",
     "mandatory_qco": true,
     "scope_summary": "Font rendering, Unicode UTF-8 support, and message readability for at least 22 scheduled Indian regional languages on mobile handsets.",
-    "key_testing_parameters": ["Display test for Indian scripts"],
+    "key_testing_parameters": [
+      "Display test for Indian scripts"
+    ],
     "certification_route": "Scheme-II CRS Registration",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset. Supersedes IS 16333 (Part 3):2017, withdrawn 2022-12-17.",
@@ -126,7 +154,10 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Electrical safety and thermal protection for induction cooktops.",
-    "key_testing_parameters": ["Heating under load", "Leakage current"],
+    "key_testing_parameters": [
+      "Heating under load",
+      "Leakage current"
+    ],
     "certification_route": "Scheme-I ISI Mark",
     "verification_status": "corrected",
     "verification_note": "Source dataset listed \"IS 302 (Part 2/Sec 26):2014\" for induction cookers. Section 26 of IS 302 Part 2 is actually the standard for clocks, not induction cookers — a materially different product. The real induction-cooker standard is IS 302 (Part 2/Section 6):2009.",
@@ -141,7 +172,11 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Safety valves, thermal proofing, and bursting-pressure limits for aluminium and stainless-steel pressure cookers, 1–22 litre nominal capacity.",
-    "key_testing_parameters": ["Proof pressure", "Safety valve release", "Bursting pressure"],
+    "key_testing_parameters": [
+      "Proof pressure",
+      "Safety valve release",
+      "Bursting pressure"
+    ],
     "certification_route": "Scheme-I ISI Mark (DPIIT Mandatory QCO)",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset.",
@@ -156,7 +191,10 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Insulation, temperature control, and earthing for domestic electric dry and steam irons up to 250V.",
-    "key_testing_parameters": ["Moisture resistance", "Earthing resistance"],
+    "key_testing_parameters": [
+      "Moisture resistance",
+      "Earthing resistance"
+    ],
     "certification_route": "Scheme-I ISI Mark",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset. Note: a Second Revision, IS 302 (Part 2/Sec 3):2024 (aligned to IEC 60335-2-3:2022), has since been published — check whether it has superseded the 2007 edition before relying on this for a current certification pathway.",
@@ -171,7 +209,10 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Motor safety, blade stability, and electrical insulation for electric motor-driven food mixers/grinders (mixies) up to 250V, for home use.",
-    "key_testing_parameters": ["Mechanical strength", "Insulation breakdown"],
+    "key_testing_parameters": [
+      "Mechanical strength",
+      "Insulation breakdown"
+    ],
     "certification_route": "Scheme-I ISI Mark",
     "verification_status": "corrected",
     "verification_note": "Source dataset listed \"IS 4250:1980\" as current. That edition was real but has been superseded by IS 4250:2025 (Second Revision), with a compliance transition period to September 2025.",
@@ -186,7 +227,10 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Submersion dielectric breakdown and physical shock protection for portable electric immersion water heaters up to 250V. Equivalent to IEC 60335-2-74.",
-    "key_testing_parameters": ["Submersion dielectric test", "Leakage current"],
+    "key_testing_parameters": [
+      "Submersion dielectric test",
+      "Leakage current"
+    ],
     "certification_route": "Scheme-I ISI Mark",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset.",
@@ -201,7 +245,11 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Impact attenuation, retention strap, and optical visor clarity for protective helmets, 500–620mm head-form sizes.",
-    "key_testing_parameters": ["Impact test", "Penetration resistance", "Dynamic retention"],
+    "key_testing_parameters": [
+      "Impact test",
+      "Penetration resistance",
+      "Dynamic retention"
+    ],
     "certification_route": "Scheme-I Mandatory ISI Mark (MoRTH)",
     "verification_status": "corrected",
     "verification_note": "Source dataset listed \"IS 4151:2020\" — no such edition exists. The current standard is IS 4151:2015 (Fourth Revision); the Protective Helmet for Two Wheeler Riders (Quality Control) Order, 2020 is the regulatory order that mandates compliance with IS 4151:2015 — the \"2020\" belongs to the order, not the standard.",
@@ -216,7 +264,10 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Colour, retro-reflectivity, and design requirements for high-visibility protective clothing used in road, rail, airport, mining, and industrial settings.",
-    "key_testing_parameters": ["Photometric performance", "Retroreflection under rain"],
+    "key_testing_parameters": [
+      "Photometric performance",
+      "Retroreflection under rain"
+    ],
     "certification_route": "Scheme-I ISI Mark",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset. Mandatory BIS certification effective 2023-10-07.",
@@ -231,7 +282,10 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Material, design, and performance requirements for industrial safety helmets used in construction, mining, shipbuilding, and tunnelling.",
-    "key_testing_parameters": ["Shock absorption", "Flame resistance"],
+    "key_testing_parameters": [
+      "Shock absorption",
+      "Flame resistance"
+    ],
     "certification_route": "Scheme-I ISI Mark",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset — this remains the current active edition.",
@@ -246,7 +300,12 @@
     "scheme": "Scheme-II (CRS)",
     "mandatory_qco": true,
     "scope_summary": "Thermal cycling, damp heat, mechanical load, and hail-impact qualification for commercial crystalline-silicon solar PV modules. Identical to IEC 61215:2005.",
-    "key_testing_parameters": ["Thermal cycling", "Damp heat", "Mechanical load", "Hail impact"],
+    "key_testing_parameters": [
+      "Thermal cycling",
+      "Damp heat",
+      "Mechanical load",
+      "Hail impact"
+    ],
     "certification_route": "Scheme-II CRS (MNRE Order)",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset. A 2023 revision exists with concurrent validity permitted until 2027-02-15 — this 2010 edition is still current for now.",
@@ -261,7 +320,10 @@
     "scheme": "Scheme-II (CRS)",
     "mandatory_qco": true,
     "scope_summary": "Anti-islanding and grid protection for grid-connected and off-grid rooftop solar inverters up to 150kW. Harmonised with IEC 62109.",
-    "key_testing_parameters": ["Anti-islanding protection", "Dielectric breakdown"],
+    "key_testing_parameters": [
+      "Anti-islanding protection",
+      "Dielectric breakdown"
+    ],
     "certification_route": "Scheme-II CRS Registration",
     "verification_status": "corrected",
     "verification_note": "Source dataset listed \"IS 16221 (Part 2):2016\" — the confirmed edition year is 2015, not 2016.",
@@ -276,7 +338,10 @@
     "scheme": "Hallmarking",
     "mandatory_qco": true,
     "scope_summary": "Mandatory 3-sign hallmark: BIS logo, purity grade (14/18/20/22/23/24 carat), and 6-digit HUID code, for gold jewellery and artefacts.",
-    "key_testing_parameters": ["Fire Assay Method (Cupellation)", "XRF Assay"],
+    "key_testing_parameters": [
+      "Fire Assay Method (Cupellation)",
+      "XRF Assay"
+    ],
     "certification_route": "Manakonline Jeweller Registration + AHC Laser Marking",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset. Mandatory hallmarking effective 2021-06-15.",
@@ -291,7 +356,9 @@
     "scheme": "Hallmarking",
     "mandatory_qco": false,
     "scope_summary": "Voluntary hallmarking fineness standards (six grades: 800/835/900/925/970/990) for silver articles.",
-    "key_testing_parameters": ["Volumetric titration assay"],
+    "key_testing_parameters": [
+      "Volumetric titration assay"
+    ],
     "certification_route": "Voluntary Hallmarking Scheme",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset, including the voluntary (non-mandatory) status. Note: IS 2112:2025 has since been published, adding grades 958 and 999 — check whether it has superseded this 2014 edition before relying on it for a current certification pathway.",
@@ -306,7 +373,10 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Manufacture, chemical, and physical requirements for OPC grades 33, 43, 53 (and sleeper-grades 43S, 53S).",
-    "key_testing_parameters": ["Compressive strength at 28 days", "Initial & Final Setting Time"],
+    "key_testing_parameters": [
+      "Compressive strength at 28 days",
+      "Initial & Final Setting Time"
+    ],
     "certification_route": "Scheme-I ISI Mark (Mandatory DPIIT QCO)",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset.",
@@ -321,12 +391,536 @@
     "scheme": "Scheme-I (ISI)",
     "mandatory_qco": true,
     "scope_summary": "Chemical composition, mechanical properties, and dimensional tolerances for TMT reinforcement bars (Fe 415/500/550/600 grades).",
-    "key_testing_parameters": ["Tensile yield strength", "Elongation %", "Bend & Rebend test"],
+    "key_testing_parameters": [
+      "Tensile yield strength",
+      "Elongation %",
+      "Bend & Rebend test"
+    ],
     "certification_route": "Scheme-I ISI Mark (Ministry of Steel)",
     "verification_status": "verified_accurate",
     "verification_note": "Confirmed as stated in the source dataset.",
     "source_url": "https://www.services.bis.gov.in/tmp/tbl5_2024-11-10_1145.pdf",
     "source_note": "Official BIS Connect standard listing PDF",
     "retrieved_at": "2026-08-28"
+  },
+  {
+    "is_number": "IS 9873 (Part 1):2019",
+    "title": "Safety of Toys - Part 1: Safety Aspects Related to Mechanical and Physical Properties",
+    "category": "Toys & Children Products",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Safety criteria regarding sharp edges, small parts, choking hazards, and physical durability for toys intended for children up to 14 years.",
+    "key_testing_parameters": [
+      "Small parts cylinder test (choking hazard)",
+      "Sharp edge and point accessibility test",
+      "Tension, drop, and impact test",
+      "Dynamic strength for ride-on toys"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 9873 (Part 1):2018 — unverified. Upstream-claimed notification: S.O. 853(E) / S.O. 3146(E) (Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/9873_1",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 15644:2006",
+    "title": "Safety of Electric Toys",
+    "category": "Toys & Children Products",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Electrical safety, thermal hazards, moisture ingress, and battery compartment safety in electrically operated toys.",
+    "key_testing_parameters": [
+      "Input power and temperature rise test",
+      "Dielectric strength at operating temperature",
+      "Short-circuit and battery compartment enclosure test",
+      "Resistance to heat and fire / Glow wire test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 853(E) (Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/15644",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 15658:2021",
+    "title": "Precast Concrete Blocks for Paving - Specification",
+    "category": "Civil Construction",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Requirements for precast solid concrete paving units designed for pedestrian and vehicular pavements.",
+    "key_testing_parameters": [
+      "Compressive strength test",
+      "Water absorption test (< 6% by mass)",
+      "Abrasion resistance test",
+      "Splitting tensile strength test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 15658:2006 — unverified. Upstream-claimed notification: S.O. 3844(E) (Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/15658",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 15885 (Part 2/Sec 13):2012",
+    "title": "Lamp Controlgear - Particular Requirements for DC or AC Supplied Electronic Controlgear for LED Modules",
+    "category": "Electrical & Lighting",
+    "scheme": "Scheme-II (CRS)",
+    "mandatory_qco": true,
+    "scope_summary": "Safety requirements for electronic drivers and controlgear powering LED lighting systems.",
+    "key_testing_parameters": [
+      "Output voltage and current regulation under fault conditions",
+      "Dielectric breakdown & insulation resistance",
+      "Thermal endurance test for winding & case",
+      "Fault condition short-circuit test"
+    ],
+    "certification_route": "Scheme-II CRS Registration",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 2905(E) (Ministry of Electronics and Information Technology (MeitY)) — unverified.",
+    "source_url": "https://www.crsbis.in/BIS/products.do",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 16102 (Part 1):2012",
+    "title": "Self-Ballasted LED Lamps for General Lighting Services - Part 1: Safety Requirements",
+    "category": "Consumer Electricals",
+    "scheme": "Scheme-II (CRS)",
+    "mandatory_qco": true,
+    "scope_summary": "Interchangeability, insulation resistance, mechanical strength, and electrical safety for consumer LED retrofit bulbs.",
+    "key_testing_parameters": [
+      "Cap temperature rise test",
+      "Torsion resistance & mechanical cap pull test",
+      "Insulation resistance and electric strength test",
+      "Resistance to heat and fire (Glow wire test)"
+    ],
+    "certification_route": "Scheme-II CRS Registration",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 2905(E) (Ministry of Electronics and Information Technology (MeitY)) — unverified.",
+    "source_url": "https://www.crsbis.in/BIS/products.do",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 694:2010",
+    "title": "Polyvinyl Chloride Insulated Unsheathed and Sheathed Cables/Cords with Rigid and Flexible Conductor for Working Voltages Up to and Including 1100 V",
+    "category": "Electrical Infrastructure",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Specifications for PVC insulated cables used in low-voltage power distribution, domestic wiring, and industrial panel circuits up to 1100 V.",
+    "key_testing_parameters": [
+      "Conductor electrical resistance test",
+      "Tensile strength and elongation of PVC insulation",
+      "High voltage spark / dielectric test in water",
+      "Thermal stability and flammability test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 694:1990 — unverified. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 3965(E) (Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/694",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 15111 (Part 1):2002",
+    "title": "Self-Ballasted Lamps for General Lighting Services - Part 1: Safety Requirements",
+    "category": "Consumer Electricals",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Safety and exchangeability requirements for tubular fluorescent and other discharge lamps with integrated ballast for general lighting.",
+    "key_testing_parameters": [
+      "Starting and operating characteristics",
+      "Insulation resistance and electric strength",
+      "Mechanical torque resistance of lamp caps",
+      "Resistance to heat and fire"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 189(E) (Department for Promotion of Industry and Internal Trade (DPIIT)) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/15111_1",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 1293:2019",
+    "title": "Plugs and Socket-Outlets of Rated Voltage up to and including 250 Volts and Rated Current up to and including 16 Amperes - Specification",
+    "category": "Electrical Accessories",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Dimensional interchangeability, contact safety, mechanical robustness, and heat resistance of plugs and socket outlets for domestic/commercial wiring.",
+    "key_testing_parameters": [
+      "Withdrawal force / Retention test for pins",
+      "Temperature rise test at rated load",
+      "Insulation resistance and high voltage breakdown",
+      "Resistance of insulating material to abnormal heat and fire (Glow wire 850°C)"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 1293:2005 — unverified. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 4381(E) / S.O. 3965(E) (Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/1293",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 14697:1999",
+    "title": "AC Static Transformer Operated Watthour and VAR-Hour Meters, Class 0.2S and 0.5S - Specification",
+    "category": "Smart Metering & Power",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Accuracy class, electrical insulation, and anti-tamper standards for static transformer-operated smart and industrial energy meters.",
+    "key_testing_parameters": [
+      "Limits of error test across dynamic load currents",
+      "Impulse voltage test (6 kV)",
+      "Electromagnetic compatibility (EMC) and immunity test",
+      "Tamper detection and anti-magnetic influence test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2', 'Amendment No. 3'] — unverified. Upstream-claimed notification: S.O. 1282(E) (Ministry of Power / Department of Consumer Affairs) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/14697",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 13779:1999",
+    "title": "AC Static Watthour Meters, Class 1 and 2 - Specification",
+    "category": "Smart Metering & Power",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Metrological accuracy, dielectric insulation, surge protection, and weather sealing for domestic single-phase and three-phase static electricity meters.",
+    "key_testing_parameters": [
+      "Metrological accuracy test under voltage and frequency variations",
+      "Dielectric and surge withstand test",
+      "Influence of external DC/AC magnetic field test",
+      "Spring hammer mechanical shock and impact test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2', 'Amendment No. 3', 'Amendment No. 4'] — unverified. Upstream-claimed notification: S.O. 1282(E) (Ministry of Power / Department of Consumer Affairs) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/13779",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 15700:2005",
+    "title": "Quality Management Systems - Requirements for Service Organizations",
+    "category": "Management Systems",
+    "scheme": "Management Systems Certification (MSCD)",
+    "mandatory_qco": false,
+    "scope_summary": "Guidelines for public and private service delivery, grievance redress mechanisms, and citizen's charter implementation (Sevottam model).",
+    "key_testing_parameters": [
+      "Citizen charter compliance audit",
+      "Service delivery timeline adherence review",
+      "Public grievance redressal system verification",
+      "Customer satisfaction measurement metrics"
+    ],
+    "certification_route": "Voluntary System Certification Audit",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed notification: BIS/MSCD/IS-15700 (Ministry of Consumer Affairs / DARPG) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/15700",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 16347:2014",
+    "title": "Automatic Data Processing Machines - General Safety Requirements",
+    "category": "Enterprise IT",
+    "scheme": "Scheme-II (CRS)",
+    "mandatory_qco": true,
+    "scope_summary": "Electrical safety, rack cooling safety, and fire isolation requirements for high-density enterprise servers and automatic data processing hardware.",
+    "key_testing_parameters": [
+      "Continuous load power supply stress test",
+      "High voltage insulation breakdown test",
+      "Earth fault leakage current limit assessment",
+      "Enclosure mechanical rigidity and flammability"
+    ],
+    "certification_route": "Scheme-II CRS Registration",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed notification: S.O. 2905(E) (Ministry of Electronics and Information Technology (MeitY)) — unverified.",
+    "source_url": "https://www.crsbis.in/BIS/products.do",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 15687 (Part 1):2006",
+    "title": "Safety of Primary Batteries - Part 1: General Requirements",
+    "category": "Consumer Electronics",
+    "scheme": "Scheme-II (CRS)",
+    "mandatory_qco": true,
+    "scope_summary": "Safety standards preventing leakage, explosion, and fire for consumer non-rechargeable zinc-carbon and alkaline primary cells.",
+    "key_testing_parameters": [
+      "Electrolyte leakage resistance under high temperature",
+      "Incorrect installation / reverse polarity charging test",
+      "External short-circuit thermal safety test",
+      "Over-discharge safety limit test"
+    ],
+    "certification_route": "Scheme-II CRS Registration",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1'] — unverified. Upstream-claimed notification: S.O. 1246(E) (Ministry of Electronics and Information Technology (MeitY)) — unverified.",
+    "source_url": "https://www.crsbis.in/BIS/products.do",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 16047:2013",
+    "title": "Automotive Vehicles - Pneumatic Tyres for Two and Three-Wheeled Motor Vehicles - Specification",
+    "category": "Automotive Components",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Dimensional, load endurance, and high-speed bursting safety standards for tubeless and tube-type tyres fitted on two/three-wheelers.",
+    "key_testing_parameters": [
+      "High-speed load endurance drum test",
+      "Tyre bead unseating resistance test",
+      "Plunger energy penetration test (casing strength)",
+      "Tread wear indicator (TWI) dimensional verification"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 3921(E) / S.O. 4381(E) (Department for Promotion of Industry and Internal Trade (DPIIT) & MoRTH) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/16047",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 15633:2005",
+    "title": "Automotive Vehicles - Pneumatic Tyres for Passenger Car Vehicles - Diagonal and Radial Ply - Specification",
+    "category": "Automotive Components",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Safety, high-speed rating durability, and structural casing integrity for passenger motor car tyres.",
+    "key_testing_parameters": [
+      "Dynamic load/speed endurance test at elevated ambient temperature",
+      "Bead push-off / unseating resistance",
+      "Tread wear indicators and groove depth verification",
+      "Plunger breaking energy test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2', 'Amendment No. 3'] — unverified. Upstream-claimed notification: S.O. 3921(E) (Department for Promotion of Industry and Internal Trade (DPIIT) & MoRTH) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/15633",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 15636:2012",
+    "title": "Automotive Vehicles - Pneumatic Tyres for Commercial Vehicles - Diagonal and Radial Ply - Specification",
+    "category": "Automotive Components",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Heavy vehicle tyre performance, casing durability under heavy axle load, and retreadability standards for commercial trucks and buses.",
+    "key_testing_parameters": [
+      "Severe load/speed endurance drum testing",
+      "Plunger casing burst resistance measurement",
+      "Tread compound abrasion resistance test",
+      "Dimensional growth after inflation test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 15636:2005 — unverified. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 3921(E) (Department for Promotion of Industry and Internal Trade (DPIIT) & MoRTH) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/15636",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 2553 (Part 1):2018",
+    "title": "Safety Glass - Specification - Part 1: Architectural, Building and General Uses",
+    "category": "Building Materials",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Impact breakage safety, fragmentation count, and optical distortion for toughened and laminated architectural glass used in buildings.",
+    "key_testing_parameters": [
+      "Fragmentation test (particle count per 50x50 mm square)",
+      "Drop weight impact test with steel ball",
+      "Boil test and high-humidity test for laminated glass",
+      "Optical distortion and light transmittance test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 2553 (Part 1):1990 — unverified. Upstream-claimed notification: S.O. 853(E) / S.O. 4381(E) (Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/2553_1",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 2553 (Part 2):2019",
+    "title": "Safety Glass - Specification - Part 2: For Road Transport",
+    "category": "Automotive Components",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Head-form impact resistance, optical clarity, secondary image separation, and fragmentation safety for vehicle windscreens and side windows.",
+    "key_testing_parameters": [
+      "227g steel ball drop impact test",
+      "Phantom head-form impact deceleration test",
+      "Luminous transmittance test (> 70% for windscreens)",
+      "Abrasion and scratch resistance test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 2553 (Part 2):1992 — unverified. Upstream-claimed notification: S.O. 853(E) / MoRTH CMVR Rule 100 (Department for Promotion of Industry and Internal Trade (DPIIT) & MoRTH) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/2553_2",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 15450:2004",
+    "title": "Polyethylene Pipes for Water Supply - Specification",
+    "category": "Plumbing & Piping",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Hydrostatic pressure resistance, carbon black dispersion, and creep rupture strength for high-density polyethylene (HDPE) water delivery pipes.",
+    "key_testing_parameters": [
+      "Hydrostatic internal pressure test at 27°C and 80°C",
+      "Carbon black content and dispersion test",
+      "Melt flow rate (MFR) test",
+      "Longitudinal reversion test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 4984:1995 — unverified. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 3844(E) (Department for Promotion of Industry and Internal Trade (DPIIT)) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/15450",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 4985:2021",
+    "title": "Unplasticized Polyvinyl Chloride (PVC-U) Pipes for Potable Water Supplies - Specification",
+    "category": "Plumbing & Piping",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Impact resistance, hydrostatic strength, and toxic heavy metal release limits for unplasticized PVC potable water piping systems.",
+    "key_testing_parameters": [
+      "Short-term and long-term internal hydrostatic pressure test",
+      "Drop weight impact / falling dart test at 0°C",
+      "Lead and heavy metal extraction limit test",
+      "Vicat softening temperature test (> 80°C)"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 4985:2000 — unverified. Upstream-claimed notification: S.O. 3844(E) (Department for Promotion of Industry and Internal Trade (DPIIT)) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/4985",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 12211:2019",
+    "title": "Safety Requirements for Mains Operated Electronic and Related Apparatus for Household and Similar General Use",
+    "category": "Consumer Electronics",
+    "scheme": "Scheme-II (CRS)",
+    "mandatory_qco": true,
+    "scope_summary": "Protection against electrical shock, excessive temperature, fire propagation, and implosion in household electronics.",
+    "key_testing_parameters": [
+      "Shock hazard isolation & creepage distances",
+      "Fault condition thermal runaway test",
+      "Glow wire fire resistance of PCB & housing",
+      "Surge immunity test"
+    ],
+    "certification_route": "Scheme-II CRS Registration",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 12211:1987 — unverified. Upstream-claimed notification: S.O. 2357(E) (Ministry of Electronics and Information Technology (MeitY)) — unverified.",
+    "source_url": "https://www.crsbis.in/BIS/products.do",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 303:1989",
+    "title": "Plywood for General Purposes - Specification",
+    "category": "Wood & Timber Products",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Requirements for different grades of general-purpose plywood including Moisture Resistant (MR) and Boiling Water Resistant (BWR) grades.",
+    "key_testing_parameters": [
+      "Water resistance and glue shear strength test",
+      "Moisture content percentage by mass",
+      "Static bending strength and modulus of elasticity",
+      "Mycological test (resistance to fungal attack)"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2', 'Amendment No. 3', 'Amendment No. 4', 'Amendment No. 5', 'Amendment No. 6'] — unverified. Upstream-claimed notification: S.O. 1018(E) (Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/303",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 2082:2018",
+    "title": "Stationary Storage Type Electric Water Heaters - Specification",
+    "category": "Electrical Appliances",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Safety and construction requirements for stationary storage-type electric water heaters intended for domestic and commercial water heating.",
+    "key_testing_parameters": [
+      "Pressure test on inner water container (rated pressure withstand)",
+      "High voltage dielectric breakdown and earth continuity",
+      "Standing loss per 24 hours (energy efficiency verification)",
+      "Thermal cutout and thermostat endurance cycle test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 2082:1993 — unverified. Upstream-claimed amendments: ['Amendment No. 1'] — unverified. Upstream-claimed notification: S.O. 1092(E) (Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/2082",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 2556 (Part 2):2004",
+    "title": "Vitreous Sanitary Appliances (Vitreous China) - Specification - Part 2: Specific Requirements of Wash Basins",
+    "category": "Sanitaryware & Ceramics",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Specifications, surface quality, and load-bearing standards for vitreous china ceramic wash basins and pedestals.",
+    "key_testing_parameters": [
+      "Water absorption test (< 0.5% after boiling)",
+      "Crazing resistance test under autoclave pressure",
+      "Static load-bearing resistance test",
+      "Chemical and stain resistance of glaze surface"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 2556 (Part 2):1981 — unverified. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 3844(E) (Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/2556_2",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS 13983:1994",
+    "title": "Stainless Steel Sinks for Domestic Purposes - Specification",
+    "category": "Kitchen & Domestic Appliances",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Material grade, fabrication dimensions, corrosion resistance, and drainage performance for domestic kitchen stainless steel sinks.",
+    "key_testing_parameters": [
+      "Chemical composition verification (austenitic grade SS304/SS202)",
+      "Corrosion resistance via salt spray test",
+      "Bowl deflection under static load",
+      "Sound deadening pad adhesion durability"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream-claimed amendments: ['Amendment No. 1', 'Amendment No. 2'] — unverified. Upstream-claimed notification: S.O. 3568(E) (Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce & Industry) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/13983",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
+  },
+  {
+    "is_number": "IS/ISO 80601-2-56:2017",
+    "title": "Medical Electrical Equipment - Part 2-56: Particular Requirements for Basic Safety and Essential Performance of Clinical Thermometers for Body Temperature Measurement",
+    "category": "Medical Equipment & Devices",
+    "scheme": "Scheme-I (ISI)",
+    "mandatory_qco": true,
+    "scope_summary": "Measurement accuracy, thermal response time, and bio-compatibility for clinical digital thermometers.",
+    "key_testing_parameters": [
+      "Laboratory temperature measurement accuracy (within ±0.1°C)",
+      "Thermal shock and drop impact durability",
+      "Waterproof probe enclosure verification",
+      "Low-battery indicator performance test"
+    ],
+    "certification_route": "Mandatory Scheme-I Factory Audit + Lab Testing",
+    "verification_status": "needs_review",
+    "verification_note": "Pulled from upstream BIS-standards-dataset (50-entry update, 2026-08-30). NOT independently verified — upstream has a documented track record of fabricated/conflated edition years and section numbers in this same dataset (see this file's other verification_notes for IS 14543 and IS 4151), so its own \"verified_accurate\" self-label is not trusted here. Upstream claims this supersedes IS 13904:1993 — unverified. Upstream-claimed notification: S.O. 4112(E) (Department of Pharmaceuticals, Ministry of Chemicals and Fertilizers) — unverified.",
+    "source_url": "https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/80601_2_56",
+    "source_note": "Upstream BIS-standards-dataset entry, not independently checked against a primary BIS source this session.",
+    "retrieved_at": "2026-08-30"
   }
 ]

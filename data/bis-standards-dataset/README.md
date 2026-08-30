@@ -45,6 +45,36 @@ via `source_note`. Entries whose source is not a primary BIS document should
 be re-verified before being treated as fully authoritative — the goal here
 was to catch outright fabrications, not to guarantee every field is perfect.
 
+## 2026-08-30 update: 26 new entries added, all `needs_review`
+
+The upstream repo pushed a 50-entry version of
+`dataset/real_bis_standards.json` (up from 22), with a richer schema
+(`supersedes`, `superseded_by`, `amendments`, `legal_source` with
+gazette/notification numbers). 26 of those 50 entries are for standards
+not already in this file; they were appended here.
+
+**They were NOT trusted at upstream's self-labeled `verified_accurate`
+status**, and are instead marked `needs_review`. Reason: this session
+spot-checked the upstream update against the two errors already
+documented above (the induction-cooker Section 26/6 mixup, and the
+fabricated "IS 4151:2020" edition) — **both errors are still present,
+unfixed, and still self-labeled `verified_accurate`** in the 50-entry
+version. Worse, `BIS-STD-001` (`IS 14543`) in the new file again claims
+a "2024" edition and `supersedes: "IS 14543:2016"` — the exact same
+fabrication this README already documented and corrected once (see the
+`IS 14543:2016` entry's own `verification_note` above: "Source dataset
+listed 'IS 14543:2024' — no such edition exists"). Upstream re-added a
+previously-debunked fabrication into its own "verified" data. Its
+self-verification process cannot be trusted for new entries either,
+so nothing new was accepted as verified without independent checking —
+which was not done this session for the 26 new entries; each carries a
+`verification_note` explaining exactly this and listing upstream's own
+supersession/amendment/notification claims as explicitly unverified.
+
+Anyone (or any future session) treating these 26 as ground truth should
+re-check each against a primary BIS source first — the same process
+used for the original 22 (see above).
+
 ## What this is *not*
 
 - Not wired into the app's ingestion pipeline (`scripts/ingest.ts`) or the

@@ -331,3 +331,53 @@ standards with real overlap terms, one side missing evidence, and one
 fabricated identifier (`not_found`). `npm run verify` green (170 vitest
 tests), retrieval regression unchanged at 12/12 recall, 8/8
 no-false-match.
+
+### Dataset update: 22 → 48 entries (this session, follow-up)
+
+User reported the upstream `BIS-Standards-AI-Assistant/BIS-standards-dataset`
+repo now has 50 entries (up from 22). Cloned it, diffed by base standard
+number: 26 are genuinely new (24 overlap with standards already in
+`data/bis-standards-dataset/qco-standards.json`).
+
+**Before merging, spot-checked upstream's own two previously-documented
+errors** (see that file's README: the induction-cooker Section 26/6 mixup,
+and the fabricated "IS 4151:2020" edition) — **both are still present,
+unfixed, and still self-labeled `verified_accurate`** in the 50-entry
+version. Worse, upstream's `IS 14543` entry again claims a "2024"
+edition — the exact fabrication this project's README already documented
+and corrected once before. This confirms upstream's self-verification
+cannot be trusted for the new entries either.
+
+Consequently, all 26 new entries were appended with
+`verification_status: "needs_review"` (not upstream's `verified_accurate`
+claim), each with a `verification_note` naming upstream's unverified
+supersession/amendment/notification claims explicitly. Migrated into the
+DB via the existing idempotent `npm run data:migrate-existing` — the 22
+already-verified standards were untouched (correctly detected as
+"already present"), 26 new `standards`/`qcos` rows were inserted, all
+landed as `needs_review` in the DB (verified directly against the live
+table, not assumed from the script's own claim).
+
+**Real UI bug found and fixed along the way**: `SchemeExplorer.tsx`'s
+verification badge rendered *any* non-null `verificationStatus` in the
+same green "success" style, only special-casing `verified_accurate` →
+"Verified" text — so a `needs_review` entry would have shown a green,
+trust-implying badge literally reading `needs_review`. Fixed: a shared
+label map (`src/lib/verification-status.ts`, deliberately without the
+Node-only `fs`/`path` imports `certification-schemes.ts` has, so the
+client-side `SchemeExplorer` doesn't pull server-only code into its
+bundle) now renders `needs_review`/`unverified` with a distinct amber
+"warning" style, never the green "verified" style. Applied to both
+`SchemeExplorer.tsx` and the Standard Passport page
+(`src/app/standards/[id]/page.tsx`), which had the same raw-value
+fallback (a display-only rough edge, not a color-based misrepresentation
+there, but fixed for consistency). New regression test confirms a
+`needs_review` badge never carries the `success` class.
+
+Two existing tests had a hardcoded dataset-size assumption (`toBe(22)`)
+and an over-narrow standard-number regex that rejected the real joint
+`IS/ISO 80601-2-56:2017` designation now in the dataset — both fixed.
+`npm run verify` green (171 vitest tests), retrieval regression
+unchanged at 12/12 recall, 8/8 no-false-match. `data:report` now shows
+51 standards total (25 verified, 26 needs_review), 46/51 with a QCO,
+still 4/51 with ingested document text, still 0 relationships.

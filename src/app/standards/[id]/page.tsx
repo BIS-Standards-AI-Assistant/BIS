@@ -10,6 +10,7 @@ import { getDb } from "@/db";
 import { documents } from "@/db/schema";
 import type { StandardDetail } from "@/types/api";
 import { findCertificationSchemeForStandard, type CertificationSchemeItem } from "@/lib/certification-schemes";
+import { VERIFICATION_STATUS_LABELS } from "@/lib/verification-status";
 import { TESTING_KEYWORDS } from "@/lib/coverage-analysis";
 import { ExternalLinkIcon, SearchIcon, CompareIcon, ChevronRightIcon } from "@/components/ui/icons";
 
@@ -213,7 +214,7 @@ function CertificationRelationship({ scheme }: { scheme: CertificationSchemeItem
       {scheme.verificationStatus && (
         <div>
           <dt className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Verification</dt>
-          <dd className="mt-0.5 text-sm text-ink-soft">{scheme.verificationStatus === "verified_accurate" ? "Verified" : scheme.verificationStatus}</dd>
+          <dd className="mt-0.5 text-sm text-ink-soft">{VERIFICATION_STATUS_LABELS[scheme.verificationStatus] ?? scheme.verificationStatus}</dd>
         </div>
       )}
       {scheme.sourceUrl && (

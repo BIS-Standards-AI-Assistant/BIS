@@ -34,6 +34,21 @@ describe("SchemeExplorer", () => {
     expect(screen.getByText("Verified")).toBeInTheDocument();
   });
 
+  test("labels a needs_review entry distinctly from a verified one, never with the same trust-implying style", async () => {
+    const needsReviewItem = { ...mockItem, standardNumber: "IS 9873 (Part 1):2019", verificationStatus: "needs_review" };
+    (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
+      ok: true,
+      json: async () => ({ items: [needsReviewItem], total: 1, sectors: ["Metals"] }),
+    });
+    render(<SchemeExplorer />);
+    await waitFor(() => expect(screen.getByText("IS 9873 (Part 1):2019")).toBeInTheDocument());
+    const badge = screen.getByText("Needs review");
+    expect(badge).toBeInTheDocument();
+    expect(badge.className).toContain("warning");
+    expect(badge.className).not.toContain("success");
+    expect(screen.queryByText("Verified")).not.toBeInTheDocument();
+  });
+
   test("shows an honest empty state when nothing matches — never fabricates a result", async () => {
     (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
       ok: true,
