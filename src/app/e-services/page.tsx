@@ -9,6 +9,8 @@ export default function EServicesPage() {
       crumbs={[{ label: ESERVICES_SECTION.label, href: ESERVICES_SECTION.rootHref }]}
       title={ESERVICES_SECTION.rootLabel}
       description={ESERVICES_SECTION.rootDescription}
+      portalHref="https://www.manakonline.in"
+      portalLabel="Open BIS Manak Online Portal"
     />
   );
 }
