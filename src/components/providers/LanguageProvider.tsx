@@ -15,7 +15,14 @@ const STORAGE_KEY = "bis-lang";
 const listeners = new Set<() => void>();
 
 function getSnapshot(): LangCode {
-  return window.localStorage.getItem(STORAGE_KEY) === "hi" ? "hi" : "en";
+  // Browsers throw on storage access in private mode or when site data is
+  // blocked. This runs inside useSyncExternalStore during render, so an
+  // uncaught throw takes down every page that renders a LanguageProvider.
+  try {
+    return window.localStorage.getItem(STORAGE_KEY) === "hi" ? "hi" : "en";
+  } catch {
+    return "en";
+  }
 }
 
 function getServerSnapshot(): LangCode {
@@ -28,7 +35,13 @@ function subscribe(callback: () => void) {
 }
 
 function setLang(next: LangCode) {
-  window.localStorage.setItem(STORAGE_KEY, next);
+  // Persisting the choice is best-effort; the language still switches for this
+  // session when storage is unavailable.
+  try {
+    window.localStorage.setItem(STORAGE_KEY, next);
+  } catch {
+    // ignored — see getSnapshot
+  }
   listeners.forEach((l) => l());
 }
 

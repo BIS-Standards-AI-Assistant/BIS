@@ -49,19 +49,35 @@ function subscribeToStorage(callback: () => void) {
   };
 }
 
+const EMPTY: RecentQueryEntry[] = [];
+
 let cachedRaw: string | null = null;
 let cachedParsed: RecentQueryEntry[] = [];
 
 function getStorageSnapshot(): RecentQueryEntry[] {
-  const raw = localStorage.getItem("bis-recent-queries");
+  // Runs during render via useSyncExternalStore. Storage access throws in
+  // private mode or when site data is blocked, and malformed JSON throws too —
+  // neither should take down the home page. Fall back to "no history", which
+  // renders the example queries.
+  let raw: string | null = null;
+  try {
+    raw = localStorage.getItem("bis-recent-queries");
+  } catch {
+    return EMPTY;
+  }
+
   if (raw !== cachedRaw) {
     cachedRaw = raw;
-    cachedParsed = raw ? JSON.parse(raw) : [];
+    try {
+      const parsed = raw ? JSON.parse(raw) : [];
+      cachedParsed = Array.isArray(parsed) ? parsed : [];
+    } catch {
+      cachedParsed = [];
+    }
   }
   return cachedParsed;
 }
 
-const EMPTY: RecentQueryEntry[] = [];
 function getServerSnapshot(): RecentQueryEntry[] {
   return EMPTY;
 }
