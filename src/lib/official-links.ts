@@ -458,20 +458,23 @@ const LINKS: Record<string, OfficialLink[]> = {
  * Official channels for the Contact page. Not a placeholder section, but kept
  * here so every official URL in the app has one home and one provenance rule.
  */
-export const CONTACT_CHANNELS: OfficialLink[] = [
+export const CONTACT_CHANNELS: readonly OfficialLink[] = [
   { label: "Enquiry related to BIS activities", href: en("directory/enquiry"), note: "Who to contact for standards, certification, testing, or training questions." },
   { label: "Online complaint registration", href: en("consumer-overview/online-complaint-registration"), note: "File a complaint about a product carrying the ISI mark or a hallmark." },
   { label: "BIS directory", href: en("directory/directory"), note: "Head office, regional, branch, and laboratory contacts." },
   { label: "Regional offices", href: en("directory/regional-offices"), note: "Addresses and contacts for BIS regional offices." },
 ];
 
+/** Shared so a miss never allocates, and never hands back a mutable array. */
+const EMPTY: readonly OfficialLink[] = Object.freeze([]);
+
 /**
  * Verified official destinations for a placeholder page. Returns `[]` when
  * no official page genuinely answers the item — callers should then say so
  * rather than linking somewhere unrelated.
  */
-export function getOfficialLinks(sectionKey: string, slug: string): OfficialLink[] {
-  return LINKS[`${sectionKey}:${slug}`] ?? [];
+export function getOfficialLinks(sectionKey: string, slug: string): readonly OfficialLink[] {
+  return LINKS[`${sectionKey}:${slug}`] ?? EMPTY;
 }
 
 /** Every distinct URL in this file, for the link checker and its test. */
@@ -480,4 +483,4 @@ export function allOfficialUrls(): string[] {
   return [...new Set(all.map((l) => l.href))].sort();
 }
 
-export const OFFICIAL_LINKS = LINKS;
+export const OFFICIAL_LINKS: Readonly<Record<string, readonly OfficialLink[]>> = LINKS;

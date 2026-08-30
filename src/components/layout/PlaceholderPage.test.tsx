@@ -79,6 +79,33 @@ describe("PlaceholderPage", () => {
     expect(screen.getByText("manakonline.in")).toBeInTheDocument();
   });
 
+  test("renders its chrome in Hindi when Hindi is selected", () => {
+    // LanguageProvider reads the choice from localStorage.
+    window.localStorage.setItem("bis-lang", "hi");
+    try {
+      render(
+        <LanguageProvider>
+          <PlaceholderPage
+            crumbs={[{ label: "Certification", href: "/certification" }]}
+            title="Hallmarking"
+            description="Gold and silver hallmarking under BIS."
+            links={[{ label: "Hallmarking Overview", href: "https://www.bis.gov.in/hallmarking-overview/?lang=en" }]}
+          />
+        </LanguageProvider>,
+      );
+
+      expect(screen.getByText("आधिकारिक बीआईएस स्रोत")).toBeInTheDocument();
+      expect(screen.getByText("यह जानकारी अभी इस प्रणाली में उपलब्ध नहीं है")).toBeInTheDocument();
+      expect(screen.getByText("(नए टैब में खुलता है)")).toBeInTheDocument();
+
+      // The link label is the name of a real English BIS page and must NOT be
+      // translated — doing so would misdescribe where the link goes.
+      expect(screen.getByText("Hallmarking Overview")).toBeInTheDocument();
+    } finally {
+      window.localStorage.removeItem("bis-lang");
+    }
+  });
+
   test("tells screen-reader users that official sources open in a new tab", () => {
     render(
       <LanguageProvider>
