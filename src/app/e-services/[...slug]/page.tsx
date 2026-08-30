@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 import { ESERVICES_SECTION, findNavItem } from "@/lib/navigation";
+import { getOfficialLinks } from "@/lib/official-links";
 
 export const dynamic = "force-dynamic";
 
@@ -17,8 +18,7 @@ export default async function EServicesSubPage({ params }: { params: Promise<{ s
       ]}
       title={found.item.label}
       description={found.item.description}
-      portalHref="https://www.manakonline.in"
-      portalLabel="Open BIS Manak Online Portal"
+      links={getOfficialLinks("e-services", found.item.slug)}
     />
   );
 }
