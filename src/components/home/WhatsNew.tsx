@@ -14,7 +14,7 @@ const FEATURED_STANDARDS = [
     category: "Packaged Water & Beverages",
     scheme: "Scheme-I (ISI)",
     meta: "Mandatory QCO · Active",
-    id: "is-14543",
+    id: "is-14543-2016",
   },
   {
     standardNumber: "IS 2347:2017",
@@ -22,15 +22,15 @@ const FEATURED_STANDARDS = [
     category: "Kitchen & Domestic Appliances",
     scheme: "Scheme-I (ISI)",
     meta: "Mandatory QCO · Active",
-    id: "is-2347",
+    id: "is-2347-2017",
   },
   {
-    standardNumber: "IS 16046:2018",
+    standardNumber: "IS 16046 (Part 2):2018",
     title: "Lithium Cells & Power Banks",
     category: "IT & Consumer Electronics",
     scheme: "Scheme-II (CRS)",
     meta: "Mandatory CRS · Active",
-    id: "is-16046",
+    id: "is-16046-part-2-2018",
   },
   {
     standardNumber: "IS 1417:2016",
@@ -38,7 +38,7 @@ const FEATURED_STANDARDS = [
     category: "Precious Metals",
     scheme: "Hallmarking (HUID)",
     meta: "Mandatory 6-Digit HUID",
-    id: "is-1417",
+    id: "is-1417-2016",
   },
   {
     standardNumber: "IS 4151:2015",
@@ -46,15 +46,15 @@ const FEATURED_STANDARDS = [
     category: "Safety Gear",
     scheme: "Scheme-I (ISI)",
     meta: "Mandatory QCO · Active",
-    id: "is-4151",
+    id: "is-4151-2015",
   },
   {
-    standardNumber: "IS 16333:2022",
+    standardNumber: "IS 16333 (Part 3):2022",
     title: "Mobile Phone Indian Language Support",
     category: "Telecommunications",
     scheme: "Scheme-II (CRS)",
     meta: "22 Scheduled Languages",
-    id: "is-16333",
+    id: "is-16333-part-3-2022",
   },
 ];
 
@@ -82,7 +82,7 @@ export function WhatsNew() {
       </p>
 
       <ul className="mt-4 space-y-2.5">
-        {FEATURED_STANDARDS.slice(0, 4).map((item) => (
+        {FEATURED_STANDARDS.map((item) => (
           <li key={item.standardNumber}>
             <Link
               href={`/standards/${item.id}`}
