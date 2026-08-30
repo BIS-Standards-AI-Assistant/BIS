@@ -69,7 +69,6 @@ export const STANDARDS_SECTION: NavSection = {
         { label: "Ask about a Standard", slug: "", real: true, href: "/?focus=search", description: "Ask a natural-language question and get a grounded, cited answer." },
         { label: "Find Relevant Standards", slug: "", real: true, href: "/standards", description: "Describe your product to discover potentially applicable standards." },
         { label: "Why is this Standard Relevant?", slug: "why-relevant", description: "Every recommendation from the query engine already includes a grounded relevance explanation — this page explains how to read it." },
-        { label: "Explore Related Standards", slug: "related", description: "Standards connected to one another by scope, material, or reference." },
       ],
     },
   ],
@@ -140,7 +139,6 @@ export const TESTING_SECTION: NavSection = {
       items: [
         { label: "Testing Overview", slug: "", description: "How BIS testing requirements work." },
         { label: "Laboratory Search", slug: "laboratory-search", description: "Find a testing laboratory." },
-        { label: "BIS Laboratories", slug: "bis-laboratories", description: "Laboratories operated directly by BIS." },
         { label: "Testing Services", slug: "services", description: "Services offered by BIS testing labs." },
         { label: "Testing Facilities", slug: "facilities", description: "Facilities and equipment available for testing." },
       ],
