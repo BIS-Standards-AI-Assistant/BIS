@@ -104,7 +104,7 @@ export default async function StandardsPage() {
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
       <main className="flex-1">
-        <div className="mx-auto max-w-3xl px-6 py-14">
+        <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-14">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">
               Indian Standards Knowledge Base
