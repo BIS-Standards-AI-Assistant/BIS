@@ -260,7 +260,40 @@ never a false "voluntary" claim).
 Neither the query planner nor the tool registry is wired into
 `/api/v1/query` yet — that route's existing pipeline (intent → retrieval →
 evidence → grounding → confidence → LLM) is untouched and still the one
-actually serving requests. Wiring the planner/tools into that route, and
-building the agent orchestrator that would actually call tools by name,
-is the natural next phase once a relationship-extraction script exists to
-make Phase 4 worthwhile too.
+actually serving requests.
+
+### Phase 7-8 — bounded agent orchestrator (this session, follow-up)
+
+`src/lib/agent/orchestrator.ts`: a single, bounded (max 3 iterations)
+orchestrator that runs a plan's `retrievalTasks` in dependency-ordered
+waves — identifier-independent tools first, identifier-dependent tools
+(`getStandard`, `checkMandatoryStatus`, `findQCO`,
+`getCertificationScheme`) once a candidate identifier is known — and
+stops on `required_evidence_covered`, `no_useful_new_evidence`,
+`max_iterations`, or `no_tools_for_plan`. Deliberately NOT LLM-driven:
+tool selection comes entirely from the deterministic query planner, so
+there's no LLM tool-choice to validate yet (rag.md §1/§22 still hold
+trivially). Tasks the planner requests that have no registered tool
+(`getStandardHistory`, `findLaboratories`, `compareStandards`,
+`findRelatedStandards`, `findReferencedStandards`, `getBISService`,
+`findTestingRequirements`) are reported as `skippedTasks`, never
+fabricated. 8 tests (DB-free, via an injected fake tool executor) +
+`npm run agent:smoke` run live against the real DB and tool registry.
+
+**Real bug found and fixed via the live smoke script, not the unit
+tests**: for a `CERTIFICATION`-type plan (whose `retrievalTasks` don't
+include `resolveStandard`), a query that names a real identifier
+explicitly — e.g. "What certification scheme applies to IS 269:2015?" —
+was having that identifier silently overridden by an unrelated fuzzy
+`findApplicableStandards` top hit, because nothing seeded the
+already-parsed identifier before the tool calls ran. Fixed by seeding a
+working identifier from the plan's own parsed identifiers up front, while
+keeping `resolvedStandard` in the result strictly limited to identifiers
+a confirming tool (one that actually validates against a real
+table/dataset) approved — so a fabricated identifier the user typed is
+still correctly reported as unresolved, never as "resolved."
+
+Still not wired into `/api/v1/query`. Wiring the orchestrator into that
+route (replacing or supplementing the existing intent→retrieval call) is
+the natural next phase once a relationship-extraction script exists to
+make Phase 4 (graph retrieval) worthwhile too.

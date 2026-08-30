@@ -23,7 +23,8 @@
     "data:discover": "tsx scripts/data-discover.ts",
     "data:migrate-existing": "dotenv -e .env.local -- tsx scripts/data-migrate-existing.ts",
     "data:report": "dotenv -e .env.local -- tsx scripts/data-report.ts",
-    "tools:smoke": "dotenv -e .env.local -- tsx scripts/tools-smoke.ts"
+    "tools:smoke": "dotenv -e .env.local -- tsx scripts/tools-smoke.ts",
+    "agent:smoke": "dotenv -e .env.local -- tsx scripts/agent-smoke.ts"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.86",
