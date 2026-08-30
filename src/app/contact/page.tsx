@@ -2,33 +2,8 @@ import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ExternalLinkIcon } from "@/components/ui/icons";
+import { CONTACT_CHANNELS } from "@/lib/official-links";
 
-/**
- * Verified against the live BIS site on 2026-08-31. See
- * src/lib/official-links.ts for the wider registry and the checker script.
- */
-const OFFICIAL_CHANNELS = [
-  {
-    label: "Enquiry related to BIS activities",
-    href: "https://www.bis.gov.in/directory/enquiry/?lang=en",
-    note: "Who to contact for standards, certification, testing, or training questions.",
-  },
-  {
-    label: "Online complaint registration",
-    href: "https://www.bis.gov.in/consumer-overview/online-complaint-registration/?lang=en",
-    note: "File a complaint about a product carrying the ISI mark or a hallmark.",
-  },
-  {
-    label: "BIS directory",
-    href: "https://www.bis.gov.in/directory/directory/?lang=en",
-    note: "Head office, regional, branch, and laboratory contacts.",
-  },
-  {
-    label: "Regional offices",
-    href: "https://www.bis.gov.in/directory/regional-offices/?lang=en",
-    note: "Addresses and contacts for BIS regional offices.",
-  },
-];
 
 export const dynamic = "force-dynamic";
 
@@ -94,7 +69,7 @@ function ContactBody() {
           Official BIS channels
         </h2>
         <ul className="mt-3 divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface-raised">
-          {OFFICIAL_CHANNELS.map((c) => (
+          {CONTACT_CHANNELS.map((c) => (
             <li key={c.href}>
               <a
                 href={c.href}
@@ -103,8 +78,13 @@ function ContactBody() {
                 className="flex items-start justify-between gap-4 px-5 py-4 transition-colors hover:bg-surface-alt"
               >
                 <span className="min-w-0">
-                  <span className="block text-[14px] font-semibold text-blue">{c.label}</span>
-                  <span className="mt-0.5 block text-[13px] leading-relaxed text-ink-soft">{c.note}</span>
+                  <span className="block text-[14px] font-semibold text-blue">
+                    {c.label}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </span>
+                  {c.note && (
+                    <span className="mt-0.5 block text-[13px] leading-relaxed text-ink-soft">{c.note}</span>
+                  )}
                 </span>
                 <ExternalLinkIcon className="mt-1 h-3.5 w-3.5 shrink-0 text-ink-faint" aria-hidden="true" />
               </a>

@@ -17,7 +17,7 @@ export const metadata = {
 // has no /testing/ section; the real pages live under /laboratorys/.
 const OFFICIAL_TESTING_LINKS = getOfficialLinks("testing", "").map((l) => ({
   label: l.label,
-  description: l.note ?? "",
+  description: l.note,
   href: l.href,
 }));
 
@@ -155,7 +155,7 @@ export default function TestingPage() {
                     >
                       {s.label} <ExternalLinkIcon className="h-3.5 w-3.5" />
                     </a>
-                    <p className="text-[12.5px] text-ink-faint">{s.description}</p>
+                    {s.description && <p className="text-[12.5px] text-ink-faint">{s.description}</p>}
                   </li>
                 ))}
               </ul>

@@ -161,6 +161,7 @@ const LINKS: Record<string, OfficialLink[]> = {
     { label: "List of Laboratories", href: en("laboratorys/list-of-laboratories"), note: "Laboratories operated by BIS." },
     { label: "List of BIS Recognised / Empanelled Labs", href: en("laboratorys/list-of-bis-recognized-lab"), note: "Third-party labs recognised by BIS for product testing." },
     { label: "Testing facility & testing charges", href: en("laboratorys/testing-facility-and-testing-charges"), note: "What each facility tests, and what it costs." },
+    { label: "Request a testing service (Manak Online)", href: PORTALS.manak, note: "Submit a testing request through BIS's official portal." },
   ],
   "testing:laboratory-search": [
     { label: "List of Laboratories", href: en("laboratorys/list-of-laboratories") },
@@ -454,6 +455,17 @@ const LINKS: Record<string, OfficialLink[]> = {
 };
 
 /**
+ * Official channels for the Contact page. Not a placeholder section, but kept
+ * here so every official URL in the app has one home and one provenance rule.
+ */
+export const CONTACT_CHANNELS: OfficialLink[] = [
+  { label: "Enquiry related to BIS activities", href: en("directory/enquiry"), note: "Who to contact for standards, certification, testing, or training questions." },
+  { label: "Online complaint registration", href: en("consumer-overview/online-complaint-registration"), note: "File a complaint about a product carrying the ISI mark or a hallmark." },
+  { label: "BIS directory", href: en("directory/directory"), note: "Head office, regional, branch, and laboratory contacts." },
+  { label: "Regional offices", href: en("directory/regional-offices"), note: "Addresses and contacts for BIS regional offices." },
+];
+
+/**
  * Verified official destinations for a placeholder page. Returns `[]` when
  * no official page genuinely answers the item — callers should then say so
  * rather than linking somewhere unrelated.
@@ -464,7 +476,8 @@ export function getOfficialLinks(sectionKey: string, slug: string): OfficialLink
 
 /** Every distinct URL in this file, for the link checker and its test. */
 export function allOfficialUrls(): string[] {
-  return [...new Set(Object.values(LINKS).flat().map((l) => l.href))].sort();
+  const all = [...Object.values(LINKS).flat(), ...CONTACT_CHANNELS];
+  return [...new Set(all.map((l) => l.href))].sort();
 }
 
 export const OFFICIAL_LINKS = LINKS;

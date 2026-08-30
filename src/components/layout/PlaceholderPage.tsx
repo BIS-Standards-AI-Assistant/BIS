@@ -79,7 +79,10 @@ function PlaceholderPageBody({ crumbs, title, description, links = [] }: Placeho
                   className="flex items-start justify-between gap-4 px-5 py-4 transition-colors hover:bg-surface-alt"
                 >
                   <span className="min-w-0">
-                    <span className="block text-[14px] font-semibold text-blue">{link.label}</span>
+                    <span className="block text-[14px] font-semibold text-blue">
+                      {link.label}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </span>
                     {link.note && (
                       <span className="mt-0.5 block text-[13px] leading-relaxed text-ink-soft">{link.note}</span>
                     )}

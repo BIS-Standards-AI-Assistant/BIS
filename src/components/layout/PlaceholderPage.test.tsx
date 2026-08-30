@@ -79,6 +79,24 @@ describe("PlaceholderPage", () => {
     expect(screen.getByText("manakonline.in")).toBeInTheDocument();
   });
 
+  test("tells screen-reader users that official sources open in a new tab", () => {
+    render(
+      <LanguageProvider>
+        <PlaceholderPage
+          crumbs={[{ label: "Certification", href: "/certification" }]}
+          title="Hallmarking"
+          description="Gold and silver hallmarking under BIS."
+          links={[
+            { label: "Hallmarking Overview", href: "https://www.bis.gov.in/hallmarking-overview/?lang=en" },
+            { label: "List of Hallmarking Centres", href: "https://www.bis.gov.in/hallmarking-overview/hallmarking-centre/?lang=en" },
+          ]}
+        />
+      </LanguageProvider>,
+    );
+    // Every external link carries the warning, not just the first.
+    expect(screen.getAllByText("(opens in a new tab)")).toHaveLength(2);
+  });
+
   test("without links, says nothing is available rather than inventing a destination", () => {
     renderPlaceholder();
     expect(screen.queryByText("Official BIS sources")).not.toBeInTheDocument();
