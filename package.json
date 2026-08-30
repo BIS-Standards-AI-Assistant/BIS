@@ -22,7 +22,8 @@
     "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
     "data:discover": "tsx scripts/data-discover.ts",
     "data:migrate-existing": "dotenv -e .env.local -- tsx scripts/data-migrate-existing.ts",
-    "data:report": "dotenv -e .env.local -- tsx scripts/data-report.ts"
+    "data:report": "dotenv -e .env.local -- tsx scripts/data-report.ts",
+    "tools:smoke": "dotenv -e .env.local -- tsx scripts/tools-smoke.ts"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.86",

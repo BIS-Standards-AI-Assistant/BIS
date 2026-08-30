@@ -207,3 +207,60 @@ Get OpenRouter credit topped up (even a small amount) and re-run
 `scripts/smoke-test-pipeline.ts` for the same 3 queries already
 deterministic-verified this session — that closes the single largest
 unverified gap (`generateAnswer()` in live production) with minimal spend.
+
+## Intelligence Engine V1 — Phase 0-2 (this session, prompts/rag.md)
+
+Full audit in `docs/INTELLIGENCE_ENGINE_AUDIT.md`, written before any code
+changed. Key finding: the `relationships` table (the actual knowledge-graph
+edges) has 0 rows — no extraction script has ever populated it — so any
+graph *query* engine (`getNeighbors`, `findPath`, etc.) would return nothing
+for every real call. Per the audit's own recommendation and this project's
+established pattern of scoping specs down rather than attempting them
+superficially, only the two phases that don't depend on graph data were
+implemented this pass:
+
+| Item | Status | Notes |
+|---|---|---|
+| Phase 0 — Repository audit | DONE | `docs/INTELLIGENCE_ENGINE_AUDIT.md` |
+| Phase 1 — Query planner (`src/lib/query-planner.ts`) | DONE | Deterministic plan-type (14 types) + complexity (SIMPLE/MODERATE/COMPLEX) classification, no LLM call; 14 tests |
+| Phase 2 — Domain tool registry (`src/lib/tools/`) | DONE | `resolveStandard`, `getStandard`, `searchStandards`, `findApplicableStandards`, `checkMandatoryStatus`, `findQCO`, `getCertificationScheme` — all deterministic, all return `{status: "not_found"}` rather than a guess; contract tests (registry timeout/validation/error handling) + a live smoke script (`npm run tools:smoke`) exercising every tool against the real DB |
+| Phase 3 (graph relational layer) | Already DONE from the prior `dataAcquisition.md` milestone | Unchanged |
+| Phase 4 (graph query engine) | Deliberately NOT attempted | Would query 0 relationship rows |
+| Phases 5-15 (multi-channel retrieval orchestration, claim objects, agent orchestrator, workflow intelligence, caching, 100-query eval, observability, frontend) | NOT attempted this pass | See audit §4 gap table |
+
+**Real bug found and fixed along the way**: `CERTIFICATION_KEYWORDS` in
+`src/lib/coverage-analysis.ts` was `/\b(certif|licen[cs]e|scheme|mark|
+registration)\b/i` — `\bcertif\b` requires a word boundary immediately
+after "certif", which never occurs (the word always continues:
+"certif**ication**", "certif**icate**"), so it silently never matched the
+single most common way certification is actually written in evidence
+text. This was live in the query pipeline's coverage analysis, not a new
+bug — found while writing `query-planner.test.ts` against a realistic
+certification sentence, not by design. Fixed to `/\b(certif\w*|
+licen[cs]e\w*|scheme|mark|registration)\b/i` and covered by a new
+regression test (`src/lib/coverage-analysis.test.ts`).
+
+The new tools do not query `certification_schemes`/nothing in
+`relationships` — `getCertificationScheme` deliberately reuses the
+existing JSON-backed `findCertificationSchemeForStandard` (already the
+UI's source of truth) rather than the DB table, since the audit found
+`certification_schemes` has no direct standard foreign key (only an
+indirect shared-`sourceId` link via `qcos`) — see audit §2 for the
+duplicated-data risk this leaves unresolved.
+
+Verification: `npm run verify` green (162 vitest tests + 4 ML test files,
+lint clean, typecheck clean, production build clean); `npm run
+eval:retrieval` unchanged at 12/12 recall, 8/8 no-false-match against the
+dev server; `npm run tools:smoke` run live against the real Neon DB,
+confirming both the positive paths (25 real standards, a real QCO, a real
+certification scheme) and the anti-fabrication paths (unknown identifier →
+`not_found`; a real standard with no QCO row → `hasVerifiedQco: false`,
+never a false "voluntary" claim).
+
+Neither the query planner nor the tool registry is wired into
+`/api/v1/query` yet — that route's existing pipeline (intent → retrieval →
+evidence → grounding → confidence → LLM) is untouched and still the one
+actually serving requests. Wiring the planner/tools into that route, and
+building the agent orchestrator that would actually call tools by name,
+is the natural next phase once a relationship-extraction script exists to
+make Phase 4 worthwhile too.
