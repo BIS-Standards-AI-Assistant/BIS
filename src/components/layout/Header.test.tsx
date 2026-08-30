@@ -70,4 +70,21 @@ describe("Header", () => {
     fireEvent.click(screen.getByLabelText("Search the site"));
     expect(screen.getByPlaceholderText("Search BIS Standards, Services & Documents")).toBeInTheDocument();
   });
+
+  test("pressing '/' opens the search overlay", () => {
+    renderHeader();
+    expect(screen.queryByPlaceholderText("Search BIS Standards, Services & Documents")).not.toBeInTheDocument();
+    fireEvent.keyDown(document, { key: "/" });
+    expect(screen.getByPlaceholderText("Search BIS Standards, Services & Documents")).toBeInTheDocument();
+  });
+
+  test("pressing '/' while typing in a text field does not open search (doesn't hijack the character)", () => {
+    renderHeader();
+    const input = document.createElement("input");
+    document.body.appendChild(input);
+    input.focus();
+    fireEvent.keyDown(input, { key: "/" });
+    expect(screen.queryByPlaceholderText("Search BIS Standards, Services & Documents")).not.toBeInTheDocument();
+    document.body.removeChild(input);
+  });
 });

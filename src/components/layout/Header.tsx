@@ -32,6 +32,15 @@ export function Header() {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") setOpenSection(null);
+      // "/" opens global search, matching common site-search conventions —
+      // but never when the user is already typing in a text field, so it
+      // doesn't hijack a literal "/" character mid-query elsewhere on the page.
+      const target = e.target as HTMLElement;
+      const isTyping = target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable;
+      if (e.key === "/" && !isTyping) {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
     }
     function onClickOutside(e: MouseEvent) {
       if (navRef.current && !navRef.current.contains(e.target as Node)) setOpenSection(null);

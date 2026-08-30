@@ -47,13 +47,40 @@ genuinely discusses sampling/testing throughout. This is a real match on
 real text, not fabrication, but it's a coarse heuristic, not a proper
 information-architecture parse.
 
+## Global search overhaul (this session, prompts/globalSearch.md — Milestone C)
+
+Scoped to the search *overlay*'s typeahead, not a full grouped multi-vertical
+results page (there isn't yet distinct indexed data for separate
+Certification/Testing/Resources search verticals — building that grouping
+would mean either empty categories or fabricated ones, both explicitly
+prohibited by the prompt itself).
+
+| Item | Status | Notes |
+|---|---|---|
+| Explicit search state machine (`src/lib/search-state.ts`) | DONE | Discriminated union (`empty/focused/typing/suggestions/no_results/offline`) replaces scattered booleans in `SearchOverlay` |
+| Deterministic exact-identifier suggestions | DONE | Reuses `resolveStandardIds` directly (pure regex, no duplicate parser) — instant, no API call, no LLM |
+| Real debounced typeahead (300ms) against `/api/v1/search` | DONE | Deduped to one suggestion per distinct standard; never fabricates a suggestion the API didn't return |
+| Keyboard navigation (↑/↓/Enter) | DONE | Selecting a suggestion navigates straight to its Standard Passport |
+| Global `/` shortcut to open search | DONE | Suppressed while focused in any input/textarea/contenteditable |
+| Honest no-results typeahead state | DONE | "No matching BIS standards found... press Enter to search anyway" — never silently empty, never a fabricated result |
+| `standards-id.ts` regression tests | DONE | Was flagged missing in the last two milestone reports; 12 tests added, including the exact Sec 6 / Sec 26 case named in the prompt |
+| Grouped multi-vertical results page (Standards/Certification/Testing/Resources sections) | NOT ATTEMPTED | No separate indexed search verticals exist yet — the existing `/search` and homepage query flow already show certification/testing info per-standard via `RecommendationCard`/`CoveragePanel`/`ConflictPanel`, which this session did not duplicate into the overlay |
+| Full accessibility/responsive/dark-mode audit passes | NOT PERFORMED | No browser tooling available this session |
+
+**Known limitation, found while building this**: `/api/v1/search` (used for
+typeahead) has no abstention behavior — unlike `/api/v1/query`'s
+engine-derived grounding, hybrid semantic retrieval always returns *some*
+nearest-neighbor candidates even for a nonsense query (verified live: a
+deliberately fake product string still returned 5 results). The suggestions
+never claim relevance/grounding/confidence for these — they only show the
+standard number and title exactly as retrieved — but a very off-topic query
+can still surface a loosely-related suggestion in the overlay. This is a
+pre-existing property of `/api/v1/search`, not something this milestone
+introduced, but it's now more visible because typeahead calls it on every
+keystroke.
+
 ## Not attempted this session (scope explicitly deferred, not silently dropped)
 
-- **Global search overhaul** (search state machine, grouped
-  standards/certification/testing/resources results, typed suggestions
-  from indexed data) — this was one of three milestone objectives handed
-  down this session; only the Standard Passport (milestone A) was built
-  to completion. Recommended as the next milestone.
 - **Testing discovery page upgrade** — `/testing` remains the existing
   honest placeholder; no dedicated testing search/discovery UI was built.
 - Dedicated responsive/accessibility/dark-mode audit passes — not
