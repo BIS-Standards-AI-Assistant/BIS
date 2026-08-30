@@ -45,14 +45,14 @@ export default function SearchPage() {
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
       <main className="flex-1">
-        <div className="mx-auto max-w-3xl px-6 py-14">
-          <h1 className="text-2xl font-semibold tracking-tight text-ink">Search Indian Standards</h1>
+        <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-14">
+          <h1 className="text-xl font-semibold tracking-tight text-ink sm:text-2xl">Search Indian Standards</h1>
           <p className="mt-2 text-sm text-ink-soft">
             Search directly by product, standard number, or topic across the ingested BIS
             document corpus. This is keyword and semantic retrieval only — no generated answer.
           </p>
 
-          <form onSubmit={runSearch} className="mt-6 flex gap-2">
+          <form onSubmit={runSearch} className="mt-6 flex flex-col gap-2 sm:flex-row">
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -63,7 +63,7 @@ export default function SearchPage() {
             <button
               type="submit"
               disabled={loading || !query.trim()}
-              className="rounded-sm bg-navy px-5 py-2.5 text-sm font-medium text-white hover:bg-navy-deep disabled:opacity-40"
+              className="w-full rounded-sm bg-navy px-5 py-2.5 text-sm font-medium text-white hover:bg-navy-deep disabled:opacity-40 sm:w-auto"
             >
               Search
             </button>

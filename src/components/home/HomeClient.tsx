@@ -146,7 +146,7 @@ export function HomeClient() {
         )}
 
         {!showHomepage && (
-          <div className="mx-auto max-w-3xl px-6 py-14">
+          <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-14">
             <SearchHero
               key={activeQuery}
               onSubmit={runQuery}
@@ -170,12 +170,12 @@ export function HomeClient() {
 
             {result && (
               <div className="mt-10 space-y-8">
-                <section className="flex items-start justify-between gap-4 rounded-lg border border-border bg-surface-raised p-5">
-                  <div>
+                <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface-raised p-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4 sm:p-5">
+                  <div className="min-w-0">
                     <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Summary</h2>
                     <p className="mt-2 text-[15px] leading-relaxed text-ink">{result.answer}</p>
                   </div>
-                  <div className="shrink-0 pt-5">
+                  <div className="shrink-0 sm:pt-5">
                     <ConfidenceBadge confidence={result.confidence} />
                   </div>
                 </section>

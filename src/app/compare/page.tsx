@@ -72,7 +72,7 @@ export default async function ComparePage({
       <div className="flex min-h-screen flex-col bg-surface">
         <Header />
         <main className="flex-1">
-          <div className="mx-auto max-w-3xl px-6 py-14">
+          <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-14">
             <h1 className="text-2xl font-semibold tracking-tight text-ink">Compare standards</h1>
             <p className="mt-2 text-sm text-ink-soft">
               Select two or more standards to see their sourced metadata side by side.
@@ -99,7 +99,7 @@ export default async function ComparePage({
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
       <main className="flex-1">
-        <div className="mx-auto max-w-4xl px-6 py-14">
+        <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-14">
           <h1 className="text-2xl font-semibold tracking-tight text-ink">Compare standards</h1>
           <p className="mt-2 text-sm text-ink-soft">
             Structured differences sourced directly from each standard&apos;s indexed metadata —
