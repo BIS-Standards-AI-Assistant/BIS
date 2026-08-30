@@ -1,13 +1,11 @@
-"use client";
-
 import Link from "next/link";
-import { NavBar } from "@/components/layout/NavBar";
+import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
 export default function ComingSoon() {
   return (
     <div className="flex min-h-screen flex-col bg-surface">
-      <NavBar />
+      <Header />
       
       <main className="flex-1 flex items-center justify-center px-6 py-16">
         <div className="max-w-xl w-full text-center p-8 md:p-10 rounded-2xl border border-border bg-surface-raised shadow-sm">

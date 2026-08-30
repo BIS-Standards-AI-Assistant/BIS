@@ -17,6 +17,8 @@ export default async function EServicesSubPage({ params }: { params: Promise<{ s
       ]}
       title={found.item.label}
       description={found.item.description}
+      portalHref="https://www.manakonline.in"
+      portalLabel="Open BIS Manak Online Portal"
     />
   );
 }
