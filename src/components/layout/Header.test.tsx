@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import { Header } from "./Header";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 
@@ -55,6 +55,20 @@ describe("Header", () => {
     fireEvent.click(screen.getByText("Testing"));
     expect(screen.queryByText("Hallmarking")).not.toBeInTheDocument();
     expect(screen.getByText("Laboratory Search")).toBeInTheDocument();
+  });
+
+  test("mobile menu: Standards placeholder items link under /standards/explore, not /standards", () => {
+    // Header.tsx has its own, separate link-generation branch for the
+    // mobile menu (MegaMenu.tsx renders the desktop version). Both used to
+    // independently re-derive a nav item's href and both got the Standards
+    // exception wrong, so this needs its own assertion rather than trusting
+    // MegaMenu's coverage to imply this branch is also correct.
+    renderHeader();
+    fireEvent.click(screen.getByLabelText("Open menu"));
+    const mobileNav = within(screen.getByRole("navigation", { name: "Primary mobile" }));
+    fireEvent.click(mobileNav.getByRole("button", { name: "Standards" }));
+    const explorer = mobileNav.getByText("Standard Explorer").closest("a")!;
+    expect(explorer).toHaveAttribute("href", "/standards/explore/explorer");
   });
 
   test("Escape key closes an open mega menu", () => {

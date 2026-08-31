@@ -7,7 +7,7 @@ import { ChevronDownIcon, MenuIcon, CloseIcon, SearchIcon } from "@/components/u
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { MegaMenu } from "@/components/layout/MegaMenu";
 import { SearchOverlay } from "@/components/layout/SearchOverlay";
-import { NAV_SECTIONS, type NavSection } from "@/lib/navigation";
+import { NAV_SECTIONS, navItemHref, type NavSection } from "@/lib/navigation";
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -161,10 +161,7 @@ export function Header() {
                               {group.items.map((navItem) => (
                                 <li key={navItem.label}>
                                   <Link
-                                    href={
-                                      navItem.href ??
-                                      (navItem.slug ? `${item.section!.rootHref}/${navItem.slug}` : item.section!.rootHref)
-                                    }
+                                    href={navItemHref(item.section!, navItem)}
                                     onClick={() => setMobileOpen(false)}
                                     className="block py-1 text-[13.5px] text-ink-soft hover:text-blue"
                                   >
