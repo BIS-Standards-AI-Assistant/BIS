@@ -14,6 +14,7 @@
     "test:ml": "tsx scripts/test-query-normalization.ts && tsx scripts/test-evidence-aggregation.ts && tsx scripts/test-grounding-pipeline.ts && tsx scripts/test-answer-schema-validation.ts",
     "test:unit": "vitest run",
     "test": "npm run test:ml && npm run test:unit",
+    "links:check": "tsx scripts/check-official-links.ts",
     "eval:retrieval": "tsx scripts/eval-retrieval.ts",
     "eval:reranker": "dotenv -e .env.local -- tsx scripts/eval-reranker.ts",
     "eval:generation": "tsx scripts/eval-generation.ts",

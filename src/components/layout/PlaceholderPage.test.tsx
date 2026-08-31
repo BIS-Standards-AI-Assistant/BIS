@@ -41,7 +41,7 @@ describe("PlaceholderPage", () => {
 
   test("honestly labels itself as not-yet-available, never fabricating content", () => {
     renderPlaceholder();
-    expect(screen.getByText("Not yet available in this system")).toBeInTheDocument();
+    expect(screen.getByText("Not covered by this system yet")).toBeInTheDocument();
     expect(screen.getByText(/honest placeholder/i)).toBeInTheDocument();
   });
 
@@ -51,27 +51,97 @@ describe("PlaceholderPage", () => {
     expect(screen.getByText("Ask about a Standard").closest("a")).toHaveAttribute("href", "/");
   });
 
-  test("renders a portal link when portalHref is provided", () => {
+  test("renders every verified official source with its host and note", () => {
     render(
       <LanguageProvider>
         <PlaceholderPage
           crumbs={[{ label: "e-Services", href: "/e-services" }]}
           title="Apply for Certification"
           description="Start a certification application."
-          portalHref="https://www.manakonline.in"
-          portalLabel="Open BIS Manak Online Portal"
+          links={[
+            { label: "Apply for a licence", href: "https://www.bis.gov.in/apply-for-licences/?lang=en" },
+            { label: "Manak Online", href: "https://www.manakonline.in", note: "BIS e-services portal." },
+          ]}
         />
       </LanguageProvider>,
     );
-    const link = screen.getByText("Open BIS Manak Online Portal").closest("a");
-    expect(link).toHaveAttribute("href", "https://www.manakonline.in");
-    expect(link).toHaveAttribute("target", "_blank");
-    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+
+    const first = screen.getByText("Apply for a licence").closest("a");
+    expect(first).toHaveAttribute("href", "https://www.bis.gov.in/apply-for-licences/?lang=en");
+    expect(first).toHaveAttribute("target", "_blank");
+    expect(first).toHaveAttribute("rel", "noopener noreferrer");
+
+    expect(screen.getByText("Manak Online").closest("a")).toHaveAttribute("href", "https://www.manakonline.in");
+    expect(screen.getByText("BIS e-services portal.")).toBeInTheDocument();
+
+    // The destination host is shown so the user knows where they are going.
+    expect(screen.getByText("bis.gov.in")).toBeInTheDocument();
+    expect(screen.getByText("manakonline.in")).toBeInTheDocument();
   });
 
-  test("does not render a portal link when portalHref is omitted", () => {
+  test("renders its chrome in Hindi when Hindi is selected", () => {
+    // LanguageProvider reads the choice from localStorage.
+    window.localStorage.setItem("bis-lang", "hi");
+    try {
+      render(
+        <LanguageProvider>
+          <PlaceholderPage
+            crumbs={[{ label: "Certification", href: "/certification" }]}
+            title="Hallmarking"
+            description="Gold and silver hallmarking under BIS."
+            links={[{ label: "Hallmarking Overview", href: "https://www.bis.gov.in/hallmarking-overview/?lang=en" }]}
+          />
+        </LanguageProvider>,
+      );
+
+      expect(screen.getByText("आधिकारिक बीआईएस स्रोत")).toBeInTheDocument();
+      expect(screen.getByText("यह जानकारी अभी इस प्रणाली में उपलब्ध नहीं है")).toBeInTheDocument();
+      expect(screen.getByText("(नए टैब में खुलता है)")).toBeInTheDocument();
+
+      // The link label is the name of a real English BIS page and must NOT be
+      // translated — doing so would misdescribe where the link goes.
+      expect(screen.getByText("Hallmarking Overview")).toBeInTheDocument();
+    } finally {
+      window.localStorage.removeItem("bis-lang");
+    }
+  });
+
+  test("tells screen-reader users that official sources open in a new tab", () => {
+    render(
+      <LanguageProvider>
+        <PlaceholderPage
+          crumbs={[{ label: "Certification", href: "/certification" }]}
+          title="Hallmarking"
+          description="Gold and silver hallmarking under BIS."
+          links={[
+            { label: "Hallmarking Overview", href: "https://www.bis.gov.in/hallmarking-overview/?lang=en" },
+            { label: "List of Hallmarking Centres", href: "https://www.bis.gov.in/hallmarking-overview/hallmarking-centre/?lang=en" },
+          ]}
+        />
+      </LanguageProvider>,
+    );
+    // Every external link carries the warning, not just the first.
+    expect(screen.getAllByText("(opens in a new tab)")).toHaveLength(2);
+  });
+
+  test("without links, says nothing is available rather than inventing a destination", () => {
     renderPlaceholder();
-    expect(screen.queryByText("Open BIS Manak Online Portal")).not.toBeInTheDocument();
-    expect(screen.queryByText("Use on BIS Portal")).not.toBeInTheDocument();
+    expect(screen.queryByText("Official BIS sources")).not.toBeInTheDocument();
+    expect(screen.getByText(/honest placeholder/i)).toBeInTheDocument();
+  });
+
+  test("with links, drops the placeholder wording in favour of the real sources", () => {
+    render(
+      <LanguageProvider>
+        <PlaceholderPage
+          crumbs={[{ label: "Certification", href: "/certification" }]}
+          title="Fees & Charges"
+          description="What BIS certification costs."
+          links={[{ label: "Product Certification Fee", href: "https://www.bis.gov.in/x/?lang=en" }]}
+        />
+      </LanguageProvider>,
+    );
+    expect(screen.getByText("Official BIS sources")).toBeInTheDocument();
+    expect(screen.queryByText(/honest placeholder/i)).not.toBeInTheDocument();
   });
 });

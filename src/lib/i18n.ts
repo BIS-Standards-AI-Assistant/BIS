@@ -66,6 +66,24 @@ export interface Dictionary {
     colLast: string;
   };
   whatsnew: { heading: string; viewAll: string };
+  /**
+   * Chrome for the placeholder pages. The official-source link labels
+   * themselves are deliberately NOT translated — they name real English pages
+   * on bis.gov.in, and renaming them in Hindi would misdescribe where the
+   * link goes.
+   */
+  placeholder: {
+    heading: string;
+    bodyWithSources: string;
+    bodyWithoutSources: string;
+    sourcesHeading: string;
+    sourcesNote: string;
+    opensNewTab: string;
+    canDoHeading: string;
+    browseStandards: string;
+    askAbout: string;
+    breadcrumbHome: string;
+  };
   quicklinks: { heading: string };
   footer: {
     ministryLine1: string;
@@ -129,6 +147,20 @@ const en: Dictionary = {
     colLast: "Last Searched",
   },
   whatsnew: { heading: "What's New", viewAll: "View all" },
+  placeholder: {
+    heading: "Not covered by this system yet",
+    bodyWithSources:
+      "This system doesn't hold this information itself, so rather than show you an invented version, it points you at the official BIS pages that do.",
+    bodyWithoutSources:
+      "This section is part of the BIS information architecture but isn't populated with real content here yet. We'd rather show you an honest placeholder than invented details.",
+    sourcesHeading: "Official BIS sources",
+    sourcesNote: "These open on official BIS websites. This system does not mirror or interpret their content.",
+    opensNewTab: "(opens in a new tab)",
+    canDoHeading: "What this system can do",
+    browseStandards: "Browse Standards",
+    askAbout: "Ask about a Standard",
+    breadcrumbHome: "Home",
+  },
   quicklinks: { heading: "Quick Links" },
   footer: {
     ministryLine1: "MINISTRY OF CONSUMER AFFAIRS, FOOD & PUBLIC DISTRIBUTION",
@@ -197,6 +229,21 @@ const hi: Dictionary = {
     colLast: "प्रकार",
   },
   whatsnew: { heading: "ज्ञान आधार में शामिल मानक", viewAll: "सभी देखें" },
+  placeholder: {
+    heading: "यह जानकारी अभी इस प्रणाली में उपलब्ध नहीं है",
+    bodyWithSources:
+      "यह जानकारी इस प्रणाली में संग्रहीत नहीं है। अनुमानित विवरण दिखाने के बजाय, यह पृष्ठ आपको बीआईएस के आधिकारिक पृष्ठों तक पहुंचाता है जहां यह जानकारी उपलब्ध है।",
+    bodyWithoutSources:
+      "यह अनुभाग बीआईएस की सूचना संरचना का हिस्सा है, किंतु यहां अभी वास्तविक सामग्री उपलब्ध नहीं है। मनगढ़ंत विवरण दिखाने के बजाय हम स्पष्ट रूप से यह बताना उचित समझते हैं।",
+    sourcesHeading: "आधिकारिक बीआईएस स्रोत",
+    sourcesNote:
+      "ये लिंक बीआईएस की आधिकारिक वेबसाइटों पर खुलते हैं। यह प्रणाली उनकी सामग्री की प्रतिलिपि या व्याख्या नहीं करती।",
+    opensNewTab: "(नए टैब में खुलता है)",
+    canDoHeading: "यह प्रणाली क्या कर सकती है",
+    browseStandards: "मानक ब्राउज़ करें",
+    askAbout: "किसी मानक के बारे में पूछें",
+    breadcrumbHome: "होम",
+  },
   quicklinks: { heading: "त्वरित लिंक" },
   footer: {
     ministryLine1: "उपभोक्ता मामले, खाद्य एवं सार्वजनिक वितरण मंत्रालय",

@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import Link from "next/link";
 import { ExternalLinkIcon, FlaskIcon, SearchIcon } from "@/components/ui/icons";
+import { getOfficialLinks } from "@/lib/official-links";
 
 export const dynamic = "force-dynamic";
 
@@ -11,28 +12,14 @@ export const metadata = {
     "Find BIS testing information, test methods, recognized laboratories, and testing requirements from ingested Indian Standards.",
 };
 
-const OFFICIAL_TESTING_LINKS = [
-  {
-    label: "BIS Laboratories",
-    description: "Laboratories operated directly by BIS across India.",
-    href: "https://www.bis.gov.in/testing/bis-laboratories/?lang=en",
-  },
-  {
-    label: "Recognized / Empanelled Laboratories",
-    description: "Third-party labs recognized by BIS for product testing.",
-    href: "https://www.bis.gov.in/testing/empanelled-laboratories/?lang=en",
-  },
-  {
-    label: "BIS Testing Services",
-    description: "Services offered by BIS testing facilities.",
-    href: "https://www.bis.gov.in/testing/?lang=en",
-  },
-  {
-    label: "Request Testing Service",
-    description: "Submit a testing request through BIS's official portal.",
-    href: "https://www.manakonline.in",
-  },
-];
+// Sourced from the verified-link registry so these can never drift back into
+// dead URLs. The previous hardcoded /testing/* links were soft 404s — bis.gov.in
+// has no /testing/ section; the real pages live under /laboratorys/.
+const OFFICIAL_TESTING_LINKS = getOfficialLinks("testing", "").map((l) => ({
+  label: l.label,
+  description: l.note,
+  href: l.href,
+}));
 
 const WHAT_YOU_CAN_DO = [
   {
@@ -55,7 +42,7 @@ const WHAT_YOU_CAN_DO = [
     icon: ExternalLinkIcon,
     title: "Find official BIS laboratories",
     body: "Find BIS-recognized laboratories for product testing via the official BIS portal.",
-    href: "https://www.bis.gov.in/testing/?lang=en",
+    href: "https://www.bis.gov.in/laboratorys/testing-overview/?lang=en",
     cta: "Visit BIS Testing →",
     internal: false,
   },
@@ -168,7 +155,7 @@ export default function TestingPage() {
                     >
                       {s.label} <ExternalLinkIcon className="h-3.5 w-3.5" />
                     </a>
-                    <p className="text-[12.5px] text-ink-faint">{s.description}</p>
+                    {s.description && <p className="text-[12.5px] text-ink-faint">{s.description}</p>}
                   </li>
                 ))}
               </ul>
