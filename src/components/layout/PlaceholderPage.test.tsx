@@ -95,7 +95,7 @@ describe("PlaceholderPage", () => {
       );
 
       expect(screen.getByText("आधिकारिक बीआईएस स्रोत")).toBeInTheDocument();
-      expect(screen.getByText("यह जानकारी अभी इस प्रणाली में उपलब्ध नहीं है")).toBeInTheDocument();
+      expect(screen.getByText("यह प्रणाली में नहीं है — बीआईएस इसे यहां प्रकाशित करता है")).toBeInTheDocument();
       expect(screen.getByText("(नए टैब में खुलता है)")).toBeInTheDocument();
 
       // The link label is the name of a real English BIS page and must NOT be
@@ -143,5 +143,10 @@ describe("PlaceholderPage", () => {
     );
     expect(screen.getByText("Official BIS sources")).toBeInTheDocument();
     expect(screen.queryByText(/honest placeholder/i)).not.toBeInTheDocument();
+
+    // A page with real sources must not read as empty: the "not covered"
+    // heading is for the true zero-links case only.
+    expect(screen.queryByText("Not covered by this system yet")).not.toBeInTheDocument();
+    expect(screen.getByText("Not built into this system — here's where BIS publishes it")).toBeInTheDocument();
   });
 });

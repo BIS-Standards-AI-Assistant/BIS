@@ -106,8 +106,10 @@ const LINKS: Record<string, OfficialLink[]> = {
     { label: "Know Your Standards — search by number or keyword", href: sp("know-your-standards"), note: "Find the specific standard first — clause text lives inside it." },
     { label: "Standards catalogue (BIS webstore)", href: PORTALS.catalogue, note: "Full clause-by-clause text is only available in the published standard itself." },
   ],
-  // Explains this system's own output — an outbound link would not answer it.
-  "standards:why-relevant": [],
+  // Deliberately no entry for "standards:why-relevant": that item explains
+  // this app's own UI (see src/components/standards/RelevanceExplainer.tsx)
+  // and never reaches PlaceholderPage or this registry at all — see the
+  // special case in src/app/standards/explore/[...slug]/page.tsx.
 
   // ------------------------------------------------------------ certification
   "certification:find": [

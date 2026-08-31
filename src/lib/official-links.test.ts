@@ -13,9 +13,19 @@ const OFFICIAL_HOSTS = [
 
 /**
  * Items that intentionally have no official destination, with the reason.
- * Anything else without links is a gap, not a decision.
+ * Anything else without links is a gap, not a decision. Currently empty —
+ * kept as a named mechanism for the next genuine case, rather than removed.
  */
-const INTENTIONALLY_EMPTY = new Set(["standards:why-relevant"]);
+const INTENTIONALLY_EMPTY = new Set<string>([]);
+
+/**
+ * Nav items that never reach PlaceholderPage/official-links at all, because
+ * they have bespoke real content instead of an external-link treatment.
+ * "standards:why-relevant" documents this app's own UI (see
+ * RelevanceExplainer.tsx) — no BIS page could answer that anyway, and it's
+ * special-cased in src/app/standards/explore/[...slug]/page.tsx.
+ */
+const BYPASSES_PLACEHOLDER = new Set(["standards:why-relevant"]);
 
 function placeholderItems() {
   const out: { key: string; label: string }[] = [];
@@ -26,7 +36,9 @@ function placeholderItems() {
         // An empty slug is the section's own landing page, which each section
         // owns (some are real pages); only sub-pages go through PlaceholderPage.
         if (!item.slug) continue;
-        out.push({ key: `${section.key}:${item.slug}`, label: item.label });
+        const key = `${section.key}:${item.slug}`;
+        if (BYPASSES_PLACEHOLDER.has(key)) continue;
+        out.push({ key, label: item.label });
       }
     }
   }
