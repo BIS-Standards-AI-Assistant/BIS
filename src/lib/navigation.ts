@@ -70,7 +70,7 @@ export const STANDARDS_SECTION: NavSection = {
         { label: "Standards Versions & Amendments", slug: "versions", description: "Track editions, revisions, and amendments to a standard over time." },
         { label: "Related Standards", slug: "related", description: "Standards connected to one another by scope, material, or reference." },
         { label: "Referenced Standards", slug: "referenced", description: "Other Indian Standards a given standard explicitly references." },
-        { label: "Clauses & Requirements", slug: "clauses", description: "Look up a specific clause or requirement directly." },
+        { label: "Clauses & Requirements", slug: "clauses", description: "Look up a specific clause or requirement directly. Standards already ingested into this system carry real clause-level evidence — browse them below to see it." },
       ],
     },
     {

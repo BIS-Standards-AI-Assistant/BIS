@@ -2,15 +2,31 @@
  * Verified official destinations for every placeholder section.
  *
  * Each entry points at a page that actually exists on an official BIS
- * property. Every URL in this file was checked by fetching it and reading
- * back a real page title on 2026-08-31 — bis.gov.in is a WordPress site that
- * serves soft 404s (HTTP 200 with an empty <title>) for unknown paths, so a
- * status code alone is not evidence a page exists. `scripts/check-official-links.ts`
- * re-runs that check; run it if these ever look stale.
+ * property. Two different verification methods are in play, because BIS
+ * runs two different kinds of site:
+ *
+ *  - www.bis.gov.in is WordPress. It serves soft 404s — HTTP 200 with an
+ *    empty <title> — for unknown paths, so a status code alone is not
+ *    evidence a page exists. Every www.bis.gov.in URL here was checked by
+ *    fetching it and reading back a real page title on 2026-08-31.
+ *    `scripts/check-official-links.ts` re-runs that check automatically.
+ *
+ *  - standards.bis.gov.in is a client-rendered Angular SPA. Every route
+ *    returns the identical static shell HTML with a generic title ("BIS -
+ *    Bureau of Indian Standards") regardless of whether the path is real,
+ *    so fetching it proves nothing — the title-check above cannot tell a
+ *    live route from a typo. Every standards.bis.gov.in URL here was instead
+ *    verified by rendering it in a real headless browser and reading the
+ *    actual page content on 2026-08-31 (see the render script this was
+ *    checked with — a one-off, not part of the automated suite). Because
+ *    that automated check can't reach these, `scripts/check-official-links.ts`
+ *    only confirms they still respond, and flags them separately for manual
+ *    re-verification rather than silently calling them OK.
  *
  * Rules for adding to this file:
- *  - Only URLs on bis.gov.in or an official BIS portal linked from bis.gov.in
- *    (manakonline.in, crsbis.in, standardsbis.bsbedge.com).
+ *  - Only URLs on bis.gov.in (including its standards.bis.gov.in subdomain)
+ *    or an official BIS portal linked from bis.gov.in (manakonline.in,
+ *    crsbis.in, standardsbis.bsbedge.com).
  *  - Never guess a URL from a pattern. Verify it, or leave the entry out.
  *  - An entry with no genuinely relevant official page gets `[]`. The
  *    placeholder then says so honestly rather than sending the user somewhere
@@ -26,6 +42,13 @@ export interface OfficialLink {
 
 const BIS = "https://www.bis.gov.in";
 const en = (path: string) => `${BIS}/${path}/?lang=en`;
+
+/**
+ * The standards.bis.gov.in portal — see the file header on why these are
+ * verified differently (render-checked, not fetch-checked).
+ */
+const STANDARDS_PORTAL = "https://standards.bis.gov.in/website";
+const sp = (path: string) => `${STANDARDS_PORTAL}/${path}`;
 
 /** Official BIS portals that are separate properties, linked from bis.gov.in. */
 export const PORTALS = {
@@ -44,37 +67,44 @@ export const PORTALS = {
 const LINKS: Record<string, OfficialLink[]> = {
   // ---------------------------------------------------------------- standards
   "standards:by-product": [
-    { label: "Know Your Standard", href: en("know-your-standard"), note: "BIS's own product-to-standard lookup." },
+    { label: "Know Your Standards — search by number or keyword", href: sp("know-your-standards"), note: "BIS's live search over published Indian Standards." },
     { label: "Products under Compulsory Certification", href: en("product-certification/products-under-compulsory-certification"), note: "Products that require a licence, with the governing standard." },
     { label: "Standards catalogue (BIS webstore)", href: PORTALS.catalogue, note: "Search and buy the full text of any Indian Standard." },
   ],
   "standards:by-industry": [
-    { label: "Standardization (Products & Methods)", href: en("standards/standardization-products-methods"), note: "How BIS organises standards work across sectors." },
-    { label: "Standards catalogue (BIS webstore)", href: PORTALS.catalogue },
+    { label: "Technical Departments", href: sp("technical-departments/department-list"), note: "BIS's 17 technical departments, each covering one industry — with their committees, panels, and working groups." },
+    { label: "Published Standards — department-wise classification", href: sp("published-standards/department-wise"), note: "Every published standard, browsable by the department (industry) that owns it." },
+    { label: "Standardization Cells", href: sp("standardization-cells"), note: "How each government ministry and industry association maps to BIS's standardization work." },
   ],
   "standards:by-material": [
+    { label: "Products under Compulsory Certification", href: en("product-certification/products-under-compulsory-certification"), note: "The compulsory list is organised by product/material (cement, steel bars, cookware, and so on)." },
     { label: "Standards catalogue (BIS webstore)", href: PORTALS.catalogue, note: "Browsable by subject and material." },
     { label: "Compendium of Indian Standards", href: en("compendium-of-indian-standards") },
   ],
   "standards:explorer": [
-    { label: "Know Your Standard", href: en("know-your-standard") },
+    { label: "Know Your Standards — search by number or keyword", href: sp("know-your-standards"), note: "BIS's own tool for finding a standard and its current status." },
+    { label: "Published Standards — department-wise classification", href: sp("published-standards/department-wise") },
     { label: "Standards catalogue (BIS webstore)", href: PORTALS.catalogue, note: "Scope, publication date, and full text for a given standard." },
   ],
   "standards:versions": [
-    { label: "Standards Under Development", href: en("standards/standard-formulation/standards-under-development"), note: "Drafts and revisions currently in progress." },
-    { label: "View Previous Editions", href: en("view-previous-editions"), note: "Superseded editions of published standards." },
+    { label: "Review of Standards", href: sp("review-of-standards"), note: "Which standards were reaffirmed, revised, or withdrawn, by department." },
+    { label: "WC Drafts", href: sp("wc-drafts"), note: "Wide Circulation Drafts currently open for public comment — the amendment pipeline in progress right now." },
+    { label: "Proposals for Standards", href: sp("proposals-for-standards"), note: "New work items proposed to each sectional committee." },
     { label: "Standards Watch", href: en("standardswatch"), note: "BIS's own change bulletin." },
   ],
   "standards:related": [
-    { label: "Standards catalogue (BIS webstore)", href: PORTALS.catalogue, note: "Each entry lists the standards it cross-refers to." },
+    { label: "Published Standards — department-wise classification", href: sp("published-standards/department-wise"), note: "Standards in the same technical department are usually the most closely related." },
+    { label: "Standards catalogue (BIS webstore)", href: PORTALS.catalogue, note: "Each standard's own text lists the other standards it cross-refers to." },
     { label: "Compendium of Indian Standards", href: en("compendium-of-indian-standards") },
   ],
   "standards:referenced": [
     { label: "Indian Standards referred in Government regulations", href: en("standards/indian-standards-referred-in-government-regulations"), note: "Standards given legal force by another ministry's rules." },
     { label: "National Building Code", href: en("standards/national-building-code"), note: "A code that references a large set of Indian Standards." },
+    { label: "Recognized SDOs", href: sp("sdo-list"), note: "Other Standards Developing Organisations BIS recognises and coordinates with." },
   ],
   "standards:clauses": [
-    { label: "Standards catalogue (BIS webstore)", href: PORTALS.catalogue, note: "Clause-level text is only available in the published standard itself." },
+    { label: "Know Your Standards — search by number or keyword", href: sp("know-your-standards"), note: "Find the specific standard first — clause text lives inside it." },
+    { label: "Standards catalogue (BIS webstore)", href: PORTALS.catalogue, note: "Full clause-by-clause text is only available in the published standard itself." },
   ],
   // Explains this system's own output — an outbound link would not answer it.
   "standards:why-relevant": [],

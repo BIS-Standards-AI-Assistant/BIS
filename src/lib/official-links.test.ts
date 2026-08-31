@@ -5,6 +5,7 @@ import { getOfficialLinks, allOfficialUrls, OFFICIAL_LINKS } from "@/lib/officia
 /** Hosts we accept: bis.gov.in and the official portals BIS itself links to. */
 const OFFICIAL_HOSTS = [
   "www.bis.gov.in",
+  "standards.bis.gov.in",
   "www.manakonline.in",
   "www.crsbis.in",
   "standardsbis.bsbedge.com",
