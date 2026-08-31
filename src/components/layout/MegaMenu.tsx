@@ -1,10 +1,5 @@
 import Link from "next/link";
-import type { NavSection } from "@/lib/navigation";
-
-function itemHref(section: NavSection, slug: string, href?: string): string {
-  if (href) return href;
-  return slug ? `${section.rootHref}/${slug}` : section.rootHref;
-}
+import { navItemHref, type NavSection } from "@/lib/navigation";
 
 interface MegaMenuProps {
   section: NavSection;
@@ -29,7 +24,7 @@ export function MegaMenu({ section, id }: MegaMenuProps) {
                 {group.items.map((item) => (
                   <li key={item.label}>
                     <Link
-                      href={itemHref(section, item.slug, item.href)}
+                      href={navItemHref(section, item)}
                       role="menuitem"
                       className="block text-[13.5px] leading-snug text-ink-soft transition-colors hover:text-blue"
                     >

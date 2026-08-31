@@ -60,7 +60,9 @@ function PlaceholderPageBody({ crumbs, title, description, links = [] }: Placeho
       <p className="mt-3 max-w-[62ch] text-[15px] leading-relaxed text-ink-soft">{description}</p>
 
       <div className="mt-8 rounded-xl border border-border bg-surface-alt px-6 py-5">
-        <p className="text-[13.5px] font-semibold text-navy">{t.placeholder.heading}</p>
+        <p className="text-[13.5px] font-semibold text-navy">
+          {hasLinks ? t.placeholder.headingWithSources : t.placeholder.headingWithoutSources}
+        </p>
         <p className="mt-1.5 max-w-[58ch] text-[13.5px] leading-relaxed text-ink-soft">
           {hasLinks ? t.placeholder.bodyWithSources : t.placeholder.bodyWithoutSources}
         </p>

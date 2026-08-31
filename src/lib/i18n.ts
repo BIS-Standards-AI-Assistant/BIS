@@ -73,7 +73,8 @@ export interface Dictionary {
    * link goes.
    */
   placeholder: {
-    heading: string;
+    headingWithSources: string;
+    headingWithoutSources: string;
     bodyWithSources: string;
     bodyWithoutSources: string;
     sourcesHeading: string;
@@ -148,7 +149,8 @@ const en: Dictionary = {
   },
   whatsnew: { heading: "What's New", viewAll: "View all" },
   placeholder: {
-    heading: "Not covered by this system yet",
+    headingWithSources: "Not built into this system — here's where BIS publishes it",
+    headingWithoutSources: "Not covered by this system yet",
     bodyWithSources:
       "This system doesn't hold this information itself, so rather than show you an invented version, it points you at the official BIS pages that do.",
     bodyWithoutSources:
@@ -230,7 +232,8 @@ const hi: Dictionary = {
   },
   whatsnew: { heading: "ज्ञान आधार में शामिल मानक", viewAll: "सभी देखें" },
   placeholder: {
-    heading: "यह जानकारी अभी इस प्रणाली में उपलब्ध नहीं है",
+    headingWithSources: "यह प्रणाली में नहीं है — बीआईएस इसे यहां प्रकाशित करता है",
+    headingWithoutSources: "यह जानकारी अभी इस प्रणाली में उपलब्ध नहीं है",
     bodyWithSources:
       "यह जानकारी इस प्रणाली में संग्रहीत नहीं है। अनुमानित विवरण दिखाने के बजाय, यह पृष्ठ आपको बीआईएस के आधिकारिक पृष्ठों तक पहुंचाता है जहां यह जानकारी उपलब्ध है।",
     bodyWithoutSources:

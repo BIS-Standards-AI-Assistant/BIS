@@ -32,4 +32,17 @@ describe("MegaMenu", () => {
     const hallmarking = screen.getByText("Hallmarking").closest("a")!;
     expect(hallmarking).toHaveAttribute("href", "/certification/hallmarking");
   });
+
+  test("Standards placeholder items link under /standards/explore, not /standards", () => {
+    // Regression test: /standards/[id] already occupies a single dynamic
+    // segment for real standard detail pages, so Standards is the one
+    // section whose placeholder pages live under a different base path.
+    // This previously linked to /standards/explorer, which 404'd because
+    // it matched the detail route instead.
+    render(<MegaMenu section={STANDARDS_SECTION} id="megamenu-standards" />);
+    const explorer = screen.getByText("Standard Explorer").closest("a")!;
+    expect(explorer).toHaveAttribute("href", "/standards/explore/explorer");
+    const byProduct = screen.getByText("Standards by Product").closest("a")!;
+    expect(byProduct).toHaveAttribute("href", "/standards/explore/by-product");
+  });
 });

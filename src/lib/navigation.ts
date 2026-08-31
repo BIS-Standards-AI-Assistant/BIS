@@ -33,12 +33,22 @@ export interface NavSection {
   rootDescription: string;
   groups: NavGroup[];
   cta?: { heading: string; body: string; ctaLabel: string; ctaHref: string };
+  /**
+   * Base path for this section's placeholder sub-pages, if it differs from
+   * rootHref. Only Standards needs this: /standards/[id] already occupies a
+   * single dynamic segment for real standard detail pages, and Next.js
+   * cannot have both /standards/[id] and /standards/[...slug] as siblings,
+   * so its placeholder catch-all lives at /standards/explore instead. Every
+   * other section's placeholders live directly under rootHref.
+   */
+  placeholderBasePath?: string;
 }
 
 export const STANDARDS_SECTION: NavSection = {
   key: "standards",
   label: "Standards",
   rootHref: "/standards",
+  placeholderBasePath: "/standards/explore",
   rootLabel: "Browse Standards",
   rootDescription: "Every Indian Standard currently in this system's knowledge base.",
   groups: [
@@ -60,7 +70,7 @@ export const STANDARDS_SECTION: NavSection = {
         { label: "Standards Versions & Amendments", slug: "versions", description: "Track editions, revisions, and amendments to a standard over time." },
         { label: "Related Standards", slug: "related", description: "Standards connected to one another by scope, material, or reference." },
         { label: "Referenced Standards", slug: "referenced", description: "Other Indian Standards a given standard explicitly references." },
-        { label: "Clauses & Requirements", slug: "clauses", description: "Look up a specific clause or requirement directly." },
+        { label: "Clauses & Requirements", slug: "clauses", description: "Look up a specific clause or requirement directly. Standards already ingested into this system carry real clause-level evidence — browse them below to see it." },
       ],
     },
     {
@@ -314,6 +324,20 @@ export const NAV_SECTIONS: NavSection[] = [
   ESERVICES_SECTION,
   ABOUT_SECTION,
 ];
+
+/**
+ * The single place that turns a nav item into a URL. A placeholder item
+ * (no `real`, no explicit `href`) resolves under the section's
+ * placeholderBasePath when set, or rootHref otherwise — MegaMenu and the
+ * mobile nav menu both call this rather than each re-deriving the path, so
+ * a section like Standards with a non-default placeholder base can't drift
+ * out of sync between the two menus again.
+ */
+export function navItemHref(section: NavSection, item: Pick<NavItem, "slug" | "href">): string {
+  if (item.href) return item.href;
+  if (!item.slug) return section.rootHref;
+  return `${section.placeholderBasePath ?? section.rootHref}/${item.slug}`;
+}
 
 export function findNavItem(sectionKey: string, slug: string[]): { section: NavSection; item: NavItem } | null {
   const section = NAV_SECTIONS.find((s) => s.key === sectionKey);
