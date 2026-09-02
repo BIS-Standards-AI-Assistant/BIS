@@ -6,6 +6,7 @@ import { getOfficialLinks, allOfficialUrls, OFFICIAL_LINKS } from "@/lib/officia
 const OFFICIAL_HOSTS = [
   "www.bis.gov.in",
   "standards.bis.gov.in",
+  "lims.bis.gov.in",
   "www.manakonline.in",
   "www.crsbis.in",
   "standardsbis.bsbedge.com",

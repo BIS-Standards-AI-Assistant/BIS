@@ -29,6 +29,7 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { allOfficialUrls } from "../src/lib/official-links";
+import { allFactSourceUrls } from "../src/lib/page-facts";
 
 const CONCURRENCY = 8;
 const TIMEOUT_MS = 30_000;
@@ -87,7 +88,7 @@ async function check(url: string): Promise<Result> {
   return last;
 }
 
-const OFFICIAL_HOST_RE = /https:\/\/(?:www\.bis\.gov\.in|standards\.bis\.gov\.in|www\.manakonline\.in|www\.crsbis\.in|standardsbis\.bsbedge\.com)[^"'`\s)]*/g;
+const OFFICIAL_HOST_RE = /https:\/\/(?:www\.bis\.gov\.in|standards\.bis\.gov\.in|lims\.bis\.gov\.in|www\.manakonline\.in|www\.crsbis\.in|standardsbis\.bsbedge\.com)[^"'`\s)]*/g;
 
 /**
  * Every official URL hardcoded anywhere in src/, not just the registry. The
@@ -115,7 +116,7 @@ function urlsInSource(dir: string, found = new Set<string>()): Set<string> {
 }
 
 async function main() {
-  const urls = [...new Set([...allOfficialUrls(), ...urlsInSource("src")])].sort();
+  const urls = [...new Set([...allOfficialUrls(), ...allFactSourceUrls(), ...urlsInSource("src")])].sort();
   const results: Result[] = [];
   let next = 0;
 
