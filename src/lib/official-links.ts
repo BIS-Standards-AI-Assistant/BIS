@@ -58,6 +58,8 @@ export const PORTALS = {
   crsRegister: "https://www.crsbis.in/BIS/registration-page.do",
   crsLabs: "https://www.crsbis.in/BIS/bis_lab.do",
   catalogue: "https://standardsbis.bsbedge.com/",
+  /** Laboratory Information Management System — BIS's live laboratory directory. */
+  lims: "https://lims.bis.gov.in",
 } as const;
 
 /**
@@ -196,6 +198,7 @@ const LINKS: Record<string, OfficialLink[]> = {
     { label: "Request a testing service (Manak Online)", href: PORTALS.manak, note: "Submit a testing request through BIS's official portal." },
   ],
   "testing:laboratory-search": [
+    { label: "LIMS — search a laboratory or search by IS number", href: PORTALS.lims, note: "BIS's live laboratory directory, with each lab's scope of testing and charges." },
     { label: "List of Laboratories", href: en("laboratorys/list-of-laboratories") },
     { label: "List of BIS Recognised / Empanelled Labs", href: en("laboratorys/list-of-bis-recognized-lab") },
     { label: "Laboratory directory", href: en("directory/laboratory") },
@@ -212,6 +215,7 @@ const LINKS: Record<string, OfficialLink[]> = {
   ],
   "testing:facilities": [
     { label: "Testing facility & testing charges", href: en("laboratorys/testing-facility-and-testing-charges") },
+    { label: "LIMS — laboratory scope and charges", href: PORTALS.lims },
     { label: "FMCS testing facilities", href: en("product-certification/fmcs-testing-facilities") },
   ],
   "testing:find-test-methods": [
@@ -232,6 +236,7 @@ const LINKS: Record<string, OfficialLink[]> = {
   ],
   "testing:recognized-laboratories": [
     { label: "List of BIS Recognised / Empanelled Labs", href: en("laboratorys/list-of-bis-recognized-lab") },
+    { label: "LIMS — apply for recognition", href: PORTALS.lims, note: "Applications are made here, not by email: Login → New Lab/Register Now." },
     { label: "How to apply for BIS recognition", href: en("laboratorys/how-to-apply-for-bis-recognition") },
     { label: "CRS recognised labs", href: PORTALS.crsLabs },
   ],

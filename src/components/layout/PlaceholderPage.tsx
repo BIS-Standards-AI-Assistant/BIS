@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ChevronRightIcon, ExternalLinkIcon } from "@/components/ui/icons";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import type { OfficialLink } from "@/lib/official-links";
+import type { PageFacts } from "@/lib/page-facts";
 
 interface Crumb {
   label: string;
@@ -22,21 +23,27 @@ interface PlaceholderPageProps {
    * it — the page then says so instead of linking somewhere unrelated.
    */
   links?: readonly OfficialLink[];
+  /**
+   * Sourced factual content from src/lib/page-facts.ts, so the page answers
+   * its own heading rather than only pointing elsewhere. Every point is
+   * attributed to the BIS page it was read from, with the date it was read.
+   */
+  facts?: PageFacts | null;
 }
 
-export function PlaceholderPage({ crumbs, title, description, links = [] }: PlaceholderPageProps) {
+export function PlaceholderPage({ crumbs, title, description, links = [], facts = null }: PlaceholderPageProps) {
   return (
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
       <main className="flex-1">
-        <PlaceholderPageBody crumbs={crumbs} title={title} description={description} links={links} />
+        <PlaceholderPageBody crumbs={crumbs} title={title} description={description} links={links} facts={facts} />
       </main>
       <Footer />
     </div>
   );
 }
 
-function PlaceholderPageBody({ crumbs, title, description, links = [] }: PlaceholderPageProps) {
+function PlaceholderPageBody({ crumbs, title, description, links = [], facts = null }: PlaceholderPageProps) {
   const { t } = useLanguage();
   const hasLinks = links.length > 0;
 
@@ -59,14 +66,46 @@ function PlaceholderPageBody({ crumbs, title, description, links = [] }: Placeho
       <h1 className="text-[28px] font-semibold tracking-tight text-navy">{title}</h1>
       <p className="mt-3 max-w-[62ch] text-[15px] leading-relaxed text-ink-soft">{description}</p>
 
-      <div className="mt-8 rounded-xl border border-border bg-surface-alt px-6 py-5">
-        <p className="text-[13.5px] font-semibold text-navy">
-          {hasLinks ? t.placeholder.headingWithSources : t.placeholder.headingWithoutSources}
-        </p>
-        <p className="mt-1.5 max-w-[58ch] text-[13.5px] leading-relaxed text-ink-soft">
-          {hasLinks ? t.placeholder.bodyWithSources : t.placeholder.bodyWithoutSources}
-        </p>
-      </div>
+      {facts && (
+        <section className="mt-8" aria-labelledby="key-facts">
+          <h2 id="key-facts" className="text-[13px] font-semibold uppercase tracking-wider text-ink-faint">
+            What BIS states on this
+          </h2>
+          <ul className="mt-3 space-y-2.5 rounded-xl border border-border bg-surface-raised px-6 py-5">
+            {facts.points.map((point) => (
+              <li key={point} className="relative pl-4 text-[14px] leading-relaxed text-ink">
+                <span aria-hidden="true" className="absolute left-0 top-[9px] h-1.5 w-1.5 rounded-full bg-blue" />
+                {point}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2.5 text-[12px] leading-relaxed text-ink-faint">
+            Summarised from{" "}
+            <a
+              href={facts.source.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-blue hover:underline"
+            >
+              {facts.source.label}
+              <span className="sr-only"> {t.placeholder.opensNewTab}</span>
+            </a>{" "}
+            (bis.gov.in), read on {facts.retrieved}. Check the source for anything you intend to rely on —
+            fee amounts, product lists and dates change.
+          </p>
+        </section>
+      )}
+
+      {!facts && (
+        <div className="mt-8 rounded-xl border border-border bg-surface-alt px-6 py-5">
+          <p className="text-[13.5px] font-semibold text-navy">
+            {hasLinks ? t.placeholder.headingWithSources : t.placeholder.headingWithoutSources}
+          </p>
+          <p className="mt-1.5 max-w-[58ch] text-[13.5px] leading-relaxed text-ink-soft">
+            {hasLinks ? t.placeholder.bodyWithSources : t.placeholder.bodyWithoutSources}
+          </p>
+        </div>
+      )}
 
       {hasLinks && (
         <section className="mt-8" aria-labelledby="official-sources">

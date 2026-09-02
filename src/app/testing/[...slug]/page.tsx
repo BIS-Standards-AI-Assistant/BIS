@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 import { TESTING_SECTION, findNavItem } from "@/lib/navigation";
 import { getOfficialLinks } from "@/lib/official-links";
+import { getPageFacts } from "@/lib/page-facts";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,7 @@ export default async function TestingSubPage({ params }: { params: Promise<{ slu
       title={found.item.label}
       description={found.item.description}
       links={getOfficialLinks("testing", found.item.slug)}
+      facts={getPageFacts("testing", found.item.slug)}
     />
   );
 }

@@ -5,6 +5,7 @@ import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 import { RelevanceExplainer } from "@/components/standards/RelevanceExplainer";
 import { STANDARDS_SECTION, findNavItem } from "@/lib/navigation";
 import { getOfficialLinks } from "@/lib/official-links";
+import { getPageFacts } from "@/lib/page-facts";
 
 export const dynamic = "force-dynamic";
 
@@ -39,6 +40,7 @@ export default async function StandardsExplorePage({ params }: { params: Promise
       title={found.item.label}
       description={found.item.description}
       links={getOfficialLinks("standards", found.item.slug)}
+      facts={getPageFacts("standards", found.item.slug)}
     />
   );
 }
