@@ -90,7 +90,33 @@ export class OpenRouterProvider implements LLMProvider {
         error: null,
       };
     } catch (err) {
-      return this.failure(start, err instanceof Error ? err.message : String(err));
+      const msg = err instanceof Error ? err.message : String(err);
+      const affordMatch = msg.match(/can only afford (\d+)/i);
+      if (affordMatch && req.maxOutputTokens && Number(affordMatch[1]) > 50) {
+        try {
+          const clamped = Math.max(50, Number(affordMatch[1]) - 20);
+          const retryResult = await this.deps.generateText({
+            model: this.client(),
+            system: req.system,
+            prompt: req.prompt,
+            maxOutputTokens: clamped,
+          });
+          return {
+            text: retryResult.text,
+            structuredData: null,
+            provider: this.name,
+            model: this.model,
+            inputTokens: retryResult.usage?.inputTokens ?? null,
+            outputTokens: retryResult.usage?.outputTokens ?? null,
+            latencyMs: Date.now() - start,
+            finishReason: retryResult.finishReason === "length" ? "length" : "stop",
+            error: null,
+          };
+        } catch (retryErr) {
+          return this.failure(start, retryErr instanceof Error ? retryErr.message : String(retryErr));
+        }
+      }
+      return this.failure(start, msg);
     }
   }
 
@@ -120,7 +146,34 @@ export class OpenRouterProvider implements LLMProvider {
         error: null,
       };
     } catch (err) {
-      return { ...this.failure(start, err instanceof Error ? err.message : String(err)), structuredData: null };
+      const msg = err instanceof Error ? err.message : String(err);
+      const affordMatch = msg.match(/can only afford (\d+)/i);
+      if (affordMatch && req.maxOutputTokens && Number(affordMatch[1]) > 50) {
+        try {
+          const clamped = Math.max(50, Number(affordMatch[1]) - 20);
+          const retryResult = await this.deps.generateObject({
+            model: this.client(),
+            schema: req.schema,
+            system: req.system,
+            prompt: req.prompt,
+            maxOutputTokens: clamped,
+          });
+          return {
+            text: null,
+            structuredData: retryResult.object,
+            provider: this.name,
+            model: this.model,
+            inputTokens: retryResult.usage?.inputTokens ?? null,
+            outputTokens: retryResult.usage?.outputTokens ?? null,
+            latencyMs: Date.now() - start,
+            finishReason: retryResult.finishReason === "length" ? "length" : "stop",
+            error: null,
+          };
+        } catch (retryErr) {
+          return { ...this.failure(start, retryErr instanceof Error ? retryErr.message : String(retryErr)), structuredData: null };
+        }
+      }
+      return { ...this.failure(start, msg), structuredData: null };
     }
   }
 

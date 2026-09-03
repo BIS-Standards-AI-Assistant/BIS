@@ -56,6 +56,8 @@ function chunk(overrides: Partial<RetrievedChunk> & { chunkId: string; documentI
 
 const intent: QueryIntent = {
   intent: "find_applicable_standard",
+  isRelevant: true,
+  relevanceMessage: null,
   product: "stainless steel utensils",
   material: "stainless steel",
   useCase: null,

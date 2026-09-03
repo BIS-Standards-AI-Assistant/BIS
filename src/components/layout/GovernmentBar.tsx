@@ -12,8 +12,8 @@ export function GovernmentBar() {
     <div className="hidden bg-navy-deep text-white/85 sm:block">
       <div className="mx-auto flex h-[34px] max-w-[1380px] items-center justify-between px-6 text-[11.5px]">
         <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1.5 font-medium tracking-wide">
-            <AshokaChakra className="h-3.5 w-3.5 text-white/85" />
+          <span className="flex items-center gap-2 font-medium tracking-wide">
+            <AshokaChakra variant="white" className="h-4.5 w-auto" />
             Government of India
           </span>
           <span className="h-3 w-px bg-white/25" aria-hidden="true" />

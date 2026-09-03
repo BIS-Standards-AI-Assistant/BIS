@@ -52,6 +52,8 @@ function chunk(overrides: Partial<RetrievedChunk> & { chunkId: string; documentI
 function intent(overrides: Partial<QueryIntent> = {}): QueryIntent {
   return {
     intent: "find_applicable_standard",
+    isRelevant: true,
+    relevanceMessage: null,
     product: null,
     material: null,
     useCase: null,

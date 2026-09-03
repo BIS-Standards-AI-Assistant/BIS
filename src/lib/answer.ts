@@ -167,7 +167,7 @@ export async function generateAnswer(pkg: EvidencePackage): Promise<LLMAnswer> {
     schema: LLMAnswerSchema,
     system: SYSTEM_PROMPT,
     prompt: buildPrompt(pkg),
-    maxOutputTokens: 2048,
+    maxOutputTokens: 800,
   });
 
   if (response?.structuredData) return response.structuredData;
