@@ -150,27 +150,12 @@ export function SourcesPanel({
           Add sources
         </button>
 
-        {/* Web discovery is drawn from the design but has no service behind
-            it — rendered disabled rather than as a box that swallows input. */}
-        <div className="mt-3 rounded-xl border border-border/70 bg-surface-alt/40 p-3">
-          <p className="text-[13px] text-ink-faint">Search the web for new sources</p>
-          <div className="mt-2.5 flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/70 px-3 py-1.5 text-[12.5px] font-medium text-ink-faint">
-              <GlobeIcon className="h-3.5 w-3.5" />
-              Web
-            </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/70 px-3 py-1.5 text-[12.5px] font-medium text-ink-faint">
-              <SparkIcon className="h-3.5 w-3.5" />
-              Fast Research
-            </span>
-            <span className="ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-surface-alt text-ink-faint">
-              <SearchIcon className="h-4 w-4" />
-            </span>
-          </div>
-          <p className="mt-2 text-[11px] leading-relaxed text-ink-faint">
-            Web discovery is not connected. Add a PDF or text file instead.
-          </p>
-        </div>
+        {/* No web-source discovery exists, so there is no search control
+            here — only a line saying what this panel does take. A heading
+            and a magnifier with nothing behind them would promise one. */}
+        <p className="mt-2.5 px-1 text-[11.5px] leading-relaxed text-ink-faint">
+          Web discovery is not connected. Add a PDF or text file instead.
+        </p>
 
         {rejection && (
           <p className="mt-3 rounded-lg border border-danger/30 bg-danger-soft/40 px-3 py-2 text-[11.5px] text-danger">
@@ -310,27 +295,6 @@ function PlusIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v14M5 12h14" />
-    </svg>
-  );
-}
-function GlobeIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zM3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18a15 15 0 010-18z" />
-    </svg>
-  );
-}
-function SparkIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4l1.6 3.9L16.5 9.5l-3.9 1.6L11 15l-1.6-3.9L5.5 9.5l3.9-1.6L11 4zM18 14l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8.8-2z" />
-    </svg>
-  );
-}
-function SearchIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
     </svg>
   );
 }

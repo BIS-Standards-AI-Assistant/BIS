@@ -545,7 +545,7 @@ Standards it cites become part of what the assistant discusses.
 | `SourcesPanel` upload / drag-drop / remove / select | DONE | Posts to the pre-existing `/api/v1/analyze-document`; 23 panel tests |
 | Shared knowledge base with the assistant | DONE | `HomeClient` unions result standards with library standards into `BisChatBot`'s `standardNumbers` |
 | Scope made visible | DONE | Chat header and centre column both say how much context came from added sources |
-| Web discovery ("Web" / "Fast Research") | NOT BUILT | Rendered from the design, marked "not connected" — there is no web-search service |
+| Web discovery ("Web" / "Fast Research") | REMOVED | Drawn from the design at first, then removed on request — there is no web-search service, so the panel just states that in one line rather than showing controls |
 
 **No new backend was needed.** `/api/v1/analyze-document` already existed,
 fully built and unit-tested, with no UI calling it — it parses PDF/text,

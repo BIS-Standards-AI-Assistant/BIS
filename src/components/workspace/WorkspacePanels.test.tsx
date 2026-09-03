@@ -137,9 +137,12 @@ describe("SourcesPanel — adding documents", () => {
     expect(screen.getByText("Saved sources will appear here")).toBeInTheDocument();
   });
 
-  test("is honest that web discovery has no service behind it", () => {
+  test("offers no web-search control, since no such service exists", () => {
     render(<SourcesPanel onCollapse={vi.fn()} />);
-    expect(screen.getByText("Search the web for new sources")).toBeInTheDocument();
+    expect(screen.queryByText("Search the web for new sources")).not.toBeInTheDocument();
+    expect(screen.queryByText("Web")).not.toBeInTheDocument();
+    expect(screen.queryByText("Fast Research")).not.toBeInTheDocument();
+    // The limitation is still stated, so a reader knows why.
     expect(screen.getByText(/Web discovery is not connected/i)).toBeInTheDocument();
   });
 
