@@ -1,0 +1,22 @@
+[
+  {
+    "modelId": "document-diversity-v1",
+    "modelName": "Document-diversity heuristic reranker",
+    "version": "v1",
+    "artifactPath": null,
+    "modelType": "heuristic",
+    "datasetVersion": "golden-queries-v1",
+    "metrics": {
+      "recallAt5": 1,
+      "recallAt10": 1,
+      "recallAt20": 1,
+      "mrr": 0.9166666666666666,
+      "ndcgAt5": 0.9384882922619097,
+      "ndcgAt10": 0.9384882922619097
+    },
+    "createdAt": "2026-09-03T23:03:54.203Z",
+    "status": "PRODUCTION",
+    "approvedBy": null,
+    "checksum": null
+  }
+]

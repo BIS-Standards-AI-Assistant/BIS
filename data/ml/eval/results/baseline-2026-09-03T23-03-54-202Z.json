@@ -1,0 +1,136 @@
+{
+  "model": "document-diversity-v1",
+  "modelType": "heuristic",
+  "dataset": "golden-queries-v1",
+  "datasetSize": 12,
+  "excludedFromRanking": 8,
+  "recallAt5": 1,
+  "recallAt10": 1,
+  "recallAt20": 1,
+  "mrr": 0.9166666666666666,
+  "ndcgAt5": 0.9384882922619097,
+  "ndcgAt10": 0.9384882922619097,
+  "perQuery": [
+    {
+      "id": "Q01",
+      "category": "exact_identifier",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 1,
+      "ndcg5": 1,
+      "ndcg10": 1
+    },
+    {
+      "id": "Q02",
+      "category": "exact_identifier",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 1,
+      "ndcg5": 1,
+      "ndcg10": 1
+    },
+    {
+      "id": "Q03",
+      "category": "messy_identifier",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 1,
+      "ndcg5": 1,
+      "ndcg10": 1
+    },
+    {
+      "id": "Q04",
+      "category": "messy_identifier",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 1,
+      "ndcg5": 1,
+      "ndcg10": 1
+    },
+    {
+      "id": "Q07",
+      "category": "natural_language",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 1,
+      "ndcg5": 1,
+      "ndcg10": 1
+    },
+    {
+      "id": "Q08",
+      "category": "natural_language",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 1,
+      "ndcg5": 1,
+      "ndcg10": 1
+    },
+    {
+      "id": "Q09",
+      "category": "natural_language",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 1,
+      "ndcg5": 1,
+      "ndcg10": 1
+    },
+    {
+      "id": "Q10",
+      "category": "natural_language",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 0.5,
+      "ndcg5": 0.6309297535714575,
+      "ndcg10": 0.6309297535714575
+    },
+    {
+      "id": "Q14",
+      "category": "evidence_question",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 1,
+      "ndcg5": 1,
+      "ndcg10": 1
+    },
+    {
+      "id": "Q15",
+      "category": "comparison",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 1,
+      "ndcg5": 1,
+      "ndcg10": 1
+    },
+    {
+      "id": "Q16",
+      "category": "certification",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 1,
+      "ndcg5": 1,
+      "ndcg10": 1
+    },
+    {
+      "id": "Q17",
+      "category": "testing",
+      "recall5": true,
+      "recall10": true,
+      "recall20": true,
+      "rr": 0.5,
+      "ndcg5": 0.6309297535714575,
+      "ndcg10": 0.6309297535714575
+    }
+  ],
+  "evaluatedAt": "2026-09-03T23:03:54.200Z"
+}

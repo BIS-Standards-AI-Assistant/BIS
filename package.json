@@ -26,6 +26,7 @@
     "eval:generation": "tsx scripts/eval-generation.ts",
     "eval:validate": "dotenv -e .env.local -- tsx scripts/validate-generation.ts",
     "eval:calibration": "tsx scripts/calibrate-confidence.ts",
+    "ml:evaluate": "tsx scripts/ml-evaluate.ts",
     "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
     "data:discover": "tsx scripts/data-discover.ts",
     "data:fetch": "tsx scripts/data-fetch.ts",

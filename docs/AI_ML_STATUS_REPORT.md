@@ -943,3 +943,96 @@ Limitations/blockers this pass did not touch, still true: 26/51 standards needs_
 Files changed this pass: src/lib/knowledge-boundary.ts (new + test), src/lib/reference-registry.ts (new + test), src/lib/graph/graph-retrieval.ts (new), src/lib/tools/registry-tools.ts (new), src/lib/tools/index.ts (registers the 2 new tools), src/app/api/v1/query/route.ts (additive wiring + the correctness fix above), docs/AI_ML_STATUS_REPORT.md (this section).
 
 **Production readiness: PARTIALLY_READY** (upgraded from NOT_READY in "UPDATE" above, only for the specific capability this pass targeted — not a general upgrade). The knowledge-boundary/reference-registry path now correctly refuses to answer a technical-detail question about an unindexed standard rather than silently falling back to unrelated evidence, which was this project's own stated "CORE trust feature" (final.md section 18) and previously did not exist as a guarantee. Everything else the original audit called NOT READY (unverified dataset half, zero temporal data, small corpus, untrained reranker, unverified provider fallback paths) is exactly as not-ready as before — this update does not change the overall system's production verdict, only adds one genuinely working trust guarantee to it.
+
+---
+
+## UPDATE 3 — 2026-09-04, `prompts/final.md` rewritten into a 121-section End-to-End ML/AI Implementation Specification
+
+**IMPORTANT**: `prompts/final.md` was completely rewritten between "UPDATE 2" above and this pass — it is no longer the 39-section Knowledge Boundary/Reference Registry/Graph Retrieval spec that "UPDATE 2" addressed (that spec's content has been superseded in the same filename). The new `final.md` (v1.0, "AI proposes. Evidence decides.") is a full ML training program: dataset/labeling infrastructure, a retrieval reranker, an intent classifier, Product DNA extraction, evidence ranking, a grounding verifier, confidence calibration, CAD/BOM intelligence, multilingual retrieval, and human-feedback learning — with an explicit §97 "NO FAKE COMPLETION" rule and a PASS/PARTIAL/BLOCKED/FAIL status vocabulary (§96).
+
+This update follows that document's own instruction (§4: "Phase 0 — ML Infrastructure... No production ML model is required yet") and its own §108 gate for a real reranker (300+ real labeled pairs — this repo has 0). Per §108's own guidance not to attempt every model simultaneously, this pass builds **Phase 0 only**.
+
+### What was built (real, tested, live-verified)
+
+| Item | File | Status |
+|---|---|---|
+| ML data directory layout (§5) | `data/ml/{datasets,labels,eval,exports,artifacts,experiments,review-queue}/` + `data/ml/README.md` | IMPLEMENTED — all real directories; every one except `eval/results/` and `artifacts/registry.json` is genuinely empty, and the README says so explicitly rather than implying otherwise |
+| Model registry (§45-46) | `src/lib/ml/model-registry.ts` | IMPLEMENTED, TESTED (6 tests) — file-backed (`data/ml/artifacts/registry.json`), not a DB table, per §80's own "do not create every table immediately" |
+| Model provider contract (§48-49) | `MLModel<TInput, TOutput>` interface in `model-registry.ts` | IMPLEMENTED (interface only — no model implements it yet, since no trained model exists) |
+| Evaluation harness (§61-62) | `scripts/ml-evaluate.ts` (+ `npm run ml:evaluate`) | IMPLEMENTED, TESTED (11 unit tests on the scoring functions), LIVE VERIFIED against the real dev server and the real 20-query golden set |
+
+### Real baseline metrics (live-measured, not fabricated)
+
+`npm run ml:evaluate` against the current deterministic stack
+(hybrid retrieval + `document-diversity-v1` heuristic reranker — **not
+trained ML**, correctly labeled `modelType: "heuristic"` in the
+registry per §3's rule against mislabeling heuristics) over the 12
+golden queries that have a real expected answer (8 of 20 are
+hallucination-trap/unsupported-query cases with no ranking target,
+excluded per the harness's own documented reasoning):
+
+| Metric | Value |
+|---|---:|
+| Recall@5 | 1.0 (12/12) |
+| Recall@10 | 1.0 (12/12) |
+| Recall@20 | 1.0 (12/12) |
+| MRR | 0.917 |
+| NDCG@5 | 0.938 |
+| NDCG@10 | 0.938 |
+
+NDCG uses **binary** relevance (§8's graded 0-3 scale doesn't exist as
+real data yet) — disclosed in both the script's own comments and
+`data/ml/README.md`, not silently approximated. This baseline is now
+registered in `data/ml/artifacts/registry.json` as the `PRODUCTION`
+entry every future trained reranker must beat (§60).
+
+### A real problem the live evaluation run surfaced (not something this pass fixed)
+
+Running the evaluation live against the current (post-corpus-expansion,
+19-document/557-chunk) dev server measured **~32.5 seconds per
+`/api/v1/search` call**, reproduced twice. This is a genuine, measured
+latency regression worth flagging per §52 ("do not allow ML to silently
+turn a fast research query into an unusably slow request") — though
+retrieval itself has no ML in it yet, so the cause is somewhere in the
+existing embedding/retrieval path, not anything built this pass. **Root
+cause NOT investigated this pass** (would require tracing the embedding
+provider call path, out of scope for a Phase 0 infrastructure pass) —
+recorded here as a real, measured, disclosed finding rather than
+silently absorbed into a slow-but-passing evaluation run.
+
+### Everything else in the new final.md: honest status
+
+Per §97, explicitly NOT claiming completion on any of the following.
+Using the document's own status vocabulary:
+
+| Phase / Model | Status | Why |
+|---|---|---|
+| Phase 1 — Retrieval Reranker (trained) | **BLOCKED** | 0/300 real labeled query-document pairs (§108's own minimum for "first serious reranker") |
+| Phase 2 — Query Intent Classifier | **BLOCKED** | Same — no labeled intent dataset; the current deterministic/keyword intent path (`src/lib/intent.ts`) is correctly NOT described as ML |
+| Phase 3 — Product DNA / Product→Standard ranking | **BLOCKED** | No extraction dataset; `src/lib/applicability.ts` (from an earlier session's `pfinal.md` work) is deterministic, not ML |
+| Phase 4 — Evidence ranking / grounding verifier / confidence calibration | **BLOCKED** | `scripts/calibrate-confidence.ts` already exists and already correctly reports "insufficient data" rather than fabricating a calibration curve (verified in an earlier session) |
+| Phase 5 — Query expansion, duplicate detection, relationship candidate generation | **NOT STARTED** | No dataset, no infrastructure |
+| Phase 6 — CAD/BOM intelligence | **NOT STARTED** | Explicitly deferred by the spec's own ordering (§112: "only when document extraction quality is sufficient") |
+| Phase 7 — Multilingual intelligence | **NOT STARTED** | Spec's own §113: "after English baseline is strong" — and the English baseline retrieval just measured a 32.5s latency regression, so it is not currently "strong" by the spec's own standard |
+| Phase 8 — Human feedback learning | **NOT STARTED** | No feedback UI, no `ml_feedback` table |
+| Champion/challenger, canary deployment, model drift monitoring (§75-79) | **NOT APPLICABLE YET** | These presuppose a second (trained) model to compare against the baseline; only the baseline exists |
+
+### Verification
+
+`npm run typecheck` clean, `npm run lint` clean, **361/361 vitest tests**
+(was 344 before this pass; +17 across model-registry.ts's 6 tests and
+ml-evaluate.ts's 11 scoring tests), **45/45 ML script tests**,
+production build clean. `npm run ml:evaluate` run live twice (idempotent
+— same result both times, confirmed the registry update doesn't
+duplicate entries).
+
+### Production readiness (unchanged from UPDATE 2)
+
+Still **PARTIALLY_READY**, same reasoning as before — this pass adds
+real ML *infrastructure* and a real *measured baseline*, which is what
+§4's Phase 0 asks for, but registers zero production-ready trained
+models (correctly, since the labeled-data prerequisite doesn't exist)
+and surfaces a new, real, unresolved latency concern. Per §97, this must
+not be read as "ML roadmap complete" — it is "Phase 0 of a 8-phase,
+25-milestone program complete; phases 1-8 correctly BLOCKED or NOT
+STARTED, not silently skipped."
