@@ -12,7 +12,7 @@ export function GovernmentBar() {
     <div className="hidden bg-navy-deep text-white/85 sm:block">
       <div className="mx-auto flex h-[34px] max-w-[1380px] items-center justify-between px-6 text-[11.5px]">
         <div className="flex items-center gap-3">
-          <span className="flex items-center gap-2 font-medium tracking-wide">
+          <span className="flex items-center gap-2 font-medium tracking-wide" suppressHydrationWarning>
             <AshokaChakra variant="white" className="h-4.5 w-auto" />
             Government of India
           </span>

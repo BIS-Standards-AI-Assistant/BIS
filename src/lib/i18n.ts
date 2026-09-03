@@ -1,26 +1,21 @@
-export type LangCode = "en" | "hi";
+export type LangCode = "en" | "hi" | "bn" | "ta" | "te" | "mr" | "gu" | "kn";
 
 export interface LanguageOption {
-  code: LangCode | string;
+  code: LangCode;
   label: string;
   nativeLabel: string;
   available: boolean;
 }
 
-/**
- * Only English and Hindi are actually translated — the other entries are
- * listed (as real government portals do) but fall back to English rather
- * than shipping guessed/machine translations of technical BIS terminology.
- */
 export const LANGUAGES: LanguageOption[] = [
   { code: "en", label: "English", nativeLabel: "English", available: true },
   { code: "hi", label: "Hindi", nativeLabel: "हिन्दी", available: true },
-  { code: "bn", label: "Bengali", nativeLabel: "বাংলা", available: false },
-  { code: "ta", label: "Tamil", nativeLabel: "தமிழ்", available: false },
-  { code: "te", label: "Telugu", nativeLabel: "తెలుగు", available: false },
-  { code: "mr", label: "Marathi", nativeLabel: "मराठी", available: false },
-  { code: "gu", label: "Gujarati", nativeLabel: "ગુજરાતી", available: false },
-  { code: "kn", label: "Kannada", nativeLabel: "ಕನ್ನಡ", available: false },
+  { code: "bn", label: "Bengali", nativeLabel: "বাংলা", available: true },
+  { code: "ta", label: "Tamil", nativeLabel: "தமிழ்", available: true },
+  { code: "te", label: "Telugu", nativeLabel: "తెలుగు", available: true },
+  { code: "mr", label: "Marathi", nativeLabel: "मराठी", available: true },
+  { code: "gu", label: "Gujarati", nativeLabel: "ગુજરાતી", available: true },
+  { code: "kn", label: "Kannada", nativeLabel: "ಕನ್ನಡ", available: true },
 ];
 
 export interface Dictionary {
@@ -66,12 +61,6 @@ export interface Dictionary {
     colLast: string;
   };
   whatsnew: { heading: string; viewAll: string };
-  /**
-   * Chrome for the placeholder pages. The official-source link labels
-   * themselves are deliberately NOT translated — they name real English pages
-   * on bis.gov.in, and renaming them in Hindi would misdescribe where the
-   * link goes.
-   */
   placeholder: {
     headingWithSources: string;
     headingWithoutSources: string;
@@ -96,6 +85,22 @@ export interface Dictionary {
     terms: string;
     accessibility: string;
     columns: { title: string; body: string; cta: string }[];
+  };
+  results?: {
+    summaryTitle: string;
+    summarySubtitle: string;
+    candidateStandards: string;
+    candidateSubtitle: string;
+    verifiedEvidence: string;
+    refinePrompt: string;
+    refineSubtitle: string;
+    refineButton: string;
+    searchingRefined: string;
+    selectedCount: string;
+    viewPassport: string;
+    viewStats: string;
+    hideStats: string;
+    limitations: string;
   };
 }
 
@@ -179,6 +184,22 @@ const en: Dictionary = {
       { title: "Publications", body: "Access BIS publications, journals and newsletters.", cta: "Browse →" },
       { title: "Help & Support", body: "FAQs, guides and support for all your queries.", cta: "Get help →" },
     ],
+  },
+  results: {
+    summaryTitle: "STANDARDS SUMMARY",
+    summarySubtitle: "Official Synthesis",
+    candidateStandards: "Candidate Standards",
+    candidateSubtitle: "Ranked by relevance & verified Bureau of Indian Standards evidence",
+    verifiedEvidence: "Verified Bureau Evidence",
+    refinePrompt: "This answer would be more precise with one more detail",
+    refineSubtitle: "Click any recommended specification below to add it directly to your query:",
+    refineButton: "Refine Search",
+    searchingRefined: "Searching Refined Standards...",
+    selectedCount: "selected",
+    viewPassport: "View Complete Standard Passport",
+    viewStats: "View Stats",
+    hideStats: "Hide Stats",
+    limitations: "Uncertainty & limitations",
   },
 };
 
@@ -264,6 +285,217 @@ const hi: Dictionary = {
       { title: "सहायता और समर्थन", body: "आपके सभी प्रश्नों के लिए FAQ, गाइड और सहायता।", cta: "सहायता लें →" },
     ],
   },
+  results: {
+    summaryTitle: "मानक सारांश",
+    summarySubtitle: "आधिकारिक संश्लेषण",
+    candidateStandards: "उम्मीदवार मानक",
+    candidateSubtitle: "प्रासंगिकता और सत्यापित भारतीय मानक ब्यूरो साक्ष्य के अनुसार",
+    verifiedEvidence: "सत्यापित ब्यूरो साक्ष्य",
+    refinePrompt: "एक और विवरण जोड़ने पर उत्तर अधिक सटीक होगा",
+    refineSubtitle: "सीधे अपनी खोज में जोड़ने के लिए नीचे किसी अनुशंसित विनिर्देश पर क्लिक करें:",
+    refineButton: "खोज परिष्कृत करें",
+    searchingRefined: "परिष्कृत मानक खोजे जा रहे हैं...",
+    selectedCount: "चयनित",
+    viewPassport: "पूर्ण मानक पासपोर्ट देखें",
+    viewStats: "आंकड़े देखें",
+    hideStats: "आंकड़े छिपाएं",
+    limitations: "अनिश्चितता और सीमाएं",
+  },
 };
 
-export const DICTIONARIES: Record<LangCode, Dictionary> = { en, hi };
+const bn: Dictionary = {
+  ...en,
+  gov: { skip: "মূল সামগ্রীতে যান", screenReader: "স্ক্রিন রিডার অ্যাক্সেস", theme: "ডার্ক মোড পরিবর্তন করুন" },
+  header: { tagline: "ভারতের জাতীয় মানক সংস্থা" },
+  nav: {
+    standards: "মানকসমূহ",
+    certification: "শংসাপত্র",
+    testing: "পরীক্ষণ",
+    resources: "সম্পদ",
+    eservices: "ই-পরিষেবা",
+    about: "বিআইএস সম্পর্কে",
+    contact: "যোগাযোগ",
+    search: "অনুসন্ধান করুন",
+  },
+  hero: {
+    ...en.hero,
+    titleLine1: "সঠিক ভারতীয় মানক খুঁজুন",
+    titlePre: "আপনার ",
+    titleHighlight: "পণ্য, প্রক্রিয়া বা পরিষেবার জন্য",
+    subtitle: "প্রযোজ্য ভারতীয় মানক, শংসাপত্র এবং পরীক্ষার প্রয়োজনীয়তা আবিষ্কার করার জন্য এআই-চালিত সহায়তা।",
+    searchButton: "অনুসন্ধান",
+    searching: "অনুসন্ধান চলছে…",
+  },
+  footer: {
+    ...en.footer,
+    ministryLine1: "ভোক্তা বিষয়ক, খাদ্য ও গণবণ্টন মন্ত্রক",
+    ministryLine2: "ভারত সরকার",
+    rights: "ভারতীয় মানক ব্যুরো (বিআইএস)। সর্বস্বত্ব সংরক্ষিত।",
+  },
+};
+
+const ta: Dictionary = {
+  ...en,
+  gov: { skip: "முக்கிய பகுதிக்கு செல்லவும்", screenReader: "திரை வாசிப்பான் வசதி", theme: "டார்க் மோட் மாற்றவும்" },
+  header: { tagline: "இந்தியாவின் தேசிய தர நிர்ணய அமைப்பு" },
+  nav: {
+    standards: "தரநிலைகள்",
+    certification: "சான்றிதழ்",
+    testing: "பரிசோதனை",
+    resources: "வளங்கள்",
+    eservices: "மின்-சேவைகள்",
+    about: "பிஐஎஸ் பற்றி",
+    contact: "தொடர்புக்கு",
+    search: "தேடுக",
+  },
+  hero: {
+    ...en.hero,
+    titleLine1: "சரியான இந்திய தரநிலையை கண்டறியவும்",
+    titlePre: "உங்கள் ",
+    titleHighlight: "தயாரிப்பு, செயல்முறை அல்லது சேவைக்கு",
+    subtitle: "பொருந்தக்கூடிய இந்திய தரநிலைகள், சான்றிதழ் முறைகள் மற்றும் சோதனை தேவைகளை அறிய AI உதவி.",
+    searchButton: "தேடு",
+    searching: "தேடுகிறது…",
+  },
+  footer: {
+    ...en.footer,
+    ministryLine1: "நுகர்வோர் விவகாரங்கள், உணவு மற்றும் பொது விநியோக அமைச்சகம்",
+    ministryLine2: "இந்திய அரசு",
+    rights: "இந்திய தர நிர்ணய பணியகம் (பிஐஎஸ்). அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+  },
+};
+
+const te: Dictionary = {
+  ...en,
+  gov: { skip: "ప్రధాన విషయానికి వెళ్లండి", screenReader: "స్క్రీన్ రీడర్ సదుపాయం", theme: "డార్క్ మోడ్ మార్చండి" },
+  header: { tagline: "భారత జాతీయ ప్రమాణాల సంస్థ" },
+  nav: {
+    standards: "ప్రమాణాలు",
+    certification: "ధృవీకరణ",
+    testing: "పరీక్షలు",
+    resources: "వనరులు",
+    eservices: "ఈ-సేవలు",
+    about: "బీఐఎస్ గురించి",
+    contact: "సంప్రదించండి",
+    search: "వెతకండి",
+  },
+  hero: {
+    ...en.hero,
+    titleLine1: "సరైన భారతీయ ప్రమాణాన్ని కనుగొనండి",
+    titlePre: "మీ ",
+    titleHighlight: "ఉత్పత్తి, ప్రక్రియ లేదా సేవ కోసం",
+    subtitle: "వర్తించే భారతీయ ప్రమాణాలు మరియు పరీక్ష అవసరాలను తెలుసుకోవడానికి AI ఆధారిత సహాయం.",
+    searchButton: "శోధించండి",
+    searching: "శోధిస్తోంది…",
+  },
+  footer: {
+    ...en.footer,
+    ministryLine1: "వినియోగదారుల వ్యవహారాలు, ఆహార & ప్రజా పంపిణీ మంత్రిత్వ శాఖ",
+    ministryLine2: "భారత ప్రభుత్వం",
+    rights: "బ్యూరో ఆఫ్ ఇండియన్ స్టాండర్డ్స్ (బీఐఎస్). సర్వహక్కులు ప్రత్యేకించబడ్డాయి.",
+  },
+};
+
+const mr: Dictionary = {
+  ...en,
+  gov: { skip: "मुख्य मजकुराकडे जा", screenReader: "स्क्रीन रीडर ऍक्सेस", theme: "डार्क मोड टॉगल करा" },
+  header: { tagline: "भारताची राष्ट्रीय मानक संस्था" },
+  nav: {
+    standards: "मानके",
+    certification: "प्रमाणीकरण",
+    testing: "चाचणी",
+    resources: "संसाधने",
+    eservices: "ई-सेवा",
+    about: "बीआयएस बद्दल",
+    contact: "संपर्क साधा",
+    search: "शोधा",
+  },
+  hero: {
+    ...en.hero,
+    titleLine1: "योग्य भारतीय मानक शोधा",
+    titlePre: "आपल्या ",
+    titleHighlight: "उत्पादन, प्रक्रिया किंवा सेवेसाठी",
+    subtitle: "लागू भारतीय मानके, प्रमाणीकरण आणि चाचणी आवश्यकता शोधण्यासाठी AI सहाय्य.",
+    searchButton: "शोधा",
+    searching: "शोधत आहे…",
+  },
+  footer: {
+    ...en.footer,
+    ministryLine1: "ग्राहक व्यवहार, अन्न आणि सार्वजनिक वितरण मंत्रालय",
+    ministryLine2: "भारत सरकार",
+    rights: "भारतीय मानक ब्युरो (बीआयएस). सर्व हक्क राखीव.",
+  },
+};
+
+const gu: Dictionary = {
+  ...en,
+  gov: { skip: "મુખ્ય સામગ્રી પર જાઓ", screenReader: "સ્ક્રીન રીડર એક્સેસ", theme: "ડાર્ક મોડ બદલો" },
+  header: { tagline: "ભારતની રાષ્ટ્રીય માનક સંસ્થા" },
+  nav: {
+    standards: "માનકો",
+    certification: "પ્રમાણીકરણ",
+    testing: "પરીક્ષણ",
+    resources: "સંસાધનો",
+    eservices: "ઈ-સેવાઓ",
+    about: "બીઆઈએસ વિશે",
+    contact: "સંપર્ક કરો",
+    search: "શોધો",
+  },
+  hero: {
+    ...en.hero,
+    titleLine1: "યોગ્ય ભારતીય માનક શોધો",
+    titlePre: "તમારા ",
+    titleHighlight: "ઉત્પાદન, પ્રક્રિયા અથવા સેવા માટે",
+    subtitle: "લાગુ પડતા ભારતીય ધોરણો અને પરીક્ષણ આવશ્યકતાઓ શોધવા માટે AI-આધારિત સહાય.",
+    searchButton: "શોધો",
+    searching: "શોધી રહ્યું છે…",
+  },
+  footer: {
+    ...en.footer,
+    ministryLine1: "ગ્રાહક બાબતો, ખાદ્ય અને જાહેર વિતરણ મંત્રાલય",
+    ministryLine2: "ભારત સરકાર",
+    rights: "ભારતીય માનક બ્યુરો (બીઆઈએસ). સર્વાધિકાર સુરક્ષિત.",
+  },
+};
+
+const kn: Dictionary = {
+  ...en,
+  gov: { skip: "ಮುಖ್ಯ ವಿಷಯಕ್ಕೆ ಹೋಗಿ", screenReader: "ಸ್ಕ್ರೀನ್ ರೀಡರ್ ಪ್ರವೇಶ", theme: "ಡಾರ್ಕ್ ಮೋಡ್ ಬದಲಿಸಿ" },
+  header: { tagline: "ಭಾರತದ ರಾಷ್ಟ್ರೀಯ ಮಾನದಂಡಗಳ ಸಂಸ್ಥೆ" },
+  nav: {
+    standards: "ಮಾನದಂಡಗಳು",
+    certification: "ಪ್ರಮಾಣೀಕರಣ",
+    testing: "ಪರೀಕ್ಷೆ",
+    resources: "ಸಂಪನ್ಮೂಲಗಳು",
+    eservices: "ಇ-ಸೇವೆಗಳು",
+    about: "ಬಿಐಎಸ್ ಬಗ್ಗೆ",
+    contact: "ಸಂಪರ್ಕಿಸಿ",
+    search: "ಹುಡುಕಿ",
+  },
+  hero: {
+    ...en.hero,
+    titleLine1: "ಸರಿಯಾದ ಭಾರತೀಯ ಮಾನದಂಡವನ್ನು ಹುಡುಕಿ",
+    titlePre: "ನಿಮ್ಮ ",
+    titleHighlight: "ಉತ್ಪನ್ನ, ಪ್ರಕ್ರಿಯೆ ಅಥವಾ ಸೇವೆಗಾಗಿ",
+    subtitle: "ಅನ್ವಯವಾಗುವ ಭಾರತೀಯ ಮಾನದಂಡಗಳು ಮತ್ತು ಪರೀಕ್ಷಾ ಅಗತ್ಯತೆಗಳನ್ನು ಅನ್ವೇಷಿಸಲು AI-ಚಾಲಿತ ನೆರವು.",
+    searchButton: "ಹುಡುಕಿ",
+    searching: "ಹುಡುಕಲಾಗುತ್ತಿದೆ…",
+  },
+  footer: {
+    ...en.footer,
+    ministryLine1: "ಗ್ರಾಹಕ ವ್ಯವಹಾರಗಳು, ಆಹಾರ ಮತ್ತು ಸಾರ್ವಜನಿಕ ವಿತರಣಾ ಸಚಿವಾಲಯ",
+    ministryLine2: "ಭಾರತ ಸರ್ಕಾರ",
+    rights: "ಭಾರತೀಯ ಮಾನಕ ಬ್ಯೂರೋ (ಬಿಐಎಸ್). ಎಲ್ಲ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
+  },
+};
+
+export const DICTIONARIES: Record<LangCode, Dictionary> = {
+  en,
+  hi,
+  bn,
+  ta,
+  te,
+  mr,
+  gu,
+  kn,
+};
