@@ -9,9 +9,8 @@ import { eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { documents } from "@/db/schema";
 import type { StandardDetail } from "@/types/api";
-import { findCertificationSchemeForStandard, type CertificationSchemeItem } from "@/lib/certification-schemes";
+import { findCertificationSchemeForStandard } from "@/lib/certification-schemes";
 import { VERIFICATION_STATUS_LABELS } from "@/lib/verification-status";
-import { TESTING_KEYWORDS } from "@/lib/coverage-analysis";
 import { getLocalSeedChunks, slugifyStandardNumber } from "@/lib/retrieval";
 import { ExternalLinkIcon, SearchIcon, CompareIcon, ChevronRightIcon } from "@/components/ui/icons";
 
@@ -240,8 +239,6 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
 
   const scheme = await findCertificationSchemeForStandard(standard.standardNumber);
 
-  const testingChunks = standard.chunks.filter((c) => TESTING_KEYWORDS.test(`${c.section ?? ""} ${c.text}`));
-  const evidenceChunks = standard.chunks.filter((c) => !testingChunks.includes(c));
   const askQuery = encodeURIComponent(`Tell me about ${standard.standardNumber ?? standard.title}`);
 
   const hasIndexedDocument = standard.chunks.length > 0;
