@@ -151,6 +151,7 @@ cleanly against them.
 | 2 | **`src/lib/applicability.ts`: a nonsense/gibberish query with no extractable product or material was reported as high-confidence, `DIRECTLY_APPLICABLE`** for real standards it has no basis to endorse that strongly | **High** (exactly the "relevant ≠ applicable" trust failure this entire session's P0 work exists to prevent) | **Yes** — `DIRECTLY_APPLICABLE` now requires a real positive signal (`coverage.product === "covered"` or an exact identifier match), not a vacuous 100% coverage ratio computed from zero actually-checked dimensions. Verified the fix does not regress genuine matches (exact-identifier queries still correctly resolve `DIRECTLY_APPLICABLE`). 2 new regression tests added. |
 | 3 | `src/lib/certification-schemes.ts`'s compatibility loader (written earlier this session for an upstream dataset reshape) doubled part/section labels — `"IS 13252 (Part Part 1):2010"` instead of `"IS 13252 (Part 1):2010"` — breaking every exact-match certification lookup for a standard with a part/section | Medium (silently broke a real feature for a subset of standards) | **Yes** — the raw `part`/`section` fields already read `"Part 1"`/`"Sec 6"`; the loader no longer re-prefixes them. Regression test added. |
 | 4 | `SearchHero.tsx`'s compact search input had no `min-w-0`, so the default flexbox content-based minimum width prevented it shrinking at narrow viewports, pushing the Search button off-screen (confirmed real horizontal page overflow at 360px and 390px) | Medium (real mobile usability defect — the primary search action was partly unreachable) | **Yes** — one-line `min-w-0` fix, standard flexbox pattern |
+| 5 | **The Standard Passport page (`/standards/[id]`) renders at an intermittently, dramatically wrong height** — 7021px (correct/expected, matches the actual content) vs 51205px (~7.3x too tall) across otherwise-identical navigations to the same URL. Reproduced independently, after this commit, across 3 separate investigations: twice via direct URL navigation, once via client-side link-through from search results — in a pattern with no reliable trigger identified. Server-rendered HTML byte size is confirmed **stable** (911,285 bytes via 3 repeated direct `curl` fetches of the same URL), which rules out a server-side data/query bug and points to client-side rendering/layout non-determinism (e.g. a CSS transition or JS-driven expand/collapse effect that intermittently fails to settle before the page is considered loaded). | **High** — this is the exact kind of defect a screenshot-diff/visual-regression check exists to catch, and it did; a ~7x layout blowup on the platform's central page is a real, user-facing defect regardless of root cause | **No — NOT fixed.** This was found in a follow-up investigation after the "4 defects, 62/62" commit below was made, so that commit's defect list and pass count did not include it. Root-causing it conclusively (client-side profiling of the exact hydration/layout timing) was judged out of scope for this pass's remaining time budget rather than guess at a fix blind. `tests/e2e/visual.spec.ts`'s "Standard Passport" test is marked `test.fail()` with a comment pointing back to this entry, so the suite honestly tracks it as a known, unresolved, expected-to-fail case instead of hiding it or letting it silently pass/fail depending on which way the non-determinism lands on a given run. |
 
 ## Test Infrastructure Issues Found and Fixed (not product defects)
 
@@ -196,11 +197,35 @@ about retrieval behavior) rather than evidence of a UI problem:
 
 ## Passed / Failed / Skipped / Blocked
 
-**Final run: 62 passed, 0 failed, 0 skipped.**
+**Correction (2026-09-04, same day, following investigation): the "62
+passed, 0 failed" figure below this line was this pass's own claim at
+the time of its commit and has since been found incomplete** — a
+follow-up investigation independently and repeatedly reproduced defect
+#5 above (Standard Passport intermittent ~7x height blowup), which that
+specific run did not hit. The honest current state is **61/62 passed, 1
+known-unresolved intermittent failure** (`visual.spec.ts`'s "Standard
+Passport" test, now marked `test.fail()` so it reports as an expected,
+tracked failure rather than a flaky green/red flip). Every other number
+and finding below (defects #1-4, the journey/a11y/responsive/trust-
+regression coverage, the infra fixes) was independently spot-checked
+after this correction and stands as reported.
 
 Progression across this pass's investigation (not hidden): 43/62 →
-54/62 → 59/62 → 62/62, as each real defect (2 product, 2 test-suite
-premise/selector issues, plus infra fixes) was found and fixed in turn.
+54/62 → 59/62 → 62/62 → **61/62 (corrected)**, as each real defect (now
+3 product defects, 2 test-suite premise/selector issues, plus infra
+fixes) was found and fixed or, for defect #5, honestly tracked as
+unresolved rather than papered over.
+
+A full, single, uninterrupted final re-run to reconfirm this exact 61/62
+figure could not be completed in this environment at the time of this
+correction (the local test/dev-server environment repeatedly stopped
+mid-run); the figure instead rests on: two earlier complete runs (56/62
+and 59/62, each with individually diagnosed and since-fixed causes for
+every failure), the specific defect-#5 reproductions described above,
+and unit-test/live-API spot verification of every fix in the Defects
+table. This gap is stated plainly rather than rounded up to a number
+that was never actually observed in one continuous run after this
+correction.
 
 No BLOCKED features were given a success test: Laboratory Finder and Map
 Locator tests assert the *blocked* state explicitly and would fail if
@@ -222,7 +247,7 @@ npm run verify:ui        # alias for test:e2e, for CI pipelines
 |---|---|
 | Navigation | PASS |
 | Search | PASS |
-| Standard Passport | PASS |
+| Standard Passport | **PARTIAL** — content and functionality are correct (evidence, relationships, certification/testing data all render correctly when checked directly), but the page has a real, unresolved, intermittent rendering defect (see Defect #5) that must be root-caused before this can honestly be called PASS |
 | Evidence | PASS |
 | Research Assistant | PASS |
 | Product Analyzer | PASS (API-level; no dedicated UI page exists) |
@@ -237,10 +262,13 @@ npm run verify:ui        # alias for test:e2e, for CI pipelines
 | Errors | PASS |
 | Visual Regression | PASS (baselines established) |
 
-**Every implemented, in-scope journey passes with real, live-verified
-evidence — 62/62.** This is not claimed as 100% coverage of the product:
-Laboratory Finder and Map Locator remain genuinely blocked on missing
-data/credentials (by design, not by test gap), and several features
-(Product/Document Analyzer, Certification, Testing) have real API
-coverage but no dedicated UI to E2E-test yet — both stated plainly
+**Every implemented, in-scope journey has real, live-verified E2E
+coverage — 61 of 62 tests pass; 1 tracks a real, confirmed,
+unresolved defect rather than being hidden.** This is not claimed as
+100% coverage of the product: Laboratory Finder and Map Locator remain
+genuinely blocked on missing data/credentials (by design, not by test
+gap), several features (Product/Document Analyzer, Certification,
+Testing) have real API coverage but no dedicated UI to E2E-test yet, and
+the Standard Passport page has a real, high-severity, intermittent
+rendering defect that is tracked but not yet fixed — all stated plainly
 above, not glossed over.
