@@ -456,3 +456,35 @@ including an honest scope cut: no ML reranker/model-registry/training
 pipeline was built this pass (0 labeled pairs exist — building that
 scaffolding now would be exactly the "looks sophisticated, adds
 nothing real" outcome the prompt's own rules warn against).
+
+### Footer policy pages served in-app (this session, follow-up)
+
+The footer's Privacy Policy / Terms of Use / Accessibility Statement links
+used to open www.bis.gov.in in a new tab, so three of the footer's own
+destinations left the service entirely.
+
+| Item | Status | Notes |
+|---|---|---|
+| `scripts/scrape-bis-policy-pages.ts` (`npm run data:policy-pages`) | DONE | Scrapes all three pages in English and Hindi from bis.gov.in; 19 unit tests over the parsers, run against BIS-shaped fixture HTML |
+| `data/bis-policy-pages.json` | DONE | 6 variants scraped live on 2026-09-03: privacy (5 paragraphs, English only), terms (6 paragraphs, en + hi), accessibility (4 paragraphs, en + hi) |
+| `/privacy-policy`, `/terms-and-conditions`, `/accessibility-statement` | DONE | Statically prerendered; footer now links internally |
+| Provenance on every page | DONE | Source URL, retrieval date, and BIS's own "Last Updated" line (or an explicit "not stated on the BIS page") |
+| Hindi | DONE | Shown when BIS publishes it. BIS serves an "only available in English" notice for the privacy policy under `?lang=hi`; that is recorded as `available: false` and the page falls back to English *and says so*, rather than machine-translating policy text or labelling English text as Hindi |
+
+The text is reproduced word for word and is never summarised, reworded or
+extended. A test pins the set of hosts BIS links to, so a future scrape
+that starts pulling in unrelated hosts fails loudly.
+
+A `/sitemap` page reproducing BIS's own sitemap was built and then removed
+before merge: mirroring another site's navigation is not this service's
+job, and every one of its ~111 links pointed off-site. The scraper's
+link-group parsing went with it rather than being left as dead code.
+
+Also fixed in passing: `politeFetch` (scripts/data-lib/rate-limit.ts) had
+no request timeout, so a bis.gov.in connection that was accepted and then
+never answered hung the whole script indefinitely — observed once during
+this scrape. Each attempt now has a 45s deadline and is retried like any
+other transport error.
+
+`npm run verify` green: 0 lint errors, 294 vitest tests across 38 files (up
+from 253 across 35), all three routes prerendered in the production build.
