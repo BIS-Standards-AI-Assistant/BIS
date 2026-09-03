@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { getProviderChain, generateStructuredWithFallback } from "./providers";
 import { resolveStandardIds } from "./standards-id";
+import { getProductRefinements } from "./product-refinements";
 
 export const QueryIntentSchema = z.object({
   intent: z
@@ -40,7 +41,7 @@ const SYSTEM_PROMPT = `You extract structured intent from user questions about I
 CRITICAL: If the query is completely unrelated to products, materials, manufacturing, Indian Standards, testing, or BIS certification (such as weather forecasts, cooking recipes, coding/programming, general trivia, politics, sports scores, greetings), set isRelevant to false and set relevanceMessage to a clear, professional message explaining that this is not a relevant search for BIS Standards Navigator and guiding them to search for a product (e.g. 'Steel water bottle', 'Cement', 'LED bulb') or standard number.
 For relevant queries, set isRelevant to true.
 Use null for any field that is not stated or cannot be reasonably inferred from the text — never invent or guess a value.
-List every piece of information that, if known, would materially change which standard applies (e.g. target age group, material grade, intended use) in missingInformation.`;
+For missingInformation, list 3 to 5 CONCRETE product specifications, grades, or types specific to the searched product that determine which standard applies (e.g. for 'helmets': ['Two-Wheeler Motorcycle (IS 4151)', 'Industrial Safety (IS 2925)', 'Non-Metallic Shell']; for 'steel water bottle': ['Stainless Steel (Grade 304)', 'Vacuum Insulated Flask', 'Single Wall Bottle', 'Food Grade 316']). NEVER output abstract generic placeholders like 'intended use', 'material grade', 'capacity', or 'size'.`;
 
 function baseIntent(overrides: Partial<QueryIntent>): QueryIntent {
   return {
@@ -110,13 +111,9 @@ export function deterministicIntentFallback(query: string): QueryIntent {
     certificationRequested,
     testingRequested,
     searchQuery: query,
-    // No LLM provider was available to extract structured parameters from
-    // free text, so offer generic, non-fabricated refinement prompts
-    // instead of a debug sentence — ClarificationPanel renders these as
-    // short selectable chips, not paragraphs. See docs/ui/SIH.md's
-    // truthfulness rule: this is a UI affordance, not a claim about the
-    // query's content.
-    missingInformation: ["material", "intended use", "capacity"],
+    // Provide concrete, actionable product-specific refinement options instead
+    // of generic placeholder strings like "material" or "intended use".
+    missingInformation: getProductRefinements(query),
   });
 }
 

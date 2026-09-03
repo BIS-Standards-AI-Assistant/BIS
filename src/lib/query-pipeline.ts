@@ -12,6 +12,7 @@ import { classifyKnowledgeBoundary } from "@/lib/knowledge-boundary";
 import { assessApplicability } from "@/lib/applicability";
 import { buildReferenceEntry } from "@/lib/reference-registry";
 import { getNeighbors, type GraphNeighbor } from "@/lib/graph/graph-retrieval";
+import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
 import { getDb } from "@/db";
 import { queryLogs } from "@/db/schema";
 
@@ -223,7 +224,19 @@ export async function runQueryPipeline(query: string, opts: { debug?: boolean } 
       certificationRequested: intent.certificationRequested,
       testingRequested: intent.testingRequested,
     },
-    clarificationNeeded: intent.missingInformation.length > 0 ? intent.missingInformation : undefined,
+    clarificationNeeded: (() => {
+      const rawMissing = intent.missingInformation ?? [];
+      const validSpecific = rawMissing.filter((item) => !isForbiddenGeneric(item));
+      const candidateHints = recommendations.map((r) => ({
+        standardNumber: r.standardNumber,
+        title: r.title,
+      }));
+      const options =
+        validSpecific.length >= 2
+          ? validSpecific
+          : getProductRefinements(normalized.normalizedQuery, intent.product, candidateHints);
+      return options.length > 0 ? options : undefined;
+    })(),
     recommendations,
     certification: {
       available: llmAnswer.certificationNotes !== null || deterministicCertificationNotes !== null,

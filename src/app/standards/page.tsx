@@ -39,6 +39,8 @@ async function getStandards(): Promise<StandardSummary[]> {
     const rawData = await fs.readFile(filePath, "utf-8");
     const list = JSON.parse(rawData);
 
+    const seenSlugs = new Set<string>();
+
     return list.map((item: {
       standard_id?: string;
       standard_number?: string;
@@ -60,9 +62,16 @@ async function getStandards(): Promise<StandardSummary[]> {
         : (item.is_number ?? `Standard ${idx + 1}`);
       
       const slugParts = [item.standard_number, item.part, item.section].filter(Boolean).join("-");
-      const slug = slugParts
+      let slug = slugParts
         ? slugParts.toLowerCase().replace(/[^a-z0-9]+/g, "-")
-        : (item.standard_id ? item.standard_id.toLowerCase() : `std-${idx + 1}`);
+        : (item.standard_id ? item.standard_id.toLowerCase().replace(/[^a-z0-9]+/g, "-") : `std-${idx + 1}`);
+
+      if (seenSlugs.has(slug)) {
+        slug = item.standard_id
+          ? item.standard_id.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+          : `${slug}-${idx + 1}`;
+      }
+      seenSlugs.add(slug);
 
       const cat = item.product_category || item.category || "Indian Standard";
       const displayTitle = item.short_title || item.full_title || item.title || "Indian Standard Specification";
