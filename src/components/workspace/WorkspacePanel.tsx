@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import {
   getRecentQueriesServerSnapshot,
@@ -8,36 +9,36 @@ import {
 } from "@/lib/recent-queries";
 
 /**
- * The workspace's right panel: output formats for the current result, and
- * the searches this browser has actually run.
+ * The workspace's right panel: what to do next with a result, and the
+ * searches this browser has actually run.
  *
- * None of the Studio formats are built yet, so every one is rendered
- * disabled and labelled "Planned" rather than as a button that silently
- * does nothing. A government service that offers a "Report" and produces
- * no report has told the user something untrue; an honest "not yet" costs
- * nothing and is the same rule the placeholder pages already follow.
+ * Testing and Certification go to the real sections of this app. Audio
+ * Overview does not exist — there is no speech synthesis anywhere in this
+ * codebase — so it is rendered disabled and labelled "Planned" rather than
+ * as a button that silently does nothing. A government service offering an
+ * audio overview that produces no audio has told the user something
+ * untrue; an honest "not yet" costs nothing, and is the same rule the
+ * placeholder pages already follow.
  *
  * The recent list is real: it comes from this browser's own query history
  * (src/lib/recent-queries.ts), not from invented "notebooks".
  */
 
-interface StudioFormat {
+interface WorkspaceAction {
   name: string;
   description: string;
   icon: React.ReactNode;
+  /** Where it goes, when it goes anywhere. */
+  href?: string;
 }
 
-const FORMATS: StudioFormat[] = [
-  { name: "Video Overview", description: "Narrated walkthrough of the result", icon: <PlayIcon /> },
-  { name: "Mind Map", description: "Standards and their relationships", icon: <MapIcon /> },
-  { name: "Reports", description: "Compliance summary for a product", icon: <ReportIcon /> },
-  { name: "Flashcards", description: "Key clauses to revise", icon: <CardsIcon /> },
-  { name: "Quiz", description: "Check understanding of a standard", icon: <QuizIcon /> },
-  { name: "Infographic", description: "Certification route at a glance", icon: <ChartIcon /> },
-  { name: "Data Table", description: "Clause-by-clause comparison", icon: <TableIcon /> },
+const ACTIONS: WorkspaceAction[] = [
+  { name: "Audio Overview", description: "Spoken summary of the result", icon: <SpeakerIcon /> },
+  { name: "Testings", description: "Test methods and recognised laboratories", icon: <FlaskIcon />, href: "/testing" },
+  { name: "Certifications", description: "Schemes, licences and the ISI mark", icon: <BadgeIcon />, href: "/certification" },
 ];
 
-export function StudioPanel({
+export function WorkspacePanel({
   onRerun,
   onCollapse,
 }: {
@@ -54,14 +55,14 @@ export function StudioPanel({
     <aside className="flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-border-strong/70 bg-surface-raised">
       <div className="flex items-center justify-between gap-2 border-b border-border/60 px-4 py-3">
         <h2 className="flex items-center gap-2 text-[13px] font-bold tracking-tight text-navy">
-          <StudioIcon className="h-4 w-4" />
-          Studio
+          <WorkspaceIcon className="h-4 w-4" />
+          Workspace
         </h2>
         <button
           type="button"
           onClick={onCollapse}
-          aria-label="Collapse studio panel"
-          title="Collapse studio panel"
+          aria-label="Collapse workspace panel"
+          title="Collapse workspace panel"
           className="rounded p-1 text-ink-faint transition-colors hover:bg-surface-alt hover:text-navy"
         >
           <PanelIcon className="h-4 w-4" />
@@ -70,36 +71,55 @@ export function StudioPanel({
 
       <div className="min-h-0 flex-1 overflow-y-auto">
         <div className="p-3">
-          <div className="grid grid-cols-2 gap-2.5">
-            {FORMATS.map((format) => (
-              <button
-                key={format.name}
-                type="button"
-                disabled
-                aria-disabled="true"
-                title={`${format.name} — not built yet`}
-                className="group flex cursor-not-allowed flex-col gap-2 rounded-lg border border-border/70 bg-surface-alt/50 p-3 text-left opacity-70"
-              >
-                <span className="flex items-center justify-between">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-md bg-navy/8 text-navy">
-                    {format.icon}
+          <div className="space-y-2">
+            {ACTIONS.map((action) =>
+              action.href ? (
+                <Link
+                  key={action.name}
+                  href={action.href}
+                  className="group flex items-center gap-3 rounded-lg border border-border/70 bg-surface-alt/40 p-3 transition-colors hover:border-navy hover:bg-navy/5"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-navy/10 text-navy">
+                    {action.icon}
                   </span>
-                  <span className="rounded bg-surface px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-ink-faint">
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-[13px] font-bold text-ink group-hover:text-navy">
+                      {action.name}
+                    </span>
+                    <span className="mt-0.5 block text-[11px] leading-snug text-ink-faint">
+                      {action.description}
+                    </span>
+                  </span>
+                  <ChevronIcon className="h-3.5 w-3.5 shrink-0 text-ink-faint group-hover:text-navy" />
+                </Link>
+              ) : (
+                <button
+                  key={action.name}
+                  type="button"
+                  disabled
+                  aria-disabled="true"
+                  title={`${action.name} — not built yet`}
+                  className="flex w-full cursor-not-allowed items-center gap-3 rounded-lg border border-border/70 bg-surface-alt/50 p-3 text-left opacity-70"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-navy/8 text-navy">
+                    {action.icon}
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-[13px] font-bold text-ink">{action.name}</span>
+                    <span className="mt-0.5 block text-[11px] leading-snug text-ink-faint">
+                      {action.description}
+                    </span>
+                  </span>
+                  <span className="shrink-0 rounded bg-surface px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-ink-faint">
                     Planned
                   </span>
-                </span>
-                <span className="min-w-0">
-                  <span className="block truncate text-[12.5px] font-bold text-ink">{format.name}</span>
-                  <span className="mt-0.5 block text-[10.5px] leading-snug text-ink-faint">
-                    {format.description}
-                  </span>
-                </span>
-              </button>
-            ))}
+                </button>
+              ),
+            )}
           </div>
           <p className="mt-2.5 px-1 text-[11px] leading-relaxed text-ink-faint">
-            These output formats are not built yet. They are shown so the
-            workspace layout is complete, not because they work.
+            Audio Overview is not built yet. Testing and Certification open this
+            service&apos;s own sections.
           </p>
         </div>
 
@@ -151,7 +171,7 @@ function relativeTime(timestamp: number): string {
   return `${Math.floor(hours / 24)}d ago`;
 }
 
-function StudioIcon(props: React.SVGProps<SVGSVGElement>) {
+function WorkspaceIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" />
@@ -175,52 +195,31 @@ const iconProps = {
   "aria-hidden": true,
 } as const;
 
-function PlayIcon() {
+function SpeakerIcon() {
   return (
     <svg {...iconProps}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.55-2.27A1 1 0 0121 8.6v6.8a1 1 0 01-1.45.87L15 14M5 6h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5L6 9H3v6h3l5 4V5zM15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13" />
     </svg>
   );
 }
-function MapIcon() {
+function FlaskIcon() {
   return (
     <svg {...iconProps}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h4v4H4zM16 4h4v4h-4zM16 14h4v4h-4zM8 8h8M8 8v8h8" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3h6M10 3v6L5 18a2 2 0 001.7 3h10.6a2 2 0 001.7-3l-5-9V3M8 14h8" />
     </svg>
   );
 }
-function ReportIcon() {
+function BadgeIcon() {
   return (
     <svg {...iconProps}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5l5 5v11a2 2 0 01-2 2z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m-3-7l2.1 1.6 2.6.1.9 2.4 2 1.7-1 2.4 1 2.4-2 1.7-.9 2.4-2.6.1L12 21l-2.1-1.6-2.6-.1-.9-2.4-2-1.7 1-2.4-1-2.4 2-1.7.9-2.4 2.6-.1L12 3z" />
     </svg>
   );
 }
-function CardsIcon() {
+function ChevronIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg {...iconProps}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2zM8 4h9" />
-    </svg>
-  );
-}
-function QuizIcon() {
-  return (
-    <svg {...iconProps}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 9a3 3 0 115 2.2c-.7.6-1 1.2-1 2.3m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-  );
-}
-function ChartIcon() {
-  return (
-    <svg {...iconProps}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17V9m5 8V5m5 12v-5M4 21h16" />
-    </svg>
-  );
-}
-function TableIcon() {
-  return (
-    <svg {...iconProps}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm0 4h16M10 10v10" />
+    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M9 5l7 7-7 7" />
     </svg>
   );
 }

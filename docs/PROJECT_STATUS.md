@@ -498,7 +498,7 @@ backend.
 | Item | Status | Notes |
 |---|---|---|
 | `src/components/workspace/SourcesPanel.tsx` | DONE | Official BIS sources + the existing Search Context panel, collapsible |
-| `src/components/workspace/StudioPanel.tsx` | DONE | Output-format cards + real recent searches, collapsible |
+| `src/components/workspace/WorkspacePanel.tsx` | DONE | Three actions + real recent searches, collapsible (was "Studio", renamed) |
 | `HomeClient` three-column results view | DONE | Columns follow which panels are open; both side panels hide below their breakpoint |
 | Shared recent-query store bindings | DONE | `subscribeToRecentQueries` / `getRecentQueriesSnapshot` extracted from `RecentQueries.tsx` into `src/lib/recent-queries.ts` so both surfaces share one implementation |
 | Truthfulness of the supplied design | ADAPTED | See below — 11 panel tests pin these |
@@ -625,4 +625,24 @@ and pushed the prompt bar below the fold, which is what it was supposed to
 prevent. Replaced with a `sticky bottom-0` prompt bar over a normally
 scrolling column: it floats at the bottom of the viewport without depending
 on the header's height being any particular value, and works below `lg` too.
+
+### Studio renamed to Workspace, cut to three actions (this session, follow-up)
+
+The seven output-format cards taken from the original design are removed.
+The panel is now titled **Workspace** and holds three actions:
+
+| Action | Status | Notes |
+|---|---|---|
+| Audio Overview | PLANNED | No speech synthesis exists anywhere in this codebase, so it renders disabled and labelled "Planned" |
+| Testings | DONE | Links to `/testing`, a real page in this service |
+| Certifications | DONE | Links to `/certification`, a real page in this service |
+
+Two of the three are real links rather than placeholders — `/testing` and
+`/certification` already exist and work, so there was no reason to render
+them disabled. Only Audio Overview is genuinely unbuilt.
+
+`StudioPanel.tsx` was renamed to `WorkspacePanel.tsx` with `git mv` so the
+history follows the file, and `showStudio` became `showWorkspace`.
+
+`npm run verify` green: 0 lint errors, 295 vitest tests across 37 files.
 

@@ -51,7 +51,7 @@ export function clearRecentQueries() {
 
 /**
  * `useSyncExternalStore` bindings for the recent-query list, shared by
- * every surface that shows it (the homepage list and the workspace Studio
+ * every surface that shows it (the homepage list and the right-hand Workspace
  * panel) so there is one implementation of the snapshot caching rather
  * than a copy per component.
  */

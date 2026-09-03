@@ -2,7 +2,7 @@ import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SourcesPanel } from "./SourcesPanel";
-import { StudioPanel } from "./StudioPanel";
+import { WorkspacePanel } from "./WorkspacePanel";
 import { getSourcesSnapshot, selectedStandardNumbers } from "@/lib/source-library";
 import type { QueryInterpretation } from "@/types/api";
 
@@ -340,22 +340,36 @@ describe("the knowledge base shared with the assistant", () => {
   });
 });
 
-describe("StudioPanel", () => {
-  test("offers the output formats from the design", () => {
-    render(<StudioPanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
-    for (const name of ["Video Overview", "Mind Map", "Reports", "Flashcards", "Quiz", "Infographic", "Data Table"]) {
+describe("WorkspacePanel", () => {
+  test("offers exactly the three workspace actions", () => {
+    render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
+    for (const name of ["Audio Overview", "Testings", "Certifications"]) {
       expect(screen.getByText(name)).toBeInTheDocument();
+    }
+    // The formats from the earlier design are gone.
+    for (const gone of ["Video Overview", "Mind Map", "Reports", "Flashcards", "Quiz", "Infographic", "Data Table"]) {
+      expect(screen.queryByText(gone), gone).not.toBeInTheDocument();
     }
   });
 
-  test("none of them pretend to work — each is disabled and labelled Planned", () => {
-    render(<StudioPanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
+  test("is titled Workspace, not Studio", () => {
+    render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
+    expect(screen.getByRole("heading", { name: "Workspace" })).toBeInTheDocument();
+    expect(screen.queryByText("Studio")).not.toBeInTheDocument();
+  });
+
+  test("Testing and Certification go to this service's real sections", () => {
+    render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
+    expect(screen.getByRole("link", { name: /Testings/ })).toHaveAttribute("href", "/testing");
+    expect(screen.getByRole("link", { name: /Certifications/ })).toHaveAttribute("href", "/certification");
+  });
+
+  test("Audio Overview does not pretend to work — there is no speech synthesis here", () => {
+    render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
     const planned = screen.getAllByText("Planned");
-    expect(planned).toHaveLength(7);
-    for (const label of planned) {
-      expect(label.closest("button")).toBeDisabled();
-    }
-    expect(screen.getByText(/not built yet/i)).toBeInTheDocument();
+    expect(planned).toHaveLength(1);
+    expect(planned[0].closest("button")).toBeDisabled();
+    expect(screen.getByText(/Audio Overview is not built yet/i)).toBeInTheDocument();
   });
 
   test("shows real search history, not invented notebooks", async () => {
@@ -367,7 +381,7 @@ describe("StudioPanel", () => {
     );
 
     const onRerun = vi.fn();
-    render(<StudioPanel onRerun={onRerun} onCollapse={vi.fn()} />);
+    render(<WorkspacePanel onRerun={onRerun} onCollapse={vi.fn()} />);
 
     const entry = screen.getByText("Domestic pressure cooker");
     expect(screen.getByText(/1 standard$/)).toBeInTheDocument();
@@ -377,15 +391,15 @@ describe("StudioPanel", () => {
   });
 
   test("says the history is empty rather than showing placeholder entries", () => {
-    render(<StudioPanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
+    render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
     const recent = screen.getByText(/Recent searches/i).closest("div");
     expect(within(recent as HTMLElement).getByText(/Nothing yet/i)).toBeInTheDocument();
   });
 
   test("collapses on request", async () => {
     const onCollapse = vi.fn();
-    render(<StudioPanel onRerun={vi.fn()} onCollapse={onCollapse} />);
-    await userEvent.setup().click(screen.getByRole("button", { name: /collapse studio panel/i }));
+    render(<WorkspacePanel onRerun={vi.fn()} onCollapse={onCollapse} />);
+    await userEvent.setup().click(screen.getByRole("button", { name: /collapse workspace panel/i }));
     expect(onCollapse).toHaveBeenCalled();
   });
 });

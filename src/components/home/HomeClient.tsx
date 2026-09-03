@@ -26,7 +26,7 @@ import {
   selectedStandardNumbers,
   subscribeToSources,
 } from "@/lib/source-library";
-import { StudioPanel } from "@/components/workspace/StudioPanel";
+import { WorkspacePanel } from "@/components/workspace/WorkspacePanel";
 import { addRecentQuery } from "@/lib/recent-queries";
 import type { QueryResponse } from "@/types/api";
 
@@ -73,7 +73,7 @@ export function HomeClient() {
 
   const [loading, setLoading] = useState(false);
   const [showSources, setShowSources] = useState(true);
-  const [showStudio, setShowStudio] = useState(true);
+  const [showWorkspace, setShowWorkspace] = useState(true);
   const [result, setResult] = useState<QueryResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [activeQuery, setActiveQuery] = useState(urlQuery);
@@ -165,12 +165,12 @@ export function HomeClient() {
   const chatStandardNumbers = [...new Set([...resultStandardNumbers, ...sourceStandardNumbers])];
 
   // Column template follows which panels are open. Both side panels are
-  // hidden below their breakpoint (sources under lg, studio under xl), so
+  // hidden below their breakpoint (sources under lg, workspace under xl), so
   // narrow screens get the assistant full-width rather than three columns
   // squeezed into one.
   const workspaceColumns = [
     showSources ? "lg:grid-cols-[320px_1fr]" : "lg:grid-cols-1",
-    showStudio
+    showWorkspace
       ? showSources
         ? "xl:grid-cols-[330px_1fr_360px]"
         : "xl:grid-cols-[1fr_360px]"
@@ -244,13 +244,13 @@ export function HomeClient() {
                         Show sources
                       </button>
                     )}
-                    {!showStudio && (
+                    {!showWorkspace && (
                       <button
                         type="button"
-                        onClick={() => setShowStudio(true)}
+                        onClick={() => setShowWorkspace(true)}
                         className="hidden rounded-md border border-border-strong px-2.5 py-1 text-[11px] font-bold text-ink-soft transition-colors hover:border-navy hover:text-navy xl:inline-flex"
                       >
-                        Show studio
+                        Show workspace
                       </button>
                     )}
                   </div>
@@ -489,11 +489,11 @@ export function HomeClient() {
                 </div>
               </div>
 
-              {/* RIGHT: output formats for this result, and this browser's
+              {/* RIGHT: what to do next with this result, and this browser's
                   own recent searches */}
-              {showStudio && (
+              {showWorkspace && (
                 <div className="hidden xl:block xl:sticky xl:top-4 xl:h-[calc(100vh-7rem)]">
-                  <StudioPanel onRerun={runQuery} onCollapse={() => setShowStudio(false)} />
+                  <WorkspacePanel onRerun={runQuery} onCollapse={() => setShowWorkspace(false)} />
                 </div>
               )}
             </div>
