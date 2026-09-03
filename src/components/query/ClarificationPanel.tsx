@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
 
 interface ClarificationPanelProps {
@@ -14,8 +14,10 @@ interface ClarificationPanelProps {
 /**
  * Product-Aware Refinement Panel:
  * - Recommendations stay in place as horizontal clickable chips.
- * - Clicking each recommendation pops up a small input column underneath where user can write or customize their answer.
- * - Clicking "Refine Search" displays an animated combining step showing all inputs being synthesized together before executing search.
+ * - Clicking a recommendation pops up a small compact input box adjusted just below the recommendations.
+ * - Only the input for the clicked recommendation is visible (all others disappear).
+ * - Input has NO default text; only placeholder text is kept.
+ * - On clicking "Refine Search", an animated combining phase displays all inputs being synthesized together.
  */
 export function ClarificationPanel({
   items,
@@ -24,10 +26,17 @@ export function ClarificationPanel({
   onRefine,
   loading = false,
 }: ClarificationPanelProps) {
+  // Set of selected recommendations
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-  const [inputValues, setInputValues] = useState<Record<string, string>>({});
+  // Custom text entered by the user (keyed by recommendation)
+  const [customValues, setCustomValues] = useState<Record<string, string>>({});
+  // Which recommendation currently has its small input column open (ONLY ONE AT A TIME)
+  const [activeRecommendation, setActiveRecommendation] = useState<string | null>(null);
+  // Animation state when Refine Search is clicked
   const [isSynthesizing, setIsSynthesizing] = useState(false);
   const [synthesisStep, setSynthesisStep] = useState(1);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Clear synthesizing state when parent loading finishes
   useEffect(() => {
@@ -36,7 +45,14 @@ export function ClarificationPanel({
     }
   }, [loading]);
 
-  // Strictly filter out generic labels and provide product-specific options
+  // Focus the input when active recommendation changes
+  useEffect(() => {
+    if (activeRecommendation && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [activeRecommendation]);
+
+  // Strictly filter out forbidden generic labels and provide product-specific options
   const displayItems = useMemo(() => {
     const specificItems = (items || []).filter((item) => !isForbiddenGeneric(item));
     if (specificItems.length >= 2) return specificItems;
@@ -45,34 +61,49 @@ export function ClarificationPanel({
 
   if (!displayItems || displayItems.length === 0) return null;
 
-  function toggleOption(item: string) {
-    setSelectedKeys((prev) => {
-      if (prev.includes(item)) {
-        return prev.filter((i) => i !== item);
-      } else {
-        // Initialize input value with recommendation text
-        setInputValues((current) => ({
-          ...current,
-          [item]: current[item] || item,
-        }));
-        return [...prev, item];
+  function handleChipClick(item: string) {
+    if (activeRecommendation === item) {
+      // Toggle off active popup
+      setActiveRecommendation(null);
+    } else {
+      // Switch active input box to this clicked recommendation (all other input boxes disappear)
+      setActiveRecommendation(item);
+      // Mark as selected if not already
+      if (!selectedKeys.includes(item)) {
+        setSelectedKeys((prev) => [...prev, item]);
       }
-    });
+    }
   }
 
-  function handleInputChange(key: string, value: string) {
-    setInputValues((prev) => ({
+  function handleInputChange(item: string, value: string) {
+    setCustomValues((prev) => ({
       ...prev,
-      [key]: value,
+      [item]: value,
     }));
+    if (!selectedKeys.includes(item)) {
+      setSelectedKeys((prev) => [...prev, item]);
+    }
+  }
+
+  function removeRecommendation(item: string) {
+    setSelectedKeys((prev) => prev.filter((k) => k !== item));
+    setCustomValues((prev) => {
+      const next = { ...prev };
+      delete next[item];
+      return next;
+    });
+    if (activeRecommendation === item) {
+      setActiveRecommendation(null);
+    }
   }
 
   function handleRefineSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!onRefine || loading || selectedKeys.length === 0) return;
 
+    // Use user custom answer if typed; otherwise fallback to recommendation text itself
     const finalSpecs = selectedKeys
-      .map((k) => inputValues[k]?.trim() || k)
+      .map((k) => customValues[k]?.trim() || k)
       .filter(Boolean);
 
     if (finalSpecs.length === 0) return;
@@ -100,8 +131,8 @@ export function ClarificationPanel({
     ? product.charAt(0).toUpperCase() + product.slice(1)
     : "";
 
-  const activeSpecs = selectedKeys
-    .map((k) => inputValues[k]?.trim() || k)
+  const finalSpecs = selectedKeys
+    .map((k) => customValues[k]?.trim() || k)
     .filter(Boolean);
 
   return (
@@ -128,7 +159,7 @@ export function ClarificationPanel({
                   : "Recommended specifications for your product"}
               </h2>
               <p className="mt-0.5 text-xs text-ink-soft">
-                Click any recommendation to select and customize its exact measurement or specification:
+                Click any recommendation to select it or specify your exact measurement:
               </p>
             </div>
 
@@ -139,78 +170,107 @@ export function ClarificationPanel({
             )}
           </div>
 
-          {/* Horizontally organized recommendations chips (in the exact same place) */}
+          {/* Recommendations chips (in the exact same place) */}
           <div className="mt-3.5 flex flex-wrap items-center gap-2">
             {displayItems.map((item, idx) => {
               const isSelected = selectedKeys.includes(item);
+              const isCurrentlyActive = activeRecommendation === item;
+              const displayLabel = customValues[item]?.trim() || item;
 
               return (
                 <button
                   key={idx}
                   type="button"
-                  onClick={() => toggleOption(item)}
+                  onClick={() => handleChipClick(item)}
                   disabled={loading || isSynthesizing}
                   className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer shadow-2xs ${
-                    isSelected
-                      ? "bg-navy text-white hover:bg-navy-deep border border-navy ring-2 ring-navy/20"
-                      : "bg-surface-alt text-ink border border-border-strong hover:border-navy hover:text-navy hover:bg-navy/5"
+                    isCurrentlyActive
+                      ? "bg-navy text-white ring-2 ring-gold/70 border border-gold"
+                      : isSelected
+                        ? "bg-navy text-white hover:bg-navy-deep border border-navy ring-2 ring-navy/20"
+                        : "bg-surface-alt text-ink border border-border-strong hover:border-navy hover:text-navy hover:bg-navy/5"
                   }`}
                 >
-                  <span className={`font-bold ${isSelected ? "text-gold" : "text-navy"}`}>
+                  <span className={`font-bold ${isSelected || isCurrentlyActive ? "text-gold" : "text-navy"}`}>
                     {isSelected ? "✓" : "+"}
                   </span>
-                  <span>{item}</span>
+                  <span>{displayLabel}</span>
+                  {isCurrentlyActive && (
+                    <span className="text-[10px] text-white/75">▾</span>
+                  )}
                 </button>
               );
             })}
           </div>
 
-          {/* Small input columns pop up under recommendations when selected */}
-          {selectedKeys.length > 0 && (
-            <div className="mt-4 pt-3.5 border-t border-border/70 space-y-2.5 animate-in fade-in slide-in-from-top-1 duration-200">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-ink-soft uppercase tracking-wider">
-                  Customize Values ({selectedKeys.length}):
+          {/* Small compact input box adjusted just below the recommendations —
+              ONLY visible for the recommendation that was clicked, all others disappear.
+              NO default text, only placeholder text. */}
+          {activeRecommendation && (
+            <div className="mt-3 inline-block w-full max-w-sm rounded-xl border border-navy/30 bg-surface p-2.5 shadow-xs transition-all animate-in fade-in slide-in-from-top-1 duration-150">
+              <div className="flex items-center justify-between text-[11px] font-semibold text-navy mb-1.5">
+                <span className="truncate flex items-center gap-1">
+                  <span>Enter specification for</span>
+                  <span className="font-bold underline decoration-gold/60">{activeRecommendation}</span>:
                 </span>
                 <button
                   type="button"
-                  onClick={() => {
-                    setSelectedKeys([]);
-                    setInputValues({});
-                  }}
-                  className="text-[11px] font-medium text-ink-faint hover:text-red-600 transition-colors cursor-pointer"
+                  onClick={() => setActiveRecommendation(null)}
+                  className="text-ink-faint hover:text-navy transition-colors text-xs font-bold px-1"
+                  title="Close input"
                 >
-                  Clear all
+                  ✕
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-                {selectedKeys.map((key) => (
-                  <div
-                    key={key}
-                    className="flex flex-col gap-1 rounded-xl border border-navy/25 bg-surface p-2.5 shadow-2xs transition-all focus-within:border-navy focus-within:ring-2 focus-within:ring-navy/15"
-                  >
-                    <div className="flex items-center justify-between text-[11px] font-semibold text-navy">
-                      <span className="truncate">{key}</span>
-                      <button
-                        type="button"
-                        onClick={() => toggleOption(key)}
-                        className="text-ink-faint hover:text-red-600 transition-colors p-0.5"
-                        title="Remove specification"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      value={inputValues[key] ?? key}
-                      onChange={(e) => handleInputChange(key, e.target.value)}
-                      placeholder={`e.g. ${key}`}
-                      className="w-full text-xs font-medium text-ink bg-transparent border-0 outline-none placeholder:text-ink-faint focus:ring-0"
-                    />
-                  </div>
-                ))}
+              <div className="flex items-center gap-2">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={customValues[activeRecommendation] || ""}
+                  onChange={(e) => handleInputChange(activeRecommendation, e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      setActiveRecommendation(null);
+                    }
+                  }}
+                  placeholder={`e.g. ${activeRecommendation}`}
+                  className="flex-1 rounded-lg border border-border px-2.5 py-1.5 text-xs font-medium text-ink bg-surface-raised outline-none transition-all focus:border-navy focus:ring-1 focus:ring-navy placeholder:text-ink-faint"
+                />
+                <button
+                  type="button"
+                  onClick={() => setActiveRecommendation(null)}
+                  className="shrink-0 rounded-lg bg-navy px-3 py-1.5 text-xs font-bold text-white hover:bg-navy-deep transition-all cursor-pointer"
+                >
+                  Done
+                </button>
               </div>
+            </div>
+          )}
+
+          {/* Active selections strip with quick remove if user has selected items */}
+          {selectedKeys.length > 0 && (
+            <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs">
+              <span className="text-[11px] font-semibold text-ink-soft">Active parameters:</span>
+              {selectedKeys.map((key) => {
+                const text = customValues[key]?.trim() || key;
+                return (
+                  <span
+                    key={key}
+                    className="inline-flex items-center gap-1 rounded-md bg-navy/10 border border-navy/20 px-2 py-0.5 text-[11px] font-medium text-navy"
+                  >
+                    <span>{text}</span>
+                    <button
+                      type="button"
+                      onClick={() => removeRecommendation(key)}
+                      className="text-navy/70 hover:text-red-600 transition-colors font-bold text-[10px] ml-0.5"
+                    >
+                      ✕
+                    </button>
+                  </span>
+                );
+              })}
             </div>
           )}
 
@@ -234,11 +294,11 @@ export function ClarificationPanel({
                 </span>
               </div>
 
-              {/* Displaying the inputs being combined */}
-              {activeSpecs.length > 0 && (
+              {/* Displaying all inputs actively being combined */}
+              {finalSpecs.length > 0 && (
                 <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-[11px]">
                   <span className="text-ink-soft">Combining:</span>
-                  {activeSpecs.map((spec, sIdx) => (
+                  {finalSpecs.map((spec, sIdx) => (
                     <span
                       key={sIdx}
                       className="inline-flex items-center rounded-md bg-white dark:bg-surface-raised px-2 py-0.5 font-medium text-navy border border-navy/20 shadow-2xs"
