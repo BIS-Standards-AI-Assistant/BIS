@@ -41,9 +41,13 @@ interface QcoEntry {
 function canonicalNumberOf(e: QcoEntry): string | null {
   if (e.is_number) return e.is_number;
   if (!e.standard_number) return null;
-  const partSuffix = e.part
-    ? ` (Part ${e.part}${e.section ? `/Sec ${e.section}` : ""})`
-    : "";
+  // e.part/e.section already read "Part 1"/"Sec 6" (confirmed against
+  // the raw file, 2026-09-04) — do not re-prefix with "Part "/"Sec " a
+  // second time, or this produces "(Part Part 1)" / "(Sec Sec 6)", a
+  // real bug this session's certification-schemes tests initially missed
+  // because they only checked substring inclusion (`.includes("1786")`),
+  // not the full reconstructed identifier.
+  const partSuffix = e.part ? ` (${e.part}${e.section ? `/${e.section}` : ""})` : "";
   return e.year ? `${e.standard_number}${partSuffix}:${e.year}` : `${e.standard_number}${partSuffix}`;
 }
 

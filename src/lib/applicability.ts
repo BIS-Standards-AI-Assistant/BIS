@@ -93,11 +93,11 @@ export function assessApplicability(input: ApplicabilityInput): ApplicabilityRes
     };
   }
 
-  // A candidate with no evidence coverage of the product itself (and no
-  // material conflict either way) is one whose scope relative to the
-  // query is genuinely unclear from what's indexed, not a confirmed
-  // match — never upgraded to "applicable" on relevance/ranking alone.
-  if (coverage.product === "not_covered" && coverage.overallCoverageRatio < 0.5) {
+  // A candidate whose evidence explicitly does NOT cover the stated
+  // product is one whose scope relative to the query is genuinely
+  // unclear from what's indexed, not a confirmed match — never upgraded
+  // to "applicable" on relevance/ranking alone.
+  if (coverage.product === "not_covered") {
     return {
       state: "SCOPE_UNCLEAR",
       reason: "This standard's scope relative to the specific product in the query could not be clearly established from the available evidence.",
@@ -105,7 +105,17 @@ export function assessApplicability(input: ApplicabilityInput): ApplicabilityRes
     };
   }
 
-  if (groundingState === "verified" && coverage.overallCoverageRatio >= 0.6) {
+  // DIRECTLY_APPLICABLE requires a REAL, positive signal that the
+  // evidence covers the query's product OR that the user named this
+  // exact standard (coverage.identifier === "covered") — never merely a
+  // high overallCoverageRatio on its own. Live defect found by this
+  // session's E2E suite: when no product/material is stated at all
+  // (common without an LLM — intent.product is null), analyzeCoverage's
+  // ratio defaults to a *vacuous* 1.0 ("nothing to cover, so 100%
+  // covered"), which previously satisfied a bare `ratio >= 0.6` check
+  // for literally any high-relevance-scoring nonsense query and reported
+  // it as high-confidence/directly-applicable.
+  if (groundingState === "verified" && (coverage.product === "covered" || coverage.identifier === "covered")) {
     return {
       state: "DIRECTLY_APPLICABLE",
       reason: "Evidence directly supports this standard applying to the query.",
@@ -121,6 +131,11 @@ export function assessApplicability(input: ApplicabilityInput): ApplicabilityRes
     };
   }
 
+  // groundingState === "verified" reaches here only when neither the
+  // product nor the exact identifier was confirmed against the evidence
+  // (e.g. no product/material could be extracted at all) — real,
+  // topically-retrieved evidence, but not a confirmed applicability
+  // match, so RELATED rather than DIRECTLY_APPLICABLE.
   return {
     state: "RELATED",
     reason: "This standard is topically related to the query, but its applicability has not been specifically established.",

@@ -24,7 +24,12 @@
 
   --color-ink: #1e293b;
   --color-ink-soft: #475569;
-  --color-ink-faint: #64748b;
+  /* Darkened from #64748b (E2E a11y suite, 2026-09-03): axe-core found
+     this token at 4.29-4.42:1 against several real surface-alt/surface
+     backgrounds it's actually paired with (bold 10.5-12px labels), below
+     WCAG AA's 4.5:1. #5c6b80 clears 4.9:1+ against the same backgrounds
+     while staying visibly lighter than --color-ink-soft. */
+  --color-ink-faint: #5c6b80;
 
   --color-accent: #e8622a;
   --color-accent-soft: #ffeedb;

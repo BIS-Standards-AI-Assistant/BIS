@@ -35,4 +35,18 @@ describe("loadCertificationSchemes", () => {
       expect(item.standardNumber).toMatch(/^IS[/ ]/);
     }
   });
+
+  test("REGRESSION (found by the E2E suite, 2026-09-04): part/section labels are never doubled ('Part Part', 'Sec Sec')", async () => {
+    // The new-shape dataset's e.part/e.section fields already read
+    // "Part 1"/"Sec 6" — canonicalNumberOf() previously re-prefixed them
+    // with another "Part "/"Sec ", producing "(Part Part 1)". This broke
+    // every exact-match lookup for a standard with a part/section.
+    const items = await loadCertificationSchemes();
+    const withPart = items.filter((i) => i.standardNumber.includes("Part") || i.standardNumber.includes("Sec"));
+    expect(withPart.length).toBeGreaterThan(0);
+    for (const item of withPart) {
+      expect(item.standardNumber).not.toMatch(/Part\s+Part/);
+      expect(item.standardNumber).not.toMatch(/Sec\s+Sec/);
+    }
+  });
 });

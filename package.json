@@ -14,6 +14,12 @@
     "test:ml": "tsx scripts/test-query-normalization.ts && tsx scripts/test-evidence-aggregation.ts && tsx scripts/test-grounding-pipeline.ts && tsx scripts/test-answer-schema-validation.ts",
     "test:unit": "vitest run",
     "test": "npm run test:ml && npm run test:unit",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:a11y": "playwright test --grep @a11y",
+    "test:responsive": "playwright test --grep @responsive",
+    "test:visual": "playwright test --grep @visual",
+    "verify:ui": "npm run test:e2e",
     "links:check": "tsx scripts/check-official-links.ts",
     "eval:retrieval": "tsx scripts/eval-retrieval.ts",
     "eval:reranker": "dotenv -e .env.local -- tsx scripts/eval-reranker.ts",
@@ -44,6 +50,8 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",

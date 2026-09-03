@@ -125,7 +125,10 @@ export function RecentQueries({ onRerun }: { onRerun?: (query: string) => void }
       <div className="mt-4 hidden overflow-hidden rounded-xl border border-border bg-surface-raised shadow-sm md:block">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-border bg-surface-alt text-[11px] font-bold uppercase tracking-wider text-ink-faint">
+            {/* text-ink-soft, not text-ink-faint: axe-core found the
+                faint token on bg-surface-alt at 4.29:1, below WCAG AA's
+                4.5:1 for this bold 11px text (E2E a11y suite, 2026-09-03). */}
+            <tr className="border-b border-border bg-surface-alt text-[11px] font-bold uppercase tracking-wider text-ink-soft">
               <th className="w-12 px-5 py-3.5">{t.recent.colHash}</th>
               <th className="px-5 py-3.5">{t.recent.colQuery}</th>
               <th className="px-5 py-3.5">{t.recent.colStandards}</th>

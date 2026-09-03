@@ -43,7 +43,12 @@ export function SearchHero({
             onChange={(e) => setValue(e.target.value)}
             placeholder={compact ? t.hero.searchPlaceholderCompact : t.hero.searchPlaceholderFull}
             aria-label={t.hero.searchPlaceholderCompact}
-            className={`flex-1 bg-transparent px-1 text-ink outline-none placeholder:text-ink-faint ${
+            // min-w-0: without it, a flex item's default content-based
+            // minimum width (not 0) stops it shrinking below the
+            // placeholder text's natural width, pushing the submit
+            // button off-screen at narrow viewports (E2E responsive
+            // suite, 2026-09-03 — confirmed overflow at 360/390px).
+            className={`min-w-0 flex-1 bg-transparent px-1 text-ink outline-none placeholder:text-ink-faint ${
               compact ? "py-2 text-sm" : "py-3 text-[15px]"
             }`}
           />

@@ -1,0 +1,3 @@
+This product specification references IS 14543:2016 for packaged drinking water
+requirements, and also mentions IS 13428:2005 for natural mineral water testing.
+The product does not comply with IS 99999:2099 which does not exist.

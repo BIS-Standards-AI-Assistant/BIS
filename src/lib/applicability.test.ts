@@ -115,6 +115,34 @@ describe("assessApplicability", () => {
     expect(result.state).toBe("SCOPE_UNCLEAR");
   });
 
+  test("REGRESSION (live E2E defect, 2026-09-03): verified grounding with NO product/material stated anywhere -> RELATED, never DIRECTLY_APPLICABLE/high-confidence", () => {
+    // The exact bug: a nonsense query with no extractable product/material
+    // (the common no-LLM case) previously satisfied a bare
+    // overallCoverageRatio >= 0.6 check (vacuously 1.0 when nothing was
+    // asked) and was reported as high-confidence/directly-applicable for
+    // real standards it has no actual basis to endorse that strongly.
+    const result = assessApplicability({
+      query: "xyzzy-nonexistent-product-qqq",
+      intentMaterial: null,
+      candidateTitle: "Packaged Drinking Water (Other than Packaged Natural Mineral Water)",
+      coverage: coverage({ overallCoverageRatio: 1 }), // product/identifier both "unknown" — nothing was actually confirmed
+      groundingState: "verified",
+    });
+    expect(result.state).toBe("RELATED");
+    expect(result.state).not.toBe("DIRECTLY_APPLICABLE");
+  });
+
+  test("an exact standard-number query (identifier covered) is DIRECTLY_APPLICABLE even with no product/material text", () => {
+    const result = assessApplicability({
+      query: "IS 14543:2016",
+      intentMaterial: null,
+      candidateTitle: "Packaged Drinking Water (Other than Packaged Natural Mineral Water)",
+      coverage: coverage({ identifier: "covered", overallCoverageRatio: 1 }),
+      groundingState: "verified",
+    });
+    expect(result.state).toBe("DIRECTLY_APPLICABLE");
+  });
+
   test("supported_inference with decent coverage and no conflict -> POTENTIALLY_APPLICABLE", () => {
     const result = assessApplicability({
       query: "helmet",

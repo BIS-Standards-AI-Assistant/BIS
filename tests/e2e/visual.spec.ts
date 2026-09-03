@@ -1,0 +1,61 @@
+import { test, expect } from "./fixtures/test-base";
+import { KNOWN_QUERIES } from "./fixtures/known-data";
+
+/**
+ * @visual — run with `npm run test:visual`
+ *
+ * Screenshots only of stable, important surfaces, per the spec. Dynamic
+ * data (query text echoed back, timestamps in chat messages) is masked
+ * rather than snapshotted raw, so these don't flake on every re-run of
+ * live retrieval scores. First run creates the baseline; subsequent runs
+ * diff against it (standard Playwright snapshot behavior).
+ */
+
+test.describe("@visual Stable surface screenshots", () => {
+  test("home / search (empty state)", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveScreenshot("home-empty.png", { fullPage: true, maxDiffPixelRatio: 0.02 });
+  });
+
+  test("search results", async ({ page }) => {
+    await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
+    await page.getByText("Search Synthesis").waitFor({ timeout: 60_000 });
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveScreenshot("search-results.png", {
+      fullPage: true,
+      maxDiffPixelRatio: 0.05, // real evidence text/scores can shift slightly as the corpus grows
+      mask: [page.getByText(/\d+\.\d{3}/)], // raw score numbers in "technical detail" panels, if expanded
+    });
+  });
+
+  test("Standard Passport", async ({ page }) => {
+    await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
+    await page.getByText("Search Synthesis").waitFor({ timeout: 60_000 });
+    await page.getByRole("link", { name: "View Complete Standard Passport" }).first().click();
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveScreenshot("standard-passport.png", { fullPage: true, maxDiffPixelRatio: 0.05 });
+  });
+
+  test("research assistant open state", async ({ page }) => {
+    await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
+    await page.getByText("Search Synthesis").waitFor({ timeout: 60_000 });
+    await page.getByRole("button", { name: "Discuss these results" }).click();
+    await page.getByPlaceholder("Ask any question about BIS standards...").waitFor();
+    await expect(page.locator("div").filter({ hasText: "Discuss these results" }).last()).toHaveScreenshot(
+      "research-assistant.png",
+      { maxDiffPixelRatio: 0.05, mask: [page.locator("text=/\\d{1,2}:\\d{2}\\s*(AM|PM)/i")] }, // message timestamps
+    );
+  });
+
+  test("laboratory finder blocked state (API response shape, captured as rendered JSON for visibility in reports)", async ({ page }) => {
+    // No dedicated UI page exists for this feature yet (docs/FINAL_E2E_AUDIT.md)
+    // — screenshotting the raw JSON response is the honest equivalent of a
+    // "blocked state" visual for a feature that is API-only right now.
+    await page.goto("about:blank");
+    const res = await page.request.post("/api/v1/find-laboratories", { data: { location: "Delhi" } });
+    const body = await res.json();
+    await page.setContent(`<pre style="font-family:monospace;padding:16px;">${JSON.stringify(body, null, 2)}</pre>`);
+    await expect(page).toHaveScreenshot("laboratory-finder-blocked.png");
+  });
+});
