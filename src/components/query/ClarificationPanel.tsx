@@ -1,30 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
 
 interface ClarificationPanelProps {
   items: string[];
+  product?: string | null;
   currentQuery?: string;
   onRefine?: (newQuery: string) => void;
   loading?: boolean;
 }
 
 /**
- * Clean clarification panel:
- * Recommended options are displayed horizontally as clickable chips.
+ * Product-Aware Refinement Panel:
+ * Recommended options are strictly concrete product specifications (e.g. "Stainless Steel Grade 304",
+ * "Vacuum Insulated Flask", "Two-Wheeler Motorcycle (IS 4151)") tailored to the product searched.
  * Clicking each option directly selects/adds it (toggled with a checkmark).
  * Clicking "Refine Search" executes the search with all selected specifications.
- * No input boxes, no "+1" text, pure direct selection.
+ * No generic placeholders (e.g. "intended use"), no input boxes, pure direct selection.
  */
 export function ClarificationPanel({
   items,
+  product,
   currentQuery = "",
   onRefine,
   loading = false,
 }: ClarificationPanelProps) {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
-  if (!items || items.length === 0) return null;
+  // Strictly filter out any generic abstract labels (e.g. "intended use", "material grade", "size or capacity")
+  // and ensure concrete specifications for the searched product are always available.
+  const displayItems = useMemo(() => {
+    const specificItems = (items || []).filter((item) => !isForbiddenGeneric(item));
+    if (specificItems.length >= 2) return specificItems;
+    return getProductRefinements(currentQuery, product);
+  }, [items, currentQuery, product]);
+
+  if (!displayItems || displayItems.length === 0) return null;
 
   function toggleOption(item: string) {
     setSelectedOptions((prev) =>
@@ -42,6 +54,10 @@ export function ClarificationPanel({
 
     onRefine(refinedQuery);
   }
+
+  const productName = product?.trim()
+    ? product.charAt(0).toUpperCase() + product.slice(1)
+    : "";
 
   return (
     <div className="rounded-2xl border border-border-strong/70 bg-surface-raised p-5 sm:p-6 shadow-xs transition-all hover:border-navy/30">
@@ -62,7 +78,9 @@ export function ClarificationPanel({
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h2 className="text-sm sm:text-base font-bold text-navy-deep dark:text-ink">
-                This answer would be more precise with one more detail
+                {productName
+                  ? `Recommended specifications for ${productName}`
+                  : "Recommended specifications for your product"}
               </h2>
               <p className="mt-0.5 text-xs text-ink-soft">
                 Click any recommended specification below to add it directly to your query:
@@ -78,7 +96,7 @@ export function ClarificationPanel({
 
           {/* Horizontally organized chips - click to directly select/add */}
           <div className="mt-3.5 flex flex-wrap items-center gap-2">
-            {items.map((item, idx) => {
+            {displayItems.map((item, idx) => {
               const isSelected = selectedOptions.includes(item);
 
               return (
@@ -102,7 +120,7 @@ export function ClarificationPanel({
             })}
           </div>
 
-          {/* Clean Refine Search Button - shows when options are selected, NO "+1" text */}
+          {/* Clean Refine Search Button - shows when options are selected */}
           {selectedOptions.length > 0 && (
             <form onSubmit={handleRefineSubmit} className="mt-4 pt-3 border-t border-border/70 flex justify-end">
               <button
