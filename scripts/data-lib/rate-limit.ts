@@ -7,6 +7,11 @@
 
 const MIN_DELAY_MS = 1500; // one request roughly every 1.5s, well under anything that would look like hammering a small gov site
 const MAX_RETRIES = 3;
+// Node's fetch has no default timeout: a server that accepts the connection
+// and then never answers hangs the whole script indefinitely. bis.gov.in
+// does this occasionally under load, so every attempt gets its own deadline
+// and is retried like any other transport error.
+const TIMEOUT_MS = 45_000;
 
 let lastRequestAt = 0;
 
@@ -30,7 +35,11 @@ export async function politeFetch(url: string, init?: RequestInit): Promise<Resp
   let lastError: unknown;
   while (attempt < MAX_RETRIES) {
     try {
-      const res = await fetch(url, { ...init, headers: { "User-Agent": "BIS-Navigator-Research/1.0 (non-commercial student project)", ...init?.headers } });
+      const res = await fetch(url, {
+        signal: AbortSignal.timeout(TIMEOUT_MS),
+        ...init,
+        headers: { "User-Agent": "BIS-Navigator-Research/1.0 (non-commercial student project)", ...init?.headers },
+      });
       if (res.ok) return res;
       // Retry on 429/5xx only — a 404 or 403 won't fix itself with a delay.
       if (res.status === 429 || res.status >= 500) {

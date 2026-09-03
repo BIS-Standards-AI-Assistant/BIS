@@ -32,6 +32,7 @@
     "data:parse-batch": "tsx scripts/data-parse-batch.ts",
     "data:migrate-existing": "dotenv -e .env.local -- tsx scripts/data-migrate-existing.ts",
     "data:report": "dotenv -e .env.local -- tsx scripts/data-report.ts",
+    "data:policy-pages": "tsx scripts/scrape-bis-policy-pages.ts",
     "data:relationships": "dotenv -e .env.local -- tsx scripts/data-relationships.ts",
     "data:relationships-extract": "dotenv -e .env.local -- tsx scripts/data-relationships-extract.ts",
     "tools:smoke": "dotenv -e .env.local -- tsx scripts/tools-smoke.ts",
@@ -39,6 +40,8 @@
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.86",
+    "@neon/config": "^1.2.0",
+    "@neon/env": "^1.2.0",
     "@neondatabase/serverless": "^1.1.0",
     "@openrouter/ai-sdk-provider": "^3.0.0",
     "ai": "^7.0.83",
