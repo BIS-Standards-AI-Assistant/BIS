@@ -17,6 +17,12 @@ interface BisChatBotProps {
   currentQuery?: string;
   /** Real standard numbers from the current results, so the server can resolve authoritative context by ID — never the recommendations' text/reason fields. */
   standardNumbers?: string[];
+  /**
+   * How many of `standardNumbers` came from documents the reader added in
+   * the Sources panel, so the scope line can say where the context came
+   * from rather than leaving them to guess.
+   */
+  fromAddedSources?: number;
 }
 
 const QUICK_PROMPTS = [
@@ -39,7 +45,7 @@ function greetingFor(currentQuery: string): Message {
   };
 }
 
-export function BisChatBot({ currentQuery = "", standardNumbers = [] }: BisChatBotProps) {
+export function BisChatBot({ currentQuery = "", standardNumbers = [], fromAddedSources = 0 }: BisChatBotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -198,7 +204,8 @@ export function BisChatBot({ currentQuery = "", standardNumbers = [] }: BisChatB
                 </p>
                 {standardNumbers.length > 0 && (
                   <p className="text-[9.5px] text-white/60 font-medium">
-                    Scope: current results ({standardNumbers.length})
+                    Scope: {standardNumbers.length} standard{standardNumbers.length === 1 ? "" : "s"}
+                    {fromAddedSources > 0 && ` · ${fromAddedSources} from your sources`}
                   </p>
                 )}
               </div>

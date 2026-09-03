@@ -532,3 +532,48 @@ column; e-BIS is now a row in the sources list.
 
 `npm run verify` green: 0 lint errors, 264 vitest tests across 36 files (up
 from 253 across 35).
+
+### Sources panel: reader-supplied documents, shared with the assistant (this session, follow-up)
+
+The Sources panel was rebuilt from a supplied design into a working source
+library. A reader adds a PDF or text file; it is analysed; the Indian
+Standards it cites become part of what the assistant discusses.
+
+| Item | Status | Notes |
+|---|---|---|
+| `src/lib/source-library.ts` | DONE | Shared store + `useSyncExternalStore` bindings; 13 unit tests |
+| `SourcesPanel` upload / drag-drop / remove / select | DONE | Posts to the pre-existing `/api/v1/analyze-document`; 23 panel tests |
+| Shared knowledge base with the assistant | DONE | `HomeClient` unions result standards with library standards into `BisChatBot`'s `standardNumbers` |
+| Scope made visible | DONE | Chat header and centre column both say how much context came from added sources |
+| Web discovery ("Web" / "Fast Research") | NOT BUILT | Rendered from the design, marked "not connected" — there is no web-search service |
+
+**No new backend was needed.** `/api/v1/analyze-document` already existed,
+fully built and unit-tested, with no UI calling it — it parses PDF/text,
+extracts BIS identifiers deterministically, and never sends the file to a
+model. This panel is its front end.
+
+**What is shared is identifiers, never document text.** The standards a
+document cites travel to the chat exactly like those from a search, and the
+server resolves the facts from the database. Posting the document's prose as
+chat input would re-open what `src/lib/chat-context.ts` closed and would let
+an uploaded file's wording act on the assistant. The panel therefore does
+not claim the assistant can answer "what does paragraph 3 of my file say" —
+a test asserts the wording stays honest about this.
+
+Cited-but-unindexed standards are shown dimmed and excluded from what is
+shared: the document really does cite them, but the assistant has nothing to
+answer from, and the two cases must not look identical.
+
+**Verified live**: uploading a text file citing IS 15450:2004 and
+IS 4985:2021 returns both identifiers with `inDatabase: false` and an
+explicit limitation string. Which is the honest catch — **the `standards`
+table is still empty in this environment (0 rows), so nothing an uploaded
+document cites currently resolves, and the shared scope stays empty.** The
+panel reports this accurately rather than appearing broken; it starts
+contributing context as soon as ingest populates `standards`.
+
+Files are held in `sessionStorage` for the tab only, and are sent nowhere
+except to be read for the standards they cite.
+
+`npm run verify` green: 0 lint errors, 285 vitest tests across 37 files (up
+from 253 across 35).

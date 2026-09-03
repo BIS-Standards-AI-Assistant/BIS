@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useSyncExternalStore } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
@@ -20,6 +20,12 @@ import { EmptyState } from "@/components/feedback/EmptyState";
 import { ErrorState } from "@/components/feedback/ErrorState";
 import { BisChatBot } from "@/components/chat/BisChatBot";
 import { SourcesPanel } from "@/components/workspace/SourcesPanel";
+import {
+  getSourcesServerSnapshot,
+  getSourcesSnapshot,
+  selectedStandardNumbers,
+  subscribeToSources,
+} from "@/lib/source-library";
 import { StudioPanel } from "@/components/workspace/StudioPanel";
 import { addRecentQuery } from "@/lib/recent-queries";
 import type { QueryResponse } from "@/types/api";
@@ -143,6 +149,21 @@ export function HomeClient() {
 
   const showHomepage = !result && !loading && !error && !activeQuery;
 
+  // The shared knowledge base: standards from the current results plus
+  // those cited by the documents the reader added in the Sources panel.
+  // Both surfaces read the same store, so anything added on the left is
+  // in scope for the assistant without either knowing about the other.
+  // Identifiers only — the server resolves the facts (chat-context.ts).
+  const librarySources = useSyncExternalStore(
+    subscribeToSources,
+    getSourcesSnapshot,
+    getSourcesServerSnapshot,
+  );
+  const resultStandardNumbers =
+    result?.recommendations.map((r) => r.standardNumber).filter((n): n is string => n !== null) ?? [];
+  const sourceStandardNumbers = selectedStandardNumbers(librarySources);
+  const chatStandardNumbers = [...new Set([...resultStandardNumbers, ...sourceStandardNumbers])];
+
   // Column template follows which panels are open. Both side panels are
   // hidden below their breakpoint (sources under lg, studio under xl), so
   // narrow screens get the assistant full-width rather than three columns
@@ -197,10 +218,18 @@ export function HomeClient() {
               {/* CENTRE: the assistant itself — search, synthesis, results */}
               <div className="min-w-0">
                 <div className="mb-3 flex items-center justify-between gap-3">
-                  <h1 className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-navy">
-                    <AssistantIcon className="h-4.5 w-4.5" />
-                    AI Assistant
-                  </h1>
+                  <div className="min-w-0">
+                    <h1 className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-navy">
+                      <AssistantIcon className="h-4.5 w-4.5" />
+                      AI Assistant
+                    </h1>
+                    {sourceStandardNumbers.length > 0 && (
+                      <p className="mt-0.5 text-[11px] text-ink-faint">
+                        Including {sourceStandardNumbers.length} standard
+                        {sourceStandardNumbers.length === 1 ? "" : "s"} cited by your added sources
+                      </p>
+                    )}
+                  </div>
                   <div className="flex items-center gap-2">
                     {!showSources && (
                       <button
@@ -469,9 +498,8 @@ export function HomeClient() {
           2026-09-03), never trusting recommendation text/reason fields. */}
       <BisChatBot
         currentQuery={activeQuery}
-        standardNumbers={result?.recommendations
-          .map((r) => r.standardNumber)
-          .filter((n): n is string => n !== null) ?? []}
+        standardNumbers={chatStandardNumbers}
+        fromAddedSources={sourceStandardNumbers.length}
       />
     </div>
   );
