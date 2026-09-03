@@ -15,11 +15,9 @@ const STORAGE_KEY = "bis-lang";
 const listeners = new Set<() => void>();
 
 function getSnapshot(): LangCode {
-  // Browsers throw on storage access in private mode or when site data is
-  // blocked. This runs inside useSyncExternalStore during render, so an
-  // uncaught throw takes down every page that renders a LanguageProvider.
   try {
-    return window.localStorage.getItem(STORAGE_KEY) === "hi" ? "hi" : "en";
+    const val = window.localStorage.getItem(STORAGE_KEY) as LangCode;
+    return val && DICTIONARIES[val] ? val : "en";
   } catch {
     return "en";
   }
@@ -31,16 +29,17 @@ function getServerSnapshot(): LangCode {
 
 function subscribe(callback: () => void) {
   listeners.add(callback);
-  return () => listeners.delete(callback);
+  return () => {
+    listeners.delete(callback);
+  };
 }
 
 function setLang(next: LangCode) {
-  // Persisting the choice is best-effort; the language still switches for this
-  // session when storage is unavailable.
   try {
     window.localStorage.setItem(STORAGE_KEY, next);
+    document.cookie = `${STORAGE_KEY}=${next};path=/;max-age=31536000;SameSite=Lax`;
   } catch {
-    // ignored — see getSnapshot
+    // ignored
   }
   listeners.forEach((l) => l());
 }
@@ -52,7 +51,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  return <LanguageContext.Provider value={{ lang, setLang, t: DICTIONARIES[lang] }}>{children}</LanguageContext.Provider>;
+  const dictionary = DICTIONARIES[lang] ?? DICTIONARIES.en;
+
+  return (
+    <LanguageContext.Provider value={{ lang, setLang, t: dictionary }}>
+      {children}
+    </LanguageContext.Provider>
+  );
 }
 
 export function useLanguage() {
