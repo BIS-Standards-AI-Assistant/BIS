@@ -1,6 +1,6 @@
 # BIS Knowledge Graph — Coverage Report
 
-Generated: 2026-09-03T08:09:21.877Z
+Generated: 2026-09-03T10:43:21.503Z
 
 Every number below is a live count from the database at generation time —
 none of this is projected or estimated.

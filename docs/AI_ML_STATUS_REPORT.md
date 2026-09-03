@@ -879,3 +879,67 @@ Why: the deterministic core is solid enough to demo honestly and would not embar
 **5. What must be built next**: in order of leverage — connect the already-built planner/tools/agent to the live route; extract one real relationship edge type; verify the unverified half of the reference dataset; grow the document corpus. None of these require new architecture; all of them require finishing what's already started.
 
 **6. Is the AI/ML architecture fundamentally sound, or does it need redesign?** **Sound — no redesign needed.** The core discipline (deterministic grounding, schema-enforced LLM output constraints, honest degradation when data or providers are unavailable) is the hard part to get right, and it is already right, verified by direct code and live-data inspection, not by trusting documentation. What remains is largely execution — more data, wiring existing components together, and finishing evaluation coverage — not a rethink of the approach.
+
+---
+
+## UPDATE 2 — 2026-09-03, prompts/final.md ("complete the AI/ML layer, in a hurry")
+
+This is the AI/ML IMPLEMENTATION REPORT prompts/final.md section 38 asks for, appended as a second dated update (not a rewrite) to the same running document, same convention as "UPDATE" above.
+
+### 1-3. What was already implemented / connected / newly implemented
+
+Everything in "UPDATE" above (relationship materialization, agent wired into /api/v1/query) was already done before this pass. New in this pass, all P0 per final.md section 34:
+
+| Capability | File | Status |
+|---|---|---|
+| Knowledge Boundary | src/lib/knowledge-boundary.ts | IMPLEMENTED, TESTED (6 tests), LIVE VERIFIED |
+| Reference Registry | src/lib/reference-registry.ts | IMPLEMENTED, TESTED (5 tests), LIVE VERIFIED |
+| Graph retrieval (getNeighbors) | src/lib/graph/graph-retrieval.ts | IMPLEMENTED, LIVE VERIFIED (no vitest unit test — DB-dependent, same rationale as every other DB-touching module in this repo; verified via `npm run tools:smoke`) |
+| 2 new tools (getReferenceEntry, getGraphNeighbors) | src/lib/tools/registry-tools.ts | IMPLEMENTED, LIVE VERIFIED, registered in the tool registry (10 tools total now) |
+| Wired into /api/v1/query as knowledgeBoundary, referenceEntry, graphNeighbors | src/app/api/v1/query/route.ts | IMPLEMENTED, LIVE VERIFIED, additive (unchanged engineConfidence/groundingState/recommendations) |
+
+**A real correctness bug was found and fixed via live testing, not inferred from reading code**: the first wiring anchored referenceEntry/knowledgeBoundary to the retrieval engine's topCandidate — but for a query naming a real standard with no ingested document (e.g. "IS 269:2015 minimum thickness requirement"), there are no chunks to retrieve, so topCandidate silently fell back to an unrelated ingested standard (IS 5522:2014), and the reference entry reported metadata about the wrong standard. Fixed by preferring the orchestrator's deterministically-resolved agentRun.resolvedStandard (a real standards table lookup keyed on the identifier the user actually typed) over the retrieval fallback, and by adding an explicit override: when the resolved standard differs from topCandidate and isn't indexed, knowledgeBoundary is forced to NOT_IN_DATABASE with a reason naming the correct standard and explicitly stating that any other evidence shown belongs to a different standard. Live-verified before and after the fix with the exact query above.
+
+Not built as a separate module: a standalone "Knowledge Gap Engine" (final.md section 18). Its behavior (what's known / what's missing / why / official access path) is fully covered by KnowledgeBoundaryResult's knowledgeGap field plus ReferenceEntry.notes — a second file wrapping the same two structures would have been indirection, not a new capability, so it was not created (per this project's own standing rule against structure for its own sake).
+
+### 4-6. ML engines implemented / ready for training / actually trained
+
+None of final.md's section 2 engine-folder restructuring (src/lib/engines/**) or sections 10-14 (ML reranker abstraction, feature extractor, model registry, offline training pipeline) was attempted this pass. This is a deliberate scope decision, not an oversight:
+
+- The reranker is, and remains, a HeuristicReranker-equivalent (src/lib/ml/reranker.ts — deterministic, no learned weights). No labeled query-document pair dataset exists (0 pairs; final.md section 12's own stated minimum is 100+). Building an MLReranker class and a model registry now, with STATUS = READY_FOR_TRAINING and nothing to train on, would be exactly the "look sophisticated, add nothing real" outcome final.md section 39 explicitly warns against ("the objective is not to make the codebase look sophisticated").
+- Reorganizing existing, working, tested modules into src/lib/engines/** folders was skipped per final.md section 2's own instruction: "Do NOT blindly move existing files if that risks regressions" and "Do not perform a cosmetic refactor merely to create folders." The interfaces final.md asks for (Reranker.rank(), evidence/grounding/confidence "engines") already exist as plain exported functions with the same real behavior; wrapping them in a class hierarchy would not change what the system can do.
+
+**Dataset sizes** (verified live, unchanged by this pass): golden queries 20, labeled reranker training pairs 0, relationship rows 50 (2 types), query logs 18 (real, from this session's own live testing).
+
+### 7-8. Evaluation metrics / knowledge boundary behavior
+
+Evaluation metrics are unchanged from the original audit (12/12 retrieval recall, 8/8 no-false-match, re-confirmed live after every change this pass). No new retrieval/reranking/grounding metric suite was built this pass (final.md section 23 P1 item — not started).
+
+Knowledge boundary behavior, live-verified this pass with 4 real queries: "IS 5522:2014" (indexed) -> VERIFIED, "IS 269:2015" + a technical-detail question (not indexed) -> NOT_IN_DATABASE with the corrected reasoning above, a version-conflict case -> CONFLICTING_EVIDENCE (unit-tested), a non-BIS-source case -> UNVERIFIED_SOURCE (unit-tested).
+
+### 9-12. Graph capabilities / provider behavior / fallback behavior
+
+Graph: getNeighbors(entityType, entityId) against the real relationships table (50 rows, 2 types). No multi-hop findPath — correctly not built, since with only 2 relationship types and no chained edges there is nothing for a path-finder to traverse yet (documented as a deliberate scope cut in the module's own comment, not a silent gap).
+
+Provider/fallback behavior: unchanged from the original audit — still NOT VERIFIED that a local (Ollama) or OpenRouter-free call has ever succeeded live in this project's history; evidence-only fallback confirmed working (every live query this pass returned a grounding-consistent response even when the answer text says "No AI-generated explanation was available," which is the expected fallback under exhausted OpenRouter credit — an existing, pre-this-session condition, not a regression).
+
+### 13-15. Tests executed / failures and limitations / remaining blockers
+
+Commands actually run this pass, with exact results:
+
+- `npm run typecheck` -> clean
+- `npm run lint` -> 0 errors, 0 warnings
+- `npm run test:unit` -> 211/211 (vitest; was 196 at session start, +15 across this session's work today)
+- `npm run test:ml` -> 45/45
+- `npm run build` -> clean, production build
+- `npm run eval:retrieval` -> 12/12 recall, 8/8 no-false-match (against a live dev server)
+- `npm run tools:smoke` -> 10/10 tools live-verified against the real DB, including both new tools
+- `npm run agent:smoke` -> live-verified against the real DB (one transient "error" on searchStandards on a run made concurrently with the dev server — reproduced clean on immediate retry; consistent with DB/embedding-call contention between two processes, not a code regression)
+
+Limitations/blockers this pass did not touch, still true: 26/51 standards needs_review, 0 real temporal data (dates), 4-document corpus, no ML reranker (0 labeled pairs), no calibration data, local/OpenRouter-free providers still not live-tested, golden set still 20.
+
+### 16-17. Exact files changed / production readiness
+
+Files changed this pass: src/lib/knowledge-boundary.ts (new + test), src/lib/reference-registry.ts (new + test), src/lib/graph/graph-retrieval.ts (new), src/lib/tools/registry-tools.ts (new), src/lib/tools/index.ts (registers the 2 new tools), src/app/api/v1/query/route.ts (additive wiring + the correctness fix above), docs/AI_ML_STATUS_REPORT.md (this section).
+
+**Production readiness: PARTIALLY_READY** (upgraded from NOT_READY in "UPDATE" above, only for the specific capability this pass targeted — not a general upgrade). The knowledge-boundary/reference-registry path now correctly refuses to answer a technical-detail question about an unindexed standard rather than silently falling back to unrelated evidence, which was this project's own stated "CORE trust feature" (final.md section 18) and previously did not exist as a guarantee. Everything else the original audit called NOT READY (unverified dataset half, zero temporal data, small corpus, untrained reranker, unverified provider fallback paths) is exactly as not-ready as before — this update does not change the overall system's production verdict, only adds one genuinely working trust guarantee to it.

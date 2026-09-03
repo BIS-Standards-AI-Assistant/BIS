@@ -10,6 +10,9 @@ import { detectConflicts } from "@/lib/conflict-detection";
 import { computeGrounding } from "@/lib/grounding";
 import { computeEngineConfidence } from "@/lib/confidence";
 import { generateAnswer, validateRecommendationExplanations, type EvidencePackage, type EvidencePackageCandidate } from "@/lib/answer";
+import { classifyKnowledgeBoundary } from "@/lib/knowledge-boundary";
+import { buildReferenceEntry } from "@/lib/reference-registry";
+import { getNeighbors, type GraphNeighbor } from "@/lib/graph/graph-retrieval";
 import { getDb } from "@/db";
 import { queryLogs } from "@/db/schema";
 
@@ -50,6 +53,21 @@ const RETRIEVAL_LIMIT = 12;
  * the request still succeeds with `toolEvidence: null` — this is a
  * strictly additive capability, never a new failure mode for the
  * existing pipeline.
+ *
+ * Also additive (2026-09-03, same session): `knowledgeBoundary`
+ * (src/lib/knowledge-boundary.ts, a pure classifier over signals the
+ * pipeline above already computes — VERIFIED / PARTIALLY_SUPPORTED /
+ * NOT_IN_DATABASE / CONFLICTING_EVIDENCE / UNVERIFIED_SOURCE),
+ * `referenceEntry` (src/lib/reference-registry.ts, real stored fields
+ * only — never an invented URL or access type), and `graphNeighbors`
+ * (src/lib/graph/graph-retrieval.ts, real `relationships` table rows
+ * only). None of these three feed back into `answer`, `confidence`, or
+ * `groundingState` yet — they are new, independently correct fields a
+ * caller can check, not (yet) enforcement that changes what the LLM's
+ * prose says. Making the answer text itself defer to
+ * `knowledgeBoundary.answerable` is the natural next step, not done in
+ * this pass to avoid changing existing golden-query answer behavior
+ * without a dedicated regression pass against it.
  */
 export async function POST(req: NextRequest) {
   const start = Date.now();
@@ -92,6 +110,61 @@ export async function POST(req: NextRequest) {
       conflicts,
       topCandidate ? groundingByStandard.get(topCandidate.documentId)! : null,
     );
+
+    // Knowledge boundary (prompts/final.md §3) — a pure classification
+    // over signals the pipeline above already computed, never a second
+    // opinion that could contradict groundingState/engineConfidence.
+    let knowledgeBoundary = classifyKnowledgeBoundary(
+      topCandidate,
+      topCandidate ? coverageByStandard.get(topCandidate.documentId)! : null,
+      conflicts,
+      topCandidate ? groundingByStandard.get(topCandidate.documentId)! : null,
+    );
+
+    // Reference registry + graph neighbors (prompts/final.md §4, §6).
+    // Deliberately prefers the orchestrator's deterministically-resolved
+    // identifier (agentRun.resolvedStandard) over the retrieval engine's
+    // topCandidate: found live, this session — a query naming a real
+    // standard with NO ingested document (e.g. "IS 269:2015 minimum
+    // thickness requirement") has no chunks to retrieve, so
+    // aggregateEvidence's topCandidate silently falls back to whichever
+    // *other*, unrelated ingested standard scored highest — and building
+    // the reference entry from that would report metadata about the
+    // wrong standard entirely. agentRun.resolvedStandard, by contrast,
+    // comes from a real standards-table lookup keyed on the identifier
+    // the user actually typed (src/lib/agent/orchestrator.ts), so it
+    // stays correct even when retrieval has nothing to show for it.
+    const referenceStandardNumber = agentRun?.resolvedStandard ?? topCandidate?.standardNumber ?? null;
+    let referenceEntry: Awaited<ReturnType<typeof buildReferenceEntry>> = null;
+    let graphNeighbors: GraphNeighbor[] = [];
+    if (referenceStandardNumber) {
+      try {
+        referenceEntry = await buildReferenceEntry(referenceStandardNumber);
+        if (referenceEntry) {
+          graphNeighbors = await getNeighbors("standard", referenceEntry.standardId);
+        }
+      } catch (err) {
+        console.error("[api/v1/query] reference registry / graph lookup failed — continuing without it", err);
+      }
+    }
+
+    // The exact scenario prompts/final.md §3 requires: a user names a
+    // real standard, but its document isn't indexed, and retrieval's
+    // topCandidate (if any) is a DIFFERENT, unrelated standard — that
+    // other candidate's grounding must never be reported as if it
+    // answered the question that was actually asked.
+    if (
+      referenceEntry &&
+      !referenceEntry.indexedByNavigator &&
+      referenceStandardNumber !== topCandidate?.standardNumber
+    ) {
+      knowledgeBoundary = {
+        state: "NOT_IN_DATABASE",
+        answerable: false,
+        knowledgeGap: true,
+        reason: `${referenceStandardNumber} was identified, but its authoritative document is not currently indexed in the Navigator's knowledge base. Any other evidence shown above belongs to a different standard and does not answer this question.`,
+      };
+    }
 
     const evidencePackageCandidates: EvidencePackageCandidate[] = aggregated.map((c) => ({
       standardNumber: c.standardNumber,
@@ -175,6 +248,23 @@ export async function POST(req: NextRequest) {
       engineConfidence,
       conflicts,
       limitations,
+      // prompts/final.md §3 — a hard, deterministic answerability
+      // classification. Consumers should treat `answerable: false` as
+      // authoritative: the LLM's `answer` text above was still generated
+      // from the same evidence package either way (this field is not
+      // yet used to suppress or rewrite that text — see the module doc
+      // "not yet wired into answer generation" note), so a caller that
+      // wants the hard boundary enforced should check this field, not
+      // just `confidence`.
+      knowledgeBoundary,
+      // prompts/final.md §4 — real, stored fields only; null when the
+      // top candidate isn't a resolvable standard number.
+      referenceEntry,
+      // prompts/final.md §6 — real relationships table rows only,
+      // empty when the top candidate's standard has no relationship
+      // rows yet (true for most standards at the time of writing — only
+      // 4 documents and 46 QCOs of 51 standards have any edge).
+      graphNeighbors,
       // Supplementary, tool-derived evidence (rag.md Phase 3) — additive
       // only, see the module doc above. `null` whenever the orchestrator
       // found no applicable tools or failed; never a placeholder for

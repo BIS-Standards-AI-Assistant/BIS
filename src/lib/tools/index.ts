@@ -2,6 +2,7 @@ import { registerTool, getTool, listTools, executeTool } from "./registry";
 import { resolveStandardTool, getStandardTool, searchStandardsTool, findApplicableStandardsTool } from "./standards-tools";
 import { checkMandatoryStatusTool, findQcoTool, getCertificationSchemeTool } from "./certification-tools";
 import { compareStandardsTool } from "./comparison-tools";
+import { getReferenceEntryTool, getGraphNeighborsTool } from "./registry-tools";
 
 export type { ToolDefinition, ToolResult, ToolStatus, ToolProvenance } from "./types";
 export { getTool, listTools, executeTool };
@@ -33,6 +34,8 @@ export function ensureToolsRegistered(): void {
   registerTool(findQcoTool);
   registerTool(getCertificationSchemeTool);
   registerTool(compareStandardsTool);
+  registerTool(getReferenceEntryTool);
+  registerTool(getGraphNeighborsTool);
 }
 
 ensureToolsRegistered();

@@ -424,3 +424,35 @@ recalculating overall completion to **~45%** — production readiness
 verdict unchanged (**NOT READY**): the audit's stated top risks (26/51
 standards unverified, 0 real temporal data, a 4-document corpus) are
 untouched by either fix.
+
+### Knowledge Boundary, Reference Registry, Graph Retrieval (this session, prompts/final.md)
+
+Three new P0 modules, all real and live-verified: `src/lib/
+knowledge-boundary.ts` (deterministic VERIFIED/PARTIALLY_SUPPORTED/
+NOT_IN_DATABASE/CONFLICTING_EVIDENCE/UNVERIFIED_SOURCE classification
+over signals the existing pipeline already computes), `src/lib/
+reference-registry.ts` (real stored-field lookup — never an invented
+URL/access type), and `src/lib/graph/graph-retrieval.ts` (`getNeighbors`
+against the real `relationships` table). Two new tools registered
+(`getReferenceEntry`, `getGraphNeighbors` — 10 tools total now), wired
+additively into `/api/v1/query` as `knowledgeBoundary`, `referenceEntry`,
+`graphNeighbors`.
+
+**Real bug found via live testing and fixed**: the first wiring anchored
+these to the retrieval engine's `topCandidate`, which for a standard
+with no ingested document silently falls back to an unrelated ingested
+standard — so a query about `IS 269:2015` (not indexed) was reporting
+`IS 5522:2014`'s metadata instead. Fixed by preferring the orchestrator's
+deterministically-resolved identifier, with an explicit override forcing
+`NOT_IN_DATABASE` when the resolved standard isn't indexed and differs
+from `topCandidate`. Verified before and after with the exact failing
+query.
+
+`npm run verify` green (211 vitest tests, up from 200; 45/45 ML tests),
+`tools:smoke` and `agent:smoke` re-run live (10/10 tools verified,
+including both new ones), retrieval regression unchanged (12/12, 8/8).
+Full detail in `docs/AI_ML_STATUS_REPORT.md`'s "UPDATE 2" section,
+including an honest scope cut: no ML reranker/model-registry/training
+pipeline was built this pass (0 labeled pairs exist — building that
+scaffolding now would be exactly the "looks sophisticated, adds
+nothing real" outcome the prompt's own rules warn against).
