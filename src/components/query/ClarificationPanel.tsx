@@ -38,12 +38,6 @@ export function ClarificationPanel({
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Clear synthesizing state when parent loading finishes
-  useEffect(() => {
-    if (!loading) {
-      setIsSynthesizing(false);
-    }
-  }, [loading]);
 
   // Focus the input when active recommendation changes
   useEffect(() => {
@@ -123,6 +117,7 @@ export function ClarificationPanel({
       const refinedQuery = currentQuery
         ? `${currentQuery} ${finalSpecs.join(" ")}`.trim()
         : finalSpecs.join(" ").trim();
+      setIsSynthesizing(false);
       onRefine(refinedQuery);
     }, 1400);
   }
