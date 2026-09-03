@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { normalizeQuery } from "@/lib/query-normalization";
 import { extractQueryIntent } from "@/lib/intent";
+import { runAgent, type AgentRunResult } from "@/lib/agent/orchestrator";
 import { retrieveChunks } from "@/lib/retrieval";
 import { aggregateEvidence, type AggregatedEvidence } from "@/lib/evidence-aggregation";
 import { analyzeCoverage } from "@/lib/coverage-analysis";
@@ -32,6 +33,23 @@ const RETRIEVAL_LIMIT = 12;
  * here adds a call. The engine (everything between retrieval and the LLM
  * answer call) is pure deterministic code: no API key, no network call,
  * fully unit-tested (scripts/test-*.ts).
+ *
+ * ADDITIVE, not a replacement (2026-09-03): the deterministic query
+ * planner (src/lib/query-planner.ts) and bounded tool-calling agent
+ * orchestrator (src/lib/agent/orchestrator.ts) — built and tested
+ * earlier this session but never called from a live route — now run
+ * alongside the pipeline above and contribute a separate `toolEvidence`
+ * field. This is deliberately NOT wired into the grounding/confidence/
+ * recommendations path: the orchestrator's tool results (e.g.
+ * checkMandatoryStatus, getCertificationScheme) are surfaced as their
+ * own structured, provenance-carrying block, never reinterpreted by the
+ * LLM and never allowed to change engineConfidence or groundingState —
+ * changing either of those remains the existing pipeline's job alone,
+ * per this project's core rule that the LLM (and now the agent) must
+ * not be the source of truth. If the orchestrator fails for any reason,
+ * the request still succeeds with `toolEvidence: null` — this is a
+ * strictly additive capability, never a new failure mode for the
+ * existing pipeline.
  */
 export async function POST(req: NextRequest) {
   const start = Date.now();
@@ -45,6 +63,16 @@ export async function POST(req: NextRequest) {
   try {
     const normalized = normalizeQuery(query);
     const intent = await extractQueryIntent(normalized.normalizedQuery);
+
+    // See the module doc above: additive only, never allowed to affect
+    // grounding/confidence/recommendations below. A failure here must
+    // never fail the whole request.
+    let agentRun: AgentRunResult | null = null;
+    try {
+      agentRun = await runAgent(normalized.normalizedQuery);
+    } catch (err) {
+      console.error("[api/v1/query] agent orchestrator failed — continuing without toolEvidence", err);
+    }
 
     const chunks = await retrieveChunks(intent.searchQuery || normalized.normalizedQuery, { limit: RETRIEVAL_LIMIT });
     const aggregated = aggregateEvidence(chunks).slice(0, MAX_CANDIDATES);
@@ -147,6 +175,22 @@ export async function POST(req: NextRequest) {
       engineConfidence,
       conflicts,
       limitations,
+      // Supplementary, tool-derived evidence (rag.md Phase 3) — additive
+      // only, see the module doc above. `null` whenever the orchestrator
+      // found no applicable tools or failed; never a placeholder for
+      // missing data.
+      toolEvidence: agentRun && agentRun.steps.some((s) => s.result.status === "ok")
+        ? {
+            planType: agentRun.plan.type,
+            complexity: agentRun.plan.complexity,
+            resolvedStandard: agentRun.resolvedStandard,
+            stopReason: agentRun.stopReason,
+            skippedTasks: agentRun.skippedTasks,
+            results: agentRun.steps
+              .filter((s) => s.result.status === "ok")
+              .map((s) => ({ tool: s.tool, data: s.result.data, provenance: s.result.provenance ?? [] })),
+          }
+        : null,
       ...(debug && {
         _debug: {
           normalizedQuery: normalized,
@@ -163,6 +207,7 @@ export async function POST(req: NextRequest) {
           groundingByStandard: Object.fromEntries(
             [...groundingByStandard.entries()].map(([docId, g]) => [docId, g]),
           ),
+          agentRun,
         },
       }),
     };

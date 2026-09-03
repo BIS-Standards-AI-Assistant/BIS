@@ -381,3 +381,46 @@ and an over-narrow standard-number regex that rejected the real joint
 unchanged at 12/12 recall, 8/8 no-false-match. `data:report` now shows
 51 standards total (25 verified, 26 needs_review), 46/51 with a QCO,
 still 4/51 with ingested document text, still 0 relationships.
+
+### AI/ML completion audit + two same-day follow-up fixes (this session)
+
+A full 38-section AI/ML status audit was written to
+`docs/AI_ML_STATUS_REPORT.md` — independently verified against the live
+DB and a full test-suite re-run, not trusted from prior docs. Result:
+**42% weighted completion, NOT production-ready.** Top finding: the
+query planner/tool registry/agent orchestrator built earlier this
+session were real and tested but had zero production effect —
+`/api/v1/query` never called them.
+
+Two of that audit's own top recommendations were implemented
+immediately after:
+
+1. **`scripts/data-relationships.ts`** (new, idempotent) materializes
+   the `relationships` table's first real rows — 50 total (4
+   `STANDARD_HAS_PRODUCT_MANUAL`, 46 `STANDARD_SUBJECT_TO_QCO`, the
+   latter a new relationship type) — from existing
+   `documents.standardId`/`qcos.standardId` foreign keys, with real
+   provenance and `verificationStatus` inherited from the underlying
+   row (never upgraded). This is FK materialization, not text-based
+   relationship extraction — explicitly documented as such in both the
+   script and the audit update, so it isn't mistaken for more than it is.
+2. **`src/app/api/v1/query/route.ts`** now calls the bounded agent
+   orchestrator alongside (not instead of) the existing pipeline,
+   contributing a new `toolEvidence` response field. Additive only —
+   `engineConfidence`/`groundingState`/`recommendations` are computed
+   by exactly the same code as before; a failure inside the orchestrator
+   produces `toolEvidence: null`, never a failed request. Live-verified
+   via 3 real HTTP calls against the running dev server, including the
+   regression case from earlier this session (a CERTIFICATION-plan
+   query naming `IS 269:2015` explicitly resolves to that standard, not
+   an unrelated fuzzy search hit).
+
+`npm run verify` green (200 vitest tests, up from 171 + this session's
+orchestrator/knowledge-graph tests; 45/45 ML script tests), retrieval
+regression unchanged at 12/12 recall, 8/8 no-false-match, production
+build clean. `docs/AI_ML_STATUS_REPORT.md` updated in place with a
+dated "UPDATE" section (not a rewrite) documenting exactly this,
+recalculating overall completion to **~45%** — production readiness
+verdict unchanged (**NOT READY**): the audit's stated top risks (26/51
+standards unverified, 0 real temporal data, a 4-document corpus) are
+untouched by either fix.

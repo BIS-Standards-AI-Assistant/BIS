@@ -4,10 +4,109 @@
 Date: 2026-09-03
 Repository commit: `96c253411060b2cfa3bd2befd6fa61de2e31c202` (2026-09-02)
 Audited by: Claude (AI/ML engineering audit — direct repository, live-DB, and test-suite inspection; no application code modified)
-Overall completion: **42%** (weighted, see §28)
-Production readiness: **NOT READY** (see §36)
+Overall completion: **~45%** (was 42% at the audit below; see "Update" immediately following)
+Production readiness: **NOT READY** (see §36 — unchanged by this update)
 
 This report is a snapshot, not a plan. Every number in it was either read directly from the live Neon database, produced by actually running a test/eval/script during this audit, or found verbatim in a committed evaluation artifact (`data/evaluation/*`). Where a claim could not be independently confirmed, it is marked **NOT VERIFIED** rather than assumed true because a doc says so — several places in this repo's own documentation turned out to disagree with each other or with the code, and those are called out explicitly below (§37 discrepancies).
+
+---
+
+## UPDATE — 2026-09-03, same day, following this audit
+
+Two of this report's own "next 5 things to build" (Knowledge Graph §10,
+Agent §18) were implemented immediately after this audit was written, as
+the highest-leverage items identified by the audit itself. This update
+documents exactly what changed, verified the same way as the rest of
+this report (live DB queries, live HTTP calls, full test re-run) —
+**it does not re-verify or restate anything else in the report below**,
+which stands as written for every other section.
+
+### 1. Knowledge graph: 0 -> 50 real relationship rows
+
+`scripts/data-relationships.ts` (new) materializes two edge types from
+data that already existed as real foreign keys — `documents.standardId`
+and `qcos.standardId` — into the `relationships` table, with real
+provenance (the underlying document/QCO's own `sourceId`/`documentId`
+and an `evidenceText` describing the actual FK link) and inherited
+`verificationStatus` (never upgraded — a relationship built from a
+`needs_review` QCO stays `needs_review`).
+
+Live-verified: **50 rows** (4 `STANDARD_HAS_PRODUCT_MANUAL`, 46
+`STANDARD_SUBJECT_TO_QCO`; the latter is a new relationship type, added
+to `src/lib/knowledge-graph.ts`'s `RELATIONSHIP_TYPES`), **25 `verified`
++ 25 `needs_review`** (correctly matching the 25 verified + 25
+needs_review QCO rows they were built from). Re-ran the script a second
+time: 0 new inserts, 50 "already present" — confirmed idempotent.
+
+**This does not change the report's Knowledge Graph verdict from
+SCAFFOLDED to IMPLEMENTED.** It is still true that: no text-based
+relationship extraction exists (no script reads a document's actual
+prose to find e.g. a `STANDARD_REFERENCES_STANDARD` or
+`STANDARD_SUPERSEDES_STANDARD` edge — the two types populated are pure
+FK materialization, not extraction), there is no graph traversal API
+(no `getNeighbors`/`findPath`), and 10 of the 12+ conceptual
+relationship types this project's own docs describe remain at 0 rows.
+What changed is narrower and real: the graph is no longer literally
+empty, and every row in it has genuine, checkable provenance.
+
+### 2. Agent orchestrator: connected to `/api/v1/query`, additively
+
+`src/app/api/v1/query/route.ts` now calls `runAgent()` (the bounded,
+max-3-iteration orchestrator built earlier this session) alongside —
+not instead of — the existing intent -> retrieval -> evidence ->
+grounding -> confidence -> LLM pipeline, contributing a new
+`toolEvidence` response field. Deliberately additive per Rule 1 (don't
+break working systems) and Rule 5 (the engine, not the agent, owns
+grounding/confidence): `toolEvidence` never touches
+`engineConfidence`, `groundingState`, or `recommendations` — those are
+computed exactly as before, by exactly the same code. A failure inside
+`runAgent()` is caught and produces `toolEvidence: null`, never a
+failed request.
+
+Live-verified via 3 real HTTP calls to the running dev server (not
+inferred from code reading):
+- `"What certification scheme applies to IS 269:2015?"` ->
+  `toolEvidence.resolvedStandard: "IS 269:2015"` (correctly NOT the
+  unrelated top fuzzy-search hit "IS 14543:2016" that also appears in
+  the same response's `findApplicableStandards` discovery results —
+  this is the exact bug class this session's earlier orchestrator work
+  fixed), with real `getCertificationScheme`/`checkMandatoryStatus`
+  data and provenance attached.
+- `"IS 5522:2014"` -> `toolEvidence` carries `resolveStandard`/
+  `getStandard` results; the pre-existing `recommendations`/
+  `confidence` fields are unchanged from before this change.
+- `"What is the weather today?"` -> `toolEvidence: null` (plan type
+  `OUT_OF_DOMAIN`, zero tool calls made) — confirmed the addition does
+  not fire speculatively on out-of-domain queries.
+
+Regression check: `npm run eval:retrieval` still 12/12 recall, 8/8
+no-false-match (this endpoint isn't touched by that eval — it hits
+`/api/v1/search` — but confirms nothing else broke). Full suite:
+lint clean, typecheck clean, **200/200 vitest + 45/45 ML script tests**
+(was 196/45), production build clean.
+
+**This does not make the Agent row "production-grade."** The
+orchestrator still only wraps 8 deterministic tools (no LLM-assisted
+tool selection, nothing graph-aware since the graph itself is still
+mostly empty per above), and its output is surfaced as raw structured
+data in a new field — no UI yet renders `toolEvidence`, and the main
+`answer` prose the LLM writes does not consume it. The gap this
+report's audit called "zero production effect from real, working
+code" is now "some production effect, still no UI, still no influence
+over the answer text or its grounding" — genuinely narrower, not closed.
+
+### Recalculated score
+
+Per §36's weights: Knowledge Graph (10%) moves from an internal
+sub-score of 15% to ~30% (real provenance-carrying rows exist now; still
+no extraction, no traversal, no coverage of most relationship types) —
++1.5 points. Agent/Planning (5%) moves from 0% (production) to ~40%
+(connected and live-verified, but not influencing the answer or
+grounding, no UI) — +2 points. Every other category is unchanged from
+the audit below. **42% -> ~45%.** Production readiness verdict is
+unchanged: **NOT READY** — the report's stated top risks (26/51
+standards unverified, 0 real temporal data, corpus of 4 documents)
+are untouched by this update.
 
 ---
 
@@ -723,21 +822,21 @@ This is intentionally conservative for a small/low-budget team — it does not a
 | Retrieval | IMPLEMENTED | 70% | High — re-run live this audit |
 | Reranking | IMPLEMENTED (as a heuristic, not ML) | 15% (as "ML") / 70% (as a heuristic) | High |
 | Query Intelligence | PARTIALLY IMPLEMENTED | 55% | High |
-| Knowledge Graph | SCAFFOLDED | 15% | High |
+| Knowledge Graph | PARTIALLY IMPLEMENTED (updated same day, see "UPDATE" above — 50 real, provenance-carrying rows now exist via FK materialization; still no text extraction, no traversal API) | 30% | High |
 | Evidence | IMPLEMENTED | 70% | High |
 | Grounding | IMPLEMENTED | 65% | High |
 | Conflict Detection | PARTIALLY IMPLEMENTED | 40% | High |
 | Temporal Intelligence | NOT IMPLEMENTED | 5% | High |
 | Confidence | IMPLEMENTED (uncalibrated) | 55% | High |
 | LLM Infrastructure | PARTIALLY IMPLEMENTED | 40% | Medium — local path unverified |
-| Agent | IMPLEMENTED (disconnected) | 50% in isolation / 0% in production | High |
+| Agent | PARTIALLY IMPLEMENTED (updated same day, see "UPDATE" above — connected to `/api/v1/query` and live-verified; output not yet consumed by the LLM prose or the UI) | 40% in production | High |
 | Evaluation | PARTIALLY IMPLEMENTED | 45% | High |
 | Security | PARTIALLY IMPLEMENTED | 30% | Medium — key defense untested against a real adversarial document |
 | Observability | SCAFFOLDED | 15% | High |
 
 # OVERALL AI/ML COMPLETION
 
-**42%**
+**~45%** (42% at initial audit; +~3 points from the same-day Knowledge Graph and Agent updates documented at the top of this report — see "UPDATE")
 
 # BIGGEST ACHIEVEMENT
 
@@ -753,8 +852,8 @@ Treating the 26 `needs_review` standards (more than half the reference dataset) 
 
 # NEXT 5 THINGS TO BUILD
 
-1. Wire the query planner + tool registry + agent orchestrator into the live `/api/v1/query` path — the highest-leverage, lowest-new-code item on this list.
-2. A real relationship-extraction script for at least one edge type, so the knowledge graph has its first real row.
+1. ~~Wire the query planner + tool registry + agent orchestrator into the live `/api/v1/query` path~~ — **done same day, see "UPDATE" above.** Still open: make the LLM prose and the UI actually consume `toolEvidence`, not just receive it.
+2. ~~A real relationship-extraction script for at least one edge type~~ — **done same day** (`STANDARD_HAS_PRODUCT_MANUAL`, `STANDARD_SUBJECT_TO_QCO`, 50 rows). Still open: text-based extraction (references, supersession, amendments) — everything done so far is FK materialization, not extraction from document prose.
 3. Independent verification of the 26 `needs_review` standards against primary BIS sources.
 4. Ingest a meaningfully larger real document corpus.
 5. One real, logged local-inference test, to actually prove the project's own "$0 budget" architectural claim.

@@ -70,4 +70,8 @@ describe("isKnownRelationshipType", () => {
   test("rejects a fabricated type", () => {
     expect(isKnownRelationshipType("STANDARD_IS_VIBING_WITH_STANDARD")).toBe(false);
   });
+
+  test("recognizes STANDARD_SUBJECT_TO_QCO (added for scripts/data-relationships.ts)", () => {
+    expect(isKnownRelationshipType("STANDARD_SUBJECT_TO_QCO")).toBe(true);
+  });
 });
