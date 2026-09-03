@@ -51,7 +51,26 @@ describe("SourcesPanel — adding documents", () => {
   test("shows the empty state until a document is added", () => {
     render(<SourcesPanel onCollapse={vi.fn()} />);
     expect(screen.getByText("Saved sources will appear here")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "add a source" })).toBeInTheDocument();
+  });
+
+  test("the search bar's only control is the document input", () => {
+    render(<SourcesPanel onCollapse={vi.fn()} />);
+    expect(screen.getByRole("searchbox", { name: /search your sources/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /add a document/i })).toBeInTheDocument();
+    // The removed affordances must not come back.
+    expect(screen.queryByRole("button", { name: "add a source" })).not.toBeInTheDocument();
+    expect(screen.queryByText(/Drop files here/i)).not.toBeInTheDocument();
+    expect(screen.queryByText("Web")).not.toBeInTheDocument();
+    expect(screen.queryByText("Fast Research")).not.toBeInTheDocument();
+  });
+
+  test("the document button opens the file picker", async () => {
+    render(<SourcesPanel onCollapse={vi.fn()} />);
+    const input = screen.getByLabelText("Add source documents") as HTMLInputElement;
+    const clickSpy = vi.spyOn(input, "click");
+
+    await userEvent.setup().click(screen.getByRole("button", { name: /add a document/i }));
+    expect(clickSpy).toHaveBeenCalled();
   });
 
   test("uploads the file to the real analysis endpoint and lists what it cites", async () => {
@@ -137,13 +156,45 @@ describe("SourcesPanel — adding documents", () => {
     expect(screen.getByText("Saved sources will appear here")).toBeInTheDocument();
   });
 
-  test("offers no web-search control, since no such service exists", () => {
+  test("filters the added sources by name", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(analysisResponse(["IS 2347:2017"])));
+    const user = userEvent.setup();
+
     render(<SourcesPanel onCollapse={vi.fn()} />);
-    expect(screen.queryByText("Search the web for new sources")).not.toBeInTheDocument();
-    expect(screen.queryByText("Web")).not.toBeInTheDocument();
-    expect(screen.queryByText("Fast Research")).not.toBeInTheDocument();
-    // The limitation is still stated, so a reader knows why.
-    expect(screen.getByText(/Web discovery is not connected/i)).toBeInTheDocument();
+    await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
+    await screen.findByText("cooker.pdf");
+    await user.upload(screen.getByLabelText("Add source documents"), pdf("helmet.pdf"));
+    await screen.findByText("helmet.pdf");
+
+    await user.type(screen.getByRole("searchbox", { name: /search your sources/i }), "cook");
+
+    expect(screen.getByText("cooker.pdf")).toBeInTheDocument();
+    expect(screen.queryByText("helmet.pdf")).not.toBeInTheDocument();
+  });
+
+  test("filters by the standards a document cites, so a reader can find where a number came from", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(analysisResponse(["IS 2347:2017"])));
+    const user = userEvent.setup();
+
+    render(<SourcesPanel onCollapse={vi.fn()} />);
+    await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
+    await screen.findByText("cooker.pdf");
+
+    await user.type(screen.getByRole("searchbox", { name: /search your sources/i }), "2347");
+    expect(screen.getByText("cooker.pdf")).toBeInTheDocument();
+  });
+
+  test("says when nothing matches, rather than showing an empty list", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(analysisResponse(["IS 2347:2017"])));
+    const user = userEvent.setup();
+
+    render(<SourcesPanel onCollapse={vi.fn()} />);
+    await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
+    await screen.findByText("cooker.pdf");
+
+    await user.type(screen.getByRole("searchbox", { name: /search your sources/i }), "zzz");
+    expect(screen.getByText(/No added source matches/i)).toBeInTheDocument();
+    expect(screen.queryByText("cooker.pdf")).not.toBeInTheDocument();
   });
 
   test("states that the BIS corpus is searched regardless of added sources", () => {

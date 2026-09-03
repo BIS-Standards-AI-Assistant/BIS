@@ -48,7 +48,19 @@ export function SourcesPanel({
   const sources = useSyncExternalStore(subscribeToSources, getSourcesSnapshot, getSourcesServerSnapshot);
   const [isDragging, setIsDragging] = useState(false);
   const [rejection, setRejection] = useState<string | null>(null);
+  const [filter, setFilter] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Matches on filename and on the standards a document cites, so a reader
+  // can find the source that brought in a given IS number.
+  const needle = filter.trim().toLowerCase();
+  const visible = needle
+    ? sources.filter(
+        (s) =>
+          s.name.toLowerCase().includes(needle) ||
+          s.citedNumbers.some((n) => n.toLowerCase().includes(needle)),
+      )
+    : sources;
 
   async function ingest(files: FileList | File[]) {
     setRejection(null);
@@ -141,21 +153,29 @@ export function SourcesPanel({
           }}
         />
 
-        <button
-          type="button"
-          onClick={() => fileInputRef.current?.click()}
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-border-strong bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink transition-colors hover:border-navy hover:text-navy"
-        >
-          <PlusIcon className="h-4 w-4" />
-          Add sources
-        </button>
-
-        {/* No web-source discovery exists, so there is no search control
-            here — only a line saying what this panel does take. A heading
-            and a magnifier with nothing behind them would promise one. */}
-        <p className="mt-2.5 px-1 text-[11.5px] leading-relaxed text-ink-faint">
-          Web discovery is not connected. Add a PDF or text file instead.
-        </p>
+        {/* Searches the documents already added — the only thing this panel
+            has to search. Its one control is the document input, since no
+            web-source discovery service exists to put behind anything else. */}
+        <div className="flex items-center gap-2 rounded-xl border border-border-strong bg-surface px-3 py-2 focus-within:border-navy">
+          <SearchIcon className="h-4 w-4 shrink-0 text-ink-faint" />
+          <input
+            type="search"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            placeholder="Search your sources"
+            aria-label="Search your sources"
+            className="min-w-0 flex-1 bg-transparent text-[13px] text-ink placeholder-ink-faint focus:outline-none"
+          />
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            aria-label="Add a document"
+            title="Add a PDF or text file"
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-border-strong text-navy transition-colors hover:border-navy hover:bg-navy/5"
+          >
+            <DocumentPlusIcon className="h-4 w-4" />
+          </button>
+        </div>
 
         {rejection && (
           <p className="mt-3 rounded-lg border border-danger/30 bg-danger-soft/40 px-3 py-2 text-[11.5px] text-danger">
@@ -163,7 +183,11 @@ export function SourcesPanel({
           </p>
         )}
 
-        {sources.length === 0 ? (
+        {sources.length > 0 && visible.length === 0 ? (
+          <p className="mt-6 px-1 text-center text-[12.5px] text-ink-faint">
+            No added source matches “{filter}”.
+          </p>
+        ) : sources.length === 0 ? (
           <div
             className={`mt-6 rounded-xl border border-dashed px-4 py-10 text-center transition-colors ${
               isDragging ? "border-navy bg-navy/5" : "border-border/70"
@@ -175,20 +199,10 @@ export function SourcesPanel({
               Add a PDF or text file. The Indian Standards it cites become part of
               what the assistant can discuss.
             </p>
-            <p className="mt-1.5 text-[12.5px] text-ink-faint">
-              Drop files here or{" "}
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="font-semibold text-navy underline underline-offset-2 hover:text-navy-deep"
-              >
-                add a source
-              </button>
-            </p>
           </div>
         ) : (
           <ul className="mt-3 space-y-1.5">
-            {sources.map((source) => (
+            {visible.map((source) => (
               <SourceRow key={source.id} source={source} />
             ))}
           </ul>
@@ -291,13 +305,6 @@ function PanelIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-function PlusIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v14M5 12h14" />
-    </svg>
-  );
-}
 function DocumentIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -309,6 +316,21 @@ function CloseIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  );
+}
+
+function SearchIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+    </svg>
+  );
+}
+function DocumentPlusIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2v-9M12 12v6M9 15h6" />
     </svg>
   );
 }

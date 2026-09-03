@@ -542,10 +542,11 @@ Standards it cites become part of what the assistant discusses.
 | Item | Status | Notes |
 |---|---|---|
 | `src/lib/source-library.ts` | DONE | Shared store + `useSyncExternalStore` bindings; 13 unit tests |
-| `SourcesPanel` upload / drag-drop / remove / select | DONE | Posts to the pre-existing `/api/v1/analyze-document`; 23 panel tests |
+| `SourcesPanel` upload / drag-drop / remove / select | DONE | Posts to the pre-existing `/api/v1/analyze-document`; 27 panel tests |
+| Source search bar | DONE | Filters added sources by filename and by the standards they cite; its only control is the document input |
 | Shared knowledge base with the assistant | DONE | `HomeClient` unions result standards with library standards into `BisChatBot`'s `standardNumbers` |
 | Scope made visible | DONE | Chat header and centre column both say how much context came from added sources |
-| Web discovery ("Web" / "Fast Research") | REMOVED | Drawn from the design at first, then removed on request — there is no web-search service, so the panel just states that in one line rather than showing controls |
+| Web discovery ("Web" / "Fast Research") | REMOVED | Drawn from the design at first, then removed on request — there is no web-search service, so no control claims one |
 
 **No new backend was needed.** `/api/v1/analyze-document` already existed,
 fully built and unit-tested, with no UI calling it — it parses PDF/text,
