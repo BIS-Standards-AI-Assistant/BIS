@@ -300,6 +300,25 @@ describe("HomeClient — assistant column layout", () => {
     expect(results.compareDocumentPosition(promptBar) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   }, 15000);
 
+  test("the prompt bar is stuck to the bottom of the viewport, not to a guessed column height", async () => {
+    searchParamsValue = "helmet";
+    (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
+      ok: true,
+      json: async () => baseResponse(),
+    });
+
+    renderHome();
+    await waitFor(() => expect(screen.getByText("test answer")).toBeInTheDocument(), { timeout: 10000 });
+
+    const bar = screen
+      .getByLabelText(/Describe your product or compliance question/i)
+      .closest("div.sticky");
+    expect(bar).not.toBeNull();
+    expect(bar!.className).toContain("bottom-0");
+    // Opaque, because the answers scroll underneath it.
+    expect(bar!.className).toMatch(/bg-surface/);
+  }, 15000);
+
   test("the results render in the assistant column itself", async () => {
     searchParamsValue = "helmet";
     (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({

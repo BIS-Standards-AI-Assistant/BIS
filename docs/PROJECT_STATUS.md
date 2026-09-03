@@ -604,7 +604,7 @@ option it cannot honour.
 |---|---|---|
 | Global search redirects into the assistant | DONE | `SearchOverlay` now pushes `/?q=…` instead of `/search?q=…`; `HomeClient` already ran a `?q=` query on arrival, so the query lands in the assistant's own prompt bar and runs |
 | Prompt bar moved to the bottom of the column | DONE | Results above, prompt below, as in a chat |
-| Results render in the assistant column | DONE | At `lg+` the column is viewport-height like the panels beside it, so results scroll internally and the prompt bar stays put; below `lg` the page scrolls normally |
+| Results render in the assistant column | DONE | The column scrolls with the page; the prompt bar is `sticky bottom-0` so it floats at the viewport bottom at every width |
 
 `/search` (keyword Document Search) is **kept** — it is a distinct feature
 reached from the navigation, ServiceActions, and the Testing and About
@@ -616,4 +616,13 @@ and fills the prompt bar; the prompt bar is positioned after the results in
 document order; and both live inside the assistant column.
 
 `npm run verify` green: 0 lint errors, 292 vitest tests across 37 files.
+
+**Correction to the above (same session).** The assistant column was first
+given `lg:h-[calc(100vh-7rem)]` with its own internal scroll, on the
+assumption that `7rem` covered the government bar plus the navigation. It
+does not — the real header is taller, so the column overflowed the viewport
+and pushed the prompt bar below the fold, which is what it was supposed to
+prevent. Replaced with a `sticky bottom-0` prompt bar over a normally
+scrolling column: it floats at the bottom of the viewport without depending
+on the header's height being any particular value, and works below `lg` too.
 

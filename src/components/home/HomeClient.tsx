@@ -215,11 +215,12 @@ export function HomeClient() {
                 </div>
               )}
 
-              {/* CENTRE: the assistant itself. At lg+ this is a fixed-height
-                  column like the panels beside it, so the results scroll and
-                  the prompt bar stays at the bottom where it is typed into.
-                  Below lg the page scrolls normally instead. */}
-              <div className="flex min-w-0 flex-col lg:h-[calc(100vh-7rem)]">
+              {/* CENTRE: the assistant itself. The column scrolls with the
+                  page — a viewport-height column here depended on the header
+                  height being what we guessed, and pushed the prompt bar off
+                  screen when it wasn't. The prompt bar sticks to the bottom
+                  of the viewport instead, which needs no such assumption. */}
+              <div className="flex min-w-0 flex-col">
                 <div className="mb-3 flex shrink-0 items-center justify-between gap-3">
                   <div className="min-w-0">
                     <h1 className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-navy">
@@ -255,7 +256,7 @@ export function HomeClient() {
                   </div>
                 </div>
 
-                <div className="min-h-0 flex-1 lg:overflow-y-auto lg:pr-1">
+                <div className="min-h-0 flex-1">
             {loading && (
               <div className="mx-auto max-w-3xl mt-8">
                 <LoadingIndicator />
@@ -473,9 +474,10 @@ export function HomeClient() {
               </div>
             )}
               </div>
-                {/* The prompt bar sits at the bottom of the assistant column,
-                    where it is typed into, with the answers above it. */}
-                <div className="mt-3 shrink-0 border-t border-border/60 pt-3">
+                {/* Floats at the bottom of the viewport while the answers
+                    scroll behind it, so it is always where it is typed into.
+                    Opaque, because results pass underneath. */}
+                <div className="sticky bottom-0 z-20 -mx-1 mt-3 border-t border-border/60 bg-surface px-1 pb-3 pt-3">
                   <SearchHero
                     key={activeQuery}
                     onSubmit={runQuery}
