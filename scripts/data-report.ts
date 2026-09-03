@@ -85,7 +85,7 @@ ${(() => {
 - No laboratory data collected yet (\`laboratories\` table does not exist).
 - No committee data collected yet.
 - No amendment/revision graph populated yet — all ${standardRows.length} standards are single, undated edition records.
-- Relationship count above (${relationshipRows.length}) reflects that no automated relationship-extraction script has been built yet — every relationship row, if any, was inserted manually or by a one-off script, not a repeatable pipeline stage.
+- Relationship count above (${relationshipRows.length}) comes entirely from \`scripts/data-relationships.ts\`, which materializes two edge types (STANDARD_HAS_PRODUCT_MANUAL, STANDARD_SUBJECT_TO_QCO) from existing foreign keys — it is repeatable and idempotent, but it is NOT text-based relationship extraction: no script yet reads document text to find e.g. STANDARD_REFERENCES_STANDARD or STANDARD_SUPERSEDES_STANDARD edges.
 - \`data/manifests/discovered-sources.json\` contains candidate URLs found via sitemap crawling, all \`needs_review\` — none have been downloaded, confirmed, or extracted from.
 `;
 
