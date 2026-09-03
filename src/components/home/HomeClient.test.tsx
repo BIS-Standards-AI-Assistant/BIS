@@ -265,3 +265,55 @@ describe("HomeClient — component breakage & flow disruption", () => {
     await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
   });
 });
+
+describe("HomeClient — assistant column layout", () => {
+  test("a query arriving in the URL is picked up and run by the assistant", async () => {
+    // What the global search overlay now does: push /?q=<query>.
+    searchParamsValue = "helmet";
+    (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
+      ok: true,
+      json: async () => baseResponse(),
+    });
+
+    renderHome();
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled(), { timeout: 10000 });
+    const body = JSON.parse((global.fetch as ReturnType<typeof vi.fn>).mock.calls[0][1].body);
+    expect(body.query).toBe("helmet");
+    // ...and it lands in the assistant's own prompt bar.
+    expect(screen.getByLabelText(/Describe your product or compliance question/i)).toHaveValue("helmet");
+  }, 15000);
+
+  test("the prompt bar sits below the results, not above them", async () => {
+    searchParamsValue = "helmet";
+    (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
+      ok: true,
+      json: async () => baseResponse(),
+    });
+
+    renderHome();
+    await waitFor(() => expect(screen.getByText("test answer")).toBeInTheDocument(), { timeout: 10000 });
+
+    const results = screen.getByText("test answer");
+    const promptBar = screen.getByLabelText(/Describe your product or compliance question/i);
+    // DOCUMENT_POSITION_FOLLOWING: the prompt bar comes after the results.
+    expect(results.compareDocumentPosition(promptBar) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  }, 15000);
+
+  test("the results render in the assistant column itself", async () => {
+    searchParamsValue = "helmet";
+    (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
+      ok: true,
+      json: async () => baseResponse(),
+    });
+
+    renderHome();
+    await waitFor(() => expect(screen.getByText("test answer")).toBeInTheDocument(), { timeout: 10000 });
+
+    const assistant = screen.getByRole("heading", { name: /AI Assistant/i }).closest("div")?.parentElement
+      ?.parentElement;
+    expect(assistant).toContainElement(screen.getByText("test answer"));
+    expect(assistant).toContainElement(screen.getByLabelText(/Describe your product or compliance question/i));
+  }, 15000);
+});
+

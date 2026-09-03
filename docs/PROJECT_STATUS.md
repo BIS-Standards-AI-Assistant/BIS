@@ -597,3 +597,23 @@ never cited as if they were a standard.
 
 No placeholder web results are rendered; the box does not offer a web
 option it cannot honour.
+
+### Assistant column: bottom prompt bar, and one entry point (this session, follow-up)
+
+| Item | Status | Notes |
+|---|---|---|
+| Global search redirects into the assistant | DONE | `SearchOverlay` now pushes `/?q=…` instead of `/search?q=…`; `HomeClient` already ran a `?q=` query on arrival, so the query lands in the assistant's own prompt bar and runs |
+| Prompt bar moved to the bottom of the column | DONE | Results above, prompt below, as in a chat |
+| Results render in the assistant column | DONE | At `lg+` the column is viewport-height like the panels beside it, so results scroll internally and the prompt bar stays put; below `lg` the page scrolls normally |
+
+`/search` (keyword Document Search) is **kept** — it is a distinct feature
+reached from the navigation, ServiceActions, and the Testing and About
+pages, and it answers nothing. Only the free-text global search and the
+overlay's identifier suggestions now go to the assistant instead.
+
+Three `HomeClient` tests pin the behaviour: a `?q=` arrival runs the query
+and fills the prompt bar; the prompt bar is positioned after the results in
+document order; and both live inside the assistant column.
+
+`npm run verify` green: 0 lint errors, 292 vitest tests across 37 files.
+

@@ -215,9 +215,12 @@ export function HomeClient() {
                 </div>
               )}
 
-              {/* CENTRE: the assistant itself — search, synthesis, results */}
-              <div className="min-w-0">
-                <div className="mb-3 flex items-center justify-between gap-3">
+              {/* CENTRE: the assistant itself. At lg+ this is a fixed-height
+                  column like the panels beside it, so the results scroll and
+                  the prompt bar stays at the bottom where it is typed into.
+                  Below lg the page scrolls normally instead. */}
+              <div className="flex min-w-0 flex-col lg:h-[calc(100vh-7rem)]">
+                <div className="mb-3 flex shrink-0 items-center justify-between gap-3">
                   <div className="min-w-0">
                     <h1 className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-navy">
                       <AssistantIcon className="h-4.5 w-4.5" />
@@ -252,17 +255,7 @@ export function HomeClient() {
                   </div>
                 </div>
 
-                <div>
-              <SearchHero
-                key={activeQuery}
-                onSubmit={runQuery}
-                loading={loading}
-                compact
-                initialValue={activeQuery}
-                onClear={handleClearResults}
-              />
-            </div>
-
+                <div className="min-h-0 flex-1 lg:overflow-y-auto lg:pr-1">
             {loading && (
               <div className="mx-auto max-w-3xl mt-8">
                 <LoadingIndicator />
@@ -479,6 +472,19 @@ export function HomeClient() {
                 </div>
               </div>
             )}
+              </div>
+                {/* The prompt bar sits at the bottom of the assistant column,
+                    where it is typed into, with the answers above it. */}
+                <div className="mt-3 shrink-0 border-t border-border/60 pt-3">
+                  <SearchHero
+                    key={activeQuery}
+                    onSubmit={runQuery}
+                    loading={loading}
+                    compact
+                    initialValue={activeQuery}
+                    onClear={handleClearResults}
+                  />
+                </div>
               </div>
 
               {/* RIGHT: output formats for this result, and this browser's
