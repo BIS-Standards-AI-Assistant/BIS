@@ -23,47 +23,60 @@ const QUICK_PROMPTS = [
   "What are the relevant clauses?",
 ];
 
+function greetingFor(currentQuery: string): Message {
+  const text = currentQuery
+    ? `Namaste! I am your Bureau of Indian Standards (BIS) AI Assistant. I can help answer any questions about applicable Indian Standards, test requirements, ISI marking, or certification procedures for "${currentQuery}". What would you like to know?`
+    : "Namaste! I am your Bureau of Indian Standards (BIS) AI Assistant. Ask me any question about Indian Standards, product certifications, QCO orders, or laboratory test requirements.";
+
+  return {
+    id: "initial-welcome",
+    sender: "assistant",
+    text,
+    timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+  };
+}
+
 export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(() => [greetingFor(currentQuery)]);
   const [hasUnread, setHasUnread] = useState(false);
+  const [syncedQuery, setSyncedQuery] = useState(currentQuery);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const idCounterRef = useRef(0);
 
-  // Initialize or update welcome greeting when currentQuery changes
-  useEffect(() => {
-    const greetingText = currentQuery
-      ? `Namaste! I am your Bureau of Indian Standards (BIS) AI Assistant. I can help answer any questions about applicable Indian Standards, test requirements, ISI marking, or certification procedures for "${currentQuery}". What would you like to know?`
-      : "Namaste! I am your Bureau of Indian Standards (BIS) AI Assistant. Ask me any question about Indian Standards, product certifications, QCO orders, or laboratory test requirements.";
+  function nextId(prefix: string) {
+    idCounterRef.current += 1;
+    return `${prefix}-${idCounterRef.current}`;
+  }
 
-    setMessages([
-      {
-        id: "initial-welcome",
-        sender: "assistant",
-        text: greetingText,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-      },
-    ]);
-
+  // Reset the greeting when currentQuery changes (adjusting state during render, not in an effect)
+  if (currentQuery !== syncedQuery) {
+    setSyncedQuery(currentQuery);
+    setMessages([greetingFor(currentQuery)]);
     if (currentQuery) {
       setHasUnread(true);
     }
-  }, [currentQuery]);
+  }
 
   useEffect(() => {
     if (isOpen) {
-      setHasUnread(false);
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [isOpen, messages]);
+
+  function openChat() {
+    setIsOpen(true);
+    setHasUnread(false);
+  }
 
   async function handleSend(textToSend?: string) {
     const text = (textToSend ?? input).trim();
     if (!text || loading) return;
 
     const userMessage: Message = {
-      id: `user-${Date.now()}`,
+      id: nextId("user"),
       sender: "user",
       text,
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
@@ -98,7 +111,7 @@ export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
       }));
 
       const botMessage: Message = {
-        id: `assistant-${Date.now()}`,
+        id: nextId("assistant"),
         sender: "assistant",
         text: data.answer || "I have analyzed the Bureau standards regarding your question.",
         standards: extractedStandards.length > 0 ? extractedStandards : undefined,
@@ -110,7 +123,7 @@ export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
       setMessages((prev) => [
         ...prev,
         {
-          id: `error-${Date.now()}`,
+          id: nextId("error"),
           sender: "assistant",
           text: "I am temporarily unable to consult the Bureau knowledge base. Please verify your connection or try again in a moment.",
           timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
@@ -128,7 +141,7 @@ export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
         <div className="flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-200">
           {hasUnread && currentQuery && (
             <div
-              onClick={() => setIsOpen(true)}
+              onClick={openChat}
               className="hidden sm:flex items-center gap-2 rounded-xl border border-navy/30 bg-surface-raised px-3.5 py-2 shadow-lg cursor-pointer hover:border-navy transition-all"
             >
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -140,7 +153,7 @@ export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
 
           <button
             type="button"
-            onClick={() => setIsOpen(true)}
+            onClick={openChat}
             className="group relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-navy via-navy to-blue text-white shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer border-2 border-white/20"
             aria-label="Open BIS Chatbot"
           >
