@@ -9,6 +9,7 @@ import {
   getSourcesServerSnapshot,
   getSourcesSnapshot,
   removeSource,
+  selectedStandardNumbers,
   subscribeToSources,
   toggleSourceSelected,
   updateSource,
@@ -38,6 +39,14 @@ import type { QueryInterpretation } from "@/types/api";
  * full-width government top navigation is untouched, and this collapses.
  */
 
+interface SourceAnswer {
+  text: string;
+  evidence: Array<{ standardNumber: string | null; document: string; clause?: string | null; page?: number | null; text: string }>;
+  limitations?: string[];
+  scope?: string;
+  failed?: boolean;
+}
+
 export function SourcesPanel({
   interpretation,
   onCollapse,
@@ -48,19 +57,55 @@ export function SourcesPanel({
   const sources = useSyncExternalStore(subscribeToSources, getSourcesSnapshot, getSourcesServerSnapshot);
   const [isDragging, setIsDragging] = useState(false);
   const [rejection, setRejection] = useState<string | null>(null);
-  const [filter, setFilter] = useState("");
+  const [prompt, setPrompt] = useState("");
+  const [asking, setAsking] = useState(false);
+  const [answer, setAnswer] = useState<SourceAnswer | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Matches on filename and on the standards a document cites, so a reader
-  // can find the source that brought in a given IS number.
-  const needle = filter.trim().toLowerCase();
-  const visible = needle
-    ? sources.filter(
-        (s) =>
-          s.name.toLowerCase().includes(needle) ||
-          s.citedNumbers.some((n) => n.toLowerCase().includes(needle)),
-      )
-    : sources;
+  const inScope = selectedStandardNumbers(sources);
+
+  /**
+   * Answers from the standards the added documents cite, through the same
+   * scoped endpoint the assistant uses — so this box and the assistant give
+   * the same answer to the same question, and both cite their evidence.
+   *
+   * Only identifiers are sent. The documents' text is never posted as chat
+   * input (see the note at the top of this file), which is also why this
+   * cannot answer "what does paragraph 3 of my file say".
+   */
+  async function ask(question: string) {
+    const message = question.trim();
+    if (!message || asking) return;
+
+    setAsking(true);
+    setAnswer(null);
+    try {
+      const res = await fetch("/api/v1/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          originalQuery: sources.map((s) => s.name).join(", ") || message,
+          standardNumbers: inScope.slice(0, 10),
+          message,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setAnswer({ text: data.error ?? `Request failed (HTTP ${res.status})`, evidence: [], failed: true });
+        return;
+      }
+      setAnswer({
+        text: data.answer ?? "No answer was returned.",
+        evidence: (data.evidence ?? []).slice(0, 4),
+        limitations: data.limitations ?? [],
+        scope: data.scope,
+      });
+    } catch {
+      setAnswer({ text: "Could not reach the assistant service.", evidence: [], failed: true });
+    } finally {
+      setAsking(false);
+    }
+  }
 
   async function ingest(files: FileList | File[]) {
     setRejection(null);
@@ -153,18 +198,24 @@ export function SourcesPanel({
           }}
         />
 
-        {/* Searches the documents already added — the only thing this panel
-            has to search. Its one control is the document input, since no
-            web-source discovery service exists to put behind anything else. */}
-        <div className="flex items-center gap-2 rounded-xl border border-border-strong bg-surface px-3 py-2 focus-within:border-navy">
-          <SearchIcon className="h-4 w-4 shrink-0 text-ink-faint" />
+        {/* Asks a question of the added documents. Its only control is the
+            document input — there is no web-search service to put behind
+            anything else, and a control that searches nothing would lie. */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            void ask(prompt);
+          }}
+          className="flex items-center gap-2 rounded-xl border border-border-strong bg-surface px-3 py-2 focus-within:border-navy"
+        >
           <input
-            type="search"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            placeholder="Search your sources"
-            aria-label="Search your sources"
-            className="min-w-0 flex-1 bg-transparent text-[13px] text-ink placeholder-ink-faint focus:outline-none"
+            type="text"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Ask about your sources"
+            aria-label="Ask about your sources"
+            disabled={asking}
+            className="min-w-0 flex-1 bg-transparent text-[13px] text-ink placeholder-ink-faint focus:outline-none disabled:opacity-60"
           />
           <button
             type="button"
@@ -175,7 +226,71 @@ export function SourcesPanel({
           >
             <DocumentPlusIcon className="h-4 w-4" />
           </button>
-        </div>
+          <button
+            type="submit"
+            disabled={asking || !prompt.trim()}
+            aria-label="Ask"
+            title="Ask"
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-navy text-white transition-colors hover:bg-navy-deep disabled:opacity-40"
+          >
+            <ArrowIcon className="h-4 w-4" />
+          </button>
+        </form>
+
+        {sources.length === 0 ? (
+          <p className="mt-2 px-1 text-[11px] leading-relaxed text-ink-faint">
+            Add a document first — questions here are answered from the Indian
+            Standards your sources cite.
+          </p>
+        ) : (
+          <p className="mt-2 px-1 text-[11px] leading-relaxed text-ink-faint">
+            Answered from the {inScope.length} standard{inScope.length === 1 ? "" : "s"} your
+            selected sources cite, using indexed BIS evidence.
+          </p>
+        )}
+
+        {(asking || answer) && (
+          <div className="mt-3 rounded-xl border border-border/70 bg-surface-alt/50 p-3">
+            {asking ? (
+              <p className="text-[12px] font-medium text-ink-soft">Searching BIS evidence…</p>
+            ) : (
+              answer && (
+                <>
+                  <p
+                    className={`text-[12.5px] leading-relaxed ${answer.failed ? "text-danger" : "text-ink"}`}
+                  >
+                    {answer.text}
+                  </p>
+
+                  {answer.evidence.length > 0 && (
+                    <ul className="mt-2.5 space-y-1.5 border-t border-border/60 pt-2.5">
+                      {answer.evidence.map((ev, i) => (
+                        <li key={i} className="text-[11px] leading-relaxed text-ink-soft">
+                          <span className="font-mono font-bold text-navy">
+                            {ev.standardNumber ?? ev.document}
+                          </span>
+                          {ev.clause && <span className="text-ink-faint"> · clause {ev.clause}</span>}
+                          {ev.page && <span className="text-ink-faint"> · p. {ev.page}</span>}
+                          <span className="mt-0.5 block text-ink-faint">“{ev.text.slice(0, 160)}…”</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {answer.limitations && answer.limitations.length > 0 && (
+                    <ul className="mt-2 space-y-0.5 border-t border-border/60 pt-2">
+                      {answer.limitations.map((l) => (
+                        <li key={l} className="text-[10.5px] leading-snug text-ink-faint">
+                          {l}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </>
+              )
+            )}
+          </div>
+        )}
 
         {rejection && (
           <p className="mt-3 rounded-lg border border-danger/30 bg-danger-soft/40 px-3 py-2 text-[11.5px] text-danger">
@@ -183,11 +298,7 @@ export function SourcesPanel({
           </p>
         )}
 
-        {sources.length > 0 && visible.length === 0 ? (
-          <p className="mt-6 px-1 text-center text-[12.5px] text-ink-faint">
-            No added source matches “{filter}”.
-          </p>
-        ) : sources.length === 0 ? (
+        {sources.length === 0 ? (
           <div
             className={`mt-6 rounded-xl border border-dashed px-4 py-10 text-center transition-colors ${
               isDragging ? "border-navy bg-navy/5" : "border-border/70"
@@ -202,7 +313,7 @@ export function SourcesPanel({
           </div>
         ) : (
           <ul className="mt-3 space-y-1.5">
-            {visible.map((source) => (
+            {sources.map((source) => (
               <SourceRow key={source.id} source={source} />
             ))}
           </ul>
@@ -320,17 +431,18 @@ function CloseIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function SearchIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
-    </svg>
-  );
-}
 function DocumentPlusIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2v-9M12 12v6M9 15h6" />
+    </svg>
+  );
+}
+
+function ArrowIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
     </svg>
   );
 }

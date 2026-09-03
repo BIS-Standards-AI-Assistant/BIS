@@ -543,7 +543,8 @@ Standards it cites become part of what the assistant discusses.
 |---|---|---|
 | `src/lib/source-library.ts` | DONE | Shared store + `useSyncExternalStore` bindings; 13 unit tests |
 | `SourcesPanel` upload / drag-drop / remove / select | DONE | Posts to the pre-existing `/api/v1/analyze-document`; 27 panel tests |
-| Source search bar | DONE | Filters added sources by filename and by the standards they cite; its only control is the document input |
+| Source prompt box | DONE | Asks a question of the added sources through `/api/v1/chat`, scoped by the standards they cite; renders the answer with its evidence, clause and page |
+| Web search from the prompt box | BLOCKED | No web-search provider exists in this codebase and no key is configured. Needs a provider decision — see below |
 | Shared knowledge base with the assistant | DONE | `HomeClient` unions result standards with library standards into `BisChatBot`'s `standardNumbers` |
 | Scope made visible | DONE | Chat header and centre column both say how much context came from added sources |
 | Web discovery ("Web" / "Fast Research") | REMOVED | Drawn from the design at first, then removed on request — there is no web-search service, so no control claims one |
@@ -578,3 +579,21 @@ except to be read for the standards they cite.
 
 `npm run verify` green: 0 lint errors, 285 vitest tests across 37 files (up
 from 253 across 35).
+
+**Web search from the Sources prompt box is BLOCKED, not skipped.** The
+request was for answers grounded in the added documents *and* a web search.
+The first half is built. The second cannot be: there is no web-search
+provider anywhere in `src/`, no API key for one in the environment, and
+adding one means a new outbound integration (Tavily/Brave/SerpAPI or
+similar), most of them paid — which docs/ui/SIH.md §23 makes a deliberate
+decision rather than an implementation detail.
+
+It is also worth deciding rather than assuming: this service answers from
+BIS evidence and cites clause and page for every claim. Arbitrary web
+results have no such provenance, so mixing them into the same answer
+surface would weaken the evidence model the whole product rests on. If web
+results are wanted, they should be visibly separated from BIS evidence and
+never cited as if they were a standard.
+
+No placeholder web results are rendered; the box does not offer a web
+option it cannot honour.

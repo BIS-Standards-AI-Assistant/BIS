@@ -53,15 +53,14 @@ describe("SourcesPanel — adding documents", () => {
     expect(screen.getByText("Saved sources will appear here")).toBeInTheDocument();
   });
 
-  test("the search bar's only control is the document input", () => {
+  test("the prompt box offers a document input and an ask button, and nothing web", () => {
     render(<SourcesPanel onCollapse={vi.fn()} />);
-    expect(screen.getByRole("searchbox", { name: /search your sources/i })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: /ask about your sources/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /add a document/i })).toBeInTheDocument();
-    // The removed affordances must not come back.
-    expect(screen.queryByRole("button", { name: "add a source" })).not.toBeInTheDocument();
-    expect(screen.queryByText(/Drop files here/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Ask" })).toBeInTheDocument();
     expect(screen.queryByText("Web")).not.toBeInTheDocument();
     expect(screen.queryByText("Fast Research")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Drop files here/i)).not.toBeInTheDocument();
   });
 
   test("the document button opens the file picker", async () => {
@@ -71,6 +70,11 @@ describe("SourcesPanel — adding documents", () => {
 
     await userEvent.setup().click(screen.getByRole("button", { name: /add a document/i }));
     expect(clickSpy).toHaveBeenCalled();
+  });
+
+  test("says a document is needed before questions can be answered", () => {
+    render(<SourcesPanel onCollapse={vi.fn()} />);
+    expect(screen.getByText(/Add a document first/i)).toBeInTheDocument();
   });
 
   test("uploads the file to the real analysis endpoint and lists what it cites", async () => {
@@ -156,50 +160,86 @@ describe("SourcesPanel — adding documents", () => {
     expect(screen.getByText("Saved sources will appear here")).toBeInTheDocument();
   });
 
-  test("filters the added sources by name", async () => {
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(analysisResponse(["IS 2347:2017"])));
-    const user = userEvent.setup();
-
-    render(<SourcesPanel onCollapse={vi.fn()} />);
-    await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
-    await screen.findByText("cooker.pdf");
-    await user.upload(screen.getByLabelText("Add source documents"), pdf("helmet.pdf"));
-    await screen.findByText("helmet.pdf");
-
-    await user.type(screen.getByRole("searchbox", { name: /search your sources/i }), "cook");
-
-    expect(screen.getByText("cooker.pdf")).toBeInTheDocument();
-    expect(screen.queryByText("helmet.pdf")).not.toBeInTheDocument();
-  });
-
-  test("filters by the standards a document cites, so a reader can find where a number came from", async () => {
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(analysisResponse(["IS 2347:2017"])));
-    const user = userEvent.setup();
-
-    render(<SourcesPanel onCollapse={vi.fn()} />);
-    await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
-    await screen.findByText("cooker.pdf");
-
-    await user.type(screen.getByRole("searchbox", { name: /search your sources/i }), "2347");
-    expect(screen.getByText("cooker.pdf")).toBeInTheDocument();
-  });
-
-  test("says when nothing matches, rather than showing an empty list", async () => {
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(analysisResponse(["IS 2347:2017"])));
+  test("a question is answered from the standards the added sources cite", async () => {
+    const fetchSpy = vi
+      .fn()
+      .mockResolvedValueOnce(analysisResponse(["IS 2347:2017"]))
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          scope: "current_results",
+          answer: "IS 2347:2017 covers domestic pressure cookers.",
+          evidence: [{ standardNumber: "IS 2347:2017", document: "Product Manual", clause: "4.1", page: 3, text: "Scope covers pressure cookers for domestic use." }],
+          limitations: [],
+        }),
+      });
+    vi.stubGlobal("fetch", fetchSpy);
     const user = userEvent.setup();
 
     render(<SourcesPanel onCollapse={vi.fn()} />);
     await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
     await screen.findByText("cooker.pdf");
 
-    await user.type(screen.getByRole("searchbox", { name: /search your sources/i }), "zzz");
-    expect(screen.getByText(/No added source matches/i)).toBeInTheDocument();
-    expect(screen.queryByText("cooker.pdf")).not.toBeInTheDocument();
+    await user.type(screen.getByRole("textbox", { name: /ask about your sources/i }), "what does it require?");
+    await user.click(screen.getByRole("button", { name: "Ask" }));
+
+    expect(await screen.findByText(/covers domestic pressure cookers/i)).toBeInTheDocument();
+
+    // Scoped by identifier to what the document cites — never its text.
+    const body = JSON.parse(fetchSpy.mock.calls[1][1].body);
+    expect(body.standardNumbers).toEqual(["IS 2347:2017"]);
+    expect(body.message).toBe("what does it require?");
   });
 
-  test("states that the BIS corpus is searched regardless of added sources", () => {
+  test("the answer shows the evidence it came from", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValueOnce(analysisResponse(["IS 2347:2017"]))
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({
+            scope: "current_results",
+            answer: "It covers domestic pressure cookers.",
+            evidence: [{ standardNumber: "IS 2347:2017", document: "Product Manual", clause: "4.1", page: 3, text: "Scope covers pressure cookers for domestic use." }],
+          }),
+        }),
+    );
+    const user = userEvent.setup();
+
     render(<SourcesPanel onCollapse={vi.fn()} />);
-    expect(screen.getByText(/runs against the indexed BIS corpus/i)).toBeInTheDocument();
+    await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
+    await screen.findByText("cooker.pdf");
+
+    await user.type(screen.getByRole("textbox", { name: /ask about your sources/i }), "scope?");
+    await user.click(screen.getByRole("button", { name: "Ask" }));
+
+    await screen.findByText(/It covers domestic pressure cookers/i);
+    // Once as the source row's chip, once as the answer's citation.
+    expect(screen.getAllByText("IS 2347:2017")).toHaveLength(2);
+    expect(screen.getByText(/clause 4\.1/)).toBeInTheDocument();
+    expect(screen.getByText(/Scope covers pressure cookers/)).toBeInTheDocument();
+  });
+
+  test("reports a failed question instead of showing nothing", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValueOnce(analysisResponse(["IS 2347:2017"]))
+        .mockRejectedValueOnce(new Error("offline")),
+    );
+    const user = userEvent.setup();
+
+    render(<SourcesPanel onCollapse={vi.fn()} />);
+    await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
+    await screen.findByText("cooker.pdf");
+
+    await user.type(screen.getByRole("textbox", { name: /ask about your sources/i }), "scope?");
+    await user.click(screen.getByRole("button", { name: "Ask" }));
+
+    expect(await screen.findByText(/Could not reach the assistant service/i)).toBeInTheDocument();
   });
 
   test("shows what the search was understood as, once there is a result", () => {
