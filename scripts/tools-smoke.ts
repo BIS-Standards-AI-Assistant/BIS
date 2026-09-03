@@ -31,6 +31,12 @@ async function main() {
     // one side has no ingested document — must report insufficient evidence, not fabricate overlap
     { tool: "compareStandards", input: { canonicalNumberA: "IS 5522:2014", canonicalNumberB: "IS 269:2015" } },
     { tool: "compareStandards", input: { canonicalNumberA: "IS 5522:2014", canonicalNumberB: "IS 99999:2099" } },
+    { tool: "getReferenceEntry", input: { canonicalNumber: "IS 5522:2014" } }, // has a real ingested document -> indexedByNavigator true
+    { tool: "getReferenceEntry", input: { canonicalNumber: "IS 269:2015" } }, // no ingested document -> indexedByNavigator false, notes explain why
+    { tool: "getReferenceEntry", input: { canonicalNumber: "IS 99999:2099" } }, // must be not_found, never a fabricated entry
+    // IS 5522:2014's real standards.id, from earlier live queries this session
+    { tool: "getGraphNeighbors", input: { entityType: "standard", entityId: "dabdadf1-1895-4825-9d6a-fa5b7bf21ad2" } },
+    { tool: "getGraphNeighbors", input: { entityType: "standard", entityId: "00000000-0000-0000-0000-000000000000" } }, // no relationships -> not_found
     { tool: "unknownTool", input: {} },
     { tool: "getStandard", input: { notAField: true } }, // invalid input
   ];
