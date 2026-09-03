@@ -18,9 +18,9 @@ describe("findCertificationSchemeForStandard", () => {
   });
 
   test("does not match across different editions of the same base standard", async () => {
-    // The dataset has IS 4151:2015; a query for a different edition of the
-    // same base number must not silently match it.
-    const result = await findCertificationSchemeForStandard("IS 4151:2020");
+    // The dataset has IS 4151:2020 (updated 2026-09); a query for a different
+    // edition of the same base number must not silently match it.
+    const result = await findCertificationSchemeForStandard("IS 4151:2015");
     expect(result).toBeNull();
   });
 });

@@ -11,19 +11,27 @@ import path from "path";
  */
 
 interface QcoEntry {
-  is_number?: string;
-  title?: string;
-  category?: string;
+  // New schema (2026-09): standard_number + year are separate; canonical
+  // "IS XXXX:YYYY" is reconstructed in toItem().
+  standard_number?: string;
+  year?: string;
+  full_title?: string;
+  short_title?: string;
+  product_category?: string;
   scheme?: string;
   mandatory_qco?: boolean;
-  scope_summary?: string;
+  scope?: string;
   key_testing_parameters?: string[];
   certification_route?: string;
   verification_status?: string;
   verification_note?: string;
   source_url?: string;
-  source_note?: string;
   retrieved_at?: string;
+  // Legacy schema fields (kept for backwards compat with any stale files)
+  is_number?: string;
+  title?: string;
+  category?: string;
+  scope_summary?: string;
 }
 
 export interface CertificationSchemeItem {
@@ -40,14 +48,22 @@ export interface CertificationSchemeItem {
 }
 
 function toItem(e: QcoEntry): CertificationSchemeItem | null {
-  if (!e.is_number) return null;
+  // Support both new schema (standard_number + year) and legacy (is_number).
+  const canonicalNumber =
+    e.is_number ??
+    (e.standard_number
+      ? e.year
+        ? `${e.standard_number}:${e.year}`
+        : e.standard_number
+      : null);
+  if (!canonicalNumber) return null;
   return {
-    standardNumber: e.is_number,
-    title: e.title ?? e.is_number,
-    category: e.category ?? null,
+    standardNumber: canonicalNumber,
+    title: e.full_title ?? e.title ?? canonicalNumber,
+    category: e.product_category ?? e.category ?? null,
     scheme: e.scheme ?? null,
     mandatoryQco: e.mandatory_qco === true,
-    scopeSummary: e.scope_summary ?? null,
+    scopeSummary: e.scope ?? e.scope_summary ?? null,
     certificationRoute: e.certification_route ?? null,
     testingParameters: e.key_testing_parameters ?? [],
     verificationStatus: e.verification_status ?? null,

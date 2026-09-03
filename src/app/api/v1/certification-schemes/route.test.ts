@@ -12,7 +12,7 @@ describe("GET /api/v1/certification-schemes", () => {
     const res = await GET(req("http://localhost/api/v1/certification-schemes"));
     const body = await res.json();
     expect(res.status).toBe(200);
-    expect(body.total).toBe(48); // the real dataset's known entry count (2026-08-30: 22 verified + 26 needs_review from the upstream 50-entry update)
+    expect(body.total).toBe(100); // new dataset (2026-09): 100 entries, all verified_accurate
     for (const item of body.items) {
       expect(item.standardNumber).toMatch(/^IS[/ ]/);
       expect(item.sourceUrl === null || typeof item.sourceUrl === "string").toBe(true);
