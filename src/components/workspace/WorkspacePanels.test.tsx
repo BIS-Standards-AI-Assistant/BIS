@@ -513,3 +513,43 @@ describe("one conversation across both surfaces", () => {
   });
 });
 
+describe("the shared conversation and React's render rules", () => {
+  test("switching search resets the thread without updating a sibling mid-render", async () => {
+    const errors: string[] = [];
+    const spy = vi.spyOn(console, "error").mockImplementation((...args) => {
+      errors.push(args.join(" "));
+    });
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ scope: "current_results", answer: "x", evidence: [] }),
+      }),
+    );
+
+    const { rerender } = render(
+      <>
+        <SourcesPanel scopeStandardNumbers={["IS 1:2020"]} scopeQuery="first" onCollapse={vi.fn()} />
+        <BisChatBot currentQuery="first" standardNumbers={["IS 1:2020"]} />
+      </>,
+    );
+    await userEvent.setup().click(screen.getByRole("button", { name: "Discuss these results" }));
+
+    rerender(
+      <>
+        <SourcesPanel scopeStandardNumbers={["IS 2:2020"]} scopeQuery="second" onCollapse={vi.fn()} />
+        <BisChatBot currentQuery="second" standardNumbers={["IS 2:2020"]} />
+      </>,
+    );
+
+    // The thread restarts for the new search...
+    await waitFor(() => expect(screen.getByText(/You're exploring "second"/)).toBeInTheDocument());
+    spy.mockRestore();
+
+    // ...without React's "Cannot update a component while rendering a
+    // different component" error, which a render-phase write to the shared
+    // store does provoke.
+    expect(errors.filter((e) => /while rendering a different component/i.test(e))).toEqual([]);
+  });
+});
+

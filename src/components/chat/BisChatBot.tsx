@@ -38,8 +38,10 @@ function greetingFor(currentQuery: string): string {
 export function BisChatBot({ currentQuery = "", standardNumbers = [], fromAddedSources = 0 }: BisChatBotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [hasUnread, setHasUnread] = useState(false);
-  const [syncedQuery, setSyncedQuery] = useState(currentQuery);
+  // Which search the reader has already opened the chat for. Derived rather
+  // than synced: an effect that calls setState to keep a flag in step with a
+  // prop is the same value expressed twice, and only one of them can be right.
+  const [openedFor, setOpenedFor] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   // One conversation, shared with the Sources panel's prompt box — a message
@@ -50,19 +52,16 @@ export function BisChatBot({ currentQuery = "", standardNumbers = [], fromAddedS
     getConversationServerSnapshot,
   );
 
-  // Reset the greeting when currentQuery changes (adjusting state during
-  // render, not in an effect).
-  if (currentQuery !== syncedQuery) {
-    setSyncedQuery(currentQuery);
+  // Start (or restart) the thread when the search changes. This has to be an
+  // effect, not a render-phase adjustment: the conversation is shared, so
+  // writing to it during render updates the Sources panel mid-render, which
+  // React rightly refuses. resetConversation is a no-op when the greeting is
+  // already the current one, so re-running it is harmless.
+  useEffect(() => {
     resetConversation(greetingFor(currentQuery), currentQuery);
-    if (currentQuery) {
-      setHasUnread(true);
-    }
-  }
+  }, [currentQuery]);
 
-  if (messages.length === 0) {
-    resetConversation(greetingFor(currentQuery), currentQuery);
-  }
+  const hasUnread = Boolean(currentQuery) && openedFor !== currentQuery;
 
   useEffect(() => {
     if (isOpen) {
@@ -72,7 +71,7 @@ export function BisChatBot({ currentQuery = "", standardNumbers = [], fromAddedS
 
   function openChat() {
     setIsOpen(true);
-    setHasUnread(false);
+    setOpenedFor(currentQuery);
   }
 
   async function handleSend(textToSend?: string) {
