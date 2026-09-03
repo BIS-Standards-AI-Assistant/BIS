@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
 
 interface ClarificationPanelProps {
@@ -13,11 +13,9 @@ interface ClarificationPanelProps {
 
 /**
  * Product-Aware Refinement Panel:
- * Recommended options are strictly concrete product specifications (e.g. "Stainless Steel Grade 304",
- * "Vacuum Insulated Flask", "Two-Wheeler Motorcycle (IS 4151)") tailored to the product searched.
- * Clicking each option directly selects/adds it (toggled with a checkmark).
- * Clicking "Refine Search" executes the search with all selected specifications.
- * No generic placeholders (e.g. "intended use"), no input boxes, pure direct selection.
+ * - Recommendations stay in place as horizontal clickable chips.
+ * - Clicking each recommendation pops up a small input column underneath where user can write or customize their answer.
+ * - Clicking "Refine Search" displays an animated combining step showing all inputs being synthesized together before executing search.
  */
 export function ClarificationPanel({
   items,
@@ -26,10 +24,19 @@ export function ClarificationPanel({
   onRefine,
   loading = false,
 }: ClarificationPanelProps) {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const [inputValues, setInputValues] = useState<Record<string, string>>({});
+  const [isSynthesizing, setIsSynthesizing] = useState(false);
+  const [synthesisStep, setSynthesisStep] = useState(1);
 
-  // Strictly filter out any generic abstract labels (e.g. "intended use", "material grade", "size or capacity")
-  // and ensure concrete specifications for the searched product are always available.
+  // Clear synthesizing state when parent loading finishes
+  useEffect(() => {
+    if (!loading) {
+      setIsSynthesizing(false);
+    }
+  }, [loading]);
+
+  // Strictly filter out generic labels and provide product-specific options
   const displayItems = useMemo(() => {
     const specificItems = (items || []).filter((item) => !isForbiddenGeneric(item));
     if (specificItems.length >= 2) return specificItems;
@@ -39,25 +46,63 @@ export function ClarificationPanel({
   if (!displayItems || displayItems.length === 0) return null;
 
   function toggleOption(item: string) {
-    setSelectedOptions((prev) =>
-      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
-    );
+    setSelectedKeys((prev) => {
+      if (prev.includes(item)) {
+        return prev.filter((i) => i !== item);
+      } else {
+        // Initialize input value with recommendation text
+        setInputValues((current) => ({
+          ...current,
+          [item]: current[item] || item,
+        }));
+        return [...prev, item];
+      }
+    });
+  }
+
+  function handleInputChange(key: string, value: string) {
+    setInputValues((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
   }
 
   function handleRefineSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!onRefine || loading || selectedOptions.length === 0) return;
+    if (!onRefine || loading || selectedKeys.length === 0) return;
 
-    const refinedQuery = currentQuery
-      ? `${currentQuery} ${selectedOptions.join(" ")}`.trim()
-      : selectedOptions.join(" ").trim();
+    const finalSpecs = selectedKeys
+      .map((k) => inputValues[k]?.trim() || k)
+      .filter(Boolean);
 
-    onRefine(refinedQuery);
+    if (finalSpecs.length === 0) return;
+
+    setIsSynthesizing(true);
+    setSynthesisStep(1);
+
+    setTimeout(() => {
+      setSynthesisStep(2);
+    }, 500);
+
+    setTimeout(() => {
+      setSynthesisStep(3);
+    }, 1000);
+
+    setTimeout(() => {
+      const refinedQuery = currentQuery
+        ? `${currentQuery} ${finalSpecs.join(" ")}`.trim()
+        : finalSpecs.join(" ").trim();
+      onRefine(refinedQuery);
+    }, 1400);
   }
 
   const productName = product?.trim()
     ? product.charAt(0).toUpperCase() + product.slice(1)
     : "";
+
+  const activeSpecs = selectedKeys
+    .map((k) => inputValues[k]?.trim() || k)
+    .filter(Boolean);
 
   return (
     <div className="rounded-2xl border border-border-strong/70 bg-surface-raised p-5 sm:p-6 shadow-xs transition-all hover:border-navy/30">
@@ -83,28 +128,28 @@ export function ClarificationPanel({
                   : "Recommended specifications for your product"}
               </h2>
               <p className="mt-0.5 text-xs text-ink-soft">
-                Click any recommended specification below to add it directly to your query:
+                Click any recommendation to select and customize its exact measurement or specification:
               </p>
             </div>
 
-            {selectedOptions.length > 0 && (
+            {selectedKeys.length > 0 && (
               <span className="inline-flex items-center gap-1 rounded-full bg-navy px-3 py-1 text-xs font-bold text-white shadow-2xs">
-                <span>{selectedOptions.length} selected</span>
+                <span>{selectedKeys.length} selected</span>
               </span>
             )}
           </div>
 
-          {/* Horizontally organized chips - click to directly select/add */}
+          {/* Horizontally organized recommendations chips (in the exact same place) */}
           <div className="mt-3.5 flex flex-wrap items-center gap-2">
             {displayItems.map((item, idx) => {
-              const isSelected = selectedOptions.includes(item);
+              const isSelected = selectedKeys.includes(item);
 
               return (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => toggleOption(item)}
-                  disabled={loading}
+                  disabled={loading || isSynthesizing}
                   className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer shadow-2xs ${
                     isSelected
                       ? "bg-navy text-white hover:bg-navy-deep border border-navy ring-2 ring-navy/20"
@@ -120,22 +165,112 @@ export function ClarificationPanel({
             })}
           </div>
 
-          {/* Clean Refine Search Button - shows when options are selected */}
-          {selectedOptions.length > 0 && (
+          {/* Small input columns pop up under recommendations when selected */}
+          {selectedKeys.length > 0 && (
+            <div className="mt-4 pt-3.5 border-t border-border/70 space-y-2.5 animate-in fade-in slide-in-from-top-1 duration-200">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-semibold text-ink-soft uppercase tracking-wider">
+                  Customize Values ({selectedKeys.length}):
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedKeys([]);
+                    setInputValues({});
+                  }}
+                  className="text-[11px] font-medium text-ink-faint hover:text-red-600 transition-colors cursor-pointer"
+                >
+                  Clear all
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                {selectedKeys.map((key) => (
+                  <div
+                    key={key}
+                    className="flex flex-col gap-1 rounded-xl border border-navy/25 bg-surface p-2.5 shadow-2xs transition-all focus-within:border-navy focus-within:ring-2 focus-within:ring-navy/15"
+                  >
+                    <div className="flex items-center justify-between text-[11px] font-semibold text-navy">
+                      <span className="truncate">{key}</span>
+                      <button
+                        type="button"
+                        onClick={() => toggleOption(key)}
+                        className="text-ink-faint hover:text-red-600 transition-colors p-0.5"
+                        title="Remove specification"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <input
+                      type="text"
+                      value={inputValues[key] ?? key}
+                      onChange={(e) => handleInputChange(key, e.target.value)}
+                      placeholder={`e.g. ${key}`}
+                      className="w-full text-xs font-medium text-ink bg-transparent border-0 outline-none placeholder:text-ink-faint focus:ring-0"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Synthesis / Combining Animation Overlay when Refine Search is clicked */}
+          {(isSynthesizing || loading) && (
+            <div className="mt-4 rounded-xl border border-navy/30 bg-navy/5 p-3.5 shadow-inner animate-in fade-in duration-300">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="relative flex h-4 w-4 items-center justify-center">
+                    <span className="absolute h-full w-full animate-ping rounded-full bg-navy/40" />
+                    <span className="relative h-2.5 w-2.5 rounded-full bg-navy" />
+                  </div>
+                  <span className="text-xs font-bold text-navy">
+                    {synthesisStep === 1 && "Taking all customized inputs..."}
+                    {synthesisStep === 2 && "Combining inputs and cross-referencing BIS catalog..."}
+                    {synthesisStep >= 3 && "Synthesizing refined standards output..."}
+                  </span>
+                </div>
+                <span className="text-[11px] font-mono text-ink-soft">
+                  {synthesisStep}/3
+                </span>
+              </div>
+
+              {/* Displaying the inputs being combined */}
+              {activeSpecs.length > 0 && (
+                <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-[11px]">
+                  <span className="text-ink-soft">Combining:</span>
+                  {activeSpecs.map((spec, sIdx) => (
+                    <span
+                      key={sIdx}
+                      className="inline-flex items-center rounded-md bg-white dark:bg-surface-raised px-2 py-0.5 font-medium text-navy border border-navy/20 shadow-2xs"
+                    >
+                      {spec}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Animated Progress Bar */}
+              <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-navy/15">
+                <div
+                  className="h-full bg-gradient-to-r from-navy via-blue to-gold transition-all duration-500"
+                  style={{
+                    width: synthesisStep === 1 ? "35%" : synthesisStep === 2 ? "70%" : "100%",
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Refine Search Button - shows when options are selected and not currently loading */}
+          {selectedKeys.length > 0 && !isSynthesizing && !loading && (
             <form onSubmit={handleRefineSubmit} className="mt-4 pt-3 border-t border-border/70 flex justify-end">
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading || isSynthesizing}
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-xs hover:bg-navy-deep transition-all cursor-pointer"
               >
-                {loading ? (
-                  <span>Searching Refined Standards...</span>
-                ) : (
-                  <>
-                    <span>Refine Search</span>
-                    <span aria-hidden="true">&rarr;</span>
-                  </>
-                )}
+                <span>Refine Search</span>
+                <span aria-hidden="true">&rarr;</span>
               </button>
             </form>
           )}
