@@ -168,6 +168,8 @@ describe("8. Evidence-only response", () => {
       query: "test",
       intent: {
         intent: "find_applicable_standard" as const,
+        isRelevant: true,
+        relevanceMessage: null,
         product: null,
         material: null,
         useCase: null,

@@ -12,6 +12,13 @@ export const QueryIntentSchema = z.object({
       "unclear",
     ])
     .describe("The user's primary goal"),
+  isRelevant: z
+    .boolean()
+    .describe("Set to false if this query is completely unrelated to Indian Standards, products, manufacturing, materials, certification, or testing. Otherwise set to true."),
+  relevanceMessage: z
+    .string()
+    .nullable()
+    .describe("If isRelevant is false, an informative and friendly explanation guiding the user to enter a product or standard. Null if isRelevant is true."),
   product: z.string().nullable().describe("Product or item described, verbatim or lightly normalized"),
   material: z.string().nullable(),
   useCase: z.string().nullable(),
@@ -30,12 +37,16 @@ export const QueryIntentSchema = z.object({
 export type QueryIntent = z.infer<typeof QueryIntentSchema>;
 
 const SYSTEM_PROMPT = `You extract structured intent from user questions about Indian Standards (BIS) applicability, certification, and testing.
+CRITICAL: If the query is completely unrelated to products, materials, manufacturing, Indian Standards, testing, or BIS certification (such as weather forecasts, cooking recipes, coding/programming, general trivia, politics, sports scores, greetings), set isRelevant to false and set relevanceMessage to a clear, professional message explaining that this is not a relevant search for BIS Standards Navigator and guiding them to search for a product (e.g. 'Steel water bottle', 'Cement', 'LED bulb') or standard number.
+For relevant queries, set isRelevant to true.
 Use null for any field that is not stated or cannot be reasonably inferred from the text — never invent or guess a value.
 List every piece of information that, if known, would materially change which standard applies (e.g. target age group, material grade, intended use) in missingInformation.`;
 
 function baseIntent(overrides: Partial<QueryIntent>): QueryIntent {
   return {
     intent: "unclear",
+    isRelevant: true,
+    relevanceMessage: null,
     product: null,
     material: null,
     useCase: null,
@@ -75,6 +86,16 @@ export function deterministicIntentFastPath(query: string): QueryIntent | null {
  */
 export function deterministicIntentFallback(query: string): QueryIntent {
   const lower = query.toLowerCase();
+  const offTopicPattern = /\b(recipe|bake|cook|weather|forecast|movie|song|joke|cricket|football|match score|prime minister|capital of|who is|javascript|python|coding|crypto|bitcoin|horoscope)\b/i;
+  if (offTopicPattern.test(lower)) {
+    return baseIntent({
+      intent: "unclear",
+      isRelevant: false,
+      relevanceMessage: "This search does not appear to be relevant to Indian Standards (BIS), certification schemes, or regulatory compliance. Please search for a physical product (e.g. 'Steel water bottle', 'Cement', 'LED bulb', 'Pressure cooker'), material, or standard code (e.g. 'IS 14543').",
+      searchQuery: query,
+    });
+  }
+
   const certificationRequested = /\b(certif|licen[cs]e|scheme|isi mark)\w*\b/.test(lower);
   const testingRequested = /\b(test|testing|tested|sample)\w*\b/.test(lower);
   const intent: QueryIntent["intent"] = certificationRequested
@@ -85,6 +106,7 @@ export function deterministicIntentFallback(query: string): QueryIntent {
 
   return baseIntent({
     intent,
+    isRelevant: true,
     certificationRequested,
     testingRequested,
     searchQuery: query,

@@ -81,6 +81,44 @@ export async function POST(req: NextRequest) {
   try {
     const normalized = normalizeQuery(query);
     const intent = await extractQueryIntent(normalized.normalizedQuery);
+    if (intent.isRelevant === false) {
+      const response = {
+        isRelevant: false,
+        answer:
+          intent.relevanceMessage ||
+          "This search does not appear to be relevant to Indian Standards (BIS), product compliance, or certification schemes. BIS Standards Navigator is dedicated to helping discover applicable Indian Standards, product testing requirements, and ISI/CRS certification schemes. Please search for a physical product (e.g., 'Steel water bottle', 'Cement', 'LED bulb'), material, or standard code (e.g., 'IS 14543').",
+        intent: intent.intent,
+        interpretation: {
+          product: intent.product,
+          material: intent.material,
+          useCase: intent.useCase,
+          targetUser: intent.targetUser,
+          sector: intent.sector,
+          certificationRequested: intent.certificationRequested,
+          testingRequested: intent.testingRequested,
+        },
+        clarificationNeeded: undefined,
+        recommendations: [],
+        certification: { available: false, notes: null },
+        testing: { available: false, notes: null },
+        nextSteps: [
+          "Enter a specific manufactured product (e.g., 'Helmets', 'Pressure cooker', 'Electric iron').",
+          "Search directly by Indian Standard number (e.g., 'IS 5522', 'IS 14543').",
+          "Browse standard classifications using the top navigation menu.",
+        ],
+        confidence: "none" as const,
+        engineConfidence: {
+          score: 0,
+          band: "none" as const,
+          supportingSignals: [],
+          limitingSignals: ["Query is out of scope for Indian Standards compliance."],
+          groundingState: "insufficient_evidence" as const,
+        },
+        conflicts: [],
+        limitations: ["This query is not related to products, materials, or Indian Standards."],
+      };
+      return NextResponse.json(response);
+    }
 
     // See the module doc above: additive only, never allowed to affect
     // grounding/confidence/recommendations below. A failure here must
@@ -222,6 +260,7 @@ export async function POST(req: NextRequest) {
     const limitations = [...new Set([...engineConfidence.limitingSignals, ...llmAnswer.limitations])];
 
     const response = {
+      isRelevant: true,
       answer: llmAnswer.answer,
       intent: intent.intent,
       interpretation: {
@@ -302,14 +341,20 @@ export async function POST(req: NextRequest) {
       }),
     };
 
-    const db = getDb();
-    await db.insert(queryLogs).values({
-      query,
-      intent: intent.intent,
-      retrievedChunkIds: chunks.map((c) => c.chunkId),
-      confidence: engineConfidence.band,
-      latencyMs: Date.now() - start,
-    });
+    if (process.env.DATABASE_URL) {
+      try {
+        const db = getDb();
+        await db.insert(queryLogs).values({
+          query,
+          intent: intent.intent,
+          retrievedChunkIds: chunks.map((c) => c.chunkId),
+          confidence: engineConfidence.band,
+          latencyMs: Date.now() - start,
+        });
+      } catch (logErr) {
+        console.warn("[api/v1/query] queryLogs insert failed:", logErr);
+      }
+    }
 
     return NextResponse.json(response);
   } catch (err) {

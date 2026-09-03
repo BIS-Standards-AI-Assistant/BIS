@@ -19,6 +19,7 @@ import { RecommendationCard } from "@/components/standards/RecommendationCard";
 import { ConflictPanel } from "@/components/standards/ConflictPanel";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { ErrorState } from "@/components/feedback/ErrorState";
+import { BisChatBot } from "@/components/chat/BisChatBot";
 import { addRecentQuery } from "@/lib/recent-queries";
 import type { QueryResponse } from "@/types/api";
 
@@ -27,13 +28,22 @@ const CACHE_PREFIX = "bis-query-cache:";
 function getCachedResult(query: string): QueryResponse | null {
   try {
     const raw = sessionStorage.getItem(CACHE_PREFIX + query);
-    return raw ? JSON.parse(raw) : null;
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    // Invalidate cached fallback answers so real AI responses are requested
+    if (parsed.answer?.includes("No AI-generated explanation")) {
+      sessionStorage.removeItem(CACHE_PREFIX + query);
+      return null;
+    }
+    return parsed;
   } catch {
     return null;
   }
 }
 
 function setCachedResult(query: string, result: QueryResponse) {
+  // Never cache fallback answers where no LLM explanation was available
+  if (result.answer?.includes("No AI-generated explanation")) return;
   try {
     sessionStorage.setItem(CACHE_PREFIX + query, JSON.stringify(result));
   } catch {
@@ -146,53 +156,177 @@ export function HomeClient() {
         )}
 
         {!showHomepage && (
-          <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-14">
-            <SearchHero
-              key={activeQuery}
-              onSubmit={runQuery}
-              loading={loading}
-              compact
-              initialValue={activeQuery}
-              onClear={handleClearResults}
-            />
+          <div className="mx-auto max-w-[1380px] px-4 py-6 sm:px-6 sm:py-8">
+            <div className="mx-auto max-w-3xl">
+              <SearchHero
+                key={activeQuery}
+                onSubmit={runQuery}
+                loading={loading}
+                compact
+                initialValue={activeQuery}
+                onClear={handleClearResults}
+              />
+            </div>
 
             {loading && (
-              <div className="mt-8">
+              <div className="mx-auto max-w-3xl mt-8">
                 <LoadingIndicator />
               </div>
             )}
 
             {error && (
-              <div className="mt-8">
+              <div className="mx-auto max-w-3xl mt-8">
                 <ErrorState title="We couldn't connect to the BIS Navigator service" body={error} />
               </div>
             )}
 
             {result && (
-              <div className="mt-10 space-y-8">
-                <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface-raised p-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4 sm:p-5">
-                  <div className="min-w-0">
-                    <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">Summary</h2>
-                    <p className="mt-2 text-[15px] leading-relaxed text-ink">{result.answer}</p>
-                  </div>
-                  <div className="shrink-0 sm:pt-5">
-                    <ConfidenceBadge confidence={result.confidence} />
-                  </div>
-                </section>
+              <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[380px_1fr] xl:grid-cols-[400px_1fr]">
+                {/* LEFT COLUMN: Executive Summary at Left Corner */}
+                <div className="space-y-6 lg:sticky lg:top-6 lg:self-start">
+                  {/* Executive Summary Card */}
+                  <section className="rounded-2xl border border-border-strong/70 bg-surface-raised p-5 sm:p-6 shadow-xs transition-all hover:border-navy/30 hover:shadow-sm">
+                    <div className="flex items-center justify-between gap-3 border-b border-border/60 pb-3.5">
+                      <div className="flex items-center gap-2.5">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-navy/10 text-navy border border-navy/15">
+                          <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
+                            Standards Summary
+                          </h2>
+                          <p className="text-[10.5px] text-ink-faint">Official Synthesis</p>
+                        </div>
+                      </div>
+                      <ConfidenceBadge confidence={result.confidence} />
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-[14.5px] leading-[1.75] text-ink font-normal">
+                        {result.answer}
+                      </p>
+                    </div>
+                    {result.limitations.length > 0 && (
+                      <div className="mt-4 rounded-xl bg-surface-alt/80 p-3.5 border border-border/60">
+                        <p className="text-[10.5px] font-bold uppercase tracking-wider text-ink-faint">
+                          Regulatory Scope
+                        </p>
+                        <p className="mt-1 text-xs text-ink-soft leading-relaxed">
+                          {result.limitations[0]}
+                        </p>
+                      </div>
+                    )}
+                  </section>
 
-                {result.clarificationNeeded && result.clarificationNeeded.length > 0 && (
-                  <ClarificationPanel items={result.clarificationNeeded} />
-                )}
-
-                {result.conflicts.length > 0 && <ConflictPanel conflicts={result.conflicts} />}
-
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr]">
+                  {/* Parameter Interpretation Panel */}
                   <InterpretationPanel interpretation={result.interpretation} />
 
+                  {/* Official BIS Directorate Reference */}
+                  <div className="rounded-2xl border border-border-strong/70 bg-surface-raised p-5 shadow-xs transition-all hover:border-navy/30">
+                    <div className="flex items-center gap-2.5 text-navy border-b border-border/50 pb-2.5">
+                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-navy/10 text-navy border border-navy/15">
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                        </svg>
+                      </div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-navy">Official BIS Portal</span>
+                    </div>
+                    <p className="mt-2 text-xs leading-relaxed text-ink-soft">
+                      Access certified standard purchases, QCO gazettes, and BIS Care applications directly.
+                    </p>
+                    <a
+                      href="https://www.services.bis.gov.in/php/BIS_2.0/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-navy hover:text-navy-deep hover:underline"
+                    >
+                      <span>Visit e-BIS Directorate</span>
+                      <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* RIGHT COLUMN: Interactive Clarification, Irrelevant Alert, Candidates, Testing, Next Steps */}
+                <div className="space-y-6 min-w-0">
+                  {/* Irrelevant Query Alert */}
+                  {result.isRelevant === false && (
+                    <div className="rounded-2xl border border-danger/30 bg-gradient-to-br from-danger-soft/80 via-surface-raised to-danger-soft/40 p-5 shadow-xs">
+                      <div className="flex items-start gap-3.5">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-danger/15 text-danger font-bold text-base">
+                          !
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-sm font-bold text-danger">
+                            This is not a relevant BIS search
+                          </h3>
+                          <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+                            {result.answer}
+                          </p>
+                          <div className="mt-3.5 border-t border-danger/15 pt-3">
+                            <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint">
+                              Try searching for any physical product or standard:
+                            </p>
+                            <div className="mt-2 flex flex-wrap gap-1.5">
+                              {[
+                                "Steel water bottle",
+                                "Packaged drinking water",
+                                "Stainless steel utensils",
+                                "Helmets for two wheeler riders",
+                                "Domestic pressure cooker",
+                                "LED bulb",
+                              ].map((prompt) => (
+                                <button
+                                  key={prompt}
+                                  type="button"
+                                  onClick={() => runQuery(prompt)}
+                                  className="rounded-full border border-border-strong bg-surface-raised px-2.5 py-1 text-xs font-medium text-navy hover:border-navy hover:bg-navy/5 transition-colors cursor-pointer"
+                                >
+                                  {prompt}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Interactive Clarification & Refinement Panel (Horizontally organized with input below) */}
+                  {result.isRelevant !== false && (
+                    <ClarificationPanel
+                      items={result.clarificationNeeded ?? []}
+                      currentQuery={activeQuery}
+                      onRefine={runQuery}
+                      loading={loading}
+                    />
+                  )}
+
+                  {result.conflicts.length > 0 && <ConflictPanel conflicts={result.conflicts} />}
+
+                  {/* Candidate Standards */}
                   <div className="space-y-4">
-                    <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-                      Candidate standards
-                    </h2>
+                    <div className="flex items-center justify-between border-b border-border/70 pb-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-navy/10 text-navy border border-navy/15">
+                          <svg className="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h2 className="text-sm sm:text-base font-bold text-navy">
+                            Candidate Standards ({result.recommendations.length})
+                          </h2>
+                          <p className="text-[11px] text-ink-faint">
+                            Ranked by relevance &amp; verified Bureau of Indian Standards evidence
+                          </p>
+                        </div>
+                      </div>
+                      <span className="hidden sm:inline-flex items-center rounded-md bg-navy/10 px-2.5 py-0.5 text-[11px] font-bold text-navy">
+                        Verified Bureau Evidence
+                      </span>
+                    </div>
+
                     {result.recommendations.length === 0 ? (
                       <EmptyState
                         title="No sufficiently relevant standard found"
@@ -211,62 +345,74 @@ export function HomeClient() {
                       </div>
                     )}
                   </div>
+
+                  {/* Certification & Testing */}
+                  {(result.certification.available || result.testing.available) && (
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                      <InfoCard
+                        title="Certification"
+                        available={result.certification.available}
+                        notes={result.certification.notes}
+                        unavailableMessage="We could not establish a reliable certification pathway from the available sources."
+                      />
+                      <InfoCard
+                        title="Testing"
+                        available={result.testing.available}
+                        notes={result.testing.notes}
+                        unavailableMessage="No testing information could be verified from the available sources."
+                      />
+                    </div>
+                  )}
+
+                  {/* Recommended Next Steps */}
+                  {result.nextSteps.length > 0 && (
+                    <section className="rounded-xl border border-border/80 bg-surface-raised p-5 shadow-xs">
+                      <div className="flex items-center gap-2 border-b border-border/60 pb-3">
+                        <svg className="h-4 w-4 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                        <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
+                          Recommended next steps
+                        </h2>
+                      </div>
+                      <ol className="mt-3.5 space-y-2.5">
+                        {result.nextSteps.map((step, i) => (
+                          <li key={i} className="flex items-start gap-3 text-xs sm:text-sm text-ink leading-relaxed">
+                            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-navy/10 font-mono text-[11px] font-bold text-navy">
+                              {String(i + 1).padStart(2, "0")}
+                            </span>
+                            <span>{step}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
+                  )}
+
+                  {/* Uncertainty & Limitations */}
+                  {result.limitations.length > 0 && (
+                    <section className="rounded-xl border border-border bg-surface-alt/70 p-5 shadow-xs">
+                      <h2 className="text-xs font-bold uppercase tracking-wider text-ink-faint">
+                        Uncertainty &amp; limitations
+                      </h2>
+                      <ul className="mt-2.5 space-y-1.5 text-xs text-ink-soft">
+                        {result.limitations.map((l, i) => (
+                          <li key={i} className="flex gap-2">
+                            <span className="text-ink-faint">•</span>
+                            {l}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  )}
                 </div>
-
-                {(result.certification.available || result.testing.available) && (
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <InfoCard
-                      title="Certification"
-                      available={result.certification.available}
-                      notes={result.certification.notes}
-                      unavailableMessage="We could not establish a reliable certification pathway from the available sources."
-                    />
-                    <InfoCard
-                      title="Testing"
-                      available={result.testing.available}
-                      notes={result.testing.notes}
-                      unavailableMessage="No testing information could be verified from the available sources."
-                    />
-                  </div>
-                )}
-
-                {result.nextSteps.length > 0 && (
-                  <section>
-                    <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-                      Recommended next steps
-                    </h2>
-                    <ol className="mt-3 space-y-2">
-                      {result.nextSteps.map((step, i) => (
-                        <li key={i} className="flex gap-3 text-sm text-ink">
-                          <span className="font-mono text-xs text-ink-faint">{String(i + 1).padStart(2, "0")}</span>
-                          {step}
-                        </li>
-                      ))}
-                    </ol>
-                  </section>
-                )}
-
-                {result.limitations.length > 0 && (
-                  <section className="rounded-lg border border-border bg-surface-alt p-5">
-                    <h2 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-                      Uncertainty &amp; limitations
-                    </h2>
-                    <ul className="mt-2 space-y-1 text-sm text-ink-soft">
-                      {result.limitations.map((l, i) => (
-                        <li key={i} className="flex gap-2">
-                          <span className="text-ink-faint">•</span>
-                          {l}
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-                )}
               </div>
             )}
           </div>
         )}
       </main>
       <Footer />
+      {/* BIS Chat Bot at Right Corner */}
+      <BisChatBot currentQuery={activeQuery} />
     </div>
   );
 }

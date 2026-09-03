@@ -55,7 +55,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[300px_1fr_300px] items-start">
           {/* Left Column: National Emblem & Ministry Details */}
           <div className="flex items-start gap-4">
-            <AshokaChakra className="h-14 w-14 shrink-0 text-navy" />
+            <AshokaChakra className="h-16 w-auto shrink-0" />
             <div className="text-[12px] font-bold leading-normal text-navy">
               <span className="block text-[11px] font-bold text-ink-soft mb-1">
                 उपभोक्ता मामले, खाद्य एवं सार्वजनिक वितरण मंत्रालय

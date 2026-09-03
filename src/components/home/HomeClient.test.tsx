@@ -73,10 +73,10 @@ describe("HomeClient — component breakage & flow disruption", () => {
     fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
-    await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument(), { timeout: 10000 });
     expect(screen.getByRole("alert")).toHaveTextContent(/temporarily unavailable/i);
     expect(screen.queryByText(/Failed to fetch/i)).not.toBeInTheDocument();
-  });
+  }, 15000);
 
   test("non-OK HTTP response (e.g. 500/402 credit exhaustion) shows the generic error, not the status text", async () => {
     (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({

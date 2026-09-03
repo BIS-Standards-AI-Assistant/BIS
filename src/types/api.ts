@@ -69,6 +69,7 @@ export interface QueryInterpretation {
 export interface QueryResponse {
   answer: string;
   intent: string;
+  isRelevant?: boolean;
   interpretation: QueryInterpretation;
   clarificationNeeded?: string[];
   recommendations: Recommendation[];
