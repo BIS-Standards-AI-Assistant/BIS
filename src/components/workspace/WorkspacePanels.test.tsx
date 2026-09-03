@@ -4,6 +4,8 @@ import userEvent from "@testing-library/user-event";
 import { SourcesPanel } from "./SourcesPanel";
 import { WorkspacePanel } from "./WorkspacePanel";
 import { getSourcesSnapshot, selectedStandardNumbers } from "@/lib/source-library";
+import { __resetConversationForTests, getConversationSnapshot } from "@/lib/assistant-conversation";
+import { BisChatBot } from "@/components/chat/BisChatBot";
 import type { QueryInterpretation } from "@/types/api";
 
 const INTERPRETATION = {
@@ -41,6 +43,11 @@ function analysisResponse(standardNumbers: string[], limitations: string[] = [],
 beforeEach(() => {
   sessionStorage.clear();
   localStorage.clear();
+  // The assistant conversation is module-level and shared on purpose, so it
+  // has to be cleared between cases.
+  __resetConversationForTests();
+  // jsdom has no layout engine, so scrollIntoView is undefined on elements.
+  Element.prototype.scrollIntoView = vi.fn();
 });
 
 afterEach(() => {
@@ -160,86 +167,70 @@ describe("SourcesPanel — adding documents", () => {
     expect(screen.getByText("Saved sources will appear here")).toBeInTheDocument();
   });
 
-  test("a question is answered from the standards the added sources cite", async () => {
-    const fetchSpy = vi
-      .fn()
-      .mockResolvedValueOnce(analysisResponse(["IS 2347:2017"]))
-      .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
-          scope: "current_results",
-          answer: "IS 2347:2017 covers domestic pressure cookers.",
-          evidence: [{ standardNumber: "IS 2347:2017", document: "Product Manual", clause: "4.1", page: 3, text: "Scope covers pressure cookers for domestic use." }],
-          limitations: [],
-        }),
-      });
+  test("a question is asked with the shared scope, not the panel's own idea of it", async () => {
+    const fetchSpy = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        scope: "current_results",
+        answer: "IS 2347:2017 covers domestic pressure cookers.",
+        evidence: [],
+      }),
+    });
     vi.stubGlobal("fetch", fetchSpy);
     const user = userEvent.setup();
 
-    render(<SourcesPanel onCollapse={vi.fn()} />);
-    await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
-    await screen.findByText("cooker.pdf");
+    render(
+      <SourcesPanel
+        scopeStandardNumbers={["IS 2347:2017", "IS 4151:2015"]}
+        scopeQuery="helmet"
+        onCollapse={vi.fn()}
+      />,
+    );
 
     await user.type(screen.getByRole("textbox", { name: /ask about your sources/i }), "what does it require?");
     await user.click(screen.getByRole("button", { name: "Ask" }));
 
     expect(await screen.findByText(/covers domestic pressure cookers/i)).toBeInTheDocument();
 
-    // Scoped by identifier to what the document cites — never its text.
-    const body = JSON.parse(fetchSpy.mock.calls[1][1].body);
-    expect(body.standardNumbers).toEqual(["IS 2347:2017"]);
+    // The scope HomeClient decided, verbatim — including the standard from
+    // the search results, which this panel could not have known about.
+    const body = JSON.parse(fetchSpy.mock.calls[0][1].body);
+    expect(body.standardNumbers).toEqual(["IS 2347:2017", "IS 4151:2015"]);
+    expect(body.originalQuery).toBe("helmet");
     expect(body.message).toBe("what does it require?");
   });
 
-  test("the answer shows the evidence it came from", async () => {
+  test("the answer names the standards it came from", async () => {
     vi.stubGlobal(
       "fetch",
-      vi
-        .fn()
-        .mockResolvedValueOnce(analysisResponse(["IS 2347:2017"]))
-        .mockResolvedValueOnce({
-          ok: true,
-          json: async () => ({
-            scope: "current_results",
-            answer: "It covers domestic pressure cookers.",
-            evidence: [{ standardNumber: "IS 2347:2017", document: "Product Manual", clause: "4.1", page: 3, text: "Scope covers pressure cookers for domestic use." }],
-          }),
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          scope: "current_results",
+          answer: "It covers domestic pressure cookers.",
+          evidence: [{ standardNumber: "IS 2347:2017", document: "Product Manual", documentId: "d1" }],
         }),
+      }),
     );
     const user = userEvent.setup();
 
-    render(<SourcesPanel onCollapse={vi.fn()} />);
-    await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
-    await screen.findByText("cooker.pdf");
-
+    render(<SourcesPanel scopeStandardNumbers={["IS 2347:2017"]} onCollapse={vi.fn()} />);
     await user.type(screen.getByRole("textbox", { name: /ask about your sources/i }), "scope?");
     await user.click(screen.getByRole("button", { name: "Ask" }));
 
     await screen.findByText(/It covers domestic pressure cookers/i);
-    // Once as the source row's chip, once as the answer's citation.
-    expect(screen.getAllByText("IS 2347:2017")).toHaveLength(2);
-    expect(screen.getByText(/clause 4\.1/)).toBeInTheDocument();
-    expect(screen.getByText(/Scope covers pressure cookers/)).toBeInTheDocument();
+    expect(screen.getByText("IS 2347:2017")).toBeInTheDocument();
   });
 
   test("reports a failed question instead of showing nothing", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi
-        .fn()
-        .mockResolvedValueOnce(analysisResponse(["IS 2347:2017"]))
-        .mockRejectedValueOnce(new Error("offline")),
-    );
+    vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("offline")));
     const user = userEvent.setup();
 
-    render(<SourcesPanel onCollapse={vi.fn()} />);
-    await user.upload(screen.getByLabelText("Add source documents"), pdf("cooker.pdf"));
-    await screen.findByText("cooker.pdf");
-
+    render(<SourcesPanel scopeStandardNumbers={["IS 2347:2017"]} onCollapse={vi.fn()} />);
     await user.type(screen.getByRole("textbox", { name: /ask about your sources/i }), "scope?");
     await user.click(screen.getByRole("button", { name: "Ask" }));
 
-    expect(await screen.findByText(/Could not reach the assistant service/i)).toBeInTheDocument();
+    expect(await screen.findByText(/temporarily unable to consult the Bureau/i)).toBeInTheDocument();
   });
 
   test("shows what the search was understood as, once there is a result", () => {
@@ -403,3 +394,122 @@ describe("WorkspacePanel", () => {
     expect(onCollapse).toHaveBeenCalled();
   });
 });
+
+describe("one conversation across both surfaces", () => {
+  test("a question asked in the Sources panel appears in the chat", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ scope: "current_results", answer: "Answer from the shared thread.", evidence: [] }),
+      }),
+    );
+    const user = userEvent.setup();
+
+    render(
+      <>
+        <SourcesPanel scopeStandardNumbers={["IS 2347:2017"]} scopeQuery="cooker" onCollapse={vi.fn()} />
+        <BisChatBot currentQuery="cooker" standardNumbers={["IS 2347:2017"]} />
+      </>,
+    );
+
+    // Open the chat so its thread is on screen.
+    await user.click(screen.getByRole("button", { name: "Discuss these results" }));
+
+    await user.type(screen.getByRole("textbox", { name: /ask about your sources/i }), "what applies?");
+    await user.click(screen.getByRole("button", { name: "Ask" }));
+
+    // The question and its answer are both in the chat thread.
+    expect(await screen.findByText("what applies?")).toBeInTheDocument();
+    expect(screen.getAllByText("Answer from the shared thread.").length).toBeGreaterThanOrEqual(1);
+  });
+
+  test("a question asked in the chat appears in the Sources panel", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ scope: "current_results", answer: "Answer from the chat.", evidence: [] }),
+      }),
+    );
+    const user = userEvent.setup();
+
+    render(
+      <>
+        <SourcesPanel scopeStandardNumbers={["IS 2347:2017"]} scopeQuery="cooker" onCollapse={vi.fn()} />
+        <BisChatBot currentQuery="cooker" standardNumbers={["IS 2347:2017"]} />
+      </>,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Discuss these results" }));
+    await user.type(screen.getByPlaceholderText(/Ask any question about BIS standards/i), "which laboratory?");
+    await user.click(screen.getByRole("button", { name: "Send message" }));
+
+    await waitFor(() => expect(screen.getAllByText("Answer from the chat.").length).toBeGreaterThanOrEqual(2));
+  });
+
+  test("both surfaces send the identical scope", async () => {
+    const fetchSpy = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ scope: "current_results", answer: "ok", evidence: [] }),
+    });
+    vi.stubGlobal("fetch", fetchSpy);
+    const user = userEvent.setup();
+    const scope = ["IS 2347:2017", "IS 4151:2015"];
+
+    render(
+      <>
+        <SourcesPanel scopeStandardNumbers={scope} scopeQuery="cooker" onCollapse={vi.fn()} />
+        <BisChatBot currentQuery="cooker" standardNumbers={scope} />
+      </>,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Discuss these results" }));
+
+    await user.type(screen.getByRole("textbox", { name: /ask about your sources/i }), "from sources");
+    await user.click(screen.getByRole("button", { name: "Ask" }));
+    await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(1));
+
+    await user.type(screen.getByPlaceholderText(/Ask any question about BIS standards/i), "from chat");
+    await user.click(screen.getByRole("button", { name: "Send message" }));
+    await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(2));
+
+    const first = JSON.parse(fetchSpy.mock.calls[0][1].body);
+    const second = JSON.parse(fetchSpy.mock.calls[1][1].body);
+    expect(first.standardNumbers).toEqual(scope);
+    expect(second.standardNumbers).toEqual(scope);
+    expect(first.originalQuery).toBe(second.originalQuery);
+  });
+
+  test("the thread keeps both exchanges in order", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ scope: "current_results", answer: "reply", evidence: [] }),
+      }),
+    );
+    const user = userEvent.setup();
+
+    render(
+      <>
+        <SourcesPanel scopeStandardNumbers={["IS 2347:2017"]} onCollapse={vi.fn()} />
+        <BisChatBot currentQuery="cooker" standardNumbers={["IS 2347:2017"]} />
+      </>,
+    );
+
+    await user.type(screen.getByRole("textbox", { name: /ask about your sources/i }), "first question");
+    await user.click(screen.getByRole("button", { name: "Ask" }));
+    await waitFor(() => expect(getConversationSnapshot().messages).toHaveLength(3));
+
+    await user.click(screen.getByRole("button", { name: "Discuss these results" }));
+    await user.type(screen.getByPlaceholderText(/Ask any question about BIS standards/i), "second question");
+    await user.click(screen.getByRole("button", { name: "Send message" }));
+    await waitFor(() => expect(getConversationSnapshot().messages).toHaveLength(5));
+
+    const thread = getConversationSnapshot().messages.map((m) => `${m.sender}:${m.text}`);
+    expect(thread[1]).toBe("user:first question");
+    expect(thread[3]).toBe("user:second question");
+  });
+});
+

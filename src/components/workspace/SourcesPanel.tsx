@@ -3,6 +3,12 @@
 import { useRef, useState, useSyncExternalStore } from "react";
 import { InterpretationPanel } from "@/components/query/InterpretationPanel";
 import {
+  getConversationServerSnapshot,
+  getConversationSnapshot,
+  sendAssistantMessage,
+  subscribeToConversation,
+} from "@/lib/assistant-conversation";
+import {
   ACCEPTED_SOURCE_TYPES,
   addSource,
   describeFileRejection,
@@ -39,72 +45,55 @@ import type { QueryInterpretation } from "@/types/api";
  * full-width government top navigation is untouched, and this collapses.
  */
 
-interface SourceAnswer {
-  text: string;
-  evidence: Array<{ standardNumber: string | null; document: string; clause?: string | null; page?: number | null; text: string }>;
-  limitations?: string[];
-  scope?: string;
-  failed?: boolean;
-}
-
 export function SourcesPanel({
   interpretation,
+  scopeStandardNumbers = [],
+  scopeQuery = "",
   onCollapse,
 }: {
   interpretation?: QueryInterpretation | null;
+  /**
+   * The assistant's scope, decided once by HomeClient and passed to every
+   * surface, so this box and the chat ask the same question of the same
+   * knowledge base and cannot disagree.
+   */
+  scopeStandardNumbers?: string[];
+  scopeQuery?: string;
   onCollapse: () => void;
 }) {
   const sources = useSyncExternalStore(subscribeToSources, getSourcesSnapshot, getSourcesServerSnapshot);
   const [isDragging, setIsDragging] = useState(false);
   const [rejection, setRejection] = useState<string | null>(null);
   const [prompt, setPrompt] = useState("");
-  const [asking, setAsking] = useState(false);
-  const [answer, setAnswer] = useState<SourceAnswer | null>(null);
+  const conversation = useSyncExternalStore(
+    subscribeToConversation,
+    getConversationSnapshot,
+    getConversationServerSnapshot,
+  );
+  const asking = conversation.pending;
+  // The assistant's last reply, wherever it was asked from.
+  const latest = [...conversation.messages]
+    .reverse()
+    .find((m) => m.sender === "assistant" && m.id !== "greeting");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const inScope = selectedStandardNumbers(sources);
+  const fromSources = selectedStandardNumbers(sources);
 
   /**
-   * Answers from the standards the added documents cite, through the same
-   * scoped endpoint the assistant uses — so this box and the assistant give
-   * the same answer to the same question, and both cite their evidence.
-   *
-   * Only identifiers are sent. The documents' text is never posted as chat
-   * input (see the note at the top of this file), which is also why this
-   * cannot answer "what does paragraph 3 of my file say".
+   * Sends into the one shared conversation, with the scope HomeClient
+   * decided — the current results plus the selected sources. This box and
+   * the chat therefore give the same answer to the same question, and the
+   * exchange appears in both.
    */
   async function ask(question: string) {
     const message = question.trim();
     if (!message || asking) return;
-
-    setAsking(true);
-    setAnswer(null);
-    try {
-      const res = await fetch("/api/v1/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          originalQuery: sources.map((s) => s.name).join(", ") || message,
-          standardNumbers: inScope.slice(0, 10),
-          message,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setAnswer({ text: data.error ?? `Request failed (HTTP ${res.status})`, evidence: [], failed: true });
-        return;
-      }
-      setAnswer({
-        text: data.answer ?? "No answer was returned.",
-        evidence: (data.evidence ?? []).slice(0, 4),
-        limitations: data.limitations ?? [],
-        scope: data.scope,
-      });
-    } catch {
-      setAnswer({ text: "Could not reach the assistant service.", evidence: [], failed: true });
-    } finally {
-      setAsking(false);
-    }
+    setPrompt("");
+    await sendAssistantMessage({
+      message,
+      standardNumbers: scopeStandardNumbers,
+      originalQuery: scopeQuery || message,
+    });
   }
 
   async function ingest(files: FileList | File[]) {
@@ -244,48 +233,43 @@ export function SourcesPanel({
           </p>
         ) : (
           <p className="mt-2 px-1 text-[11px] leading-relaxed text-ink-faint">
-            Answered from the {inScope.length} standard{inScope.length === 1 ? "" : "s"} your
-            selected sources cite, using indexed BIS evidence.
+            One conversation with the assistant. Scope: {scopeStandardNumbers.length} standard
+            {scopeStandardNumbers.length === 1 ? "" : "s"}
+            {fromSources.length > 0 && `, ${fromSources.length} from your sources`}.
           </p>
         )}
 
-        {(asking || answer) && (
+        {(asking || latest) && (
           <div className="mt-3 rounded-xl border border-border/70 bg-surface-alt/50 p-3">
             {asking ? (
               <p className="text-[12px] font-medium text-ink-soft">Searching BIS evidence…</p>
             ) : (
-              answer && (
+              latest && (
                 <>
                   <p
-                    className={`text-[12.5px] leading-relaxed ${answer.failed ? "text-danger" : "text-ink"}`}
+                    className={`whitespace-pre-line text-[12.5px] leading-relaxed ${
+                      latest.failed ? "text-danger" : "text-ink"
+                    }`}
                   >
-                    {answer.text}
+                    {latest.text}
                   </p>
 
-                  {answer.evidence.length > 0 && (
-                    <ul className="mt-2.5 space-y-1.5 border-t border-border/60 pt-2.5">
-                      {answer.evidence.map((ev, i) => (
-                        <li key={i} className="text-[11px] leading-relaxed text-ink-soft">
-                          <span className="font-mono font-bold text-navy">
-                            {ev.standardNumber ?? ev.document}
-                          </span>
-                          {ev.clause && <span className="text-ink-faint"> · clause {ev.clause}</span>}
-                          {ev.page && <span className="text-ink-faint"> · p. {ev.page}</span>}
-                          <span className="mt-0.5 block text-ink-faint">“{ev.text.slice(0, 160)}…”</span>
-                        </li>
+                  {latest.standards && latest.standards.length > 0 && (
+                    <div className="mt-2.5 flex flex-wrap gap-1 border-t border-border/60 pt-2.5">
+                      {latest.standards.map((std, i) => (
+                        <span
+                          key={i}
+                          className="rounded bg-navy/10 px-1.5 py-0.5 font-mono text-[10px] font-bold text-navy"
+                        >
+                          {std.number ?? std.title}
+                        </span>
                       ))}
-                    </ul>
+                    </div>
                   )}
 
-                  {answer.limitations && answer.limitations.length > 0 && (
-                    <ul className="mt-2 space-y-0.5 border-t border-border/60 pt-2">
-                      {answer.limitations.map((l) => (
-                        <li key={l} className="text-[10.5px] leading-snug text-ink-faint">
-                          {l}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  <p className="mt-2 text-[10.5px] text-ink-faint">
+                    This exchange is in the assistant conversation too.
+                  </p>
                 </>
               )
             )}

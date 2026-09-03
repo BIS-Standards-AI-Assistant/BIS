@@ -149,11 +149,12 @@ export function HomeClient() {
 
   const showHomepage = !result && !loading && !error && !activeQuery;
 
-  // The shared knowledge base: standards from the current results plus
-  // those cited by the documents the reader added in the Sources panel.
-  // Both surfaces read the same store, so anything added on the left is
-  // in scope for the assistant without either knowing about the other.
-  // Identifiers only — the server resolves the facts (chat-context.ts).
+  // The one knowledge base and the one scope: standards from the current
+  // results plus those cited by the selected source documents. Decided here
+  // and passed to every surface that talks to the assistant, so the Sources
+  // prompt box and the chat cannot ask different questions of different
+  // context. Identifiers only — the server resolves the facts
+  // (src/lib/chat-context.ts).
   const librarySources = useSyncExternalStore(
     subscribeToSources,
     getSourcesSnapshot,
@@ -210,6 +211,8 @@ export function HomeClient() {
                 <div className="hidden lg:block lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
                   <SourcesPanel
                     interpretation={result?.interpretation ?? null}
+                    scopeStandardNumbers={chatStandardNumbers}
+                    scopeQuery={activeQuery}
                     onCollapse={() => setShowSources(false)}
                   />
                 </div>

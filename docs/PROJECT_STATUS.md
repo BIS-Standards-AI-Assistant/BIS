@@ -646,3 +646,29 @@ history follows the file, and `showStudio` became `showWorkspace`.
 
 `npm run verify` green: 0 lint errors, 295 vitest tests across 37 files.
 
+### One assistant conversation, one scope (this session, follow-up)
+
+The Sources prompt box and the docked chat were two conversations asking
+two different questions. The box sent only the standards the added
+documents cite; the chat sent those *plus* the current result's standards.
+The same question put to the two could come back with different answers —
+in a service whose claim is traceable evidence, not a cosmetic problem.
+
+| Item | Status | Notes |
+|---|---|---|
+| `src/lib/assistant-conversation.ts` | DONE | One message thread + `useSyncExternalStore` bindings; `sendAssistantMessage` performs the single request |
+| `BisChatBot` reads the shared thread | DONE | Local `messages`/`loading` state removed |
+| Sources prompt box reads the shared thread | DONE | Shows the assistant's latest reply and says the exchange is in the conversation too |
+| One scope for both | DONE | `HomeClient` computes it once and passes it to both surfaces; neither derives its own |
+
+Four tests pin the behaviour: a question asked in the panel appears in the
+chat, a question asked in the chat appears in the panel, both surfaces send
+byte-identical `standardNumbers` and `originalQuery`, and the thread keeps
+both exchanges in order.
+
+Scope is still identifiers only — the server resolves the facts from the
+database, per `src/lib/chat-context.ts`. The pre-existing empty `standards`
+table still means scoped answers come back empty in this environment.
+
+`npm run verify` green: 0 lint errors, 299 vitest tests across 37 files.
+
