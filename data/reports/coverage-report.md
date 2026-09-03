@@ -1,6 +1,6 @@
 # BIS Knowledge Graph — Coverage Report
 
-Generated: 2026-09-03T14:53:50.326Z
+Generated: 2026-09-03T20:43:03.053Z
 
 Every number below is a live count from the database at generation time —
 none of this is projected or estimated.
@@ -74,5 +74,5 @@ none of this is projected or estimated.
 - No laboratory data collected yet (`laboratories` table does not exist).
 - No committee data collected yet.
 - No amendment/revision graph populated yet — all 51 standards are single, undated edition records.
-- Relationship count above (70) comes entirely from `scripts/data-relationships.ts`, which materializes two edge types (STANDARD_HAS_PRODUCT_MANUAL, STANDARD_SUBJECT_TO_QCO) from existing foreign keys — it is repeatable and idempotent, but it is NOT text-based relationship extraction: no script yet reads document text to find e.g. STANDARD_REFERENCES_STANDARD or STANDARD_SUPERSEDES_STANDARD edges.
+- Relationship count above (70) comes from two sources: `scripts/data-relationships.ts` materializes structural FK-mirror edges (STANDARD_HAS_PRODUCT_MANUAL, STANDARD_SUBJECT_TO_QCO), and `scripts/data-relationships-extract.ts` (added P1-A, 2026-09-03) does real text-based extraction — STANDARD_RELATED_TO_STANDARD from shared base identifiers, STANDARD_REFERENCES_STANDARD from ingested chunk text naming another real standard — both kept at `needs_review`, never auto-verified. No amendment/supersession evidence exists in the corpus yet, so STANDARD_SUPERSEDES_STANDARD/DOCUMENT_AMENDS_DOCUMENT remain unpopulated — that is a data gap, not a missing script.
 - `data/manifests/discovered-sources.json` contains candidate URLs found via sitemap crawling, all `needs_review` — none have been downloaded, confirmed, or extracted from.

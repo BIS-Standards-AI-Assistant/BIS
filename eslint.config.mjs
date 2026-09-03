@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Not part of the source tree — generated Playwright HTML report
+    // (gitignored, but a local run leaves it on disk and its minified
+    // vendor JS bundles otherwise get linted as if they were source).
+    "playwright-report/**",
+    "test-results/**",
   ]),
 ]);
 
