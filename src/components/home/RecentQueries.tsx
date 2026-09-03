@@ -5,7 +5,13 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { ChevronRightIcon } from "@/components/ui/icons";
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import { clearRecentQueries, type RecentQueryEntry } from "@/lib/recent-queries";
+import {
+  clearRecentQueries,
+  getRecentQueriesServerSnapshot,
+  getRecentQueriesSnapshot,
+  subscribeToRecentQueries,
+  type RecentQueryEntry,
+} from "@/lib/recent-queries";
 
 const EXAMPLE_QUERIES: RecentQueryEntry[] = [
   {
@@ -40,60 +46,15 @@ function formatRelativeTime(timestamp: number): string {
   return `${days}d ago`;
 }
 
-function subscribeToStorage(callback: () => void) {
-  window.addEventListener("storage", callback);
-  window.addEventListener("bis-queries-updated", callback);
-  return () => {
-    window.removeEventListener("storage", callback);
-    window.removeEventListener("bis-queries-updated", callback);
-  };
-}
-
-const EMPTY: RecentQueryEntry[] = [];
-
-let cachedRaw: string | null = null;
-let cachedParsed: RecentQueryEntry[] = [];
-
-function getStorageSnapshot(): RecentQueryEntry[] {
-  // Runs during render via useSyncExternalStore. Storage access throws in
-  // private mode or when site data is blocked, and malformed JSON throws too —
-  // neither should take down the home page. Fall back to "no history", which
-  // renders the example queries.
-  let raw: string | null = null;
-  try {
-    raw = localStorage.getItem("bis-recent-queries");
-  } catch {
-    return EMPTY;
-  }
-
-  if (raw !== cachedRaw) {
-    cachedRaw = raw;
-    try {
-      const parsed = raw ? JSON.parse(raw) : [];
-      cachedParsed = Array.isArray(parsed) ? parsed : [];
-    } catch {
-      cachedParsed = [];
-    }
-  }
-  return cachedParsed;
-}
-
-function getServerSnapshot(): RecentQueryEntry[] {
-  return EMPTY;
-}
-
 export function RecentQueries({ onRerun }: { onRerun?: (query: string) => void }) {
   const { t } = useLanguage();
-  const stored = useSyncExternalStore(subscribeToStorage, getStorageSnapshot, getServerSnapshot);
+  const stored = useSyncExternalStore(subscribeToRecentQueries, getRecentQueriesSnapshot, getRecentQueriesServerSnapshot);
 
   const hasHistory = stored.length > 0;
   const entries = hasHistory ? stored.slice(0, 5) : EXAMPLE_QUERIES;
 
   function handleClearHistory() {
     clearRecentQueries();
-    cachedRaw = null;
-    cachedParsed = [];
-    window.dispatchEvent(new Event("bis-queries-updated"));
   }
 
   function handleRowClick(query: string) {

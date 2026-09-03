@@ -10,7 +10,6 @@ import { RecentQueries } from "@/components/home/RecentQueries";
 import { WhatsNew } from "@/components/home/WhatsNew";
 import { QuickLinks } from "@/components/home/QuickLinks";
 import { SearchHero } from "@/components/query/SearchHero";
-import { InterpretationPanel } from "@/components/query/InterpretationPanel";
 import { ClarificationPanel } from "@/components/query/ClarificationPanel";
 import { LoadingIndicator } from "@/components/query/LoadingIndicator";
 import { ConfidenceBadge } from "@/components/query/ConfidenceBadge";
@@ -20,10 +19,20 @@ import { ConflictPanel } from "@/components/standards/ConflictPanel";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { ErrorState } from "@/components/feedback/ErrorState";
 import { BisChatBot } from "@/components/chat/BisChatBot";
+import { SourcesPanel } from "@/components/workspace/SourcesPanel";
+import { StudioPanel } from "@/components/workspace/StudioPanel";
 import { addRecentQuery } from "@/lib/recent-queries";
 import type { QueryResponse } from "@/types/api";
 
 const CACHE_PREFIX = "bis-query-cache:";
+
+function AssistantIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7h16M4 12h10M4 17h7M17 14l1.5 3 3 1.5-3 1.5L17 23l-1.5-3-3-1.5 3-1.5L17 14z" />
+    </svg>
+  );
+}
 
 function getCachedResult(query: string): QueryResponse | null {
   try {
@@ -57,6 +66,8 @@ export function HomeClient() {
   const urlQuery = searchParams.get("q") ?? "";
 
   const [loading, setLoading] = useState(false);
+  const [showSources, setShowSources] = useState(true);
+  const [showStudio, setShowStudio] = useState(true);
   const [result, setResult] = useState<QueryResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [activeQuery, setActiveQuery] = useState(urlQuery);
@@ -132,6 +143,21 @@ export function HomeClient() {
 
   const showHomepage = !result && !loading && !error && !activeQuery;
 
+  // Column template follows which panels are open. Both side panels are
+  // hidden below their breakpoint (sources under lg, studio under xl), so
+  // narrow screens get the assistant full-width rather than three columns
+  // squeezed into one.
+  const workspaceColumns = [
+    showSources ? "lg:grid-cols-[320px_1fr]" : "lg:grid-cols-1",
+    showStudio
+      ? showSources
+        ? "xl:grid-cols-[330px_1fr_360px]"
+        : "xl:grid-cols-[1fr_360px]"
+      : showSources
+        ? "xl:grid-cols-[330px_1fr]"
+        : "xl:grid-cols-1",
+  ].join(" ");
+
   return (
     <div className="flex min-h-screen flex-col bg-surface">
       <NavBar />
@@ -156,8 +182,48 @@ export function HomeClient() {
         )}
 
         {!showHomepage && (
-          <div className="mx-auto max-w-[1380px] px-4 py-6 sm:px-6 sm:py-8">
-            <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-[1640px] px-4 py-5 sm:px-6">
+            <div className={`grid grid-cols-1 gap-5 ${workspaceColumns}`}>
+              {/* LEFT: official sources in scope + what the search was read as */}
+              {showSources && (
+                <div className="hidden lg:block lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
+                  <SourcesPanel
+                    interpretation={result?.interpretation ?? null}
+                    onCollapse={() => setShowSources(false)}
+                  />
+                </div>
+              )}
+
+              {/* CENTRE: the assistant itself — search, synthesis, results */}
+              <div className="min-w-0">
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <h1 className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-navy">
+                    <AssistantIcon className="h-4.5 w-4.5" />
+                    AI Assistant
+                  </h1>
+                  <div className="flex items-center gap-2">
+                    {!showSources && (
+                      <button
+                        type="button"
+                        onClick={() => setShowSources(true)}
+                        className="hidden rounded-md border border-border-strong px-2.5 py-1 text-[11px] font-bold text-ink-soft transition-colors hover:border-navy hover:text-navy lg:inline-flex"
+                      >
+                        Show sources
+                      </button>
+                    )}
+                    {!showStudio && (
+                      <button
+                        type="button"
+                        onClick={() => setShowStudio(true)}
+                        className="hidden rounded-md border border-border-strong px-2.5 py-1 text-[11px] font-bold text-ink-soft transition-colors hover:border-navy hover:text-navy xl:inline-flex"
+                      >
+                        Show studio
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <div>
               <SearchHero
                 key={activeQuery}
                 onSubmit={runQuery}
@@ -181,73 +247,42 @@ export function HomeClient() {
             )}
 
             {result && (
-              <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[380px_1fr] xl:grid-cols-[400px_1fr]">
-                {/* LEFT COLUMN: Executive Summary at Left Corner */}
-                <div className="space-y-6 lg:sticky lg:top-6 lg:self-start">
-                  {/* Search Synthesis: a concise, evidence-grounded summary — not an AI chat answer */}
-                  <section className="rounded-lg border border-border-strong/70 bg-surface-raised p-5 sm:p-6">
-                    <div className="flex items-center justify-between gap-3 border-b border-border/60 pb-3.5">
-                      <div>
-                        <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
-                          Search Synthesis
-                        </h2>
-                        <p className="text-[10.5px] text-ink-faint">
-                          {result.recommendations.length} candidate standard{result.recommendations.length === 1 ? "" : "s"}
-                          {" · "}
-                          {result.recommendations.reduce((n, r) => n + r.evidence.length, 0)} supporting source
-                          {result.recommendations.reduce((n, r) => n + r.evidence.length, 0) === 1 ? "" : "s"}
-                        </p>
-                      </div>
-                      <ConfidenceBadge confidence={result.confidence} />
-                    </div>
-                    <div className="mt-4">
-                      <p className="text-[14.5px] leading-[1.75] text-ink font-normal">
-                        {result.answer}
+              <div className="mt-6 space-y-6">
+                {/* Evidence-grounded synthesis of the whole result set */}
+                <section className="rounded-lg border border-border-strong/70 bg-surface-raised p-5 sm:p-6">
+                  <div className="flex items-center justify-between gap-3 border-b border-border/60 pb-3.5">
+                    <div>
+                      <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
+                        Search Synthesis
+                      </h2>
+                      <p className="text-[10.5px] text-ink-faint">
+                        {result.recommendations.length} candidate standard{result.recommendations.length === 1 ? "" : "s"}
+                        {" · "}
+                        {result.recommendations.reduce((n, r) => n + r.evidence.length, 0)} supporting source
+                        {result.recommendations.reduce((n, r) => n + r.evidence.length, 0) === 1 ? "" : "s"}
                       </p>
                     </div>
-                    {result.limitations.length > 0 && (
-                      <details className="mt-4 rounded-md bg-surface-alt/80 border border-border/60 p-3.5 text-xs">
-                        <summary className="cursor-pointer font-bold uppercase tracking-wider text-[10.5px] text-ink-faint">
-                          Why this result — technical detail
-                        </summary>
-                        <ul className="mt-2 space-y-1 text-ink-soft leading-relaxed">
-                          {result.limitations.map((l, i) => (
-                            <li key={i}>{l}</li>
-                          ))}
-                        </ul>
-                      </details>
-                    )}
-                  </section>
-
-                  {/* Search Context: what was detected from the query */}
-                  <InterpretationPanel interpretation={result.interpretation} />
-
-                  {/* Official BIS Directorate Reference */}
-                  <div className="rounded-2xl border border-border-strong/70 bg-surface-raised p-5 shadow-xs transition-all hover:border-navy/30">
-                    <div className="flex items-center gap-2.5 text-navy border-b border-border/50 pb-2.5">
-                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-navy/10 text-navy border border-navy/15">
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
-                        </svg>
-                      </div>
-                      <span className="text-xs font-bold uppercase tracking-wider text-navy">Official BIS Portal</span>
-                    </div>
-                    <p className="mt-2 text-xs leading-relaxed text-ink-soft">
-                      Access certified standard purchases, QCO gazettes, and BIS Care applications directly.
-                    </p>
-                    <a
-                      href="https://www.services.bis.gov.in/php/BIS_2.0/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-navy hover:text-navy-deep hover:underline"
-                    >
-                      <span>Visit e-BIS Directorate</span>
-                      <span aria-hidden="true">&rarr;</span>
-                    </a>
+                    <ConfidenceBadge confidence={result.confidence} />
                   </div>
-                </div>
+                  <div className="mt-4">
+                    <p className="text-[14.5px] leading-[1.75] text-ink font-normal">
+                      {result.answer}
+                    </p>
+                  </div>
+                  {result.limitations.length > 0 && (
+                    <details className="mt-4 rounded-md bg-surface-alt/80 border border-border/60 p-3.5 text-xs">
+                      <summary className="cursor-pointer font-bold uppercase tracking-wider text-[10.5px] text-ink-faint">
+                        Why this result — technical detail
+                      </summary>
+                      <ul className="mt-2 space-y-1 text-ink-soft leading-relaxed">
+                        {result.limitations.map((l, i) => (
+                          <li key={i}>{l}</li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
+                </section>
 
-                {/* RIGHT COLUMN: Interactive Clarification, Irrelevant Alert, Candidates, Testing, Next Steps */}
                 <div className="space-y-6 min-w-0">
                   {/* Irrelevant Query Alert */}
                   {result.isRelevant === false && (
@@ -415,6 +450,16 @@ export function HomeClient() {
                 </div>
               </div>
             )}
+              </div>
+
+              {/* RIGHT: output formats for this result, and this browser's
+                  own recent searches */}
+              {showStudio && (
+                <div className="hidden xl:block xl:sticky xl:top-4 xl:h-[calc(100vh-7rem)]">
+                  <StudioPanel onRerun={runQuery} onCollapse={() => setShowStudio(false)} />
+                </div>
+              )}
+            </div>
           </div>
         )}
       </main>

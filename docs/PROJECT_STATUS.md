@@ -488,3 +488,47 @@ other transport error.
 
 `npm run verify` green: 0 lint errors, 294 vitest tests across 38 files (up
 from 253 across 35), all three routes prerendered in the production build.
+### Assistant workspace layout (this session, follow-up)
+
+The results view was rebuilt as a three-column workspace from a supplied
+NotebookLM-style design: official sources on the left, the assistant and
+its results in the centre, output formats on the right. UI only — no new
+backend.
+
+| Item | Status | Notes |
+|---|---|---|
+| `src/components/workspace/SourcesPanel.tsx` | DONE | Official BIS sources + the existing Search Context panel, collapsible |
+| `src/components/workspace/StudioPanel.tsx` | DONE | Output-format cards + real recent searches, collapsible |
+| `HomeClient` three-column results view | DONE | Columns follow which panels are open; both side panels hide below their breakpoint |
+| Shared recent-query store bindings | DONE | `subscribeToRecentQueries` / `getRecentQueriesSnapshot` extracted from `RecentQueries.tsx` into `src/lib/recent-queries.ts` so both surfaces share one implementation |
+| Truthfulness of the supplied design | ADAPTED | See below — 11 panel tests pin these |
+
+Three things in the design could not be reproduced literally without
+breaking the project's own rules, so they were adapted rather than copied:
+
+1. **Source counts.** The design shows "1,245 standards", "467 orders",
+   "18,765 notifications". This app does not hold those figures, and a
+   plausible number beside a government source is exactly the fabrication
+   CLAUDE.md forbids. Each row shows its real host instead — checkable,
+   where a total would not be. A test asserts no count-shaped subtitle.
+2. **"Recent notebooks."** The design lists notebooks that do not exist.
+   Replaced with this browser's real query history, which the app already
+   keeps; empty history says so rather than showing placeholder rows.
+3. **Studio formats.** Video Overview, Mind Map, Reports, Flashcards, Quiz,
+   Infographic and Data Table are not built. They render disabled and
+   labelled "Planned", with a line saying they are not built yet — the same
+   honest-placeholder rule the section pages already follow.
+
+**Left panel vs "no permanent left sidebar."** CLAUDE.md rules out a
+dashboard sidebar. This panel is a working surface beside the results, not
+navigation: the full-width government top navigation is untouched and
+remains the only way around the app, the panel collapses, and it is hidden
+entirely below `lg`. Flagged rather than assumed — say if it should go.
+
+Source selection is presentational: the checkboxes toggle but do not
+re-scope retrieval, and the panel says so where a user will see it.
+The duplicated "Official BIS Portal" card was dropped from the results
+column; e-BIS is now a row in the sources list.
+
+`npm run verify` green: 0 lint errors, 264 vitest tests across 36 files (up
+from 253 across 35).
