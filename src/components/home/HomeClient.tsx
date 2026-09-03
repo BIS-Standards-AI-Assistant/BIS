@@ -296,6 +296,7 @@ export function HomeClient() {
                   {result.isRelevant !== false && (
                     <ClarificationPanel
                       items={result.clarificationNeeded ?? []}
+                      product={result.interpretation?.product}
                       currentQuery={activeQuery}
                       onRefine={runQuery}
                       loading={loading}
