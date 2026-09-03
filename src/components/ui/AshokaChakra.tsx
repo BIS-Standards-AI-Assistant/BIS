@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /**
  * State Emblem of India (Lion Capital of Ashoka with Satyameva Jayate)
  * Rendered in place of the Ashoka Chakra as the authoritative Government of India mark.

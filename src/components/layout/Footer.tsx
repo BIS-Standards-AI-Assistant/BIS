@@ -119,13 +119,14 @@ export function Footer() {
         <div className="mx-auto flex max-w-[1380px] flex-col items-center gap-3 px-6 py-4 text-[11.5px] md:flex-row md:justify-between font-semibold tracking-wide">
           <p className="text-center md:text-left">© {year} {t.footer.rights}</p>
           <p className="flex flex-wrap items-center justify-center gap-2.5">
-            <a href="https://www.bis.gov.in/sitemap/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.sitemap}</a>
+            {/* These three render BIS's own published text in-app (see
+                src/lib/policy-pages.ts), so they stay internal links rather
+                than sending the reader off to bis.gov.in mid-session. */}
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">{t.footer.privacy}</Link>
             <span aria-hidden="true" className="opacity-30">|</span>
-            <a href="https://www.bis.gov.in/privacy-policy/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.privacy}</a>
+            <Link href="/terms-and-conditions" className="hover:text-white transition-colors">{t.footer.terms}</Link>
             <span aria-hidden="true" className="opacity-30">|</span>
-            <a href="https://www.bis.gov.in/terms-and-conditions/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.terms}</a>
-            <span aria-hidden="true" className="opacity-30">|</span>
-            <a href="https://www.bis.gov.in/accessibility-statement/?lang=en" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.accessibility}</a>
+            <Link href="/accessibility-statement" className="hover:text-white transition-colors">{t.footer.accessibility}</Link>
           </p>
 
         </div>

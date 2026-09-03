@@ -11,27 +11,40 @@ import path from "path";
  */
 
 interface QcoEntry {
-  // New schema (2026-09): standard_number + year are separate; canonical
-  // "IS XXXX:YYYY" is reconstructed in toItem().
+  // Compatibility, 2026-09-03: data/bis-standards-dataset/qco-standards.json
+  // was replaced upstream with a differently-shaped 100-entry file
+  // (standard_number/year/part/section instead of a single is_number
+  // string) — see docs/DATA_INTEGRITY_CONCERN.md for why this loader now
+  // reconstructs is_number defensively rather than trusting the new
+  // file's data as authoritative.
+  is_number?: string;
   standard_number?: string;
   year?: string;
+  part?: string | null;
+  section?: string | null;
+  title?: string;
   full_title?: string;
-  short_title?: string;
-  product_category?: string;
+  category?: string;
   scheme?: string;
   mandatory_qco?: boolean;
+  scope_summary?: string;
   scope?: string;
   key_testing_parameters?: string[];
   certification_route?: string;
   verification_status?: string;
   verification_note?: string;
   source_url?: string;
+  source_note?: string;
   retrieved_at?: string;
-  // Legacy schema fields (kept for backwards compat with any stale files)
-  is_number?: string;
-  title?: string;
-  category?: string;
-  scope_summary?: string;
+}
+
+function canonicalNumberOf(e: QcoEntry): string | null {
+  if (e.is_number) return e.is_number;
+  if (!e.standard_number) return null;
+  const partSuffix = e.part
+    ? ` (Part ${e.part}${e.section ? `/Sec ${e.section}` : ""})`
+    : "";
+  return e.year ? `${e.standard_number}${partSuffix}:${e.year}` : `${e.standard_number}${partSuffix}`;
 }
 
 export interface CertificationSchemeItem {
@@ -48,22 +61,15 @@ export interface CertificationSchemeItem {
 }
 
 function toItem(e: QcoEntry): CertificationSchemeItem | null {
-  // Support both new schema (standard_number + year) and legacy (is_number).
-  const canonicalNumber =
-    e.is_number ??
-    (e.standard_number
-      ? e.year
-        ? `${e.standard_number}:${e.year}`
-        : e.standard_number
-      : null);
-  if (!canonicalNumber) return null;
+  const standardNumber = canonicalNumberOf(e);
+  if (!standardNumber) return null;
   return {
-    standardNumber: canonicalNumber,
-    title: e.full_title ?? e.title ?? canonicalNumber,
-    category: e.product_category ?? e.category ?? null,
+    standardNumber,
+    title: e.title ?? e.full_title ?? standardNumber,
+    category: e.category ?? null,
     scheme: e.scheme ?? null,
     mandatoryQco: e.mandatory_qco === true,
-    scopeSummary: e.scope ?? e.scope_summary ?? null,
+    scopeSummary: e.scope_summary ?? e.scope ?? null,
     certificationRoute: e.certification_route ?? null,
     testingParameters: e.key_testing_parameters ?? [],
     verificationStatus: e.verification_status ?? null,

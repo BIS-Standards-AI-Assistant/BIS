@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import type { GroundingState, Recommendation } from "@/types/api";
+import type { ApplicabilityState, GroundingState, Recommendation } from "@/types/api";
 import { RelevanceMeter } from "@/components/ui/RelevanceMeter";
 import { EvidenceExcerpt } from "@/components/evidence/EvidenceExcerpt";
 import { Badge } from "@/components/ui/Badge";
@@ -19,16 +19,39 @@ const GROUNDING_TONE: Record<GroundingState, "success" | "warning" | "danger"> =
   insufficient_evidence: "danger",
 };
 
+// Distinct from GROUNDING_LABEL on purpose (P0 audit, 2026-09-03):
+// "relevant" (the retrieval engine found supporting text) is not the same
+// claim as "applicable" (this standard actually governs the queried
+// product) — see src/lib/applicability.ts.
+export const APPLICABILITY_LABEL: Record<ApplicabilityState, string> = {
+  DIRECTLY_APPLICABLE: "Directly applicable",
+  POTENTIALLY_APPLICABLE: "Potentially applicable",
+  RELATED: "Related standard",
+  MATERIAL_MISMATCH: "Related standard — material mismatch",
+  SCOPE_UNCLEAR: "Scope unclear",
+  INSUFFICIENT_EVIDENCE: "Insufficient evidence",
+  NOT_APPLICABLE: "Not applicable",
+};
+export const APPLICABILITY_TONE: Record<ApplicabilityState, "success" | "warning" | "danger" | "neutral"> = {
+  DIRECTLY_APPLICABLE: "success",
+  POTENTIALLY_APPLICABLE: "warning",
+  RELATED: "neutral",
+  MATERIAL_MISMATCH: "danger",
+  SCOPE_UNCLEAR: "neutral",
+  INSUFFICIENT_EVIDENCE: "danger",
+  NOT_APPLICABLE: "danger",
+};
+
 export function RecommendationCard({ recommendation }: { recommendation: Recommendation }) {
   const [showStats, setShowStats] = useState(false);
   const documentId = recommendation.evidence[0]?.documentId;
 
   return (
-    <article className="rounded-2xl border border-border-strong/70 bg-surface-raised p-5 sm:p-7 shadow-xs transition-all hover:border-navy/35 hover:shadow-md">
+    <article className="rounded-lg border border-border-strong/70 bg-surface-raised p-5 sm:p-7">
       {/* Card Header: Standard Number, Title, and Relevance Meter */}
       <div className="flex flex-wrap items-start justify-between gap-3.5 border-b border-border/60 pb-4">
         <div className="min-w-0 flex-1">
-          <span className="inline-flex items-center rounded-lg border border-navy/20 bg-navy/10 px-3 py-1 font-mono text-xs font-black tracking-wider text-navy shadow-2xs">
+          <span className="inline-flex items-center rounded border border-navy/20 bg-navy/10 px-3 py-1 font-mono text-xs font-black tracking-wider text-navy">
             {recommendation.standardNumber ?? "Unnumbered Reference"}
           </span>
           <h3 className="mt-2 text-xl sm:text-2xl font-black text-navy-deep dark:text-ink tracking-tight">
@@ -40,11 +63,11 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
         </div>
       </div>
 
-      {/* Relevance Reason */}
+      {/* Why this result */}
       <div className="mt-4">
         <div className="flex flex-wrap items-center gap-2">
           <p className="text-[11px] font-extrabold uppercase tracking-wider text-ink-faint">
-            Why this appears relevant
+            Why this result
           </p>
           <Badge tone={GROUNDING_TONE[recommendation.groundingState]}>
             {GROUNDING_LABEL[recommendation.groundingState]}
@@ -52,6 +75,22 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
         </div>
         <p className="mt-2 text-[14.5px] leading-relaxed text-ink/90 font-medium">
           {recommendation.reason}
+        </p>
+      </div>
+
+      {/* Applicability — separate claim from relevance/grounding above.
+          "This appeared" is not "this applies"; see APPLICABILITY_LABEL. */}
+      <div className="mt-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="text-[11px] font-extrabold uppercase tracking-wider text-ink-faint">
+            Applicability
+          </p>
+          <Badge tone={APPLICABILITY_TONE[recommendation.applicability.state]}>
+            {APPLICABILITY_LABEL[recommendation.applicability.state]}
+          </Badge>
+        </div>
+        <p className="mt-2 text-[13.5px] leading-relaxed text-ink-soft">
+          {recommendation.applicability.reason}
         </p>
       </div>
 
@@ -107,96 +146,59 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
         <button
           type="button"
           onClick={() => setShowStats(!showStats)}
-          className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-extrabold transition-all cursor-pointer shadow-2xs ${
+          className={`inline-flex items-center gap-2 rounded px-4 py-2.5 text-xs sm:text-sm font-bold transition-colors cursor-pointer ${
             showStats
-              ? "bg-navy/15 text-navy border border-navy/40 ring-2 ring-navy/15"
+              ? "bg-navy/15 text-navy border border-navy/40"
               : "border border-border-strong bg-surface-alt hover:bg-navy/5 text-navy hover:border-navy"
           }`}
         >
-          <svg className="h-4 w-4 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-            />
-          </svg>
-          <span>{showStats ? "Hide Stats ▲" : "View Stats ▼"}</span>
+          <span>{showStats ? "Hide technical detail" : "Technical detail"}</span>
         </button>
       </div>
 
-      {/* Expanded Metrics & Performance Stats Panel */}
+      {/* Technical detail: the raw metrics behind "Why this result", for
+          readers who want to inspect the engine's output directly rather
+          than a debug dashboard shown by default. */}
       {showStats && (
-        <div className="mt-4 rounded-xl border border-navy/20 bg-gradient-to-br from-navy/[0.04] via-surface-raised to-surface-alt/80 p-4 sm:p-5 shadow-inner animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="flex items-center justify-between border-b border-border/70 pb-3">
-            <div className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-navy text-white text-xs font-black">
-                📊
-              </span>
-              <h4 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-navy">
-                Standard Evaluation &amp; Compliance Analytics
-              </h4>
-            </div>
+        <div className="mt-4 rounded-md border border-border/70 bg-surface-alt/60 p-4 sm:p-5">
+          <div className="flex items-center justify-between border-b border-border/70 pb-2.5">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-ink-faint">
+              Retrieval &amp; grounding detail
+            </h4>
             <button
               type="button"
               onClick={() => setShowStats(false)}
-              className="text-xs font-bold text-ink-faint hover:text-ink cursor-pointer px-1 py-0.5"
+              className="text-xs font-medium text-ink-faint hover:text-ink cursor-pointer"
             >
-              Close ✕
+              Close
             </button>
           </div>
 
-          <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {/* Relevance Score Metric */}
-            <div className="rounded-lg border border-border/80 bg-surface-raised p-3 shadow-2xs">
-              <span className="block text-[10.5px] font-extrabold uppercase tracking-wider text-ink-faint">
-                Relevance Score
-              </span>
-              <span className="mt-1 block text-lg sm:text-xl font-black text-navy">
-                {Math.round(recommendation.relevanceScore * 100)}%
-              </span>
-              <span className="text-[10.5px] text-ink-soft">Raw: {recommendation.relevanceScore.toFixed(3)}</span>
+          <dl className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+            <div>
+              <dt className="text-ink-faint">Relevance score</dt>
+              <dd className="font-mono text-ink">{recommendation.relevanceScore.toFixed(3)}</dd>
             </div>
-
-            {/* Coverage Ratio Metric */}
-            <div className="rounded-lg border border-border/80 bg-surface-raised p-3 shadow-2xs">
-              <span className="block text-[10.5px] font-extrabold uppercase tracking-wider text-ink-faint">
-                Coverage Ratio
-              </span>
-              <span className="mt-1 block text-lg sm:text-xl font-black text-navy">
-                {Math.round((recommendation.coverage?.overallCoverageRatio ?? 0) * 100)}%
-              </span>
-              <span className="text-[10.5px] text-ink-soft">Dimensional Match</span>
+            <div>
+              <dt className="text-ink-faint">Coverage ratio</dt>
+              <dd className="font-mono text-ink">
+                {(recommendation.coverage?.overallCoverageRatio ?? 0).toFixed(3)}
+              </dd>
             </div>
-
-            {/* Evidence Count */}
-            <div className="rounded-lg border border-border/80 bg-surface-raised p-3 shadow-2xs">
-              <span className="block text-[10.5px] font-extrabold uppercase tracking-wider text-ink-faint">
-                Indexed Evidence
-              </span>
-              <span className="mt-1 block text-lg sm:text-xl font-black text-navy">
-                {recommendation.evidence.length} Source{recommendation.evidence.length !== 1 ? "s" : ""}
-              </span>
-              <span className="text-[10.5px] text-ink-soft">Gazetted Chunks</span>
+            <div>
+              <dt className="text-ink-faint">Evidence chunks</dt>
+              <dd className="font-mono text-ink">{recommendation.evidence.length}</dd>
             </div>
-
-            {/* Grounding Level */}
-            <div className="rounded-lg border border-border/80 bg-surface-raised p-3 shadow-2xs">
-              <span className="block text-[10.5px] font-extrabold uppercase tracking-wider text-ink-faint">
-                Grounding State
-              </span>
-              <span className="mt-1 block text-xs sm:text-sm font-black text-emerald-700 dark:text-emerald-400 capitalize truncate">
-                {recommendation.groundingState.replace("_", " ")}
-              </span>
-              <span className="text-[10.5px] text-ink-soft">BIS Verified</span>
+            <div>
+              <dt className="text-ink-faint">Grounding state</dt>
+              <dd className="font-mono text-ink capitalize">{recommendation.groundingState.replace("_", " ")}</dd>
             </div>
-          </div>
+          </dl>
 
-          {/* Dimension Breakdown */}
           {recommendation.coverage && (
-            <div className="mt-4 pt-3 border-t border-border/60">
-              <p className="text-[11px] font-extrabold uppercase tracking-wider text-ink-faint mb-2">
-                Dimensional Conformity Breakdown:
+            <div className="mt-3 pt-3 border-t border-border/60">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint mb-2">
+                Coverage by dimension
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {Object.entries(recommendation.coverage)
@@ -204,16 +206,15 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
                   .map(([dimension, status]) => (
                     <span
                       key={dimension}
-                      className={`inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-semibold border ${
+                      className={`inline-flex items-center gap-1 rounded px-2 py-1 text-[11px] font-medium border ${
                         status === "covered"
-                          ? "bg-emerald-50 text-emerald-800 border-emerald-300/50 dark:bg-emerald-950/40 dark:text-emerald-300"
+                          ? "bg-success-soft text-success border-success/30"
                           : status === "not_covered"
-                            ? "bg-rose-50 text-rose-800 border-rose-300/50 dark:bg-rose-950/40 dark:text-rose-300"
+                            ? "bg-danger-soft text-danger border-danger/30"
                             : "bg-surface-raised text-ink-soft border-border/70"
                       }`}
                     >
-                      <span className="capitalize">{dimension}:</span>
-                      <span className="font-black">{status}</span>
+                      <span className="capitalize">{dimension}:</span> {status}
                     </span>
                   ))}
               </div>

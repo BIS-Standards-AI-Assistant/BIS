@@ -121,20 +121,28 @@ function buildEvidenceOnlyAnswer(pkg: EvidencePackage): LLMAnswer {
   }
 
   const groundingLabel: Record<string, string> = {
-    verified: "the evidence directly supports this.",
-    supported_inference: "the evidence is related but requires interpretation to connect it to your query.",
-    insufficient_evidence: "the retrieved evidence does not clearly establish this as applicable.",
+    verified: "directly supported by indexed BIS evidence.",
+    supported_inference: "related to the query, but connecting it requires interpretation the evidence alone doesn't settle.",
+    insufficient_evidence: "not clearly established as applicable by the evidence currently indexed.",
   };
 
-  const lines = pkg.candidates.map(
-    (c, i) => `${i + 1}. ${c.standardNumber ?? c.title} — ${groundingLabel[c.groundingState] ?? "grounding could not be determined."}`,
-  );
+  const verifiedCount = pkg.candidates.filter((c) => c.groundingState === "verified").length;
+  const names = pkg.candidates.map((c) => c.standardNumber ?? c.title);
+  const nameList =
+    names.length <= 2
+      ? names.join(" and ")
+      : `${names.slice(0, -1).join(", ")}, and ${names[names.length - 1]}`;
 
   return {
-    answer: `No AI-generated explanation was available for this response, so here is the retrieval engine's evidence directly:\n\n${lines.join("\n")}`,
+    // A deterministic, single-sentence summary built directly from the
+    // engine's own evidence — never a statement about AI/LLM
+    // availability, which is an implementation detail, not something the
+    // reader needs to act on. Per-candidate grounding detail lives in
+    // recommendationExplanations below, not crammed into this sentence.
+    answer: `Based on indexed BIS evidence, ${pkg.candidates.length} candidate standard${pkg.candidates.length === 1 ? "" : "s"} ${pkg.candidates.length === 1 ? "was" : "were"} found${verifiedCount > 0 ? ` (${verifiedCount} directly supported by evidence)` : ""}: ${nameList}.`,
     recommendationExplanations: pkg.candidates.map((c) => ({
       standardNumber: c.standardNumber,
-      reason: "Deterministic evidence-only response — no LLM provider was available to write an explanation. See the evidence and grounding state below.",
+      reason: `This standard is ${groundingLabel[c.groundingState] ?? "of uncertain relevance based on the available evidence."}`,
     })),
     certificationNotes: null,
     testingNotes: null,
@@ -143,7 +151,7 @@ function buildEvidenceOnlyAnswer(pkg: EvidencePackage): LLMAnswer {
       "Consult the official BIS website (bis.gov.in) or BIS Care portal to confirm applicability.",
     ],
     limitations: [
-      "No LLM provider was available to generate a natural-language explanation — this response is built directly from deterministic retrieval evidence.",
+      "This summary is generated directly from indexed evidence and has not been rewritten by a language model.",
       ...pkg.engineConfidence.limitingSignals,
     ],
   };

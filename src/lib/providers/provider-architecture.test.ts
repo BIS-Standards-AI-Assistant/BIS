@@ -204,9 +204,9 @@ describe("8. Evidence-only response", () => {
     };
 
     const answer = await generateAnswer(pkg);
-    expect(answer.answer).toContain("No AI-generated explanation");
+    expect(answer.answer).toContain("Based on indexed BIS evidence");
     expect(answer.recommendationExplanations[0].standardNumber).toBe("IS 5522:2014");
-    expect(answer.limitations.some((l) => l.includes("No LLM provider was available"))).toBe(true);
+    expect(answer.limitations.some((l) => l.includes("has not been rewritten by a language model"))).toBe(true);
   });
 });
 

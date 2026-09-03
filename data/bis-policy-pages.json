@@ -1,0 +1,418 @@
+{
+  "retrieved": "2026-09-03",
+  "note": "Verbatim content of the BIS website-policy pages, scraped by scripts/scrape-bis-policy-pages.ts. Published by the Bureau of Indian Standards at bis.gov.in; reproduced here unchanged. Do not hand-edit.",
+  "pages": [
+    {
+      "key": "privacy-policy",
+      "route": "/privacy-policy",
+      "variants": [
+        {
+          "lang": "en",
+          "sourceUrl": "https://www.bis.gov.in/privacy-policy/?lang=en",
+          "available": true,
+          "title": "Privacy Policy",
+          "lastUpdatedOnSource": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "BIS website does not automatically capture any specific personal information from you (like name, phone number or e-mail address) that allows you to be identified."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "If the BIS website requests you to provide personal information, adequate security measures will be taken to protect it."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "BIS does not sell or share any personally identifiable information volunteered on the BIS website to any third party (public/private), unless required under the provisions of applicable law. Any information provided to this website will be protected from loss, misuse, unauthorized access or disclosure, alteration, or destruction."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "BIS website gather certain information about the user, such as Internet protocol (IP) addresses, domain name, browser type, operating system, the date and time of the visit and the pages visited. BIS make no attempt to link these addresses with the identity of individuals visiting our site unless an attempt to damage the site has been detected."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "While visiting BIS website, pop up advertisement may appear which are most likely produced by other website you may have visited. BIS do not produce any such pop up advertisement and have no connection."
+                }
+              ]
+            }
+          ],
+          "relatedLinks": [
+            {
+              "label": "Website Policies",
+              "href": "https://www.bis.gov.in/website-policies/?lang=en"
+            },
+            {
+              "label": "Copyright Policy",
+              "href": "https://www.bis.gov.in/copyright-policy/?lang=en"
+            },
+            {
+              "label": "Hyperlinking Policy",
+              "href": "https://www.bis.gov.in/hyperlinking-policy/?lang=en"
+            },
+            {
+              "label": "Privacy Policy",
+              "href": "https://www.bis.gov.in/privacy-policy/?lang=en"
+            },
+            {
+              "label": "Content Contribution",
+              "href": "https://www.bis.gov.in/wp-content/uploads/2018/11/BIS_CMAP.pdf"
+            },
+            {
+              "label": "Content Review Policy",
+              "href": "https://www.bis.gov.in/wp-content/uploads/2018/11/BIS_CRP.pdf"
+            },
+            {
+              "label": "Website Security Policy",
+              "href": "https://www.bis.gov.in/website-security-policy/?lang=en"
+            },
+            {
+              "label": "Website Monitoring Policy",
+              "href": "https://www.bis.gov.in/website-monitoring-policy/?lang=en"
+            },
+            {
+              "label": "Contingency Management Plan",
+              "href": "https://www.bis.gov.in/contingency-management-plan/?lang=en"
+            },
+            {
+              "label": "Terms & Conditions",
+              "href": "https://www.bis.gov.in/terms-and-conditions/?lang=en"
+            },
+            {
+              "label": "Disclaimer",
+              "href": "https://www.bis.gov.in/disclaimer/?lang=en"
+            }
+          ]
+        },
+        {
+          "lang": "hi",
+          "sourceUrl": "https://www.bis.gov.in/privacy-policy/?lang=hi",
+          "available": false,
+          "title": "Privacy Policy",
+          "lastUpdatedOnSource": null,
+          "blocks": [],
+          "relatedLinks": []
+        }
+      ]
+    },
+    {
+      "key": "terms-and-conditions",
+      "route": "/terms-and-conditions",
+      "variants": [
+        {
+          "lang": "en",
+          "sourceUrl": "https://www.bis.gov.in/terms-and-conditions/?lang=en",
+          "available": true,
+          "title": "Terms & Conditions",
+          "lastUpdatedOnSource": "January 20, 2021",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "This website is designed, developed and maintained by BIS. Though all efforts have been made to ensure the accuracy and currency of the content on this website, the same should not be construed as a statement of law or used for any legal purposes. In case of any ambiguity or doubts, users are advised to verify/check with the concerned BIS office/department."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "Under no circumstances will BIS be liable for any expense, loss or damage including, without limitation, indirect or consequential loss or damage, or any expense, loss or damage whatsoever arising from use, or loss of use, of data, arising out of or in connection with the use of this website."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "These terms and conditions shall be governed by and construed in accordance with the Indian Laws. Any dispute arising under these terms and conditions shall be subject to the jurisdiction of the High court of New Delhi."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "The information posted on this website could include hypertext links or pointers to information created and maintained by non-Government / private organizations. BIS is providing these links and pointers solely for your information and convenience. When you select a link to an external website, you are leaving the BIS website and are subject to the privacy and security policies of the owners/ sponsors of the external website."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "BIS does not guarantee availability of linked pages at all times. BIS cannot authorize use of copyrighted materials contained in linked website. Users are advised to request such authorization from owners of linked websites. BIS does not guarantee that linked websites comply with Indian Government Web Guidelines."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "By using this website, you agree to these terms & conditions."
+                }
+              ]
+            }
+          ],
+          "relatedLinks": [
+            {
+              "label": "Website Policies",
+              "href": "https://www.bis.gov.in/website-policies/?lang=en"
+            },
+            {
+              "label": "Copyright Policy",
+              "href": "https://www.bis.gov.in/copyright-policy/?lang=en"
+            },
+            {
+              "label": "Hyperlinking Policy",
+              "href": "https://www.bis.gov.in/hyperlinking-policy/?lang=en"
+            },
+            {
+              "label": "Privacy Policy",
+              "href": "https://www.bis.gov.in/privacy-policy/?lang=en"
+            },
+            {
+              "label": "Content Contribution",
+              "href": "https://www.bis.gov.in/wp-content/uploads/2018/11/BIS_CMAP.pdf"
+            },
+            {
+              "label": "Content Review Policy",
+              "href": "https://www.bis.gov.in/wp-content/uploads/2018/11/BIS_CRP.pdf"
+            },
+            {
+              "label": "Website Security Policy",
+              "href": "https://www.bis.gov.in/website-security-policy/?lang=en"
+            },
+            {
+              "label": "Website Monitoring Policy",
+              "href": "https://www.bis.gov.in/website-monitoring-policy/?lang=en"
+            },
+            {
+              "label": "Contingency Management Plan",
+              "href": "https://www.bis.gov.in/contingency-management-plan/?lang=en"
+            },
+            {
+              "label": "Terms & Conditions",
+              "href": "https://www.bis.gov.in/terms-and-conditions/?lang=en"
+            },
+            {
+              "label": "Disclaimer",
+              "href": "https://www.bis.gov.in/disclaimer/?lang=en"
+            }
+          ]
+        },
+        {
+          "lang": "hi",
+          "sourceUrl": "https://www.bis.gov.in/terms-and-conditions/?lang=hi",
+          "available": true,
+          "title": "नियम और शर्तें",
+          "lastUpdatedOnSource": "January 20, 2021",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "यह वेबसाइट बीआईएस द्वारा डिजाइन, विकसित और अनुरक्षित है। यद्यपि इस वेबसाइट पर उपलब्ध सामग्री की सटीकता और वैधता सुनिश्चित करने के सभी प्रयास किए गए हैं, लेकिन इसे आधिकारिक कथन के रूप में न लिया जाए या इसका उपयोग कानूनी प्रयोजन के लिए न किया जाए। किसी स्‍पष्‍टीकरण या संदेह के मामले में उपयोगकर्ताओं को सलाह दी जाती है कि संबंधित बीआईएस कार्यालय /विभाग से इसका सत्‍यापन/जांच करें।"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "बीआईएस किसी भी परिस्थिति में, इस वेबसाइट के उपयोग से होने वाली किसी भी प्रकार के खर्च, नुकसान या क्षति, असीमित, अप्रत्यक्ष या परिणामी नुकसान या क्षति, या किसी भी अन्य प्रकार के व्यय, नुकसान या क्षति या इस वेब साइट के उपयोग से डाटा के नुकसान इत्यादि के प्रति उत्तरदायी नहीं होगा।"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "ये नियम व शर्तें भारतीय कानून और नियमों द्वारा शासित और अभिप्रेत हैं। इन नियम और शर्तों के तहत उत्पन्न होने वाले किसी भी विवाद का समाधान उच्च न्यायालय, नई दिल्ली के कार्य क्षेत्र के अधीन होगा।"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "इस वेबसाइट पर उपलब्ध जानकारी में गैर-सरकारी / निजी संगठनों द्वारा निर्मित और अनुरीक्षित जानकारियों के हाइपरटेक्स्ट लिंक या पॉइंटर्स शामिल हो सकते हैं। बीआईएस केवल आपकी जानकारी और सुविधा के लिए इन लिंकों और पॉइंटर्स को प्रदान कर रहा है। जब आप किसी बाह्य वेबसाइट का लिंक चुनते हैं, तो आप बीआईएस वेबसाइट छोड़ रहे होते हैं और यह बाह्य वेबसाइट के स्‍वामियों / प्रायोजकों की गोपनीयता और सुरक्षा नीतियों के अधीन हैं।"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "बीआईएस संबद्ध पृष्ठों की हर समय उपलब्धता की गारंटी नहीं देता है। बीआईएस संबद्ध वेबसाइटों में मौजूद कॉपीराइट सामग्रियों के उपयोग के लिए प्राधिकृत नहीं कर सकता है। उपयोगकर्ताओं को सलाह दी जाती है कि वे संबद्ध वेबसाइटों के मालिकों से इस तरह के प्राधिकरण का अनुरोध करें। बीआईएस इस बात की गारंटी नहीं देता है कि संबद्ध वेबसाइटें भारत सरकार के वेब दिशानिर्देशों का अनुपालन करती हैं।"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "इस वेबसाइट के उपयोग से आप इन नियमों और शर्तों के प्रति सहमत हैं।"
+                }
+              ]
+            }
+          ],
+          "relatedLinks": [
+            {
+              "label": "वेबसाइट नीतियां",
+              "href": "https://www.bis.gov.in/website-policies/?lang=hi"
+            },
+            {
+              "label": "कॉपीराइट नीति",
+              "href": "https://www.bis.gov.in/copyright-policy/?lang=hi"
+            },
+            {
+              "label": "हाइपरलिंकिंग नीति",
+              "href": "https://www.bis.gov.in/hyperlinking-policy/?lang=hi"
+            },
+            {
+              "label": "गोपनीय नीति",
+              "href": "https://www.bis.gov.in/privacy-policy/?lang=hi"
+            },
+            {
+              "label": "सामग्री योगदान",
+              "href": "https://www.bis.gov.in/wp-content/uploads/2018/11/BIS_CMAP.pdf"
+            },
+            {
+              "label": "सामग्री समीक्षा नीति",
+              "href": "https://www.bis.gov.in/wp-content/uploads/2018/11/BIS_CRP.pdf"
+            },
+            {
+              "label": "वेबसाइट सुरक्षा नीति",
+              "href": "https://www.bis.gov.in/website-security-policy/?lang=hi"
+            },
+            {
+              "label": "वेबसाइट मॉनीटरिंग नीति",
+              "href": "https://www.bis.gov.in/website-monitoring-policy/?lang=hi"
+            },
+            {
+              "label": "आकस्म्कि प्रबंधन नीति",
+              "href": "https://www.bis.gov.in/contingency-management-plan/?lang=hi"
+            },
+            {
+              "label": "नियम और शर्तें",
+              "href": "https://www.bis.gov.in/terms-and-conditions/?lang=hi"
+            },
+            {
+              "label": "अस्वीकरण",
+              "href": "https://www.bis.gov.in/disclaimer/?lang=hi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "accessibility-statement",
+      "route": "/accessibility-statement",
+      "variants": [
+        {
+          "lang": "en",
+          "sourceUrl": "https://www.bis.gov.in/accessibility-statement/?lang=en",
+          "available": true,
+          "title": "Accessibility Statement",
+          "lastUpdatedOnSource": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "We are committed to ensure that the BIS Website of India is accessible to all users irrespective of device in use, technology or ability. It has been built, with an aim, to provide maximum accessibility and usability to its visitors."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "We have put in our best efforts to ensure that all information on this Website is accessible to people with disabilities. For example, a user with visual disability can access this Website using assistive technologies, such as screen readers and magnifiers."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "This Website is designed using XHTML 1.0 Transitional and meets priority 1 (level A) of the Web Content Accessibility Guidelines (WCAG) 2.0 laid down by the World Wide Web Consortium (W3C). Part of the information in the Website is also made available through links to external Web sites. External Web sites are maintained by the respective departments who are responsible for making these sites accessible."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "If you have any problem or suggestion regarding the accessibility of this Website, please send a Leave a messages to us."
+                }
+              ]
+            }
+          ],
+          "relatedLinks": []
+        },
+        {
+          "lang": "hi",
+          "sourceUrl": "https://www.bis.gov.in/accessibility-statement/?lang=hi",
+          "available": true,
+          "title": "अभिगम्‍यता",
+          "lastUpdatedOnSource": null,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "We are committed to ensure that the BIS Website of India is accessible to all users irrespective of device in use, technology or ability. It has been built, with an aim, to provide maximum accessibility and usability to its visitors."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "We have put in our best efforts to ensure that all information on this Website is accessible to people with disabilities. For example, a user with visual disability can access this Website using assistive technologies, such as screen readers and magnifiers."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "This Website is designed using XHTML 1.0 Transitional and meets priority 1 (level A) of the Web Content Accessibility Guidelines (WCAG) 2.0 laid down by the World Wide Web Consortium (W3C). Part of the information in the Website is also made available through links to external Web sites. External Web sites are maintained by the respective departments who are responsible for making these sites accessible."
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "runs": [
+                {
+                  "text": "If you have any problem or suggestion regarding the accessibility of this Website, please send a Leave a messages to us."
+                }
+              ]
+            }
+          ],
+          "relatedLinks": []
+        }
+      ]
+    }
+  ]
+}

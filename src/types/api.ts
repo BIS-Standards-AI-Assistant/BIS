@@ -30,6 +30,21 @@ export interface CoverageResult {
   overallCoverageRatio: number;
 }
 
+export type ApplicabilityState =
+  | "DIRECTLY_APPLICABLE"
+  | "POTENTIALLY_APPLICABLE"
+  | "RELATED"
+  | "MATERIAL_MISMATCH"
+  | "SCOPE_UNCLEAR"
+  | "INSUFFICIENT_EVIDENCE"
+  | "NOT_APPLICABLE";
+
+export interface Applicability {
+  state: ApplicabilityState;
+  reason: string;
+  materialConflict: boolean;
+}
+
 export interface Recommendation {
   standardNumber: string | null;
   title: string;
@@ -38,6 +53,8 @@ export interface Recommendation {
   reason: string;
   coverage: CoverageResult;
   evidence: EvidenceRef[];
+  /** Deterministic, separate from relevanceScore/groundingState — "relevant" is not the same claim as "applicable". See src/lib/applicability.ts. */
+  applicability: Applicability;
 }
 
 export type Confidence = "high" | "medium" | "low" | "none";

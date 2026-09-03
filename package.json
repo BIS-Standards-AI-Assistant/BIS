@@ -26,7 +26,9 @@
     "data:parse-batch": "tsx scripts/data-parse-batch.ts",
     "data:migrate-existing": "dotenv -e .env.local -- tsx scripts/data-migrate-existing.ts",
     "data:report": "dotenv -e .env.local -- tsx scripts/data-report.ts",
+    "data:policy-pages": "tsx scripts/scrape-bis-policy-pages.ts",
     "data:relationships": "dotenv -e .env.local -- tsx scripts/data-relationships.ts",
+    "data:relationships-extract": "dotenv -e .env.local -- tsx scripts/data-relationships-extract.ts",
     "tools:smoke": "dotenv -e .env.local -- tsx scripts/tools-smoke.ts",
     "agent:smoke": "dotenv -e .env.local -- tsx scripts/agent-smoke.ts"
   },
