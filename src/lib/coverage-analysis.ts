@@ -58,7 +58,13 @@ function termCoverage(value: string | null, haystack: string): CoverageStatus {
 // Exported so other consumers (e.g. the Standard Passport page) can group
 // evidence chunks by the same testing/certification signal this module
 // uses for coverage scoring — one definition, not a second copy.
-export const TESTING_KEYWORDS = /\b(test|testing|tested|sample|inspection|method of test)\b/i;
+// P0 audit fix, 2026-09-03: \btest\b never matched "tests" (no word
+// boundary between "test" and its trailing "s") — a real, live bug that
+// silently made "what tests are required?" invisible to both the query
+// planner's TESTING plan type and this module's own testing-coverage
+// check. Explicit alternation, not a bare stem + \b, so this doesn't
+// regress the same way for "sample"/"inspection" either.
+export const TESTING_KEYWORDS = /\b(tests?|testing|tested|samples?|inspection|method of test)\b/i;
 export const CERTIFICATION_KEYWORDS = /\b(certif\w*|licen[cs]e\w*|scheme|mark|registration)\b/i;
 
 function keywordCoverage(requested: boolean, pattern: RegExp, haystack: string): CoverageStatus {

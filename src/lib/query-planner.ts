@@ -92,7 +92,14 @@ function retrievalTasksFor(type: QueryPlanType): string[] {
     case "CERTIFICATION":
       return ["findApplicableStandards", "getCertificationScheme", "checkMandatoryStatus"];
     case "TESTING":
-      return ["findApplicableStandards", "findTestingRequirements"];
+      // findTestingRequirements/findLaboratories are not implemented (no
+      // laboratories table — see src/lib/tools/index.ts's doc comment).
+      // getCertificationScheme IS implemented and already carries real
+      // testingParameters (src/lib/certification-schemes.ts) for
+      // standards that have a certification scheme record — reusing it
+      // here, rather than depending on an LLM to surface the same data,
+      // is the P0 "testing reachability" fix (2026-09-03 audit).
+      return ["findApplicableStandards", "findTestingRequirements", "getCertificationScheme"];
     case "LABORATORY":
       return ["findApplicableStandards", "findTestingRequirements", "findLaboratories"];
     case "QCO":

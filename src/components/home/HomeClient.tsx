@@ -184,21 +184,19 @@ export function HomeClient() {
               <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[380px_1fr] xl:grid-cols-[400px_1fr]">
                 {/* LEFT COLUMN: Executive Summary at Left Corner */}
                 <div className="space-y-6 lg:sticky lg:top-6 lg:self-start">
-                  {/* Executive Summary Card */}
-                  <section className="rounded-2xl border border-border-strong/70 bg-surface-raised p-5 sm:p-6 shadow-xs transition-all hover:border-navy/30 hover:shadow-sm">
+                  {/* Search Synthesis: a concise, evidence-grounded summary — not an AI chat answer */}
+                  <section className="rounded-lg border border-border-strong/70 bg-surface-raised p-5 sm:p-6">
                     <div className="flex items-center justify-between gap-3 border-b border-border/60 pb-3.5">
-                      <div className="flex items-center gap-2.5">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-navy/10 text-navy border border-navy/15">
-                          <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
-                            Standards Summary
-                          </h2>
-                          <p className="text-[10.5px] text-ink-faint">Official Synthesis</p>
-                        </div>
+                      <div>
+                        <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
+                          Search Synthesis
+                        </h2>
+                        <p className="text-[10.5px] text-ink-faint">
+                          {result.recommendations.length} candidate standard{result.recommendations.length === 1 ? "" : "s"}
+                          {" · "}
+                          {result.recommendations.reduce((n, r) => n + r.evidence.length, 0)} supporting source
+                          {result.recommendations.reduce((n, r) => n + r.evidence.length, 0) === 1 ? "" : "s"}
+                        </p>
                       </div>
                       <ConfidenceBadge confidence={result.confidence} />
                     </div>
@@ -208,18 +206,20 @@ export function HomeClient() {
                       </p>
                     </div>
                     {result.limitations.length > 0 && (
-                      <div className="mt-4 rounded-xl bg-surface-alt/80 p-3.5 border border-border/60">
-                        <p className="text-[10.5px] font-bold uppercase tracking-wider text-ink-faint">
-                          Regulatory Scope
-                        </p>
-                        <p className="mt-1 text-xs text-ink-soft leading-relaxed">
-                          {result.limitations[0]}
-                        </p>
-                      </div>
+                      <details className="mt-4 rounded-md bg-surface-alt/80 border border-border/60 p-3.5 text-xs">
+                        <summary className="cursor-pointer font-bold uppercase tracking-wider text-[10.5px] text-ink-faint">
+                          Why this result — technical detail
+                        </summary>
+                        <ul className="mt-2 space-y-1 text-ink-soft leading-relaxed">
+                          {result.limitations.map((l, i) => (
+                            <li key={i}>{l}</li>
+                          ))}
+                        </ul>
+                      </details>
                     )}
                   </section>
 
-                  {/* Parameter Interpretation Panel */}
+                  {/* Search Context: what was detected from the query */}
                   <InterpretationPanel interpretation={result.interpretation} />
 
                   {/* Official BIS Directorate Reference */}
@@ -251,7 +251,7 @@ export function HomeClient() {
                 <div className="space-y-6 min-w-0">
                   {/* Irrelevant Query Alert */}
                   {result.isRelevant === false && (
-                    <div className="rounded-2xl border border-danger/30 bg-gradient-to-br from-danger-soft/80 via-surface-raised to-danger-soft/40 p-5 shadow-xs">
+                    <div className="rounded-lg border border-danger/30 bg-danger-soft/40 p-5">
                       <div className="flex items-start gap-3.5">
                         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-danger/15 text-danger font-bold text-base">
                           !
@@ -304,29 +304,10 @@ export function HomeClient() {
 
                   {result.conflicts.length > 0 && <ConflictPanel conflicts={result.conflicts} />}
 
-                  {/* Candidate Standards */}
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between border-b border-border/70 pb-3">
-                      <div className="flex items-center gap-2.5">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-navy/10 text-navy border border-navy/15">
-                          <svg className="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                          </svg>
-                        </div>
-                        <div>
-                          <h2 className="text-sm sm:text-base font-bold text-navy">
-                            Candidate Standards ({result.recommendations.length})
-                          </h2>
-                          <p className="text-[11px] text-ink-faint">
-                            Ranked by relevance &amp; verified Bureau of Indian Standards evidence
-                          </p>
-                        </div>
-                      </div>
-                      <span className="hidden sm:inline-flex items-center rounded-md bg-navy/10 px-2.5 py-0.5 text-[11px] font-bold text-navy">
-                        Verified Bureau Evidence
-                      </span>
-                    </div>
-
+                  {/* Best match + other candidates — the strongest result gets
+                      the strongest visual hierarchy, per docs/ui/SIH.md's
+                      evidence-first UX rule. */}
+                  <div className="space-y-6">
                     {result.recommendations.length === 0 ? (
                       <EmptyState
                         title="No sufficiently relevant standard found"
@@ -338,11 +319,37 @@ export function HomeClient() {
                         ]}
                       />
                     ) : (
-                      <div className="space-y-4">
-                        {result.recommendations.map((rec, i) => (
-                          <RecommendationCard key={i} recommendation={rec} />
-                        ))}
-                      </div>
+                      <>
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint pb-2 border-b border-border/70">
+                            {/* P0 audit, 2026-09-03: a top-ranked result is only
+                                labeled "Best match" when its applicability is
+                                actually established — never on relevance/rank
+                                alone. A material mismatch or unclear scope is
+                                shown as a related standard instead. */}
+                            {result.recommendations[0].applicability.state === "DIRECTLY_APPLICABLE" ||
+                            result.recommendations[0].applicability.state === "POTENTIALLY_APPLICABLE"
+                              ? "Best match"
+                              : "Related standard"}
+                          </p>
+                          <div className="mt-4">
+                            <RecommendationCard recommendation={result.recommendations[0]} />
+                          </div>
+                        </div>
+
+                        {result.recommendations.length > 1 && (
+                          <div>
+                            <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint pb-2 border-b border-border/70">
+                              Other relevant standards ({result.recommendations.length - 1})
+                            </p>
+                            <div className="mt-4 space-y-4">
+                              {result.recommendations.slice(1).map((rec, i) => (
+                                <RecommendationCard key={i} recommendation={rec} />
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
 
@@ -411,8 +418,15 @@ export function HomeClient() {
         )}
       </main>
       <Footer />
-      {/* BIS Chat Bot at Right Corner */}
-      <BisChatBot currentQuery={activeQuery} />
+      {/* BIS Chat Bot at Right Corner — real standard numbers only, so the
+          server can resolve authoritative context by ID (P0 audit,
+          2026-09-03), never trusting recommendation text/reason fields. */}
+      <BisChatBot
+        currentQuery={activeQuery}
+        standardNumbers={result?.recommendations
+          .map((r) => r.standardNumber)
+          .filter((n): n is string => n !== null) ?? []}
+      />
     </div>
   );
 }

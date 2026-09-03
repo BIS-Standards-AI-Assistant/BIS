@@ -11,12 +11,24 @@ import path from "path";
  */
 
 interface QcoEntry {
+  // Compatibility, 2026-09-03: data/bis-standards-dataset/qco-standards.json
+  // was replaced upstream with a differently-shaped 100-entry file
+  // (standard_number/year/part/section instead of a single is_number
+  // string) — see docs/DATA_INTEGRITY_CONCERN.md for why this loader now
+  // reconstructs is_number defensively rather than trusting the new
+  // file's data as authoritative.
   is_number?: string;
+  standard_number?: string;
+  year?: string;
+  part?: string | null;
+  section?: string | null;
   title?: string;
+  full_title?: string;
   category?: string;
   scheme?: string;
   mandatory_qco?: boolean;
   scope_summary?: string;
+  scope?: string;
   key_testing_parameters?: string[];
   certification_route?: string;
   verification_status?: string;
@@ -24,6 +36,15 @@ interface QcoEntry {
   source_url?: string;
   source_note?: string;
   retrieved_at?: string;
+}
+
+function canonicalNumberOf(e: QcoEntry): string | null {
+  if (e.is_number) return e.is_number;
+  if (!e.standard_number) return null;
+  const partSuffix = e.part
+    ? ` (Part ${e.part}${e.section ? `/Sec ${e.section}` : ""})`
+    : "";
+  return e.year ? `${e.standard_number}${partSuffix}:${e.year}` : `${e.standard_number}${partSuffix}`;
 }
 
 export interface CertificationSchemeItem {
@@ -40,14 +61,15 @@ export interface CertificationSchemeItem {
 }
 
 function toItem(e: QcoEntry): CertificationSchemeItem | null {
-  if (!e.is_number) return null;
+  const standardNumber = canonicalNumberOf(e);
+  if (!standardNumber) return null;
   return {
-    standardNumber: e.is_number,
-    title: e.title ?? e.is_number,
+    standardNumber,
+    title: e.title ?? e.full_title ?? standardNumber,
     category: e.category ?? null,
     scheme: e.scheme ?? null,
     mandatoryQco: e.mandatory_qco === true,
-    scopeSummary: e.scope_summary ?? null,
+    scopeSummary: e.scope_summary ?? e.scope ?? null,
     certificationRoute: e.certification_route ?? null,
     testingParameters: e.key_testing_parameters ?? [],
     verificationStatus: e.verification_status ?? null,

@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import type { QueryResponse } from "@/types/api";
 
 interface Message {
   id: string;
@@ -10,23 +9,27 @@ interface Message {
   text: string;
   timestamp: string;
   standards?: { number: string | null; title: string; id?: string }[];
+  /** Which scope actually produced this answer — shown so the user never has to guess (P0 audit, 2026-09-03). */
+  scope?: "current_results" | "global";
 }
 
 interface BisChatBotProps {
   currentQuery?: string;
+  /** Real standard numbers from the current results, so the server can resolve authoritative context by ID — never the recommendations' text/reason fields. */
+  standardNumbers?: string[];
 }
 
 const QUICK_PROMPTS = [
-  "What tests are mandatory?",
-  "Is ISI mark mandatory for this?",
-  "How to apply for BIS certification?",
-  "What are the relevant clauses?",
+  "What makes the first result relevant?",
+  "Show me the supporting evidence.",
+  "What information is missing?",
+  "Which standard should I investigate?",
 ];
 
 function greetingFor(currentQuery: string): Message {
   const text = currentQuery
-    ? `Namaste! I am your Bureau of Indian Standards (BIS) AI Assistant. I can help answer any questions about applicable Indian Standards, test requirements, ISI marking, or certification procedures for "${currentQuery}". What would you like to know?`
-    : "Namaste! I am your Bureau of Indian Standards (BIS) AI Assistant. Ask me any question about Indian Standards, product certifications, QCO orders, or laboratory test requirements.";
+    ? `You're exploring "${currentQuery}". Ask about what makes a result relevant, the supporting evidence, or what's still missing.`
+    : "Ask a question about Indian Standards, product certifications, QCO orders, or laboratory test requirements.";
 
   return {
     id: "initial-welcome",
@@ -36,7 +39,7 @@ function greetingFor(currentQuery: string): Message {
   };
 }
 
-export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
+export function BisChatBot({ currentQuery = "", standardNumbers = [] }: BisChatBotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -87,34 +90,51 @@ export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
     setLoading(true);
 
     try {
-      // Send query to the BIS query engine
-      const contextualQuery = currentQuery
-        ? `${currentQuery} — Question: ${text}`
-        : text;
-
-      const response = await fetch("/api/v1/query", {
+      // Server-side scoped context (P0 audit, 2026-09-03): send only the
+      // original query text and real standard numbers from the current
+      // results — the server resolves everything else from the database
+      // itself. This request never asks the server to trust a client-
+      // supplied "reason" or evidence string.
+      const response = await fetch("/api/v1/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: contextualQuery }),
+        body: JSON.stringify({ originalQuery: currentQuery || text, standardNumbers, message: text }),
       });
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
 
-      const data: QueryResponse = await response.json();
+      const data = await response.json();
+      const scope: "current_results" | "global" = data.scope === "global" ? "global" : "current_results";
 
-      const extractedStandards = (data.recommendations ?? []).slice(0, 3).map((r) => ({
-        number: r.standardNumber,
-        title: r.title,
-        id: r.evidence[0]?.documentId,
-      }));
+      let messageText: string;
+      let extractedStandards: { number: string | null; title: string; id?: string }[] = [];
+
+      if (scope === "global") {
+        // The pipeline's global response shape (recommendations, answer).
+        messageText = `${data.scopeChangeNotice}\n\n${data.answer ?? ""}`.trim();
+        extractedStandards = (data.recommendations ?? []).slice(0, 3).map((r: { standardNumber: string | null; title: string; evidence?: { documentId?: string }[] }) => ({
+          number: r.standardNumber,
+          title: r.title,
+          id: r.evidence?.[0]?.documentId,
+        }));
+      } else {
+        // The scoped chat-context response shape (answer, evidence[]).
+        messageText = data.answer ?? "I don't have enough evidence in the current results to establish that.";
+        extractedStandards = (data.evidence ?? []).slice(0, 3).map((e: { standardNumber: string | null; document: string; documentId: string }) => ({
+          number: e.standardNumber,
+          title: e.document,
+          id: e.documentId,
+        }));
+      }
 
       const botMessage: Message = {
         id: nextId("assistant"),
         sender: "assistant",
-        text: data.answer || "I have analyzed the Bureau standards regarding your question.",
+        text: messageText,
         standards: extractedStandards.length > 0 ? extractedStandards : undefined,
+        scope,
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
 
@@ -142,11 +162,10 @@ export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
           {hasUnread && currentQuery && (
             <div
               onClick={openChat}
-              className="hidden sm:flex items-center gap-2 rounded-xl border border-navy/30 bg-surface-raised px-3.5 py-2 shadow-lg cursor-pointer hover:border-navy transition-all"
+              className="hidden sm:flex items-center gap-2 rounded-lg border border-navy/30 bg-surface-raised px-3.5 py-2 shadow-sm cursor-pointer hover:border-navy transition-colors"
             >
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-bold text-navy max-w-[180px] truncate">
-                Ask BIS about &ldquo;{currentQuery}&rdquo;
+              <span className="text-xs font-bold text-navy max-w-[200px] truncate">
+                Discuss these results
               </span>
             </div>
           )}
@@ -154,55 +173,41 @@ export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
           <button
             type="button"
             onClick={openChat}
-            className="group relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-navy via-navy to-blue text-white shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer border-2 border-white/20"
-            aria-label="Open BIS Chatbot"
+            className="flex h-14 w-14 items-center justify-center rounded-full bg-navy text-white shadow-md hover:bg-navy-deep transition-colors cursor-pointer"
+            aria-label="Discuss these results"
           >
-            {/* Bureau Emblem / Chat Icon */}
-            <svg className="h-7 w-7 text-white transition-transform group-hover:rotate-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <svg className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
-
-            {/* Live Indicator */}
-            <span className="absolute -top-1 -right-1 flex h-4 w-4">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-4 w-4 rounded-full border-2 border-white bg-emerald-500" />
-            </span>
           </button>
         </div>
       )}
 
       {/* Expanded Chat Window at Right Corner */}
       {isOpen && (
-        <div className="flex h-[520px] w-[360px] sm:w-[420px] max-w-[calc(100vw-2rem)] flex-col rounded-2xl border border-border-strong bg-surface-raised shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-          {/* Header */}
-          <div className="flex items-center justify-between bg-gradient-to-r from-navy via-navy to-navy-deep px-4 py-3.5 text-white">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-white border border-white/20">
-                <svg className="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                </svg>
-              </div>
+        <div className="flex h-[520px] w-[360px] sm:w-[420px] max-w-[calc(100vw-2rem)] flex-col rounded-lg border border-border-strong bg-surface-raised shadow-lg overflow-hidden">
+          {/* Header + context indicator (§16: always show what the chat is discussing) */}
+          <div className="bg-navy px-4 py-3.5 text-white">
+            <div className="flex items-center justify-between gap-2.5">
               <div>
-                <div className="flex items-center gap-1.5">
-                  <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-white">
-                    BIS Standards Assistant
-                  </h3>
-                  <span className="rounded-full bg-emerald-400/20 px-1.5 py-0.2 text-[9px] font-extrabold text-emerald-300 border border-emerald-400/30">
-                    Live
-                  </span>
-                </div>
-                <p className="text-[10.5px] text-white/80 font-medium">
-                  Authoritative Bureau of Indian Standards AI
+                <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
+                  Discuss these results
+                </h3>
+                <p className="text-[10.5px] text-white/80 font-medium truncate max-w-[260px]">
+                  {currentQuery ? `Discussing: "${currentQuery}"` : "Bureau of Indian Standards"}
                 </p>
+                {standardNumbers.length > 0 && (
+                  <p className="text-[9.5px] text-white/60 font-medium">
+                    Scope: current results ({standardNumbers.length})
+                  </p>
+                )}
               </div>
-            </div>
-
-            <div className="flex items-center gap-1">
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="flex h-7 w-7 items-center justify-center rounded-lg text-white/80 hover:bg-white/15 hover:text-white transition-colors cursor-pointer"
-                title="Minimize chat"
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded text-white/80 hover:bg-white/15 hover:text-white transition-colors cursor-pointer"
+                aria-label="Close chat"
+                title="Close chat"
               >
                 ✕
               </button>
@@ -223,6 +228,11 @@ export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
                       : "bg-surface-alt border border-border/80 text-ink rounded-bl-xs leading-relaxed"
                   }`}
                 >
+                  {msg.scope === "global" && (
+                    <p className="mb-1.5 inline-flex items-center gap-1 rounded bg-navy/10 px-1.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-navy">
+                      Wider BIS search
+                    </p>
+                  )}
                   <p className="whitespace-pre-line">{msg.text}</p>
 
                   {/* Standard References if returned */}
@@ -281,7 +291,7 @@ export function BisChatBot({ currentQuery = "" }: BisChatBotProps) {
                   <span className="h-2 w-2 rounded-full bg-navy animate-bounce" style={{ animationDelay: "150ms" }} />
                   <span className="h-2 w-2 rounded-full bg-navy animate-bounce" style={{ animationDelay: "300ms" }} />
                 </span>
-                <span className="font-semibold text-navy">Consulting BIS Knowledge Base...</span>
+                <span className="font-semibold text-navy">Searching evidence...</span>
               </div>
             )}
 

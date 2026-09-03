@@ -110,9 +110,13 @@ export function deterministicIntentFallback(query: string): QueryIntent {
     certificationRequested,
     testingRequested,
     searchQuery: query,
-    missingInformation: [
-      "This query was interpreted without AI assistance (no LLM provider was available) — product/material/use-case details were not extracted, so results rely on keyword and semantic retrieval over the raw query text only.",
-    ],
+    // No LLM provider was available to extract structured parameters from
+    // free text, so offer generic, non-fabricated refinement prompts
+    // instead of a debug sentence — ClarificationPanel renders these as
+    // short selectable chips, not paragraphs. See docs/ui/SIH.md's
+    // truthfulness rule: this is a UI affordance, not a claim about the
+    // query's content.
+    missingInformation: ["material", "intended use", "capacity"],
   });
 }
 

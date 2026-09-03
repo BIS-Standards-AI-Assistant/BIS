@@ -21,6 +21,13 @@ export const RELATIONSHIP_TYPES = [
   "STANDARD_REFERENCES_STANDARD",
   "STANDARD_SUPERSEDES_STANDARD",
   "STANDARD_PART_OF_STANDARD",
+  // P1-A, 2026-09-03: for standards sharing a base identifier (same
+  // normalizedNumber) where no single umbrella "base standard" row
+  // exists to be the PART_OF target — e.g. "IS 302 (Part 2/Sec 6):2009"
+  // and "IS 302 (Part 2/Sec 3):2007" are siblings, not one a part of the
+  // other. RELATED_TO says exactly that, honestly, rather than forcing a
+  // hierarchy the data doesn't support.
+  "STANDARD_RELATED_TO_STANDARD",
 ] as const;
 
 export type RelationshipType = (typeof RELATIONSHIP_TYPES)[number];
