@@ -80,7 +80,6 @@ export interface Dictionary {
     ministryLine2: string;
     connect: string;
     rights: string;
-    sitemap: string;
     privacy: string;
     terms: string;
     accessibility: string;
@@ -174,7 +173,6 @@ const en: Dictionary = {
     ministryLine2: "GOVERNMENT OF INDIA",
     connect: "Connect with BIS",
     rights: "Bureau of Indian Standards (BIS). All Rights Reserved.",
-    sitemap: "Sitemap",
     privacy: "Privacy Policy",
     terms: "Terms of Use",
     accessibility: "Accessibility Statement",
@@ -274,7 +272,6 @@ const hi: Dictionary = {
     ministryLine2: "भारत सरकार",
     connect: "बीआईएस से जुड़ें",
     rights: "भारतीय मानक ब्यूरो (BIS)। सर्वाधिकार सुरक्षित।",
-    sitemap: "साइटमैप",
     privacy: "गोपनीयता नीति",
     terms: "उपयोग की शर्तें",
     accessibility: "पहुंच-योग्यता विवरण",
