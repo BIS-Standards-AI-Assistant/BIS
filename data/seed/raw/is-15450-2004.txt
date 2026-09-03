@@ -1,0 +1,417 @@
+PM/ IS 15450/ 1/ April 2020 
+   
+ 
+BUREAU OF INDIAN STANDARDS  
+Manak Bhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+1 
+ 
+PRODUCT MANUAL FOR  
+POLYETHYLENE/ALUMINIUM/ POLYETHYLENE COMPOSITE 
+PRESSURE PIPES FOR HOT AND COLDWATER SUPPLIES 
+ACCORDING TO IS 15450: 2004 
+ 
+This Product Manual shall be used as reference material by all Regional/Branch Offices & licensees 
+to ensure coherence of practice and transparency in operation of certification under Scheme-I of 
+Bureau of Indian Standards (Conformity Assessment) Regulations, 2018 for various products. The 
+document  may  also  be  used  by  prospective  applicants  desirous  of  obtaining  BIS  certification 
+licence/certificate. 
+1. Product  : IS 15450: 2004 
+ Title : POLYETHYLENE/ALUMINIUM/POLYETHYLENE 
+COMPOSITE   PRESSURE   PIPES   FOR   HOT   AND 
+COLD-WATER SUPPLIES 
+ No. of Amendments : 2 
+    
+2. Sampling Guidelines: 
+a) Raw material : a) Polyethylene – Clause 4.2 of IS 15450: 2004 
+b) Aluminium – Clause 4.4 of IS 15450: 2004 
+b) Grouping guidelines : Please refer ANNEX – A 
+c) Sample Size : Qty - 6 meter 
+    
+3. List of Test Equipment : Please refer ANNEX – B 
+ 
+    
+4. Scheme  of  Inspection 
+and Testing 
+: Please refer ANNEX – C 
+    
+5. Possible tests in a day : Please refer ANNEX – D 
+  
+6. Scope of the Licence:       
+ “Licence is granted to use Standard Mark as per IS 15450: 2004 with the following scope: 
+ Name of the product Polyethylene/Aluminium/Polyethylene composite pipes for 
+hot and cold-water supplies 
+Pipe Designation 
+ 
+ 
+
+PM/ IS 15450/ 1/ April 2020 
+ 
+2 
+ 
+ANNEX- A  
+ 
+Grouping Guidelines 
+ 
+1. IS 15450 :2004 covers Polyethylene/Aluminium/Polyethylene (PE-AL-PE) composite pipes 
+for hot and cold-water supplies.  
+ 
+2. PE-AL-PE composite pipes are designated by nominal inside and outside diameters. The Pipes 
+are grouped as under based on Pipe Designation: 
+ 
+Group I II III 
+ 
+Pipe Designation  0912, 1014, and 1216 1620 and 2025 2532, 3240 and 4050 
+ 
+ 
+3. Considering the above, following grouping guidelines is developed for GoL/CSoL: 
+ 
+• One  sample with  highest  Pipe  Designation from  each group shall  be  tested  for  all 
+requirements to cover all Pipe Designation from that particular group in the scope of 
+licence. 
+ 
+4. The Firm shall declare the varieties of pipes they intend to cover in the licence. The scope of 
+the Licence may be restricted on the Manufacturing and Testing capabilities of the Manufacturer. 
+ 
+5. During the operation of the licence, BO shall ensure that all the varieties of Pipes covered in 
+the Licence are tested in rotation to the extent possible. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+PM/ IS 15450/ 1/ April 2020 
+ 
+3 
+ 
+ANNEX B  
+ 
+List of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+ 
+Sl. 
+No. 
+Tests used in with Clause 
+Reference 
+Test Equipment 
+1  Dimensions of pipes (Clause 8) a) Vernier calliper 
+b) Micrometer 
+c) Steel tape   
+d) Magnifying glass with graduated reticule 
+of Least count 0.10 mm  
+2 Density (Clause 10.1) a) Steam or electrical heated press for 
+sample preparation  
+b) Analytical balance  
+c) Butyl Acetate 
+d) Thermometer,  
+e) Hydrometer 
+f) Glass beaker (250 ml) 
+g) Air conditioned room to maintain 
+temperature of 27 ± 2°C 
+3 Melt flow rate (Clause 10.2) a) Melt flow index test apparatus  with dead 
+load of 5 kg 
+b) Weighing balance 
+c) Stopwatch 
+4 Carbon black content and 
+dispersion (Clause 10.3) 
+a) Porcelain or silica combustion boats 
+b) Combustion tube made of hard glass 
+c) Gas flow meter  
+d) Nitrogen gas. 
+e) Thermometer  
+f) Furnace  
+g) Trichloroethylene 
+h) Analytical balance 
+i) Desiccator, Solid CO2. 
+j) Fuming hood. 
+k) Hot plate  
+l) Glass slides  
+m) Microscope with 10X and 20X 
+magnification 
+
+ 
+PM/ IS 15450/ 1/ April 2020 
+ 
+4 
+ 
+5 Pigment dispersion  
+(Clause 10.4) 
+a) Microtome i.e. microscope of at least 
+100X linear magnification and circular 
+Field of view of 0.7+/- 0.07 mm dia. 
+b) Microscope slides and cover slips. 
+6 Adhesion test (Clause 10.5) a) Sharp cutting tools and pliers 
+ 
+7 Apparent tensile strength test  
+(Clause 10.6) 
+a) Tensile testing machine 
+b) Protractor 
+c) Steel rod of 4 mm dia 
+d) Vernier calliper 
+ 
+8 Minimum burst pressure  
+(Clause 10.7) 
+ 
+a) Hydrostatic pressure test  apparatus with 
+pressure    gauge    and appropriate    end 
+fittings  
+b) Stopwatch 
+c) Thermometer  
+ 
+9 Hydraulic Characteristics; 
+Hydraulic pressure test (Clause 
+10.8)  
+Long term hydrostatic test  
+(Clause 11.1) 
+a) Hydrostatic pressure test  apparatus with 
+pressure gauge, timer and appropriate end 
+fittings  
+b) Temperature controlled water bath  
+10 Overall migration test (Clause 11.1) a) Electric oven/Water bath with thermostat 
+b) Hot plate with temperature regulator. 
+c) Analytical balance  
+d) Glass beaker 
+e) Stainless steel evaporating dish  
+11 Thermal stability to oxidation 
+(Clause 11.1) 
+a) Differential Thermal Analyzer Or 
+Differential Scanning Calorimeter. 
+b) Aluminium pan 
+c) Nitrogen  and  Oxygen  Gas cylinder  with 
+flow meter 
+d) Core driller machine 
+  
+12 For maintaining ambient 
+temperature during various tests 
+a) Air Conditioner 
+ 
+The above list is indicative only and may not be treated as exhaustive.
+
+PM/ IS 15450/ 1/ April 2020 
+ 
+5 
+ 
+ANNEX C 
+ 
+Scheme of Inspection and Testing  
+ 
+1. LABORATORY - A laboratory shall be maintained which shall be suitably equipped (as 
+per the requirement given in column 2 of Table 1) and staffed, where different tests given in 
+the specification shall be carried out in accordance with the methods given in the specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipments. 
+ 
+2. TEST RECORDS – The manufacturer shall maintain test records for the tests carried out 
+to establish conformity. 
+ 
+3. LABELLING AND MARKING – As per the requirement of IS 15450:2004.  
+ 
+4.  CONTROL  UNIT – PE-AL-PE  pipe  of  a  particular Pipe Designation  manufactured  as  a 
+continuous roll in each consignment shall constitute a control unit.  
+ 
+5. LEVELS OF CONTROL - The tests as indicated in column 1 of Table 1 and the levels of 
+control  in  column  3  of Table  1,  shall  be  carried  out  on  the  whole  production  of  the  factory 
+which  is  covered  by  this  plan  and  appropriate  records  maintained  in  accordance  with      
+paragraph 2 above.  
+ 
+5.1 All the  production  which  conforms  to  the  Indian  Standards  and  covered  by  the  licence 
+should be marked with Standard Mark. 
+ 
+6. REJECTIONS – Disposal of non-conforming product shall be done in such a way so as to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+                                                                                                                            PM/ IS 15450/ 1/ April 2020 
+ 
+6 
+ 
+ 
+TABLE 1 
+ 
+(1) (2) (3) 
+Test Details Test equipment 
+requirement 
+R: required (or)  
+S: Sub-contracting 
+permitted 
+Levels of Control 
+Cl. Requirement Test Method No. of Sample Frequency Remarks 
+Clause Reference 
+4 Material 
+Polyethylene  4.2 
+ 
+IS 15450 
+IS 7428 
+S One  
+ 
+Each 
+consignment  
+$$ 
+U V Stabilizer 4.3 IS 15450 - - - Consignment received 
+shall   be received with 
+manufacturers certificate 
+Aluminium  4.4 IS 15450 
+IS 737  
+S One  Each 
+consignment  
+$$ 
+7 Colour 7 IS 15450 R Every coil or length of 
+pipe extruded 
+- - 
+8 Dimensions of pipe 
+ 
+8.1, 8.2, 8.3, 
+8.4, Annex- B 
+IS 15450 R One Every Three 
+hours 
+- 
+9 Visual appearance 9 IS 15450 R Every coil or length of 
+pipe extruded 
+Each control 
+unit 
+- 
+10.1 Density 10.1, Table3 IS 15450 
+IS 7328 
+R One composite sample of 
+minimum three pipes/coil 
+drawn at regular interval 
+Each control 
+unit 
+- 
+10.2 Melt flow rate 10.2, 
+Table3 
+IS 15450 
+IS 2530 
+R One composite sample of 
+minimum three pipes/coil 
+drawn at regular interval 
+Each control 
+unit 
+- 
+10.3 Carbon black content 
+and dispersion 
+10.3, 
+ Table3 
+IS 15450 
+IS 2530 
+R One composite sample of 
+minimum three pipes/coil 
+drawn at regular interval 
+Each control 
+unit 
+- 
+
+                                                                                                                            PM/ IS 15450/ 1/ April 2020 
+ 
+7 
+ 
+ 
+10.4 Pigment dispersion 10.4, 
+ Annex C 
+IS 15450 R One Alternate 
+control units 
+- 
+10.5 Adhesion Test 10.5, 
+ Annex D 
+IS 15450 R One Alternate 
+control units 
+- 
+10.6 Apparent tensile 
+strength of pipe 
+10.6,  
+Annex E, 
+Table-4 
+IS 15450 R One Each control 
+unit 
+- 
+10.7 Minimum burst 
+pressure 
+10.7, 
+Annex F 
+IS 15450 R One Each control 
+unit 
+- 
+10.8 Hydraulic 
+characteristic 
+10.8,   
+Annex G, 
+Table-5 
+IS 15450 R One Each control 
+unit 
+- 
+11.1 Long term hydrostatic 
+test 
+11.1.1, 
+Table 6 
+IS 15450 S One Once in Three 
+year 
+## 
+11.1 Overall migration test  11.1.2 IS 15450 
+IS 9845  
+IS 10146 
+S One Once in Three 
+year 
+## 
+11.1 Thermal stability    to 
+oxidation 
+11.1.3, 
+Annex-H, 
+Table 3 
+IS 15450 S One Once in Three 
+year 
+## 
+$$ Further testing is not required, if consignment received is ISI marked or received with manufacturers certificate. 
+ 
+## One sample from pipe designation shall be tested at least once in three years. This test shall also be carried out whenever there is change in composition 
+or method of manufacture or when a new size is to be introduced. 
+ 
+Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empanelled by the Bureau. 
+ 
+Note-2: Levels of control given in column 3 are only recommendatory in nature. The manufacturer may define the control unit/batch/lot and submit his 
+own levels of control in column 3 with proper justification for approval by BO Head. 
+ 
+ 
+
+                                                                                                                            PM/ IS 15450/ 1/ April 2020 
+ 
+8 
+ 
+ 
+ANNEX D 
+ 
+ 
+ Possible tests in a day: 
+ 
+ (i) Colour (Clause 7) 
+(ii) Dimensions of pipes (Clause 8) 
+(iii) Visual appearance (Clause 9) 
+(iv) Density (Clause 10.1) 
+(v) Melt flow rate (Clause 10.2) 
+(vi) Carbon black content and dispersion. (Clause 10.3) 
+(vii) Adhesion test (clause 10.5) 
+(viii) Apparent tensile strength (Clause 10.6). 
+(ix) Minimum burst pressure (Clause 10.7) 
+(x) Hydraulic characteristics (Clause 10.8)

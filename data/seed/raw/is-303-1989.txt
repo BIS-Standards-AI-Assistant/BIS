@@ -1,0 +1,375 @@
+PM/ IS 303/ 2/ JULY 2020  
+ 
+BUREAU OF INDIAN STANDARDS 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+ 
+1 
+ 
+PRODUCT MANUAL FOR  
+PLYWOOD FOR GENERAL PURPOSES  
+ACCORDING TO IS 303: 1989 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by  prospective  applicants  desirous  of 
+obtaining BIS certification licence/certificate. 
+1. 
+Product 
+: IS 303 : 1989 
+ 
+Title 
+: Plywood for General Purposes 
+ 
+No. of Amendments 
+: 6 
+    
+2. 
+Sampling Guidelines: 
+a) 
+Raw material 
+: a) Adhesive – IS 848  
+b) Extenders – IS 1508 
+b) 
+Grouping guidelines 
+: Please refer ANNEX – A  
+c) 
+Sample Size 
+: Plywood – 1 sheet  
+ 
+    
+3. 
+List of Test Equipment 
+: Please refer ANNEX – B 
+ 
+ 
+  
+4. 
+Scheme    of    Inspection 
+and Testing 
+: Please refer ANNEX – C 
+ 
+ 
+ 
+ 
+5.  
+Possible tests in a day : 
+ Please refer ANNEX – D 
+ 
+6. 
+Scope of the Licence : 
+ “Licence is granted to use Standard Mark as per IS 303 : 1989 with the following scope: 
+ Name of the product PLYWOOD FOR GENERAL PURPOSES 
+ Grade  BWR/MR 
+ Type AA/AB/BB 
+ Size  Upto and including _____ ply and _____ thickness. 
+ 
+
+PM/ IS 303/ 2/ JULY 2020 
+2 
+ 
+ANNEX A 
+Grouping Guidelines 
+ 
+1. Plywood for general purposes are classified based on the parameters as given below: 
+ 
+a) Grade: BWR and MR 
+ 
+b) Types based on appearance: AA, AB and BB 
+ 
+c) Number of ply : 3,5,7,9,11 and above 
+ 
+d) Thickness based on number of ply: 3 mm to 25 mm and above, and 
+ 
+e)  Any  dimensions  as  agreed  to  between  the  manufacturer  and  the  purchaser  are  also 
+permitted in addition to the standard dimensions. 
+ 
+2. Requirements  for  BWR  grade  is  stringent  than  MR  grade  plywood,  but  Mycological  test  is 
+applicable only for MR grade.  Based on appearance type, requirements for type AA is more 
+stringent.  Also  for  manufacturing  of  more  number  of  ply  and  plywood  of  higher  thickness, 
+manufacturing  capacity  and  infrastructure  required  is  more  critical  than  plywood  with  less 
+number of ply and thickness.   
+ 
+3. Considering the above, following grouping guidelines for GoL/CSoL have been developed: 
+ 
+a) One sample of any appearance type AA/AB/BB with highest ply, highest thickness and 
+any  size  for  each  grade  (BWR  and  MR)  shall  be  tested  for  all  requirements  to  cover 
+plywood  of the appearance  type tested  and  with  number  of  ply  and  thickness  upto and 
+including the tested sample.  
+ 
+b) However, if plywood with superior surface quality is tested then lower appearance type 
+may also be covered. 
+4. The  Firm  shall  declare  the varieties  of  plywood they  intend  to  cover  in  the  Licence.  The 
+Scope  of  Licence  may  be  restricted  based  on  the  Manufacturing  capability  and  Testing 
+facilities of the Manufacturer. 
+5. During  the  operation  of  the  Licence,  BO  shall  ensure  that  all  the  Varieties  covered  in  the 
+Licence are tested in rotation to the extent possible. 
+ 
+
+PM/ IS 303/ 2/ JULY 2020  
+ 
+ 
+ 
+3 
+ 
+ 
+ANNEX B  
+List of Test Equipment 
+ 
+Major test equipment essentially required to test as per the Indian Standard 
+ 
+Sl. No. Tests used in with Clause 
+Reference 
+Test Equipment 
+1 Dimensions, Squareness   and 
+Edge Straightness 
+(Clause 8) 
+Measuring Tape 
+Steel Scale 
+Micro Meter 
+Vernier Caliper 
+Squareness Gauge 
+Straight Edge 
+Feeler Gauge 
+2 Static  bending  test  (MOE  and 
+MOR Test) 
+(Clause 11.4) 
+ 
+Tensile Testing Machine attached with MOE and MOR 
+attachments and 100 mm. dial gauge 
+3 Mycological Test 
+(Clause 11.2.2) 
+Enameled Mycological Tray with Sucrose / Saw Dust 
+4 Water resistance test 
+(Clause 11.2.1) 
+ 
+Water  Bath  fitted  with  digital temperature 
+controller, Knife as per ISS, Stout Table 
+5 Moisture content  
+(Clause 11.3) 
+Hot    Air    Oven - thermostat controlled and fitted with 
+thermometer 
+Moisture Meter 
+6 Adhesive  testing 
+(Clause 6.2 ) 
+pH Meter 
+IS Sieve 
+7 General test equipments 
+required 
+Humidity Chamber with thermometer & hygrometer 
+Desiccator 
+Air Conditioner 
+Dry-Wet Thermometer 
+Electric Hot Plate 
+Chemicals and glassware 
+Viscosity Cup 
+The above list is indicative only and may not be treated as exhaustive.
+
+PM/ IS 303/ 2/ JULY 2020  
+ 
+4 
+ 
+ANNEX C 
+Scheme of Inspection and Testing  
+ 
+1. LABORATORY - A laboratory shall be maintained which shall be suitably equipped (as per the 
+requirement given in column 2 of Table 1) and staffed, where different tests given in the specification 
+shall be carried out in accordance with the methods given in the specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipments. 
+  
+2.  TEST  RECORDS – The  manufacturer  shall  maintain  test  records  for the  tests  carried  out  to 
+establish conformity. 
+ 
+3. LABELLING AND MARKING – As per the requirements of IS 303: 1989 
+ 
+4. CONTROL UNIT – All plywood boards of similar construction, grade and type pressed under 
+similar conditions continuously with same mix of adhesive in one press in a day shall constitute a 
+control unit (Plywood Boards in which the arrangement of veneers is similar as regards thickness 
+and  species  of  timber  on  both  sides  of  central  ply  shall  be considered  to  be  of  similar 
+construction). 
+ 
+5. LEVELS OF CONTROL - The tests as indicated in column 1 of Table 1 and the levels of control 
+in column 3 of Table 1, shall be carried out on the whole production of the factory which is covered 
+by this plan and appropriate records maintained in accordance with paragraph 2 above.  
+ 
+5.1 All the production which conforms to the Indian Standards and covered by the licence should be 
+marked with Standard Mark. 
+ 
+6. REJECTIONS – Disposal of non-conforming product shall be done in such a way so as to ensure 
+that there is no violation of provisions of BIS Act, 2016. 
+ 
+ 
+
+PM/ IS 303/ 2/ JULY 2020 
+5 
+ 
+TABLE 1 
+ 
+(1) (2) (3) 
+Test Details Test equipment 
+requirement 
+R: required (or) S: 
+Sub-contracting 
+permitted 
+Levels of Control 
+Cl. Requirement Test Methods 
+ Clause         Reference         
+No. of 
+Sample 
+Frequency Remarks 
+5.1 
+Classification by 
+appearance 
+5.1 IS 303 
+R All 
+- 
+- 
+5.2 
+Table 1, 
+Table 2 
+Quality    requirements 
+of surface and number 
+of defects 
+5.2 
+IS 303 
+ 
+R All 
+- 
+The   visual  inspection  shall be 
+carried out in a well-lighted place.    
+6.1 Timber 6.1 IS 303 
+- One 
+Each lot 
+received 
+Record   of   each   lot   of   timber 
+received shall be maintained 
+6.2 Adhesive 6.2 IS 303 
+IS 848 
+R One  
+Each lot 
+No    testing    is    required,    if 
+accompanied with test certificate 
+or ISI marked. 
+6.2.1 Extenders 6.2.1 IS 303 
+IS 1508 
+S One  
+Each lot 
+7.2.1 
+Thickness of veneers 
+7.2.1 IS 303 
+R One  
+Each lot 
+- 
+7.2.3 
+Grain direction 
+7.2.3 IS 303 
+R All 
+- 
+- 
+7.2.5 
+Permissible defects 
+7.2.5.1, 
+7.2.5.2  
+7.2.5.3 
+IS 303 
+R All 
+- 
+- 
+8 Dimensions and 
+Tolerances 
+8.1, 8.2 
+and 8.3 
+IS:303 
+ 
+R 5 
+For each size 
+from each 
+control unit 
+Samples shall be  drawn at regular 
+interval to cover entire production.  
+In  case  of  failure  of  any sample, 
+entire production shall be checked 
+and only conforming product shall 
+be marked. 
+9 Workmanship and 
+finish 
+9.1, 9.2 
+Annex-C 
+IS 303 
+R All 
+- 
+- 
+
+PM/ IS 303/ 2/ JULY 2020 
+6 
+ 
+11.2.1 Water Resistance Test 
+11.2.1 
+IS 303 
+IS 1734 (Part 5) 
+R One Each control 
+unit 
+In case of failure, twice the number 
+of samples from same control unit 
+shall  be  tested  and  control  unit 
+shall    be    accepted    if    retested 
+samples found passing. 
+11.2.2 Mycological Test 
+11.2.2 
+IS 303 
+IS 1734 (Part 7) 
+R One  sample  in a  month from 
+each  set  of  species  of  timber 
+and each grade of plywood 
+ 
+# 
+11.3 Moisture Content 
+11.3 
+IS 303 
+IS:1734 (Part 1) 
+R One Each control 
+unit 
+In case of failure, twice the number 
+of samples from same control unit 
+shall  be  tested.  Control  unit  shall 
+be  accepted  if  retested  samples 
+found passing. 
+11.4 Static Bending 
+Strength 
+11.4 ,  
+Table 4 
+IS 303 
+IS:1734 (Part 
+11) 
+R 
+One Each control 
+unit 
+In case of failure twice the number 
+of samples from same control unit 
+shall  be  tested.  Control  unit  shall 
+be  accepted  if  retested  samples 
+found passing. 
+ 
+ # Samples may be drawn in such a manner that all thickness of plywood manufactured are tested over a period of time. In case of failure of sample in 
+mycological test, a thorough check shall be made about the type of glue used and type of preservative added to the glue.  
+ 
+Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empaneled by the Bureau. 
+ 
+Note-2: Levels of control given in column 3 are only recommendatory in nature. The manufacturer may define the control unit/batch/lot and submit his 
+own levels of control in column 3 with proper justification for approval by BO Head.  
+  
+
+PM/ IS 303/ 2/ JULY 2020 
+7 
+ 
+ 
+ANNEX D 
+Possible Tests in a day 
+ 
+ 
+(i) Visual defects & Finish (Cl 5.2) 
+(ii) Dimensions & Tolerances (Cl 8) 
+(iii) Moisture Content  (Cl. 11.3) 
+(iv) Glue Adhesion - Water Resistance test (Cl 11.2.1) 
+(v) Static Bending Strength (Cl.11.4)

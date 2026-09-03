@@ -1,0 +1,688 @@
+1 
+ 
+ 
+  
+भारतीय मानक ब्यूरो 
+BUREAU OF INDIAN STANDARDS 
+मानक भवन, ९, बहादुर शाह ज़फ़र मार्ग 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg 
+नई ददल्ली- ११०००२ 
+New Delhi – 110002
+उत्पाद मैन्युअल 
+भा. मा.  2553 (भार् 2): 2019 के अनुसार 
+सड़क पररवहन के ललए सुरक्षा कााँच के  ललए 
+दस्तावेज़ संख्या–पी एम/आई एस 2553 (Part 2)/5/अक्टूबर 2023 
+भारतीय मानक ब्यूरो की स्कीम-I  (अनुरूपता  मूल्यांकन) लवलनयम, 2018 के तहत यह उत्पाद मैन्युअल 
+प्रमाणीकरण के प्रचालन में रीलत औरपाररर्शगता की सुसंर्तता सुलनलित करनेके ललए सभी क्षेत्रीय/शाखा 
+कायागलयों और लाइसेंसी द्वारा संदभग सामग्री के रूप में उपयोर् दकया जाएर्ा। बीआईएस प्रमाणीकरण लाइसेंस/ 
+प्रमाणपत्र प्राप्त करने के इच्छुक भावी आवेदकों द्वारा भी इस दस्तावेज़ का उपयोर् दकया जा सकता है। 
+ 
+PRODUCT MANUAL FOR 
+SAFETY GLASS FOR ROAD TRANSPORT 
+ACCORDING to IS 2553 (Part 2):2019 
+ 
+Document No.-PM/IS 2553 (Part 2)/5/ October 2023 
+ 
+This  Product Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by  prospective  applicants  desirous  of 
+obtaining BIS certification licence/certificate. 
+ 
+ 
+ 
+
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+ 
+2 
+ 
+ 
+PRODUCT MANUAL FOR 
+SAFETY GLASS FOR ROAD TRANSPORT 
+ACCORDING TO IS 2553 (Part 2): 2019 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees  to  ensure  coherence  of  practice  and  transparency  in  operation  of  certification  under 
+Scheme-I of Bureau of Indian Standards (Conformity Assessment) Regulations, 2018 for various 
+products. The document may also be used by prospective applicants desirous of obtaining BIS 
+certification licence/certificate. 
+1. 
+Product 
+: IS 2553 (Part 2): 2019 
+ 
+Title 
+: Safety Glass for Road Transport 
+ 
+No. of Amendments 
+: Four 
+    
+2. 
+Sampling Guidelines: 
+a) 
+Raw material 
+: --- 
+b) 
+Grouping guidelines 
+: 
+Please refer ANNEX –A 
+c) 
+Sample Size 
+: Please refer ANNEX –B 
+    
+3. 
+List of Test Equipment 
+: Please refer ANNEX –C 
+ 
+ 
+  
+4. 
+Scheme   of   Inspection 
+and Testing 
+: Please refer ANNEX –D 
+ 
+ 
+ 
+ 
+5. 
+Possible tests in a day 
+: Please refer ANNEX –E 
+  
+6. 
+Scope of the Licence:        
+Please refer ANNEX –F 
+ 
+ 
+ 
+BUREAU OF INDIAN STANDARDS  
+Manak Bhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+
+ 
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+ 
+ 
+ANNEX A 
+Grouping Guidelines 
+1. Safety  glazing intended  for  installation  in  motor  vehicles  as  per  IS  2553  (Part  2)  are 
+classified as given below: 
+(a) Windscreens  
+ Laminated Glass (II) 
+ Laminated Glass (II/P) 
+ Glass Plastics (IV) 
+ Toughened Glass (I) 
+ Toughened Glass (I/P) 
+ Uniformly Toughened Glass (VII) 
+(b) Panes and Roof Glazing 
+ Uniformly Toughened Glass (without marking P) 
+ Uniformly Toughened Glass (with marking P) 
+ Laminated Glass (XI) 
+ Laminated Glass (XI/P) 
+ Double Glazed Unit (VI) 
+- Symmetrical, Asymmetrical  
+ Glass Plastics (XII) 
+ Rigid Plastics (VIII/A, VIII/B, VIII/C) 
+- /L, /M 
+ Flexible Plastics (IX) 
+(For Panes, glazing with a light transmission of less than 70 % shall be marked with “/V”). 
+2. For considering GoL/CSoL, the guidelines given below shall be followed: 
+(a) Every variety of Safety Glass is required to be tested. Appropriate reduction in testing 
+as per Table 7 of IS 2553-2: 2019) shall be applicable.  
+(b) The manufacturer shall declare all the varieties which are intended to be covered in the 
+scope of licence and submit the technical specification in accordance with Annex A of 
+IS 2553 (Part 2) for each variety of Safety glass intended to be manufactured by him..  
+(c) For   inclusion   of   additional   variety,   every   functional   modification   in   technical 
+specification in accordance with Annex A of IS 2553 (Part 2): 2019 shall be declared 
+by manufacturer to BIS. 
+(d) In case any reduction in testing as per Table 7 of IS 2553-2: 2019 is sought at the time 
+of grant of licence or inclusion, the same shall be declared by the manufacturer to BIS 
+and the testing lab carrying out the testing.  
+ 
+3. During the operation of license, it shall be ensured that all varieties covered in the license 
+are tested in rotation, to the extent possible.  
+(For agricultural tractors only) 
+
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+ 
+4 
+ 
+Annex –B 
+Sample size 
+ 
+ 
+ 
+ 
+Sl. No. Grade Sampling Details 
+1 Laminated Glass (II) Actual Size: 04 Nos. 
+Cut Size 300 mm x 300 mm: 44 Nos. 
+Cut Size 76 mm x 300 mm: 03 Nos. 
+Cut Size 100 X 100 with6.4 mm hole (in centre): 
+03 Nos. Cut Size 1100 mm x 500 mm: 08 Nos. 
+OR 
+Actual Size: 08 Nos. 
+Cut Size 300 mm x 300 mm: 44 Nos. 
+Cut Size 76 mm x 300 mm: 03 Nos. 
+Cut Size 100 X 100 with6.4 mm hole (in centre): 
+03 Nos. Head-form Test support fixture for 
+windscreen 
+2 Uniformly Toughened 
+Panes 
+(Without P) 
+Actual Size = 08 Nos. 
+Cut Size 300 x 300 = 06 Nos. 
+3 Laminated Glass (XI) Actual Size = 01 No. 
+300 X 300 mm samples = 20 Nos. 
+Cut Size 100 X 100 with 6.4 mm hole (in centre): 03 Nos. 
+76 X 300 mm samples = 03 Nos 
+4 Toughened Windscreen (I) Actual Size: 06 Nos. 
+Cut Size 300 mm x 300 mm: 03 Nos. 
+Cut Size 1100 mm x 500 mm: 06 
+Nos. OR 
+Actual Size: 10 Nos. 
+Cut Size 300 mm x 300 mm: 03 Nos. 
+Head-form Test support fixture for windscreen 
+5 Uniformly Toughened 
+Windscreen (VII) 
+Actual Size = 08 Nos. 
+Cut Size 300 x 300 = 06 Nos. 
+6 Double Glazed Unit (VI) Actual Size = 12 Nos. 
+Cut Size 300 x 300 = 03 Nos. 
+
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+5 
+ 
+ANNEX C 
+ 
+List of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+ 
+S.no. 
+Tests used in with Clause Reference 
+Test Equipment 
+Cl. No. Test 
+1) 5.1.1 
+Light Transmittance 
+Test 
+1.  
+ 
+ 
+ 
+ 
+Light source consisting of an incandescent lamp 
+with  its  filament  contained  within  a  parallel 
+piped  measuring 1.5  mm  ×  1.5  mm  ×  3  mm  as 
+per Cl. 6.11 
+2) 5.1.2 
+Test of Resistance to 
+abrasion 
+ 
+ 
+ 
+ 
+Abrading  Instrument  as  mentioned  in  Fig  4  of         
+IS  2553 (Part  2):2019,  Abrasive wheels,  Haze 
+meter,  Light  Source  consisting  of  Incandescent 
+lamp, Linen Cloth, Distilled water as per Cl. 6.6 
+3) 5.2.1 
+Resistance to 
+Temperature Changes 
+ 
+Temperature controller bath as per Cl. 6.10 
+ 
+4) 5.2.2 Resistance to fire  
+ 
+Combustion Chamber, Sample holder and fume 
+Cupboard as per Cl. 6.14 
+ 
+5) 5.2.3 
+Resistance to 
+chemicals 
+Chemicals and solutions as mentioned in Cl. 6.15 
+6) 5.3.1 
+Resistance to 
+Radiation 
+Test apparatus for radiation resistance, Radiation 
+source consisting of a medium pressure mercury 
+vapour  arc  lamp  or  any  similar  source as  per       
+Cl. 6.8 
+7) 5.3.2 
+Resistance to High 
+Temperature 
+Chamber  for  maintaining high  temperature  as 
+per Cl. 6.7 
+8) 5.3.3 
+Resistance to humidity Humidity Chamber as per Cl. 6.9 
+9) 5.4.1 
+Optical Distortion 
+Test 
+Optical Distortion Tester Consisting projector,  
+rasters and supporting stand as per Cl. 6.12 
+10) 5.4.2 
+Secondary image 
+separation test 
+ 
+Apparatus for image separation test as mentioned 
+in Cl. 6.13 
+ 
+11) 5.4.3 
+5.5.3.2 
+5.6.1, 5.8.3 
+Head-form test Head form Supporting Fixture  
+
+ 
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+ 
+ 
+12) 5.4.4 
+2.260 g Ball test 
+ 
+ 
+ 
+Solid  Hardened  Steel  ball,  set  up  as  per         
+Cl. 6.4 
+13) 5.4.5, 
+5.5.1.2, 
+5.5.2.1, 
+5.6.2, 5.7.1 
+227 g Ball test 
+ 
+Hardened   Steel   ball fixture,   set   up   as   per             
+Cl. 6.3 
+  14) 
+ 
+5.5.1.1, 
+5.8.2 
+Fragmentation test 
+ 
+Spring Loaded Centre punch or hammer, 
+Adhesive tape, set up as per Cl. 6.3 
+15) 
+ 
+5.6.3 
+5.7.2 
+Flexibility and Fold 
+ 
+Thermometer, Hygrometer  
+ 
+16) 5.6.4, 
+5.7.4 
+Weathering 
+ 
+Long-arc xenon lamp as per Cl. 6.18 
+17) 5.6.5 
+Cross-cut 
+ 
+Cutting tool with 6 blades set, Magnifying 
+glass 
+ 
+ 
+The above list is indicative only and may not be treated as exhaustive 
+ 
+
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+7 
+ 
+ANNEX D 
+ 
+Scheme of Inspection And Testing  
+ 
+1. LABORATORY - A laboratory shall be maintained which shall be suitably equipped (as 
+per the requirement given in column 2 of Table 1) and staffed, where different tests given in 
+the specification shall be carried out in accordance with the methods given in the specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipments. 
+ 
+2. TEST RECORDS – The manufacturer shall maintain test records for the tests carried out 
+to establish conformity. 
+ 
+3.  LABELLING  AND  MARKING – The  packing  and  marking  shall  be  done  as  per  the 
+provisions of the Indian Standard i.e IS 2553 (Part 2):2019. The Standard Mark, as given in the 
+Schedule of the licence, shall be marked on each piece of safety glass provided always that the 
+safety glass thus marked conforms to all the  requirement of the specification.. In addition, the 
+licence no. CM/L-__________ and details of  BIS website shall be marked at  an appropriate 
+place on  product  or  package as  follows:  “For  details  of  BIS  certification  please visit 
+www.bis.gov.in” 
+ 
+4. CONTROL UNIT- Quantity of the safety glass of the same variety [variety as defined in 
+Scope of licence] manufactured by the same method and under similar conditions in a day shall 
+constitute a control unit. 
+ 
+5. LEVELS OF CONTROL - The tests as indicated in column 1 of Table 1 and the levels of 
+control  in  column  3  of  Table  1,  shall  be  carried  out  on  the  whole  production  of  the  factory 
+which  is  covered  by  this  plan  and  appropriate  records  maintained  in  accordance  with     
+paragraph 2 above.  
+ 
+6. REJECTIONS – Disposal of non-conforming product shall be done in such a way so as to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+8 
+ 
+ 
+TABLE 1 
+ 
+(1) (2) (3) 
+Test Details Test equipment 
+requirement 
+R: required (or)  
+S: Sub-
+contracting 
+permitted 
+Levels of Control 
+Cl. Requirement Test Method No. of 
+Sample 
+Frequency Remarks 
+Clause Reference 
+3.7 Thickness 
+measurement 
+3.7 IS 2553 (Part 2) R One Each Control Unit  
+4.1 Marking 4.1 IS 2553 (Part 2) -- Each glass  
+5.1 Requirements applicable to all glazing 
+ 
+5.1.1 Light transmittance test 6.11, Table 1, 
+    Table 1A 
+IS 2553 (Part 2) S Three Once in two years for 
+each type 
+-- 
+5.2 Additional Requirements applicable to All Glazing faced with plastic 
+ 
+5.1.2 Resistance to abrasion 6.6, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Three Once in six months for 
+each type 
+-- 
+5.2.1 Resistance to 
+Temperature Changes 
+6.10, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Two Once in six months for 
+each type 
+-- 
+5.2.2 Resistance to fire 6.14, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Five Once in six months for 
+each type 
+-- 
+5.2.3 Resistance to chemicals 6.15, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Four Once in six months for 
+each type 
+-- 
+5.3 Additional Requirements applicable to All Laminated-Glass and All Glazing faced with Plastics, Glass Plastics 
+5.1.2 Resistance to abrasion 6.6, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Three Once in six months for 
+each type 
+-- 
+5.3.1 Resistance to Radiation 6.8, 6.11, 
+Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Three Once in two years for 
+each type 
+-- 
+
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+9 
+ 
+ 
+5.3.2 Resistance to High 
+Temperature 
+6.7, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Three Once in two years for 
+each type 
+-- 
+5.3.3 Resistance to humidity 6.9, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Three Once in six months for 
+each type 
+-- 
+5.4 Additional Requirements applicable to Windscreens 
+ 
+5.1.2 Resistance to abrasion 6.6, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Three Once in six months for 
+each type 
+-- 
+5.4.1 Optical Distortion Test 6.12, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Four Once in two years for 
+each type 
+-- 
+5.4.2 Secondary image 
+separation test 
+6.13, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Four Once in two years for 
+each type 
+-- 
+5.4.3 Head-form test 6.5, Table 1 IS 2553 (Part 2) S Eight Once in two years for 
+each type 
+-- 
+5.4.4 2260 g Ball test 6.4, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Twelve Once in two years for 
+each type and nominal 
+thickness 
+-- 
+5.4.5 227 g Ball test 6.3, Table 1, 
+Table 1A 
+IS 2553 (Part 2) R Ten Once in a month for 
+each type and nominal 
+thickness 
+-- 
+5.5 Additional Requirements applicable to Panes 
+ 
+5.5.1 Requirements applicable only to uniformly Toughened Glass Panes 
+5.5.1.1 Fragmentation test 6.2, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Four Once in six months for 
+each type 
+-- 
+5.5.1.2 227 g Ball test 6.3, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Six Once in a month for 
+each type and nominal 
+thickness 
+-- 
+5.5.2 Requirements applicable only to Laminated-Glass and Glass-Plastic Panes 
+5.5.2.1 227 g Ball test 6.3, Table 1, 
+Table 1A 
+IS 2553 (Part 2) R Eight Once in a month for 
+each type and nominal 
+thickness 
+-- 
+ 
+ 
+
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+10 
+ 
+ 
+5.5.3 Requirements applicable only to Double-Glazed Units 
+5.5.3.1 Individual components 5.5.3.1, 
+Table 1 
+IS 2553 (Part 2) As outlined in the SIT for that type of glazing 
+5.5.3.2 Head-form test 6.5, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Twelve Once in two years for 
+each type 
+-- 
+5.5.2.1 227 g Ball test 6.3, Table 1 IS 2553 (Part 2) R Eight Once in a month for 
+each type and nominal 
+thickness 
+-- 
+5.6 Additional requirements specific to Rigid Plastic Glazing 
+5.1.2 Resistance to abrasion 6.6, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Three Once in six months for 
+each type 
+-- 
+5.6.1 Head-form test 6.16, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Six Once in two years for 
+each type 
+-- 
+5.6.2 Mechanical Strength 
+test- 227g Ball test 
+6.3, Table 1, 
+Table 1A 
+IS 2553 (Part 2) R Ten Once in a month for 
+each type and nominal 
+thickness 
+-- 
+5.6.2.5 227g Ball Test at         
+–18° ± 2°C 
+6.3, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Ten Once in six months for 
+each type and nominal 
+thickness 
+-- 
+5.6.3 Flexibility and Fold test 6.17, Table 1, 
+Table 1A 
+IS 2553 (Part 2) R One Once in a month for 
+each type 
+-- 
+5.6.4 Weathering 6.18, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Three Once in two years for 
+each type 
+-- 
+5.6.5 Cross-cut 6.19, Table 1, 
+Table 1A 
+IS 2553 (Part 2) R One Once in a month for 
+each type 
+-- 
+5.7 Additional requirements specific to Flexible Plastic Glazing 
+ 
+5.7.1 227g Ball Test at       
+20° ± 5°C 
+6.3, Table 1 IS 2553 (Part 2) R Ten Once in a month for 
+each type and nominal 
+thickness 
+-- 
+
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+11 
+ 
+ 
+5.7.2 227g Ball Test at           
+-18° ± 2°C 
+6.3, Table 1 IS 2553 (Part 2) S Ten Once in six months for 
+each type and nominal 
+thickness 
+-- 
+5.7.3 Flexibility and Fold test 6.17, Table 1 IS 2553 (Part 2) R One Once in a month for 
+each type 
+-- 
+5.7.4 Weathering test 6.18, Table 1, 
+Table 1A 
+IS 2553 (Part 2) S Three Once in two years for 
+each type 
+-- 
+ 
+ 
+ 
+ 
+5.8 Additional requirements specific to Toughened glass windscreens for Agricultural Tractor  
+5.8.2 Fragmentation test 6.2.1, 6.2.2.1, 
+6.2.2.2, 
+6.2.2.4,   
+Table 1A 
+IS 2553 (Part 2) S Six Once in six months for 
+each type 
+ 
+5.8.3 Head-form test 6.5.3,        
+Table 1A 
+IS 2553 (Part 2) S Four  Once in two years for 
+each type 
+ 
+ 
+Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empanelled by the Bureau. 
+ 
+Note-2: The control unit and levels of control as decided by the Bureau are obligatory to which the licensee shall comply with. 
+ 
+Note-3: Type of safety glass is defined at para 1 of Grouping Guidelines
+
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+12 
+ 
+ 
+ 
+Annex-E 
+Possible tests in a day 
+ 
+i) Thickness measurement (Cl. 3.7) 
+ii) Marking Cl. 4.1  
+iii) Light transmittance test (Cl. 5.1.1)  
+iv) Thickness (Cl. 3.7)  
+v) Resistance to temperature change (Cl. 5.2.1)  
+vi) Resistance to High Temperature (Cl. 5.3.2) 
+vii) Optical Distortion (Cl. 5.4.1) 
+viii) Secondary Image Separation (Cl. 5.4.2) 
+ix) Fragmentation Test (Cl. 5.5.1.1) 
+x) 227g Ball (Cl. 5.5.1.2) 
+ 
+Note: Fragmentation test shall be done on all applicable varieties available during surveillance inspection. 
+ 
+ 
+
+PM/ IS 2553 (Part 2)/ 5/ October 2023 
+ 
+13 
+ 
+ 
+ANNEX F 
+Scope of Licence  
+Licence is granted to use Standard Mark as per IS 2553 (Part 2):2019 with the following scope: 
+Name of the Product Safety Glass for Road Transport 
+ 
+ Variety  
+Technical parameter 
+Variety 1 Variety 2 Variety 3 
+Part number or unique identification Mark 
+   
+Drawing number 
+   
+Type   of   glazing   along   with   identification 
+marks  as  per  Cl.  4.2  of  IS  2553  (Part  2)  and 
+Classification given in Grouping Guidelines in 
+this Manual 
+   
+Nominal Thickness 
+   
+Interlayer  type,  material  and  thickness (For 
+Laminated-glass) 
+   
+Intended type of installation (Windscreen/Rear 
+windscreen/ Pane/Roof glazing) 
+   
+Rake angle, in case of windscreen 
+   
+Color  combination,  Clear  +  clear  or  Clear  + 
+green etc. 
+   
+Colour (for toughened Panes)

@@ -1,0 +1,519 @@
+भारतीय मानक ब्य
+ू
+रो 
+BUREAU OF INDIAN STANDARDS 
+मानक भवन, ९, बहाद
+ु
+र शाह ज़फ़र मार्ग 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg 
+नई ददल्ली- ११०००२ 
+                                                                New Delhi – 110002     
+ 
+ 
+उत्पाद मैन्य
+ु
+अल 
+आई एस 15636: 2012 के अन
+ु
+सार 
+स्वचलन वाहन – व्यावसाययक वाहनों  के ललए वायिल टायर- आड़ी और रेडियल 
+प्लाई के ललए 
+ 
+दस्िावेज़ संख्या – पी एम/आई एस 15636/2/अगस्ि 2021 
+ 
+भारिीय मानक ब्य
+ू
+रो की स्कीम-I (अन
+ु
+रूपिा म
+ू
+लयाांकन) ववयनयम , 2018 के िहि यह उत्पाद मैन्य
+ु
+अल 
+प्रमाणीकरण के प्रचालन में रीयि और पाररलशििा की स
+ु
+संगििा स
+ु
+यनश्चचि करने के ललए सभी 
+क्षेत्रीय/शाखा कायािलयों और लाइसेंसी द्वारा संदभि सामग्री के रूप में उपयोग ककया जाएगा। 
+बीआईएस प्रमाणीकरण लाइसेंस/ प्रमाणपत्र प्राप्ि करने के इच्छ
+ु
+क भावी आवेदकों द्वारा भी इस 
+दस्िावेज़ का उपयोग ककया जा सकिा है । 
+ 
+PRODUCT MANUAL FOR 
+ 
+PNEUMATIC TYRES FOR COMMERCIAL VEHICLES - 
+DIAGONAL AND RADIAL PLY  
+ACCORDING to IS 15636:2012 
+ 
+Document No.- PM/IS 15636/2/August 2021 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by  prospective  applicants  desirous  of 
+obtaining BIS certification licence/certificate. 
+           
+ 
+
+PM/ IS 15636/ 2/ August 2021 
+ 
+ 
+PRODUCT MANUAL FOR 
+PNEUMATIC TYRES FOR COMMERCIAL VEHICLES - 
+DIAGONAL AND RADIAL PLY - 
+ACCORDING TO IS 15636:2012 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various products. The document may also be used by prospective applicants desirous of 
+obtaining BIS certification licence/certificate. 
+ 
+1. 
+Product 
+: IS 15636: 2012 
+ 
+Title 
+: 
+PNEUMATIC TYRES FOR COMMERCIAL VEHICLES 
+– DIAGONAL AND RADIAL PLY 
+ 
+No. of Amendments 
+: 3 
+    
+2. Sampling Guidelines: 
+a) 
+Raw material 
+: 
+--- 
+ 
+ 
+b) 
+ 
+ 
+Grouping guidelines 
+ 
+ 
+: 
+Each  type  of  Tyre  as  per  the  approved  Family  of  Tyres 
+according  to  Clause  6.2.5.2  of  IS 15636:2012  shall  be 
+tested for GoL/CSoL. If a Tubeless Tyre version is 
+approved, Tube version for the same Tyre Designation may 
+also be covered in the Scope of Licence based on the 
+Manufacturing/Testing capabilities of the Manufacturer. 
+c) 
+Sample Size 
+: 2 Tyres (as per Table 32 of IS 15636:2012). Also see Item 
+5 below. 
+    
+3. 
+List of Test Equipment 
+: Please refer ANNEX – A 
+    
+4. 
+Scheme of Inspection 
+and Testing 
+: Please refer ANNEX – B 
+    
+5. Possible tests in a day : 
+ 
+Marking, Tyre Strength Test (Plunger Test), Load/Speed Performance Test ,  Tread Wear 
+Indicators 
+Note: During  surveillance inspection, all  possible  tests  shall  be carried  out in  the 
+factory. A  Factory  sample  shall also be  drawn for  independent  testing during 
+surveillance inspection. No Market samples shall be drawn.  
+6. 
+Scope of the Licence : 
+ 
+Please refer ANNEX – C 
+ 
+BUREAU OF INDIAN STANDARDS 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg, 
+New Delhi – 110002 
+1 
+
+PM/ IS 15636/ 2/ August 2021 
+ 
+ANNEX A 
+ 
+List of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+ 
+ 
+Sl. No. Test Equipment Tests used in with Clause Reference 
+1 
+i. Pressure Gauge 
+ii. Steel Tape 
+iii. Pie Tape 
+iv. Vernier Caliper 
+v. Thermo Hygrometer 
+vi. Measuring Rim 
+Dimensions (Cl. 4.1) 
+2 i. Tyre Drum Testing Machine 
+ii. Load 
+iii. Test Drum 
+iv. Pressure Gauge 
+v. Test Rim 
+Load/Speed Performance  Test (Cl. 4.3) 
+3 i. Tyre Drum Testing Machine 
+ii. Load 
+iii. Test Drum 
+iv. Pressure Gauge 
+Endurance Test (Cl. 4.2) 
+4 i. Pressure Gauge 
+ii. Depth Gauge 
+Tread Wear Indicators  (Cl. 4.4 ) 
+5 i. Tyre Strength Test Machine 
+ii. Pressure Gauge 
+iii. Cylindrical Steel Plunger 
+iv. Linear Scale 
+v. Test Rim 
+Tyre Strength Test (Plunger Test) (Cl. 4.5) 
+ 
+The above list is indicative only and may not be treated as exhaustive. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2 
+
+PM/ IS 15636/ 2/ August 2021 
+ 
+ANNEX B 
+ 
+Scheme of Inspection And Testing 
+ 
+1. LABORATORY - A laboratory shall be maintained which shall be suitably equipped (as 
+per the requirement given in column 2 of Table 1) and staffed, where different tests given in 
+the specification shall be carried out in accordance with the methods given in the specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipments. 
+ 
+2. TEST RECORDS – The manufacturer shall maintain test records for the tests carried out 
+to establish conformity. 
+ 
+3. LABELLING AND MARKING – As per the requirement of IS 15636:2012. 
+ 
+4. LEVELS OF CONTROL - The tests as indicated in column 1 of Table 1 and the levels of 
+control  in  column  3  of  Table  1,  shall  be  carried  out  on  the  whole  production  of  the  factory 
+which is covered by this plan and appropriate records maintained in accordance with paragraph 
+2 above. 
+4.1 RAW  MATERIAL  CONTROL – All  the  incoming  raw  materials  shall  be  tested  and 
+proper  records  maintained  before  releasing  material  for  production.  Alternatively,  the  raw 
+material  shall  be  accompanied  by  the  test certificate  of  the  supplier.  Recommended  list  of 
+various raw materials is given in Annex I. 
+ 
+4.2 PROCESS CONTROL – The frequency of inspection and parameters shall be according 
+to the approved plant quality audit programme. The recommendatory areas of manufacturing 
+given in Annex II may be covered in this programme. During each stage, the given parameters 
+and equipment set up shall be controlled, audited and recorded. 
+ 
+5. REJECTIONS – Disposal of non-conforming product shall be done in such a way so as to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3 
+
+  PM/ IS 15636/ 2/ August 2021 
+ 
+TABLE 1 
+ 
+(1) (2) (3) 
+Test Details 
+Test equipment 
+Levels of Control 
+requirement 
+R: required (or)S: Sub- 
+contracting permitted 
+Cl. Requirement 
+ 
+Clause 
+Test Methods 
+Reference 
+No. of 
+Sample 
+Frequency Remarks 
+4.1 
+Tyre 
+Dimensions 
+Annex A 
+Table 6 to 25 
+IS 15636 R One 
+Once in three months for 
+each variety 
+In case of failure in any 
+requirement, marking shall be 
+suspended, reasons for failure 
+investigated and corrective  actions 
+taken. Double the number of 
+samples indicated shall then be 
+tested and marking and original 
+frequency  may  be  restored  only  if 
+both the samples pass. 
+ 
+ 
+No. of samples may be  drawn and 
+tested as per clause 4.2, 4.3 and 4.5 
+in  such  a  way  that  all  varieties  of 
+tyres manufactured are covered 
+once in two years. 
+4.2 Endurance Test Annex B 
+Table 26 
+IS 15636 S One or 
+more 
+Once in three months 
+4.3 Load/Speed 
+Performance 
+Test 
+Annex C IS 15636 S 
+One or 
+more 
+Once in three months 
+4.4 
+Tread Wear 
+Indicators 
+4.4 IS 15636 R Three 
+Once in three months for 
+each variety 
+4.5 
+Tyre Strength 
+(Plunger Test) 
+Annex D 
+Table 27 to 30 
+IS 15636 R 
+One or 
+more 
+Once in three months 
+5 Marking 
+5.1 to 5.4 Annex 
+E & F 
+IS 15636 R Each Tyre 
+6 
+Type Approval / 
+Type Test 
+6.1 to 6.3, 
+Table 31 and 
+Annex ‘G’ 
+IS 15636 R 
+As per 
+Table 31 
+Each Family of Tyre At the time of initial approval or 
+whenever there is any change in 
+already approved family of tyres. 
+ 
+Definition of “Variety’ – The tyre defined uniquely by Tyre Size Designation, Structure, Speed category, Load Index, Ply Rating and Category of use. For 
+example, ‘9.00 R 20 8 PR 129/127 M’ and ‘9.00 R 20 12 PR 129/127 M’ are two different varieties of tyres. 
+ 
+Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empanelled by the Bureau. 
+ 
+Note-2: The control unit and levels of control are obligatory, to which the licensee shall comply with. 
+4 
+
+PM/ IS 15636/ 2/ August 2021 
+ 
+ANNEX I 
+ 
+RAW MATERIAL CONTROL 
+(Clause 4.1 of SIT) 
+ 
+Sl No Item Tests 
+1 Natural Rubber 
+a) Visual inspection 
+b) Moisture content 
+c) Ash content 
+d) Dirt content 
+e) Viscosity 
+2 Synthetic Rubber 
+a) Moisture content 
+b) Ash content 
+c) Viscosity 
+d) Compound testing 
+3 Lattices 
+a) Contents 
+b) Viscosity 
+c) TSC 
+4 Carbon Black 
+a) Moisture content 
+b) Ash content 
+c) DBP value 
+d) Iodine number 
+e) Sieve residue 
+5 Activators 
+a) Moisture content 
+b) Sieve residue 
+c) ASSAY 
+d) Ash content 
+e) HCL insoluble 
+f) Acid number 
+6 Vulcanising Agents 
+a) Melting point 
+b) Acetone insoluble 
+c) Specific gravity 
+d) Softening point 
+e) Solubility 
+7 Process Oil 
+a) Aniline point 
+b) Viscosity 
+c) Specific gravity 
+8 Tyre Cord 
+a) Warp sheets 
+i) Breaking strength 
+ii) Percentage elongation 
+iii) Twist 
+iv) Moisture content 
+b) Nylon square woven fabric 
+i) Strip and grab 
+ii) Adhesion strength 
+iii) EPI 
+9 Bead Wire 
+a) Breaking strength 
+b) Percentage elongation 
+c) Torsion 
+d) Bend test 
+e) Adhesion 
+f) Copper coating 
+10 Solvent 
+a) Specific gravity 
+b) Distillation range 
+5 
+
+PM/ IS 15636/ 2/ August 2021 
+ANNEX II 
+ 
+PROCESS CONTROL 
+(Clause 4.2 of SIT) 
+ 
+Area Parameters to be controlled 
+Compounding Ingredient weights 
+Mixing Time/Temperature or Energy, Sequence 
+Dip Preparation Ingredient weights, time, temperature sequence 
+Dipping Temperature, stretch/tension, speed/time, width 
+Extrusion Stock identification, temperature, width, dimensions 
+Calendering Stock/fabric identification, temperature, width, gauge 
+Bead making Stock/wire identification, diameter, No. of strands, No. of turns 
+Stock preparation Stock identification, width, angle 
+Tyre building Component identification, sequence 
+Tyre curing Time, temperature/pressure, sequence 
+Final Inspection Every tyre shall be visually examined for defects and appearance 
+In process Testing 
+COMPOUND 
+ 
+Final Batch 
+ 
+ 
+Specific Gravity 
+Rapid Modulus Rheometer Test 
+Physical Properties 
+DIP SOLUTION 
+ 
+Final 
+ 
+Total solids 
+pH value 
+DIPPED FABRIC 
+ 
+Tyre Cord warp sheet Breaking strength 
+Percentage Elongation 
+Adhesion & Dip pick up 
+Sq. woven nylon fabric E.P.I. 
+Strength 
+Adhesion and dip pick up 
+CALENDERED FABRIC 
+ 
+Tyre cord warp sheet E.P.I. 
+ 
+Gauge 
+ Sq. metre weight 
+Sq. woven fabric Gauge 
+ 
+Sq. metre weight 
+ 
+6 
+
+PM/ IS 15636/ 2/ August 2021 
+ 
+ANNEX C 
+Scope of the Licence 
+ 
+ 
+Licence is granted to use Standard Mark as per IS 15636:2012 with the following scope: 
+ 
+ 
+ 
+Name of the Product 
+Pneumatic Tyres for Commercial Vehicles 
+Application Category  
+Construction Type  
+Structure  
+Tyre Size Designation  
+Speed Category  
+Use of Tube  
+Load Index (or Load Capacity)  
+Ply Rating  
+Carcass Material  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+7

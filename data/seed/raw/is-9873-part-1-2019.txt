@@ -1,0 +1,4949 @@
+PM/ 9873/11 
+Oct 2023 
+1 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+www.bis.gov.in 
+ 
+उत्पाद मानुयल 
+खिलौन ों की सुरक्षा 
+IS 9873 (Parts 1,2,3,4,7,9) and IS 15644 के अनुसार 
+ 
+PRODUCT MANUAL FOR SAFETY OF TOYS AS PER   
+IS 9873 (Parts 1,2,3,4,7,9) and IS 15644   
+   
+विविन्न उत्पादोों के  विए िारतीय मानक ब्यूरो (अनुरूपता मूल्ाोंकन) विवनयम, 2018 की योजना- I के  तहत प्रमाणन के  सोंचािन में 
+अभ्यास और पारदवशिता के  सोंचािन में पारदवशिता सुवनवित करने के  विए इस उत्पाद मैनुअि का उपयोग सिी क्षेत्रीय / शाखा 
+कायािियोों और िाइसेंसधाररयोों द्वारा सोंदिि सामग्री के  रूप में वकया जाएगा। दस्तािेज़ का उपयोग बीआईएस प्रमाणन 
+िाइसेंस/प्रमाणपत्र प्राप्त करने के  इच्छुक सोंिावित आिेदकोों द्वारा िी वकया जा सकता हैI 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  &  licensees  to 
+ensure coherence of practice and transparency in operation of certification under Scheme-I of Bureau of 
+Indian Standards (Conformity Assessment) Regulations, 2018 for various products. The document may 
+also be used by prospective applicants desirous of obtaining BIS certification licence.   
+   
+1.उत्पाद/Product   
+   
+Sl. No.   IS No.   
+शीर्िक/ Title   
+सोंशोधनोों की 
+सोंख्या 
+/ 
+No. of 
+Amendments   
+1.   IS 9873 (Part 1):2019   Safety of Toys Part 1 Safety Aspects Related 
+to Mechanical and Physical Properties   
+NIL   
+2.   IS 9873 (Part 2) : 2017   Safety of Toys Part 2 Flammability   NIL   
+3.   IS 9873 (Part 3) : 2020   
+Safety of Toys Part 3 Migration of Certain 
+Elements   
+NIL   
+4.   IS 9873 (Part 4) : 2017   
+Safety of Toys Part 4 Swings, Slides and 
+Similar Activity Toys for Indoor and Outdoor 
+Family Domestic Use   
+01   
+5.   IS 9873 (Part 7) : 2017   
+Safety of Toys Part 7 Requirements and Test 
+Methods for Finger Paints   
+NIL   
+6.   IS 9873 (Part 9) :2017   
+Safety of Toys Part 9 Certain Phthalates 
+Esters in Toys and Children’s Products   
+NIL   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+2 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+  
+7.   IS 15644:2006   Safety of Electric Toys   1   
+    
+8 
+. 
+   
+नमूना वदशावनदेश  
+/Sampling Guidelines: (In a single operative year, one factory sample 
+and two market samples of 
+electric and non-electric toys per license shall be drawn for testing in third party lab)  
+   
+   a)   
+   
+कच्चामाि 
+Raw material 
+  
+:   
+All materials shall be visually clean and free from infestation. 
+The materials shall be assessed visually by normal corrected 
+vision rather than under magnification. (Cl4.3 of IS 9873 (Part 
+1):2019)   
+b)   
+समूहीकरण वदशावनदेश 
+Grouping Guidelines 
+:  
+Please refer ANNEX – A   
+c)   
+नमूने का आकार  
+Sample Size 
+ 
+ 
+:  
+03-10  pieces.  However,  depending  on  the  size  of  toys,  the 
+certification  officer  shall  consult  with  the  lab  and  ensure  that 
+sufficient  quantity  required  for  complete  testing  is  sent  to  lab. 
+(Samples to be fully packaged and labeled)   
+9.   
+परीक्षण उपकरणोों की सूची 
+List 
+of Test Equipment 
+:  
+Please refer ANNEX –B   
+10.   
+वनरीक्षण और परीक्षण की स्कीम 
+Scheme of Inspection 
+and Testing 
+:  
+Please refer ANNEX –C   
+11.   
+एक वदन में सोंिावित परीक्षण  
+/Possible tests in a day : All possible applicable tests as per IS 9873 (Part 1) and IS 15644 
+12.   
+लाइसेंस का दायरा /Scope of the Licence : 
+   
+Licence is granted for use of BIS Standard Mark on toys for safety requirements as per the 
+applicable Indian Standards given below *   
+   
+Type   
+Descrip 
+tion of 
+toy   
+Category 
+No. and 
+Name   
+Sub- 
+category 
+No. and 
+Name   
+Input source for
+ 
+electric
+ 
+toy**
+ 
+ 
+ 
+Starting 
+Age   
+Series 
+No.#   
+Applicable
+ 
+primary
+ 
+standard
+ 
+ 
+ 
+Applicable
+ 
+Secondary
+ 
+standard
+ 
+ 
+ 
+Non electric   
+Rattle   
+Category 
+A-   
+Toys for 
+sensorimot 
+or 
+activities —   
+First age   
+Subcateg 
+ory 1 - 
+Rattles 
+and  
+rings   
+NA   
+0 
+months  
++   
+S01   IS 9873  
+Part 1   
+IS 9873  
+Part   2, 
+3 and 9   
+   Ring   -do-   -do-   NA   -do-            
+*Details in the table are given for illustration. Also see sampling guidelines at Annex-A   
+** Input source for electric toys - battery operated, transformer operated or dual supply 
+#Details of models contained in each series shall be declared by manufacturer to BIS 
+separately and BIS shall endorse the series wise details of models separately in the 
+licence document as Annexure (See Annex-A for details)  
+ 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+3 
+    
+ 
+ 
+ 
+ANNEX A 
+ 
+ 
+GROUPING/SAMPLING GUIDELINES 
+ 
+1. For the  purpose of certification, toys  have been classified into 2  types. For each 
+type, one primary standard shall apply against which licence would be granted and 
+the  other  standards  against  which  testing  may  also  be  required  to  be  done  shall  be 
+taken as secondary standards. However, testing will be considered by the lab based 
+on  both  the  primary  and  secondary  standards  applicable.  The  classification  is  as 
+follows:   
+ 
+Sl. 
+No.   
+Type   
+Primary Standard 
+Applicable   
+Secondary Standards 
+(As Applicable)   
+   1   
+Non Electric Toys   IS 9873 Part 1   IS 9873 Parts 2, 3,4, 7 and 
+9   
+2   Electric Toys   IS 15644   
+IS 9873 Parts 1, 2, 3,4, 7 
+and 9   
+ 
+2. Further, based  on  their  specific  purpose  and  function,  toys  have  also  been  classified 
+into  7  Categories  and  146  sub-categories  as  per APPENDIX  I (based  on  IS  9873 
+(Part8):2019). 
+ 
+3. 
+For  the  purpose  of  certification,  all  varieties  of  toys  of  similar  design
+1
+,  made 
+from the  same  materials
+2 
+and  covered  under  a  single  sub-category,  shall  be 
+considered as a series (group of varieties). 
+ 
+4. Accordingly, the following sampling or grouping guidelines shall be followed for 
+drawal and testing of samples for consideration of Grant of Licence (GOL) and 
+Change in Scope of Licence(CSoL):   
+ 
+Sl. No.   Type   Samples to be drawn and tested for GOL/CSoL   
+1   Non Electric Toys   
+Sample  (of  required  quantity)  of  any  one model  of  toy 
+from  among  all  the  models  in  the  same series i.e.of 
+same type,  similar  design
+1
+,  made  from  the  same 
+materials
+2 
+and covered under a single sub- 
+category to be drawn and tested for considering GOL 
+or CSOL.   
+2   Electric Toys   Electric toys are further sub-divided into the following   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+4 
+    
+ 
+ 
+ 
+  
+sub-groups according to input source:   
+ Battery operated   
+ Transformer toys   
+ Dual-supply toys   
+   
+Accordingly the following shall apply:   
+— To cover all the models of battery operated 
+electric toys, one model of battery operated 
+electric toy from among all models of battery 
+operated electric toys having the same power 
+supply layout, same chassis, same power 
+requirement and same battery type &size, 
+processor/ controller (if any), same charger for 
+externally rechargeable batteries (Alternate 
+models of charger may be evaluated as part of the 
+main product and mentioned in the test report), 
+and  in  the  same series  (as  per  Sl  No  1) to  be 
+drawn and tested for considering GOL orCSOL.   
+   
+— To  cover  all  the  models  of  Transformer  toys,  one 
+model  of transformer toy  from among all models 
+of Transformer toys having the Same mains 
+layout  or SMPS  board, Same  enclosure  (except 
+for differences of decorative parts which do not 
+affect the electrical safety), Same processor/ 
+controller and in the same series (as per Sl No 1) 
+to  be  drawn  and  tested  for considering  GOL or 
+CSOL.   
+   
+— To  cover  all  the  models  of  Dual-supply  toys,  one 
+model of dual supply toy from among all models of 
+Dual-supply toys having Same mains layout or 
+SMPS board, Same enclosure (except for 
+differences of  decorative  parts  which  do  not  affect 
+the  electrical safety),  Same  chassis,  Same  battery 
+type  &  size(Alternate  models  of  batteries  may  be 
+evaluated as part of the main product and 
+mentioned in the test report), Same processor/ 
+controller  and  in  the  same series  (as  per  Sl  No 
+1)to  be  drawn  and  tested  for  considering  GOL  or 
+CSOL.   
+Footnotes:   
+1
+―Similar Design pertains to models which have similar designs in terms of compliance to the 
+safety requirements specified in the relevant Indian Standards. For electric toys, input source, 
+mains layout etc as given in the table above will also constitute design parameters.   
+2
+―Same materials pertain to material of the same nature (i.e. LLDPE or PVC or HDPE or Cotton 
+Fabric etc.).   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+5 
+    
+ 
+ 
+ 
+ 
+5. APPLICATION FOR GRANT OF LICENCE 
+ 
+For manufacturers applying for grant of licence, a declaration/request as per format 
+at APPENDIX  II shall  be  submitted  to  BIS  by  the  manufacturer  through  Manakonline, 
+based  on  which  the  application  shall  be  assessed  and  the  scope  of licence  shall  be 
+defined by BIS.   
+ 
+6. APPLICATION FOR CHANGE IN SCOPE OF LICENCE 
+For  manufacturers  applying  for change  in  scope  of licence i.e. addition  of a  new 
+series in the scope of their licence, a declaration/request as per format at APPENDIX 
+III shall be  submitted  to  BIS  by  the  manufacturer through  Manakonline,  based  on 
+which  the  application  shall  be  assessed  and  the  scope  of  licence  shall  be  revised  by 
+BIS   
+ 
+7. APPLICATION FOR ADDITION OF NEW MODELS IN THE SERIES ALREADY 
+COVERED IN THE SCOPE OF LICENCE 
+ 
+Whenever  a  licensee  intends  to  add  new  model(s)  to  a  series  already  covered  in  the 
+scope  of licence,  The  declaration/request  shall be  submitted  by  the  manufacturer  as 
+per APPENDIX IV through Manakonline  and the  information  shall  be noted  by  BIS 
+and these additional models endorsed in the licence document by revising the 
+Annexure  to  the  licence  document  containing  the  series  wise  list  of  models.  After 
+submission of the information to BIS Branch Office through Manakonline, the 
+licensee may use the standard mark on  toys  with respect to such models without 
+waiting for BIS to  endorse  the models in the licence. (Licensee shall be able to 
+produce documentary proof of having submitted this information to BIS).   
+ 
+However,  in  case  any  discrepancy  is  observed post-facto  due  to  which it is      viewed 
+that the models are not to be endorsed in the scope (e.g. if the models do not belong 
+to the series as declared), Head of BIS Branch Office concerned, may, after giving the 
+licensee  an  opportunity  to explain,  direct the  licensee to cease marking  on  the  toys of 
+the  relevant  models,  or  in  case  the  toys  are  already  marked  and  dispatched,  issue 
+directions for product recall.   
+ 
+8. However,  if  any  variety  of  toy  pertains  to  a  category/sub-category  which  is      not 
+covered in the 7 Categories and 146 sub-categories as per Annex I, the manufacturer 
+shall declare the same. In case of such varieties, the above sampling guidelines 
+shall not apply and each such variety shall be required to be got tested from 
+third party lab for covering them in the scope of licence.  
+9. With respect to the "Starting Age" mentioned in the grouping (Appendix-I), in case 
+a  manufacturer  intends  to  declare  a  starting  age  higher  than  that  specified  in 
+Appendix-I, it  shall  be  ensured  that  the  age  grading  so  declared  is  reasonable 
+and  in  accordance  with  the  age  grading  guidelines  given  in  IS  9873  (Part  1)  to 
+ensure  that  a  toy  is appropriate  and  safe  at  the  various  stages  of  physical  and 
+mental development of the child using the toy.  
+ 
+In  case  a  manufacturer  is  found  to  be  declaring  a  higher  age  grading  than  that 
+specified in Appendix-I simply in order to avoid testing of certain requirements, 
+such requests shall not be entertained. 
+ 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+6 
+    
+ 
+ 
+For example, starting age for teethers and teething rings is given as 4 months+ in 
+Appendix-I.  Further,  the  test for  shape,  size  and  strength  (C.  5.3  of  IS  9873  (Part 
+1):2019) of Squeeze toys, rattles, and certain other toys and components of toys 
+(Cl.  4.5.1.2  of  IS  9873  (Part  1):2019)  is  applicable  only  for  teethers  and  teething 
+toys intended for children under 18 months.  
+ 
+In  case  any  manufacturer  declares  a  higher  starting  age  for  teethers or  teething 
+toys, say, 18 months+ (to avoid the tests prescribed in the standard which are not 
+applicable  if  the  toy  is  age  graded  18  months  +.),  such  requests shall not  be 
+agreed as the age grading would not be reasonable.   
+ 
+However, scope of licence should clearly mention the starting age applicable. 
+ 
+ 
+ 
+10. The  Scope  of  Licence  shall  be  restricted  based  on  the  manufacturing  and  testing 
+capabilities of the manufacturer.   
+ 
+11. During the operation of the Licence, BO shall ensure that all the varieties covered in 
+the  Licence  are  tested  in  rotation  and samples  of  toys  of  different  colours  are 
+tested in rotation, to the extent possible..   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+7 
+    
+ 
+ 
+ 
+ 
+ANNEX B 
+ 
+List of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+Sl. 
+No. 
+Tests used in with Clause Reference Test Equipment 
+Test Clause IS 
+ 
+1. 
+Small parts 
+test   
+5.2   
+IS 9873   
+(Part 
+1):2019   
+Cylinder as shown in Figure 26   
+2. 
+Test for shape   
+and size of 
+certain toys   
+5.3   -do-   Test template A shown in Figure 27,   
+Supplemental test template B shown in 
+Figure 28   
+3. 
+Small balls 
+test   
+5.4   -do-   Test template C shown in Figure 29   
+4. 
+Test for 
+pompoms   
+5.5   -do-   test template C shown in Figure 29   
+5. 
+Test for pre- 
+school play 
+figures   
+5.6   -do-   
+Supplemental test template B shown in 
+Figure 28   
+6. 
+Accessibility of   
+a part or 
+component   
+5.7   -do-   Articulated accessibility probe,   
+7. 
+Sharp-edge 
+test   
+5.8   -do-   
+Sharp-edge test as per Figure 31, Steel 
+Mandrel, Device for rotating the mandrel 
+and applying a force to it, Pressure- 
+sensitive polytetrafluoroethylene (PTFE) 
+tape   
+8. 
+Sharp-point 
+test   
+5.9   -do-   Point tester,   
+9. 
+Determination 
+of thickness of 
+plastic film and 
+sheeting   
+5.10   -do-   
+A measuring device capable of measuring 
+thickness to an accuracy of 4 μm with 
+plane upper and lower measuring surfaces 
+having a diameter of (6 ± 1) mm that are 
+parallel to within 5 μm and have polished 
+surfaces, and which applies a compression 
+force of (0,75 ± 0,25) N.   
+10 Test for cords   5.11   -do-   
+Suitable apparatus capable of applying 
+and measuring tensile forces up to (25 ±   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+8 
+    
+ 
+ 
+ 
+ 
+    
+2) N, instruments to measure length and 
+cross sectional area of cords e.g. an 
+optical projector, head probe (see Figure 
+35), hook test fixture (Figure 36), mass of 
+(1 ± 0,1) kg, conditioning chamber to 
+maintain samples at a temperature of (25± 
+3) °C and at a relative humidity of   
+50 % to 65%.   
+11 
+Stability and 
+overload tests   
+5.12   -do-   
+smooth surfaces inclined 10+0.5°/-0.0° and 
+15+0.5°/-0.0°, 10±1° to the horizontal 
+plane, Loads for stability test (25 ± 0,2,50   
+± 0,5 kg), Loads for overload test (35 ± 0,3, 
+80 ± 1,0, 140 ± 2,0)   
+12 
+Test for 
+closures and 
+toy chest lids   
+5.13   -do-   
+Suitable apparatus capable of applying and 
+measuring  tensile forces  up  to (45  ±  1,3)  N 
+in  an  outward  direction  to  the  inside  of  the 
+closure perpendicular to the plane of the 
+closure   
+ 
+Durability test apparatus to subject the lid 
+to 7 000 opening-and-closing cycles, 
+where one cycle consists of raising the lid 
+from its fully closed to its fully open 
+position and returning it to fully closed. The 
+time to complete one cycle shallbe 
+approximately 15 s. The 7 000 cycles shall 
+be completed within a time period of 72 h.   
+13 
+Impact  test  for 
+toys  that  cover 
+the face   
+5.14   -do-   
+Suitable apparatus to drop a steel ball 
+with a diameter of (16 ± 0,15) mm and 
+mass of (16,9 ± 0,7) g from a height of 
+(130 ± 0,5) cm onto the horizontal upper   
+surface of the toy in the area that would 
+cover the eyes in normal use.   
+14 
+Kinetic energy 
+and wall 
+impact test   
+5.15   -do-   
+Timing device for determining the velocity, 
+to give a calculated kinetic energy to an 
+accuracy of 0,005 J.   
+15 
+Free-wheeling 
+facility and 
+brake 
+performance 
+test   
+5.16   -do-   
+Apparatus for Stability and overload tests, 
+surface covered with aluminium oxide 
+paper P60, Apparatus to Pull the toy at a 
+constant speed of (2 ± 0,2) m/s and apply 
+and measure forces of (50 ± 2) N to the 
+pedal in the operating direction producing 
+the effect of the brake, mass of (50 ± 0,5) 
+kg   
+16 
+Determination 
+of speed of 
+electrically  
+driven ride-on 
+toys   
+5.17   -do-   
+mass of (25 ± 0,2) kg, horizontal surface, 
+Apparatus to check if velocity exceeds 8 
+km/h.   
+17 
+Determination 
+of temperature 
+increases   
+5.18   -do-   
+ambient draft-free atmosphere with a 
+temperature of (21 ± 5) °C, 
+Thermometer/appropriate equipment to 
+Measure the temperature of the accessible   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+9 
+    
+ 
+ 
+ 
+ 
+    
+parts   
+18 
+Leakage of 
+liquid-filled 
+toys   
+5.19   -do-   Conditioning chamber to condition toy at a 
+temperature of (37 ± 1) °C, Apparatus to 
+apply a force of 5 N to the external surface 
+of the toy through a steel needle with a 
+diameter of (1 ± 0,1) mm and with a tip 
+radius of (0,5 ± 0,05) mm   
+19 
+Durability of 
+mouth- 
+actuated toys   
+5.20   -do-   
+Durability test apparatus comprising piston 
+pump capable of discharging and receiving 
+more than 300 cm3 of air in less than 3 s 
+to the mouthpiece of the mouth-actuated 
+toy with a relief valve so arranged that the 
+pump will not generate a positiveor 
+negative pressure of more than 13,8 kPa.   
+20 
+Expanding 
+materials   
+5.21   -do-   
+Conditioning chamber to condition the toy 
+or component at (21 ± 5) °C and at a 
+relative humidity of 40 % to 65 %, calipers, 
+demineralized water, container of requisite 
+dimensions, tongs   
+21 Folding or   
+sliding 
+mechanisms   
+5.22   -do-   Loads of mass (25 ± 0,2) kg and (50 ± 0,5)   
+kg, horizontal surface, Apparatus/support 
+frames to apply the loads   
+22 Washable toys   5.23   -do-   
+Automatic washing machine, dummy 
+loads, washer, dryer or laundry detergent, 
+Apparatus to measure mass (Weighing 
+scale etc.)   
+23 
+Reasonably 
+foreseeable 
+abuse tests   
+5.24   -do-   
+Drop test: impact surface shall consist of 
+vinyl composition tile of approximately 3 
+mm nominal thickness laid over concrete 
+of at least 64 mm thickness. The tile shall 
+have a hardness of (80 ± 10) Shore A and 
+the impact surface shall be at least 0,3m2.   
+ 
+Tip-over test for large and bulky toys: 
+Apparatus to Gradually apply a force, 
+which is not to exceed 120 N, in a 
+horizontal direction and 1 500 mm above 
+the horizontal surface   
+or at the top edge of the toy for toys less 
+than 1 500 mm in height. A non-resilient 
+step with a height of (25 ± 2) mm shall be 
+positioned such that it prevents sliding or 
+rolling of the toy during the test.   
+ 
+Dynamic strength test for wheeled ride-on 
+toys other than toy scooters: Loads and 
+Drive   
+ 
+Torque test: torque gauge or torque 
+wrench tp apply torque of (0,45 ± 0,02) 
+N⋅m   
+ 
+Tension and Compressiontest: Tension 
+and Compression Test Apparatus with   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+10 
+    
+ 
+ 
+ 
+ 
+    
+loading device equipped with a self- 
+indicating gauge or other appropriate 
+means to measure force applied to 
+accuracy of 1 N   
+ 
+Flexure test: Apparatus as per 5.24.8   
+24 
+Determination 
+of sound 
+pressure 
+levels   
+5.25   -do-   Environment that meets the qualification 
+requirements of either ISO 11201 or ISO 
+11202, Equipment for Noise measurement 
+in dB including instrumentation system, 
+including the microphone and cable as per 
+class 1 instrument as specified in IEC 
+61672-1, standard test table as described 
+in ISO 11202 (wooden top with a thickness 
+of 4 cm or larger and leg construction 
+providing a stable test surface), 
+hypothetical box-shaped measurement 
+surface (see Figure 43), reflecting plane 
+(for example, concrete, tile or another hard 
+surface) and a test rig for Pull or push toys, 
+test rig for Cap firing toys   
+25 
+Static strength 
+for toy 
+scooters   
+5.26   -do-   
+Test masses for toy scooters of (50 ± 0,5) 
+kg, (100 ± 1) kg of dimensions as per 
+Figure 47   
+26 
+Dynamic 
+strength for 
+toy scooters   
+5.27   -do-   
+Load as specified in Figure 48, equipped 
+with two articulated arms and a removable 
+cushion with straps, platform   
+27 
+Brake 
+performance 
+for toy 
+scooters   
+5.28   -do-   
+250 mm high platform (with stabilizers) 
+with a total mass of (4,8 ± 0,2) kg as 
+shown in Figure 49, mass of (50 ± 0,5) kg, 
+(25 ± 0,2) kg, Setup to apply and measure 
+force applied up to 20 kg/30 N.   
+28 
+Strength of toy 
+scooter 
+steering tubes   
+5.29   -do-   
+horizontal plane equipped to secure the toy 
+scooter, mass of (25 ± 0,2) kg  ̧(50 ± 0,5) 
+kg, (100 ± 1) kg   
+29 
+Resistance to 
+separation of 
+handlebar   
+5.30   -do-   
+Setup to apply and measure force applied 
+up to 90 N   
+30 
+Tension test 
+for magnets   
+5.31   -do-   
+Tension test apparatuswith Nickel disc with 
+a minimum nickel content of 99 %, a 
+diameter of (30 ± 0,5) mm and thickness of 
+(10 ± 0,5) mm.   
+31 
+Magnetic flux 
+index   
+5.32   -do-   
+Magnetic flux index test apparatus with 
+Direct current field Gauss meter, with a 
+resolution of 5 G, capable of determining 
+the field to an accuracy of 1,5 % or better. 
+The meter shall have an axial type probe 
+with an active area diameter of (0,76 ± 
+0,13) mm and a distance between the 
+active area and probe tip of (0,38 ± 0,13) 
+mm, Calliper, or similar device, with an 
+accuracy of 0,1 mm.   
+32 Impact test for   5.33   -do-   Impact test for magnets apparatus with   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+11 
+    
+ 
+ 
+ 
+ 
+ 
+magnets   
+  
+plane horizontal steel surface and 
+arrangement to drop a metallic weight with 
+a mass of (1 ± 0,02) kg, distributed over a 
+diameter of (80 ± 2) mm, through a 
+distance of (100 ± 2) mm onto the toy   
+33 
+Soaking test 
+for magnets   
+5.34   -do-   Container of demineralized water 
+maintained at a temperature of (21 ± 5) °C 
+for 4 min   
+34 
+Determination 
+of projectile 
+range   
+5.35   -do-   
+Apparatus to Discharge the projectile using 
+a discharge angle that will maximize the 
+distance travelled (typically this is 45°). At 
+the point of discharge, the projectile shall 
+be disengaged   
+from the discharge mechanism and in free 
+flight.   
+35 
+Tip 
+assessment of 
+rigid 
+projectiles   
+5.36   -do-   gauge shown in Figure 54   
+36 
+Length of 
+suction cup 
+projectiles   
+5.37   -do-   
+flat horizontal surface, measuring 
+scale/tape   
+37 
+Yo-yo ball 
+measurements   
+5.38   -do-   
+Setup for Yo-yo ball measurements 
+including fixed clamping device   
+38 Flammability   
+ 
+IS9873   
+(Part 
+2):2017   
+Test burner as described in ISO 
+6941:2003   
+Conditioning and test chamber   
+Fire extinguishers and other protective 
+equipment   
+39 Migration of 
+Certain 
+Elements   
+ 
+IS    9873 
+(Part  3)  : 
+2017   
+Reagents   
+ Hydrochloric acid solution, c(HCl) = 
+(0,07 ± 0,005)mol/l.   
+ Hydrochloric acid solution, c(HCl) = 
+(0,14 ± 0,010)mol/l.   
+ Hydrochloric acid solution, c(HCl) = 
+approximately 1mol/l.   
+ Hydrochloric acid solution, c(HCl) = 
+approximately 2mol/l.   
+ Hydrochloric acid solution, c(HCl) = 
+approximately 6mol/l.   
+ General purpose reagent n- 
+heptane, (C7H16); 99%.   
+ Water of at least grade 3 purity, in 
+accordance with ISO3696.   
+ 
+Apparatus   
+ 
+ Normal laboratory apparatusand   
+ Plain-weave wire-cloth stainless 
+steel metal sieve, of nominal 
+aperture 0,5 mm and tolerances as   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+12 
+    
+ 
+ 
+ 
+ 
+    
+indicated in Table A.1.   
+ Means of measuring pH to an 
+accuracy of ± 0,2 pH units. Cross- 
+contamination shall beprevented.   
+ Membrane filter, of poresize   
+0,45μm.   
+ Centrifuge, capable ofcentrifuging 
+at (5 000 ±500   
+ Means of agitating the mixture, at a 
+temperature of (37 ± 2)°C.   
+ Series of containers, of gross 
+volume between 1,6 × and 5,0 × 
+that of the volume of hydrochloric 
+acidextractant   
+ Analytical Weighing balance 
+Instrumentation   
+Suitable instrument having a detection limit 
+of a maximum of 1/10 of the values to be 
+determined   
+40 
+Stability of 
+activity toys 
+with a free 
+height of fall of 
+600 mm or 
+less   
+6.1.1   IS9873   
+(Part 
+4):2017   
+— Loads of mass (50 ± 0,5) kg and 
+dimensions as given in Figure19.   
+— Loads of mass (25 ± 0,2) kg and 
+dimensions as given in Figure19.   
+— Inclined plane of (10 ±1)°.   
+41 
+Stability of 
+activity toys 
+with a free 
+height of fall of 
+more than 600 
+mm   
+6.1.2   -do-   
+— Suitable device(s) to apply ahorizontal 
+force of (120 ± 5)N.   
+— Stops, ifneeded.   
+42 
+Stability of 
+slides   
+6.1.3   -do-   
+— Loads of mass (50 ± 2) kg and 
+dimensions as given in Figure19.   
+— Inclined plane of (10 ±1)°.   
+43 
+Stability of 
+swings and 
+other activity 
+toys with 
+crossbeams 
+more than 1 
+200 mm 
+above the 
+ground   
+6.1.4.1   -do-   
+— Suitable device(s) to apply ahorizontal 
+force from 125 N to (2 000 ± 20) N 
+according to Table4.   
+— Stops, ifneeded.   
+44 
+Stability of 
+swings and 
+other activity 
+toys with 
+crossbeams 1 
+200 mm or less 
+above the 
+ground   
+6.1.4.2   -do-   
+— Loads of mass (25 ± 0,2) kg and 
+dimensions as given in Figure19.   
+— Blocks, if needed.   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+13 
+    
+ 
+ 
+ 
+ 
+45 
+Stability of 
+toddler swings   
+6.1.5   -do-   
+Pendulum test apparatus constructed in 
+accordance with dimensions and materials 
+specified in Figure 21.   
+46 
+Strength of 
+toys other than 
+swings   
+6.2.1   -do-   
+— Load(s) of mass (50 ± 0,5) kg and 
+dimensions as given in Figure19.   
+— Load(s) of mass (25 ± 0,2) kgand 
+dimensions as given in Figure 19.   
+47 
+Strength of 
+swings and 
+similar toys   
+6.2.2   -do-   a) For swings, except those covered byb):   
+— a load with a mass of (200 ± 10)kg;   
+— loads with a mass of (50 ± 2)kg.   
+b) For swings intended for children under 
+36 months and with suspension points 1 
+200 mm or less above the base level:   
+— a load with a mass of (66 ± 3) kg.   
+48 
+Dynamic 
+strength of 
+barriers and 
+handrails   
+6.3   -do-   
+— A pad with a length of 200 mm and a 
+height of 50 mm minimum made of textile, 
+leather or similar material and stuffed with 
+suitable material and with a shape thatwill 
+enable it to be attached to the top of a 
+barrier orhandrail.   
+— A device consisting of a pulley and a 
+(25 ± 1) kg mass attached to one end of a 
+non-elastic cord, that will enable a 
+horizontal impact to be applied to the pad 
+on the barrier or handrail by means ofa 
+freefalling mass.   
+49 
+Determination 
+of impact from 
+swing 
+elements   
+6.4   -do-   
+— Test mass, consisting of an aluminium 
+sphere or semi-sphere of radius 80 mm ± 3 
+mm, and a total mass (including 
+accelerometer) of (4,6 ± 0,05) kg. The 
+impacting part between the surface struck 
+and the accelerometer shall be 
+homogeneous and free from voids. Cables 
+connected to the accelerometer shall be 
+placed in such a way that the effect on the 
+mass of the test mass is minimized. An 
+example is given in Figure24.   
+— Accelerometer, mounted at the centreof 
+gravity of the test mass assembly with the 
+sensitivity axis aligned to within 2° of the 
+direction of travel of the test mass, capable 
+of measuring acceleration triaxially in the 
+range of ± 500 g with an accuracy of ± 0,1 
+g and with a frequency range from 0 Hz to 
+10 000Hz.   
+— Amplifier with a sampling frequency of 
+10 kHz and a cut-off frequency of 10kHz.   
+— Two chains where the chain links have 
+a thickness of material (diameter) of (6 ± 
+0,5) mm and an outer major dimension of 
+(47 ± 2) mm. The chains shall be of equal 
+length suspended from pivots 600mm 
+apart at the same height as the suspension 
+connectors, such that they meet at the   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+14 
+    
+ 
+ 
+ 
+ 
+    
+point of connection to the test mass. The 
+fictive prolongations of the chains shall 
+meet in the centre of the   
+test mass (see Figure 24).   
+50 
+Test for head 
+and neck 
+entrapment -   
+6.5   -do-   
+Test probes made of any suitably rigid 
+material and with dimensions as given in 
+Figures 25, 26 and 27. (Head and neck 
+entrapment in completely bound openings)   
+ 
+Test  template  made  of  any  suitable  rigid 
+material  and  with  dimensions  as  given  in 
+Figure  28  (Head  and  neck  entrapment  in 
+partially bound and V-shaped openings)   
+51 Toggle test   6.6   -do-   
+Toggle test device as shown in Figure 31 
+a) comprising of:   
+— toggle, as shown in Figure 31 b), made 
+of polyamides (PA) (e.g. nylon) or 
+polytetrafluroethylene (PTFE), which have 
+been found to be suitablematerials;   
+— chain, as shown in Figure 31c);   
+— collar, detachable and with goodslip;   
+— pole.   
+52 
+Test for 
+protrusions   
+6.7   -do-   
+Test gauges made of any suitable rigid 
+material and with dimensions as given in 
+Figure 34.   
+50 (All Protrusions)   
+ 
+A test gauge made of any suitable rigid 
+material and with dimensions as given in 
+Figure 36. (Protrusions in motion rides)   
+53 
+Durability test 
+for suspension 
+connectors and 
+means of 
+suspension   
+6.8   -do-   Test masses as specified in Table 5   
+54 
+Deflation of 
+inflatable 
+activity toys   
+6.9   -do-   
+Loading pad, made of a rigid material with 
+a diameter of 400 mm.   
+Additional loads, consisting of sandbags 
+sufficient to make up the test loads as 
+specified in Table 6.   
+55 
+Static load test 
+for paddling 
+pools with non- 
+inflatablewalls   
+6.10   -do-   25 kg load   
+56 
+Test Methods 
+For Finger 
+Paints - Limits 
+for primary 
+aromatic 
+amines   
+4.5.1   IS    9873 
+(Part  7)  : 
+2017   
+Reagents:   
+ Methanol., Acetonitrile, tert-Butyl 
+methyl ether, Citrate/sodium 
+hydroxide buffer, Sodium dithionite 
+solution, Porous,granular   
+―kieselguhr‖SPEcolumn, Anhydrous 
+sodium sulfate, Certified amine 
+standards   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+15 
+    
+ 
+ 
+ 
+ 
+    
+ Internal standards for gas 
+chromatography: IS 1: 2,4,5- 
+Trichloroaniline, CAS No. 636-30- 
+6., IS 2: 4-Amino-2- 
+methylquinoline, CAS No. 6628-04- 
+2., IS 3: Tributylphosphate, CAS 
+No. 126-73-8;   
+ Standard solutions: Stock solution 
+of aromaticamines,   
+ 
+ Calibration solutions, Internal 
+standard solution, Recovery 
+solution of aromaticamines   
+ 
+Apparatus   
+ Reaction vessel (50 ml conical flask)of 
+temperature-resistant glass with tight- 
+fittingcap.   
+ Water bath, capable of maintaining a 
+temperature of (37 ± 2) °C and (70 ±2)   
+°C.   
+ Column made from glass or 
+polypropylene, 25 mm to 30 mm 
+internal diameter, 140 mmto   
+ 150 mm length, filled with about 20g 
+porous,granular―kieselguhr‖SPE 
+material, fitted on theoutlet   
+ with a glass fibre filter (or commercial 
+SPEcolumn)3).   
+ Vacuum rotary evaporator or 
+equivalent low temperature sample 
+concentrationsystem.   
+ Pipettes 10 ml, 5 ml, 2 ml, 1ml.   
+ 
+Instrumentation (The analysis shall be 
+performed using equipment selected from 
+the following list)   
+ HPLC with gradient-elution andAD.   
+ GC withMS.   
+57 
+Test Methods 
+For Finger 
+Paints - Limits 
+for other 
+impurities   
+4.5.2   -do-   
+Standards, reagents andsolvents   
+ Hexane, analyticalgrade.   
+ Cyclohexane, analyticalgrade.   
+ Acetone, analyticalgrade.   
+ trimethylpentane, analyticalgrade.   
+ Toluene, analyticalgrade.   
+ Cyclohexane (E.2.2): acetone (E.2.3) 
+1:1 v/vmixture.   
+ Toluene (E.2.5):acetone (E.2.3) 2:1 v/v 
+mixture.   
+ Anhydrous sodium sulfate.   
+ Hexachlorobenzene (HCB), CASNo   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+16 
+    
+ 
+ 
+ 
+ 
+    
+118-74-1, > 99 %.   
+ Commercial PCB standard mixtureor 
+individual PCB congeners   
+— PCB congener 11 (3,3’- 
+Dichlorobiphenyl), CAS No: 2050-67-1;   
+— PCB congener 28 (2,4,4’- 
+Trichlorobiphenyl), CAS No: 7012-37-5;   
+— PCB congener 52 (2,2’,5,5’- 
+Tetrachlorobiphenyl), CAS No: 35693- 
+99-3;   
+— PCB congener 101 (2,2’,4,5,5’- 
+Pentachlorobiphenyl), CAS No: 37680- 
+73-2;   
+— PCB congener 118 (2,3’,4,4’,5- 
+Pentachlorobiphenyl), CAS No: 31508- 
+00-6;   
+— PCB congener 138 (2,2’,3,4,4’,5’- 
+Hexachlorobiphenyl), CAS No: 35065- 
+28-2;   
+— PCB congener 153 (2,2’,4,4’,5,5’- 
+Hexachlorobiphenyl), CAS No: 35065- 
+27-1;   
+— PCB congener 180 (2,2’,3,4,4’,5,5’- 
+Heptachlorobiphenyl), CAS No:35065- 
+29-3;   
+— PCB congener 209 
+(Decachlorobiphenyl), CAS No: 2051- 
+24-3,   
+ Benzo[α]pyrene (B[α]P), CAS No:50- 
+32-8, > 99 %.   
+ Internalstandards.   
+o HCB 13C6, CAS No:118-74-1.   
+o PCB congener 10113C12, 
+CAS No: 37680-73-2.   
+o PCB congener 13813C12, 
+CAS No: 35065-28-2.   
+o B [α]P d12, CAS No:63466-71- 
+7.   
+ Primary standardsolutions.   
+ Calibrationstandards.   
+Apparatus   
+ Amber colouredglassbottle 
+approximately 40 ml volume with tight- 
+fitting screw cap.   
+ Analytical balance, capable ofweighing 
+to 4 decimal places.   
+ Glass microfibre thimble, 33mm 
+diameter x 100 mm.   
+ Soxhlet extractor with siphon cupto 
+hold a 33 mm diameter x 100 mm 
+thimble.   
+ Water cooledcondenser.   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+17 
+    
+ 
+ 
+ 
+ 
+    
+ 250 ml round bottomflask.   
+ Spark proof heatingmantle.   
+ Sample concentration systemwith 
+nitrogen gasstream.   
+ Solid phase extraction column made 
+from either glass or polypropylene, 25 
+mm to 30mm   
+ internal diameter, 140 mm to 150 mm 
+length, filled with about 20 g porous, 
+granular―kieselguhr‖SPEmaterial(or 
+commercial SPEcolumn).   
+ 
+Instrumentation   
+ A gas chromatograph-mass 
+spectrometricsystem   
+ Analytical capillarycolumn   
+58 
+Determination 
+Of Certain 
+Phthalate 
+Esters   
+ 
+IS9873   
+(Part 
+9):2017   
+Reagents   
+ Dichloromethane, CAS No. 75-09- 
+2, analytical grade or higher, free of 
+phthalate esters.   
+ Phthalate reference substances, 
+DBP, BBP, DEHP, DNOP, DINP, 
+and DIDP (see Annex A), minimum 
+of 95 % purity.   
+ Stock solution, 100 mg/l of DBP, 
+BBP, DEHP, DNOP each, and 500 
+mg/l of DINP, DIDP each in 
+dichloromethane   
+ External Standard (ES) calibration 
+solutions.   
+ Internal Standard (IS) calibration 
+solutions.   
+ 
+Apparatus   
+ Normal laboratoryglassware.   
+ Gas chromatography-mass 
+spectrometer (GC-MS), with a 
+capillary column coupled to amass   
+ Spectrometric detector (electron 
+ionization, EI) used for theanalysis. 
+See7.4.1.   
+ Soxhlet extractor, see FigureB.1.   
+ Solvent extractor, see FigureB.2.   
+ Extraction thimble,cellulose.   
+ Cotton wool, for extractionthimble.   
+ Analytical balance, capable of 
+measuring to an accuracy of 0,001 
+g.   
+ Concentration apparatus, for 
+example, a rotaryevaporator.   
+ Solid phase extraction(SPE)   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+18 
+    
+ 
+ 
+ 
+ 
+    
+cartridge, 1000 mg silica gel/6 ml 
+tubes, or equivalent.   
+ Volumetric flasks, of 5 ml, 10 ml, 25 
+ml, 50 ml, and 100 ml nominal 
+capacity.   
+ Pipettes, of 0,5 ml, 1 ml, 2 ml, 5 ml, 
+and 10 ml nominalcapacity.   
+ Polytetrafluoroethylene (PTFE) 
+membrane filter, of pore size 0,45 
+μm   
+59 
+Tests for 
+Safety of 
+Electric Toys - 
+Heating and 
+abnormal 
+operation test   
+9   
+IS 
+15644:2006   
+ Test corner consisting of two walls 
+at right angles and a floor made of 
+dull black-painted plywood having a 
+thickness of approximately20mm.   
+ 4 layers of Bleached cotton gauze 
+having dimensions of 500mm x 500 
+mm anda specific mass of 40 g/m
+2
+± 
+8g/m
+2
+.   
+ Fine-wire thermocouples and 
+temperature recorder for 
+determination of rise oftemperature   
+ Straight steel pin of length 25mm 
+minhaving a diameter of 0,5 mm, or 
+rod of length 100 mm min having a 
+diameter of 1.0mm   
+ powersupply 
+ Apparatus for needle flame test 
+(AnnexB)   
+ Apparatus for low powercircuit 
+determination 
+60 
+Electric 
+strength at 
+operating 
+temperature   
+10   -do-   
+ powersupply 
+ Voltmeter, ammeter,oscilloscope 
+61 
+Moisture 
+resistance   
+11   -do-   
+ Test apparatus as per 14.2.4of 
+IS/IEC60529   
+ Humidity cabinet capableof 
+maintaining relative humidity of 
+(93± 3) %. 
+62 
+Electric 
+strength at 
+room 
+temperature   
+12   -do-   
+ powersupply 
+ Voltmeter, ammeter,oscilloscope 
+63 
+Mechanical 
+strength   
+13   -do-   
+ Impact Hammer test apparatusas 
+per test Ehb of IS 9000 (Pt 7/ Sec 
+7)/ IEC 60068-2-75. 
+64 Construction   14   -do-   
+ powersupply 
+ Voltmeter 
+ Steel surface, cylindrical metallic 1 
+kg mass of dia80mm 
+ Pull force gauge up to 90N 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+19 
+    
+ 
+ 
+ 
+ 
+    
+ Calipers, measuring scale/tape 
+65 
+Protection of 
+cords and 
+wires   
+15   -do-   
+ Calipers, measuring scale/tape 
+66 Components   16   -do-   
+ Based on TC/Certification 
+67 Screws and 
+connections   
+17   -do-   
+ Tools such as spanners, wrenches 
+and pliers, torqueguage 
+68 
+Clearances 
+and creepage 
+distances   
+18   -do-   
+ Calipers, gauges, measuring 
+scale/tape 
+69 
+Resistance to 
+heat and fire   
+19   -do-   
+ Apparatus for ball pressure test of 
+IS/IEC60695-10-2. 
+ Apparatus for glow-wire test of 
+IS/IEC60695-2-11, 
+ Apparatus for needle flame test 
+(AnnexB)   
+70 
+Radiation, 
+toxicity and 
+similar hazards   
+20   -do-   
+ As per IS 9873 (Part3) 
+71 Power Input   8   -do-   
+ Voltmeter,Wattmeter 
+72 Marking   7   -do-   
+ Petroleum spirit,water 
+ 
+The above list is indicative only and may not be treated as exhaustive. 
+ 
+References to figure and table nos are to the respective figures and tables in the 
+relevant Indian Standard 
+
+  
+ 
+ 
+20 
+ 
+ 
+ 
+ 
+ 
+ 
+ANNEX C 
+PM/ 9873/11   
+Oct 2023 
+ 
+ 
+Scheme of Inspection and Testing 
+ 
+1. LABORATORY - A laboratory shall be maintained which shall be suitably equipped (as 
+per the requirement given in column 2 of Table 1) and staffed, where different tests given in 
+the specification shall be carried out in accordance with the methods given in the 
+specification.   
+ 
+1.1 The manufacturer shall prepare and implement a calibration plan for the test equipments.   
+ 
+2. TEST RECORDS – The manufacturer shall maintain test records for the tests carried out 
+to establish conformity.   
+ 
+3. PACKING AND MARKING –– The Standard Mark, as given in the Schedule of the 
+licence, shall be marked on the primary packaging and/or on the toy itself legibly and 
+indelibly, provided always that material so marked conform to requirements of the 
+specification. In case the Standard Mark cannot be incorporated on the product or 
+packaging, it may be provided as an integral part of the package containing the toy in 
+a manner accessible and evident to the consumer. 
+ 
+3.1 Packing  and  marking/labelling  including  warnings  and  other  instructions  and information 
+required to be provided (for assembly, maintenance etc.) shall be done as per the provisions 
+of the Indian Standard. In addition, the model number and the following shall be 
+incorporated on each package:   
+i) BIS Licence NumberCM/L ...............and   
+ii) BIS website details   i.e.   ―For   details   of   BIS   certification   please   visit   
+www.bis.gov.in 
+ 
+5. CONTROL  UNIT – For  the  purpose  of  this  scheme,  the  entire  quantity  of  the  toys  of  the 
+same type and series (See Sampling guidelines at Annex A) produced under similar 
+conditions of manufacture shall constitute a control unit.   
+ 
+6. LEVELS  OF  CONTROL - The  tests  as  indicated  in  column  1  of  Table  1  and  the  levels  of 
+control  in  column  3  of  Table  1,  shall  be  carried out  on the  whole  production  of  the  factory 
+which is covered by this plan and appropriate records maintained in accordance with 
+paragraph 2above.   
+ 
+6.1 All  the  production  which  conforms  to  the  Indian  Standards  and  covered  by  the  licence 
+should be marked with Standard Mark.   
+ 
+7. REJECTIONS – Disposal of non-conforming product shall be done in such a way so as to 
+ensure that there is no violation of provisions of BIS Act, 2016.   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+21 
+  
+ 
+ 
+ 
+ 
+ 
+TABLE 1 
+LEVELS OF CONTROL 
+PART A: 
+LEVELS OF CONTROL FOR SAFETY ASPECTS RELATED TOMECHANICAL AND 
+PHYSICALPROPERTIES 
+AS PER IS 9873 (PART 1):2019 
+ 
+(1) (2) (3) 
+Test Details 
+Test 
+equipment 
+requiremen 
+t 
+R: required 
+(or) S: Sub- 
+contracting 
+permitted 
+Levels of Control 
+Cl. Requirement 
+Test Method 
+No. of 
+Sample 
+Frequency Remarks 
+Clause 
+Referenc 
+e 
+4.3.1   Material quality 4.3.1   
+IS9873   
+(Part 1)   
+R   
+One   
+Each 
+consignment 
+of material   
+ 
+4.3.2   
+Expanding 
+materials 
+5.21   -do-   
+R   
+-do-   -do-   
+ 
+See notes 
+below   
+4.4   Small parts 
+5.24,   
+5.2   
+IS9873   
+(Part1)   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.5   
+Shape, size 
+and strength of 
+certain toys 
+     
+-do-   
+4.5.1   
+Squeeze toys, 
+rattles, 
+fasteners, and 
+certain other 
+toys and 
+components of 
+toys 
+5.3   
+IS9873   
+(Part1)   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.5.2 Small balls 
+5.4,   
+5.24   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.5.3 Pompoms 5.24.6.3   -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.5.4 
+Pre-school 
+play figures 
+5.6   -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.5.5 Toy pacifiers 4.5.5 -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.5.6 Balloons 4.5.6 -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+22 
+  
+ 
+ 
+ 
+ 
+ 
+4.5.7 Marbles 
+5.24,   
+4.5.7   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.5.8 
+Hemispheric- 
+shaped toys 
+5.24,   
+4.5.8   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.6 Edges 
+      
+4.6.1 
+Accessible 
+sharp edges of 
+glass or metal 
+5.8,   
+4.6.1   
+IS9873   
+(Part1)   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.6.2 
+Functional 
+sharp edges 
+4.6.2 
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.6.3 
+Edges on 
+metal toys 
+5.8, 
+4.6.2 
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.6.4 
+Edges on 
+moulded toys 
+4.6.4 -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.6.5 
+Edges on 
+exposed bolts 
+or threaded 
+rods 
+5.24.7,   
+5.24,   
+5.24.5,   
+5.24.6.1   
+, 4.6.5   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-    
+4.7 Points 
+      
+4.7.1 
+Accessible 
+sharp points 
+5.9   
+IS9873   
+(Part1)   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.7.2 
+Functional 
+sharp points 
+4.7.2   -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.7.3 Wooden toys 4.7.3   -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.8 Projections 
+4.8   -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.9 
+Metal wires 
+and rods 
+5.24.8.2   
+, 
+5.24.8.3   
+, 
+5.24.6.4   
+, 5.8,   
+5.9, 4.9   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.10 
+Plastic film or 
+plastic bags in 
+packaging and 
+in toys 
+4.10,   
+5.10   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+23 
+  
+ 
+ 
+ 
+ 
+ 
+4.11 Cords 
+5.11.1,   
+5.11.2,   
+5.11.3,   
+5.11.4,   
+5.11.5,   
+5.11.6   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.12 
+Folding 
+mechanisms 
+      
+4.12.1 
+Toy 
+pushchairs, 
+perambulators 
+and similar 
+toys 
+4.12.1,   
+5.22.2   
+IS9873   
+(Part1)   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.12.2 
+Other toys with 
+folding 
+mechanisms 
+4.12.2, 
+5.22.3   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.12.3 
+Hinge-line 
+clearance 
+4.12.3 -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.13 
+Holes, 
+clearances and 
+accessibility of 
+mechanisms 
+      
+4.13.1 
+Circular holes 
+in rigid 
+materials 
+4.13.1 
+IS9873   
+(Part 1)   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.13.2 
+Accessible 
+clearances for 
+movable 
+,segments 
+4.13.2 
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do- (see 
+note (iii) 
+below)   
+4.13.3 
+Chains or belts 
+in ride-on toys 
+4.13.3,5   
+.7   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.13.4 
+Other driving 
+mechanisms 
+4.13.4 -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.13.5 Winding keys 4.13.5 
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.14 Springs 4.14 
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.15 
+Stability and 
+overload 
+requirements 
+4.15.1.1   
+to 
+4.15.1.3   
+,5.12.2,   
+5.12.3,   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+24 
+  
+ 
+ 
+ 
+ 
+ 
+  
+5.12.4,   
+5.12.5,   
+5.12.6   
+     
+4.16 Enclosures 
+      
+4.16.1 Ventilation 4.16.1 
+IS9873   
+(Part1)   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.16.2 Closures 
+4.16.2, 
+5.13.1,   
+5.13.2.1   
+, 
+5.13.2.2   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.16.3 
+Toys that 
+enclose the 
+head 
+4.16.3 -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.17 
+Simulated 
+protective 
+equipment, 
+such as 
+helmets, hats 
+and goggles 
+4.17, 
+5.14   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.18 Projectile toys 
+4.18.1   
+to 
+4.18.4,   
+5.15.1,   
+5.15.2,   
+5.35,   
+5.36,   
+5.37   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.19 
+Rotors and 
+propellers 
+4.19,   
+5.35   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.20 Aquatic toys 4.20 
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.21 Braking 
+4.21,   
+5.16.1,   
+5.16.2   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.22 Toy bicycles 
+4.22.1   
+to 
+4.22.3   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.23 
+Speed 
+limitation of 
+electrically 
+driven ride-on 
+toys 
+4.23, 
+5.17 
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+        
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+25 
+  
+ 
+ 
+ 
+ 
+ 
+4.24 
+Toys 
+containing a 
+heat source 
+4.24,5.1   
+8   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.25 
+Liquid-filled 
+toys 
+4.25, 
+5.19   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.26 
+Mouth- 
+actuated toys 
+4.26,   
+5.2,   
+5.24.5,   
+5.24.6.1   
+,5.20   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.27 
+Toy roller 
+skates, toy 
+inline skates 
+and toy 
+skateboards 
+4.27 
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.28 
+Percussion 
+caps 
+specifically 
+designed for 
+use in toys 
+4.28 -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.29 
+Acoustic 
+requirements 
+5.25   -do-   
+S   
+one   
+Every six 
+months (or 
+whenever 
+there is a 
+change in 
+design of toy)  
+ 
+-do-   
+4.30 Toy scooters 
+4.30.1   
+to 
+4.30.8,   
+5.26,   
+5.27,   
+5.285.2   
+9,   
+5.12.2,   
+5.30   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.31 
+Magnets and 
+magnetic 
+components 
+5.31,   
+5.32,   
+5.2,   
+5.34,   
+5.24.2   
+or 
+5.24.3,   
+5.24.5,   
+5.24.6.1   
+, 
+5.24.6.2   
+, 5.33, 
+5.24.7   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-    
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+26 
+  
+ 
+ 
+ 
+ 
+ 
+4.32 Yo-yo balls 
+5.38.1,   
+5.38.2   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.33 
+Straps 
+intended to be 
+worn fully or 
+partially 
+around the 
+neck 
+5.11.3   -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.34 Sledges and 
+toboggans 
+with cords for 
+pulling 
+4.34 -do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+4.35 
+Jaw 
+entrapment in 
+handles and 
+steering 
+wheels 
+4.35,   
+5.39   
+-do-   
+R   
+one   
+Each Control 
+Unit   
+ 
+-do-   
+ 
+Notes for IS 9873 (Part 1)   
+ 
+i. Normal use: All toys shall be tested in accordance with the relevant tests in 5.1(general) to 
+5.22 (folding or sliding mechanisms) in order to ensure that risks as a result of normal wear 
+and/or deterioration are minimized. Toys labelled as washable shall be subjected to washing in 
+accordance with 5.23 (washable toys).After testing, the toy shall continue to conform to the 
+relevant requirements of Clause 4 (requirements).   
+ 
+ii. Reasonably  foreseeable  abuse: After  normal  use  tests,  toys  intended  for  children  under  96 
+months,  unless  otherwise  stated,  shall  be  tested  in  accordance  with  the  relevant  tests  in  5.24 
+(reasonably foreseeable abuse tests) to ensure that risks as a result of reasonably 
+foreseeable abuse are minimized. After testing, the toy shall continue to conform to the 
+relevant requirements of Clause 4(requirements).  
+   
+iii. Accessible clearances for movable segments as per Cl. 4.13.2 is applicable only for ride 
+on  toys  where  the  potential  for  crushing  of  fingers  or  other  appendages  exists  and  not  for 
+smaller toys which prima-facie do not present risk of crushing fingers and appendages 
+ 
+iv. Expanding  Materials  as  per  Cl.  4.3.2  test applies  only  to  toys  made  from  materials  which 
+absorb water and therefore poses a risk of choking of a child swallows the toy or part thereof 
+and it expands in the airway. 
+ 
+v. In  case  it  is  not  practically possible  to  perform  Compression  test  as  per  Cl  5.24.7  due  to  the 
+design/size of the toy, it should be concluded that this test is not applicable for such toys. 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+27 
+  
+ 
+ 
+ 
+ 
+ 
+PART B: 
+LEVELS OF CONTROL FOR SAFETY ASPECTS RELATED TO 
+FLAMMABILITYAS PER IS 9873 (PART 2):2017 
+ 
+(1) (2) (3) 
+Test Details 
+Test 
+equipment 
+requiremen 
+t 
+R:  required 
+(or) S: Sub- 
+contracting 
+permitted 
+Levels of Control 
+Cl. Requirement 
+Test Method 
+No. of 
+Sample 
+Frequency Remarks 
+Clause 
+Referenc 
+e 
+4.1 General 4.1 
+IS9873   
+(Part2)   
+S   
+One 
+sample per 
+series   
+Once in six 
+months 
+ 
+Sample  to  be 
+tested also if 
+the material   
+       
+supplier 
+changes   
+4.2 
+Toys to be 
+worn on the 
+head 
+      
+4.2.2 
+Beards, 
+moustaches, 
+wigs, etc. 
+made from 
+hair, pile, or 
+material that 
+behaves in a 
+similar 
+manner to 
+hair (e.g. 
+free-hanging 
+ribbons, 
+paper, cloth 
+strands, or 
+other flowing 
+elements), 
+which 
+protrude 50 
+mm or more 
+from the 
+surface of 
+the toy 
+4.2.2, 
+5.2   
+IS9873   
+(Part2)   
+S   
+One 
+sample per 
+series   
+Once in six 
+months 
+ 
+Sample to be 
+tested also if 
+the material 
+supplier 
+changes   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+28 
+  
+ 
+ 
+ 
+ 
+ 
+4.2.3 
+Beards, 
+moustaches, 
+wigs, etc. 
+made from 
+hair, pile, or 
+material that 
+behaves in a 
+similar 
+manner to 
+hair (e.g. 
+free-hanging 
+ribbons, 
+paper, cloth 
+strands, or 
+other flowing 
+elements), 
+4.2.3,   
+5.3   
+IS9873   
+(Part2)   
+S   
+-do-   -do-   
+ 
+-do-   
+ 
+which 
+ 
+protrude 
+less than 50 
+mm and 
+more than 5 
+mm from the 
+surface of 
+the toy 
+      
+4.2.4 
+Full or 
+partial 
+moulded 
+head masks 
+4.2.4, 
+5.3 
+IS9873   
+(Part2)   
+S   
+-do-   -do-   
+ 
+-do-   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+29 
+  
+ 
+ 
+ 
+ 
+ 
+.2.5 
+Flowing 
+elements of 
+toys to be 
+worn on the 
+head (except 
+those 
+covered by 
+4.2.2 and 
+4.2.3), 
+hoods, 
+headdresses, 
+etc. and 
+masks not 
+covered by 
+4.2.4 which 
+partially or 
+fully cover 
+the head 
+(e.g. fabric 
+and 
+cardboard 
+masks, eye 
+masks, face 
+masks), but 
+excluding 
+those items 
+covered by 
+4.3 
+4.2.5, 
+5.4   
+IS9873   
+(Part2)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.3 
+Toy disguise 
+costumes 
+and toys 
+intended to 
+4.3, 5.4 
+IS9873   
+(Part2)   
+S   
+-do-   -do-   
+ 
+-do-   
+ 
+be worn by a 
+child in play 
+      
+4.4 
+Toys 
+intended to 
+be entered 
+by a child 
+4.4, 5.4   
+IS9873   
+(Part2)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.5 
+Soft-filled 
+toys 
+4.5, 5.5   
+IS9873   
+(Part2)   
+S   
+-do-   -do-   
+ 
+-do-   
+
+30 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+PART C: 
+LEVELS OF CONTROL FOR MIGRATION OF CERTAIN 
+ELEMENTSAS PER IS 9873 (PART 3):2020 
+PM/ 9873/10 
+Feb 2023 
+ 
+(1) (2) (3) 
+Test 
+Details 
+Test 
+equipmen 
+t 
+requirem 
+ent 
+R: 
+required 
+(or) S: 
+Sub- 
+contracti 
+ng 
+permitte 
+d 
+Levels of Control 
+Cl. 
+Requirement 
+Test Method No. of 
+Sample 
+Frequency Remarks 
+Clause 
+Refere 
+nce 
+4.1   Sb, As, Ba,  
+8,9,10   
+IS 9873   S   One sample  Once in 12  1. Sample  
+ 
+Cd, Cr, Pb,  
+ 
+(Part  
+ 
+per series   months   also to be  
+ 
+Hg, Se   
+ 
+3):2020   
+   
+tested  
+       
+whenever  
+       
+supplier of  
+       
+material  
+       
+changes   
+       
+   
+       
+   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+31 
+  
+ 
+ 
+ 
+ 
+ 
+PART D: 
+LEVELS OF CONTROL FOR SAFETY OF SWINGS, SLIDES AND SIMILAR ACTIVITY TOYS 
+FORINDOOR AND OUTDOOR FAMILY DOMESTIC USE 
+AS PER IS 9873 (PART 4):2017 
+ 
+(1) (2) (3) 
+Test Details 
+Test 
+equipme 
+ntrequire 
+ment 
+R: 
+required 
+(or) S: 
+Sub- 
+contracti 
+ng 
+permitte 
+d 
+Levels of Control 
+Cl. Requirement 
+Test Method 
+No. of 
+Sample 
+Frequency Remarks 
+Clause 
+Referenc 
+e 
+4.1 General 
+      
+4.1.1 
+Static 
+strength 
+6.2.1   
+IS9873   
+(Part4)   
+S   
+One 
+sample per 
+series   
+Once in six 
+months 
+Also to be 
+tested 
+whenever 
+supplier of 
+material 
+changes   
+4.1.2 
+Maximum 
+height 
+4.1.2 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.1.3 
+Corners and 
+edges 
+4.1.3 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.1.4 
+Protruding 
+parts 
+      
+4.1.4.1 General 4.1.4.1 
+IS9873   
+(Part4)   
+S   
+One 
+sample per 
+series   
+Once in six 
+months 
+Also to be 
+tested 
+whenever 
+supplier of 
+material 
+changes   
+4.1.4.2 
+All 
+protrusions 
+4.1.4.2, 
+6.7.1   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.1.4.3 
+Upright 
+protrusions 
+4.1.4.3, 
+6.7.1   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.1.4.4 Motion rides 
+4.1.4.4, 
+6.7.2   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.1.4.5 Slides 
+4.1.4.5, 
+6.7.1.2   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+32 
+  
+ 
+ 
+ 
+ 
+ 
+4.1.5 
+Climbing 
+and 
+swinging 
+ropes, 
+chains and 
+cables 
+4.1.5 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.1.6 Open tubing 4.1.6 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.2 Barriers 
+4.2, 
+6.5.1,   
+6.3   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.3 
+Rung 
+ladders, 
+stepladders 
+and 
+stairways 
+4.3 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.4 Entrapment 
+      
+4.4.1 
+Head and 
+neck 
+entrapment 
+4.4.1, 
+6.5.1   
+IS9873   
+(Part4)   
+S   
+One 
+sample per 
+series   
+Once in six 
+months 
+Also to be 
+tested 
+whenever 
+supplier of 
+material 
+changes   
+4.4.2 
+Entrapment 
+of clothing 
+and hair 
+4.4.2, 
+6.6   
+IS9873   
+(Part4)   
+S   
+One 
+sample per 
+series   
+Once in six 
+months 
+Also to be 
+tested 
+whenever 
+supplier of 
+material 
+changes   
+4.4.3 
+Entrapment 
+of feet 
+4.4.3 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.4.3 
+Entrapment 
+of fingers 
+4.4.3 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.5 
+Stability of 
+activity toys 
+other than 
+      
+ 
+slides, 
+swings and 
+toys with 
+crossbeams 
+      
+4.5.1 General 4.5.1 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+33 
+  
+ 
+ 
+ 
+ 
+ 
+4.5.2 
+Stability of 
+activity toys 
+with a free 
+height of fall 
+of 600 mm or 
+less 
+4.5.2, 
+6.1.1   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.5.3 
+Stability of 
+activity toys 
+with a free 
+height of fall 
+of more than 
+600 mm 
+4.5.3, 
+6.1.2   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.6 Slides 
+4.5.3, 
+6.1.2   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.6.1 
+Stability of 
+slides 
+4.6.1, 
+6.1.3   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.6.2 
+Retaining 
+sides for 
+slides 
+4.6.2 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.6.3 
+Starting, 
+sliding and 
+run-out 
+section on 
+slides 
+4.6.3 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.6.4 Roller slides 
+4.6.1 to   
+4.6.3,   
+4.6.4   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.7 Swings 
+      
+4.7.1 
+Stability of 
+swings and 
+other activity 
+toys with 
+crossbeams 
+4.7.1.1 
+to 
+4.7.1.3, 
+6.1.4.1,   
+6.1.4.2   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.7.2 
+Strength of 
+crossbeams, 
+swing 
+devices, 
+suspension 
+connectors 
+and 
+6.2.2   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+ 
+suspension 
+couplings 
+      
+4.7.3 
+Swings 
+intended for 
+children 
+under 36 
+months 
+4.7.3.1 
+to 
+4.7.3.2, 
+6.2.2.3.   
+2, 6.1.5   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+34 
+  
+ 
+ 
+ 
+ 
+ 
+4.7.4 
+Impact from 
+swing 
+elements 
+6.4   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.7.5 
+Minimum 
+clearance 
+between 
+swing 
+elements, 
+and similar 
+equipment 
+and adjacent 
+structures 
+4.7.5 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.7.6 
+Lateral 
+stability of 
+swing 
+elements 
+4.7.6 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.7.7 
+Minimum 
+clearance 
+between 
+swing 
+elements and 
+the ground 
+4.7.7 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.7.8 
+Suspension 
+connectors 
+and means of 
+suspension 
+4.7.8, 
+6.8   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.8 
+Seesaws 
+4.8 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.9 
+Carousels 
+and rocking 
+toys 
+4.9, 
+6.1.1,   
+6.2.1   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.10 
+Inflatable 
+      
+ 
+activity toys 
+      
+4.10.1 
+General 
+4.10.1 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+35 
+  
+ 
+ 
+ 
+ 
+ 
+4.10.2 
+Anchorage 
+4.10.2 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.10.3 
+Connection 
+tubes for 
+continuous 
+inflation 
+4.10.3 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.10.4 
+Containment 
+4.10.4. 
+1 to 
+4.10.4. 
+4, 6.9   
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.11 
+Paddling 
+pools 
+4.11.1 
+to 
+4.11.3, 
+6.10 
+IS9873   
+(Part4)   
+S   
+-do-   -do-   
+ 
+-do-   
+ 
+ 
+PART E: 
+LEVELS OF CONTROL FOR REQUIREMENTS AND TEST METHODS FOR FINGER 
+PAINTSAS PER IS 9873 (PART 7):2017 
+ 
+(1) (2) (3) 
+Test Details 
+Test 
+equipment 
+requiremen 
+t 
+R:  required 
+(or) S: Sub- 
+contracting 
+permitted 
+Levels of Control 
+Cl. Requirement 
+Test Method 
+No. of 
+Sample 
+Frequency Remarks 
+Clause 
+Referenc 
+e 
+4.1   General 4.1   
+IS9873   
+(Part7)   
+S   
+One 
+sample per 
+series   
+Once in 12 
+months   
+Also to be 
+tested 
+whenever 
+supplier of 
+material 
+changes   
+4.2   Colourants 4.1   
+4.2.1   
+4.2.2   
+Table-1   
+-do-   
+S   
+One   
+Each 
+consignment 
+of colourant   
+ 
+-do-   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+36 
+  
+ 
+ 
+ 
+ 
+ 
+  
+Table-2   
+Annex- 
+A   
+Annex- 
+B   
+Annex- 
+C   
+     
+4.3   
+Preservative 
+s 
+4.3   
+Annex- 
+A   
+Annex- 
+D   
+IS9873   
+(Part7)   
+S   
+One 
+sample per 
+series   
+Once in 12 
+months   
+Also to be 
+tested 
+whenever 
+supplier of 
+material 
+changes   
+4.4   
+Migration of 
+certain 
+elements 
+4.4   
+IS9873   
+(Part3)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.5.1 
+Limits for 
+Primary 
+Aromatic 
+Amines 
+4.5.1.1   
+4.5.1.2   
+Table-1   
+Table-2   
+Annex- 
+A   
+Annex- 
+B   
+Annex- 
+C   
+IS9873   
+(Part7)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.5.2 
+Limits for 
+other 
+impurities 
+4.5.2   
+Table-3   
+Annex- 
+A   
+Annex- 
+E   
+-do-   
+S   
+-do-   -do-   
+ 
+-do-   
+4.6 
+Taste and 
+Smell 
+4.6   
+Table-4   
+Annex- 
+A   
+-do-   
+S   
+-do-   -do-   
+ 
+-do-   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+37 
+  
+ 
+ 
+ 
+ 
+ 
+4.7 pH Value 
+4.7   
+Annex- 
+A   
+IS9873   
+(Part7)   
+ 
+ 
+IS 
+101(Pt.1/ 
+Sec 8)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.8 
+Binding 
+agents, 
+extenders, 
+humectants 
+and 
+surfactants 
+4.8 
+4.1 
+Annex- 
+F   
+IS9873   
+(Part7)   
+S   
+-do-   -do-   
+ 
+-do-   
+4.9 
+N- 
+Nitrosamine 
+s 
+4.9   
+Annex- 
+A   
+IS9873   
+(Part7)   
+ 
+ 
+EN 71- 
+12   
+S   
+-do-   -do-   
+ 
+-do-   
+4.10 Container 4.10   
+Annex- 
+A   
+IS9873   
+(Part7)   
+S   
+-do-   -do-   
+ 
+-do-   
+A.11 
+Labelling 
+Guidelines 
+Annex- 
+A   
+-do-   
+R   
+Each 
+Package of 
+finger paint   
+Each Package 
+of finger paint   
+ 
+ 
+PART F: 
+LEVELS OF CONTROL FOR CERTAIN PHTHALATES ESTERS IN TOYS AND 
+CHILDREN’SPRODUCTS 
+AS PER IS 9873 (PART 9):2017 
+ 
+(1) (2) (3) 
+Test Details 
+Test 
+equipment 
+requiremen 
+t 
+R:  required 
+(or) S: Sub- 
+contracting 
+permitted 
+Levels of Control 
+Cl. Requirement 
+Test Method 
+No. of 
+Sample 
+Frequency Remarks 
+Clause 
+Referenc 
+e 
+3   
+Maximum 
+acceptable 
+levels of 
+phthalates   
+      
+i)   
+Vinyl  in  toys 
+or childcare 
+articles   
+ IS9873   
+(Part6)   
+S   
+One 
+sample per 
+series   
+Once in 12 
+months   
+Also to be 
+tested 
+whenever 
+supplier of 
+material   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+38 
+  
+ 
+ 
+ 
+ 
+ 
+       changes   
+ii)   
+Vinyl in any 
+part of the toy 
+or childcare 
+article that 
+can be placed 
+in mouth of 
+child under 4 
+years ofage   
+ 
+IS9873   
+(Part6)   
+S   
+-do-   -do-   -do-   
+ 
+PART G: 
+LEVELS OF CONTROL FOR SAFETY OF ELECTRIC 
+TOYSAS PER IS 15644:2006 
+ 
+(1) (2) (3) 
+Test Details 
+Test 
+equipment 
+requiremen 
+t 
+R:  required 
+(or) S: Sub- 
+contracting 
+permitted 
+Levels of Control 
+Cl. Requirement 
+Test Method 
+No. of 
+Sample 
+Frequency Remarks 
+Clause 
+Referenc 
+e 
+8   
+Power Input 
+of 
+transformer& 
+dual-supply 
+toys   
+8   IS 15644  
+R   One 
+sample 
+from each 
+series   
+Once in a day   
+ 
+9   
+Heating and 
+abnormal 
+operation   
+9.1 to   
+9.8   
+IS 15644  
+S   
+One model 
+from each 
+series   
+Once in 
+six 
+months 
+ 
+10   Electric 
+Strength at 
+operating 
+temperature   
+10   IS 15644  
+S   One model 
+from each 
+series   
+Once in a 
+month   
+ 
+11   
+Moisture 
+resistance   
+11.2 to   
+11.2   
+IS 15644  
+S   
+One 
+sample 
+from each 
+series   
+Once in six 
+months   
+ 
+12   
+Electric 
+strength at 
+room 
+temperature   
+12   IS 15644  
+S   
+-do-   -do-   
+ 
+13   
+Mechanical 
+Strength   
+ 
+IEC 
+60068-2-   
+75   
+S   
+-do-   -do-   
+ 
+14   Construction   14.1 to   
+14.14   
+IS 15644  
+S   
+-do-   -do-   
+ 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+39 
+  
+ 
+ 
+ 
+ 
+ 
+15   
+Protection of 
+cords and 
+wires   
+15.1 to   
+15.2   
+IS 15644  
+S   
+-do-   -do-   
+ 
+16   Components   
+16.1 to   
+16.3   
+IS 15644  
+S   
+-do-   -do-   
+Certified 
+components 
+shall be 
+used   
+17   
+Screws and 
+Connections   
+17.1 to   
+17.2   
+IS 15644  
+S   
+-do-   -do-   
+ 
+18   
+Clearances 
+and creepage 
+distances   
+181   
+IS 15644  
+S   
+-do-   -do-   
+ 
+19   
+Resistance to 
+heat and fire   
+19.1 to   
+19.2   
+IS 15644  
+S   
+-do-   -do-   
+ 
+20   
+Radiation, 
+toxicity and 
+similar 
+hazards   
+ 
+IS 9873   
+(Part 
+3)/ISO   
+8124-3   
+S   
+-do-   -do-   
+ 
+ 
+ 
+Note-1: Whether test equipment is required or sub-contracting is permitted in column 2 shall be decided 
+by the Bureau and shall be mandatory. Sub-contracting is permitted to a laboratory recognized by the 
+Bureau or Government laboratories empaneled by the Bureau. However, the manufacturer shall be 
+required to establish test facilities for only those tests which are applicable to the varieties oftoys 
+covered in his licence. 
+ 
+Note-2:  Levels  of  control  given  in  column  3  are  only  recommendatory  in  nature.  The  manufacturer  may 
+define the control unit/batch/lot and submit his own levels of control in column 3 with proper justification 
+for approval by BO Head.   
+ 
+Note-3: Where  one  sample  per  series  is  being  tested  at  a  frequency  specified  under  levels  of control,  it 
+shall be ensured that different models are tested in rotation so that each model in the series is tested over 
+a given period. Samples of  toys  of different  colours shall  be  tested in  rotation, to  the extent 
+possible 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+40 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+APPENDIX I 
+ 
+Categories and sub-categories of toys 
+ 
+Category A — 32 Sub-categories — Toys for sensorimotor activities — First age 
+ 
+Sub- 
+category 
+Starting 
+age 
+Description and examples of 
+appropriate toys 
+1.   0 months+   
+Rattles and rings 
+2.   4 months +   
+Teethers and teething rings 
+3.   0 months +   
+Mobiles, with or without sound – toys with miscellaneous figures 
+and shapes   
+to be mounted above the crib and intended to be out of the reach of  
+the child   
+4.   2 months +   
+Crib gyms and playmats– mats with simple play features or   
+activities; may include overhead structures that may have dangling 
+objects intended for the child to reach, grasp or hit   
+5.   3 months +   
+Cradle and playpen toys – balls, characters attached to cribs, 
+strollers or enclosures   
+6.   4 months +   
+Activity playboards– boards that are attached to the crib with 
+various play features such as miscellaneous coloured shapes, 
+shatterproof mirrors, spin- ners that rattle, buttons to push, parts that 
+slide on guides, doors that open   
+7.   3 months +   
+Squeeze toys – constructed of soft material, with or without internal 
+rattle or noise feature   
+8.   4 months +   
+Bath toys – animals, small boats and floating objects   
+9.   6 months +   Simple books made of textiles or plastic 
+10.   2 months +   
+Simple dolls and animals – soft-stuffed dolls and animals made of 
+fabric or   
+plush with or without clothes and fixed details which cannot be 
+removed   
+11.   8 months +   
+Roly-poly toys, bop-punching toys and pop-up action toys –   
+figures and animals that rock in a to-and-fro motion, made of rigid 
+or inflatable plastic, jack in the box, push-down spinning toys   
+12.   8 months +   
+Books with thick (chunky) pages 
+13.   5 months +   
+Simple blocks, nesting toys, and stacking toys 
+14.   6 months +   
+Simple ball and track toys 
+15.   18 months +  
+Push-pull and rolling toys with cord or handle 
+16.   6 months +   
+Simple push/pull rolling toys (without cord or handle) which 
+make sounds and / or have coloured lights – wheeled animals or 
+vehicles   
+17.   18 months +  
+Wheelbarrows and other vehicles to fill up and empty 
+18.   12 months +  
+Boxes, tubs, buckets, and containers – to store toys   
+19.   3 months +   
+Cloth and similar soft material balls and geometric forms 
+20.   18 months +  
+Toys for sand and water – pails, small shovels, moulds to play with 
+sand   
+and water   
+21.   12 months +  
+Rocking animals and rocker chairs – size suitable for children 
+to ride and rock   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+41 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+22.   12 months +  
+Push toys with a long handle that provides stability – corn 
+popper, lawn mower   
+23.   9 months +   
+Learn to walk toys (walk behind) – wheeled unit with a solid base 
+and han-   
+dle to support the child in the early stages of walking   
+24.   12 months +  
+Self-standing foot to floor riding toys, trikes, without pedals –   
+wheeled toys, vehicles without pedals that are propelled by the 
+power provided by the child’s feet on the ground   
+25.   8 months +   
+Soft materials in various shapes for stacking 
+26.   12 months +  
+Sliding beads on a fixed loop or shaft – bead maze or frame   
+27.   12 months +  
+Shape sorters with miscellaneous shapes and colours– 
+containers and vehicles with holes of different geometrical shapes 
+that only allow parts to pass through the corresponding openings 
+and to fall inside   
+28.   12 months +  
+Tool benches, pounding benches – toys simulating carpenter’s 
+benches (strictly pounding toys at this age)   
+29.   12 months +  
+Mechanically and electrically operated toys – vehicles, dolls,   
+animal char- acters etc. made of plastic, metal, fabric or plush, with 
+motions powered by spring or battery   
+30.   4 months +   
+Balls or cylinders – clear material with visible contents   
+31.   0 months +   
+Musical boxes – toys to be mounted on or near a crib with handle or 
+button   
+for adult activation   
+32.   6 months +   
+Simple keyboards or hand-held toys with buttons that activate 
+lights 
+and sounds 
+ 
+ 
+Category B — 23 Sub-categories — Toys for physical activities 
+ 
+Sub- 
+category 
+Starting age Description and examples of appropriate toys 
+33.   2 years +   
+Pedal vehicles, kick scooters, walking bicycles, balance bikes – tricy- 
+cles, wheeled toys, stable vehicles with pedals, small two wheeled bicycles 
+without pedals powered by the child’s feet   
+34.   2 years +   
+Child sized electrical vehicles – battery powered vehicles to be driven by 
+children   
+35.   3 years +   
+Toy bicycles – two-wheeled pedal bicycles with or without training/sup- 
+porting wheels to provide stability   
+36.   6 years +   Skates, two-wheeled scooters and in-line roller skates 
+37.   3 years +   
+Roller skates (except in-line) – roller skates with wheels not positioned in 
+linear (in-line) direction   
+38.   5 years +   
+Flying objects – kites, boomerangs, simple airplanes (with rubber band)   
+39.   3 years +   
+Soap bubbles – toys with accessories for blowing soap bubbles   
+40.   3 years +   
+Bowling,―bocce‖-type games, ring toss games–plastic or wooden pin 
+bowling sets, rings for throwing   
+41.   12 months +   
+Lightweight balls (plastic) 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+42 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+42.   3 years +   
+Toy versions of sporting equipment to imitate real sports versions – 
+baseball, basketball, cricket, golf, shuttlecock, tennis, badminton, or beach 
+racquets   
+43.   4 years +   
+Simple obstacle and hopscotch-type games 
+44.   3 years +   
+Games involving objects thrown at targets 
+45.   4 years +   
+Spinning tops without cord 
+46.   4 years +   
+Stilt walking (low height), hula hoops, rings to be balanced with a rod 
+47.   6 years +   
+Yo-yos and spinning tops with cord 
+48.   6 years +   
+Mini golf, cricket, billiards, table football, and other similar games 
+49.   5 years +   
+Jump rope 
+50.   7 years +   
+Electronic dancing mats – for learning dance steps and for following 
+com- plex dance routines   
+51.   
+3 years +   
+Activity toys for indoor and outdoor domestic use – toboggans, sleds,   
+swings with open seating, higher slides with more steps, climbers and see- 
+saws   
+52.   2 years +   
+Activity toys for indoor or outdoor domestic use – swing with seats 
+that surround the child and short slides with few steps for climbing   
+53.   3 years +   
+Aquatic toys – boards, inflatables (animal/character shapes, boats)   
+54.   2 years +   
+Wading or paddling pools (with adult supervision) 
+55.   
+3 years +   
+Simple electronic floor mats – for following patterns, making music, 
+learn- ing simple dance routines   
+ 
+Category C — 20 Sub-categories — Toys for intellectual activities 
+ 
+Sub- 
+category 
+Starting 
+age 
+Description and examples of appropriate toys 
+56.   4 years +   
+Easy puzzles – 20 to 150 interlocking parts   
+57.   2 years +   
+Simple puzzles and plain-fitting parts – puzzles with up to 20 large parts 
+that have smooth edges and fit together without interlocking, may have 
+pegs for grasping shapes for fitting parts together on trays   
+58.   7 years +   Puzzles – 150 to 500 interlocking parts   
+59.   18 months +   
+Toy activity panels with fixed parts and turning gears activated by 
+twisting motions or a crank 
+60.   18 months +   
+Simple building blocks with overlapping parts that may or may not 
+interlock 
+61.   2 years +   
+Simple matching activities – matching activities based on shapes, 
+colours, or pictures   
+62.   3 years +   
+Assembly, construction, or building sets – parts with different shapes 
+with   
+diversified fittings and fastenings   
+63.   2 years +   
+Building blocks that snap/fit together – large parts with defined pattern 
+for construction/fastening/assembly that may include features or themes   
+64.   18 months +   
+Simple mechanical toys – inclined planes to slide objects, toys actuated by 
+paddles, wheels, and other parts, using water and/or sand   
+65.   7 years +   Toys that involve or demonstrate elementary laws of physics 
+66.   8 years +   
+Experimental kits, scientific kits – chemistry sets, human body in detail, 
+organic material kits, crystals, herbariums, microscopes, habitats   
+67.   4 years +   
+Question (images) and answer toys and games – picture matching   
+68.   2 years +   
+Educational toys – alphabet and simple number learning   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+43 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+69.   3 years +   
+Observation and reasoning toys and games – memory games, games of 
+chance, board games without strategy   
+70.   5 years +   
+Time-learning games – clocks, calendars, and toys for providing notions of 
+hours, days, and months   
+71.   3 years +   
+Educational toys – quantity, size, volume, weight, space, and shape 
+notions,   
+learning to tell time   
+72.   6 years +   
+Games involving spelling and numbers (usually individual player) – 
+crossword puzzles, word finding, Sudoku   
+73.   4 years +   
+Logical and mathematical games – logical sequences, time sequences   
+74.   6 years +   
+Games with mathematical operations – including fractions   
+75.   2 years +   
+Computers, tablets, and hand-held games – computer devices for play,  
+such as simple questions and answers type or matching games; also may 
+be multi-lingual   
+ 
+Category D — 12 Sub-categories — Toys that reproduce the technical world 
+ 
+Sub- 
+category 
+Starting age Description and examples of appropriate toys 
+76.   5 years +   
+Functioning walkie-talkies and telephone sets for 
+communication 
+77.   4 years +   
+Audio and audiovisual equipment with real functions – portable 
+media, karaokes, and microphones   
+78.   5 years +   
+Home appliances with limited real function – sewing machine, 
+popcorn   
+popper, mixer, blender, ice-cream machine, cotton-candy machine, 
+etc.   
+NOTE: Not all functioning appliances may be appropriate at this age,   
+particu- larly toys connected to mains electricity or with heating 
+functions.   
+79.   5 years +   
+Detailed scale and/or more realistic vehicle replicas – include 
+features such as doors, hood (bonnet) and trunk (boot) that open 
+and close   
+80.   18 months +   
+Simple vehicle miniatures, without mechanisms – cars, trains, 
+motorcycles, trucks, aircrafts, boats, and ships, and others   
+81.   3 years +   
+Mechanical and electrical vehicles which imitate adult versions 
+(level of detail, proportional) – spring or battery-powered cars, 
+trucks, aircraft, boats   
+82.   4 years +   
+Complex remote controlled vehicles with multi-direction and 
+functionality– cars, trucks, boats moved by remote control, radio or 
+infrared command, or other   
+83.   6 years +   
+Complex mechanical or electrical powered vehicles and 
+machines – construction equipment, dump trucks, hoists/cranes   
+84.   6 years +   
+Tracks for electrical cars, trains and accessories – auto tracks,   
+train tracks, sophisticated circuits, with or without accessories, such 
+as platforms, tunnels, obstacles, scenery, vehicles, etc.   
+85.   3 years +   
+Non-powered vehicles and machines which imitate adult 
+versions (level of detail, proportional) – trucks, aircraft, boats, 
+simple and light, constructed from plastic or wood which may or   
+may not travel on tracks   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+44 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+86.   3 years +   
+Simple transformable toys and objects – toys whose parts can be 
+moved to transform them from one character or object into another   
+87.   3 years +   
+Robots with simple movements or controls 
+ 
+Category E — 23 Sub-categories — Toys for the development of feelings and empathy 
+ 
+Sub- 
+category 
+Starting 
+age 
+Description and examples of 
+appropriate toys 
+88.   9 months +   
+Dolls, imaginary animal characters, with no removable 
+components –   
+dolls representing fictional characters, including animal or human 
+forms   
+89.   2 years +   
+Lightweight dressed dolls, and dolls to dress (excluding fashion 
+dolls) 
+– moving eyes, articulated arms and legs, rooted hair similar to real 
+hair, animated activities, such as crying, bodily functions, smiling or 
+talking, with easy to dress clothing and accessories for imitating 
+familiar activities (bottle, blanket, etc.)   
+90.   3 years +   
+Functioning strollers, cribs, and furniture for dolls which imitate 
+real 
+versions 
+91.   2 years +   
+Toy tableware, pots, and feeding accessories for dolls 
+92.   2 years +   
+Simple role playing toys – home appliances sized to the child, 
+stoves, kitchen sets   
+93.   3 years +   
+Domestic appliances in a children’s size that are more realistic 
+but with- out actual function – stove, sewing machine, pressing 
+iron, blender, mixer, and other toy appliances   
+94.   2 years +   
+Audiovisual equipment that imitates real equipment – plastic 
+versions that imitate radios, CD players, portable media players, 
+telephones, cell phones, karaoke, and microphones which may have  
+limited functions   
+95.   2 years +   
+Miniatures of simple characters – Animals, small soldiers,   
+characters made of plastic such as zoo park, super-heroes, 
+fantasy/fictional characters, and historical themes   
+96.   3 years +   
+Articulated  figures with limited accessories – poseable 
+characters with articulated limbs, moving head and simple  
+mechanisms to simulate heroes, warriors, fictional or imaginative 
+stories and battles   
+97.   12 months +  
+Imitation dashboard panels – controls imitating driving activities 
+of cars, boats, airplanes or spaceships   
+98.   12 months +  
+Simple costumes and disguises – slip-on costumes without 
+fasteners and with large openings for arms and legs; basic dress-up 
+materials including hats, headscarves or other hair accessories and 
+shoes   
+99.   2 years +   
+Costumes, dress up clothing and accessories imitating 
+characters of leg-ends and tales–costumes sized to children   
+with accessories such as masks, helmets, swords   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+45 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+100.   3 years +   
+Objects imitating home and professional activities – 
+housekeeping ob- jects, carpenter and mechanic tools, physician   
+and nurse instruments, police, firefighter and soldier objects such 
+as helmets, tools, weapons and related accessories   
+101.   3 years +   
+Beauty care accessories for dolls – cosmetics, garments, 
+clothing accesso- ries, high-heeled shoes, and small bags   
+102.   3 years +   
+Soft or rigid playhouse toys with accessories sized to the 
+children – sales   
+stands, post office   
+103.   2 years +   
+Soft and rigid structures in which the child can play – houses, 
+caves, forts, tents, and tunnels   
+104.   3 years +   
+Play sets imitating urban and rural areas – commercial 
+establishments, stores, banks, gas stations, parking lots, post 
+offices, schools and classrooms, train and metro stations, hospital, 
+airports, bus stations, zoo parks, Noah’s Ark, fruit and vegetable 
+sales stands, towns, farms, and any other toys that imitate places 
+and regions   
+105.   2 years +   
+Books – contain special features such as pop-ups, hidden pictures 
+and dress-me   
+106.   2 years +   
+Themed mats for play – mats for playing on the floor with designs 
+imitating   
+towns with streets   
+107.   4 years +   
+Cards, stickers, and albums for collection – with play function   
+108.   
+3 years +   
+Doll houses and accessories – houses with multiple rooms and 
+furniture imitating kitchen, bedroom, dining room, etc.   
+109.   3 years +   
+Fashion dolls and accessories – articulated fashion dolls and their 
+fashion accessories and complements, such as furniture, personal 
+belongings, sports equipment and others   
+110.   18 months +  
+Dolls  for  imitating  care  activities  (bathing  and  feeding) – simple 
+dolls imitating babies, without hair or with moulded hair, with painted 
+eyes and without articulated arms and legs   
+ 
+Category F — 21 Sub-categories — Toys for creative activities 
+ 
+Sub- 
+category 
+Starting age Description and examples of appropriate toys 
+111.   5 years +   
+Pattern matching activities – geometrical parts or pins, made 
+of wood or plastic, coloured, to form figures or images   
+112.   4 years +   
+Stamps with images of animals, characters, designs, 
+alphabet, etc. for printing 
+113.   3 years +   
+Toys for creative activities – coloured paper, felt boards, or  
+plastic sticks to form scenes or figures, parts with magnets to 
+form play scenes   
+114.   3 years +   
+Body stickers or paints to be applied on the child – 
+cosmetics, tattoos for skin, and stickers for fingernails   
+115.   6 years +   
+Crafts such as weaving looms, needle embroidery kits, or 
+other sewing equipment 
+116.   3 years +   
+Insertion and tying toys and crafts – threading beads on yarn 
+or string etc.   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+46 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+117.   4 years +   
+Perforated and cut out toys 
+118.   8 years +   
+Engraving and metal work in simple to complex detail 
+119.   6 years +   
+Clay and ceramic crafts for modelling 
+120.   7 years +   
+Folding crafts – origami   
+121.   8 years +   
+Mock-ups, technical models – aircrafts, boats, cars, and 
+motorcycles with parts to assemble   
+122.   3 years +   
+Colouring and painting kits – detailed materials, stencils, 
+and templates for artwork; large assortment of coloured 
+crayons, pencils, thin-tipped felt mark- er pens, and water 
+colours   
+123.   2 years +   
+Colouring and painting materials – simple and limited 
+assortment of mate- rials and templates for artwork; large (easy 
+to grasp) crayons, chalk, broad- tipped felt marker pens, and 
+finger paints   
+124.   4 years +   
+Painting sets with water-based paints – with brushes and 
+accessories for paintwork or silk-screen   
+125.   4 years +   
+Drawing sets – toys with canvas and mats made of fabric, 
+paper or plastic to draw, colour and/or erase,―magic tracing ‖ 
+type toys, toys for reproduction and imitation of photocopies 
+(pantographs), sets with writing boards, black- boards, or flip 
+Charts   
+126.   3 years +   
+Modelling (manual) and moulding (with moulds) –manual   
+modelling and moulding with putty or dough moulds, utensils 
+for working with modelling putty   
+127.   5 years +   
+Moulding with plaster and modelling sands 
+128.   12 months +   
+Musical toys – simple musical instruments such as: pianos, 
+guitars, drums, tambourines, horns, and others   
+129.   12 months +   
+Simple play sets – basic structure with three to five figures 
+with limited detail   
+130.   4 years +   
+Electronic musical instruments – realistic and functional 
+keyboards, elec- trical guitars, electronic drums   
+131.   3 years +   
+Puppets and simple theatres made of wood, plastic or fabric, 
+with fixed eyes,   
+and detachable accessories   
+ 
+Category G — 15 Sub-categories — Toys for social relationships 
+ 
+Sub- 
+category 
+Starting 
+age 
+Description and examples of appropriate toys 
+132.   4 years +   
+Simple card games – simple card games, card decks for family play   
+133.   7 years +   
+Social family games – games for several players, with predefined   
+rules, whether or not requiring previous knowledge of miscellaneous 
+subjects, from medium to difficult knowledge levels   
+134.   4 years +   
+Co-operative games – board games for teaching teamwork by 
+emphasizing play rather than competition   
+135.   5 years +   
+Games of chance – dice, coin flipping, bingo, roulette   
+136.   4 years +   
+Table games with pathways – Table games with pathways to be 
+travelled by   
+using dice or spinners for indicating the number of moves   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+47 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+137.   4 years +   
+Social games for young children – with several players, involving a 
+simple degree of difficulty   
+138.   5 years +   
+Ability and skill games – games for balancing parts, capturing, 
+hitting the   
+target, among others that require ability, and fast reaction   
+139.   4 years +   
+Electronic ability and skill games – videogames, hand-held 
+videogames,   
+toys that simulate real life by a virtual character (avatar)   
+140.   5 years +   
+Simple strategy and reasoning games – checkers, trading card 
+games, dominoes, and similar   
+141.   6 years +   
+Games for strategy and reasoning – chess, table games that 
+require strategy   
+142.   9 years +   
+Simulation, conquering, and role-playing games – RPG type and 
+simulation, conquering and acquisition games, where the players 
+must make decisions by reviewing several situations and using 
+individual strategies for conquering territories, acquiring assets or   
+real estate properties, building towns, deciding on new positions for 
+characters so as to transform the story   
+143.   7 years +   
+General knowledge games – games involving knowledge on 
+miscellaneous subjects   
+144.   6 years +   
+Number and letter games (usually multiple players) – games 
+requiring the creation of or the discovery of hidden words or 
+numbers   
+145.   7 years +   
+Magic kits 
+146.   6 years +   
+Game collections – boxes with miscellaneous games   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+48 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+APPENDIX II 
+ 
+FORMAT FOR DECLARATION BY MANUFACTURER 
+(TO BE SUBMITTED WITH APPLICATION FOR GRANT OF LICENCE) 
+ 
+Date:       
+ 
+    Branch Office   
+Bureau of Indian Standards   
+ 
+Subject: Declaration For Application For Grant of Licence for Safety Of Toys Dear Sir,   
+ 
+ 
+With reference to my application for grant of licence to use Grant of Licence for Safety of Toys as per 
+Indian Standards under Scheme I of Schedule II of BIS (Conformity Assessment) Regulations, 2018, I 
+hereby declare the following:   
+ 
+1. I am applying for grant of licence/addition in scope of licence (strike out whichever is not 
+applicable) for the following toys:   
+ 
+Type   
+Descripti 
+on of toy   
+Category 
+No. and 
+Name   
+Sub- 
+category 
+No. and 
+Name   
+Input source for
+ 
+electric
+ 
+toy**  
+ 
+Starting 
+Age   
+Series 
+No.#   
+Applicable
+ 
+primary
+ 
+standard
+ 
+ 
+ 
+Applicable
+ 
+Secondary
+ 
+standard
+ 
+ 
+ 
+Non 
+electric   
+Rattle   
+Category A- 
+Toys for 
+sensorimotor 
+activities —  
+First age   
+Subcateg 
+ory 1- 
+Rattles 
+and  
+rings   
+NA   
+0 
+months+   
+S01   
+IS 9873 
+Part 1   
+IS   9873 
+Part  2,  3 
+and 9   
+ 
+Ring   -do-   -do-   NA   -do-   
+   
+*Details in the table are given for illustration. Also see sampling guidelines at Annex-A   
+** Input source for electric toys - battery operated, transformer operated or dual supply   
+#Details of models contained in each series with starting ages etc. shall be declared by manufacturer to BIS 
+separately and BIS shall endorse the series wise details of models separately in the licence document as 
+Annexure (see Annex-I)   
+ 
+2. I declare that the above varieties of toys in the  same series are of similar design, made from the 
+same materials and covered under a single sub-category. Design/Photographs and list of 
+materials of the above models are enclosed as per Annex-I 
+ 
+3. I  declare  that  I  have  read  and  understood  the  provisions  of  the  BIS  Guidelines  for  Certification  of 
+Toys as per Scheme I of Schedule II of BIS (Conformity Assessment) Regulations, 2018 and 
+agree to abide by the same.   
+ 
+4. I declare that all details and information provided by me above and in my application are true to 
+the best of my knowledge. In case of any discrepancies found in the declared information, I shall 
+be liable for suitable action.   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+49 
+  
+ 
+ 
+ 
+ 
+ 
+Regards   
+ 
+ 
+Signature of Firm’s CEO/Director/Authorized Representative 
+Name/Designation:       
+Firm’s Name/Address:       
+ 
+ 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+50 
+  
+ 
+ 
+ 
+ 
+ 
+ANNEX-I 
+SERIES WISE LIST OF MODELS 
+LICENCE NO. CM/L-    
+NAME OF LICENSEE -    
+ 
+ 
+ 
+ 
+1. SERIES NO: (STARTING AGE: ) 
+ 
+S.No. MODEL NUMBER TOY DESCRIPTION TOY IMAGE/PHOTO 
+    
+    
+    
+    
+ 
+2. SERIES NO: (STARTING AGE: ) 
+ 
+S.No. MODEL NUMBER TOY DESCRIPTION TOY IMAGE/PHOTO 
+    
+    
+    
+    
+ 
+3. SERIES NO: (STARTING AGE: ) 
+ 
+S.No. MODEL NUMBER TOY DESCRIPTION TOY IMAGE/PHOTO 
+    
+    
+    
+    
+ 
+4. SERIES NO: (STARTING AGE: ) 
+ 
+S.No. MODEL NUMBER TOY DESCRIPTION TOY IMAGE/PHOTO 
+    
+    
+    
+    
+ 
+SIGNATURE 
+NAME 
+DESIGNATION 
+DATE 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+51 
+  
+ 
+ 
+ 
+ 
+ 
+APPENDIX III 
+ 
+FORMAT FOR DECLARATION BY MANUFACTURER 
+(TO BE SUBMITTED WITH APPLICATION FOR CHANGE IN SCOPE OF LICENCE 
+I.E. ADDITION OF NEW SERIES) 
+ 
+ 
+Date:       
+ 
+    Branch Office   
+Bureau of Indian Standards   
+ 
+Subject: Declaration For Application For Change in Scope of Licence for Safety Of Toys   
+ 
+ 
+Dear Sir,   
+ 
+ 
+With reference to my application for Change in Scope of Licence for Safety of Toys i.e. addition of new 
+series in the scope of licence as per Indian Standards under Scheme I of Schedule II of BIS (Conformity 
+Assessment) Regulations, 2018, I hereby declare the following:   
+ 
+1. I am applying for addition in scope of licence for the following new varieties (new series) of 
+toys:   
+ 
+Type   
+Descripti 
+on of toy   
+Category 
+No. and 
+Name   
+Sub- 
+category 
+No. and 
+Name   
+Input source for
+ 
+electric
+ 
+toy**  
+ 
+Starting 
+Age   
+Series 
+No.#   
+Applicable
+ 
+primary
+ 
+standard
+ 
+ 
+ 
+Applicable
+ 
+Secondary
+ 
+standard
+ 
+ 
+ 
+Non 
+electric   
+Rattle   
+Category A- 
+Toys for  
+sensorimotor  
+Subcateg 
+ory 1-  
+Rattles  
+NA   
+0 
+months+   
+S01   
+IS 9873 
+Part 1   
+IS 9873   
+Part 2, 3 
+and 9   
+  
+activities — 
+First age   
+and 
+rings   
+     
+ 
+Ring   -do-   -do-   NA   -do-   
+   
+*Details in the table are given for illustration. Also see sampling guidelines at Annex-A   
+** Input source for electric toys - battery operated, transformer operated or dual supply   
+#Details of models contained in each series with starting ages etc. shall be declared by manufacturer to BIS 
+separately and BIS shall endorse the series wise details of models separately in the licence document as 
+Annexure (see Annex-I)   
+ 
+2. I declare that the above varieties of toys belong to a new series no. which  is  not  already 
+covered in the scope of my licence.   
+ 
+3. I declare that I have submitted/will submit the requisite fees for extension in scope of licence to 
+BIS.   
+ 
+ 
+4. I declare that I have read and understood the provisions of the BIS Guidelines for Certification of 
+Toys as per Scheme I of Schedule II of BIS (Conformity Assessment) Regulations, 2018 and   
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+52 
+  
+ 
+ 
+ 
+ 
+ 
+agree to abide by the same.   
+ 
+ 
+5. I declare that all details and information provided by me above and in my application are true to 
+the best of my knowledge. In case of any discrepancies found in the declared information, I shall 
+be liable for suitableaction.   
+ 
+Regards   
+ 
+ 
+Signature of Firm’s CEO/Director/Authorized Representative 
+Name/Designation:       
+Firm’s Name/Address:       
+ 
+ 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+53 
+  
+ 
+ 
+ 
+ 
+ 
+ANNEX-I 
+SERIES WISE LIST OF MODELS 
+LICENCE NO. CM/L-    
+NAME OF LICENSEE -    
+ 
+ 
+ 
+ 
+5. SERIES NO: (STARTING AGE: ) 
+ 
+S.No. MODEL NUMBER TOY DESCRIPTION TOY IMAGE/PHOTO 
+    
+    
+    
+    
+ 
+6. SERIES NO: (STARTING AGE: ) 
+ 
+S.No. MODEL NUMBER TOY DESCRIPTION TOY IMAGE/PHOTO 
+    
+    
+    
+    
+ 
+7. SERIES NO: (STARTING AGE: ) 
+ 
+S.No. MODEL NUMBER TOY DESCRIPTION TOY IMAGE/PHOTO 
+    
+    
+    
+    
+ 
+8. SERIES NO: (STARTING AGE: ) 
+ 
+S.No. MODEL NUMBER TOY DESCRIPTION TOY IMAGE/PHOTO 
+    
+    
+    
+    
+ 
+ 
+ 
+ 
+SIGNATURE 
+NAME 
+DESIGNATION 
+DATE 
+
+  
+  
+PM/ 9873/11 
+Oct 2023 
+ 
+54 
+  
+ 
+ 
+ 
+ 
+ 
+APPENDIX –IV 
+ 
+FORMAT FOR ADDING NEW MODELS TO SERIES ALREADY COVERED IN THE SCOPE 
+OF LICENCE BY LICENSEE 
+ 
+Date:       
+ 
+  Branch Office 
+Bureau of Indian 
+Standards 
+ 
+Sir/Madam   
+ 
+Subject: Declaration addition of new models in the series already covered in scope of 
+Licence for Safety Of Toys 
+ 
+With reference to my existing licence for safety of toys (Licence No CM/L-.....), I request BIS to 
+add the following new models in the series which are already covered in the scope of my licence   
+ 
+ 
+1 SERIES NO: (STARTING AGE: ) 
+ 
+S.No. MODEL NUMBER TOY DESCRIPTION TOY IMAGE/PHOTO 
+    
+    
+    
+    
+ 
+2. SERIES NO: (STARTING AGE: ) 
+ 
+S.No. MODEL NUMBER TOY DESCRIPTION TOY IMAGE/PHOTO 
+    
+    
+    
+    
+ 
+I declare that the above models belong to the series as indicated above which are already covered 
+in my licence.   
+ 
+I declare that the above information is true and correct to the best of my knowledge and undertake 
+that in case my declaration is found defective or incorrect BIS may take action as deemed 
+appropriate as per the BIS Act, Rules and Regulations which we shall comply with including recall 
+of such products from the market.   
+ 
+Sincerely,   
+ 
+SIGNATURE OF AUTHORISED SIGNATORY 
+NAME 
+DESIGNATION 
+NAME OF FIRM 
+CM/L-

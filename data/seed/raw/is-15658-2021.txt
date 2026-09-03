@@ -1,0 +1,430 @@
+भारतीय मानक ब्यूरो 
+BUREAU OF INDIAN STANDARDS 
+मानक भवन, ९, बहादुर शाह ज़फ़र मार्ग 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg 
+नई ददल्ली- ११०००२ 
+New Delhi – 110002 
+ 
+       PRODUCT MANUAL FOR 
+                                      CONCRETE PAVING BLOCKS 
+         ACCORDING TO IS 15658: 2021 
+ 
+ 
+ 
+Document No.- PM/ IS 15658/6/July 2021 
+ 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various products. The document may also be used by prospective applicants desirous of obtaining 
+BIS certification licence/certificate. 
+           
+ 
+उत्पाद मैन्य
+ु
+अल 
+आई एस 15658:2021 के अन
+ु
+सार 
+            खंडजे के लिए कंक्रीट ब्िॉक के ललए 
+ 
+ 
+ दस्तावेज़ संख्या – पी एम/ आई एस 15658/6/ज
+ु
+लाई 2021 
+ 
+भारतीय मानक ब्य
+ू
+रो की स्कीम-I (अन
+ु
+रूपता म
+ू
+लयाांकन) ववननयम , 2018 के तहत यह उत्पाद 
+मैन्य
+ु
+अल प्रमाणीकरण के प्रचालन में रीनत और पाररलशिता की स
+ु
+संगतता स
+ु
+ननश्चचत करने के ललए 
+सभी क्षेत्रीय/शाखा कायािलयों और लाइसेंसी द्वारा संदभि सामग्री के रूप में उपयोग ककया जाएगा। 
+बीआईएस प्रमाणीकरण लाइसेंस/ प्रमाणपत्र प्राप्त करने के इच्छ
+ु
+क भावी आवेदकों द्वारा भी इस 
+दस्तावेज़ का उपयोग ककया जा सकता है । 
+ 
+
+2 
+PM/ IS 15658/6/July 2021 
+ 
+ 
+ 
+PRODUCT MANUAL FOR                      
+                                     CONCRETE PAVING BLOCKS 
+ACCORDING TO IS 15658: 2021 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by  prospective  applicants  desirous  of 
+obtaining BIS certification licence/certificate. 
+ 
+1. 
+Product 
+: IS 15658 : 2021 
+ 
+Title 
+: CONCRETE PAVING  BLOCKS  
+ 
+No. of Amendments : Nil 
+    
+2. 
+Sampling Guidelines: 
+a) Raw material : As per Clause 5 of IS 15658:2021 
+b) 
+Grouping guidelines 
+: Please refer ANNEX – A 
+c) 
+Sample Size 
+: 50 blocks for all tests 
+    
+3. List of Test Equipment : Please refer ANNEX – B 
+    
+4. 
+Scheme of Inspection 
+and Testing 
+: Please refer ANNEX – C 
+    
+5. 
+Possible tests in a day : 
+ 
+a) Visual appearance (Clause 6.2.1) 
+b) Dimensions and tolerance (Clause 6.2.2) 
+c) Thickness of wearing layer (Clause 6.2.3) 
+6. 
+Scope of the Licence : 
+ 
+“Licence is granted to use Standard Mark as per IS 15658 : 2006 with the following 
+scope: 
+ 
+Name of the product CONCRETE PAVING BLOCKS 
+ 
+Grade designation M-30, M-35, M-40, M-50 and M-55 
+ 
+Thickness of Block --- mm (as applicable for the grade designation) 
+ 
+No of layer Single layer / Double layer 
+ 
+BUREAU OF INDIAN STANDARDS 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg, 
+New Delhi – 110002 
+
+3 
+ 
+ 
+PM/ IS 15658/6/July 2021 
+ 
+ 
+ANNEX A 
+ 
+Grouping Guidelines 
+ 
+ 
+1. IS 15658 : 2021 covers Precast Concrete Blocks for Paving with the following requirements : 
+i) Grade Designation: M-30, M-35, M-40, M-50 and M-55. 
+ii) Dimensions: 
+• The thickness of the blocks shall be not less than 50 mm and not more than 120 mm 
+and shall also meet the thickness requirement specified under Table 1 of   IS 15658: 
+2006. When agreed to between manufacturer and purchaser, Blocks of thickness more 
+than 120 mm may also be manufactured. 
+• Length and Width: To be specified by the manufacturer. 
+ 
+iii) Blocks can be manufactured in one layer or two layers. 
+2. Considering the above, Precast Concrete Blocks for Paving are categorized into the following 
+groups based on Grade Designation: 
+ 
+ 
+GROUP-I GROUP-II 
+ 
+GRADE DESIGNATION 
+ 
+M-30, M-35, M-40 
+ 
+M-50, M-55 
+ 
+3. For GoL/CSoL, one sample from each Group having the highest Grade Designation and any 
+thickness shall be drawn and tested for all requirements, in order to cover the complete range 
+and grade of that Group. 
+ 
+4. The Firm shall declare the varieties of paver blocks intended to be covered in the Licence. The 
+Scope of Licence may be restricted based on the Manufacturing and Testing capabilities of the 
+Manufacturer. 
+ 
+5. During the operation of the Licence, BO shall ensure that all the Grade Designations, Types 
+and Sizes covered in the Licence are tested in rotation, to the extent possible. 
+
+3 
+ 
+ 
+   PM/ IS 15658/6/July 2021 
+ 
+ 
+ANNEX B 
+ 
+List of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+ 
+ 
+Sl. 
+No. 
+Tests used in with Clause Reference Test Equipment 
+1 
+Aggregates (clause 4.2) 
+- Test sieves for aggregate testing 
+2 
+Dimensions, tolerance and thickness of 
+wearing layer (clause 6.2.2, 6.2.3) 
+- Steel calipers 
+- Steel rules/Vernier caliper 
+- Weighing balance 
+- Sheets of thin cardboard of uniform 
+thickness 
+- Sharp pencil 
+- Sharp scissors 
+- Odd leg marking gauge 
+- Engineers square or profiled template 
+- Feeler gauge 
+3 
+Water absorption 
+( clause 6.2.4) 
+- Weighing balance 
+- Drying air oven 
+4 Compressive strength (clause 6.2.5) 
+- Compression testing machine with bearing 
+blocks  and  plates  (rate  of  loading  15  ±  3 
+N/mm
+2
+ min ) 
+- Water bath capable to maintain 
+temperature 27 ± 2° C 
+- Capping     of     specimen     arrangement/ 
+plywood 
+5 Abrasion resistance (clause 6.2.6) - Abrasion testing machine 
+- Hot air oven 
+- Weighing balance 
+- Standard abrasive powder 
+- Grinding disk with defined load 
+- Stop watch 
+6 
+Tensile splitting strength (clause 6.2.7) 
+- Testing machine with rigid bearers of radius 
+75 ± 5 mm 
+- Packing piece thickness 4 ± 1 mm & width 
+15 ± 1 mm 
+- Water bath capable to maintain temperature 
+27 ± 2° C 
+
+4 
+ 
+ 
+PM/ IS 15658/6/July 2021 
+ 
+  
+7 
+Flexural strength /breaking load (clause 
+6.2.8) 
+- Testing apparatus with rollers of  diameter  
+25 - 40 mm 
+- Loading machine with rate 6 kN/min 
+8 Freeze–thaw durability (clause 6.3.3) - Freezing cabinet/cold room : -15 ± 2 °C 
+- Thawing chamber : 23 ± 3 °C 
+- Moist chamber : temperature 23 ± 2 °C & 
+humidity 90 % 
+- Weighing balance 
+- Container 
+ 
+The above list is indicative only and may not be treated as exhaustive. 
+
+5 
+ 
+ 
+PM/ IS 15658/6/July 2021 
+ 
+ 
+ANNEX C 
+ 
+Scheme of Inspection and Testing 
+ 
+1. LABORATORY - A laboratory shall be maintained which shall be suitably equipped (as 
+per the requirement given in column 2 of Table 1) and staffed, where different tests given in 
+the specification shall be carried out in accordance with the methods given in the specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipments. 
+ 
+2. TEST RECORDS –The manufacturer shall maintain test records for the tests carried out to 
+establish conformity. 
+ 
+3. LABELLING AND MARKING– As per the requirements of IS 15658: 2021. 
+ 
+4. CONTROL  UNIT – Every  25000  Precast  Concrete  Blocks  for  Paving  or  part  thereof  of 
+same size/shape and grade manufactured under identical condition from raw material of same 
+source in a week shall constitute one control unit. 
+5. LEVELS OF CONTROL - The tests as indicated in column 1 of Table 1 and the levels of 
+control submitted by the manufacturer in column 3 of Table 1, shall be carried out on the whole 
+production of the factory which is covered by this plan and appropriate records maintained in 
+accordance with paragraph 2 above. 
+ 
+5.1 All  the  production  which  conforms  to  the  Indian  Standard  and  covered  by  the  licence 
+should be marked with Standard Mark. 
+ 
+6. REJECTIONS–Disposal of non-conforming product shall be done in such a way so as to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+
+6 
+ 
+ 
+PM/ IS 15658/6/July 2021 
+ 
+TABLE 1 
+(1) (2) (3) 
+Test Details 
+Test equipment 
+requirement 
+R: required (or) 
+S: Sub-
+contracting 
+permitted 
+Recommended Levels of Control 
+Clause Requirement 
+Test Methods 
+Clause Reference 
+No. of 
+Sample* 
+Frequency Remarks 
+5.1 Cement 5.1 IS 15658 
+S - - 
+Shall be ISI marked and received with test 
+certificate. 
+5.2 Mineral Admixture 5.2 IS 15658 
+S One 
+Once in three 
+month for each 
+type and source of 
+admixture supply 
+No     further     testing     is     required,     if 
+accompanied  with  test  certificate  or  ISI 
+marked. 
+5.3    Chemical Admixtures 5.3 IS 15658 
+S One Each 
+consignment 
+No     further     testing     is     required,     if 
+accompanied  with  test  certificate  or  ISI 
+marked 
+5.4 Coarse and Fine 
+Aggregates 
+5.4 IS 15658 
+S 
+ 
+R 
+(for sieve 
+analysis 
+only) 
+One 
+Once in a year for 
+each source and 
+size 
+Additional sample shall be tested whenever 
+there  is  change  of  source  of  supply  of 
+material. Maximum aggregate  size  used  in 
+manufacturing shall be ensured in house for 
+each consignment  received  or  once  in a 
+week,   whichever   is   earlier.   No   further 
+testing is required, if accompanied with test 
+certificate or ISI marked 
+5.5 Pigments 5.5 IS 15658 
+S One Each consignment 
+No     further     testing     is     required,     if 
+accompanied  with  test  certificate  or  ISI 
+marked 
+5.6 Water 5.6 IS 15658 S One 
+Once in a year for 
+each source 
+Additional testing is required 
+whenever there is change of source. 
+7.1.1  
+General Quality 
+7.1.1 
+IS 15658 
+- Each block - - 
+
+7 
+ 
+PM/ IS 15658/6/July 2021 
+ 
+ 
+7.1.2 Visual Inspection 7.1.2 IS 15658 R Two Each control unit - 
+7.1.3 
+Colour and 
+Texture 
+7.1.3 IS 15658 R Each block - - 
+7.2 Dimensions and 
+Tolerances 
+7.2 and 
+Annex B 
+IS 15658 R Eight blocks Each control unit - 
+7.2 
+Thickness of 
+wearing Layer 
+7.2 IS 15658 R Eight blocks Each control unit - 
+7.3 Water Absorption 
+7.3 and 
+Annex C 
+IS 15658 R Three blocks Once in a month - 
+7.3 
+Compressive 
+Strength 
+7.3 
+Annex D 
+IS 15658 
+R Four blocks Once in a month 
+Samples  may  be  selected  in  such  a 
+manner that over a period of time, paver 
+blocks of all grades, shapes and sizes etc 
+are tested. 
+7.3 
+Abrasion 
+Resistance 
+7.3 and 
+Annex E 
+IS 15658 R Six blocks Once in a month 
+7.3 Tensile Splitting 
+Strength 
+7.3 and 
+Annex F 
+IS 15658 
+S Four blocks 
+Once in six 
+months 
+7.3 Flexural 
+strength/ 
+Breaking load. 
+7.3 and 
+Annex G 
+IS 15658 
+S Four blocks 
+Once in six 
+months 
+7.3 
+Freeze- thaw 
+durability 
+7.3 and 
+Annex H 
+IS 15658 
+S Three blocks 
+As required by the Purchaser or once in a year, whichever 
+is earlier 
+* If any sample fails, twice the number of samples from the same control unit shall be tested for that requirement and if any failure is observed in 
+retested sample, the control unit shall be rejected. 
+Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empanelled by the Bureau. 
+Note-2: The control unit and levels of control as decided by the Bureau are obligatory to which the licensee shall comply with.

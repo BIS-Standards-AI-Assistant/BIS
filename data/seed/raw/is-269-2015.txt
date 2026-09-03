@@ -1,0 +1,869 @@
+PM/ IS 269/ 2/ October 2019   
+ 
+ 
+BUREAU OF INDIAN STANDARDS 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+1 
+ 
+PRODUCT MANUAL FOR  
+ORDINARY PORTLAND CEMENT  
+ACCORDING TO IS 269: 2015 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by  prospective  applicants  desirous  of 
+obtaining BIS certification licence/certificate. 
+1. 
+Product 
+: IS 269 : 2015 
+ 
+Title 
+: ORDINARY PORTLAND CEMENT  
+ 
+No. of Amendments 
+: Nil 
+    
+2. 
+Sampling Guidelines: 
+a) 
+Raw material 
+: 
+Performance improver (if added) – as per clause 5.1.1 and 
+Table 1 of IS 269 
+ 
+b) 
+Grouping guidelines 
+: 
+Each Grade of OPC shall be tested to cover that  Grade of 
+Cement in the licence.  
+c) 
+Sample Size 
+: 
+Ordinary Portland Cement  –  8 kg for physical test 
+                                    1 kg for chemical test 
+Conformity   of Raw   material per   the   relevant   Indian 
+Standard shall be ensured at the time of GoL/CSoL. 
+    
+3. 
+List of Test Equipment 
+: Please refer ANNEX – A 
+ 
+ 
+  
+4. 
+Scheme    of    Inspection 
+and Testing 
+: Please refer ANNEX – B 
+ 
+ 
+ 
+ 
+5. 
+Possible tests in a day : 
+ 
+(i) Insoluble Residue 
+(ii) Loss of ignition 
+(iii) Fineness 
+(iv) Setting time  
+6. 
+Scope of the Licence : 
+ 
+“Licence  is  granted  to  use  Standard  Mark on Ordinary   Portland   Cement   as per                   
+IS 269 : 2015 for Grades ---------”. 
+ 
+Any other aspect required 
+as per the Standard 
+Transverse  strength  test  is  optional  test  as  per  agreement 
+between purchaser and manufacturer. 
+
+PM/ IS 269/ 2/ October 2019   
+ 
+ 
+2 
+ 
+ANNEX A 
+List of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+ 
+Sl 
+No. 
+Tests used in with Clause Reference Test equipment 
+1 
+ 
+Fineness Clause 7 Table 3  Blaine’s apparatus variable flow type 
+Stop watch with start-stop mechanism 
+Mercury for calibration 
+Balance, Standard weights 
+Standard Cement  
+Manometer liquid (di-butyl phthalate or light 
+mineral oil.) 
+Mercury of reagent grade or better, Pyknometer 
+Circular discs of filter paper of medium porosity 
+(mean pore diameter 7 μ). 
+Le-Chatelier’s flask 
+Constant temperature water bath to maintain 
+temp. within ± 0.1 ° C 
+2 
+ 
+Soundness by Autoclave  
+Clause 7 Table 3  
+Auto clave machine with thermostatic control to 
+maintain pressure of 2.1 MPa for 3 hrs, pressure 
+to be attained within 1-1 ¼ hrs;  
+L-Shape thermometer LC 1 °C 
+Pressure gauge 0-42 kg/cm
+2  
+LC = 0.4 kg/cm
+2
+ 
+Humidity chamber with temperature & RH 
+control 27  ± 2 °C, RH  90 to 100 % 
+Standard bar 308 mm, max 
+Bar moulds  25 x 25 x 282 mm 
+Length comparator with dial gauge 
+Mineral oil for covering moulds 
+3 
+ 
+Soundness by Le-chatelier Method  
+Clause 7 Table 3 
+ 
+Le-Chatelier’s water bath preferably with 
+thermostatic control raising  temperature from    
+27 ± 2
+ 0
+ C to boiling in 27 ± 3 minutes 
+Le-Chatelier’s  moulds with weights and cover 
+glasses minimum 8 nos. 
+Humidity chamber with temperature & RH 
+control 27 ± 2
+ 0
+ C, RH 90 to 100 % 
+Steel scale 12" (304.8 mm) 
+
+PM/ IS 269/ 2/ October 2019   
+ 
+ 
+3 
+ 
+4 Setting time  
+Clause 7 Table 3 
+Vicat apparatus 
+Needle for  Consistency, IST& FST testing 
+Moulds 
+Stop Watch 
+Balance - 1000g ± 0.1g and Standard Weights  
+1mg to 500 gm 
+Gauging trowel of weight 210 ± 10 g 
+5 Compressive Strength  
+Clause 7 Table 3 
+Vibration machine with timer & cube mould 
+fitting assembly 12000 ± 400 vibration  per min. 
+Compressive Strength machine  
+Poking  Rod , Petroleum Jelly  
+Proving ring with all accessories suitable for 
+calibration of  CST machine 
+Tachometer 
+Cube Moulds   70.6 × 70.6 mm, Poking rod  
+Gauging trowel (210 ± 10 g) 
+ gauging plate, stainless steel(non-perforated) 
+Standard sand grade 1, 2 and 3 (as per IS 650) 
+Curing tank of appropriate size with water 
+circulation arrangement 
+Graduated glass cylinders  150 to 200 ml  
+Humidity chamber with temperature  & RH 
+Control  27  ± 2° C, RH 90 to 100 % 
+ 
+6 Transverse Strength Test 
+Clause 7, Table 3 
+Moulds   
+Planetary Mixer, Standard Sand 
+Jolting Apparatus, Scraper, Demolding device  as 
+per IS 4031 (Part 8) 
+7 IS 269 : 2015 
+General equipments for Cement testing 
+a) To control  humidity & temperature 
+in lab 
+1.  Humidity chamber with temperature & RH  
+control 27  ± 2 °C,  RH 90 to 100 % 
+2. Suitable arrangement to demonstrate 
+maintenance of temp. of 27 ± 2 ° C  & RH 65 ± 
+5% constantly 
+b) For cement Sampling Mixing trays –adequate size including trays of 24 
+partitions for keeping hourly samples 
+c) To control the residue of cement Sieves of size (300, 212, 150, 90, 75 & 45μ) 
+ 
+d) To measure temperature 
+ 
+Thermometers 
+ 
+
+PM/ IS 269/ 2/ October 2019   
+ 
+ 
+4 
+ 
+e) Lab ball mill (motorized) 
+ 
+To grind the clinker, slag & gypsum sample in lab 
+ball mill for testing 
+f) To weigh the material 1. Platform type balance 
+2. Electrical balance 
+3 Weight box with weights   (1 mg - 500 g) 
+9 
+General test equipments for chemical testing  
+Clause 6 , Table 2 of IS 269  : 2015 
+ Muffle Furnace with thermostatic control,  
+Range 0 – 1200° C 
+Oven with thermostatic control 0-300° C 
+Heater and hot plate 
+Distillation Assembly 
+Crucible:  Platinum or  Porcelain / silica  
+Filter paper (No- 1, 40, 41, 42) 
+Desiccators with cover & Desiccant 
+Water bath 
+pH meter/paper 
+Glassware - volumetric flask -0-250 ml,              
+beaker 0-250 ml, 
+measuring cylinder 0-50,100,500, 1000 ml, 
+burette 0-25/50 ml,  
+conical flasks- 0-250 ml, pipette 0-5,10, 25, 50 ml 
+All chemicals required for complete chemical 
+analysis of cement 
+Tongs including platinum tipped tong 
+Wire gauge with asbestos sheet at the middle 
+Washing bottle 
+Mortar mixer-  4.75 l 
+Glass thermometer 
+All required chemicals as per IS 4032 Ordinary 
+portland cement and Portland clinker testing. 
+10 Testing  arrangement  for  performance  improver  as  per  Clause  5.1.1  and  Table  1  of          
+IS 269 : 2015 
+ 
+The above list is indicative only and may not be treated as exhaustive.
+
+                 PM/ IS 269/ 2/ October 2019   
+ 
+5 
+ 
+ ANNEX B  
+SCHEME OF INSPECTION AND TESTING 
+ 
+1. LABORATORY - A  laboratory  shall  be maintained  which  shall  be  suitably  equipped                     
+(as per the requirement given in column 2 of Table 1) and staffed, where different tests given 
+in  the  specification  shall  be  carried  out  in  accordance  with  the  methods  given  in  the 
+specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipments. The following 
+equipments shall be calibrated at a frequency shown against each and records kept.  
+ 
+ 
+2.  TEST  RECORDS – The  manufacturer  shall  maintain  test  records  in  various  formats,            
+Form 1 to Form 18 for the tests carried out to establish conformity. 
+ 
+3. LABELLING AND MARKING – Labeling and marking shall be as given below: 
+ 
+3.1 STANDARD MARK - The Standard Mark, as specified  by  BIS, shall be printed or 
+stenciled on each bag or drum of Ordinary  Portland  Cement or on the label applied to it, 
+provided the material in each bag or package to which the mark thus applied conforms to 
+the specification.  The  size  of  the  Standard  Mark  shall  be  either 160 x 120 mm or               
+80 x 60 mm for packing in quantity of 50 kg and above. For other  packing of lower 
+quantity, a photographic reduction is permitted. 
+ 
+3.2 MARKING - As per the requirements of IS 269: 2015. 
+3.2.1 In addition to above, following marking shall also be marked: 
+ 
+a) Name  of original  manufacturer  of  cement  with  BIS  licence  number  in  case  of 
+repacking unit. 
+ 
+b) Any  other  marking  required  under provisions  of  Legal  Metrology  Act,  2009  and 
+Legal Metrology (Packaged Commodities) Rules, 2011 framed thereunder. 
+ 
+Sl. No. TEST EQUIPMENT FREQUENCY OF CALIBRATION 
+1. Blaine’s apparatus Daily with licensee’s own Standard cement sample and 
+monthly  with  standard  cement  samples  supplied  by 
+NCCBM. 
+2. Compressive 
+strength Testing 
+machine 
+Once in a month with Licensee’s own Proving Ring and 
+the  Proving  Ring  shall  be  Calibrated  once  in  two  years 
+from a NPL/NABL Accredited Calibrating body or NPL 
+or NPL accredited Proving Ring manufacturer. 
+3. Autoclave pressure 
+gauge 
+Once in a month by licensee’s own dead weight pressure 
+gauge  tester  OR  once  in  six  months  from  accredited 
+calibrating body or NPL/NABL accredited manufacturer 
+of such gauges. 
+4. Vibration machine Once  in  a  month  by  licensee’s  own  Tachometer.  The 
+tachometer  shall  be  calibrated  once  in  a  year  from 
+NPL/NABL accredited outside agency. 
+5. Dead weight 
+pressure gauge 
+Tester (if available) 
+Once in four years from NABL accredited Tester      (if 
+available) Lab or OEM (original Equipment 
+manufacturer) having NPL/NABL accredited calibrator. 
+
+                 PM/ IS 269/ 2/ October 2019   
+ 
+6 
+ 
+3.2.2 All  the  information  including  BIS  Standard  Mark  except  Manufacturers  Registered 
+Trade Mark shall be applied on each bag in BLACK COLOUR. 
+ 
+Note :   
+1. For  each calendar year, the first week shall be counted as 7 days from 1
+st 
+of January    
+and  subsequent  weeks  numbered  serially  accordingly.  The  bags  shall  be  marked  as                        
+W 0l/MM/YY......  W 51/MM/YY.......  etc. 
+2. Label  mentioned  at 3.1 and 3.2 above  shall  be  attached  to  the  seal  of  the  container. 
+The seal shall be of such a design that it shall automatically get destroyed on opening. 
+3. The colour  of the bag and background colours should  be in contrast to  the colour of 
+the Standard Mark and the details so that the markings are conspicuous. 
+ 
+4. CONTROL UNIT –   
+ 
+4.1 For  manufacturing  units  of Ordinary Portland  Cement: The  tests,  as  indicated  in 
+Table 1 attached and at the levels of control specified therein, shall be carried out on the 
+whole production of the factory which is covered by this scheme and appropriate records 
+maintained in accordance with clause 2 above.  
+ 
+4.2 For packing  of Ordinary Portland  Cement at  bulk  cement  terminal: The  tests,  as 
+indicated in Table 2 attached and at the levels of control specified therein, shall be carried out 
+on  the  whole  packing  of Ordinary Portland  Cement and appropriate  records  maintained  in 
+accordance with clause 2 above.   
+ 
+4.2.1 For bulk packing units as per clause 4.2, all cement of one consignment received shall 
+constitute one batch. 
+ 
+4.2.2 Batch mixing may be permitted for packing units, which are extended packing terminals 
+of the same cement manufacturer (licensee) subject to packing units obtaining test certificates 
+from  the  manufacturer  and  keeping  proper  records. If  the  cement  is  received  from  different 
+units of the same manufacturer (different licensees) batch mixing of cement is not permitted. 
+The  Batch  integrity  shall  be  ensured  at  all  stages  of  packing and the packer  shall  maintain 
+appropriate  controls  and  checks  to  ensure  that  there  is  no  chance  of  mix  up  of  different 
+batches.  Adequate  care  shall  be  taken  to  avoid  spoilage  during  handling,  packing  and 
+storage.  
+ 
+4.2.3  If bulk packing unit is instructed by  BIS for suspension of licence due to the failure of 
+the  samples,  such  instruction  will  automatically  apply  to  the original  manufacturer  of  the 
+cement,  as  per  relevant suspension  of  licence guidelines.  An  undertaking  to  this  effect shall 
+be obtained from the bulk packers and the original cement manufacturer. 
+ 
+4.2.4 Test Certificate of each original batch of cement shall be obtained from the supplier and 
+test results recorded. On the basis of tests and inspection, the decision regarding conformity 
+or otherwise of the consignment/batch to a given requirement shall be taken. 
+ 
+4.3 WEIGHMENT – One filled bag from each nozzle shall be taken at random twice in each 
+shift of operation and weight checked in case of electronic packers with recorders. In all other 
+cases one filled bag from each nozzle shall be checked once in two hours. The records shall 
+be maintained in Form 1. The bag shall be so chosen for weighment such that bags from each 
+nozzle are taken for weighment. The weighing and packing machines shall be adjusted as and 
+when  necessary  in  such  a  way  that  net  quantity  of  each  bag  shall  be  in  accordance  with  the 
+
+                 PM/ IS 269/ 2/ October 2019   
+ 
+7 
+ 
+tolerances given in Annex B and clause 10.1.1 of IS 269 : 2015.  Such adjustments for each 
+nozzle shall be recorded in Form 1 under remarks column. 
+ 
+4.3.1  For  packing  of   Ordinary Portland Cement in  bulk  cement  terminal  weighment  of 
+hourly  check  of  mass  of  drums  also  shall  be  done  in  addition to weighment  of  bags 
+mentioned  in  para 4.3 above.  The  records  of  weighments  shall  be  maintained  in  Forms  10    
+and 12. 
+ 
+4.4 RAW MATERIALS 
+ 
+4.4.1 Routine  analysis  of  various  raw  materials used  in the  manufacture  of Ordinary 
+Portland Cement shall be made at intervals of a month or whenever there is a change in 
+the  source/mine  area  stratification  whichever  is  earlier  and  appropriate  records  of  the 
+analysis and of the Physical composition of the mixtures shall be maintained in Form 2. 
+This analysis is not  applicable  for  Packing  Units  of Ordinary Portland Cement at  bulk 
+cement terminal.  
+ 
+4.5 PERFORMANCE   IMPROVER – Manufacturer   shall declare   performance 
+improver  and  its  percentage  added  in  the  ordinary  portland cement.  The  details  of  such 
+performance   improver   added   to   cement   and   its   percentage   shall   be   printed   on 
+bags/package of cement. 
+ 
+4.6. PACKING - The  Cement  shall  be  packed  in  bags as specified  in  clause  10 of                          
+IS 269:  2015.  A  test  certificate  either  from  the  manufacturer  or  from  any  recognized 
+testing  laboratory  shall  be  received  along  with  each  consignment of  bags.  Alternatively 
+the samples of bags from  each consignment shall be tested by the cement manufacturer 
+either in his own laboratory or any other BIS recognized laboratory before they are used 
+for  packing  cement.  No  testing  would  be  necessary  if  the  bags  carry  BIS  Certification 
+Mark. The bag shall be in good condition at the time of packing. 
+ 
+5. LEVELS OF CONTROL - The tests as indicated in column 1 of Table 1 and the levels of 
+control in  column  3  of  Table  1,  shall  be  carried  out  on  the  whole  production  of  the  factory 
+which is covered by this plan and appropriate records maintained in accordance with clause 2 
+above.  
+ 
+5.1. PRODUCTION  DATA - The  licensee  shall  send  to  BIS  a  statement  of  quantity 
+produced, marked and exported by him and the value thereof at the end of each quarter of the 
+operative  period as  per  the  enclosed  proforma and  shall  also  submit  these  details  to BIS  at  
+the end of the operative year duly authenticated by a Chartered Accountant. 
+ 
+6. REJECTIONS – Disposal of non-conforming product shall be done in such a way so as to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+ 
+ 
+
+                 PM/ IS 269/ 2/ October 2019   
+ 
+8 
+ 
+Table 1 – Levels of Control (Grinding/Packing Unit) 
+(1) 
+(2) 
+(3) 
+TEST DETAILS 
+Test equipment 
+requirement 
+R: required (or) 
+S: Sub-
+contracting 
+permitted 
+RECOMMENDED LEVELS OF CONTROL 
+Clause Requirement Test Methods  
+Clause Reference 
+Number 
+of sample 
+Frequency Remark 
+Cement 
+Grinding/Blending 
+Cement Packing 
+5.1 and 
+5.1.1, 
+Table 1 
+Performance improver  5.1.1 IS 269 S One One  sample  shall  be  tested from  each  supplier  once  in  a 
+month/whenever  there  is  change  of  source  of  supply  of 
+material as  per relevant Indian  Standard  as  given  in  Table  1 
+of  IS  269:  2015. No  further  testing  required  if  accompanied 
+with test certificate or ISI marked. 
+6 Table 2 Chemical Requirement   
+i) LSF 6 IS 269 R One Daily Composite 
+sample 
+Weekly composite 
+sample 
+- 
+ii) AF Ratio 9 IS 269 R One Daily Composite 
+sample 
+Weekly composite 
+sample 
+- 
+iii) Insoluble residue 6 IS 269 
+IS 4032 
+R One Daily Composite 
+sample 
+Weekly composite 
+sample 
+- 
+iv) Magnesia 6 IS 269 
+IS 4032 
+R One Daily Composite 
+sample 
+Weekly composite 
+sample 
+- 
+v) Total Sulphur content 
+calculated as sulphuric 
+anhydride (SO
+3
+) 
+6 IS  269 
+IS 4032 
+R One Daily Composite 
+sample 
+Weekly composite 
+sample 
+- 
+vi) Loss on ignition 6 IS 269 
+IS 4032 
+R One Daily Composite 
+sample 
+Weekly composite 
+sample 
+- 
+vii) Chloride Content 6 IS 269 
+IS  4032 
+R One - Weekly composite 
+sample 
+This  test  shall  also 
+be carried out 
+whenever   there   is 
+any change in 
+source  of  any  raw 
+material. 
+
+                 PM/ IS 269/ 2/ October 2019   
+ 
+9 
+ 
+viii) Alkali Content 6 - S One - - 
+Pl   see   note   under    
+Table 2 of  IS 269: 
+2015. 
+7 Table 3  Physical Requirement  
+i) Fineness 7 IS  269   
+ IS 4031 (Part 2) 
+R One 1. Every alternate 
+hourly from each 
+mill separately. 
+2. Daily 
+Composite sample 
+Daily Composite 
+sample 
+- 
+ii) Soundness                       
+(Le-Chatelier  method 
+and Autoclave method) 
+7 IS 269 
+IS 4031(Part 3) 
+R One Daily Composite 
+sample 
+Daily Composite 
+sample 
+- 
+iii) Setting Time 7 IS 269 
+IS 4031 (Part 5) 
+R One One sample per 
+shift (Composite 
+sample) 
+Daily Composite 
+sample 
+- 
+iv) Compressive strength 7 IS 269 
+IS 4031 (Part 6) 
+R One Daily Composite 
+sample 
+Daily Composite 
+sample 
+- 
+v) Transverse       strength 
+(Optional) 
+7 IS 269 
+IS 4031(Part 8) 
+S One Weekly composite 
+sample 
+Weekly composite 
+sample 
+- 
+  
+ NOTES – 
+1. Composite sample shall be made out of hourly samples for the required period (Pl see IS 3535 Methods of sampling hydraulic cements).  
+ If cement is manufactured using same proportion of raw materials from more than one cement mill, sample from each mill shall be tested for fineness as per the above table. 
+For all other parameters composite samples from all the mills shall be tested.  
+ If cement is manufactured using different proportion of raw materials from more than one cement mill, sample from each mill shall be tested for all requirements as per the 
+above table.   
+2. For manufacturing units where there is no packing silo and cement is packed directly from cement grinding, the frequency of tests specified for cement grinding stage would 
+apply for the various tests to be carried out on samples taken from cement mill spouts along with weekly chloride content test. 
+  
+
+                 PM/ IS 269/ 2/ October 2019   
+ 
+10 
+ 
+Table 2 Level of Control (Bulk Packing Unit) 
+ 
+ 
+  
+(1) 
+(2) 
+(3) 
+TEST DETAILS 
+Test equipment 
+requirement 
+R: required (or) S: 
+Sub-contracting 
+permitted 
+RECOMMENDED LEVELS OF CONTROL 
+Clause 
+Requirement Test Methods  
+Clause Reference 
+Number of 
+samples 
+Frequency Remarks 
+6 , Table 2 
+(iii) 
+Insoluble 
+Residue 
+6 IS  269 
+IS 4032 
+R One Each batch To  be  tested  in  laboratory  at  bulk 
+terminal packing unit. 
+ 
+6,  Table 2  
+(vi) 
+Loss  on  
+Ignition 
+6 IS 269 
+IS 4032 
+R One Each batch 
+7, Table 2 (i) Fineness 7 IS 269 
+IS 4031(Part 2) 
+S One Each batch - 
+7, Table 2 (ii) Soundness 7 IS 269 
+IS 4031(Part 3) 
+S One Each batch 
+7, Table 2 (iii) Setting Time 7 IS 269 
+IS 4031(Part 5) 
+S One Each batch 
+7, Table 2 (iv) Compressive 
+strength 
+7 IS 269 
+IS 4031(Part 6) 
+S One Each batch 
+
+                 PM/ IS 269/ 2/ October 2019   
+ 
+11 
+ 
+Form No. 1 
+FORMAT FOR MAINTENANCE OF TEST RECORDS WEIGHMENT CONTROL AT PACKING STAGE 
+ 
+Date Shift Time (Hourly) No. of Bags Net mass of bags from nozzles Remark. 
+            
+ 
+Form No. 2 
+RAW MATERIAL TESTING 
+ 
+Date of receipt of 
+material 
+Date of 
+testing 
+Name of Material Source of supply and consignment 
+No. 
+Details of analysis for specified requirements 
+     
+Form 3 
+PRODUCTION DATA 
+(POST GRINDING DETAILS OF PRODUCTION ACCEPTED AND REJECTED FOR STANDARD MARK) 
+ 
+Shift Quantity Passed for Standard mark Rejected Remark 
+     
+Form No. 4 
+CLINKER CHEMICAL COMPOSITION (DAILY COMPOSITE SAMPLE) 
+Date of 
+manufacture 
+Total loss on 
+ignition 
+Insoluble 
+residue 
+Alkali 
+content 
+as Na
+2
+O 
+@ 
+C
+3
+S C
+3
+A
+  
+C
+3
+S+ 
+C
+2
+S 
+SO
+3 
+MgO Chloride Free 
+lime 
+LSF Alumina 
+factor 
+Sample 
+Pass/Fail 
+Remarks 
+               
+ 
+@ Alkali content test to be conducted as and when desired by Purchaser 
+Form No. 5 
+CLINKER GROUND WITH GYPSUM (DAILY COMPOSITE SAMPLE) 
+Date of 
+grinding 
+Fineness Soundness Setting time Compressive strength Sample 
+Pass/Fail 
+Remark 
+Le-Chatelier Autoclave Initial Final 3 days 7 days 28 days 
+        
+ 
+
+                 PM/ IS 269/ 2/ October 2019   
+ 
+12 
+ 
+ 
+Form 6 
+ORDINARY PORTLAND CEMENT (GRINDING/ BLENDING) (Daily/Weekly Composite sample) 
+ 
+ 
+@ Alkali content test to be conducted as and when desired by Purchaser 
+Form No 7 
+ORDINARY PORTLAND CEMENT GRINDING (For Alternate Hourly Sample) 
+ 
+Date of 
+grinding 
+Time Fineness Setting Time  
+Initial & Final 
+Sample  
+Pass/Fail 
+Mode of disposal or action taken if sample fails 
+      
+ 
+ Form No 8 
+ORDINARY PORTLAND CEMENT PACKING STAGE (Daily/Weekly Composite Sample) 
+ 
+@ Alkali content test to be conducted as and when desired by Purchaser 
+Form No 9 
+CALIBRATION 
+ 
+ 
+Sl. No  
+  
+Date of 
+calibration  
+  
+Result of Calibration (Test records indicating details of standard values and 
+observed values for each equipment  to be kept in proforma for which various 
+columns be devised; as required) 
+Name of equipment 
+Action taken if equipment found 
+defective 
+Sl.No.  
+(If any) & 
+Remarks  
+     
+Note: The above records are to be kept separately for each equipment. 
+Date of 
+grinding 
+LSF AF IR MgO Total 
+Sulphur 
+calculated 
+as SO
+3 
+LOI Chloride 
+Content 
+Alkali 
+content 
+@ 
+Fineness Soundness 
+(Le-
+chatelier & 
+Autoclave) 
+Setting 
+Time 
+Initial 
+& Final 
+Compressive 
+strength 
+Transverse 
+Strength 
+Sample  
+Pass/Fail 
+Action 
+taken if 
+sample 
+fails 
+                
+Date of 
+Packing 
+LSF AF IR MgO Total 
+Sulphur 
+calculated 
+as SO
+3 
+LOI Chloride 
+Content 
+Alkali 
+content 
+@ 
+Fineness Soundness 
+(Le-
+chatelier & 
+Autoclave) 
+Setting 
+Time 
+Initial 
+& Final 
+Compressive 
+strength 
+Transverse 
+Strength 
+Sample  
+Pass/Fail 
+Action 
+taken if 
+sample 
+fails 
+                
+
+                 PM/ IS 269/ 2/ October 2019   
+ 
+13 
+ 
+ 
+RECORDS TO BE MAINTAINED AS PER TABLE-2 OF SIT (BY BULK PACKING UNIT) 
+Form No. 10 
+FORMAT FOR MAINTENANCE OF TEST RECORDS WEIGHMENT CONTROL AT PACKING STAGE  
+HOURLY CHECK OF MASS OF DRUMS 
+Date Time (Hourly) Condition of Drums Net quantity of cement Record of calibration of weighing scale and Date of calibration. 
+     
+ 
+Form No. 11 
+FORMAT FOR MAINTENANCE OF RECORDS FOR THE CONDITIONS OF THE EMPTY DRUMS/BULKERS  
+FOR PACKING CEMENT 
+ 
+Date No. of empty drums/Bulkers checked No. of empty drums/Bulkers rejected Reasons/Remarks Sign of firms inspector 
+     
+ 
+Form No. 12 
+FORMAT FOR MAINTENANCE OF TEST RECORDS WEIGHMENT CONTROL AT PACKING STAGE  
+HOURLY CHECK OF MASS OF BAGS 
+ 
+Date Shift Time(Hourly) No of Bags  Net  quantity of Bags from Nozzles Records of calibration/date of calibration of nozzles 
+      
+ 
+Form No. 13 
+RECEIPT OF CEMENTS 
+ 
+Date of receipt Batch No. Supply received from Test Certificate No 
+    
+ 
+  
+
+                 PM/ IS 269/ 2/ October 2019   
+ 
+14 
+ 
+Form No. 14 
+CEMENT DISPATCH DATA FROM PACKING  
+ 
+Date Quantity Passed for Standard Mark Rejected (if any) Reasons for not marking/Method of disposal 
+     
+ 
+Form No 15 & 16 
+TEST DONE AT FACTORY (At receipt stage and at bulk packing terminal) 
+ 
+ 
+Date Batch No. LOI IR Fineness Setting Time Remarks 
+       
+ 
+Form No 17 & 18 
+ORDINARY PORTLAND CEMENT (PHYSICAL TEST REPORT) (At receipt stage and at bulk packing terminal) 
+ 
+Date Batch No. Test Report Soundness Compressive Strength Remarks 
+   LC AC 3 days 7 days 28 days  
+         
+ 
+Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empaneled by the Bureau. 
+ 
+Note-2: The control unit and levels of control as decided by the Bureau are obligatory to which the licensee shall comply with.

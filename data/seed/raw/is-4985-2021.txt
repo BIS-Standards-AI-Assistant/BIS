@@ -1,0 +1,585 @@
+. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+भारतीय मानक ब्यूरो 
+BUREAU OF INDIAN STANDARDS 
+मानक भवन, ९, बहादुर शाह ज़फ़र मार्ग 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg 
+नई ददल्ली- ११०००२ 
+New Delhi – 110002 
+उत्पाद मैन्युअल 
+आई एस 4985:2021 के अनुसार 
+जल की पूर्ति के र्लए असुघर्ियत पी.वी.सी. पाइप के र्लए 
+ 
+दस्तावेज़ संख्या – पीएम/आईएस 4985/5/मई 2023 
+ 
+भारतीय मानक ब्यूरो की स्कीम-I (अनुरूपता मूलयाांकन) र्वर्नयम , 2018 के तहत यह उत्पाद 
+मैन्युअल प्रमाणीकरण के प्रचालन में रीर्त और पाररर्शिता की सुसंगतता सुर्नर्ित करने के र्लए 
+सभी क्षेत्रीय/शाखा कायािलयों और लाइसेंसी द्वारा संदभि सामग्री के रूप में उपयोग र्कया 
+जाएगा। बीआईएस प्रमाणीकरण लाइसेंस/ प्रमाणपत्र प्राप्त करने के इच्छुक भावी आवेदकों द्वारा 
+भी इस दस्तावेज़ का उपयोग र्कया जा सकता है । 
+PRODUCT MANUAL FOR 
+UNPLASTICIZED PVC PIPES FOR WATER SUPPLIES  
+ACCORDING to IS 4985:2021 
+ 
+Document No - PM/IS 4985/5/May 2023 
+ 
+This Product Manual shall be used as reference material by all Regional/Branch Offices 
+& licensees to ensure coherence of practice and transparency in operation of certification 
+under  Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations, 
+2018  for  various  products.  The  document  may  also  be  used  by  prospective  applicants 
+desirous of obtaining BIS certification licence/certificate. 
+           
+ 
+
+PM/ IS 4985/5/May 23 
+ 
+ 
+ 
+PRODUCT MANUAL FOR 
+UNPLASTICIZED PVC PIPES FOR WATER SUPPLIES  
+ACCORDING to IS 4985:2021 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by  prospective  applicants  desirous  of 
+obtaining BIS certification licence/certificate. 
+ 
+1. 
+Product 
+: IS 4985:2021 
+ 
+Title 
+: 
+  UNPLASTICIZED PVC PIPES FOR WATER SUPPLIES  
+ 
+No. of Amendments 
+: 1 
+    
+2. 
+Sampling Guidelines: 
+a) 
+Raw material 
+: 
+a) PVC resin – Clause 6.1 of IS 4985 
+b) Additives – IS 10148 
+b) 
+Grouping guidelines 
+: Please refer ANNEX – A 
+c) 
+Sample Size 
+: 10 pipes of 1 mtr length  
+    
+3. 
+List of Test Equipment 
+: Please refer ANNEX – B 
+    
+4. 
+Scheme of Inspection 
+and Testing 
+: Please refer ANNEX – C 
+    
+5. Possible tests in a day : Please refer ANNEX – D 
+  
+6. 
+Scope of the Licence : 
+ 
+“Licence is granted to use Standard Mark as per IS 4985 : 2021 with the following scope: 
+ Name of the product 
+Unplasticized PVC Pipes for Potable Water Supplies 
+ 
+Class of pipes 
+(Pressure rating) 
+ 
+ 
+Nominal Size 
+ 
+ 
+Type 
+  Type A/ Type B 
+ 
+ 
+End of pipes 
+a) Plain ended pipes 
+b) Socketed for elastomeric sealing ring jointing 
+c) Socketed for solvent cement jointing 
+ 
+Additional Parameter (if 
+applicable) 
+ Lead-Free (LF) 
+BUREAU OF INDIAN STANDARDS 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg, 
+New Delhi – 110002
+
+PM/ IS 4985/5/May 23 
+ 
+ 
+ANNEX A 
+Grouping Guidelines 
+ 
+1. Unplasticized PVC  pipes  for  water  supplies  as  per  IS  4985:2021  are  categorized  into 
+following groups for the purpose of GoL/ CSoL: 
+ 
+a) Based on Size, Class and Pressure rating of pipes: 
+ 
+Class of Pipe Working Pressure 
+(PN) MPa 
+Group-1 Group-2 Group-3 
+1 0.25 90-110 125-315 355-630 
+2 0.40 63-110 125-315 355-630 
+3 0.60 40-110 125-315 355-630 
+4 0.80 25-110 125-315 355-630 
+5 1.00 20-110 125-315 355-630 
+6 1.25 20-110 125-315 355-630 
+Plumbing pipes - 20-50 - - 
+ 
+b) Based on ends of pipe: 
+(i)  Plain ended pipes 
+(ii)  Socketed for elastomeric sealing ring jointing 
+(iii) Socketed for solvent cement jointing 
+ 
+c) Based on the application of pipe: 
+(i) Type A (Pipes for water supply) 
+(ii) Type B (Pipes for agricultural use) 
+ 
+Note: Type  A  and  Type  B  are  grouped  under  one  group  of  variety  for  the  purpose  of 
+GoL/CSoL, since all the requirements for Type A pipes (water supply) and Type B pipes 
+(agricultural use) remain the same except the additional marking required on Type A pipes 
+as per Clause 13.1.2 of IS 4985:2021.  
+ 
+d) Additional Requirement (if applicable):  
+          Lead-Free (LF) pipes (pipes manufactured without lead stabilizer) 
+ 
+ 
+2. For considering GoL/CSoL, testing shall be done as follows: 
+ 
+a) Pipe of any size from each size group and class of pipe shall be tested for all requirements 
+to cover pipes of all sizes in that size group and class of pipe tested. 
+ 
+
+PM/ IS 4985/5/May 23 
+ 
+ 
+b) If plain ended pipe is covered in the licence and extension of Scope is requested for 
+socket ended pipe, only applicable tests for socket shall be carried out. 
+ 
+c)  
+(i) If Type A pipe is tested, then Type B may also be covered in the licence without any 
+further testing.  
+(ii) If  Type  B  is  tested  and  then  the manufacturer  applies  for  Type  A  and  Type  B; 
+compliance to the marking requirements as per Clause 13.1.2 of IS 4985:2021 in the 
+form  of  manufacturing  capabilities  and  in-house  factory  test  report  of  any  single 
+variety of  Type  A  pipe for  the  above  marking  requirement,  will  suffice  for 
+incorporation of Type A and Type B under the scope. The same shall also apply for 
+the purpose of CSoL for including Type A pipes. 
+ 
+d)  Lead-Free  (LF)  pipes of each  class shall  be tested  for  all  requirements  to  cover  the 
+additional requirement of ‘Lead-Free’ in the scope of licence, for that particular class of 
+pipes tested.  
+ 
+3. The Firm shall declare the varieties of Pipes intended to be covered in the Licence. The Scope 
+of  Licence may  be  restricted  based  on  the  Manufacturing  and  Testing  capabilities  of  the 
+Manufacturer. 
+ 
+4. During the operation of the Licence, BO shall ensure that all the types and sizes covered in the 
+Licence are tested in rotation, to the extent possible.
+
+ 
+ 
+ 
+PM/ IS 4985/5/May 23 
+ANNEX B 
+List of Test Equipment 
+Major test equipment required to test as per the Indian Standard 
+ 
+Sl. No. Tests used in with Clause 
+Reference 
+Test Equipment 
+1 Wall Thickness (Clause 7.1.2) - Dial Gauge Method or 
+- Micrometer 
+- Ultrasonic gauge 
+2 Outside Diameter at any Point 
+(Clause 7.1.1.2) 
+- Vernier Calipers or outside caliper 
+3 Mean Outside Diameters 
+(Clause 7.1.1.1) 
+- Pi Tape or flexible tape 
+4 Effective length (Clause 7.1.4) - Tape 
+5 
+Dimension of Socket 
+(Clause 7.2) 
+- Vernier Caliper or Vernier depth gauge 
+- Inside Caliper 
+- Micrometer 
+6 Pipe Ends (Clause 9.1, 9.2) - Angle Protractor 
+7 Sealing Ring (Clause 8) - Vernier caliper 
+- Micrometer 
+- Radius gauge 
+- Shore hardness tester 
+8 Opacity (Clause 10.2) - Opacity Test Apparatus 
+- Standard sample of opacity 0.2 % 
+or Apparatus for Test Method-2 
+- Source of light (halogen lamp 1000 W), 
+- Photo-electric cell (with filter correction 
+to match eye response), 
+- Adjustable power arc or Incandescent lamp 
+- Diaphragm and optical lens 
+- Digital current meter. 
+- Standard sample of opacity 0.2 % 
+9 Effect on water (Clause 10.3) - Distilled water 
+- Air conditioner 
+- pH meter 
+- Testing reagent and equipment for 
+determination of cadmium, mercury, lead, tin and 
+other toxic substances. 
+10 Reversion test (Clause 10.4) - Thermostatically Control oil bath 
+- Mono-polyethylene glycol, glycerol or 
+mineral oil free from aromatic hydrocarbons 
+- Vernier Calipers 
+- Stop watch 
+11 Vicat Softening temperature 
+(Clause 10.5) 
+- Oil heating Bath equipped with means to raise 
+the temperature at uniform rate of 50 ± 5° 
+
+ 
+ 
+PM/ IS 4985/5/May 23 
+ 
+  
+C/hr. with suitable stirrer. 
+- Rod with loading plate, load and indenting 
+tips 
+- Micrometer dial gauge 
+- Thermometer or temperature measuring 
+equipment 
+12 Density (Clause 10.6) - Balance 
+- Thermometer 
+- Demineralized water 
+- Beaker 
+- Corrosion resistant wire 
+13 
+Sulphated ash content test 
+(Clause 10.7) 
+- Balance 
+- Silica Crucible or Platinum crucible 
+- Bunsen Burner with Silica Triangle & 
+Tripod 
+- Muffle Furnace 
+- Pipette 
+- Desiccator 
+- Drying agent 
+- Sulphuric Acid and Acetic acid 
+14 
+Hydrostatic Pressure Test 
+(Clause 11.1 and 11.1.1) 
+- Hydrostatic pressure testing apparatus with 
+pressuring unit and multiple outlets 
+- Water bath with temperature control 
+- Thermometer 
+- End plugs 
+15 
+Resistance to external blows at 
+0°C (Clause 11.2) 
+-  Falling Weight testing machine from height 
+2000 mm 
+- Striker of weight 0.25, 0.50 & 1.00 kg 
+- Digital watch 
+- Liquid bath or freezer for conditioning of 
+samples 
+ 
+The above list is indicative only and may not be treated as exhaustive.
+
+ 
+  
+PM/ IS 4985/5/May 23 
+ 
+ANNEX C 
+ 
+Scheme of Inspection and Testing 
+ 
+1. LABORATORY - A laboratory shall be maintained which shall be suitably equipped (as per 
+the  requirement  given  in  column  2  of  Table  1)  and  staffed,  where  different  tests  given  in  the 
+specification shall be carried out in accordance with the methods given in the specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipment. 
+ 
+2. TEST RECORDS – The manufacturer shall maintain test records for the tests carried out to 
+establish conformity. 
+ 
+1. LABELLING  AND  MARKING – As  per  the  requirements  of  IS  4985:  2021. The  Standard 
+Mark, as given in the Schedule of the licence, shall be clearly and indelibly marked in colour using 
+ink/paint on each pipe provided always that the pipes thus marked conforms to all the requirement 
+of the specification.  In  addition, the licence no. CM/L-__________ and  details of BIS website 
+shall  be  marked on  the  pipes as  follows:  “For  details  of  BIS  certification  please  visit 
+www.bis.gov.in” 
+ 
+3. CONTROL  UNIT – Pipes  of  same  size,  class, type and  additional requirement (i.e.  LF) 
+extruded from same compound shall constitute a control unit. 
+ 
+4. LEVELS  OF  CONTROL - The  tests  as  indicated  in  column  1  of Table  1 and  the  levels  of 
+control in column 3 of Table 1, shall be carried out on the whole production of the factory which 
+is covered by this plan and appropriate records maintained in accordance with paragraph 2 above. 
+ 
+4.1 All the production which conforms to the Indian Standard and covered by the licence should 
+be marked with Standard Mark. 
+ 
+5. REJECTIONS – Disposal  of  non-conforming  product  shall  be  done  in  such  a  way  so  as  to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  7
+
+PM/ IS 4985/5/May 23 
+ 
+ 
+8 
+ 
+TABLE 1 
+ 
+(1) (2) (3) 
+Test Details 
+Test equipment 
+requirement 
+R: required (or) 
+S: Sub-
+contracting 
+permitted 
+Levels of Control 
+Cl. Requirement Test Methods No. of 
+Sample 
+Frequency Remarks 
+Clause Reference 
+6 
+Composition 
+      
+Polyvinyl Chloride Resin 
+a) VCM Content 
+b) K-Value 
+6.1 
+6.1.1 
+6.1.2 
+IS 4985 
+IS 10151 
+IS 4669 
+S 1 
+Each consignment 
+# 
+Additives 6.1 IS 4985 S 1 Each consignment # 
+8 Sealing rings 8 IS 4985 
+IS 5382 
+S 1 Each consignment # 
+7 Dimensions 
+7.1 
+Dimensions of Pipes 
+Diameter 7.1.1 
+Table 1 
+IS 4985 
+IS 12235 (Part 1) 
+ 
+ 
+ 
+R 
+ 
+Firm  to  have  adequate  in-process  controls  to  check 
+compliance of this parameter as per the requirements 
+given  in  the  Indian  Standard.  Appropriate  records 
+shall be maintained by the manufacturer for evidence 
+of conformity 
+Wall thickness 7.1.2 
+Table 1 
+IS 4985 
+IS 12235 (Part 1) 
+Mean outside diameter, Outside 
+diameter at any point and wall 
+thickness (for plumbing pipes) 
+7.1.3 
+Table 2 
+IS 4985 
+Length 7.1.4.1 IS 4985 
+
+PM/ IS 4985/5/May 23 
+ 
+ 
+9 
+ 
+ 
+ 
+ 
+ 
+7.2 
+Dimensions of socket 
+Formation of socket 7.2.1 IS 4985  
+ 
+ 
+ 
+R 
+ 
+ 
+Socket for solvent cement 
+jointing 
+7.2.1.1 
+Table 3 
+IS 4985 
+Firm to have adequate in-process controls to check 
+compliance    of this    parameter    as    per    the 
+requirements    given    in    the    Indian    Standard. 
+Appropriate  records  shall  be  maintained  by  the 
+manufacturer for evidence of conformity 
+Socket for elastomeric sealing 
+ring joints 
+7.2.1.2 
+Table 4 
+IS 4985 
+9 Pipes ends 9.1, 9.2 IS 4985 
+10.1 Visual appearance 10.1, 
+10.1.1 
+IS 4985 
+10.2 Opacity 10.2 IS 4985 
+IS 12235 (Part 3) 
+S 1 
+Once in three 
+months 
+Pipe  with  thinnest 
+wall section shall 
+be tested $ 
+10.3 Effect on water 10.3 IS 4985 
+IS 12235 (Part 4) 
+IS 12235 (Part 10) 
+S 1 
+Once in six 
+months 
+Smallest size pipe 
+shall be tested @ 
+10.4 Reversion test 10.4 IS 4985 
+IS 12235 (Part 5) 
+R 3 
+Each control Unit 
+ 
+* 
+10.5 Vicat Softening temperature 10.5 IS 4985 
+IS 12235 (Part 2) 
+S 1 
+Once in three 
+months 
+- 
+10.6 Density 10.6 IS 4985 
+IS 12235 (Part 14) 
+R 1 
+Each control unit 
+- 
+10.7 Sulphated Ash Content test 10.7 
+Annex B 
+IS 4985 S 1 
+Once in a week 
+- 
+11 Mechanical Properties 
+11.1 
+Hydrostatic characteristics 
+Type test 11.1 IS 4985 
+IS 12235 
+(Part 8/ Sec 1) 
+IS 12235 
+S 1 
+Once in three 
+months 
+One    sample    of 
+each   class   shall 
+be tested once in 
+1 ½ years  
+
+PM/ IS 4985/5/May 23 
+ 
+ 
+10 
+ 
+ 
+ Acceptance test  (Part 8/ Sec 4) R 1 
+Each control unit 
+- 
+Acceptance test of plumbing 
+pipes 
+11.1.1 IS 4985 R 1 
+Each control unit 
+- 
+11.2 Resistance to external blows at 
+0
+°
+C 
+11.2 
+Annex C 
+IS 4985 R Adequate 
+pieces 
+Each control unit - 
+ 
+# No further testing is required if accompanied with the Test Certificate or ISI marked. 
+ 
+$ Additional test shall be carried out whenever there is a change in formulation/composition. Sampling shall be done in such a way that 
+pipes from all extrusion machine shall be tested once in a year. 
+ 
+@ Additional sample shall be tested whenever there is a change in formulation/composition. Pipes from each class shall be tested in one 
+year. 
+ 
+*  In case of failure, additional six samples from same control units shall be tested and control unit shall be accepted if all retested samples 
+pass.  
+ 
+Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empanelled by the Bureau. 
+Note-2: Levels of control given in column 3 are only recommendatory in nature. The manufacturer may define the control unit/batch/lot 
+and submit his own levels of control in column 3 with proper justification for approval by BO Head.
+
+ 
+ PM/ IS 4985/5/May 23 
+ 
+ 
+ 
+ANNEX-D  
+ 
+POSSIBLE TESTS IN A DAY 
+ 
+(i) Dimensions of pipes and socket (Clause 7) 
+(ii) Dimensions of sealing rings (Clause 8) 
+(iii) Pipe ends (Clause 9) 
+(iv) Visual appearance (Clause 10.1) 
+(v) Opacity (Clause 10.2) 
+(vi) Reversion test (clause 10.4) 
+(vii) Vicat softening temperature (Clause 10.5) 
+(viii) Density (Clause 10.6) 
+(ix) Hydrostatic characteristics – Acceptance test (Clause 11.1) 
+(x) Resistance to external Blows (Clause 11.2) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+12

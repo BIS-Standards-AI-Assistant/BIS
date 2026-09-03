@@ -1,0 +1,392 @@
+PM/ IS 13779/ 2/ April 2019 
+ 
+ 
+BUREAU OF INDIAN STANDARDS  
+Manak Bhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+1 
+PRODUCT MANUAL FOR 
+a.c. STATIC WATTHOUR METERS CLASS 1 & 2  
+ACCORDING TO IS 13779:1999 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by  prospective  applicants  desirous  of 
+obtaining BIS certification license/certificate. 
+1. 
+Product 
+: IS 13779:1999 
+ 
+Title 
+: a.c. Static Watthour Meters Class 1& 2 
+ 
+No. of Amendments 
+: 5 
+2. 
+Sampling Guidelines: 
+a) 
+Raw material 
+: ___ 
+b) 
+Grouping guidelines 
+: Please refer ANNEX – A 
+c) 
+Sample Size 
+: Three Meters 
+3. 
+List of Test Equipment 
+: Please refer ANNEX – B 
+4. 
+Scheme of Inspection 
+and Testing 
+: Please refer ANNEX – C 
+5. 
+Possible tests in a day : 
+: Please refer ANNEX - D 
+6. 
+Scope of the Licence : Licence is granted to use Standard Mark as per IS 13779:1999 with 
+the following scope: 
+ 
+Name of the Product a.c. Static Watthour Meters 
+Class 1 / Class 2, Type ...., Single phase 2-wire/ Three phase 3-wire/ Three phase 4-wire, 
+Voltage....V, Basic current (Ib) .... A, Maximum current (Imax) ...... A, Frequency ...Hz,         
+Transformer  operated  (Connection  through  voltage  transformer)/ Transformer  Operated 
+(Connection  through current  transformer  only)/ Whole  current  (direct  connection), 
+Insulating   Encased/ Non-Insulating   Encased, With   or   Without   Earth   terminal,            
+Electro-mechanical register/ Electronic display, Indoor / Outdoor Meter 
+
+ 
+PM/ IS 13779/ 2/ April 2019 
+2 
+ 
+ANNEX A 
+ 
+Grouping Guidelines 
+ 
+1. Samples of each variety of meters shall be tested considering the following:  
+ 
+i. Accuracy Class – Class1 and Class 2  
+ii. Number of phases and number of wires - Single phase 2-wire, Three phase 3-wire 
+and 3 phase 4-wire 
+iii. Insulating encased and non-insulating encased 
+iv. Type of display- Electro-mechanical register, Electronic display 
+v. Transformer Operated  (Connection  through Voltage Transformer),  Transformer 
+Operated  (Connection  through Current Transformer  only) and Whole  current 
+(Direct Connection) 
+vi. Indoor and Outdoor Type Meters 
+ 
+2. The following relaxation may be given when a variety is tested for all the requirements: 
+ 
+i. Same  basic  current  (I
+b
+)  and  different  current  ratio  (I
+max
+/I
+b
+) – One  sample  of 
+maximum current ratio (I
+max
+/I
+b
+) out of the range offered be subjected to all tests. 
+ii. Different  basic  current  (I
+b
+)  but  same  (I
+max
+/I
+b
+) – One  sample  with  highest  (I
+b
+) and 
+another sample with lowest (I
+b
+) be subjected to all tests. 
+iii. Different basic current (I
+b
+) and different (I
+max
+/I
+b
+) – One sample with lowest (I
+b
+) and 
+lowest  (I
+max
+/I
+b
+)  and  another  sample  with  highest  (I
+b
+)
+ 
+and  highest  (I
+max
+/I
+b
+)  be 
+subjected to all tests. 
+iv. For CSoL – If same (I
+b
+) with different (I
+max
+/I
+b
+) is to be included in the licence, the 
+varieties offered be subjected to tests applicable at I
+max 
+only. 
+ 
+3. If the licence covers only ‘Electro mechanical register’ and CSoL  for ‘Electronic                 
+display’ is to be considered, then any one sample with ‘Electronic display’ from any 
+one the variety already covered in the license or any new variety intended to be covered 
+in the licence be subjected to all tests or vice-versa. 
+ 
+4. If  the license covers only ‘Insulating encased meters’ and CSoL  for ‘Non-insulating 
+encased meters’ is to be considered, then any one sample of ‘Non-insulating encased 
+meters’ from any one variety already covered in the license or any new variety intended 
+to be covered in the licence be subjected to all tests or vice-versa. 
+ 
+5. In  case  of  electronic  display,  manufacturer’s  certificate  shall  be  obtained  for 
+compliance to the requirement of Clause 6.10 of IS 13779:1999. 
+ 
+
+ 
+PM/ IS 13779/ 2/ April 2019 
+3 
+ 
+6. The Firm shall declare the varieties of a.c. static watthour meters intended to be covered 
+in  the  Licence.  An  undertaking  shall  also  be  taken  from  the  applicant/  licensee  in 
+respect of construction and design similarity as per clause 3.1.4 of IS 13779:1999 for 
+the range of varieties which they intend to cover  in the licence.  One set of drawings 
+representing  each  of  these  varieties  be  sealed  and  kept  in  the  factory  for  reference 
+whenever required. The Scope of Licence may be restricted based on the Manufacturing 
+and Testing capabilities of the Manufacturer. 
+ 
+7. During the operation of the Licence, BO shall ensure that all the Varieties covered in 
+the Licence are tested in rotation to the extent possible. 
+ 
+ 
+  
+
+ 
+PM/ IS 13779/ 2/ April 2019 
+4 
+ 
+ANNEX B  
+ 
+List Of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+ 
+Sl. 
+No. 
+Test Equipment Tests used in with Clause Reference 
+1 Vernier Caliper, Micrometer Cl. 6.1, 6.2, 6.3, 6.5 & 6.7 
+2 a.c. High Voltage Tester Cl. 12.7.6.1, Cl. 12.7.6.3 & Table 21 
+3 Insulation Tester Cl. 12.7.6.1, 12.7.6.4 & Table 22 
+4 Test bench load with phantom system, 
+Reference Standard Meter 
+Cl.11.1,11.4, 11.5, 12.10.1, 12.13, 23 & Table 23 
+5 Power Meter Cl. 9.1.1, 9.1.2, 12.7.1 
+6 Voltage drop simulation generator Cl. 9.2.1, 9.2.2, 12.7.2 & Table 11 
+7 Dust test equipment, Rain Fall Test 
+Equipment 
+Cl. 6.9, 12.5 & 12.7.6.4 
+8 Shock Test Device Cl. 12.3.1 
+9 Vibration Test Device Cl. 12.3.2 
+10 Spring Hammer Test Device Cl. 12.3.3 
+11 Impulse Voltage Tester Cl. 12.7.6.2 
+12 Glow Wire Test Apparatus Cl. 6.8, 12.3 
+13 Short time overcurrent tester Cl. 9.2.3, 12.7.3, Table 12 
+ 
+The above list is indicative only and may not be treated as exhaustive. 
+
+ 
+PM/ IS 13779/ 2/ April 2019 
+5 
+ 
+ANNEX C 
+ 
+Scheme Of Inspection And Testing  
+ 
+1.  LABORATORY - A  laboratory  shall  be  maintained  which  shall  be  suitably  equipped          
+(as per the requirement given in column 2 of Table 1) and staffed, where different tests given 
+in  the  specification  shall  be  carried  out  in  accordance  with  the  methods  given  in  the 
+specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipment. 
+ 
+2. TEST RECORDS – The manufacturer shall maintain test records for the tests carried out 
+to establish conformity. 
+ 
+3. LABELLING AND MARKING – As per the requirements of IS 13779:1999. In addition, 
+connection diagrams and terminal markings shall also be marked indelibly on every meter. 
+ 
+4. CONTROL  UNIT – Meters  of  the  same  design manufactured  in  a  day  shall  constitute  a 
+control unit. 
+ 
+5. LEVELS OF CONTROL - The tests as indicated in column 1 of Table 1 and the levels of 
+control  in  column  3  of Table  1,  shall  be  carried  out  on  the  whole  production  of  the  factory 
+which  is  covered  by  this  plan  and  appropriate  records  maintained  in  accordance  with    
+paragraph 2 above.  
+ 
+6. REJECTIONS – Disposal of non-conforming product shall be done in such a way so as to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+ 
+
+ 
+PM/ IS 13779/ 2/ April 2019 
+6 
+ 
+TABLE 1 
+ 
+ 
+(1) (2) (3) 
+Test Details 
+Test equipment 
+requirement 
+R: required (or) 
+S:Sub-contracting 
+permitted 
+Levels of Control 
+Cl. Requirement Test Methods 
+No. of 
+Sample 
+Frequency 
+Remarks 
+Clause 
+Referenc
+e 
+6.1 to 6.3 General and Constructional 
+Requirements 
+6.1, 6.2, 6.3 IS 13779 R 
+Each Meter 
+In  case  of  failure  of  any 
+meter,   cause   of   failure 
+shall   be   identified   and 
+corrective  action  shall  be 
+taken  to  remove  the non-
+conformity. 
+9.5 a.c. High Voltage Test 12.7.6.1, 12.7.6.3 IS 13779 R 
+9.5, 12.7.6.4 Insulation Test 12.7.6.4, 12.7.6.1 IS 13779 R 
+11.1 Limits of Error Due to Variation of 
+Current 
+11.1, 12.16 
+ 
+IS 13779 R 
+11.5 Test of Starting Condition 11.5, 12.14 IS 13779 R 
+11.4 Test of no-Load Condition 11.4, 12.13 IS 13779 R 
+9.1 Power Consumption 9.1, 12.7.1 IS 13779 R 
+Three 
+ 
+Once in 
+six 
+months 
+for each 
+type and 
+rating 
+ 
+In case of failure of any 
+sample, double the 
+number of samples shall 
+be tested and  no  failure 
+in those samples shall be 
+permitted. After 
+corrective actions 
+samples from two 
+consecutive control 
+units shall be tested and 
+the original   frequency 
+may be restored if all the 
+samples pass. 
+9.2 Influence of Supply Voltage 9.2.1, 9.2.2, 12.7.2 IS 13779 S 
+9.2.3 Short Time Overcurrent Test 9.2.3, 12.7.3 IS 13779 S 
+9.3 Influence of Self-Heating 9.3, 12.7.4 IS 13779 S 
+9.4 Influence of Heating 9.4, 12.7.5 IS 13779 S 
+11.6 Meter Constant 11.6, 12.15 IS 13779 R 
+11.7 Repeatability of Error Test  11.7, 12.17 IS 13779 S 
+6.6 Clearances & Creepage Distances 6.6 IS 13779 S 
+6.10 Display of Measured Values 6.10 IS 13779 R 
+6.11 Output Device 6.11 IS 13779 R 
+
+ 
+PM/ IS 13779/ 2/ April 2019 
+7 
+ 
+ 
+ 
+Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empaneled by the Bureau. 
+ 
+Note-2: Note-3: Levels of control given in column 3 are obligatory in nature. The manufacturer may define the control unit/batch/lot and submit his own 
+levels of control in column 3 with proper justification for approval by BO Head.
+6.9 Protection against penetration of dust 
+and water 
+6.9, 12.5 IS 13779 S  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Three 
+Once in a 
+year for 
+each type 
+and  
+rating 
+In case of failure of any 
+sample, double the 
+number of samples shall 
+be tested and no failure 
+in those samples shall 
+be permitted. After 
+corrective actions 
+samples from two 
+consecutive control 
+units shall be tested and 
+the original frequency 
+may be restored if all 
+the samples pass. 
+9.6 Immunity to Earth Fault  
+(For 3 phase 4 wire meters) 
+9.6, 12.8 IS 13779 S 
+10 Electromagnetic Compatibility 10, 12.9 IS 13779 S 
+11.2 Accuracy Requirements  
+(Limits of error due to other influence 
+quantities) 
+11.2, 12.11, 12.10.1 IS 13779 S 
+11.3 Accuracy Requirements  
+(Limits   of   error   due   to   ambient 
+temperature variation) 
+11.3, 12.12, 12.10.1 IS 13779 S 
+12.3.1 Shock Test 12.3.1 IS 13779 S 
+12.3.2 Vibration Test 12.3.2 IS 13779 S 
+12.3.3 Spring Hammer Test 12.3.3 IS 13779 S 
+8, 12.6 Test for climatic influences 8, 12.6 IS 13779 S 
+12.7.6.2 Impulse Voltage Test 12.7.6.1, 12.7.6.2 IS 13779 S 
+6.4, 6.5 Terminal Blocks and Terminal Cover 6.4, 6.5, 6.7 IS 13779 S Three from  
+every consignment 
+of insulating 
+material received 
+No   further   testing   is 
+required if accompanied 
+with Test Certificate  
+6.8 Resistance to Heat and Fire 6.8, 12.4 IS 13779 
+S 
+
+ 
+PM/ IS 13779/ 2/ April 2019 
+8 
+ 
+ANNEX D 
+ 
+Possible Tests in a day 
+ 
+1. General and Constructional Requirements 
+2. a.c. High Voltage Test 
+3. Insulation Test 
+4. Accuracy Requirements (Limits of Error) 
+5. Test of starting condition 
+6. Test of no-load condition 
+7. Power Consumption

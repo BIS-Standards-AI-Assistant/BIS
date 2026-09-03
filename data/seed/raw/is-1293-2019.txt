@@ -1,0 +1,774 @@
+भारतीय मानक ब्यूरो 
+BUREAU OF INDIAN STANDARDS 
+मानक भवन, ९, बहादुर शाह ज़फ़र मार्ग 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg 
+नई ददल्ली- ११०००२ 
+New Delhi – 110002 
+ 
+ 
+ 
+उत्पाद मैन्युअल 
+आई एस 1293: 2019 के अनुसार 
+घरेलू और ऐसे ही सामान्य प्रयोजनों के ललए 250 वोल्ट तक की रेटेड वोल्टेज वाले और 16 
+एम्पेयर तक की रेटेड करंट वाले प्लर् और सॉकेट- लनकास  के ललए  
+ 
+दस्तावेज़ संख्या – पी एम/आई एस 1293/ 2/जनवरी 2021 
+ 
+भारतीय मानक ब्यूरो की स्कीम-I  (अनुरूपता मूलयाााांकन) लवलनयम  , 2018 के तहत यह उत्पाद मैन्युअल 
+प्रमाणीकरण के प्रचालन में रीलत और पाररर्शगता की सुसंर्तता सुलनलित करने के ललए सभी क्षेत्रीय/शाखा 
+कायागलयों और लाइसेंसी द्वारा संदभग सामग्री के रूप में उपयोर् दकया जाएर्ा। बीआईएस प्रमाणीकरण लाइसेंस/ 
+प्रमाणपत्र प्राप्त करने के इच्छुक भावी आवेदकों द्वारा भी इस दस्तावेज़ का उपयोर् दकया जा सकता है । 
+ 
+PRODUCT MANUAL FOR 
+Plugs and Socket-Outlets for household and similar purposes of rated Voltage 
+up to and including 250 V and rated current up to and including 16 A 
+ACCORDING to IS 1293 : 2019 
+ 
+Document No.- PM/ IS 1293/ 2/ Jan 2021 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by  prospective  applicants  desirous  of 
+obtaining BIS certification licence/certificate. 
+
+PM/ IS 1293/ 2/ January 2021 
+1 
+ 
+ 
+PLUGS AND SOCKET-OUTLETS FOR HOUSEHOLD AND SIMILAR 
+PURPOSES OF RATED VOLTAGE UPTO AND INCLUDING 250 V AND 
+RATED CURRENT UPTO AND INCLUDING 16 A 
+ACCORDING TO IS 1293:2019 
+ 
+This  Product  Manual  shall  be  used as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to  ensure  coherence  of  practice  and  transparency in  operation  of  certification  under 
+Scheme-I  of  Bureau of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by  prospective  applicants  desirous of 
+obtaining BIS certification licence/certificate. 
+ 
+1. 
+Product : 
+IS 1293:2019 
+ 
+Title : 
+Plugs and Socket-Outlets for household and similar purposes 
+of rated Voltage up to and including 250 V and rated current 
+up to and including 16 A 
+ 
+No. of amendments : 
+1 
+2. 
+Sampling Guidelines 
+  
+a) 
+Raw material : 
+NA 
+b) 
+Grouping Guidelines : 
+Please refer Annex - A 
+c) 
+Sample Size : 
+10 nos.for Socket Outlets and 15 nos. for Plugs 
+3. 
+List of Test Equipment : 
+Please refer Annex - B 
+4. 
+Scheme of Inspection 
+and Testing 
+: 
+Please refer Annex - C 
+5. 
+Possible tests in a day : 
+Please refer Annex - D 
+6. 
+Scope of the Licence : 
+ 
+Please refer Annex - E 
+7. 
+Any other guidelines 
+ 
+Please refer Annex - F for guidelines for Outsourcing of 
+Moulded Bodies 
+ 
+ 
+BUREAU OF INDIAN STANDARDS 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg, 
+New Delhi – 110002 
+
+PM/ IS 1293/ 2/ January 2021 
+ 
+2 
+ 
+ 
+ANNEX A 
+ 
+Grouping Guidelines 
+ 
+1. The  following  aspects  of  a  Plug or  Socket-Outlet  shall  be  taken  into  consideration  for 
+grouping of different varieties for the purpose of GoL/ CSoL: 
+a. Current rating (as per Cl 6 of IS 1293) 
+b. Voltage rating (as per Cl 6 of IS 1293) 
+c. Degree of protection against access to hazardous parts and against harmful ingress of 
+solid foreign objects (as per Cl 7.1.1 of IS 1293) 
+d. Degree of protection against harmful ingress of water (as per Cl 7.1.2 of IS 1293) 
+e. Provision for earthing (as per Cl 7.1.3 of IS 1293) 
+f. Method of connecting the cable (as per Cl 7.1.4 of IS 1293) 
+g. Type of terminals (as per Cl 7.1.5 of IS 1293) 
+h. Method of application/ mounting of the socket-outlet (as per Cl 7.2.2 of IS 1293) 
+i. Intended use, if any (as per Cl 7.2.4 of IS 1293) 
+j. Intended Class of appliance (as per Cl 7.3 of IS 1293) 
+k. Type of Socket-Outlet (Fixed/ Portable/ Multiple/ Combined/ for Appliances) 
+l. Degree of protection against electric shock (as per Cl 7.2.1 of IS 1293) 
+m. Existence of shutters (as per Cl 7.2.3 of IS 1293) 
+n. Plug pins with insulating sleeves 
+ 
+2. At  least  one  plug  and  socket  outlet  of each  current  rating  and  combination  thereof  shall  be 
+tested to cover the entire range. 
+ 
+3. If a particular voltage rating is tested, lower ratings may be covered. 
+4. Additionally, the following relaxations may be permitted  when a variety is tested for all the 
+requirements: 
+ 
+a) If accessories with a particular IP is tested, lower IPs may also be covered. 
+b) For the parameters mentioned at  1.1(e) to  1.1(k) above, at  least  one  plug or socket-outlet 
+(as  applicable)  of each  aspect  shall  be  tested to  cover  the  entire  range. However, if 
+accessories   with   screwless   terminals   for   rigid   and   flexible   conductors   are   tested, 
+accessories with screwless terminals for rigid conductors shall also be covered. 
+c) If   socket-outlets   with   increased   protection   are   tested,   socket-outlets   with   normal 
+protection are also covered. 
+d) If socket-outlets with shutters are tested, socket-outlets without shutters are also covered. 
+e) If  plugs  having  pins  with  insulating  sleeves  are  tested,  plugs  having  pins  without 
+insulating sleeves are also covered. 
+6. The Firm shall declare the varieties of  Plugs  or Socket-outlets intended to be covered in the 
+Licence.  The  Scope  of  Licence  may be  restricted  based  on  the  manufacturing  and  testing 
+capabilities of the manufacturer. 
+7. During  the  operation  of  the  Licence, BO  shall  ensure  that  all  the  varieties  covered in  the 
+Licence are tested in rotation to the extent possible. 
+
+PM/ IS 1293/ 2/ January 2021 
+ 
+3 
+ 
+ 
+ 
+ 
+ANNEX B 
+ 
+List Of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+ 
+Sl. 
+No. 
+Test Equipment 
+Tests used in with Clause 
+Reference 
+1 Petroleum spirit, water Marking - 8.8 
+2 Vernier caliper, micrometer, gauges Dimensions – 9, General 
+ 
+ 
+ 
+3 
+Jointed  test  finger  (test  probe  B  of IS  1401),  unjointed 
+test   finger   (test   probe 11   of IS   1401),   electrical 
+indicator,  push-pull  force  applicator,  arrangement  for 
+compression  test  (Figure  8),  Figures  9  and 10:  Gauges 
+for  checking  non-accessibility  of  live  parts,  through 
+shutters,   and   of   live   parts of   socket-outlets   with 
+increased protection, Test plug 
+ 
+ 
+ 
+Protection against electric shock - 
+10 
+4 Low voltage AC source with Voltmeter and ammeter Earthing Resistance  - 11.5 
+ 
+5 
+Screw  driver  and  spanner  with  torque  meter,  weights, 
+Figure   11:   Arrangement   for   checking   damage to 
+conductors 
+ 
+Tests on screw terminals-12.2 
+ 
+6 
+Figure   11:   Arrangement   for   checking   damage   to 
+conductors, AC source, measuring instruments 
+Figure 12: Deflection test apparatus 
+ 
+Tests on screwless terminals 
+Weights-12.3 
+ 
+7 
+Test probe 1 of IS 1401, push-pull force applicator   
+Figure 13: Test setup 
+Construction of fixed socket- 
+outlets-13.4 
+8 
+Figure 14: Device for checking the resistance to lateral 
+strain 
+Lateral strain of socket-outlets- 
+13.14 
+9 Heating cabinet, Test probe 11 of IS 1401, Freezer Test on membranes- 13.22, 13.23 
+10 
+Figure  15:  Device  for  testing  of  non-solid  pins,  Push- 
+pull force applicator, micrometer 
+Test of non-solid pins- 14.2 
+11 
+AC    source,    measuring    instruments,     temperature 
+measuring device 
+Temperature rise test on plugs of 
+plug-in equipment- 14.23.1 
+12 Apparatus for the torque test 
+Torque test on plugs of plug-in- 
+equipment- 14.23.2 
+13 Heating cabinet, humidity chamber Ageing test- 16.1 
+ 
+14 
+Figure 16:    Test    wall in    accordance    with    the 
+requirements of   16.2.1,   Test   apparatus   acc.   IS/IEC 
+60529 
+Protection provided by 
+enclosures- 16.2, 
+15 Humidity chamber Humidity treatment- 16.3 
+16 Insulation test equipment (Megger) Insulation resistance- 17.1 
+17 High voltage test equipment Electric strength - 17.2 
+ 
+ 
+18 
+AC source, measuring instruments, temperature 
+measuring device (thermocouples), test block for flush- 
+mounted accessories, wooden block for surface-type 
+socket-outlets, test plug, 
+Clamping unit for the temperature rise test (Figure 18) 
+ 
+ 
+Temperature rise- 19 
+
+PM/ IS 1293/ 2/ January 2021 
+ 
+4 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+19 
+Figure 19: Apparatus for breaking capacity and normal 
+operation, test plug, fixed socket-outlet, 
+AC source, adjustable load (resistors and inductors), 
+measuring instruments, Figure 9: Gauge for checking 
+non-accessibility of live parts, through shutters, after 
+normal operation test 
+Figure 10: Gauge for checking non-accessibility of live 
+parts, through shutters, and of live parts of socket- 
+outlets with increased protection 
+ 
+ 
+ 
+ 
+Breaking capacity - 20 
+Normal operation- 21 
+ 
+20 
+Figure 21: Apparatus for checking the withdrawal 
+force, test-plug, chemical degreaser, 
+Test pin gauge as per Figure 22 
+Verification of the maximum 
+withdrawal force- 22.1 
+21 
+Figure 22: Gauge for the verification of the minimum 
+withdrawal force, 
+Verification of the minimum 
+withdrawal force- 22.2 
+22 
+Figure 23: Apparatus for testing the cord retention, 
+Apparatus for the torque test 
+Test of the cord retention- 23.2 
+23 
+Figure 24: Apparatus for flexing test, measuring 
+instruments 
+Flexing test- 23.4 
+ 
+24 
+Pendulum hammer test apparatus, mounting 
+arrangement, Figures 25: Mechanical strength test 
+apparatus, Test probe B of IS 141, Steel wire of Figure 
+10, 
+ 
+Mechanical Strength- 24.1 
+25 Tumbling barrel as per Figure 26 Tumbling barrel test- 24.2 
+26 Cylinder of rigid steel sheet, Flat steel sheet 
+Test on ordinary surface-type 
+socket-outlets- 24.3 
+27 
+Figure 27: Apparatus for impact test at low 
+temperature, sponge rubber,  freezer 
+Impact test at low temperature- 
+24.4 
+28 Figure 8: Arrangement for compression test 
+Impact test at low temperature- 
+10.1, 24.5 
+29 
+Cylindrical metal rods 
+Test-spanner with torque meter 
+Test on screwed glands-24.6 
+30 
+Figure 28: Apparatus for abrasion test on insulating 
+sleeves of plug pins 
+Abrasion test – 24.7 
+31 Test-pin, electrical indicator Test on shutters- 24.8 
+32 
+Figure 29: Arrangement for mechanical strength test on 
+multiple portable socket-outlets 
+Test on multiple portable socket- 
+outlets- 24.9 
+33 
+Figure 30: Arrangement to verify the fixation of pins in 
+the body of the plug, heating cabinet 
+Test of the fixing of the pins- 
+24.10 
+ 
+34 
+ 
+Cylindrical steel rod 
+Test on  portable socket-outlets 
+with suspension means- 24.11- 
+24.12 
+35 Round head screw 
+Test on portable socket-outlets 
+with suspension means- 24.13 
+
+PM/ IS 1293/ 2/ January 2021 
+ 
+5 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+36 
+Figure 31: Arrangement for test on covers or cover- 
+plates 
+Figure 32: Gauge for the verification of the outline of 
+covers or cover plates 
+Figure 35: Gauge for verification of grooves, holes and 
+reverse tapers 
+Figure 37: Apparatus for compression test for the 
+verification of resistance to heat 
+ 
+ 
+ 
+Removal of covers or cover- 
+plates Weights- 24.14-24.19 
+ 
+37 
+Heating cabinet, Test probe B of IS 1401, 
+Figure 38: Ball pressure test apparatus 
+Figure 37: Apparatus for compression test for the 
+verification of resistance to heat 
+ 
+Resistance to heat – 25 
+38 Screw-driver and spanner with torque meter 
+Screws, current carrying parts and 
+connections- 26 
+39 Calipers. Tolerances gauges 
+Creepage distances, clearances- 
+27 
+40 
+Glow wire test apparatus according to IS 11000 (Pt 2/ 
+Sec 1) 
+Glow-wire test- 28.1.1 
+ 
+41 
+Figure 39: Apparatus for testing resistance to abnormal 
+heat of insulating sleeves of plug pins 
+Test of the resistance to heat of 
+pins with insulating sleeves- 
+28.1.2 
+42 Test apparatus according to IS 2824 Resistance to tracking- 28.2 
+43 
+Chemicals (Ammonium Chloride), Humidity cabinet, 
+Heating cabinet 
+Resistance to rusting- 29 
+44 
+Figure 40: Apparatus for pressure test at high 
+temperature, Heating cabinet 
+Pressure test at high temperature- 
+30.1 
+45 
+Climatic chamber according to IS 9000 (Pt 5/ Sec 1 & 
+2) 
+Static damp heat test- 30.2 
+46 Freezer Test at low temperature- 30.3 
+47 
+Figure 41: Impact test apparatus on pins provided with 
+insulating sleeves 
+Impact test at low temperature- 
+30.4 
+ 
+The above list is indicative only and may not be treated as exhaustive. 
+
+PM/ IS 1293/ 2/ January 2021 
+ 
+6 
+ 
+ANNEX C 
+ 
+ 
+Scheme Of Inspection And Testing 
+ 
+ 
+1. LABORATORY - A laboratory shall be maintained which shall be suitably equipped (as per 
+the  requirement  given in  column  2  of  Table  1)  and  staffed,  where  different  tests  given in  the 
+specification shall be carried out in accordance with the methods given in the specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipment. 
+ 
+2. TEST RECORDS – The manufacturer shall maintain test records for the tests carried out to 
+establish conformity. 
+ 
+3. LABELLING AND  MARKING -   As  per  the  requirements  of IS  1293:2019. In  addition, 
+each  product  or  the  packaging  of  the  product  shall  carry  the  identification  mark in  code  or 
+otherwise for traceability. 
+ 
+4. CONTROL UNIT – Plugs and socket-outlets of same type and rating manufactured in a day 
+shall constitute a control unit. 
+ 
+5. LEVELS OF  CONTROL  - The  tests as indicated in  column  1  of 
+Table  1 and  the  levels  of 
+control in column 3 of Table 1, shall be carried out on the whole production of the factory which 
+is  covered by  this  plan  and  appropriate  records  maintained in  accordance  with  paragraph  2 
+above. 
+ 
+6. REJECTIONS – Disposal  of  non-conforming  product  shall  be  done in  such  a  way so  as  to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+
+ 
+7 
+ 
+PM/ IS 1293/ 2/ January 2021 
+ 
+TABLE 1 
+ 
+(1) (2) (3) 
+Test Details 
+Test equipment 
+requirement 
+R: required (or) S: Sub - 
+contracting permitted 
+Levels of Control 
+ 
+Cl. 
+ 
+Requirement 
+Test Methods 
+No. of 
+Sample 
+ 
+Frequency 
+Clause Ref 
+8 Marking (except 8.8) 8 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IS 
+1293 
+--- Each plug/ socket-outlet 
+8.8 Marking 8.8 R 3 Each control unit 
+17.3 Electric Strength (Flash test) 17.3 R Each plug/ socket-outlet 
+9 Checking of dimensions 9 
+R 
+3 Each control unit 
+10 Protection against electric shock 10 R 3 Every week for each type and rating 
+11 Provision for earthing 11 S 3 
+Every 3 months for each type and rating 
+12 Terminals 12 S 3 
+Every 3 months for each type and rating 
+13 Constructional requirements of fixed socket outlets 13 S 3 Every month for each type and rating 
+14 
+Constructional requirements of plugs and portable 
+socket outlets 
+14 S 3 
+Every month for each type and rating 
+15 Interlocked socket outlet 15 S 3 Every month for each type and rating 
+16 
+Resistance to ageing, harmful ingress of water, 
+humidity 
+16 S 3 
+Every 3 months for each type and rating 
+17 Insulation resistance and electric strength 17 S 3 Every 3 months for each type and rating 
+18 Operation of earthing contacts 18 S 3 Every 3 months for each type and rating 
+19 Temperature rise 19 R 3 Every week for each type and rating 
+20 Making and breaking capacity 20 
+S 
+3 
+Once in a year for each type and rating 
+21 Normal operation 21 S 3 Every 3 months for each type and rating 
+22 Force necessary to withdraw the plug 22 R 3 Every week for each type and rating 
+23 Flexible cables and their connection 23 S 3 Every month for each type and rating 
+24 Mechanical Strength 24 
+S 
+3 
+Each 3 months for each type and rating 
+25 Resistance to heat 25 S 3 Every month for each type and rating 
+26 Screws, current carrying parts and connections 26 S 3 
+Every month for each type and rating 
+27 
+Creepage distances, clearance and distances 
+through sealing compound 
+27 S 3 
+Every month for each type and rating 
+28 
+Resistance of insulating material to abnormal  heat, 
+fire and tracking 
+28 S 3 
+Once in a year or whenever there is 
+change in raw material 
+
+ 
+8 
+ 
+PM/ IS 1293/ 2/ January 2021 
+ 
+ 
+(1) (2) (3) 
+Test Details 
+Test equipment 
+requirement 
+R: required (or) S: Sub - 
+contracting permitted 
+Levels of Control 
+ 
+Cl. 
+ 
+Requirement 
+Test Methods 
+No. of 
+Sample 
+ 
+Frequency 
+Clause Ref 
+29 Resistance to rusting 29 
+ 
+S 3 
+Every 3 months for each type and 
+rating 
+30 
+Additional tests on pins provided with insulating 
+sleeves 
+30 S 3 
+Every   3   months   for   each   type   and 
+rating 
+ 
+Note-1: The number of additional specimens for testing shall be selected as per clause 5 of IS 1293. In case of any failure, the provisions given in clause 5.5 of IS 1293 shall be 
+followed. 
+ 
+Note-2: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empanelled by the Bureau. 
+ 
+Note-3: The control unit and levels of control as decided by the Bureau are obligatory, to which the licensee shall comply with. 
+ 
+ 
+. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+9 
+ 
+PM/ IS 1293/ 2/ January 2021 
+ANNEX D 
+ 
+Possible Tests in a day 
+ 
+ 
+ 
+1. Marking – Cl. 8 
+2. Checking of dimensions – Cl. 9 
+3. Protection Against Electric Shock - Cl. 10 
+4. Electric Strength (Flash Test) - Cl. 17.3 
+5. Temperature Rise - Cl.19 
+6. Tumbling barrel test – Cl. 24.2 
+7. Creepage distance and clearances - Cl. 27 
+8. Glow-wire test- Cl. 28.1.1 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+
+PM/ IS 1293/ 2/ January 2021 
+10 
+ 
+ 
+ANNEX E 
+ 
+Scope of Licence 
+ 
+ 
+Licence is granted to use Standard Mark as per IS 1293:2019 with the following scope: 
+ 
+Name of the Product 
+ 
+Type (socket-outlet) 
+Fixed/ Portable/ Multiple/ Combined/ for Appliances 
+Rated Current 
+ 
+Rated Voltage 
+ 
+Nature of supply 
+ 
+IP (plugs/socket outlets) 
+ 
+Provision for earthing 
+(plugs/socket outlets) 
+With/ without earthing contact 
+Method of connecting cable 
+(plugs/socket outlets) 
+Rewirable/ non-rewirable 
+Type of terminals 
+(plugs/socket outlets) 
+Screw-type/ screwless for rigid conductors/ screwless for 
+rigid and flexible conductors 
+Degree of protection against 
+electric shock (socket-outlets) 
+Normal / Increased protection 
+Method of application/ 
+mounting (socket-outlet) 
+Surface/ Flush/ Semi-Flush/ Panel/ Architrave Type 
+Existence of shutters 
+(socket-outlet) 
+With/ without shutters 
+Intended Use (if any) 
+(socket-outlets) 
+ 
+Intended Class of appliance 
+(Plugs) 
+Class I/ Class II 
+Insulating sleeves (Plug) 
+Pins with/ without insulating sleeve 
+ 
+ 
+Scope for Plugs and Socket-outlets may be provided in separate tables in the Licence. 
+
+PM/ IS 1293/ 2/ January 2021 
+ 
+11 
+ 
+ANNEX – F 
+ 
+Guidelines for Outsourcing of Moulded Bodies 
+ 
+ 
+a) Outsourcing  of  moulding   facilities   may  be   permitted   with  the   following  organizations 
+(Moulder): 
+For Domestic Manufacturers 
+ Any dedicated moulding unit in the conforming/ authorized industrial area and located 
+under the jurisdiction of the same Branch Office. 
+ Any  other  unit  of  the  Licensee/  Applicant or  their  sister  concern,  which is  having  a 
+valid  BIS  licence  for  the  same  product  under  the  jurisdiction  of  the  same  Branch 
+Office. 
+ 
+For Foreign Manufacturers 
+ Any dedicated moulding unit in the conforming/ authorized industrial area  and located in the 
+same city where the applicant/ licensee is located. 
+ 
+b) The  dedicated  moulder  shall not  carry  out  moulding  for  units  other  than  the  particular 
+Applicant/ Licensee. 
+c) The Manufacturer shall take the following actions: 
+ Enter  into an  agreement  with  the  moulder  which  shall  comprise,  interalia,  the  terms 
+and conditions for moulding including the condition of dedicated moulding, period of 
+agreement etc. 
+ Declare the Items and Brands for which he intends to outsource moulding. 
+ Declare the name, ownership details, address, details of the responsible person, phone 
+number, etc. of the moulder. 
+d) It  shall be  the  responsibility of  the  licensee  (the  firm  which is  outsourcing  the  moulding 
+activity) to  ensure  that no finished  material is  produced  or assembled at  any  place  other  than 
+the licensed premises and he shall be responsible for any misuse of ISI mark at the moulder’s 
+premises. An Undertaking to this effect shall be furnished to BIS. 
+e) Records  of  raw  material  issued  date-wise,  moulded  material  received  back  date-wise  and 
+item-wise shall be maintained by the licensee. Similar records shall also be maintained by the 
+moulder. 
+ 
+f) The  moulder  shall  ensure  that  there is  a  separate  dedicated  space  for  keeping   moulded 
+components as  well as  the  raw  materials  received  from  the  licensee.  Colour  coding  of  bins/ 
+separate  storage  location etc.  may  be  used to  ensure  easy  and  quick  traceability.  Appropriate 
+records are to be maintained at both the units. 
+g) The  licensee  shall  ensure  that  there  are  adequate  means  of  ensuring  the  quality of  incoming 
+outsourced moulded bodies. 
+ 
+
+ 
+PM/ IS 1293/ 2/ January 2021 
+ 
+12 
+ 
+ 
+h) For applications received with request for outsourcing of moulding facilities, a special  inspection  of  the 
+moulder’s  premises  shall  be  carried  out to  adjudge  the  capability  of  the  moulder in  addition to  the 
+preliminary  inspection at  the  applicant’s  premises.  Special  Inspection Charges and any other charges, as 
+applicable,  for  this  visit  shall be  collected from   the  applicant in  advance.  The  process  flow  chart 
+submitted   by   the   applicant   shall   clearly    indicate   the    outsourcing   of   moulded    bodies.   The 
+recommendations for  GoL  shall  include  details on outsourcing of moulding operation by the firm. The 
+details of outsourcing may also  be included in the GoL intimation letter. 
+i) For  existing  licensees  who  intend to  outsource  the  moulding  facility,  the  licensee  shall  submit   a  fresh 
+process  flow  chart  indicating  the  outsourcing of  moulded  bodies.  The  permission  for  outsourcing  may 
+be  given to  the  licensee  after  complying  with  all  the  procedures  including   verification  visit  to  the 
+moulder’s premises. 
+j) Whenever  there is  a  change in  the  moulder,  the  licensee  has to  enter  into  a  fresh  agreement  with the 
+new moulding unit. The permission for outsourcing may be given to the licensee after  complying with all 
+the procedures including verification visit to the moulder’s premises. 
+k) During the operation of the licence, records required to be maintained at the licensee end with  respect to 
+outsourced  moulding  shall  be  verified  during  surveillance  visit at  the  licensee’s   premises by  BIS 
+Certification Officer. 
+l) BIS  Officer(s)  shall  have  access to  the  moulder’s  premises  and if  at  any  time  the  same is  denied, 
+permission for outsourcing shall be withdrawn. An undertaking in this respect shall be   obtained. 
+ 
+m) For  Domestic  manufacturers,  the  visit to  moulder’s  premises may  be  taken  up as  a  special  visit as 
+and when needed. Special  Inspection Charges for  this visit shall be collected from the  licensee  after the 
+visit. An undertaking from the licensee  regarding payment of such charges  shall be obtained. 
+n) For  Foreign  manufacturers,  BIS  shall  maintain  surveillance  over  the  moulder’s  premises in  addition to 
+the  manufacturer’s  premises.  Special  inspection  charges  and  all  other  applicable   charges  for  this  visit 
+shall be payable by the licensee. 
+Note: 
+ The  Indian  Standard  does  not  impose  any  restriction  on  the  manner/  method  of  Marking so  long as  the 
+Durability  clause is  complied  with. As  such,  the  product may  be  marked  with  the  Standard  Mark, 
+CM/L  Number,  Manufacturer’s  Brand  and  other  markings  during  the  process   of  moulding  itself,  in 
+which case all the conditions stated above shall apply. 
+ However, if  the  Marking  on  the  moulded  bodies is  done at  the  Licensee’s  own  premises  by  other 
+means  such as  pad  printing/  laser  marking  etc,  the  moulded  component  may  be  treated as   any  other 
+bought  out  component/  raw  material as  these  are  not  marked  with  the  ISI  Mark or   CM/L  Number 
+during  the  outsourced  moulding  process.  Notwithstanding  this,  the  Applicant/   Licensee  shall  ensure  that 
+there  are  adequate  means  of  ensuring  the  quality  of  the  incoming  components.

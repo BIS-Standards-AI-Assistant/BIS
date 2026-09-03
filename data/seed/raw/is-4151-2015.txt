@@ -1,0 +1,497 @@
+PM/ IS 4151/ 2/ June 2020 
+  
+BUREAU OF INDIAN STANDARDS  
+Manak Bhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+1 
+ 
+PRODUCT MANUAL FOR  
+PROTECTIVE HELMET FOR TWO WHEELER RIDERS 
+ACCORDING TO IS 4151: 2015 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all  Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by  prospective  applicants  desirous  of 
+obtaining BIS certification licence/certificate. 
+ 
+1. 
+Product 
+: IS 4151 : 2015 
+ 
+Title 
+: Protective Helmet for Two Wheeler Ridders 
+ 
+No. of Amendments 
+: 2 
+    
+2. 
+Sampling Guidelines: 
+a) 
+Raw material 
+: Materials - Clause 4 of IS 4151 : 2015 
+b) 
+Grouping guidelines 
+: Helmet  of  each  Model/Design,  Type  and  Size shall  be 
+tested to cover that variety in the licence  
+c) 
+Sample Size 
+: 8 Helmets - for all tests  
+    
+3. 
+List of Test Equipment 
+: Please refer ANNEX – A 
+ 
+ 
+  
+4. 
+Scheme  of  Inspection  and 
+Testing 
+: Please refer ANNEX – B 
+ 
+ 
+ 
+ 
+5. 
+Possible tests in a day : 
+ (i) Sizes (Clause 5) 
+(ii) Constructional requirement  (Clause 6.1 to 6.6)) 
+(iii) Peripheral vision (Clause 6.7) 
+(iv) Workmanship and Finish (Clause 6.8) 
+(v) Mass (Class 6.9)  
+(vi) Dynamic test of retention system (Clause 7.5) 
+6. 
+Scope of the Licence : 
+ “Licence is granted to use Standard Mark as per IS 4151 : 2015 with the following scope: 
+ Name of the product Protective Helmet for Two Wheeler Ridders 
+Model/Design of    helmet 
+(Including reference to 
+document submitted by 
+licensee/applicant) 
+-  
+Type - With or without lower face cover 
+- With or without Visor 
+Size --- mm 
+ 
+
+PM/ IS 4151/ 2/ June 2020 
+2 
+ 
+ANNEX A  
+List of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+ 
+S. No. Tests used in with Clause 
+Reference 
+Test Equipment 
+1 Metal parts (Clause 4.5) - Spray cabinet 
+- Temperature controlling arrangement 
+- Salt  spray  arrangement  under  pressure  and  with 
+atomizer  
+- Solution collection device 
+2 Visor (Clause 4.6) 
+a) Impact Resistance 
+- Test apparatus 
+- Air conditioner 
+- Steel spherical ball 
+b) Penetration Resistance 
+- Test apparatus 
+- Pointed project with 50 gm weight 
+c) Flammability 
+- Burner 
+- Bare copper wire 0.71 mm 
+- Protractor  
+- Stop watch 
+d) Spherical  and  cylindrical  error  and  Prismatic 
+error 
+- Standard lenses 
+- Telescope 
+- Adjustable light source with condenser 
+e) Diffuse transmittance and Light Transmission 
+- Haze meter 
+- Integrating sphere 
+f) Mass 
+- Weighing balance with weights 
+3 Sizes (Clause 5) Head  forms  of  various  sizes as  per  Annex  A  of        
+IS 4151 
+4 Shell (Clause 6.2) - Vernier calliper / Steel scale 
+- Radius gauges 
+5 Retention system  
+(Clause 6.4) 
+- Vernier calliper 
+- Load of 150 N ± 5 N 
+
+ 
+PM/ IS 4151/ 2/ June 2020 
+ 
+3 
+ 
+6 Peripheral vision  
+(Clause 6.7) 
+- Head forms of various sizes 
+- Load of 50 N 
+- Angle protractor or gauge to check the angle 
+7 Mass (Clause 6.9) - Weighing balance 
+8 Impact absorption test 
+(Clause 7.2) 
+- As per C-2 of IS 4151 
+9 Rigidity test  
+(Clause 7.3) 
+- Loading arrangement on helmet with loads of 630 
+N  and 30 N  
+- Steel scale or Vernier calliper  
+- Stop watch 
+10 
+Test for projections and surface friction (Clause 7.4) 
+Method A - As per E-1.2 of IS 4151 
+Method B - As per E-2.2 of IS 4151 
+11 Dynamic test of 
+retention system 
+(Clause 7.5) 
+- Test apparatus 
+- Headform with 15 ± 0.5 kg mass 
+- Falling mass 10 ± 0.1 kg and height 750 ± 5 mm 
+12 Audibility test  
+(Clause 7.6) 
+- As per G-1 of IS 4151 
+ 13 Retention  (Detaching  ) 
+test (Clause 7.7) 
+- Retention (Detaching) test apparatus 
+- Headform 
+- Falling mass of 10 ± 0.01 kg from height 0.50 ± 0.01 m 
+height 
+14 Micro-slip   test   of   the 
+chin strap (Clause 7.8) 
+- Apparatus for testing slippage of the chin strap 
+- Reciprocating clamp  
+15 Test   for   resistance   to 
+abrasion   of   the   chin 
+strap (Clause 7.9) 
+- Apparatus for testing abrasion of the chin strap 
+ 
+16 
+Tests for retention system relying quick – release mechanisms (Clause 7.10) 
+Inadvertent release by 
+pressure (Clause 7.10.1) 
+Rigid  sphere  of  100  mm  and  load  to  exert  pressure  of 
+100 ± 5 N on helmet  
+Ease of release  
+(Clause 7.10.2) 
+- Force measuring equipment 
+- Dynamometer 
+- Vernier calliper 
+Durability    of    Quick –
+release Mechanisms  
+(Clause 7.10.3) 
+- Suitable test apparatus  
+- Provision for applying force of 20 ± 1 N  
+- Closed    cabinet    with    spray    arrangement    and 
+temperature control arrangement  
+17 
+For conditioning of helmets  (Clause 7.1.1) 
+
+ 
+PM/ IS 4151/ 2/ June 2020 
+ 
+4 
+ 
+Solvent conditioning  
+(Clause 7.1.1.1) 
+- Cotton cloth 
+- Octane 
+- Toluene 
+- Stop watch 
+- Steel scale 
+Ambient     temperature     and 
+hygrometry conditioning 
+(Clause 7.1.1.2) 
+- Arrangement    for    maintaining    temperature    of          
+25 ± 5 ° C and humidity 65 ± 5 % 
+- Stop watch 
+Heat conditioning  
+(Clause 7.1.1.3) 
+- Arrangement    for    maintaining    temperature    of           
+50  ± 5 ° C  
+- Stop watch 
+Low temperature 
+conditioning 
+(Clause 7.1.1.4) 
+- Arrangement    for    maintaining    temperature    of              
+- 20 ± 2 ° C  
+- Stop watch 
+Ultraviolet –radiation 
+conditioning and moisture 
+conditioning  
+(Clause 7.1.1.5) 
+- Xenon  filled  quartz  lamp  of  125  W  with  range       
+25 cm 
+- Water spraying arrangement 
+- Timer 
+ 
+The above list is indicative only and may not be treated as exhaustive. 
+
+PM/ IS 4151/ 2/ June 2020 
+5 
+ 
+ANNEX B 
+ 
+Scheme of Inspection and Testing  
+ 
+1. LABORATORY - A laboratory shall be maintained which shall be suitably equipped (as 
+per the requirement given in column 2 of Table 1) and staffed, where different tests given in 
+the   specification   shall   be   carried   out   in   accordance   with   the   methods   given   in   the 
+specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipments. 
+ 
+2. TEST RECORDS – The manufacturer shall maintain test records for the tests carried out 
+to establish conformity. 
+ 
+3. LABELLING AND MARKING – As per the requirement of IS 4151: 2015.  
+ 
+3.1 In addition, if visor is provided with the helmet, it shall be marked with manufacturer’s 
+name or trade mark,  year of manufacture and identification in code or otherwise for 
+traceability.  
+ 
+3.2 Each visor shall also be tagged with a printed card having the following information: 
+ 
+a)   To maintain a good field of vision, formation of scratches and accumulation of dirt on 
+the visor screen shall be avoided. 
+ 
+b)   No organic solvents or materials containing organic solvents such as metal polish, wax 
+and polish shall be used to clean the visor screen. 
+ 
+c)    A soft cloth shall be used to wipe the visor for removing dust, dirt etc. 
+ 
+4. CONTROL UNIT – Helmets of same Model/Design, Type and Size manufactured under 
+similar conditions in a day shall constitute a control unit.  
+ 
+5. LEVELS OF CONTROL - The tests as indicated in column 1 of Table 1 and the levels of 
+control  in  column  3  of  Table  1,  shall  be  carried  out  on  the  whole  production  of  the factory 
+which  is  covered  by  this  plan  and  appropriate  records  maintained  in  accordance  with 
+paragraph 2 above.  
+ 
+5.1 All  the  production  which  conforms  to  the  Indian  Standards  and  covered  by  the  licence 
+should be marked with Standard Mark. 
+ 
+6. REJECTIONS – Disposal of non-conforming product shall be done in such a way so as to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+PM/ IS 4151/ 2/ June 2020 
+ 
+6 
+ 
+ 
+TABLE 1 
+ 
+(1) (2) (3) 
+Test Details Test equipment 
+requirement 
+R: required (or)  
+S: Sub-contracting 
+permitted 
+Levels of Control 
+Cl. Requirement Test Method No. of Sample Frequency Remarks 
+Clause Reference 
+4.1 Shell 4.1 IS 4151  – – – Material shall conform to the 
+requirements. 
+4.2 Protective padding 4.2 IS 4151 – – – 
+4.3 Comfort padding 4.3 IS 4151 – – – 
+4.4 Retention system 4.4 IS 4151 – – – 
+4.5 Metal Parts 
+(Corrosion 
+resistance) 
+4.5 IS 4151 
+ IS 9844 
+S Two samples 
+for each 
+component. 
+Each 
+consignment 
+ 
+No   further   testing   is   required   if 
+accompanied  with  the  test  certificate. 
+However,    random    sample    counter 
+check   on   each   component may be 
+carried out once in three months.  
+4.6 
+and 
+6.1.2 
+Visor  
+(If provided) 
+4.6 IS 4151 
+ IS 9973 
+  
+R One sample 
+for each shape 
+and size 
+Each lot No   further   testing   is   required   if 
+accompanied  with  the  test  certificate 
+or  ISI  marked.  However,  for  non-ISI 
+visors,  random  sample  counter  check 
+may be carried out once in a month. 
+5 Sizes 5.1 IS 4151 R Eight Each control 
+unit 
+In case of any failure, all helmets in 
+the control unit shall be tested. 
+6 
+CONSTRUCTIONAL REQUIREMENTS 
+6.1 General 
+(Except visor) 
+6.1.1 , 
+6.1.2 
+6.1.3 
+IS 4151 R Eight Each control 
+unit 
+In case of any failure, all helmets in the 
+control unit shall be tested 
+6.2 Shell 6.2.1 to 
+6.2.7 
+IS 4151 R Eight Each control 
+unit 
+
+PM/ IS 4151/ 2/ June 2020 
+ 
+7 
+ 
+ 
+6.3 Protective padding 6.3 IS 4151 R Eight Each control 
+unit 
+In case of any failure, all helmets in the 
+control unit shall be tested 
+6.4 Retention system 6.4 IS 4151 R Eight Each control 
+unit 
+– 
+6.5 Characteristics of 
+material of helmet 
+6.5 IS 4151 R Eight Each control 
+unit 
+– 
+6.6 Safety of wearer 6.6 IS 4151 R Eight Each control 
+unit 
+– 
+6.7 Peripheral vision 6.7,  
+Annex B 
+IS 4151 R One sample for each shape and 
+size from every 7 control units. 
+# Please see foot note. 
+6.8 Workmanship and 
+finish 
+6.8 IS 4151 R Each – – 
+6.9 Mass 6.9  IS 4151 R Eight Each control 
+unit 
+In case of any failure, all the helmets in 
+the control unit shall be tested. 
+7.2 Impact absorption   
+test 
+7.1, 7.2,  
+Annex C 
+IS 4151 S Five samples 
+for each shape 
+and size  
+Once in three 
+months 
+ 
+# Please see footnote. 
+7.3 Rigidity test 7.1, 7.3,  
+Annex D 
+IS 4151 
+ 
+R Two  samples  for  each  shape 
+and  size  from  every  30
+ 
+control 
+units 
+# Please see footnote. 
+7.4 Test for 
+projections and 
+surface friction 
+7.4,  
+Annex E 
+IS 4151 
+ 
+R # Please see footnote. 
+7.5 Dynamic test of 
+retention system 
+7.5,  
+Annex F 
+ 
+IS 4151 R   One   Each control 
+unit 
+- 
+7.6 Audibility test 7.6,  
+Annex G 
+IS 4151 S One sample 
+for each shape 
+and size  
+Once in 6 
+month 
+ 
+# Please see footnote. 
+
+PM/ IS 4151/ 2/ June 2020 
+ 
+8 
+ 
+ 
+7.7 Retention 
+(Detaching) test of 
+helmet 
+7.1, 7.7, 
+Annex H 
+IS 4151 R One sample  Each control 
+unit 
+ 
+ 
+– 
+7.8 Micro-slip test of 
+the Chin strap 
+7.8,  
+Annex J 
+IS 4151 S One sample 
+for each shape 
+and size  
+Once in three 
+month 
+ 
+# Please see footnote. 
+7.9 Test for resistance 
+to abrasion of the 
+Chin strap  
+7.9,  
+Annex K 
+IS 4151 S One sample 
+for each shape 
+and size  
+Once in three 
+month 
+ 
+# Please see footnote. 
+7.10 Test for retention 
+systems relying on 
+quick release 
+mechanisms 
+7.10 IS 4151 S One sample 
+for each shape 
+and size  
+Once in three 
+month 
+ 
+# Please see footnote. 
+ 
+#  In  case  of  failure  of  sample  in  any  of  the  requirements  as  per  clauses  6.7, 7.2,  7.3, 7.4,  7.6,  7.8,  7.9  and  7.10, samples  from  two 
+consecutive  control units shall be tested  for the requirement in  which failure has occurred. The original frequency shall be restored only after 
+samples from both control units are found meeting the requirement. 
+ 
+Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empanelled by the Bureau. 
+ 
+Note-2: The control unit and levels of control as decided by the Bureau are obligatory, to which the licensee shall comply with.

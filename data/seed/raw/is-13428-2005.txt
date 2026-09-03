@@ -1,0 +1,5927 @@
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+उत्पाद मानुयल 
+पैकेजबंद प्राकृतिक तमनरल जल - वितिवि 
+IS 13428:2005 के अनुसार 
+ 
+PRODUCT MANUAL 
+FOR PACKAGED NATURAL MINERAL WATER 
+ACCORDING TO IS 13428 : 2005 
+ 
+भारतीय मानक ब्य
+ू
+रो (नन
+ां
+य्ता म
+ू
+तया
+ु
+कन )विवनयम 8102 की स्कीम-I के तहत यह उत््ाद मान
+ां
+यल प्रमाणीकरणके प्रचलन मे रीवत और ्ारदवशिता के 
+स
+ां
+स
+ु
+गता स
+ां
+वनवित करने के वलए सभी क्षेत्रीय/शाखा कायािलयों एि
+ु
+ लाइसेन्स धाररयों द्वारा स
+ु
+दभि सामग्री के य् मे उ्योग वकया जाएगा। बीआईएस 
+लाइसेन्स/प्रमाण ्त्र प्राप्त करने के इच्छ
+ां
+क भािी आिेदकों द्वारा भी इस दस्तािेज़ का उ्योग वकया जा सकता है। 
+ 
+This Product Manual shall be used as reference material by all Regional/Branch Offices & licensees  to ensure 
+coherence  of  practice  and  transparency  in  operation  of  certification  under  Scheme-I  of Bureau  of  Indian 
+Standards (Conformity Assessment) Regulations, 2018 for various products. The document may also be used 
+by prospective applicants desirous of obtaining BIS certification licence/certificate. 
+ 
+1. 
+ उत््ाद 
+Product 
+: IS 13428 : 2005 
+ 
+ शीर्िक 
+Title 
+: Packaged Natural Mineral Water 
+ 
+ स
+ु
+शोधन स
+ु
+ख्या 
+No. of Amendments 
+: 11 
+2. 
+Introduction and Salient changes in 
+: Please refer Annex -A 
+this version of the manual 
+3. Product Specific Guidelines: 
+a) 
+Guidelines for processing 
+: Please refer Annex –B 
+Applications for grant of licence and 
+change in scope of licence 
+b) Guidelines for Surveillance : Please refer Annex – C 
+c) 
+Guidelines for actions in case of 
+: Please refer Annex – D 
+non-conformity including 
+suspension and revocation of 
+suspension of licence 
+4. 
+ ्रीक्षण उ्करणो की स
+ू
+ची 
+List of Test Equipment 
+: Please refer ANNEX –E 
+5. 
+वनरीक्षण ि ्रीक्षण स्कीम 
+Scheme of Inspection and Testing 
+: Please refer ANNEX –F 
+6. Guidelines for Special Situations : Please refer ANNEX –G 
+7.  Hygiene Checklist  Please refer ANNEX –H (It shall be verified, filled up, duly-
+signed and uploaded as an attachment alongwith the Factory 
+Test report. Hygiene assessment shall be done during all 
+inspections(Preliminary inspection, Surveillance inspection, 
+Verification inspection) 
+8. लाइसेन्स का कायिक्षेत्र / Scope of the Licence : 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+IS 13428:2005 के अन
+ु
+सार मानक म
+ु
+हर का उपयोग करने के लिए िाइसेंस लनम्नलिलित काययक्षेत्र के लिए प्रदान लकया जाता 
+है: 
+“Licence is granted to use Standard Mark as per IS 13428 : 2005 with the following scope: 
+ 
+Name of the product Natural Mineral Water 
+Varieties (Packaging) 
+Mention material (PE/PET/PVC/Glass etc.), type of containers 
+(cup/bottles/jars etc.) and capacities in ml or litres (500 ml/1 
+litre/20 litres etc.) 
+For example: PET Bottles of 500 ml, 1litre, 1.5 litre capacity 
+and/or PET Jars of 20 litres capacity 
+(any other pack sizes; containers for all pack sizes need to be 
+in conformance to IS 15410 (as per latest amendment)  
+ 
+BUREAU OF INDIAN STANDARDS 
+Manak Bhawan, 9, Bahadur Shah Zafar Marg,    
+New Delhi – 110002 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+Annexure A 
+Salient changes in this version of the manual 
+ 
+1. The first edition Manual for Packaged Water, which provided internal guidelines to BIS Certification 
+officers for certification of Packaged Drinking Water (Other Than Packaged Natural Mineral Water) 
+(PDW) and Packaged Natural Mineral Water (PNMW) was issued in 2005. Following changes in the 
+standard and feedback obtained during certification, the second and third editions of this Manual were 
+issued in 2007 and 2013, respectively. 
+ 
+2. Following the revision of the BIS Act, 1986 as the BIS Act, 2016 in March 2017 and subsequent issue of 
+general guidelines for certification based on the Act and regulations framed thereunder, it was decided to 
+prepare  a  Scheme  of  Inspection  and  Testing (SIT)  as  per  the  provisions  of  the  new  regulations  for  both 
+PDW/PNMW. Accordingly, SITs for both PDW and PNMW were issued in 2018-19. 
+ 
+3. Subsequently, it was also felt that the Manual for Packaged Water also needs to be revised to align with the 
+provisions of the existing Indian Standard, and the BIS Act, with a view to consolidate the various guidelines 
+for certification of packaged water in a single, user-friendly document. Accordingly, in line with the practice 
+for  other  products,  separate product  manuals  for PDW  and PNMW were framed. This document pertains 
+only to PNMW manual, the PDW manual has been issued separately. 
+ 
+4. The salient changes in this version of the PNMW manual are as follows: 
+ 
+i. The manual has been updated with respect to various amendments to IS 13428 (upto Amendment 
+No. 11)  and guidelines  issued from time to time.  
+ 
+ii. The list of test equipment has been updated as per revised test methods wherever applicable; and 
+the list of test equipment for Uranium has been included. 
+ 
+iii. In line with CMD-2 circular dated 22-03-2022 regarding testing of Pesticide Residues in Packaged 
+Natural Mineral Water as per IS 13428:2005, it has been specified that out of all the samples drawn 
+for factory/market surveillance in a year, only one sample may be got tested for pesticide residues. 
+The  same  shall  be  clearly  indicated  on  the  test  requests  generated  by  BOs/outsourced  agencies. 
+However, if a sample fails in the requirement of Pesticide Residues, then the next 3 consecutive 
+samples (factory/market) of that licence  shall be  tested for all tests  including Pesticide Residues 
+(except  Radioactive  residues),  till  the  3  consecutive  samples  are found  conforming  to all 
+requirements tested including pesticide residues. 
+ 
+5. The salient features of the erstwhile product manual(PM/13428/2, July 2020), which remains in vogue 
+and are to be followed:  
+ 
+i. As  per  Guidelines  for  Grant  of  Licence  (GoL)  as  per  the  conformity  assessment  Scheme – I  of 
+Schedule – II of BIS (Conformity Assessment) Regulations, 2018, the provision for grant of licence 
+under option 2 (simplified procedure) has been excluded. 
+ 
+ii. It has been specified that the compliance of source of water and process adopted by the 
+manufacturer for treatment/disinfection of the water shall be verified and details thereof reported 
+during preliminary inspection. 
+ 
+iii. In  line  with  CMD-2  circular  dated  16.09.2019  regarding  testing  of  market  samples  of  reusable 
+containers of PNMW, it is specified that   separate samples of containers need not be drawn during 
+factory and market surveillance for testing. The possible tests on containers will be carried out on 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+the containers of the samples of Natural Mineral Water drawn for chemical/microbiological/other 
+tests during factory and market surveillance. 
+ 
+iv. It is a l s o  permitted  that at the  grant of licence stage and during  operation  of  the  licence  stage,  for 
+inclusion of containers sizes, the manufacturer may offer only (at least) one sample of packaged natural 
+mineral water in any one variety of packaging along with conforming tests reports issued by BIS 
+recognized labs for the other varieties of packaging/containers intended to be covered in the scope  
+of the licence. (Test reports may not be required in case containers are ISI marked).   
+v. It was also specified that although in case of water samples, consecutive non-conformity will attract 
+suspension, in case of non-conformity of containers, suspension will be attracted only in case 
+the  same variety of container (i.e. same material, type and capacity of container) fails more than 
+two times consecutively. However, first failure will attract suspension in case of parameters 
+concerning radioactive residues. 
+ 
+vi. As per the previous Water Manual, if a fresh application has been submitted after closure of earlier 
+application or expiry/cancellation of earlier licence and the closure of application/licence was for 
+reasons other than failure in radioactive residues, fresh sample of water need not be drawn for 
+testing of radioactive residues, if evidence is available that the source of raw water remained the 
+same  as  that  in  earlier  application/licence,  provided  that  radioactive  residue  TR  of the  sample 
+drawn  by  BIS  during  verification  visit  passes  and  is  not  older  than  five  years.  The earlier  test 
+reports of sample drawn by BIS (not older than five years) shall be accepted within a period of five 
+years. This provision has been removed in this version since present regulations/guidelines do not 
+permit acceptance of applications based on old test reports. 
+ 
+vii.  IS 11984 has been specified as a reference Indian Standard for glass bottles. If any manufacturer 
+intends  to  use  glass  bottles  for  packaging,  it  shall  be  included  in  the licence. The separate 
+processing line for filling the glass bottles may be verified by BIS during  the  next  visit and 
+necessary steps in the process for ensuring sterility of bottles may be adopted like steam sterilizing, 
+hot water rinsing, UV sterilization or combination thereof. In case of lug caps containing plastic 
+lining, food grade certificate or OSL report for migration testing may be accepted. 
+ 
+viii. Manufacturers need not maintain separate chemists and microbiologist and alternatively, may keep 
+even one testing person, in case he/she is found competent for both chemical and microbiological 
+testing. This shall be duly recorded in PIR. 
+ 
+ix. Guidelines  for  special  situations  faced  in  certification  of  packaged  water  have  been  addressed 
+(Annex  G)  covering  aspects  like  change  in  source  of  raw  water,  shelf  life,  brand  name/label 
+approvals. It has been specified that in case the brand name/trademark submitted by the firm is a 
+registered brand name/trademark, no objection to its use shall be raised even if the brand 
+name/trademark is  found to be in non-compliance to Clause 8 of IS 13428. However, in such a 
+case, the Head BO concerned shall communicate the details of such cases to CMD-2 for taking up 
+with the concerned authorities. 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+Annex B 
+Product Specific Guidelines for processing 
+applications for grant of licence and change in scope of licence 
+ 
+ 
+B-1. Application for grant of licence 
+ 
+i. Domestic manufacturers of PNMW shall apply for grant of licence for his unit online through the 
+Manakonline system  as  per  the  provided  application  format  i.e.  as  per  Form  V  as  specified  in 
+Scheme  I  of  Schedule  II  of  BIS  (Conformity  Assessment  Regulations),  2018.  (Presently  foreign 
+applications under FMCS are being processed on offline mode). 
+ 
+ii. Applications will only be accepted under Option 1 (Normal procedure), i.e. after receipt of the 
+application and          ensuring completeness of the application, a visit will be paid by BIS to the factory 
+of  the  applicant for  assessment  of  the  manufacturing  infrastructure, production  process,  quality 
+control, testing  capabilities, assessment of hygiene conditions and sample will be drawn for testing 
+in third party laboratory. 
+ 
+B-2 Preliminary Inspection 
+ 
+B-2.1 During preliminary inspection, the documents/aspects as mentioned in general GoL guidelines 
+shall be verified and the observations recorded in the Preliminary Inspection Report in the format circulated 
+by CMD. 
+ 
+B-2.2 The actual factory layout shall be verified against the layout submitted with application. The layout 
+should clearly indicate the different locations preferably including the following: 
+ 
+a) Location of source of raw water and its entry point, pipeline etc. 
+b) Plant for the manufacture of the product (with various stages) 
+c) Filling/packing areas, change room, toilet(s), 
+e) Entry/exit with indications of double door/door closures/Air curtains wherever provided 
+f) Stores for packaging material and finished product 
+g) Laboratory 
+h) Actual boundary/perimeter of the establishment 
+i) If the premises are also used for residential quarters/other purposes, then specific mention of 
+the same be made with identified locations. 
+ 
+B-2.3 As product is under mandatory certification, it is unlikely to be in “production” during PI. It is 
+therefore essential to get some production & filling/packing done as ‘Trial Batch’ during the visit and then 
+make comments on the firm’s capability for the same. 
+ 
+B-2.4  It  should  be  clearly  reported  in  the  PIR  as  to  whether  the  filling/packaging  adopted  are  manually 
+operated or automatic. It may be noted that the plastic cups, tumbler, pouch bottles are required to be filled 
+only through automatic machine. However, jars maybe filled manually also. 
+ 
+B-2.5. In addition, the following product specific aspects shall also be verified and observations recorded 
+in the Preliminary Inspection Report or in an Annexure to that report: 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+i. Availability of all manufacturing facilities including filling and/or packaging machinery for the 
+varieties applied for to be verified and observations recorded; 
+ 
+ii. Compliance to hygienic practices as per Annex B of IS 13428, to be verified and observations to 
+be recorded as per Hygiene Checklist (as per Annex-H). 
+ 
+iii. As per Cl 3.1 of IS 13428:2005, Natural Mineral Water is: a) is obtained directly from natural or 
+drilled sources from underground water-bearing strata; b) it is characterized by its content of certain 
+mineral salts and their relative proportions and the presence of trace elements or of other 
+constituents; c) of the  constancy  of its composition and the stability  of its discharge and its 
+temperature, due  account being taken of the cycles of minor natural fluctuations; d) it is collected 
+under conditions which guarantee the original microbiological purity and chemical composition of 
+essential components; e) it is packaged close to the point of emergence of the source with particular 
+hygienic precautions; f) it is not subjected to any treatment other than those permitted under Cl 4.1 
+of  IS  13428. Compliance to Cl 3.1 a) to f) shall be  ensured  and  reported in  the Preliminary 
+Inspection report. 
+ 
+iv. As per Cl.3.1.6 of IS 13428:2005, Natural Spring water is natural mineral water which is derived 
+from an underground formation from which water flows naturally to the surface of the earth at an 
+identified location. Spring water shall be collected only at the spring or through a borehole 
+tapping the underground formation feeding the spring. There shall be a natural force causing the 
+water to flow to the surface through an orifice. Compliance to Cl 3.1.6 and 6.4 shall be ensured and 
+reported in the preliminary inspection report in case manufacturer claims the natural mineral water 
+as Natural spring water. 
+ 
+v. The transport of natural mineral water in bulk containers for packaging or any other process before 
+packaging is prohibited. 
+ 
+vi. Natural mineral water shall have the constancy of its composition and the stability of its discharge 
+and temperature, due account being taken of the cycles of minor natural fluctuations. Evidence 
+for constancy of water composition at source on account of cycles of minor natural fluctuations 
+during different seasons in a year shall comprise of the following: 
+ 
+a. Undertaking  for  submission  of Test  report (from  any  BIS  approved  OSL)  of  all  the  major 
+seasons (over a period of one year) for all the major   physicochemical parameters, complying to 
+the requirements of IS 10500; 
+b. Record of temperature at discharge point/ point of emergence (by manufacturer); and 
+c. Report from the Hydrogeologist covering genesis of natural mineral water; period of its 
+residence in the ground; chemical, physical and radiological qualities; and the risk of pollution 
+ 
+ 
+vii. Availability of required testing facilities, as per the ISS should be verified and recorded. The test 
+equipment should have valid calibration on the day of the visit. Calibration should be done from 
+NABL  accredited  laboratory  or  any  other  laboratory  provided  traceability  to  NPL  is  established 
+through  the  calibration  certificates.  Calibration  of  Analytical  Balance,  temperature  indicators, 
+pressure gauge of autoclave and spectrophotometer (internal/in-house or from an outside lab) is 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+considered necessary at least once a year. Indicative List of test equipment and chemicals required 
+for testing of Natural Mineral Water is given at Annex E for guidance. Status of test equipment 
+calibration observed from calibration certificates should be certified. 
+ 
+viii. Testing person(s) shall be science/engineering graduate from disciplines such as 
+chemistry/chemical  engineering/  microbiology/  biotechnology/ biochemistry/  food  technology/ 
+botany and other biological/ life sciences. Engineering graduates from disciplines such as chemical 
+engineering  may  also  be  engaged  as  testing  persons. Availability  of  testing  person(s), his/her 
+competence, qualifications and experience shall be verified and reported. One testing personnel 
+may be allowed in case he/she is found competent for both chemical and microbiological testing 
+and if so, this shall be duly recorded in Inspection Report. 
+B-3 Factory testing 
+ 
+B-3.1  One sample  of  the  product  shall  be  tested  in  the  factory  during  the  preliminary  inspection  for 
+preferably following requirements: Description, Colour, Odour, Taste, Turbidity, Total Dissolved Solids 
+(TDS) by gravimetric method as per IS 3025(Part-16), pH, Chloride and Alkalinity. 
+ 
+B-3.2 In case any non-conformity is observed during factory testing, no sample shall be drawn for 
+independent testing in third party lab. (Please refer Annex D for guidelines to be followed in case 
+of non conformity) 
+B-4 Sample for Independent Testing 
+B-4.1 If the sample passes in factory testing, sample of Natural Mineral Water shall be drawn and sent for 
+complete testing for all requirements of the Indian Standard. The following details should be mentioned 
+in the test request (generated through Manakonline): 
+ 
+i. Specify if it is Natural Spring Water (as per Cl. 3.1.6 o IS 13428:2005) 
+ 
+ii. Date of manufacture/packing and batch number; 
+ 
+iii. Expiry/Use by; 
+ 
+iv. Quantity (number of containers and total quantity of Natural Mineral Water in litre or milliliter), 
+ 
+v. Type, material and capacity of containers 
+ 
+vi. Declared wall thickness of container(s)/width of film of pouch 
+ 
+ 
+B-4.2 In case of foreign manufacturers, test report through LIMS is not applicable, till applicants/licencees 
+under FMCS are brought on online mode, integrated with LIMS. 
+ 
+B-4.3 However, in case the manufacturer intends to cover more than one variety of packaging in the scope 
+of  licence,  he  need  not  offer  samples  of  each  variety  of  packaging  during  the  factory  visit  (preliminary 
+inspection) for testing in third party lab. However, it shall be ensured that the manufacturing facilities for 
+manufacturing other packing sizes (if applicable) like moulding machines, etc, are available. He may offer 
+sample of the product in at least one variety of packaging, along with either: 
+ 
+a. Conforming tests reports issued by BIS recognized labs (through LIMS only) for the other varieties of 
+packaging/containers intended to be covered in the scope of the licence. These test reports issued 
+through LIMS, shall not be older than 90 days  on the date of submission of application.  
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ In case an application is received for more than one variety of container and the variety of the container 
+drawn  during  preliminary  inspection, does  not  conform  to  the  requirements  of  the  Indian  Standard, 
+however the product (Packaged Natural Mineral water) is found conforming to all the requirements of 
+the Indian Standard, then the application is to be processed for Grant of Licence for all those varieties 
+of container packaging, whose conforming test report has been submitted with the application. Under 
+such circumstances, the variety of container, which has not been found conforming to the requirements 
+of relevant Indian Standard, shall be excluded from the scope. 
+ 
+ Further there may be a situation when applicant has applied for one variety only and the container is 
+found failing but the product (PNMW) is passing. Under such circumstances, only the improved sample 
+of the container as offered by the manufacturer, maybe tested for conformity to the requirements of the 
+relevant Indian Standard. 
+. 
+ 
+OR 
+ 
+b. In case the applicant uses/intends to use ISI Marked Plastic Containers as per IS 15410 or ISI Marked 
+polyethylene flexible pouches as per IS 15609 or ISI Marked Paper based multilayer laminated/extruded 
+composite cartons  as per IS 17753 or ISI  marked  aluminum cans  as per the finalized  draft of Indian 
+Standard  'Aluminum  cans  for  packaged  natural  mineral  water  and  packaged  drinking  water — 
+Specification'  [Doc:  PGD  38  (20182)], the  manufacturer may  submit           a  consent  letter  from  the  BIS 
+licensed  manufacturer of  the  container, that  he  has  agreed  to  supply  ISI Marked  containers  for  the 
+required varieties (to be explicitly mentioned in the letter) to the applicant firm. In that case test reports 
+from  third  party  labs  need  not  be  submitted  for  those  varieties. The letter from BIS  licensed 
+manufacturers shall not be older than 90 days on the date of submission of application. The test 
+certificates of the containers issued as per relevant Indian Standard(s) by the BIS licensed manufacturer 
+is required to be submitted at the time of submission of application / before inspection, for examination 
+by BIS. 
+ 
+B-4.4 In case the applicant is adopting more than one type of processes/sources of raw water, separate 
+samples shall be drawn for each process/source. 
+B-4.5 The sample quantity to be sent to the third-party lab for testing is as follows: 
+ 
+i) Natural Mineral Water 
+ 
+a) For all parameters other than radioactive residues - A sample containing approximately 18 litres of 
+Natural Mineral Water (NMW) in two parts is adequate, if packed in 1 liter or smaller containers but 
+in case the samples are available in large size packages, minimum two such packages are required as 
+microbiological laboratory needs separate sample for ensuring aseptic handling. For example: 
+ 
+Capacity of the container 
+Number of containers to be drawn 
+(cup/bottle/jar) in litres 
+1 18 
+2 9 
+5 4 
+10 2 
+20 2 
+25 2 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+For Pouches: 2 bags/cartons each containing total of atleast 100 pouches + Film. 
+ 
+b) For Parameters concerning Radio-active Residue 
+ 
+ 
+In addition to the above, sample shall also be drawn for testing parameters concerning radioactive 
+residues. A sample of 10 litres is adequate. 
+ 
+(ii)  Sample of packaging material (containers)   :: 
+                                                                                                                                                
+Capacity of the container 
+(cup/bottle/jar) in ml/L 
+Number of containers (including caps) to be drawn 
+200ml 30(empty with caps) + 9(filled)+40 caps 
+250ml 27 (empty with caps) + 9 (filled) + 40 (caps)   
+500ml 24 (empty with caps) + 9 (filled) +40 caps 
+1 liter 21 (empty with caps) + 9 (filled) + 40 caps 
+2 litre 18 Empty (with caps) + 8 (filled) + 40caps 
+5 litre and above 7 Empty (with caps) + 8 (filled) + 25 caps 
+ 
+ 
+Pouches: 1 bag of 50 filled pouches + 18 meter film+ 10 Nos. of Preformed pouches of dimension 125 
+mm X 200 mm. 
+Cup/Glass along with peelable seal: 37 (Empty) + 15 (filled) + 18 meter film of peelable seal + 8 
+preformed pouches of 125 mm x 200 mm of peelable seal. 
+Note 1: The pouches shall be made in the presence of BIS officer, during inspection, and, may be printed 
+with only details like batch number, date of manufacturing, Expiry/Use by,, capacity, using ink to be used 
+by the manufacturer for marking on the pouches. This will facilitate testing of pouches for ink adhesion 
+test  and  product  resistance  test.  This  is  being  allowed  as  manufacturer  cannot  get  the  pouch  film rolls 
+printed with all other details such as Standard Mark etc. before the GOL. 
+ 
+Note 2: IS 11984 has been specified as a reference Indian Standard for glass bottles/tumbler, however such 
+containers  need  not  be  tested. However,  if  any  manufacturer  intends  to  use  such  container,  it  shall  be 
+included  in  the  licence.. The separate  processing  line  for  filling  the  glass bottles  may  be  verified  by  BIS 
+during the next surveillance visit and necessary steps in the process for ensuring sterility of bottles may be 
+adopted  like  steam sterilizing,  hot  water  rinsing  or  combination  thereof.  In  case  of  lug  caps  containing 
+plastic lining, food grade certificate or OSL report for migration testing may be accepted. 
+ 
+Note 3: Effort shall be made, as far as possible, to send samples without the manufacturer’s identification 
+and/or markings. Any label and/or manufacturer's identification from the bottles/Jars shall be removed or 
+defaced. 
+ 
+Note 4: The manufacturer’s declaration with respect to the minimum wall thickness (Top/Middle/Bottom) of 
+the container and shelf life of product, shall                   be obtained and the same to be mentioned in the test request 
+ 
+B-5 Change in Scope of Licence 
+ 
+B-5.1 For the purpose of certification of PNMW, change in scope of licence pertains only to 
+addition/deletion of the varieties of packaging covered in the scope of the licence. 
+ 
+B-5.2 In case a licensee intends to add new varieties of packaging in scope of licence, he shall submit an 
+application in the Form – XIV along with requisite fee and relevant documents. 
+ 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+B-5.3 In addition, he shall submit conforming third party lab test report(s) of samples of each variety of 
+the packaging (i.e. each material (PET/PE etc.), form or type (cup/bottle/jar) and capacity in ml or litres) 
+intended to be added to the scope of licence. 
+ 
+B-5.4  In  addition  to  these  guidelines,  Guidelines  for  Grant  of  Licence  (GoL)  and  Change  in  Scope  of 
+Licence  (CSoL)  as  per  the  conformity  assessment  Scheme – I  of  Schedule – II  of  BIS  (Conformity 
+Assessment) Regulations, 2018 issued by CMD-1 shall be followed. 
+ 
+ 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+Annexure C 
+Guidelines for Surveillance 
+Surveillance consists of two activities in case of Natural Mineral Water certification i.e. surveillance visits 
+at factory premises (which includes testing of sample drawn from factory) and drawl of samples from the 
+market for third party lab testing. Product Specific guidelines for these are as follows: 
+C-1. Factory Surveillance 
+ 
+C-1.1 During factory surveillance  visit, the compliance  to the requirements  of the  SIT and  ISS shall be 
+verified  and  the observations  recorded  in  the  Report  of  Periodic  Inspection  in  the  format  circulated  by 
+CMD (General Format applicable for all products), 
+ 
+C-1.2 However, in addition, the following product specific aspects shall also be verified and observations 
+recorded in the Report of Periodic Inspection or in an Annexure to that report: 
+ 
+i. Any change in manufacturing facilities including filling and/or packaging machinery for the 
+varieties applied for to be verified and observations recorded; 
+ 
+ii. Compliance to hygienic practices as per Annex B of IS 13428 to be verified and observations 
+to be recorded as per Hygiene Checklist at Annex-H of this product manual. 
+ 
+iii. Any change in Source of Water shall be checked for and reported. Any observations 
+including non-compliance to IS requirements to be reported. 
+ 
+iv. Any observations including non-compliance to IS requirements to be reported. 
+ 
+v. Any change in nature of treatments processes to be verified and observations including 
+compliance thereon to be reported (This may be mentioned in the process flowchart submitted.) 
+ 
+vi. Availability of required testing facilities, as per the ISS should be verified and recorded. 
+Any change in the test facilities should be checked for and reported. The test equipment 
+should have valid calibration on the day of the visit. Calibration should be done from 
+NABL accredited laboratory or any other laboratory provided traceability to NPL is established 
+through   the calibration certificates. Calibration of Analytical Balance, temperature 
+indicators, pressure gauge of autoclave and spectrophotometer (internal/in-house or from 
+outside lab.) is considered necessary at least once a year. Indicative List of test equipment 
+and chemicals required for testing of Natural Mineral Water is given at Annex E for 
+guidance. Status of test equipment  calibration observed from calibration certificates 
+should be reported. 
+ 
+vii. Any change in testing person(s) should be checked for and reported along with 
+comments on the competence, qualifications and experience. 
+ 
+viii. Compliance to requirements of SIT shall be verified and observations reported. 
+ 
+C-2 Factory testing 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+C-2.1  One  sample  of  the  product  shall  be  tested  in  the  factory  during  the  preliminary  inspection  for 
+preferably following requirements: Colour, Odour, Taste, Turbidity, pH, Chloride, Alkalinity. 
+ 
+C-2.2  In  case  any  non-conformity  is  observed  during  factory  testing,  no  sample  shall  be  drawn  for 
+independent  testing  in  third  party  lab.  (Please  refer  Annex  D  for  actions  to  be  taken  in  case  of  non- 
+conformity) 
+ 
+C-3 Sample for Independent Testing 
+C-3.1 If the sample passes in factory testing, sample of Natural Mineral Water shall be drawn and sent for 
+complete  testing  for all  requirements of  the  Indian  Standard  IS  13428:2005 except  the  parameters 
+concerning radioactive residues. However, out of all the samples drawn for 
+factory/market surveillance in a year, only one sample may be got tested for pesticide residues, which is 
+required   to   be   clearly   indicated   on   the   test   requests   generated   by   BOs/outsourced   agencies. 
+But, if   a   sample   fails   in   the   requirement   of   Pesticide   Residues,   then   the   next   3   consecutive 
+samples    (factory/market)    of    that    licence    shall    be    tested    for    all    tests    including    Pesticide 
+Residues(except   Radioactive   residues),   till   the   3   consecutive   samples   are   found   conforming   to 
+all requirements tested including pesticide residues.  The following details should be mentioned in the test 
+request (generated through Manakonline): 
+i. Specify if it is Natural spring water (as per Cl 3.1.6 of IS 13428:2005) 
+ 
+ii. Date of manufacture/packing and batch number; 
+ 
+iii. Expiry/Use by or Best Before Days/Months from the date of Packaging/Manufacture ; 
+ 
+iv. Quantity (number of containers and total quantity of Natural Mineral Water in litre or 
+milliliter), 
+ 
+v. Type, material and capacity of containers 
+ 
+vi. Declared wall thickness of container(s)/width of film of pouch 
+ 
+vii. ‘All tests/All Chemical tests/All Possible tests, except Pesticide Residues and Radioactive 
+Residues’   (where   pesticide   residue   is   not   required   to   be   tested) 
+And 
+All tests/All Chemical tests/All Possible tests, including Pesticide Residues, but excluding 
+Radioactive Residues (where pesticide residue is required to be tested) ‘ 
+ 
+C-3.2 In case the applicant is adopting more than one type of processes/sources of raw water, samples shall 
+be drawn for each process/source by rotation during factory surveillance. 
+ 
+C-3.3 The sample quantity to be sent to the third party lab for testing is as follows: 
+ 
+i) Natural Mineral Water 
+For  all  parameters  other  than  radioactive  residues - A  sample  containing  approximately  18 litres  of 
+packaged water (NMW) in two parts is adequate, if packed in 1 liter or smaller containers but in case the 
+samples are available in large size packages, minimum two such packages are required as microbiological 
+laboratory needs separate sample for ensuring aseptic handling. . Details of pack sizes to be drawn are as 
+given above, under clause B-4.5 (i)(a) 
+ 
+For Pouches: Details of pack sizes to be drawn are as given above, under clause B-4.5 (i)(a) 
+ 
+C-4 Market Surveillance 
+ 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+C-4.1 While obtaining samples of Natural Mineral Water from the market, it should be ensured that the 
+samples  being  drawn are  bearing  genuine  ISI  mark.  This  may  be  done  by  checking  the  licence  number 
+printed on the label. In case  it is found that the  ISI  mark is spurious, the sample shall not be drawn for 
+testing and suitable action should be initiated for further investigation. 
+ 
+C-4.2 For sending the market sample to the lab for testing, the following details should be mentioned in 
+the test request (generated through Manakonline): 
+i. Specify if it is Natural Spring water (as per Cl 3.1.6 of IS 13428:2005) 
+ 
+ii. Date of manufacture or packaging’ and ‘Expiry/Use by; 
+ 
+iii. Best Before Date(optional); 
+ 
+iv. Quantity (number of containers and total quantity of Natural Mineral Water in litre or milliliter), 
+ 
+v. Type, material and capacity of containers 
+ 
+ 
+C-4.3  Separate  samples  of  containers  need  not  be  drawn  during  market  surveillance  for  testing.  The 
+possible tests on containers (including transparency) will be carried out on the containers of the samples of 
+Natural Mineral Water drawn for testing requirements as per IS 13428 excluding PR and RAR. This shall 
+be mentioned on the test request. 
+C-4.4 The sample quantity to be sent to the third-party lab for testing is as follows: 
+ 
+i) Natural Mineral Water 
+For all parameters other than radioactive residues – A sample containing approximately 18 litres of 
+Natural Mineral Water (NMW) in two parts is adequate, if packed in 1 liter or smaller containers but in 
+case the  samples  are  available  in  large  size  packages,  minimum  two  such  packages  are  required  as 
+microbiological laboratory needs separate sample for ensuring aseptic handling. For example: 
+ 
+ 
+ 
+Capacity of the container 
+Number of containers to be drawn 
+(cup/bottle/jar) in litres 
+ 
+1 18 
+2 9 
+5 4 
+10 2 
+20 2 
+25 2 
+ 
+For Pouches: 2 bags of 100 pouches each + Film. A sample of 4 bags shall be drawn in case each 
+bag contains 50/60 pouches. 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+Annexure D 
+ 
+Guidelines for actions in case of non-conformity including suspension and revocation of suspension 
+of licence 
+ 
+D-1.1 Guidelines for Suspension (SUS) and Revocation of Suspension (ROS) of Licence – For Scheme - I of 
+Schedule - II  of  BIS  (Conformity  Assessment)  Regulations,  2018  issued  by  CMD-1  shall  apply  in  case  of 
+Natural  Mineral  Water.  In  addition,  the  following  product  specific  guidelines  will  apply.  Wherever  the 
+general and product-specific guidelines are in conflict, the product specific guidelines will take precedence. 
+D-1.2 Non Conformity of Samples 
+ 
+Non-conformity of containers/packaging material shall not be treated at par with non-conformity of 
+Natural Mineral Water, since the criticality of the former is lower. Accordingly, non-conformity in 
+case of Natural Mineral Water and containers/packaging material shall be treated separately as follows: 
+D-1.2.1 Non-conformity of Natural Mineral Water (IS 13428) 
+ 
+i) Suspension shall be imposed in the event of consecutive non-conformity of samples of Natural 
+Mineral  Water.  However, suspension  shall  be  imposed  on  first  non-conformity  itself if  the 
+non-conformity of Natural Mineral Water is in respect of parameters concerning radioactive 
+residues or pesticide residue or toxicity. 
+ 
+ii) For other situations, in case of first non-conformity, the non-conformity shall be 
+communicated  to  the  licensee  through  email/speed  post/IT  software  with  a  copy  of  the  test 
+report (as per template given in Annex I of SUS/ROS guidelines). The licensee shall be advised 
+to take corrective action and submit reply with supporting evidence, as applicable, within 30 
+days (one month) of the date of communication. 
+ 
+iii) When the corrective actions as mentioned at para ii above, are received within 30 days (one 
+month), the DO shall put up the case to the Head BO for nominating an officer for verification 
+of the corrective actions preferably within 90 days through a surveillance inspection. 
+ 
+iv) If during the surveillance inspection, the sample is non-conforming in factory testing, it shall 
+be  treated  as  consecutive  non-conformity and  suspension  shall  be  imposed  and  actions  for 
+communication of suspension as per para 10 of SUS/ROS guidelines shall be taken. 
+ 
+v) However, if corrective actions as mentioned at para ii are not received within 30 days (one 
+month), the case may be processed for imposition of suspension. 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+D-1.2.2 Non-conformity of container or packaging material (IS 15410 etc) 
+ 
+i) First non-conformity 
+ 
+a) For containers/packaging material, in case of first non-conformity, the non-conformity 
+shall be communicated to the licensee through email/speed post/IT software with a copy 
+of the test report (as per template given in Annex I of SUS/ROS guidelines). The licensee 
+shall be advised to take corrective action and submit reply with supporting evidence, as 
+applicable, within 30 days (one month) of the date of communication and offer improved 
+samples for testing. 
+ 
+b) When the corrective actions as mentioned at para (a) above, are received within 30 days 
+(one month), the DO shall put up the case to the Head BO for nominating an officer for 
+verification  of  the  corrective  actions  preferably  within  90  days  through  a  surveillance 
+inspection. 
+ 
+c) Since factory testing of containers during surveillance visit may not be feasible in most 
+cases  as  most  manufacturers  are  procuring  containers  from  outside  and  do  not  have  in- 
+house testing facilities, the corrective action shall be verified from documents etc as far as 
+possible and improved sample of container shall be drawn for testing for all requirements 
+of the standard (i.e. IS 15410) in third party lab during surveillance visit. 
+ 
+ 
+ii) Second non-conformity (First consecutive non-conformity) 
+ 
+a) Non-conformity  is  to be  considered  as  consecutive  in  case  of  containers  only  when  the 
+same variety of containers (i.e. the same material, type/form and capacity) is found to be 
+non-conforming  consecutively  and  hence  suspension  shall  not  be  imposed  in  the  first 
+instance of consecutive non conformity in case of container. The non-conformity shall 
+be communicated to the licensee through email/speed post/IT software with a copy of 
+the test report (as per template  given in Annex  I of SUS/ROS guidelines). The licensee 
+shall be advised to take corrective action and submit reply with supporting evidence, as 
+applicable, within 30 days (one month) of the date of communication and offer improved 
+samples for testing. 
+ 
+b) When the corrective actions as mentioned at para (a) above, are received within 30 days 
+(one month), the DO shall put up the case to the Head BO for nominating an officer for 
+verification  of  the  corrective  actions  preferably  within  90  days  through  a  surveillance 
+inspection. 
+ 
+c) Since factory testing of containers during surveillance visit may not be feasible in most 
+cases  as  most  manufacturers  are  procuring  containers  from  outside  and  do  not  have  in- 
+house testing facilities, the corrective action shall be verified from documents etc as far as 
+possible and improved sample of container shall be drawn for testing for all requirements 
+of the standard (i.e. IS 15410) in third party lab during surveillance visit. 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+iii) Third non-conformity (Second Consecutive Non-Conformity) 
+ 
+ 
+Suspension shall be imposed in case of second instance of consecutive non-conformity of the same 
+variety  of  containers  i.e.  third  consecutive  non-conformity  of  same  variety  of container and 
+actions for communication of suspension as per para 10 of SUS/ROS guidelines shall be taken. 
+ 
+ 
+iv) Suspension shall also be imposed in case improved sample offered after second non 
+conformity (first  consecutive  non-conformity)  fails  in  factory  or  independent  testing  or  if 
+licensee  fails  to confirm corrective  actions  within 30 or days  and/or offer improved  sample 
+during  the  visit,  and  actions  for  communication  of  suspension  as  per  para  10  of  SUS/ROS 
+guidelines shall be taken 
+ 
+v) Revocation of suspension shall be done as per the general Guidelines for Suspension (SUS) 
+and Revocation of Suspension (ROS) of Licence. 
+ 
+D-2 Unsatisfactory performance 
+ 
+D-2.1 In case the following situations are observed, it shall be treated as major modification in process 
+without prior evaluation of the Bureau and shall attract suspension on the first instance itself: 
+i) Change of source of raw water without evaluation of the Bureau. 
+ 
+ii) Modification  in  the process with or without any  change in raw water source, without prior 
+evaluation  of the Bureau.  (Any  addition or deletion of processing  machinery  eg. Tanks/Filling 
+machine, etc for capacity enhancement or otherwise, which does not change the overall manufacturing 
+process, will not constitute as modification in the  process. A declaration regarding the same may be 
+taken during surveillance in Form-I.) 
+ 
+ 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+Annexure E 
+ 
+LIST OF TEST FACILITES 
+ 
+A-ORGANOLEPTIC AND PHYSICAL REQURIMENTS 
+ 
+SI. 
+Tests 
+Clause Ref. of Referred Method of 
+Test /Equipment /Apparatus Chemical/Regents 
+No. IS 13428:2005 
+ 
+Tests & 
+  
+Limit of Detection 
+(1) (2) (3) (4) (5) (6) 
+1. Colour 
+6.2, Sl No. i) of IS 3025 (Part 4) 
+ 
+• Potassium chloroplatinate 
+Table 1 
+   
+• Cobaltous chloride, 
+ 
+i) Platinum 
+  
+crystalline 
+  
+cobalt (Visual Nessler cylinders,50 ml • Conc. Hydrochloric acid 
+  
+Comparison Centrifuge or filter assembly, functional • Distilled water 
+  
+method) pore size 0.45μm 
+  
+   
+ii) Spectrophoto- • Spectrophotometer,400-700 nm with • Conc. Sulphuric acid 
+ 
+metric method 
+ 
+10 mm absorption cell 
+  
+  
+• Filteration system consisting of • Sodium hydroxide 
+   
+filteration flask with side tubes. 
+  
+  
+• Crucible holder 
+  
+  
+• Micrometallic filter crucible, pore 40 
+  
+   
+μm 
+  
+  
+• Calcined filter aid (Celite 505 or 
+  
+   
+equivalent 
+  
+  
+• Vacuum system 
+  
+  
+• Refrigerator (recommended) 
+  
+  
+• pH meter 
+  
+  
+• Centrifuge 
+  
+2. 
+Odour 
+6.2, SI No, ii) of 
+IS 3025 (P 5 ) 
+• Wide mouth glass stoppered bottles • Odour free distilled water (or 
+Table 1 
+ 
+(approx.1 lit . capacity) 
+ 
+distilled water and column of 
+    
+granulated activated carbon) 
+    
+• Hydrochloric acid 
+3. Taste 
+6.2, Sl. No. iii) 
+IS 3025 (P 8) 
+Breaker (50ml) Taste and Odour free water 
+of table 1 Water bath 2000 mg/l solution of sodium 
+ 
+Thermometer chloride 
+4. Turbidity 
+6.2, Sl. No. iv) 
+IS 3025 (P 10) 
+• Sample tubes • Distilled water 
+of Table 1 
+• Turbidity meter 
+• 
+Hexamethylene Tetramine 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+• Volumetric flasks (100 ml) • Hydrazine sulphate 
+• Membrane filter with pore size not more 
+  
+than 0.45 μm 
+  
+5. 
+Total 6.2, Sl No. v) of 
+IS 3025 (P 16) 
+• Filter: 
+ 
+dissolved Table 1 • Filtering Assembly (suitable for type of 
+solids 
+ 
+filter selected) 
+  
+• Drying oven (180 ± 2 ̊C) 
+  
+• Desiccator 
+  
+• Analytical balance (200 g capacity, LC 
+  
+0.1 mg) 
+  
+• Pipettes 
+  
+• Evaporating dish 
+  
+• Magnetic stirrer, recommended 
+  
+• Conductivity meter. 
+6 pH 
+6.2, Sl No. vi) of 
+IS 3025 (P 11) 
+• pH meter – with glass and reference • Standard pH Buffer 
+Table 1 
+ 
+electrode (saturated calomel) l.c 0.1 
+ 
+solutions/tablets (Buffer 
+ 
+• Magnetic stirrer with poly tetra fluoro 
+ 
+tablets pH 4, pH 7, pH 
+  
+ethylene coated stirring bar 
+ 
+9.2) (Minimum two different 
+ 
+• Thermometer (l.c. 0.5°C 
+ 
+values) 
+ 
+• Beakers OR 
+   
+• Distilled water 
+   
+• Borax (for Borax buffer) 
+   
+• Potassium dihydrogen 
+    
+phosphate, Sodium hydrogen 
+    
+phosphate and oven (for 
+    
+phosphate buffer) 
+   
+• Potassium hydrogen tartarate 
+    
+(for Tartarate buffer) 
+    
+Potassium hydrogen 
+    
+phthalate (for Phthalate 
+    
+buffer) Potassium 
+    
+tetraoxalate dihydrate (for 
+    
+Calcium hydroxide buffer) 
+   
+• Calcium Carbonate 
+   
+• Platinum dish, 
+   
+• Muffle furnace, 
+   
+• Hot Plate, 
+   
+• Fritted glass filter of medium 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+    
+porosity, polyethylene bottle, 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+ 
+     
+Suction pump & fritted glass 
+funnel (for Tetra oxalate 
+buffer) 
+ 
+• Methyl orange, methyl red, 
+bromothymol blue, 
+phenolphthalein and 
+alcohol (66%) (for 
+universal indicator) 
+• Thymol blue indicator 
+(acid range) Bromophenol 
+blue indicator 
+• Bromocresol green indicator 
+Methyl red indicator 
+• Bromocresol purple indicator 
+Bromothymol blue indicator 
+Phenol Red indicator 
+• Cresol Red indicator 
+• Thymol Blue (alkali 
+range) indicator 
+• Thymolphthalein indicator 
+• Thymol violet indicator 
+• Different buffer solutions 
+of known pH 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+ 
+B - CHEMICAL REQUIREMENTS 
+ 
+ 
+ 
+SI. 
+Tests 
+Clause Ref. Referred Method of 
+Test /Equipment /Apparatus* Chemical/Regents 
+No. of IS Tests & 
+ 
+13428:2005 Limit of Detection 
+(1) (2) (3) (4) (5) (6) 
+1. 
+Nitrate (as 6.2, Sl. No. i) 
+IS 3025 (Part 34) 
+  
+NO3) of Table 2 
+   
+i) Cadmium Reduction • Reduction Column • Distilled water 
+Method • Colorimeter OR • Nitrate free water 
+ 
+• Spectrophotometer OR • Cadmium granules (40 – 60 mesh) 
+Detection limit • 
+Filter photometer Glass wool 
+• 
+Hydrochloric Acid (6N) 
+maximum 0.1 mg/l • 0.45 μm pore diameter membrane • Copper Sulphate Solution 
+  
+filter • Sulphanilamide 
+ 
+Refrigerator • Conc. Hydrochloric Acid 
+  
+• N-(1-napthyl))-Ethylenediamine 
+   
+dihydrochloride (NED) 
+   
+Dihydrochloride) 
+  
+• Ammonium Chloride 
+  
+• Disodium Ethylene diamine tetra acetate 
+  
+• Ammonia Solution 
+  
+• Copper sulphate Solution – 2% Stock 
+   
+nitrate solution – 100μg/ml 
+  
+• (Potassium Nitrate & Chloroform) 
+  
+• Chloroform 
+  
+• Stock nitrite solution - 100μg/ml 
+  
+• (Potassium Nitrite & Chloroform) 
+   
+Nitrite free water 
+   
+ 
+ii) Chromotropic 
+ 
+• 
+ 
+Spectrophotometer 
+ 
+• Nitrate free water 
+Acid Method • Standard laboratory glasswares • Stock Nitrate Solution - 100μg/ml 
+   
+(Potassium Nitrate, Chloroform) 
+   
+• Standard Nitrate solution – 10.0μg/ml 
+   
+• 
+Sulphite Urea Reagent 
+    
+(Urea & Anhydrous sodium Sulphite) 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+ 
+     
+• Antimony reagent (Antimony 
+ 
+metal, Conc. Sulphuric acid) 
+• Chromotropic Acid Reagent 
+ 
+(Purified chromotropic Acid 
+ 
+crystals, Conc. Sulphuric Acid) 
+ 
+Sulphuric Acid, Conc. Nitrate free 
+   
+iii) Devarda’s Alloy • 
+Distillation Assembly (Kjeldahl 
+• 
+Ammonia Free Water 
+ 
+Reduction 
+ 
+Assembly) 
+• 
+Borate Buffer Solution (0.1N Sodium 
+ 
+Method 
+   
+Hydroxide, 0.025M Sodium 
+• Measuring Scoop spectrophotometer 
+ 
+Tetraborate) 
+   
+• Sodium Hydroxide – 6 N 
+Detection limit 
+  
+• Devarda’s Alloy – 20 mesh with less 
+minimum 2 mg/l 
+   
+than 0.005 percent Nitrogen 
+   
+• 
+Mixed indicator Solution (Methyl Red 
+    
+indicator, Ethyl alcohol/Isopropyl 
+    
+alcohol, Methylene Blue) 
+   
+• 
+Indicating Boric Acid Solution 
+    
+(Hydroboric Acid, mixed indicator 
+    
+solution) 
+   
+• Std. Sulphuric Acid Titrant - 0.02 N 
+   
+• Nessler’s Reagent (Mercuric Iodide, 
+    
+Potassium Iodine. Sodium Hydroxide) 
+   
+• Stock Ammonia Solution -1.22mg 
+    
+ammonia/ ml (Anhydrous Ammonium 
+    
+ammonia/ ml (Anhydrous Ammonium 
+    
+Chloride) 
+   
+• 
+Standard Ammonia Solution 
+2 Nitrite 
+6.2, Sl. No. 
+IS 3025(Part 34) 
+ 
+• Spectrophotometer / Photometer • Nitrite Free water (Distilled water, 
+ii) of Table 2 
+  
+OR 
+ 
+Hydroxide/Calcium Hydroxide Conc. 
+  
+• Nessler’s cylinders method 
+ 
+Sulphuric Acid, Manganese Sulphate) 
+  
+• Nessler’s Tubes • Sulphanilamide Reagent 
+  
+• 0.45 μm Membrane Filter • NED Dihydrochloride 
+  
+Distillation Assembly (borosilicate) • Hydrochloric Acid 
+   
+• Sodium Oxalate – 0.05 N. 
+   
+• Ferrous Ammonium Sulphate – 0.05N 
+    
+(Ferrous Ammonium Sulphate, Conc. 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+ 
+     
+Sulphuric Acid, Std. Dichromate 
+solution) 
+• Stock Nitrite Solution - 250μg of 
+nitrogen/ml (Sodium Nitrite, 
+Chloroform, Sodium Oxalate, Std., 
+Potassium Permanganate solution) 
+• Intermediate Nitrite Solution – 50.0μg/ml 
+Standard Nitrite Solution – 0.500μg/ml 
+3 Sulphide 
+6.2, Sl. No. IS 3025 (Part 29) • Glass Fibre Filter Paper. • Zinc acetate solution – 2N 
+iii) of Table 2 
+ 
+• Reaction Flask (1 lit capacity with 2 • Sulphuric Acid, Conc. 
+ 
+i) Iodometric Method hole stopper fitted with gas-diffusion • Standard Iodine solution – 0.025 N 
+ 
+Detection limit 
+tube. • (Potassium Iodide, Iodine) Hydrochloric 
+ 
+• Absorption flasks (250ml Capacity) Acid, Conc. Standard Thiosulphate 
+ 
+above 1 mg/l (2 No’s) Solution - 0.025 N (Sodium 
+  
+• Nitrogen/Carbon dioxide gas thiosulphate, Sodium 
+  
+cylinder Or Carbon dioxide gas 
+Hydroxide/Chloroform) 
+  
+generator • Starch indicator solution (Starch, 
+   
+salicylic acid, toluene) 
+   
+• Aluminium Chloride solution – 6N 
+   
+• Sodium hydroxide – 6N 
+   
+ii) Methylene blue • Spectrophotometer (664 nm) or • N, N-dimethyl-p-Phenylene Diamine 
+Method filterphotometer (600 nm). oxalate 
+ 
+• Matched test tubes • Sulphuric Acid, Conc. & 1:1 solution 
+Detection limit upto • Droppers • Ferric Chloride 
+20 mg/l • Dark glass bottle. • Diammonium Hydrogen Phosphate 
+  
+• Methylene Blue 
+  
+• Standard Sulphide Solution 
+  
+• Zinc acetate 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+4 Manganese 
+6.2, SI. No. i) IS 3025 (Part 59) 
+• 
+Nessler’s Tubes 
+• 
+Sulphuric Acid 
+iv) Table 2 
+ 
+• Beakers • Hydrogen Peroxide (30%) 
+ 
+a) Periodate • Hot Plate • Nitric Acid, Conc. 
+ 
+Colorimetric 
+• 
+Volumetric flask 
+• 
+Stabilized Distilled Water OR 
+ 
+Method • Pipettes • Distillation Assembly, OR 
+ 
+Detection limit up to 
+• Conical Flasks • Distilled water, 
+ 
+• Burette • Potassium Permanganate and 
+ 
+0.2mg/l 
+   
+• Dil Sulphuric Acid 
+    
+• Phosphoric Acid (sp. Gr. 1.75) 
+    
+• Potassium Periodate 
+    
+• Std. Manganese Solution 
+    
+( 1ml=0.02 mg of Mn) (Standard 0.1 N 
+     
+Potassium Permanganate solution, 
+     
+saturated solution of sulphur dioxide) 
+   
+b) Formaldoxime 
+  
+• Fluoride Free Water 
+   
+• Potassium Peroxodisulphate or Sodium 
+Spectrometric • Spectrophotometer 
+ 
+Peroxodisulphate 
+Method 
+• Glass Bottle • EDTA Tetrasodium Salt, Solution, 
+  
+Autoclave 
+ 
+c(EDTA) 
+Detection limit 
+  
+• Sodium Hydroxide 
+between 0.01mg/l to 5 
+  
+• Hydroxyl ammonium Chloride 
+mg/l 
+  
+• Formaldehyde 
+   
+• Ammonia Solution 
+   
+• Ammonium Iron (II) Sulphate 
+    
+Hexahydrate Solution 
+   
+• Sulphuric Acid, conc. 
+    
+Manganese Monohydrate (for Standard 
+    
+Mn Solution) 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+   
+ 
+IS 3025 (Part 2) 
+ 
+• 
+ 
+Induction Coupled Plasma-Atomic 
+ 
+• 
+ 
+Nitric Acid 
+ 
+Emission Spectrometer 
+• 
+Hydrogen Peroxide 
+• Sample Bottles • Sulphuric Acid 
+• 
+Glasswares 
+• 
+Hydrochloric acid 
+• Acid Dispensers • Ammonium Sulfate 
+• 
+Membrane Filtration Equipment and • Stock Solution of Iron 
+ 
+• 
+A 
+Filters (0.45μ) 
+Hot Plate 
+rgon gas 
+ 
+5 
+Copper 
+ 
+ 
+IS 3025 (Part 2) 
+ 
+• 
+ 
+Induction Coupled Plasma-Atomic 
+ 
+• 
+ 
+Nitric Acid 
+  
+Emission Spectrometer • Hydrogen Peroxide 
+ 
+• Sample Bottles • Sulphuric Acid 
+ 
+• Glasswares • Hydrochloric acid 
+ 
+• Acid Dispensers • Ammonium Sulfate 
+ 
+• 
+Membrane Filtration Equipment and • Stock Solution of Iron 
+  
+Filters (0.45μ) 
+ 
+ 
+• Hot Plate 
+ 
+ 
+6.2, Sl No. 
+Argon gas 
+ 
+v) of Table 2 
+  
+   
+a) Neocuproine 
+• Spectrophotometer & 1cm cell Hot 
+• Ammonium Hydroxide 
+Method • Chloroform, AR Grade 
+ 
+plate 
+Detection range 0.05 • 
+Hydrochloric acid, Conc. 
+• Separating funnels (125 ml) 
+to 5.0mg/l • 
+Hydroxylamine Hydrochloride 
+• 
+Conical flasks 
+ 
+• 
+Isopropyl Alcohol 
+   
+• 
+Neocuproine 
+   
+• 
+Double Distilled water 
+   
+• 
+Nitric Acid, Conc. 
+   
+• Sulphuric Acid, Conc. 
+   
+• Hydrated Sodium Citrate 
+   
+• Stock copper (II) solution 200μg/ml 
+   
+(Pure Copper Metal, hot plate) 
+   
+• Hydrogen Peroxide 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+b) Atomic Abso- 
+ 
+• 
+Hydrochloric Acid, Conc 
+ 
+rption Method 
+ 
+• Nitric Acid, Conc. 
+ 
+(Direct) 
+ 
+• Dilute Sulphuric Acid 
+Detection range 0.02 to • Atomic Absorption Spectro- photometer • Stock copper (II) solution – 1.0mg/ml 
+5.0mg/l 
+ 
+with air-acetylene flame & Copper • (Pure Copper metal & hot plate) 
+  
+Hollow Cathode lamp 
+  
+   
+c) Atomic 
+    
+ 
+Absorption 
+  
+• Hydrochloric Acid, Conc. 
+ 
+Method 
+  
+• Nitric Acid, Conc. 
+ 
+(Chelation 
+  
+• Pyrrolidine 
+ 
+Extraction) 
+• Atomic Absorption Spectrophotometer • Dithiocarbamic acid 
+Detection range 0.02 to 
+ 
+with air-acetylene flame 
+• Methyl Isobutyl Ketone, AR grade 
+5.0mg/l 
+• Carbon Disulphide 
+• Copper Hollow Cathode 
+ 
+• 
+Sodium Hydroxide 
+  
+Lamp Separating Funnel 
+ 
+• Volumetric Flasks 
+• Distilled water 
+ 
+• Water Standard MIBK 
+ 
+• 
+Distillation Assembly 
+ 
+• Bromophenol Blue 
+   
+• Ethanol or Isopropanol 
+   
+• Stock copper (II) solution – 1.0mg/ml 
+   • (Pure Copper metal & hot plate) 
+   
+d) Differential Pulse • Polarograph capable of 
+• Hydrochloric Acid Conc. (Spectro 
+ 
+Anodic Stripping 
+ 
+Performing differential 
+ 
+Grade) 
+ 
+Voltametry 
+ 
+pulse work • Nitric Acid-Conc. (Spectro Grade) 
+Detection range 0.01 • Hanging Mercury Drop 
+• Sulphuric Acid Conc. 
+to 
+  
+electrode • Pure Copper Metal 
+0.1mg/l 
+• 
+Platinum Counter • Granular Zinc 
+  
+Electrode • Mercury 
+ 
+• Saturated Calomel Reference 
+ 
+  
+Electrode 
+ 
+ 
+• 
+Magnetic Stirrer 
+ 
+ 
+• Control unit with Stirring Bar 
+ 
+ 
+• Scrubber Assembly 
+ 
+ 
+• 
+Whatman Filter Paper 
+ 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+  
+No. 40 
+ 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+    
+• 
+Nitrogen Gas 
+ 
+    
+i) IS 3025 
+• Induction Coupled Plasma-Atomic • Nitric Acid 
+ 
+Emission Spectrometer • Hydrogen Peroxide 
+  
+(Part 2) 
+  
+• Sample Bottles • Sulphuric Acid 
+   
+• Glasswares • Hydrochloric acid 
+   
+• Acid Dispensers • Ammonium Sulfate 
+   
+• Membrane Filtration Equipment and 
+• Stock Solution of Copper 
+    
+Filters 
+ 
+   
+(0.45μ) 
+  
+   
+• Hot Plate 
+  
+   
+• Argon Gas 
+ 
+6. Flouride 
+6.2, Sl. No. IS 3025(Part 60) 
+   
+vii) of Table i) 
+ 
+Zirconium • Nessler Tubes (100ml)Distillation • Thiosulphate Solution (0.1 N) 
+2 
+  
+alizarin 
+ 
+Apparatus 
+ 
+• Standard Sodium Fluoride Solution 
+ 
+• Refrigerator (Recommended) 
+ 
+(1ml = 0.01 mg F) 
+ 
+  
+Method 
+ 
+Heating mantle • Zirconium Oxychloride OR Zirconium 
+    
+Oxynitrate 
+ 
+Detection range 
+ 
+• 
+Alizarin Sodium Monosulphonate 
+ 
+0.05 to 1.0 mg/l 
+  
+(AlizarinS) 
+  
+• Conc. Hydrochloric Acid 
+   
+• Conc. Sulphuric Acid 
+   
+• Silver Sulphate 
+   
+• Perchloric Acid 
+   
+• Phenolphthalein Indicator 
+   
+• Sodium Hydroxide Solution 
+   
+ii) Electro Chemical • Millivolt Meter • Sodium Hydroxide- 5 M 
+ 
+Probe Method • Fluoride Ion – Selective Electrode • Total Ionic Strength Adjustment Buffer 
+ 
+Detection range 
+• Reference Electrode – Either a 
+ 
+(TISAB)-[Sodium Chloride, Glacial 
+ 
+ 
+calomel electrode, 
+ 
+Acetic Acid, Sodium Hydroxide, 
+ 
+0.2mg to 2.0 g/l 
+  
+filled with saturated Potassium 
+ 
+CDTA( trans -1,2- diaminocyclohexane 
+   
+Chloride (KCl) Solution or a Silver / 
+ 
+– N,N,N’,N’ tetra acetic acid)] 
+   
+Silver Chloride Electrode 
+  
+  
+• Measuring Cells – • Fluoride, Stock Solution, 1000mg/1 
+   
+100ml(Polypropylene fitted with 
+ 
+(Sodium Fluoride ) 
+   
+thermostated jacket) 
+  
+  
+• Water Bath 
+  
+  
+• Magnetic Stirrer with a 
+  
+   
+polytetrafluoroethylene(PTFE) 
+  
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+    
+• Polyethylene Beaker 
+• pH meter 
+• Standard Volumetric 
+• Glasswares 
+• Desiccator 
+• Screw Capped Polyethylene Container 
+• Plastic Bottle 
+Note : 
+• Purity of the reagent – Unless specified 
+otherwise, only pure chemicals & Fluoride 
+free distilled water shall be used in tests. 
+7. 
+Barium 
+6.2, Sl. No i) 
+of Table 2 
+i) Annex G of IS 
+13428 
+Filter paper and filtration assembly 
+Hot plate/gas burner 
+• Ammonium Dichromate 
+• Ammonium Acetate 
+• Ammonium Hydroxide 
+• Potassium Iodide 
+• Sodium Thiosulphate(0.1N) 
+• Hydrochloric Acid 
+• Ammonium Chloride 
+Starch indicator 
+   
+ii) IS 15302 • Atomic Absorption Spectrophotometer 
+and 
+• Associated equipment (Burner, 
+Readout mechanism, lamp for Barium, 
+Pressure Reducing valves and vents) 
+• Nitrous oxide burner head 
+• T-junction valve or other switching 
+valve 
+• Air 
+• Acetylene Gas 
+Nitrous oxide gas 
+• Metal free water 
+• Hydrochloric Acid 
+• Nitric Acid 
+• Sulphuric Acid 
+• Hydroflouric Acid 
+• Potassium Chloride 
+• Standard barium solution 100μg/ml 
+(Barium chloride, oven, hydrochloric 
+acid) 
+   
+iii) IS 3025 (P 2) 
+• Induction Coupled Plasma-Atomic 
+Emission 
+• Spectrometer 
+• Sample Bottles 
+• Glasswares 
+• Acid Dispensers 
+• Nitric Acid 
+• Hydrogen Peroxide 
+• Sulphuric Acid 
+• Hydrochloric acid 
+• Ammonium Sulfate 
+Stock Solution of Barium 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+    
+• Membrane Filtration Equipment and 
+ 
+ 
+Filters 
+(0.45μ) 
+• Hot Plate 
+ 
+Argon Gas 
+8. Antimony 
+6.2 Sl. No. i) Annex H of IS 13428 • Spectrophotometer (565 nm) • Hydrochloric Acid – 6 N 
+ix) of Table 2 
+ 
+• Erlenmeyer Flask (125ml) • Phosphoric Acid – 3N 
+ 
+Spectrophoto-metric 
+• Separating Funnels (125 ml) with • Rhodamine B 
+ 
+Method 
+ 
+Teflon • Antimony Standard 
+  
+• Stopcocks • Solution (100 μg/ml and 1 ug/ml (pure 
+  
+• Refrigerator antimony, sulphuric acid) 
+  
+• Ice Bath • Benzene 
+  
+• Test Tubes 
+• Sulphuric Acid 
+  
+• Perchloric Acid 
+   
+Pipettes 
+   
+ii) IS 15303 • Atomic Absorption Spectrometer • Metal free Water 
+  
+with • Hydrochloric Acid, Conc. 
+Electrothermal Atomic 
+ 
+• Nitric Acid, Conc. 
+Absorption • Hollow Cathode Lamp OR • Matrix Modifier Stock Solutions 
+Spectrometric Method 
+• Electrodeless discharge lamp (EDL). (Magnesium Nitrate, Nickel Nitrate, 
+ 
+• Graphic Furnace Phosophoric Acid, Palladium Nitrate, 
+ 
+• Readout Mechanism Citric Acid) 
+ 
+• Microlitre Pipettes-5 to 100 μl. OR 
+• Stock Metal Solution 
+ 
+• Antimony Solutions (100 μg/m Sb) 
+ 
+• Automatic sampling device designed 
+ 
+• Iron-100μg Fe 
+ 
+ 
+for the specific instrument.  
+• Selenam-1.00 mg Sb 
+ 
+• Vent for Fumes 
+ 
+• Chelating Resin 
+ 
+• Cooling Device  
+Sodium hydroxide -10 N 
+  
+Membrance Filter Apparatus (0.45μm) 
+  
+or smaller pore diameter membrane 
+ 
+  
+filters. 
+ 
+9. Borate 
+6.2, Sl. No. 
+Annex J of IS13428 
+• Spectrometer (410 – 420nm) • Azomethine – H, Sodium Salt 
+x) of Table 2 • Lab Apparatus made of • L - Ascorbic Acid 
+  
+Polypropylene/Polyethylene/Polytetra • Buffer Solution (pH 5.9) [Ammonium 
+  
+fluoro Ethylene Acetate, Sulphuric Acid, Phosphoric 
+  
+Refrigerator Acid, Citric Acid, Disodium Ethylene 
+   
+diamine – Tetraacetic Acid Dihydrate] 
+   
+• Borate Stock Solution - (1mg/ml) (Boric 
+   
+Acid) 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+     
+• Boron Standard Solution - 10μg/ml 
+ 
+Calcium Hydroxide 
+10. Silver 
+6.2, Sl. No. 
+Annex K of IS 13428 
+• Atomic Absorption Spectrophotometer • Deionised Distilled Water (Ion 
+xi) of Table 2 with Oxidizing Air Acetylene Flame 
+ 
+Exchange Column & Distilled Water) 
+  
+• Nitric Acid – Redistilled 
+  
+• Hydrochloric Acid – Redistilled 
+  
+• Silver Std. Solution (Silver Nitrate) 
+  
+• Lanthanum Chloride 
+  
+• Lanthanum Stock Solution (Lanthanum 
+   
+Oxide, Hydrochloric Acid) 
+  
+• Ammonium Pyrrolidine 
+   
+Dithiocarbamate solution) 
+  
+• 
+Methyl isobutyl ketone 
+11. Chloride 
+6.2, Sl. No IS 3025 (Part 32) • Erlenmeyer Flask (250ml) • Potassium Chromate Indicator Solution 
+.xii) of Table 
+   
+(Potassium Chromate, Silver Nitrate) 
+2 
+i) Argentometric 
+Burette • Standard Silver Nitrate Solution – 
+  
+ 
+0.01 N (silver nitrate, sodium 
+ 
+Method 
+ 
+   
+chloride) 
+   
+• Standard Sodium Chloride Solution – 
+    
+0.01 N (Sodium Chloride) 
+   
+• Aluminium Hydroxide Suspension 
+    
+(Aluminium Potassium Sulphate or 
+    
+Aluminium Ammonium Sulphate, 
+    
+Conc Ammonium Hydroxide) 
+   
+• Phenolphthalein Indicator 
+    
+Solution 
+   
+• Sodium Hydroxide – 1N 
+   
+• Sulphuric Acid – 1N 
+   
+Hydrogen Peroxide – 30% 
+   
+ 
+ii) Mercuric Nitrate 
+ 
+• Erlenmeyer Flask (250 ml) 
+ 
+• Standard Sodium Chloride 
+Method 
+• Microburette (5 ml with l.c. 0.01ml) 
+ 
+Solution, 0.01N 
+• Refrigerator • Nitric Acid, 0.1N 
+ • pH meter • Sodium Hydroxide, 0.1N 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+     • Indicator – Acidifier Reagent (S- 
+Diphenyl- carbazone, Conc. Nitric 
+Acid, Xylene Cyanol FF, Ethyl 
+Alcohol or Isopropyl Alcohol) 
+• Standard Mercuric Nitrate Solution, 
+0.01N (Mercuric Nitrate, Conc. Nitric 
+Acid, Sodium Bicarbonate, Std. Sodium 
+Chloride Solution) 
+• Mixed Indicator Reagent 
+(Diphenylcarbazone, Bromo Phenol 
+Blue, Ethyl Alcohol or Isopropyl 
+Alcohol) 
+• Standard Mercuric Nitrate Solution – 
+0.1N 
+   
+iii) Potentiometric • Glass and Silver- Silver Chloride • Standard Sodium Chloride Solution 
+Method Electrodes (0.01N) 
+  
+• Nitric Acid-Conc 
+ 
+• Electronic Voltmeter • Standard Silver Nitrate Solution (0.01N) 
+  
+• Pretreatment Reagent (Sulphuric Acid, 
+ 
+• Mechanical Stirrer Hydrogen Peroxide, Sodium Hydroxide 
+ 
+• –1N) 
+  • 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+   
+iv) Automated 
+• Automated Analytical Equipment • Stock Mercuric Thiocyanate Solution 
+Ferricyanide Method 
+ 
+(Mercuric Thiocynate, Methanol) 
+ 
+Filters (480nm) • Stock Ferric Nitrate Solution (Ferric 
+  
+Nitrate, Conc. Nitric Acid) 
+  
+• Colour Reagent (Poly oxy Ethylene 23 
+  
+Lauryl Ether) 
+  
+Sodium Chloride 
+12 Sulphate 
+6.2, Sl. No. IS 3025 (Part 24) 
+  
+xiii) of Table 
+   
+2 
+  
+• Steam Bath 
+ 
+• Methyl Red Indicator 
+ 
+i)Gravimetric Method • Drying Oven (thermostatically • Hydrochloric Acid 
+  
+controlled) • Barium Chloride 
+ 
+Detection limit more • Muffle Furnace • Silver Nitrate 
+ 
+than 10mg/l • Desiccator • Nitric Acid 
+  
+• Analytical Balance (l.c.0.1mg) • Ion Exchange Resin (Amberlite IR-120 
+  
+• Filter Paper (Preferably Whatman or Equivalent) 
+  
+No.42) 
+ 
+  
+• Silica or Porcelain Crucible (max pore 
+ 
+  
+size of 5 microns) 
+ 
+  
+• Ion Exchange Column 
+ 
+  
+• Filter (0.45 μ m) 
+ 
+  
+• Platinum Dish 
+ 
+   
+ii) Thorin Method • White Porcelain Basin • Ethyl Alcohol 
+ 
+• Burette • Ammonium Hydroxide (Ammonia-Conc 
+Detection range 5 to • Ion Exchange Column and Distilled Water) 
+150mg/l • Filter – 0.45μm • Hydrochloric Acid 
+  
+• Thorin (2,2 – Hydroxy – 3,6 – Disulpho 
+  
+– 1 – Naphthylazo Benzene Arsenic 
+  
+Acid) 
+  
+• Ion Exchange Resin (Amberlite IR-120 
+  
+or Equivalent) 
+  
+• Stock Sulphate Solution – 100 mg/l 
+  • (Anhydrous Sodium Sulphate) 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+   
+iii) Turbidity • Turbidity Meter or • Barium Chloride – Standard Solution 
+ 
+Method Spectrophotometer`(420nm) (Barium chloride in hydrochloric acid 
+ 
+• Glass Apparatus ammonia) 
+Detection limit 1 to • Hot Plate • Barium Chloride 
+40mg/l • Refrigerator (recommended) • Gelatin Powder 
+ 
+Filter – 0.45μm • Glycerol 
+  
+• Hydrochloric Acid, Conc 
+  
+• Sodium Chloride 
+  
+• Ethyl or Isopropyl Alcohol 
+  
+• Anhydrous Sodium Sulphate 
+  • Stock sulphate solution – 100mg/l 
+13. Magnesium 
+6.2, Sl No. i) IS 3025 (Part 46) • Vacuum Pump • Methyl Red Indicator 
+xiv) of Table 
+ 
+• Filter Flasks • Hydrochloric Acid 
+2 a)Gravimetric Method • Filter Crucibles (medium porosity, • Ammonium Oxalate 
+  
+30 ml) 
+• Ammonium Hydroxide 
+ 
+Detection limit more • Nitric Acid, Conc 
+ 
+• Muffle Furnace 
+ 
+than 1 mg/l 
+• Diammonium Hydrogen Phosphate 
+ 
+• Hot plate 
+  
+• Urea 
+  
+• Volumetric Flasks 
+  
+• Glasswares 
+ 
+   
+b)Volumetric Method • Hot plate • Indicator Solutions 
+(EDTA) • Volumetric Flasks i)Patton and Reeder Reagent, 
+ 
+• Glasswares Sodium Chloride/Potassium 
+ 
+• Chloride 
+  
+ii) Murexide (Ammonium Purpurate), 
+  
+Absolute Ethylene Glycol, Sodium 
+  
+Chloride 
+  
+iii) Eriochrome Black T Indicator (EBT 
+  
+Indicator), Hydroxylamine, Hydrochloride, 
+  
+Ethanol/Methanol 
+  
+• Standard Zinc Solution – 0.01M 
+  
+(Pure Zinc Dust/Granules – 99.9% 
+  
+Pure; Hydrochloric Acid) 
+  
+• Buffer Solution (Ammonium Chloride, 
+  
+Ammonia, Sodium Hydroxide-1N) 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+     • Standard Ethylene Diamine Tetra 
+Acetic Acid (EDTA) Solution – 
+0.001M (Disodium Ethylene Diamine 
+Tetra Acetate Dihydrate, Standard 
+Zinc Solution) 
+• Triethanolamine Solution – 
+10% Potassium Cyanide 
+• Hydroxlamine Hydrochloride 
+   
+c) Atomic Absorption • Atomic Absorption • Hydrochloric Acid – 1N and 0.1N 
+Method Spectrophotometer ( 285.2 nm ) with • Lanthanum Chloride (Lathanum 
+ 
+Air-Acetylene Flame or Nitrous Oxide, Hydrochloric Acid, Conc) 
+Detection limit max 5 Oxide-Acetylene Flame and Hollow • Cesium Chloride 
+ 
+mg/l Cathode Lamp (Magnesium) Standard Magnesium Solution (1000mg/l) 
+  • Polyethylene Bottles (Magnesium Oxide, Hydrochloric Acid) 
+   
+i) IS 3025(Part 2) ICP AES (279.079nm) including - • Nitric Acid 
+ 
+computer controlled aes with • Hydrogen Peroxide 
+Inductively Coupled background correction radio frequency • Sulphuric Acid 
+Plasma Atomic 
+generator argon gas supply ( welding • Hydrochloric Acid 
+Emission Spectroscopy grade or better) • Ammonium Sulphate 
+  
+• Distilled Water 
+Detection limit • Sample bottles • Magnesium Stock solution ( 10 mg/l ) 
+0.03 mg/l 
+• Glassware ( beakers, filter funnels, 
+ 
+ 
+• volumetric flasks, pipettes) acid 
+ 
+ 
+dispensers 
+ 
+ 
+• Membrane filtration equipment 
+ 
+14 Calcium 
+6.2 Sl. No. i) IS 3025 (Part 40) 
+ 
+• Sodium Hydroxide Solution – 1N 
+xv) of Table 
+  
+• Hydrochloric Acid – 0.1N 
+2 
+  
+• Indicator Solution:Murexide 
+ 
+a)EDTA Titrimetric 
+ 
+(Ammonium Purpurate) Indicator, 
+ 
+Method • Hot Plate Absolute Ethylene Glycol 
+  
+• Glassware • Sodium Chloride 
+  
+• Polyethylene Bottle OR 
+   
+• Patton and Reeder’s Indicator 
+  
+ (Eriochrome Blue Black R, Sodium 
+   
+Sulphate/Potassium Sulphate) 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+     
+• Standard EDTA Solution – 0.01M 
+(Disodium Ethylene Diamine Tetra – 
+Acetate, Standard Zinc Solution, (Or 
+Standard Calcium Solution) Buffer 
+Solution, Eriochrome Black T Indicator 
+Solution 
+• Stock Calcium Solution (Calcium 
+Carbonate, Hydrochloric Acid – 0.1N) 
+• Nitric Acid, Conc 
+• 
+   
+b)Atomic Absorption • Atomic Absorption Spectrometer • Hydrochloric Acid – 1N and 0.1N 
+Spectrometric Method 
+(422.7 nm ) with Air/Acetylene or • Lanthanum Chloride 
+Detection limit 
+Nitrous Oxide/Acetylene Flame and • Cesium Chloride 
+Hollow Cathode Lamp (Calcium) 
+• Standard Calcium Solution 
+maximum 50mg/l 
+   
+c) Permanganate 
+• Beakers, Cover Glass, and Glass • Hydrochloric Acid – 1N 
+Titration Method Rod Filtration Set up (Gooch • Methyl Red Indicator Solution 
+ 
+Crucible with Suction) 
+• Ammonium Oxalate Solution 
+ 
+Hot plate 
+ 
+• Urea 
+   
+• Dilute Sulphuric Acid – 1N 
+   
+• Sodium Oxalate 
+   
+• Standard Potassium 
+   
+• Permanganate Solution (Potassium 
+   
+permanganate, sodium oxalate) 
+   
+ii) IS 3025(Part 2) • ICP AES ( 315.887 nm) including • Nitric Acid 
+Inductively Coupled – 
+ 
+• Hydrogen Peroxide 
+Plasma Atomic 
+• computer controlled a e s with • Sulphuric Acid 
+Emission Spectroscopy background correction • Hydrochloric Acid 
+(a e s) 
+• radio frequency generator 
+• Ammonium Sulphate 
+Detection limit 
+• argon gas supply ( welding grade 
+• Distilled Water 
+Calcium Stock solution ( 10 mg/l) 
+0.1 mg/l or better) 
+ 
+ 
+• Sample bottles 
+ 
+ 
+• Glassware ( beakers, filter funnels, 
+ 
+ 
+volumetric flasks, pipettes) 
+ 
+ 
+• acid dispensers 
+ 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+    
+• Membrane filtration equipment 
+• Filter of pore size 0.45 microns 
+ 
+ 
+15. Sodium 6.2, Sl No. 
+xvi) of Table 
+2 
+i) IS 3025 (Part 45)  
+a) Flame Emission 
+Photometric Method 
+anyone of the following 
+applicable detection 
+range:(0 to 1)mg/lit(1 
+to 10)mg/lit (0 to 
+100)mg/lit 
+• Flame Photometer (Direct Reading 
+OR Internal Standard Type) OR 
+Atomic Absorption 
+Spectrophotometer (In Flame 
+Emission Mode) 
+• Deionized Distilled Water 
+• Stock Sodium Solution – 1mg/ml 
+(Sodium Chloride) 
+• Standard Lithium Solution – 1mg/ml 
+   
+ 
+b)Atomic Absorption 
+• Atomic Absorption 
+Spectrophotometer with Air- 
+Acetylene Flame and Hollow 
+Cathode Lamp (Sodium) 
+• Glassware 
+• Beakers (20ml, Borosilicate) 
+• 
+ 
+• Sodium Chloride 
+Spectrometry Method • Potassium Chloride 
+ 
+Detection range 0.20 
+to 4.0mg/l 
+• Stock Sodium Solution – 1mg/ml 
+• Stock Potassium Solution – 1mg/ml 
+   
+c)Gravimetric Method • Fritted Glass Crucible or Porous • Zinc Uranyl Acetate Reagent (Glacial 
+ 
+Porcelain Crucibles 
+• Vacuum Pump or Aspirator 
+• Filter paper 
+• Pyrex bottle 
+Stirring rod 
+Conc. Acetic Acid, Uranyl Acetate 
+Dihydrate, Zinc Acetate Dihydrate, 
+Sodium Chloride) 
+Ethyl Alcohol Wash Solution (Ethyl 
+Alcohol, Pure Sodium Zinc Uranyl 
+Acetate, Sodium Chloride, Acetic Acid, 
+Diethyl Ether) 
+   
+ii) IS 3025(Part 2) 
+• Oven 
+• Membrane filtration equipment and 
+filters(0.45μm) 
+• Inductively coupled plasma atomic 
+emission spectrometer; Computer 
+controlled AAS with background 
+correction, Radiofrequency 
+Generator, Argon Gas 
+supply(welding grade or better) 
+• Nitric acid 
+• Hydrogen peroxide 
+• Sulphuric acid 
+• Ammonium sulphate 
+• Sodium Stock solution 
+• 
+ 
+• pH meter 
+ 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+    
+• PTFE container 
+ 
+• PTFE sample bottles(250 ml or 
+500ml) 
+• Acid dispensers, Variables 
+• 
+16. Alkalinity 
+6.2, Sl. No. IS 3025 (Part 23) 
+ 
+Distilled Water 
+xvii) of Table 
+ 
+• pH Meter • Sulphuric Acid, Conc 
+2 
+ 
+• Burette • Sulphuric Acid, 0.02 N 
+ 
+i) Indicator Method • Magnetic Stirrer Assembly • Phenolphthalein Indicator 
+  
+• Beaker • Mixed Indicator Solution (Methyl Red, 
+ 
+Detection 
+ 
+• Bromocresol Green, Ethyl or Isoprophyl 
+ 
+range 0. 5 to 
+ 
+Alcohol) 
+ 
+500mg/l 
+ 
+   ii)Potentiometric • Potentiometer 
+Standard Sulphuric Acid – 0.02N 
+Method 
+Glasswares 
+Detection range 
+ 
+0.5 to 500mg/l 
+ 
+17. Selenium 
+6.2, Sl. No. i) IS 3025 (Part 56) 
+  
+xviii) of a)Spectrophotometric 
+  
+Table 2 Method • Spectrophotometer (480nm,light path • Stock Selenium Solution – 1.0mg/ml 
+  
+of 1cm (Sodium Selenite, Hydrochloric Acid) 
+ 
+(Diamino naphthalene • Volumetric Glasswares • Hydrochloric Acid – 0.1N 
+ 
+Method) • Separating Funnel (250ml) Preferably • Ammonium Hydroxide,1:1Cyclohexane 
+  
+• Flourocarbon Stopcock • 2,3 – Diaminonaphthalene (DAN) 
+ 
+Detection limit • Water Bath – Thermostatically • Hydroxylamine Hydrochloride 
+ 
+minimum 0.01mg/l 
+Controlled • Sodium Salt of EDTA 
+  
+• pH Meter • Amberlite XAD -8 or Equivalent Resin 
+  
+• Centrifuge • Hydrochloric Acid, Conc 
+  
+Centrifuge Bottles with Flourocarbon Potassium Hydroxide 
+  
+Screw Cap 
+ 
+   b) Atomic absorption • Atomic Absorption Spectrometer • Nitric Acid 
+Spectrometric Method (196.0 nm) Fitted with Hydride • Sulphuric Acid 
+(Hydride Technique) System and Hollow Cathode • Hydrochloric Acid 
+ 
+Lamp/Electrodeless Discharge Lamp 
+• Hydrogen Peroxide 
+ 
+• Gas (Argon or Nitrogen) • Sodium Hydroxide 
+  
+• Sodium Tetrahydro borate 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+    
+• Glasswares Decomposition Apparatus • Selenium Stock Solution (1mg/ml) 
+(Round Bottom Flask, Reflux (Selenium Dioxide) 
+Condenser, Condensate Reservoir) 
+ 
+18 Mineral Oil 
+6.2, Sl No. Clause 6 of IS 3025 • Separating Funnel (1lit) with Teflon • Hydrochloric Acid 
+xix) of Table (Part 39) or Equivalent Stopcock • Hexane 
+2 
+ 
+• Infra-Red Spectrophotometer – • Sodium Sulphate, Anhydrous 
+ 
+Partition Infra-Red Double Beam, Recording type • Reference Oil (Iso-Octane, Hexadecane, 
+ 
+Method 
+• Cells – Infra-Red, Silica Benzene) 
+ 
+Detection limit 0.5 to 
+• Filter Paper – Whatman No.40 or • Trichlorotrifluoroethane 
+ 
+Equivalent, 11cm Diameter 
+ 
+ 
+100 mg/l 
+ 
+ 
+Analytical Balance 
+ 
+11                            19 
+ 
+Phenolic 
+compounds 
+(as C
+6
+H
+5
+OH) 
+55.3, Sl No. 
+xix) of Table 2 
+ Clause 6 of IS 3025 
+(Part 43) 
+ Spectrophotometer 
+ pH Meter 
+ Phenol Standard Solution 
+ Glass distilling apparatus with 
+Graham condenser 
+ Water bath 
+ Buchner funnels with fritted discs 
+ Filter Paper – Whatman No.40 or 
+equivalent 
+ 1000 ml capacity separating funnel 
+with ground glass stoppered and 
+TFE stop cock 
+ Ferrous Sulphate 
+ Phosphoric Acid 
+ Sodium Hydroxide pellets 
+ Chloroform 
+ Sodium Sulphate 
+ Ammonium Hydroxide 
+ Phosphate Buffer solution 
+ 4-Aminoantipyrine solution 
+ Potassium Ferricyanide solution 
+ Phosphoric Acid 
+20 
+Anionic 6.2, Sl No. Annex L of IS 13428 • pH Meter • Sodium Chloride 
+Surface xx) of Table 
+ 
+• Spectrophotometer (650 nm) 10mm • Ethyl Acetate 
+Active 2 Detection limit about & 50mm cells • Al2O3 
+Agents (as 
+ 
+0.05 mg/l 
+ 
+• Chloroform 
+MBAS) 
+  
+• Gas Stripping Apparatus (1 lit • Ethanol 
+   
+Capacity) • Methanol 
+   
+• Nitrogen Air (20 ltr/hr to 50 ltr/hr) • Sulphuric Acid 
+   
+• Reflux Condenser • Ethanolic Sodium Hydroxide-0.1 mol/lit 
+   
+• Fuming hood (Sodium Hydroxide, Ethanol) 
+   
+• Water bath • Methylene Blue, Neutral Solution 
+    
+• Methylene Blue, Acidic Solution 
+    
+• Buffer Solution, pH 10 (Sodium 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+    
+Hydrogen Carbonate, Anhydrous 
+    
+Sodium Carbonate) 
+    
+• Phenolphthalein Indicator, Ethanol 
+    
+Dodecyl Benzene Sulphonic Acid 
+    
+Methyl Ester (Tetrapropylene Type), 
+    
+Stock Standard Solution 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+C- REQUIREMENTS FOR TOXIC SUBSTANCES 
+ 
+ 
+SI. 
+Tests 
+Clause Ref. of Referred Method of 
+Test /Equipment /Apparatus Chemical/Regents 
+No. IS 13428:2005 
+ 
+Tests & 
+  
+Limit of Detection 
+(1) (2) (3) (4) (5) (6) 
+1 MERCURY 
+6.2, Sl. No.v) of IS 3025 (Part 48) • Atomic Absorption Spectrometer and • Sulphuric acid, conc. 
+Table 3 i) Cold Vapour 
+ 
+Associated Equipment (Cold Vapour • Nitric acid, Conc. 
+ 
+Atomic Absorption 
+ 
+Technique) 
+• 
+Stannous chloride 
+ 
+Spectrophotometry • Mercury Vapour Generation • Hydrochloric acid, Conc. 
+ 
+Detection limit 
+ 
+Assembly • Sodium chloride 
+ 
+• Mercury Hollow Cathode Lamp • Hydroxylamine sulphate  
+0.0002 mg/l, Min 
+ 
+• Recorder/Printer/Display • Potassium permanganate 
+   
+Meter • Potassium persulphate 
+  
+• BOD bottle, 300 ml • Mercuric chloride 
+  
+• Water bath • Mercury free distilled 
+  
+• Equipment assembly as per Fig 1 
+ water 
+   
+ii) Colorimetric • Spectrophotometer • Redistilled or Deionised 
+Dithizone Method • Separating Funnels (250 and 1000ml 
+ 
+Distilled Water (Mercury 
+  
+with PTFE stopcocks) 
+ 
+free) 
+Detection limit • 
+Glass wares • Mercuric chloride 
+0.002 mg/l, Min 
+• Whatman Filter No. 42 • Nitric acid, Conc. 
+   
+• 
+Potassium permanganate 
+   
+• Potassium persulphate 
+   
+• 
+Hydroxylamine 
+    
+hydrochloride 
+   
+• Dithiozone solution, 6 μg/ml 
+   
+• Sulphuric acid – 0.25 N 
+   
+• Potassium bromide 
+   
+• 
+Chloroform 
+   
+• Disodium hydrogen 
+    
+phosphate 
+   
+• Anhydrous potassium 
+    
+carbonate 
+   
+• 
+Sodium sulphate, Anhydrous 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+     
+• 
+Hydrochloric acid(1:1) 
+• 
+Ammonium hydroxide 
+2 CADMIUM 
+6.2, Sl. No. ii) IS 3025 (Part 41) • Atomic Absorption spectrophotometer • Hydrochloric acid, Conc. 
+of Table 3 
+  
+with Air-Acetylene Flame • Nitric acid, Conc. 
+ 
+i) Atomic 
+  
+• Nitric acid, dilute – 1:499 
+ 
+Absorption • Cadmium Hollow Cathode Lamp or 
+• 
+Pure Cadmium Metal 
+ 
+Method (Direct) 
+ 
+Multi Element Hollow Cathode Lamp 
+ 
+Detection range 
+ 
+for Use at 228.8 nm 
+  
+ 
+0.05 to 2mg/l 
+    
+   
+ii) Atomic • Atomic Absorption spectrophotometer • Hydrochloric acid, Conc. 
+Absorption Method 
+ 
+with Air-Acetylene Flame • Hydrochloric acid – 1:49 
+(Chelation and 
+  
+• Nitric acid, Conc. 
+Extraction) 
+• 
+Cadmium Hollow Cathode Lamp or 
+• Nitric acid, dilute – 1:499 
+Detection range 
+• Multi Element Hollow Cathode Lamp • Pure Cadmium Metal 
+ 
+for use at 228.8 nm 
+• Sodium hydroxide 
+0.005 to 0.2mg/l 
+  
+• 
+Separating funnel 
+• 
+Methyl Isobutyl Ketone 
+ 
+ 
+(MIBK) 
+ 
+• pH meter 
+ 
+• Bromophenol Blue 
+ 
+• 
+pH paper 
+ 
+• Ethanol or Isopropanol 
+   
+• Pyrrolidine dithiocarbamic 
+    
+acid 
+   
+• 
+Carbon Disulphide 
+   
+iii) Differential Pulse • Polarograph – Capable of Differential • Hydrochloric Acid, Conc., 
+Anodic Stripping 
+ 
+Pulse Work 
+ 
+spectrograde 
+Voltametry • Hanging Mercury Drop Electrode • Nitric Acid, Conc., 
+Detection range • Platinum Counter Electrode 
+ 
+spectrograde 
+0.0001 to 0.1mg/l 
+• 
+Saturated calomel Reference Electrode 
+• 
+Nitric Acid, dil – 1:1 
+ 
+• Magnetic Stirrer Control Unit with 
+• Hydroxylamine Hydrochloride 
+ 
+ 
+Stirring Bar 
+ 
+• L-Ascorbic Acid 
+ 
+• Nitrogen Gas (Cylinder) 
+ 
+• Pure Cadmium Metal  
+• Scrubber assembly for nitrogen 
+ 
+• Granular Zinc 
+ 
+ 
+purification 
+ 
+• Mercury 
+ 
+• 
+Voltametric Cell assembly 
+ 
+• 
+Ammonium Meta Vanadate 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+ 
+3 ARSENIC 
+6.2, Sl. No. i) IS 3025(Part 37) 
+    
+of Table 3 
+ 
+i) Atomic absorption 
+ 
+• 
+ 
+Atomic absorption spectrometer 
+ 
+• 
+ 
+Argon or Nitrogen and 
+ 
+method 
+ 
+equipped with gas flow meter for 
+ 
+Hydrogen 
+   
+Argon or Nitrogen and Hydrogen and • Sodium borohydride 
+ 
+Detection limit 
+ 
+with arsenic electrodeless discharge 
+• 
+Sodium hydroxide 
+ 
+0.001 mg/l 
+ 
+lamp 
+ 
+• Sodium Iodide 
+  
+• Atomizer 
+  
+• Sulphuric acid-18N & 2.5 N 
+  
+• Reaction cell for producing arsenic 
+  
+• 
+Potassium persulphate 
+   
+hydride 
+  
+• Eye dropper or syringe • Nitric acid, conc 
+  
+• Refrigerator • Perchloric acid, conc 
+    
+• Hydrochloric acid, conc 
+    
+• Arsenic trioxide 
+    
+• Arsenic pentaoxide 
+    
+• Dimethyl arsenic 
+     
+acid/cacodylic acid 
+    
+• 
+Calcium chloride 
+   
+ii) Silver diethyl Arsine generator & absorption assembly • Hydrochoric acid , Conc 
+dithiocarbamate (Fig. 2 of IS 3025 Pt 37) • 
+Potassium Iodide 
+method 
+Spectrophotometer, 535 nm with 1 cm 
+• Stannous chloride, arsenic 
+ 
+ 
+free 
+(Referee method) 
+cells 
+• Lead acetate 
+Detection limit 
+ 
+• 
+Ephedrine 
+0.001 mg/l 
+ 
+• Pyridine 
+  
+• Chloroform 
+  
+• 
+Silver diethyl 
+   
+dithiocarbamate 
+  
+• Zinc – 20 to 30 mesh, 
+   
+arsenic free 
+  
+• Arsenic trioxide 
+  
+• 
+Sodium hydroxide 
+   
+iii) Mercuric Arsine generator glass assembly (Fig 3 of • Sulphuric acid (1:1) 
+bromide stain IS 3025 Pt 37) • 
+Nitric acid, conc 
+method 
+ 
+• 
+Roll cotton 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+• Lead acetate 
+• Arsenic papers 
+• Mercuric bromide 
+• Ethyl alcohol/isopropanol 
+• Potassium iodide 
+• Arsenic free stannous 
+chloride 
+• Zinc-20 to 30 Mesh, arsenic 
+free 
+• Arsenic trioxide 
+• Sodium hydroxide 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4 CYANIDE 6.2, Sl. No. iii) IS 3025(Part.27) 
+    
+  
+of Table 3 
+    
+  
+i) Total cyanide after 
+• 
+Distillation apparatus consisting of 
+• 
+Sodium hydroxide 
+  
+distillation method 
+ 
+boiling flask, 1l, thistle tube, Allihn • Lead carbonate-powdered 
+    
+water cooled condenser, gas 
+• 
+Sulphamic acid 
+  
+  
+dispersion tube, needle valve, suction 
+  
+• 
+Magnesium chloride   
+Detection limit 
+ 
+flask and suction pump (Fig 1 of IS   
+• 
+Sulphuric acid, conc 
+  
+minimum 0.02 mg/l 
+ 
+3025 Pt 27) 
+   
+• Heating mantle 
+• Acetic acid, glacial 
+   
+• Gas absorber • Potassium cyanide 
+   
+• 
+Ground glass ST joints 
+• 
+Silver nitrate 
+   
+• Spectrophotometer for use at 62 nm • Chloramine – T 
+    
+with 1-cm cell 
+• 
+Pyridine 
+   
+• 
+pH paper 
+• 
+Pyrazolone 
+   
+• 
+Thermometer – 0
+o
+C – 110
+0
+C, l.c. 1
+o
+C 
+• 
+BIS – pyrazolone 
+  
+ii) Selective • 
+Expanded – scale pH meter or specific 
+• 
+Potassium cyanide 
+  
+electrode method 
+ 
+Ion meter • Silver nitrate 
+   
+• Cyanide Ion selective electrode • Sodium hydroxide 
+  
+Detection range • Reference electrode, double junction 
+• 
+Potassium nitrate 
+  
+0.05 to 10 mg/l 
+  
+    
+• Potassium hydroxide 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+    
+• Magnetic mixer with TFE coated 
+ 
+ 
+stirring Bar 
+5 LEAD 
+6.2, Sl. No. vi) IS 3025(Part 47) 
+    
+of Table 3 
+   
+• Hydrochloric acid, conc 
+ 
+i) Atomic absorption • Atomic absorption spectrophotometer • Nitric acid, conc. 
+ 
+method (direct) 
+ 
+with air acetylene flame • (Lead nitrate 
+ 
+Detection range 1.0 • Hollow cathode lamp OR • Nitric acid, dil (1:499) 
+ 
+to 10.0mg/l 
+ 
+Electrodeless Discharge lamp for use 
+  
+   
+at 283.3 nm 
+  
+   
+   
+• 
+Hydrochloric acid, conc 
+ii) Atomic absorption 
+  
+• Hydrochloric acid, dil (1:2) 
+method (chelation – • Atomic absorption spectrophotometer 
+• Hydrochloric acid, dil (1:49) 
+extraction) 
+ 
+with air acetylene flame 
+• 
+Nitric acid, conc. 
+ 
+• Hollow cathode lamp OR Electrode 
+ 
+• Pyrrolidine 
+ 
+ 
+less Discharge lamp for use at 283.3  
+• 
+Chloroform 
+  
+nm 
+ 
+• Separatory funnel 
+• Carbon disulphide 
+ 
+• 0.45μm membrane filter • Sodium hydroxide 
+ 
+• Acid washed filter paper. • Bromophenol blue 
+ 
+• 
+pH meter 
+• 
+Lead nitrate 
+   
+iii) Differential pulse Polarograph capable of performing 
+  
+anodic stripping differential pulse work 
+  
+voltametry (DPASV) • Hanging mercury drop electrode • Lead nitrate 
+ 
+• Platinum counter electrode • Hydrochloric acid, conc. 
+Detection range • Saturated calomel reference electrode • Nitric acid, conc. 
+0.001 to 0.1mg/l • Magnetic stirrer control unit with • Nitric acid, dil (1:1) 
+  
+stirring bar • Granular zinc 
+ 
+• Scrubber assembly for nitrogen • Mercury 
+  
+purification • Ammonium metavanadate 
+ 
+• Nitrogen gas (cylinder) 
+  
+ 
+• 0.45μm membrane filter 
+  
+   
+iv) Dithizone method 
+ 
+• 
+ 
+Spectrophotometer for use at 510 nm 
+ 
+• 
+ 
+Lead free distilled water 
+Detection limit 
+ 
+with 1-cm cell • Lead nitrate 
+0.1 mg/l • pH meter • Nitric acid, 95% (w/w) 
+ 
+• TEF beakers, 100 ml • Nitric acid, dil 20% (w/w) 
+ 
+• 
+Separating funnels, 250 ml, 500 ml 
+• 
+Nitric acid, dil (1:1) 
+   
+• Ammonium hydroxide Conc. 
+    
+(14 N) 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+     
+• 
+Ammonium hydroxide, dil. 
+ 
+10% ( v/v) 
+• Ammonium hydroxide, dil. 
+ 
+1% v/v) 
+• Anhydrous Ammonium 
+ 
+Citrate 
+• Anhydrous Sodium Sulphite 
+• Hydroxylamine 
+ 
+hydrochloride 
+• Potassium cyanide 
+• Dithizone 
+• Chloroform 
+• 
+Hydrochloric acid (1:1) 
+6 CHROMIUM 
+6.2, Sl. No. vi) Annex K of IS • Atomic absorption spectrophotometer • Deionised distilled water, 
+of Table 3 13428 
+ 
+with reducing Air – acetylene flame 
+ 
+Ammonia free 
+  
+• 0.45μm membrane filter • Nitric acid, redistilled – 1:1 
+  
+• pH meter 
+ 
+(v/v) 
+  
+• Centrifuge • Hydrochloric acid, redistilled 
+     
+– 1:1 (v/v) 
+    
+• Chromium oxide 
+    
+• Lanthanum chloride 
+    
+• Lanthanum oxide , 99.9%, 
+     
+w/w 
+    
+• Ammonium pyrrolidine 
+     
+dithiocarbamate 
+7 NICKEL 
+6.2, Sl. No. vii) Annex M of IS • Atomic absorption spectrophotometer • Nitric acid, conc. – 1.4 g/ml 
+of Table 3 13428 
+ 
+with nebulizer – burner having air- • Pure nickel metal 
+   
+acetylene flame • Sodium hydroxide 
+  
+• Centrifuge • Hydrochloric acid, conc. – 
+  
+• Nickel hollow cathode lamp/electrode 
+ 
+1.19 g/ml 
+   
+less discharge lamp • Methyl isobutyleketone 
+  
+• Separating funnel, 250-ml with PTFE 
+ 
+(MIBK) 
+   
+taps • Ammonium 1 – pyrrolidino 
+  
+• pH meter 
+ 
+carbodithioate 
+    
+• Bromophenol blue 
+    
+• 
+Ethanol 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+ 
+8 
+POLY 
+6.2, Sl. No. Annex N of IS • Gas chromatograph with EC detector • Silica gel, 60 – 100 mesh 
+CHLORINATED viii) of Table 3 13428 
+ 
+& coupled with printer-plotter-cum- • N-hexane-redistilled 
+BIPHENYLE 
+   
+integrator • Potassium hydroxide pellets 
+(PCB) 
+  
+• 
+Glass chromatographic column, 300 
+• 
+Sodium hydroxide solution – 
+    
+mm long, 8 mm ID with ground glass 
+ 
+5N 
+    
+socket at the upper end and a stop • Diethyl ether, 
+    
+cock at low end. 
+ 
+chromatography grade 
+   
+• Kuderna-Danish type, evaporator • Cotton wool, extracted with 
+   
+• Snyder columns 
+ 
+hexane and diethyl ether 
+   
+• Syringe (5 μl) • Acetic acid, glacial, 
+   
+• Heating oven 
+ 
+redistilled 
+   
+• 
+Desiccator 
+• 
+Chromium trioxide, re- 
+      
+crystallized 
+     
+• Apiezon L grease 
+     
+• Epikote Resin 1001 – 0.15 % 
+     
+• Chromosorb G (acid 
+      
+washed) DMCS treated, 60 
+      
+– 80 mesh 
+     
+• Silicone gum GE-S-SI – 1.3 
+      
+% 
+9 
+POLYNUCLEAR 6.2, Sl. No. ix) i) High Performance • High Performance Liquid • Reagent Water 
+AROMATIC of Table 3 Liquid 
+ 
+Chromatograph (HPLC) complete with • Sodium thiosulphate, granular 
+HYDROCARBON APHA 6440 Chromatography 
+ 
+gradient pumping system, reverse • Cyclohexane 
+  
+(HPLC) Method 
+ 
+phase column and detectors (UV and • Methanol 
+    
+fluorescence) • Acetone, 
+  
+ii) Gas • Gas Chromatograph (GC) complete • Methylene chloride 
+  
+chromatographic 
+ 
+with column and flame ionization • Pentane – Pesticide quality or 
+  
+(GC) Method 
+ 
+detector. 
+ 
+equivalent 
+   
+• Separating funnel (2 l) 
+   
+• Acetonitrile – HPLC quality 
+   
+• Evaporative flask 
+   
+• Sodium sulphate, granular, 
+   
+• 
+Three Ball Synder column     
+anhydrous 
+   
+• 
+Kuderna- Danish Apparatus 
+• Silica Gel – 100/200 mesh 
+   
+• Water bath (60-65 ̊C) • Stock standard solution 
+     
+• Std. PAHs Solutions – 
+      
+a)100 μg/ml of naphthalene, 
+      
+acenaphthylene, fluorine, 
+      
+phneanthrene and anthracene. 
+      
+b)5μg/ml Benzo (k) 
+      
+Fluoranthene 
+
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+10 
+   URANIUM 
+5.3, Sl. No. x) 
+of Table 3 
+ 
+IS 3025(Part 65) 
+or  
+IS 14194 (Part 3) 
+i) Inductively coupled 
+plasma mass 
+spectrometry (ICP-
+MS) method 
+ 
+ii) Uranium 
+Fluorimeter method 
+i) Inductively Coupled Plasma Mass        
+Spectrometry (ICP-MS) 
+ 
+ii) Uranium Fluorimeter/Analyser 
+ Uranium Fluorimeter 
+ Platinum dishes 
+ Platinum Wire Gauge 
+ Fisher Burner 
+ Platinum tipped forceps 
+ Micropipette 0.5 ml 
+ Syringe 5 ml 
+ Ion-exchange column 
+ Infrared Lamp of maximum 500W 
+ Muffle furnace 
+ Hot plate 
+ 
+ Water, Grade 1 
+ Nitric acid 
+ Hydrochloric acid 
+ Sulphuric acid 
+ Hydrogen peroxide 
+ Multi-element standard 
+solutions 
+ 
+OR 
+ 
+ Reagent grade Sodium 
+Fluoride (NaF) and Sodium 
+Carbonate (Na
+2
+CO
+3
+)  
+ Uranium standard 
+ Hydrochloric acid 
+ Nitric Acid 
+ Distilled water 
+ 
+ *Note: Besides listed Equipments/Apparatus/Chemicals, following accessories are essential part of a chemical lab: 
+i) General glass wares like Pipettes Burette, Conical flasks, Beakers, Measuring cylinders, Volumetric flasks, (of different volumes) 
+ii) Provision for distilled/double distilled water 
+iii) Fuming Hood and sink with tap in the lab 
+ 
+# The list does not cover the requirements of Pesticide Residues and Radio Active Residues as these requirements are to be got tested from outside 
+approved lab. 
+ 
+ 
+
+PM/ 13428/3 
+January 2023 
+ 
+ 
+ 
+D - MICROBIOLOGICAL REQUIREMENTS 
+ 
+General microbiological lab equipments ** 
+ 
+• Hot air oven (capable of 160 to 180 ºC). 
+• Autoclave (capable of 15 psi/ 121 ºC) of suitable size as per need. 
+• Weighing Balance with least count 0.01 g (least count 0.001 g, if Tergitol-7 agar medium or Crystal violet neutral red bile lactose 
+(VRBL) agar is being prepared in house). 
+• pH meter with least count 0.1 pH unit. 
+• Laminar air flow chamber OR Class II Biosafety Cabinets shall be used for product testing and reference culture in microbiology laboratories. 
+• Hot plate for media preparation. 
+• Membrane filtration assembly (including sterilized membrane filters of 47 mm to 50 mm diameter with 0.45 μm pore size, 
+vacuum pump (for applying vacuum of about 70 kPa) and forceps with rounded tips). 
+• Inoculation loop/needle. 
+• Bunsen burner with LPG cylinder. 
+• Thermostatically controlled water bath. 
+• Air conditioner (recommended) 
+• Refrigerator 
+• Colony counting equipment (recommended) 
+• General glasswares including, petri dishes (made of glass or plastic), volumetric pipettes (of capacity 1 ml and 10 ml), flasks, test 
+tubes, culture bottles, funnels, glass rod, measuring cylinders. 
+• Thermometer with least count, at least four times smaller than the range of required maximum permissible tolerance shall be used) 
+• Filter paper 
+• Cotton 
+ Ready-to-use microbiological culture plates may also be used against the medias, as mentioned in the table below 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+ 
+SI. 
+No. 
+Parameter Clause Ref. Referred 
+Method 
+of Test 
+Test Equipment/Apparatus ** Chemicals/Media/Reagents ** 
+(1) (2) (3) (4) (5) (6) 
+1 Escherichia 
+coli (or 
+thermotolerant 
+bacteria) 
+6.1.1 of 
+IS13428 
+IS 15185 /ISO 
+9308-1 
+• General microbiological lab equipments 
+(as listed above) 
+• Incubator capable of maintaining (36+2)
+0
+C 
+• Equipment, for membrane filtration 
+ 
+• Membrane filters 
+• Disinfected forceps, for handling of 
+membrane filters. 
+• @Incubator capable of maintaining 44°C 
+• Microscope and Glass slides (for 
+Gram staining) 
+• Distilled water 
+ 
+ 
+ 
+ 
+• Chromogenic Coliform Agar 
+(Enzymatic digest of casein 
+1.0g, Yeast Extract 2.0g, 
+Sodium chloride 5.0g, 
+• Sodium dihydrogen phosphate 
+x 2H2O 2.2g, 
+• Disodium Hydrogen Phosphate 
+2.7g, 
+• Sodium pyruvate 1.0g, 
+• Sorbitol 1.0g, 
+• Tryptophane 1.0g,  6-chloro  3 
+indoxyl Beta D 
+Galactopyranoside 0.2g, 5- 
+Bromo 4-Chloro 3Indoxyl Beta 
+D Glucuronic Acid 0.1g, 
+• Iso propyl Beta D 
+thiogalactopyranoside (IPTG) 
+0.1g, 
+• Bacteriological Agar 9-18g 
+• Water 1000ml 
+• pH 6.8±0.2 at 25°C. 
+• Oxidase reagent: 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+     
+• 
+N,N,N’,N’- Tetramethyl p 
+ 
+phenylenediamine 
+ 
+ 
+dihydrochloride 0.1g, 
+ 
+• Water 10ml 
+  
+• Tryptone Soya Agar: 
+ 
+• Tryptone 15.0g, 
+ 
+• Soya Peptone 5.0g, 
+ 
+• Sodium Chloride 5.0g, 
+ 
+• Agar 15-25g, 
+  
+• Water 1000ml 
+  
+• pH 7.2±0.2 at 25°C 
+ 
+• @Medium for indole 
+ 
+production 
+  
+• @Kovac’s reagent (for indole 
+ 
+test) 
+  
+• Gram stain – (Methyl violet or 
+ 
+Crystal violet, Iodine, 
+ 
+ 
+Potassium iodide; Neutral red, 
+ 
+Acetic acid, Ethanol) 
+ 
+2 
+Coliform  
+Bacteria 
+6.1.2 of IS 
+i) Reference • General microbiological lab equipments • Distilled water 
+ 
+ 13428 : method 
+ 
+(as listed above) 
+  
+ 
+2005 
+ 
+• Incubator capable of operating at 37 ºC ± • Crystal violet neutral red bile 
+ 
+ IS 5401 (Pt. 1) 
+ 
+1 ºC 
+ 
+lactose (VRBL) agar – 
+ 
+  
+/ISO 4832 
+• Petri dishes, made of glass or plastic, of 
+ 
+• (Enzymatic digest of animal 
+   
+ 
+diameter 90 mm to 100 mm 
+   
+ 
+tissues, Yeast extract, Lactose, 
+   
+• Total-delivery pipettes, having nominal 
+   
+ 
+Sodium chloride, Bile salts, 
+   
+ 
+capacities of 1ml 
+   
+ 
+Neutral red, Crystal violet,    
+• Water bath, or similar apparatus, capable 
+   
+ 
+Agar) 
+  
+    
+of operating at 44 to 47°C 
+   
+• Colony-counting equipment, consisting of 
+    
+    
+an illuminated base and a mechanical or 
+    
+    
+electronic digital counter. 
+    
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+    • Test tubes of dimensions approximately 
+  
+ 
+16 mm x 160 mm • 
+@ 
+Brilliant green lactose bile 
+• Durham tubes of dimensions appropriate 
+ 
+broth – (Enzymatic digest of 
+ 
+for use with the test tubes 
+ 
+casein, Lactose, Dehydrated ox 
+• Bottles or flasks, for boiling and storage 
+ 
+bile, Brilliant green) 
+ 
+ 
+of culture media 
+   
+   
+ii) IS 15185 • General microbiological lab equipments • Distilled water 
+  
+/ISO 9308-1 
+ 
+(as listed above) 
+  
+• Sample quantity : 50 ml 
+  
+ 
+• Incubator, thermostatically controlled at 
+  
+  
+(36 ± 2) °C. 
+• 
+Chromogenic Coliform Agar 
+ 
+• Equipment, for membrane filtration 
+ 
+(Enzymatic digest of casein 
+ 
+ 
+1.0g, Yeast Extract 2.0g, 
+ 
+• Membrane filters 
+ 
+ 
+Sodium chloride 5.0g, 
+ 
+ 
+• Disinfected forceps, for handling of 
+ 
+• Sodium dihydrogen phosphate 
+ 
+ 
+membrane filters. 
+ 
+ 
+x 2H2O 2.2g, 
+  
+ 
+• @Incubator capable of maintaining 44°C 
+ 
+• Disodium Hydrogen Phosphate 
+ 
+• Microscope and Glass slides (for 
+ 
+2.7g, 
+   
+  
+Gramstaining) • Sodium pyruvate 1.0g, 
+ 
+   
+• Sorbitol 1.0g, 
+  
+   
+• Tryptophane 1.0g,  
+    
+6-chloro 3 indoxyl Beta 
+    
+D Galactopyranoside 0.2g,  5- 
+    
+Bromo 4-Chloro 3Indoxyl Beta 
+    
+D Glucuronic Acid 0.1g, 
+ 
+   
+• Iso propyl Beta D 
+    
+thiogalactopyranoside (IPTG) 
+    
+0.1g, 
+   
+   
+• Bacteriological Agar 9-18g 
+   
+• Water 1000ml 
+  
+   
+• pH 6.8±0.2 at 25°C. 
+  
+   
+• 
+Oxidase reagent: 
+  
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+     
+• 
+N,N,N’,N’- Tetramethyl p 
+ 
+phenylenediamine 
+ 
+ 
+dihydrochloride 0.1g, 
+ 
+• Water 10ml 
+  
+• 
+Tryptone Soya Agar: 
+ 
+• Tryptone 15.0g, 
+ 
+• Soya Peptone 5.0g, 
+ 
+• Sodium Chloride 5.0g, 
+ 
+• Agar 15-25g, 
+  
+• Water 1000ml 
+ 
+• pH 7.2±0.2 at 25°C 
+ 
+• @Medium for indole 
+ 
+production 
+  
+• @Kovac’s reagent (for indole 
+ 
+test) 
+  
+• Gram stain – (Methyl violet or 
+ 
+Crystal violet, Iodine, 
+ 
+ 
+Potassium iodide; Neutral red, 
+ 
+Acetic acid, Ethanol) 
+ 
+3 
+Sulphite 
+reducing 
+ 
+Annex C of • General microbiological lab equipments • Distilled water 
+ 
+anaerobes 6.1.4 of IS13428 
+ 
+(as listed above) • Differential reinforced 
+ 
+ 
+IS13428 : 
+ 
+• Sample quantity : 50 ml 
+ 
+clostridial medium (DRCM) – 
+ 
+2005 
+ 
+• 
+Screw cap bottles or vials and stoppers of 
+ 
+Double strength and Single 
+    
+boron silicate glass of capacities 100 ml 
+ 
+Strength (if necessary) 
+ 
+   
+• Water bath capable at 75 ± 5 °C. 
+ 
+(Peptone tryptic digest of meat 
+   
+• Iron wire 
+ 
+, Meat extract, Yeast extract, 
+   
+• Incubator (37 ºC ± 1 ºC) 
+ 
+Starch, Hydrated sodium 
+   
+• Appropriate method to hermetically seal 
+ 
+acetate, Glucose, L- cysteine- 
+   
+ 
+the vial or anaerobic systems 
+ 
+hydrochloride, Sodium 
+ 
+   
+ 
+hydroxide) 
+  
+   
+• Anaerobic jar assembly (recommended) 
+   
+• Sodium sulphite 
+ 
+    • 
+Iron (III) citrate 
+ 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+4 
+Pseudomonas 
+ 
+Annex D of • General microbiological lab equipments 
+• Distilled water 
+• Medium for determination of 
+presumed Pseudomonas 
+aeruginosa – (DL asparagine, 
+L proline, Anhydrous 
+dipotassium hydrogen 
+phosphate, Magnesium 
+sulphate heptahydrate, 
+Anhydrous potassium 
+sulphate, Ethanol) 
+• 
+@ 
+Confirmatory medium (Milk 
+agar medium) – [Skim milk 
+powder, Bacteriological yeast 
+extract, Peptone, Sodium 
+chloride, Agar 
+hexadecyltrimethyl ammonium 
+bromide (centrimide)] 
+• 
+@ 
+Clause D-10 (NOTE) of IS 
+13428 : 2005 specifies 
+confirmation of non- 
+pigmented strains as a further 
+step, if required. Annex 2D of 
+IS 13428 : 2005 specifies 
+biochemical characteristics to 
+be tested for this purpose. 
+• No specific apparatus, media 
+and reagents have been 
+specified for the same. It is 
+specified that commercially 
+available identification kits 
+may be used for this.For 
+example Gram Staining Kit, 
+Spore Staining Kit, Reagent 
+for Oxidase test, Hydrogen 
+Peroxide for Catalase Test, 
+aeruginosa 6.1.5 of IS13428 
+ 
+(as listed above) 
+ 
+IS13428 : 
+ 
+• Screw capped bottles 
+ 
+2005 
+ 
+• 
+Incubator (37 ± 1° C) 
+   
+• @Incubator, capable of being maintained 
+    
+at 42 ± 0.5° C 
+   
+• 
+@Incubator 4° C 
+   
+• UV cabinet fitted with UV lamp emitting 
+    
+light of wavelength 360 ± 20 nm 
+   
+• Cellulose acetate or nitrate membrane of 
+    
+pore size 0.22 μm (for alternate 
+    
+sterilization of ethanol) 
+   
+• 
+@ 
+Incubator, capable of being maintained 
+    
+at 42 ± 0.5° C 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+     
+ 
+Hugh and Leifson Medium, 
+ 
+Media for Nitrate Reductase 
+ 
+Test, for Acetamide 
+ 
+Deaminase activity, for Gelatin 
+ 
+Liquification and for Starch 
+ 
+Hydrolysis. 
+6 
+Yeast and 
+ 
+IS 5403 
+• General microbiological lab equipments • Distilled water 
+Mould 6.1.7 of (as listed above) • Yeast extract-dextrose- 
+ 
+IS13428 • Incubator (25 ± 1 ºC) 
+ 
+chloramphenicol-agar medium 
+  
+• 
+ 
+– (Yeast extract, Dextrose, 
+    
+Chloramphenicol or 
+    
+Oxytetracycline hydrochloride, 
+    
+Agar) 
+ 
+ 
+** NOTES 
+ 
+Note 1 – The list does not cover the following requirements, as these parameters are to be tested from outside approved lab: 
+i) Faecal streptococci and Staphylococcus aureus. 
+ii) Salmonella and Shigella. 
+iii) Vibrio cholera and V. parahaemolyticus. 
+ 
+Note 2 – General Microbiological Lab Equipments as listed are common for various microbiological tests. Other additional equipments required  for 
+specific test methods are indicated against each parameter. 
+ 
+Note  3 – For  preparation  of  culture  media  and  reagents  ingredients  of  uniform  quality  and  chemicals  of  analytical  reagent  grade should  be  used. 
+Alternatively, commercially available media and reagents may be used provided their composition comply with those given in Indian Standards 
+ 
+Note 4 – Disposable glassware may be accepted as an alternative to re-usable glassware. 
+ 
+Note 5 – All efforts have been made to compile the list as per the respective standards exhaustively covering all the required test equipments, apparatus 
+and chemicals. However, in case any omission or incorrectness is noticed while referring, the same may be conveyed to CMD immediately for suitable 
+actions. 
+ 
+The marked equipments/ chemicals and media are required for confirmatory tests of respective microorganisms. The confirmatory test may be 
+dispensed with/omitted, provided the licensee undertakes to start corrective actions based on presumptive presence of microorganisms. 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+E - REQUIREMENTS FOR BOTTLES/CONTAINERS FOR PACKAGED WATER 
+ 
+ 
+ 
+ 
+SI. 
+No. 
+Clause No. 
+of IS 
+15410:2003 
+Specified Requirement Test Facility Requirement 
+Range and 
+Accuracy/ Least 
+Count (If    and as 
+Applicable) 
+Method of Test/ 
+Remarks (If any) 
+1 4.1 Material --- 
+ 
+---- 
+Raw Material 
+conformity to ISs is 
+indicated 
+2 4.2 
+4.2.1 
+Design, Shape and Dimensions Visual ----- 
+ 
+3 4.3 
+4.3.1 
+4.3.2 
+Manufacture, 
+Workmanship, 
+Finish and 
+Appearance 
+Visual 
+ 
+------- 
+--------- 
+ 
+To adhere GMP 
+-- 
+4 4.4 Capacity Weighing Balance 
+Suitable range with , 
+LC 0.1 g for 
+Balanceor1 ml for 
+Cylinder 
+Cl 5 of IS 2798 
+5 4.5 Wall Thickness Micrometer Suitable Range with 
+LC 0.02 mm 
+Cl 4.5 of IS 2798 
+6 4.6.2 Transparency Transparency/ Haze Meter Range upto 100 %,LC 
+1% 
+Annex A of IS 15410 
+7 4.6.3 Leakage Test Vibration Leakage Tester as per Cl. 
+6.2.1 of IS 2798 
+Reservoir 
+Air Pressure Leakage Tester 
+- Cl 6 of IS 2798 
+8 4.6.4 Drop Test Drop Tester with height of 0.5 m 
+ 
+Cl 8 of IS 2798 
+9 4.6.5 Migration Test Oven/Water Bath 
+Hot Plate 
+Analytical Balance 
+SS Evaporating Dish 
+Capable of 
+maintaining40+2° C 
+IS 9845 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+   
+Dessicator 
+Glass Beaker, pyrex, 1000 ml 
+Pouch Sealing Machine 
+  
+10 4.6.6 Water Potability test Conditioning Chamber 
+Capable of 
+maintaining 38+2° C 
+Annex B of IS 15410 
+ 
+ 
+F- REQUIREMENTS FOR POLYETHYLENE FLEXIBLE POUCHES FOR PACKAGED WATER 
+ 
+ 
+SI. Clause No. 
+Specified Requirement Test Facility Requirement 
+Range and Method of Test/ 
+No. of IS Accuracy/ Least Remarks (If any) 
+ 
+15410:2003 Count (If and as 
+ 
+  
+Applicable) 
+  
+Clause 6.1 Requirements for Films 
+1 6.1.1 Description Visual --------------------- 
+ 
+2 6.1.2 Film Form Visual --------------------- 
+ 
+3 6.1.3 Winding of Film Visual --------------------- 
+ 
+4 6.1.4 Odour Olfactory --------------------- 
+ 
+5 6.1.5 
+Thickness Dead Weight Dial Suitable Range with 
+A-2 of IS 2508 
+(65± 5μ/ 75± 5μ) Micrometer LC1μ 
+ 
+6 6.1.6 Width (in mm) Scale 
+Suitable Range, 
+ 
+LC 1 mm 
+ 
+7 6.1.7 Overall Migration 
+Oven/Water Bath Capable of 
+IS 9845 
+Hot Plate 
+maintaining 40±2
+o 
+C 
+Analytical Balance 
+ 
+SS Evaporating Dish 
+ 
+Dessicator 
+ 
+Glass Beaker, pyrex, 1000 ml 
+ 
+Pouch Sealing Machine 
+ 
+
+ 
+ 
+       
+PM/ 13428/ 3 
+       
+January 2023 
+8 6.1.8 Tensile Strength 
+Tensile Testing Machine of suitable 
+LC 0.01 kN A-4 of IS 9845 
+range 
+9 6.1.9 Elongation at break 
+Tensile Testing Machine of suitable 
+LC 0.01 kN A-4 of IS 9845 
+range 
+10 6.1.10 Dart Impact Resistance 
+Dart Impact Tester with Drop Height Set of weights (Min. 
+A-6 of IS 9845 
+of 66 cm Impact failure load : 
+ 
+2.20 N) 
+  
+Clause 7 Requirements for Pouches 
+11 7.1 Vibration Leakage Test 
+Vibration Table Temp. - Ambient Table conforming to 
+Annex D of IS 15609 
+or27 ± 2
+0 
+C in case of dispute IS 7028 (Pt 2) 
+ 
+Frequency 
+ 
+of 
+ 
+vibration 2 Hz 
+ 
+12 7.2 Water Potability Test 
+Oven/Heating Arrangement Pouch Capable 
+ 
+of 
+Annex E of IS 15609 
+Sealing Machine maintaining 38±2
+o 
+C 
+13 7.3 Stack Load Test 
+Flat Wooden Plank Set of weights for20 
+Annex F of IS 15609 
+Temp. - Ambient or N to 200 N 
+  
+27±2
+0 
+C in case of dispute 
+   
+14 7.4 Drop Test 
+Arrangement for flat drop from 1.2 m 
+---------- Annex G of IS 15609 
+height 
+15 7.5 
+Ink Adhesion Test for Printed Pressure Sensitive Tapes or Cello- 25 mm wide tape 
+ 
+Annex H of IS 15609 
+Pouch Tape Arrangement for 
+  
+pulling tape at 
+  
+10mm/s at about 90 
+o
+ 
+16 7.6 
+Product Resistance Test for 
+Paper Tissue ------------- Annex J of IS 15609 
+Printed Pouch 
+Clause 8 Construction 
+17 8 Construction Visual -------------- 
+ 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+ANNEX F 
+SCHEME OF INSPECTION AND TESTING 
+FOR PACKAGED NATURAL MINERAL WATER ACCORDING TO IS 13428: 2005 
+ 
+1.0 LABORATORY -A laboratory shall be maintained which shall be suitably equipped and staffed 
+with competent testing person(s) to carry out the different tests in accordance with the methods given in 
+the Indian  standards.  Testing  person(s)  shall  be  science/engineering  graduate  from  disciplines  such  as 
+chemistry/chemical engineering/  microbiology/  biotechnology/  biochemistry/  food  technology/  botany 
+and other biological/ life sciences. Engineering graduates from disciplines such as chemical engineering 
+may also be engaged as testing persons. 
+1.1. The manufacturer shall prepare and implement a calibration plan for the test equipment.  
+ 
+2. TEST RECORDS –The manufacturer shall maintain test records for the tests carried out to establish 
+conformity. 
+ 
+3.0 LABELLING AND MARKING - The Standard Mark, as given in the Schedule of the Licence shall 
+be clearly marked legibly and indelibly on the label of the bottle/container or on the pouch as the case may 
+be, provided always that the material on which this Mark is applied conforms to every requirement of the 
+specification. The dimension of standard mark shall be in accordance with specified design. 
+ 
+3.1 PACKING – The Packaged  Natural Mineral Water shall be packed as per clause  3.2, clause 7 and 
+Annex B of IS 13428:2005. The pouches and bottles/containers shall be supplied in secondary packaging 
+as agreed to between the purchaser and the supplier. 
+ 
+3.2 Packaged Natural  Mineral Water  packed  in  Paper  based  multilayer  laminated/extruded  composite 
+cartons shall conform to IS 17753 and aluminum cans shall conform to Indian standard on 'Aluminum 
+cans for packaged  natural mineral water and packaged  drinking water — Specification [Doc: PGD 38 
+(20182)] as per provisions of Cl. 7.1.2 of IS 13428:2005. 
+ 
+3.3 All packaging materials of plastic origin shall pass the overall migration, colour migration and specific 
+migration limits for toxic substances as laid down in IS 15410 as per provisions of Cl. 7.1.3 of IS 
+13428:2005. 
+ 
+3.4 MARKING – In  addition  to  the  Standard  Mark  as  per  clause  8  of  IS  13428:2005  the  following 
+information shall be given legibly & indelibly on each bottle/container or its label or directly printed on 
+the pouch/bottle/container. 
+i. Name of the product (i.e. Natural Mineral Water) 
+ii. Supplementary designations, if any; 
+iii. Name and full address of the processor (i.e. manufacturer); 
+iv. Brand Name, if any; 
+v. Batch or Code Number/Control Unit No.; 
+vi. Date of manufacture/ packaging’ and ‘Expiry/Use by; 
+vii. Best before date (optional); 
+viii. Net quantity; 
+ix. Location and name of the source of natural mineral water. 
+x. Direction for storage; 
+xi. Keep the container away from direct sunlight; and 
+xii. Any other information required under the Legal Metrology(Packaged Commodity) Rules, 
+2011 and the Food Safety and Standards (Packaging and Labeling) Regulations 2011. 
+xiii. Recycling symbol as per IS 14534 and 14535 
+xiv. BIS website details: www.bis.gov.in 
+ 
+3.4.1 Minimum height of the BIS Standard Mark on different pack sizes of Packaged Natural 
+Mineral Water shall be as under: 
+S. No. Size of Container Min height of BIS Standard Mark* 
+1 
+Pouch/Cups/bottle(250 ml capacity & 
+5mm 
+below) 
+2 
+Bottles upto 500ml capacity & below 
+7.5mm 
+(but greater than 250 ml capacity) 
+3 Bottles more than 500ml capacity 10mm 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+4 All re-useable Jars 15mm 
+(* other dimensions of the BIS Standard Mark shall  be in appropriate proportions as 
+per BIS guidelines). 
+ 
+ 
+3.5 Each  secondary  packing  of  pouches/bottles/containers  shall  be  marked  with  the  following,  except 
+where  such  secondary  packing  is  transparent  and  the  markings  on  the  pouches/bottles/containers  are 
+legible through the secondary packing: 
+i. Indication of the source of manufacture i.e. manufacturer’s name and address; 
+ii. Number of pouches/bottles/containers 
+iii. Brand name, if any 
+iv. Nominal capacity; 
+v. Batch No. or Code No. 
+ 
+3.6 LABELLING PROHIBITIONS -The label on the bottles/containers/pouches and/or the secondary 
+packaging shall not contain claims which are prohibited as per clause 8.2 of IS 13428:2005. 
+ 
+3.7 Shelf  life:  Declared  shelf  life  for  Packaged  Natural  Mineral  Water  in  all  type  of  packing 
+materials shall not be less than 30 days. (also see Table 1 and Note 8 under Table 1) 
+ 
+3.8 Brand names: The labels conforming to the marking details as mentioned in clause 8 of IS 13428 
+along with the brand names are to be submitted by licensees to BIS for information only, which will only 
+be noted by BIS for records. The compliance of such labels to the requirement of clause 8 shall be ensured 
+by  licensees.  However,  in  case  non-compliance  to  Clause  8  is  observed  by  BIS  and communicated  in 
+writing to licensee, licensee shall make necessary rectification and resubmit the label for confirmation to 
+concerned BIS Branch Office within 15 days. Decision of BIS regarding whether labeling is complying 
+or not with clause 8 of IS 13428 shall be final. 
+ 
+4.0  LEVELS  OF  CONTROL -The  tests  as indicated  in  Table  1  and  at  the  levels  of  control  specified 
+therein, shall be carried out on the whole production of the factory covered by this Scheme and appropriate 
+records maintained in accordance with clause 2 of this Scheme. Entire production which conforms to the 
+Indian Standard and covered by the licence shall be marked with Certification Mark of the Bureau. 
+ 
+5.0 CONTROL UNIT - For the purpose of this Scheme, the quantity of packaged natural mineral water 
+treated/processed from each processing line and filled/packed in one day shall constitute a Control Unit. 
+ 
+5.1 On the basis of tests and analysis results, the decision regarding conformity or otherwise of a Control 
+Unit to the given requirements shall be made. 
+ 
+5.2 In respect of all other clauses of the Standard (other than those mentioned under Levels of Control– 
+Table  1  of  this  Scheme)  the  factory  shall  maintain  appropriate  controls  and  checks  to  ensure  that  their 
+product conforms to the requirements of the standard. 
+ 
+6.0 Microbiological Requirements - If any failure is noticed in any of the microbiological requirements, 
+control units available in the stock shall be rechecked and released into the market only after conformity 
+is ensured. 
+ 
+6.1 The licensee shall take immediate corrective actions, which would involve complete investigation of 
+the reasons for contamination and non-conformity. The manufacturer should re- start marking and dispatch 
+only  after  the  completion  of  satisfactory  corrective  actions  and  availability  of  satisfactory  results of  all 
+microbiological tests  as  applicable  for  each  control  unit,  for  next  2  consecutive  control  units.  The 
+manufacturer shall keep complete records of such instances for review by BIS for minimum period of 5 
+years. 
+ 
+7.0 SOURCE WATER - The source water used in production of Packaged Natural Mineral Water shall 
+be initially tested for Organoleptic and physical parameters (Table 1), Chemical requirements (Table 2), 
+and  all  microbiological  requirements  possible  to  be  tested  in  house.  Subsequently,  its  quality  may  be 
+regularly  assessed  at  least  once  in  three  months  through  in- house  testing  for  Colour,  Odour,  Taste, 
+Turbidity, pH, Total Dissolved Solids and Microbiological requirements. In addition, any other 
+requirements  as  considered  necessary  for  process  control,  are  to  be  tested  where  the  incidence  of  their 
+presence in higher levels has been detected during the previous tests. 
+ 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+7.1 The permitted treatment under clause 3 and 4 of IS 13428 shall only be carried out on condition that 
+the mineral content of water is not modified. Whenever, the quality of processed mineral water is found to 
+be not meeting the requirements of IS 13428 for the tested parameters, the source water shall be checked 
+again  for  such  parameters  in  which  failure  is  observed  for  deciding  upon  the  necessary  controls to be 
+exercised for conformance of quality of processed water to IS 13428. 
+ 
+7.2 In case non-conformity  is observed for radioactive residues,  the source of raw water shall be 
+abandoned and water shall be recalled immediately. 
+ 
+7.3 As and when there is change in source water, it shall be intimated to BIS. The raw water collected from 
+the new  source shall  be tested  in  accordance  with  Clause 7  as above and the processed  mineral water 
+produced from such source water shall be tested for conformity to IS 13428 from BIS recognized outside 
+lab. The reports of source water and the product water produced from the new source shall be submitted to 
+BIS for approval before commissioning for regular production and marking. 
+ 
+8.0 Plastic Jars/Bottles/Containers - The plastic containers used for packing the material shall conform 
+to IS 15410:2003. The conformity assessment shall be carried in accordance with the levels of controls 
+as given under Table 2. 
+ 
+8.1 In addition, the top lid for glasses/cups shall be of suitable peelable structure in accordance with Clause 
+4.2.1 of IS 15410:2003. 
+ 
+8.2 Pouches–The polyethylene film and pouches shall conform to IS 15609. The conformity assessment 
+shall be carried in accordance with the levels of controls as given under Table3. 
+ 
+8.3 Glass Bottles - IS 11984 has been specified as a reference Indian Standard for glass bottles. However, 
+if  any  manufacturer  intends  to  use  glass  bottles  for  packaging,  it  shall  be  included  in  the  licence.  The 
+separate processing line for filling the glass bottles may be verified by BIS during the next inspection and 
+necessary steps in the  process  for ensuring sterility of bottles may be  adopted  like  steam sterilizing, hot 
+water rinsing, UV sterilization or combination thereof. In case of lug caps containing plastic lining, food 
+grade certificate or OSL test report for migration testing may be accepted. 
+ 
+8.4 Paper based multilayer laminated/extruded composite cartons and aluminum cans - Paper based 
+multilayer laminated/extruded  composite  cartons shall conform to IS 17753. The  conformity assessment 
+shall be carried in accordance with the levels of controls as given under Table 4.  
+Aluminum cans shall conform to Indian standard on 'Aluminum cans for packaged natural mineral water 
+and packaged drinking water — Specification' [Doc: PGD 38 (20182)]. 
+ 
+9.0 REUSED CONTAINERS – Licensee shall ensure use of only such jars for packing the product water 
+whose transparency continues to meet the requirements as per IS 15410 even  after its  repeated use. Jars 
+which get soiled, de-shaped and/or mutilated during the course of use and refilling shall not be used. 
+ 
+9.1 Water to be used for the purpose of cleaning etc. IS 4251:1967 may be followed as Good 
+Manufacturing practices. 
+ 
+10.0  HYGIENIC  CONDITION - The  Natural  Mineral  water  shall  be  collected,  processed,  handled, 
+stored,  packed  and  marketed  in  accordance  with  the  hygienic  practices  given  under  Annex  B  of  IS 
+13428:2005. Other clauses shall also be complied in day to day production and quality control activities. 
+Schedule  for  each  activity  for  this  purpose  shall  be  displayed  prominently  in  the  factory  premises  and 
+records of compliance shall be maintained for scrutiny by the Bureau. The hygienic conditions shall also 
+be  maintained at the site of water source. A check list for good hygienic practices and food safety system 
+for packaged drinking water processing units is given in Annex H of this product manual. 
+ 
+11.0 REJECTION - Disposal of non-conforming product shall be done in such a way so as to ensure that 
+there is no violation of provisions of BIS Act, 2016. A separate record providing the detailed information 
+regarding the rejected control units and mode of their disposal shall be maintained. Such material shall in 
+no case be stored together with that conforming to the specification. 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+IS 13428:2005 PACKAGED NATURAL MINERAL WATER 
+TABLE 1 LEVELS OF CONTROL 
+(Para 4 of the Scheme of Inspection and Testing) 
+ 
+TEST DETAILS 
+Test equipment 
+LEVELS OF CONTROL 
+ 
+REMARKS 
+Clause Requirement 
+Test Method requirement No. of 
+Frequency 
+Clause Reference 
+R: required (or)S: Sub- Sample 
+contracting permitted  
+6.1 Microbiological Requirement 
+6.1.1 Escherichia coli -- IS 15185 R One Each control unit 
+ 
+ 
+6.1.2 
+ 
+Coliform Bacteria 
+ 
+-- 
+IS 5401 (Part-1)* 
+R 
+ 
+One 
+ 
+Each control unit 
+ 
+or IS 15185 
+6.1.3 
+Faecal Streptococci and Staphylococcus 
+-- 
+IS 5887 (Part-2)* 
+S One Once in a month 
+ 
+aureus or IS 15186 
+6.1.4 Sulphite Reducing Anaerobes -- 
+Annex C of IS 
+R One Each control unit 
+ 
+13428 
+6.1.5 Pseudomonas aeruginosa -- 
+Annex D of IS 
+R One Each control unit 
+ 
+13428 
+6.1.6 Yeast &Mould -- IS 5403 R One Each control unit 
+ 
+6.1.7 Salmonella and Shigella -- 
+IS 15187 & IS 
+S One Once in a month 
+ 
+5887 (Part-7), 
+respectively 
+6.1.8 Vibrio cholera and V. parahaemolyticus -- IS 5887 (Part-5) S One Once in a month 
+ 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+TABLE 1 (continued) 
+TEST DETAILS Test equipment LEVELS OF CONTROL 
+ 
+REMARKS 
+Clause Requirement 
+Test Method requirement No. of 
+Frequency 
+Clause Reference 
+R: required (or)S: Sample 
+Sub-contracting 
+ 
+permitted 
+ 
+6.2 and Table 1 i) Colour - IS 3025 (Part 4) R One Each Control Unit See Note 2 
+-do- ii) Odour - IS 3025 (Part 5) R One Each Control Unit -do- 
+-do- iii) Taste - IS 3025 (Part 8) R One Each Control Unit -do- 
+-do- iv) Turbidity - IS 3025 (Part 10) R One Each Control Unit -do- 
+-do- v) Total Dissolved Solids - IS 3025 (Part 16) R One Each Control Unit See Note 3 
+-do- vi) pH - IS 3025 (Part 11) R One Every four hours See Note 2 
+6.2 and Table 2 i) Nitrate (as NO3) - IS 3025 (Part 34) R One Once in a week See Note 4 
+-do- ii) Nitrite (as NO2) - IS 3025 (Part 34) R One Once in a week -do- 
+-do- iii) Sulphide (as H2S) - IS 3025 (Part 29) R One Once in a week -do- 
+-do- 
+iv) Manganese (as Mn) 
+- 
+IS 3025 (Part 59)* or IS 
+R One Once in a week -do- 
+  
+3025 (Part 2) 
+-do- 
+v) Copper (as Cu) 
+- 
+IS 3025 (Part 42)* or IS 
+R One Once in a week -do- 
+  
+3025(Part 2) 
+-do- vii) Fluoride (as F) - IS 3025 (Part 60) S One Once in six months See Note 6 
+ 
+viii) Barium (as Ba) 
+- 
+Annex G of IS 
+R One Once in a week See Note 4 
+  
+13428* or IS 15302 or 
+  
+IS 3025 (Part 2) 
+-do- ix) Antimony (as Sb) - 
+Annex H of IS 13428* 
+S One Once in a month See Note 5 
+or IS 15303 
+-do- x) Borates (as B) - 
+Annex J of IS 13428* or 
+S One Once in a month -do- 
+IS 3025 (Part 2) 
+-do- xi) Silver (as Ag) - Annex K of IS 13428 S One Once in six months See Note 6 
+-do- xii) Chloride (as Cl) - IS 3025 (Part 32) R One Each control unit See Note 2 
+-do- xiii) Sulphate (as SO4) - IS 3025 (Part 24) R One Each control unit See Note 2 
+-do- 
+xvi) Magnesium (as Mg) 
+- 
+IS 3025 (Part 46)* or 
+R One Once in a week See Note 4 
+  
+IS 3025 (Part2) 
+
+PM/ 13428/ 3 
+January 2023 
+ 
+ 
+-do- 
+xv) Calcium (as Ca) 
+- 
+IS 3025 (Part 40)* or IS 
+R One Once in a week See Note 4 
+  
+3025 (Part 2) 
+-do- xvi) Sodium (as Na) - 
+IS 3025 (Part 45)* or IS 
+S One Once in six months See Note 6 
+3025(Part 2) 
+-do- xvii) Alkalinity (as HCO3) - IS 3025 (Part 23) R One Each control unit See Note 2 
+-do- 
+xviii) Selenium (as Se) 
+- 
+IS 15303* or IS 3025 
+S One Once in six months See Note 6 
+  
+(Part 56) 
+-do- xix) Mineral Oil - 6 of IS 3025 (Part 39) S One Once in a month See Note 5 
+-do- 
+xx) Phenolic compounds 
+- 6 of IS 3025 (Part 43) S One Once in a month See Note 5 
+(as C6H5OH) 
+-do- 
+xxi) Anionic surface active 
+- Annex L of IS 13428 S One Once in a month See Note 5 
+agents (as MBAS) 
+6.2 and Table 3 i) Arsenic (as As) - IS 3025 (Part 37) S one Once in six months See Note 6 
+-do- ii) Cadmium (as Cd) - IS 3025 (Part 41) S one Once in six months -do- 
+-do- iii) Cyanide (as CN) - 2 of IS 3025 (Part 27) S one Once in six months -do- 
+-do- 
+iv) Chromium (as Cr) 
+- 
+Annex K IS 13428* or IS 
+S one Once in six months -do- 
+  
+3025 (Part 2) 
+-do- v) Mercury (as Hg) - IS 3025 (Part 48) S one Once in six months -do- 
+-do- vi) Lead (as Pb) - IS 3025 (Part 47) S one Once in six months -do- 
+-do- vii) Nickel (as Ni) - Annex M IS 13428 S one Once in six months -do- 
+-do- 
+viii) Polychlorinated 
+- Annex N of IS 13428 S one Once in six months -do- 
+Biphenyl (PCB) 
+-do- 
+ix) Polynuclear aromatic 
+- APHA 6440 I S one Once in six months -do- 
+hydrocarbons 
+ 
+x) Uranium 
+-=-- 
+IS 3025(Part 65)* or  
+IS 14194 (Part 3) 
+S one -do- -do- 
+
+ 
+ 
+        
+PM/ 13428/ 3 
+        
+January 2023 
+TEST DETAILS Test equipment LEVELS OF CONTROL 
+REMARKS 
+Clause Requirement Test Method 
+requirement No. of 
+Frequency 
+R: required (or)S: Sample 
+Clause Reference 
+Sub-contracting 
+ 
+permitted 
+ 
+6.2 and Table 4 
+i) Alpha emitters 
+- IS 14194 (Part 2) S one 
+Once in five 
+ 
+  
+years 
+-do- 
+ii) Beta emitters 
+- IS 14194 (Part 1) S one 
+Once in five 
+ 
+  
+years 
+6.3 Pesticide Residues - Annex P of IS 13428**S 
+ 
+One 
+ 
+See Note 1 below 
+Once in a year 
+- Shelf Life Assessment B 6.9 Annex B of IS 13428 R 
+Once in six months each 
+See Note 8 below 
+type of container shall be 
+tested for shelf life 
+assessment 
+ 
+ 
+ 
+In case of dispute, methods given at column 4 and wherever indicated by “*” shall be the referee method. 
+**Shall be got tested from BIS recognized laboratory using internationally established test method as specified in Annex P of IS 13428 : 2005 
+ 
+Note 1: For tests with frequency of once in a year, in case any failure is observed, in the requirement of Pesticide Residues, then the next 3 consecutive samples (factory/market) 
+of that licence shall be tested for all tests including Pesticide Residues(except Radioactive residues), till the 3 consecutive samples are found conforming to all requirements 
+tested including pesticide residues. 
+ 
+Note 2: In case of failure in any requirement with frequency of each control unit like colour, odour, taste, turbidity, Chloride, Sulphate, Alkalinity, after taking corrective 
+action the frequency to be increased from each control unit to every four hours for one month. Thereafter frequency of each control unit may be restored if all the samples during 
+the month are found passing. For pH, in case of failure, after taking corrective action, the frequency to be increased from every four hours to every hour for a week. Thereafter 
+frequency of every 4 hours may be restored if all the samples during the week are found passing. 
+ 
+Note 3: In case of failure in total dissolved solid, after taking corrective action, the frequency to be increased from each control unit to every four hours for one month. Thereafter 
+frequency of each control unit may be restored if all the samples during the month are found passing. 
+ 
+Note 4: In case of failure in Nitrate, Nitrite, Manganese, Copper, Calcium, Magnesium, Barium and Sulphide, after taking corrective action, the frequency to be increased from 
+once in a week to each control unit for one month. Thereafter frequency of once in a week may be restored if all the samples during the month are found passing 
+
+ 
+ 
+PM/13428/ 3 
+January 2023 
+ 
+Note 5: In case of failure in any requirement like Phenolic Compounds, Mineral Oil, Anionic surface active agents, Antimony, Borate, with frequency of once a month, after 
+taking corrective actions, samples from 2 consecutive control units shall be tested in house or in BIS recognized third party lab. Thereafter frequency of once in a month may 
+be restored if the samples from both control units are found passing. 
+ 
+Note 6: In case of failure in any requirement like Fluoride, Silver, Selenium, Sodium, Mercury, Cadmium, Arsenic, Cyanide, Lead, Chromium, Nickel, PCB, PAH, Uranium 
+with frequency of once in six months, the frequency to be increased from once in 6 months to once in 3 months for 6 months. Thereafter frequency of once in 6 months may be 
+restored only if both the samples tested at each quarter are found passing. 
+ 
+Note 7: Approved and validated international test methods from ISO/ APHA/ ASTM/ AOAC/EPA/EN may also be followed for performing tests given in Table 2 & 3 of 
+IS 13428 : 2005. In case of dispute, methods given at column 4 and wherever indicated by “*” shall be the referee method. 
+ 
+Note 8: Shelf Life testing shall be done in house for all possible tests for organoleptic, physico-chemical, chemical, and microbiological parameters which are possible to be 
+tested in house as per test methods prescribed in IS 13428. Records of shelf life studies to be maintained. In case of failure, the manufacturer shall review the shelf life declaration 
+and re-declare the suitable revised shelf life. 
+ 
+Note-9: Whether test equipment is required or sub-contracting is permitted in column 2 shall be decided by the Bureau and shall be mandatory. Sub- contracting is permitted to 
+a laboratory recognized by the Bureau or Government laboratories empaneled by the Bureau. 
+ 
+Note-10: The control unit and levels of control as decided by the Bureau are obligatory to which the licensee shall comply with. 
+ 
+Note -11: Whenever, due to failure, the test frequency is increased, the compliance for such frequency levels may be ensured either from in-house or OSL testing of samples. 
+
+ 
+ 
+ 
+ 
+ 
+FORM 1 
+REPORT FOR FOUR HOURLY pH TESTING 
+ 
+Date of 
+Production 
+Batch 
+Number/ 
+Control unit 
+number 
+pH Remarks 
+1 2 3 4 
+    
+ 
+ 
+FORM 2 
+REPORT FOR DAILY/ EACH CONTROL UNIT TESTING 
+PM/13428/ 3 
+January 2023 
+ 
+Date of Batch 
+Colour Odour Taste Turbidity TDS Chloride Sulphate Alkalinity E.coli 
+Coliform Sulphite Pseudo Yeast 
+Remark 
+    
+monas & 
+Production Number/ Bacteria reducing aerugin Mould 
+  
+control 
+  
+anaerobes 
+osa 
+ 
+ 
+unit 
+    
+ 
+number 
+    
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 
+                
+ 
+ 
+FORM 3 
+REPORT FOR WEEKLY & MONTHLY TESTING 
+ 
+Date 
+Batch/ 
+Barium Copper 
+Mangan 
+Nitrate Nitrite Calcium Sulphide Magnesium Antimony Borate 
+Phenolic 
+Mineral Oil 
+Anionic 
+Remarks 
+ 
+ese Compounds Surface 
+control 
+  
+Active 
+unit no. 
+  
+Agents 
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 
+
+PM/13428/ 3 
+January 2023 
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+FORM 4 
+ 
+FORMAT FOR TESTING FROM BIS RECOGNIZED OUTSIDE LABORATORY 
+ 
+Month & Year Batch No./DOM Type of packing 
+Dates on which Lab to which Test report 
+Results Remarks 
+sample sent sample sent number & date 
+        
+ 
+ 
+1. REPORT FOR MONTHLY TEST 
+ 
+i. Faecal streptococci and S. aureus, Salmonella and Shigella, V. cholera and V. parahaemolyticus 
+ 
+ii. Mineral Oil, Anionic Surface Active Agents, Phenolic Compounds, Antimony, Borates, 
+ 
+2. REPORT FOR SIX MONTHLY TEST 
+ 
+i. Mercury, Cadmium, Arsenic, Cyanide, Lead, Chromium, Nickel, Fluoride, Selenium, Sodium, PCB, PAH. 
+ii. Silver (as applicable) 
+ 
+iii. Pesticide Residues 
+ 
+ 
+3. REPORT FOR FIVE YEARLY TEST 
+ 
+I. Radio Active Residues (Alpha and Beta Emitters) 
+
+PM/13428/ 3 
+January 2023 
+PM/13428/ 3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+FORM 5 
+ 
+SOURCE WATER TESTING (3 MONTHLY TESTS) 
+ 
+Month Source of In-house testing Outside testing (if done) Record of in-house Results Remarks 
+& Year water (if done) testing/outside TR 
+   
+Name of sample TR No. 
+   
+lab sent on & Date 
+ 
+ 
+FORM 6 
+ 
+RECORD FOR PLASTIC CONTAINERS USED FOR PACKING WATER 
+ 
+Date of Type of Name of Quantity Whether Details of outside 
+Results Remarks 
+receipt packing supplier received ISI testing 
+ 
+ 
+material 
+  
+marked 
+  
+     
+Name of Date of Overall Colour Remaining 
+ 
+lab sending migration migration parameters 
+ 
+samples 
+  
+as per IS 
+    
+15410 
+           
+ 
+ 
+FORM 7 
+ 
+RECORDS FOR SHELF LIFE ASSESSMENT (SEPARATE FOR EACH TYPE OF CONTAINER BEING USED) 
+ 
+Date on which Batch Type of Declared shelf Periodicity of Date of Requirements 
+Results Remarks 
+sample kept No./DOM packing whose life testing Testing Tested 
+  
+sample kept 
+    
+
+ 
+ 
+ 
+ 
+FORM 8 
+ FORMAT FOR PE  FILM 
+PM/ 13428/ 3 
+January 2023 
+ 
+Date of Name of Quantity Details of Descriptio Film Winding 
+Odour 
+Thicknes 
+Width 
+Overall Tensile Elongation Dart 
+Results Remark 
+Receipt Supplier Receive Test report 
+n 
+Form 
+of s 
+Migratio Strength 
+n Impact 
+ 
+Film 
+ 
+at Break Resistance 
+  
+d 
+     
+n 
+   
+of 
+ 
+(No. of from O S 
+        
+Rolls  
+Rolls) Lab. With 
+        
+   
+date 
+        
+(1) (2) (3) (4) (5) (6) (7) (8) (9) (10) (11) (12) (13) (14) (15) (16) 
+ 
+ 
+FORM 9 
+FORMAT FOR POUCH TESTING 
+ 
+Date of Time of Total quantity 
+Drop Test 
+Stack Load Ink Adhesion of Product Resistance Water 
+Results Remarks 
+Pouch production produced Test Printed Pouches of Potability 
+Production 
+    
+Printed Pouches Test 
+   
+ 
+Machine No. 
+    
+   
+1 2 3 4 Etc. 
+    
+(1) (2) (3) (4) (5) (6) (7) (8) (9) (10) 
+ 
+
+ 
+ 
+ 
+ 
+TABLE 2 
+PM/13428/ 3 
+January 2023 
+GUIDELINES ON ENSURING CONFORMITY OF CONTAINERS USED FOR PACKAGED NATURAL MINERAL WATER 
+ 
+Type of container 
+Parameters Options for mode of conformity Frequency to be followed by licensee 
+a) Plastic Jars i) Overall migration and colour    
+migration as per Clause 7 of IS 
+13428  
+ ii) Conformity to IS15410 
+i) ‘ISI’ marked, OR 
+ii) In-house Test Reports of 
+licensee, if facilities exist; 
+OR 
+iii) BIS recognized outside 
+laboratory Test Report of 
+the samples (not older than 
+6months from the date of 
+purchase) ; OR 
+iv) Combination of the above. 
+Once in six months, sample from one  consignment of 
+plastic jars of each size/material procured from a single 
+source (i.e. supplier) shall be tested as per the modes of 
+conformity given in column 3 (Not required 
+if  material is ISI marked) 
+b) Plastic Bottles, Glass/ 
+cups 
+i) Overall migration and colour    
+migration as per Clause 7 of IS 
+13428  
+ ii) Conformity to IS 15410 
+i) ‘ISI’ marked  
+OR 
+ii) In-house Test Reports of 
+licensee, if facilities exist  
+OR 
+iii) BIS recognized outside laboratory 
+Test Report of the samples (not older 
+than 6months from the date of 
+purchase) 
+Once  in  six months,  sample  from  one consignment of 
+plastic bottles/ glasses/ cups of each type/ shape/ 
+capacity/ material procured from  a  single  source  (i.e. 
+supplier) shall be tested as per the modes of conformity 
+given in column 3 (Not required if material is ISI marked 
+c) Plastic cap (closures) 
+of containers 
+Overall migration and colour 
+migration as per Clause 7 of IS 
+13428 
+i) Declaration/ certificate w.r.t. 
+food grade quality, as permitted under 
+IS13428 , AND 
+ii)In house test report of licensee, if 
+facilities exist ; OR 
+Once in six months, sample from one consignment of 
+plastic caps/closures of each size/material procured 
+from a single source (i.e. supplier) shall be tested as 
+per the modes of conformity given in column 3 (Not 
+required if material is ISI marked) 
+ 
+ 
+iii)   BIS recognized outside laboratory 
+test report of samples (not older than 
+6months from the date of 
+  purchase)  
+   
+  
+ 
+  
+ 
+
+ 
+ 
+PM/ 13428/ 3 
+January 2023 
+    
+d) Foil (for sealing of 
+plastic cups/ glasses) 
+Overall migration and colour 
+migration as per Clause 7 of IS 
+13428:2005  
+i) Declaration/ certificate w.r.t. food     
+grade quality of the material used for 
+the plastic film, AND 
+Once in six months, sample from one consignment 
+of one consignment of foils procured from a single 
+source (i.e. supplier) shall be tested as per the 
+modes of conformity given in column 3 (Not 
+required if material is ISI marked) 
+ii) In house test report of licensee, if  
+ 
+facilities exist OR  
+iii) BIS recognized Outside test report  
+ 
+of samples (not older than 
+ 
+ 
+6months from the date of 
+ 
+ 
+purchase) 
+ 
+ 
+ 
+Note : Licensee to keep records of receipt for all types of containers and closures received, along with the corresponding test certificate in case of ISI marked 
+consignment or test reports of samples tested in-house or got tested as per the specified frequency at BIS recognized laboratory, to be verified by BIS during 
+periodic inspections for adequacy of the system being followed by licensee to control quality of packaging material received, accepted, rejected and method of 
+disposal. 
+
+PM/ 13428/ 3 
+January 2023 
+July 2020 
+ 
+ 
+TABLE 3 
+Levels of control for Polyethylene Flexible Pouches for the packing of Packaged Natural Mineral Water as per IS 15609 
+TEST DETAILS Test equipment LEVELS OF CONTROL 
+Clause 
+ 
+Requirement 
+ 
+Test Method 
+requirement 
+ 
+ 
+Lot size 
+ 
+Remarks (Modes of Conformity etc.) 
+R: required No. of 
+Clause Reference 
+(or)S: Sub- Samples 
+contracting 
+ 
+permitted 
+ 
+5 Material 5 IS 15609 S One 
+Each consignment of i) ISI Marked, OR 
+Polyethylene film ii) BIS recognized outside laboratory 
+ 
+Test Report of the samples, OR 
+ 
+iii) Test certificate issued by PE resin 
+ 
+supplier. 
+6.1 
+ 
+Requirement for Polyethylene Film 
+     
+6.1.1 Description 6.1.1 IS 15609 R One 
+Each roll of All rolls to be checked before using the 
+polyethylene film same for making pouches. All such 
+ 
+rolls which do not conform to the 
+ 
+requirement shall be rejected 
+6.1.2 Film Form 6.1.2 -do- R -do- -do- -do- 
+6.1.3 Winding of film 6.1.3 -do- R -do- -do- -do- 
+6.1.4 Odour 6.1.4 -do- R -do- -do- -do- 
+6.1.5 Thickness 6.1.5 -do- R -do- -do- -do- 
+6.1.6 Width 6.1.6 -do- R -do- -do- -do- 
+ 
+ 
+ 
+ 
+6.1.7 
+ 
+ 
+ 
+ 
+ 
+Overall Migration 
+ 
+ 
+ 
+ 
+6.1.7 
+ 
+ 
+ 
+ 
+-do- 
+S 
+ 
+ 
+ 
+ 
+ 
+-do- 
+ 
+i) ISI Marked, OR 
+ 
+ii) In house test report, if facility 
+One consignment 
+ 
+exist with the licensee OR 
+from each source iii) Outside approved laboratory 
+(i.e. supplier) initially 
+ 
+test report of the sample 
+and subsequently If the sample does not conform to the 
+once every six requirement, the consignment shall be 
+months for each rejected. 
+source (i.e. supplier) 
+ 
+
+PM/ 13428/ 3 
+January 2023 
+July 2020 
+ 
+ 
+Table 3 contd... 
+ 
+TEST DETAILS Test equipment LEVELS OF CONTROL 
+ 
+Clause 
+Requirement 
+Test Method requirement No. of 
+Lot size Remarks 
+Clause Reference 
+R: required Samples 
+(or)S: Sub- 
+ 
+contracting 
+ 
+permitted 
+ 
+6.1.8 Tensile strength 6.1.8 -do- S -do- -do- -do- 
+6.1.9 Elongation of break 6.1.9 -do- S -do- -do- -do- 
+6.1.10 
+Dart impact 
+6.1.10 -do- S -do- -do- -do- 
+resistance 
+ 
+7 Requirement for Flexible Pouches 
+7.2 
+Water Potability 
+Annex E -do- S -do- Once in two months 
+Sample of each size shall be tested by 
+Test rotation so that all the sizes shall be tested 
+ 
+in one operative period. 
+7.3 Stack load Test Annex F -do- R -do- One day production 
+If the sample does not conform to the 
+requirement the same day production shall 
+be rejected. 
+7.4 Drop test Annex G -do- R -do- 
+Every hour for each If the sample does not conform to the 
+machine requirement, the licensee shall follow the 
+ 
+criteria for acceptance and retesting as per 
+ 
+clause G-3 of IS 15609:2005. If it still does 
+ 
+not conform then the same day production 
+ 
+shall be rejected. 
+7.5 
+Ink Adhesion of 
+Annex H IS 15609 R -do- One day production 
+If the sample does not conform to the 
+Printed Pouches requirement the same day production 
+ 
+shall be rejected. All rolls to be checked 
+ 
+before using the same for making 
+ 
+pouches. All such rolls which do not 
+ 
+conform to the requirement shall be 
+ 
+rejected. 
+ 
+7.6 
+Product resistance 
+ 
+Annex J 
+ 
+-do- 
+R 
+ 
+One 
+ 
+-do- 
+ 
+-do- of printed Pouches 
+
+[Type here] 
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+Note-1: Whether test equipment is required or sub-contracting is permitted in column 2 shall be decided by the Bureau and shall be mandatory. Sub-contracting is permitted to a 
+laboratory recognized by the Bureau or Government laboratories empaneled by the Bureau.  
+Note-2: Levels of control given in column 3 are only recommendatory in nature. The manufacturer may define the control unit/batch/lot and submit his own levels of control in 
+column 3 with proper justification for the approval by BO Head.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+[Type here] 
+PM/13428/3 
+January 2023 
+ 
+ 
+TABLE 4 
+Levels of control for Paperbased Multilayer Laminated/Extruded Composite Cartons (Aseptic and Non-Aseptic)  
+For Processed Liquid Food Products and Beverages as per IS 17753 
+ 
+TEST DETAILS Test equipment LEVELS OF CONTROL 
+Requirement Test Method 
+requirement 
+ 
+Lot size Remarks (Modes of Conformity etc.) 
+R: required 
+(or)S: 
+No. of 
+Clause Reference 
+Sub-contracting 
+Samples 
+permitted 
+Material,  
+Cl. 4.1 
+4.1 IS 17753 S One 
+Each consignment of 
+paper based multilayer 
+composite sheet 
+i) Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+ 
+ 
+  
+Paper Board, 
+Cl. 4.1.1 
+--- IS 16983/IS 1776/ IS 12999 S One Each consignment i) BIS recognized outside laboratory Test Report of 
+the samples, OR 
+ii) Test certificate issued by supplier 
+Polyethylene, 
+Cl. 4.1.2 
+--- IS 2508/IS 14500/ IS 10146/  
+IS 16738 
+S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+Aluminium Foil, 
+Cl. 4.1.3 
+4.3 of IS 
+IS 8970 
+IS 8970 and Table 1 of IS 17753 S One Each consignment i) BIS recognized outside laboratory Test Report of 
+the samples, OR 
+ii) Test certificate issued by supplier 
+Caps,  
+Cl. 4.1.4 
+--- IS 10910 S One Each consignment i) ISI Marked, OR 
+ii) BIS recognized outside laboratory Test Report 
+of the samples, OR 
+iii) Test certificate issued by supplier 
+Printing Inks,  
+Cl. 4.1.6 
+ IS 15495 S One Each consignment i) BIS recognized outside laboratory Test Report of 
+the samples, OR 
+ii) Test certificate issued by supplier 
+Requirement for Paper Based Multilayer Laminated/Extruded Composite Sheets 
+Description,  
+Cl. 5.1 
+5.1 IS 17753 R One 
+Every hour 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overall Migration, 
+Cl. 5.2.1 
+---- IS 9845 
+R -do- Once in a fortnight -do- 
+Specific Migration ---- IS 9845 and IS 3025(Part-2)/  R -do- Every month -do- 
+
+[Type here] 
+PM/13428/3 
+January 2023 
+ 
+ 
+Test, 
+Cl. 5.2.2 
+IS 5158(A-4)/ IS 9873(Part-6) 
+Vibration Leakage 
+Test, 
+Cl. 5.2.3 
+Annex-B 
+IS 17753 
+R -do- Every 24 hours -do- 
+Storage Test, 
+Cl. 5.2.4 
+--- 
+IS 8639 
+R -do- Every month -do- 
+Water Vapour 
+Transmission Rate 
+(WVTR) and 
+Oxygen Transmission 
+Rate (OTR), Cl. 5.2.5 
+Annex-C 
+of IS 
+17753 
+IS 17753/ISO 2528(for WVTR) 
+And 
+ISO 15105-2(for OTR) 
+R -do- Once in a fortnight -do- 
+Print Resistance Test, 
+Cl. 5.2.6 
+Annex-D 
+IS 17753 
+R -do- Every 24 hours -do- 
+Ink Adhesion Test 
+Cl. 5.2.7 
+Annex-E 
+IS 17753 
+R -do- Every 24 hours -do- 
+ 
+ Note-1: Whether test equipment is required or sub-contracting is permitted in column 2 shall be decided by the Bureau and shall be mandatory. Sub-contracting is permitted to a 
+laboratory recognized by the Bureau or Government laboratories empaneled by the Bureau.  
+ 
+Note-2: Levels of control given in column 3 are only recommendatory in nature. The manufacturer may define the control unit/batch/lot and submit his own levels of control in 
+column 3 with proper justification for the approval by BO Head 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+[Type here] 
+PM/13428/3 
+January 2023 
+ 
+ 
+TABLE 5 
+Levels of control for Aluminium Cans for Packaged Natural Mineral Water and Packaged Drinking Water 
+— Specification as per [Doc. No.: PGD 38(20182)] 
+ 
+TEST DETAILS Test equipment LEVELS OF CONTROL 
+Requirement Test Method 
+requirement 
+ 
+Lot size Remarks (Modes of Conformity etc.) 
+R: required 
+(or)S: 
+No. of 
+Clause Reference 
+Sub-contracting 
+Samples 
+permitted 
+Material,  
+Cl. 5.1 
+5.1 IS 504 (Part 1 to 12) and 
+IS 504 (Part 13 to 16) 
+S One 
+Each consignment of 
+ 
+paper based multilayer 
+composite sheet 
+i) Test Reports from BIS recognized outside 
+laboratory, OR 
+ ii) Test certificate issued by supplier. 
+  
+Temper, 
+Cl. 5.2 
+--- IS 16983/IS 1776/ IS 12999 S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR 
+ii) Test certificate issued by supplier 
+Mechanical properties of the 
+alloys for the body and 
+closure, 
+Cl. 5.3 
+--- IS 2508/IS 14500/ IS 10146/  
+IS 16738 
+S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR 
+ii) Test certificate issued by supplier 
+Can bod, 
+Cl. 6.1.1 
+6.1.1 PGD 38(20182)    By visual  
+Can Ends 
+Cl. 6.1.2 
+6.1.2 PGD 38(20182) S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR 
+ii) Test certificate issued by supplier 
+Internal finish 
+Cl. 6.2 
+6.2 PGD 38(20182)    By visual 
+a) External Coating 
+Cl. 6.3 
+b) Bottom Rim 
+Coating 
+Cl. 6.1.3 
+a) 6.3 
+ 
+b) 6.1.3 
+PGD 38(20182) S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR 
+ii) Test certificate issued by supplier 
+a) Shape and 
+Dimension 
+b) Wall thickness 
+Cl. 6.4.1 
+Table 3 PGD 38(20182) S One Each consignment i)Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+Shape and nominal 
+dimension of closure 
+Table 4 PGD 38(20182) S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR  
+
+[Type here] 
+PM/13428/3 
+January 2023 
+ 
+ 
+components 
+Cl. 6.4.2 
+ii) Test certificate issued by supplier 
+Top Load / Axial 
+Load / Column 
+Strength 
+Cl. 7.1.1 
+7.1.1 PGD 38(20182) S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+Enamel Rater Criteria 
+Cl. 7.1.2 
+7.1.2 PGD 38(20182) S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+Air Pressure Test 
+Cl. 7.1.3 
+--- IS 2471 S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+Slip Angle Test / Wall 
+Mobility Test 
+Cl. 7.1.4 
+Annex-B PGD 38(20182) S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+Testing of Ends 
+Cl. 7.2 
+7.2 PGD 38(20182) S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+Overall Migration 
+Limit 
+Cl. 7.3.1 
+--- IS 9845 S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+Specific Migration 
+Limit 
+Cl. 7.3.2 
+--- IS 9845 S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+Water Potability Test 
+Cl. 7.4 
+--- IS 2500(Part-1) S One Each consignment i) Test Reports from BIS recognized outside 
+laboratory, OR  
+ii) Test certificate issued by supplier 
+ 
+ 
+Note-1: Whether test equipment is required or sub-contracting is permitted in column 2 shall be decided by the Bureau and shall be mandatory. Sub-contracting is permitted to a 
+laboratory recognized by the Bureau or Government laboratories empaneled by the Bureau.  
+ 
+Note-2: Levels of control given in column 3 are only recommendatory in nature. The manufacturer may define the control unit/batch/lot and submit his own levels of control in 
+column 3 with proper justification for the approval by BO Head 
+ 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+Annex G 
+Guidelines for Special Situations 
+ 
+G-1 Change of source of raw water or change in process 
+As and when there is change in source water, it shall be intimated to BIS. The raw water collected from 
+the new source shall be tested in accordance with Clause 7 of SIT and the processed water produced 
+from such source water shall be tested for conformity to IS 13428 from BIS recognized outside lab. 
+The reports of source water and the product water produced from the new source shall be submitted to 
+BIS for approval before commissioning for regular production and marking. 
+ 
+G-2 Modification in the process 
+G-2.1  In  case  of  any  addition,  alteration  and/or  change  in  the  production  process  without  any 
+change  in  raw  water source,  the  processed  water  produced  from  such  changed  process  shall  be 
+tested  for  conformity  to  IS  13428  from  BIS  recognized  outside  lab.  The  reports  of  the  product 
+water produced from the changed process shall be submitted to BIS for approval before 
+commissioning for regular production and marking. 
+G-2.2 Testing of product water so produced by using different processes shall be carried out as 
+per SIT and records be kept separately by the licensee. 
+Note  1:  Testing  for  parameters  concerning  radio-active residues  need  not  be  done  under  above 
+circumstances provided the source of raw water remains the same. 
+Note 2: Any change in process may require change of label. Therefore licensee may be advised 
+to prepare fresh label incorporating all marking details. 
+G-3 Shelf-life 
+G-3.1 Declared shelf life for Natural Mineral Water in all type of packing materials shall not 
+be less than 30 days. If the manufacturer intends to declare a longer shelf-life than minimum 30 
+days, study shall be conducted on each type of packing whenever there is a change in the source 
+of raw water/manufacturing/packing process, whichever is earlier. The shelf-life shall be declared 
+on the labels as per 8.1 (g) of  IS 13428. It shall be based on in-house shelf life study for which 
+proper records be maintained conforming to declared shelf life. 
+ 
+G-3.2 Subsequently, for any change in the shelf life declared on the labels, the manufacturer shall 
+inform  BIS  in  advance  along  with  shelf- life  study  reports  and  submit  fresh  label  for approval. 
+Tests to be carried out for shelf life studies are requirements given in Table 1 of IS 13428 along 
+with routine microbiological tests as per IS 13428. 
+G-4 Label/marking approvals 
+ 
+G-4.1There is a practice that applicants/licensees submit labels to BIS for approval. Wherever any 
+applicant/licensee submits labels to BIS for approval, it shall be informed to them that the labels conforming to 
+the marking details as mentioned in clause 8 of IS 13428 along with the brand names are to be submitted 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+ 
+ 
+to by licensees to BIS for information only, which will only be noted by BIS for records. 
+ 
+G-4.2 The compliance of such labels to the requirement of clause 8 shall be ensured by licensees. However, 
+in  case  non-compliance  to Clause  8  is  observed  by  BIS  and  communicated  in  writing  (provided brand 
+name/trademark is not registered) to licensee, licensee shall make necessary rectification and resubmit the 
+label for confirmation to concerned BIS Branch Office within 15 days. Decision of BIS regarding whether 
+labeling is complying or not with clause 8 of IS 13428 shall be final. 
+ 
+G-4.3 However, in case the brand name/trademark submitted by the firm is a registered brand 
+name/trademark, no objection to its use shall be raised even if the brand name/trademark is found to be in 
+non-compliance  to  Clause  8.  However,  in  such  a  case,  the  Head  BO  concerned  shall  communicate  the 
+details of such cases to CMD-2 for taking up with the concerned authorities. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+Annex H 
+ 
+CHECKLIST FOR GOOD HYGIENE PRACTICES AND FOOD SAFETY SYSTEMS FOR 
+ PACKAGED NATURAL MINERAL WATER PROCESSING UNITS 
+ 
+    SI No.                                        Requirements     
+ 
+     (1)                                                 (2)                                                                                                                                                                                                                  
+Answers 
+         
+    Remarks 
+ 
+ 
+ 
+       (5) 
+Adequate 
+     
+    (3) 
+Not 
+Adequate 
+  (4)   
+i) Building, Facilities and Locations 
+ 
+a) Is the facility location area free from objectionable odour, smoke, 
+dust or other contaminants and not subject to flooding? 
+b) Are  the  areas  immediately  surrounding  the buildings,  roads, 
+packing places, suitably paved, grassed and kept clean? 
+c) Is adequate  facility for drainage  of surroundings available  and is 
+designed to handle peak load? 
+d) Is  the  facility  used  for  processing  water,  free  from  Domestic 
+animals? 
+e) Is the facility surroundings free from refuse, waste materials, 
+rubbish, overgrown weeds and grasses? 
+f) Are there adequate facilities for the disposal of effluents and 
+wastes? 
+g) Are the buildings and facilities of sound construction and 
+maintained in good repair? 
+h) Are the buildings and facilities designed and maintained to prevent 
+entrance and harboring of pests and entry of contaminants? 
+i) Are building and facilities designed to facilitate Hygienic 
+operations? 
+ 
+ii) Plant and Physical Facilities 
+ 
+ a)  Is  adequate  lighting  provided  at  working  station,  hand  washing 
+area, and storage areas?  
+b)   Are   light   fixtures   safety   type   and   protected   to   prevent   
+contamination  in  the  event  of  breakage  in  the  processing  and 
+packing area? 
+c)      Are  the  processing  areas  well-ventilated,  to  minimize  odours  , 
+noxious fumes and condensates? 
+d)   Are the barriers/traps provided at drains to prevent the  entry of 
+rodents from the drains into the facility? 
+         e)    Is effective screening provided against entry of birds, animals,   
+                insects, rodents, etc 
+ 
+   
+ 
+f)      Are   doors,   hatches   and   other   openings   to   the   building 
+constructed to render opening pest proof? 
+g)    Are floors, walls, ceilings, windows and doors so designed and 
+constructed as to render them washable? 
+h)    Is product in process and storage area adequately   protected from 
+any   leakage   from   external   surfaces   and   other   sources   of 
+contamination? 
+i)   Are immediate surroundings of extraction or collection   protected 
+from entry of unauthorized persons? 
+ 
+iii) Raw Water Processing 
+ 
+a)    In case of extraction/collection for processing are the sources free 
+from contaminations/ impurities? 
+   
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+b)   Are  water storage tanks, pipe lines utilized for handling water 
+constructed  and  so  designed  as  to  facilitate cleaning  and 
+inspection? 
+c)        Are  inspections  of  containers/carriers/pipe  lines  of  raw  water 
+supply   performed   for   the   material   of   construction   and 
+cleanliness? 
+d)      Are  possible  chances  of  contamination  from  incoming  water 
+assessed? 
+e)   Are  water storage tanks regularly cleaned and records maintained 
+to prevent entry of pests and potential contaminator? 
+f)        Are  the  processed  water  contact  surfaces  regularly  cleaned  and 
+sanitized and records maintained?  
+ 
+iv) Post-processing Handling 
+ 
+a)    Are  cleaning  operation  of  bottles/containers  so  done  as  to 
+preclude      contamination  of  product  and  product  contact 
+services with residues? 
+b)   Has absence of residual cleaning chemicals been ensured?  
+c)   Is preventive maintenance in place for all   processing machinery 
+and equipment? 
+d)  Are  the  primary  packing  materials  and  containers  of  food  grade 
+conforming to relevant Indian Standards? 
+e)   Are packing and sealing, where required, monitored? 
+f)  Are physical hazards prevented from entering into processed water? 
+        g)   Are glassware excluded from production area? 
+ 
+v) Packaging Material and Finished Goods Storage 
+ 
+a) Are the primary packing materials and containers of food grade 
+conforming to relevant Indian Standards? 
+b)   Are the packaging materials inspected to ensure their suitability? 
+c)  Are the packing materials especially primary packing material  
+      properly stored and properly handled to preclude contamination? 
+d)  Are the packaging materials purchased, stored and handled in  
+      sanitary manner? 
+ 
+vi) Finished Product Storage and Distribution 
+ 
+a) Is first-in-first out (FIFO) of stored product maintained? 
+b) Is storage properly sanitized and disinfected periodically? 
+c) Are stores protected from pest infestations? 
+d) Are coding and tracking clear and in place? 
+e) Are the instruction clear and in place? 
+f) Are hold/release procedure in place and product identified? 
+g) Are the records maintained for batch number, date of and volume 
+of production? 
+h) Are transport containers/vehicles maintained in clean condition? 
+ 
+vii) Customer Handling of Products 
+ 
+a) Are the storage instructions provided on containers? 
+b) Is the shelf life period/best before mentioned on containers ? 
+c) Are instructions provided for handling defective/damaged products? 
+ 
+     viii) Sanitary Facilities and Control 
+ 
+a) Are   toilets   provided   in   sufficient   numbers   and   are   they 
+provided  with: 
+1) Doors of self-closing type? 
+2) Do not open directly into processing areas? 
+3) Hand washing signs provided in appropriate language? 
+
+PM/13428/3 
+January 2023 
+ 
+ 
+ 
+4) Proper lighting and ventilation? 
+5) Proper maintenance to keep in clean and tidy manner? 
+b) Are   hand   washing   facilities   provided   adequately   and 
+conveniently  to  wash  hands,  foot,  elbow  or  sensor  operated 
+taps?  
+c) Are  germicidal  soaps/soap  solution  and  hand  drying facility 
+provided? 
+d)    Are notice/ instructions prominently pasted in toilet directing 
+employees to wash their hands on entry and re-entry into the 
+packaged drinking water handling areas?  
+e)   Are the refuse receptacles self closing type maintained in a 
+manner to protect from contaminations? 
+ 
+          ix) Personnel Hygiene and Habits 
+ 
+a) Is any individual assigned to supervise overall sanitation of plant 
+and personnel? 
+b)  Is  there  any  person  responsible  for  day-to-day  monitoring  of 
+health and hygiene? 
+c)  Are  the  medical  records  of  the  employees  in  processing, 
+packing and maintenance been periodically maintained? 
+ d) Are  the  personnel  with infectious diseases, skin infection and 
+open  lesion  or  any  other  source  of  microbial      contamination 
+excluded from working in process/packing areas?  
+ e)   Are   the   following   personnel   hygiene   practices   regularly 
+maintained and monitored: 
+1) Clean outer garments- protective clothing? 
+2) Personal cleanliness-finger nails? 
+3)  Head  cover-hair  restraints,  caps,  head  bands,  beard 
+cover? 
+4) No tobacco in any form-smoking, chewing? 
+5) No eating at work stations? 
+f) Are protective clothing stored on the premises and not allowed to 
+be used for outside wear? 
+g) Are there clear legible notices defining limits of no smoking areas 
+such as ‘NO SMOKING BEYOND THIS POINT’ displayed? 
+            h)  Have  the  personnel  been  imparted  training  or  hygienic  food 
+handling, processing food and personal hygiene?    
+            i) Are unsecured jewellery and other objects such as wrist watches, 
+cufflinks,  ear  rings,  glass  bangles,  stick  BINDIS  removed  at 
+work? 
+ 
+ 
+CONCLUSION: OVERALL ASSESSMENT OF HYGIENIC CONDITIONS –  
+   SATISFACTORY/ NOT SATISFACTORY

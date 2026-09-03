@@ -1,0 +1,533 @@
+PM/ IS 1786/ 3/ August 2019 
+ 
+ 
+BUREAU OF INDIAN STANDARDS  
+Manak Bhawan, 9, Bahadur Shah Zafar Marg,  
+New Delhi – 110002 
+1 
+ 
+PRODUCT MANUAL FOR  
+HIGH STRENGTH DEFORMED STEEL BARS AND WIRES  
+FOR CONCRETE REINFORCEMENT  
+ACCORDING TO IS 1786: 2008 
+ 
+This  Product  Manual  shall  be  used  as  reference  material  by  all Regional/Branch  Offices  & 
+licensees to ensure coherence of practice and transparency in operation of certification under 
+Scheme-I  of  Bureau  of  Indian  Standards  (Conformity  Assessment)  Regulations,  2018  for 
+various  products.  The  document  may  also  be  used  by prospective  applicants  desirous  of 
+obtaining BIS certification licence/certificate. 
+ 
+1. 
+Product 
+: IS 1786 : 2008 
+ 
+Title 
+: 
+HIGH  STRENGTH  DEFORMED  STEEL  BARS  AND 
+WIRES FOR CONCRETE REINFORCEMENT  
+ 
+No. of Amendments 
+: 4 
+    
+2. 
+Sampling Guidelines: 
+a) 
+Raw material 
+: Clause 4.2 of IS 1786 : 2008 
+b) 
+Grouping guidelines 
+: Please refer ANNEX – A  
+c) 
+Sample Size 
+: 
+Chemical test - 50 gm or 50 mm x 5 nos  
+Physical test  - 1 m x 3 nos  
+Pull out test   - 1 m x 3 nos  
+    
+3. 
+List of Test Equipment 
+: 
+Please refer ANNEX – B 
+ 
+ 
+  
+4. 
+Scheme of Inspection and 
+Testing 
+: Please refer ANNEX – C 
+ 
+ 
+ 
+ 
+5. 
+Possible tests in a day : 
+ 
+(i) Freedom from defects (Clause 4.3.1) 
+(ii) Deformation and surface characteristics (Clause 5.2) 
+(iii) Nominal size (Clause 6.1) 
+(iv) Effective cross sectional area and mass (Clause 6.3, 7.2)  
+(v) Specified length (Clause 7.1) 
+(vi) Proof Stress, Percentage elongation,  Tensile strength (Clause 8.1) 
+(vii)  Bend and Re-bend  test (Clause 9.3) 
+6. Scope of the Licence :  Please refer ANNEX – D  
+ 
+
+ 
+                 PM/ IS 1786/ 3/ August 2019 
+ 
+2 
+ 
+ 
+ANNEX A 
+ 
+Grouping Guidelines 
+ 
+1. High  strength  deformed  steel  bars  and  wires  for  concrete  reinforcement are grouped  as 
+given below for GoL/CSoL:    
+2.  
+Strength 
+Grade 
+Group 1 
+Group 2 
+Group 3 
+Group 4 
+Group 5 
+Group 6 
+Fe 415, Fe 415D, Fe 415S 
+Fe 500, Fe 500D, Fe 500S 
+Fe 550, Fe 550D 
+Fe 600 
+Fe 650 
+Fe 700 
+Nominal 
+Size 
+Group I 
+Group II 
+Group III 
+ 
+4 mm, 5 mm, 6 mm 
+8 mm, 10 mm, 12 mm, 16 mm, 20 mm, 25 mm, 28 mm, 32 mm       
+36 mm, 40 mm, 45 mm and 50 mm. 
+Other sizes are also permitted by mutual agreement. 
+ 
+ 
+3. Considering   the   above   following   grouping   guidelines   for   GoL/CSoL have   been 
+developed: 
+ 
+a) One  sample of  highest  size  and  maximum  strength  grade from  each size group and 
+strength  grade  group shall  be tested to  cover  all the sizes of HSDS  bars  in  that  size 
+group for all the Strength Grades in that Strength Grade group tested. 
+ 
+b) For  example,  if  6mm, Fe  415S  is  tested,  then  all  the  sizes  in  Group  I  (4  mm,  5  mm,     
+6 mm) for all the grades in Group 1 (Fe 415, Fe 415D, Fe 415S) shall be covered. 
+ 
+4. The Firm shall declare the varieties of HSDS bars they intend to cover in the Licence. The 
+Scope of Licence may be restricted based on the Manufacturing and Testing capabilities of 
+the Manufacturer.  
+ 
+5. During the operation of the Licence, BO shall ensure that all the types and sizes covered in 
+the Licence are tested in rotation, to the extent possible. 
+ 
+
+                 PM/ IS 1786/ 3/ August 2019 
+ 
+3 
+ 
+ANNEX B  
+ 
+List Of Test Equipment 
+ 
+Major test equipment required to test as per the Indian Standard 
+ 
+S. No. Tests used in with Clause 
+Reference 
+Test Equipment 
+1. 
+Chemical tests ( Clause 4.2) Spectrophotometer   
+OR 
+Carbon Sulphur  (Strohlein’s type ) Apparatus – 
+Complete set consisting of glass parts, 
+combustion furnace,  oxygen   cylinder , 
+combustion tubes/ boats etc. 
+a) Electronic Balance 
+b) Hot plate 
+c) Muffle furnace 
+d) Barometer 
+e) Thermometer 
+f) Distilled water plant 
+g) Burette, Pipette and Full Range of 
+Laboratory  Glassware -  Conical Flasks, 
+Beakers, Funnel, Pipettes Glass rod, watch 
+Glass, Brush etc. 
+h) Standard Reference Material 
+i) Platinum/Silica Crucible for Silicon Test 
+j) Desiccator 
+k) Watt Man Filter Paper & Ash less clippings 
+l) Arrangements for nitrogen testing  
+m) Drilling machine 
+n) Chemicals and reagents as applicable 
+2. 
+Freedom from defects 
+ (Clause 4.3) 
+a) Wire brush 
+b) Vernier calliper 
+c) Micrometre 
+3. 
+Pull out test (Clause 5.1) a) Tensile testing machine 
+b) Steel scale 
+c) Micrometre 
+d) Slip ring cross bar 
+e) Cube moulds 
+f) Tamping rod 
+4. 
+Deformation and surface 
+characteristics ( Clause 5.2) 
+a) Vernier calliper/Depth gauge 
+b) Micrometre 
+c) Angle protector 
+d) Steel scale 
+5. 
+Nominal size, Mass and 
+tolerances (Clause 6 & 7) 
+a) Weighing balance 
+b) Vernier calliper 
+c) Micrometre 
+d) Steel scale 
+e) Measuring tape 
+
+                 PM/ IS 1786/ 3/ August 2019 
+ 
+4 
+ 
+6. 
+ 
+Mechanical Properties           
+(Clause 8.1) 
+a) Tensile testing Machine 
+b) Outside/Inside caliper 
+c) Punch and Hammer 
+d) Measuring steel tapes 
+e) Marking tool  
+f) Magnetic V- Block 
+g) Vernier caliper 
+h) Thermometer 
+i) Stop watch 
+j) Extensometer 
+7 
+Bend Test (Clause 9.3) 
+a) Bend test arrangement 
+b) Mandrels for bend tests 
+c) Vernier caliper  
+d) Micrometer 
+8 
+Re-bend Test (Clause 9.4) 
+a) Re-bend testing arrangement 
+b) Mandrels for re-bend testing 
+c) Temperature controlled water bath 
+d) Vernier caliper 
+e) Micrometer 
+f) Angle protector 
+g) Stop watch 
+h) Magnifying glass 
+ 
+The above list is indicative only and may not be treated as exhaustive. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+                 PM/ IS 1786/ 3/ August 2019 
+ 
+5 
+ 
+ 
+ANNEX C 
+ 
+Scheme of Inspection And Testing  
+ 
+1. LABORATORY - A  laboratory  shall  be  maintained  which  shall  be  suitably  equipped          
+(as per the requirement given in column 2 of Table 1) and staffed, where different tests given 
+in  the  specification  shall be  carried  out  in  accordance  with  the  methods  given  in  the 
+specification. 
+ 
+1.1 The manufacturer shall prepare a calibration plan for the test equipment. 
+ 
+2. TEST RECORDS – The manufacturer shall maintain test records for the tests carried out 
+to establish conformity. 
+ 
+3. LABELLING AND MARKING – As per the requirements of IS 1786: 2008. In addition 
+to  the  above,  following  details  shall  be  marked  on  bar/wire  during  rolling  or  by  any  other 
+permanent marking at interval not more than 3 meter. 
+ 
+a) Brand name/Trade mark of manufacturer 
+b) Grade of bar/wire 
+c) Six  digit  identification  number  (Two  digits  are  branch  ID  circulated  as  per  CMD-II 
+circular ref: CMD-II(L)/9 dated 20/10/2014, under which jurisdiction the licence is in 
+operation and last four digits of the licence number allotted to the manufacturer)     
+ 
+4.   CONTROL   UNIT – High   strength   deformed   steel   bars   and   wire   for   concrete 
+reinforcement of  each strength  grade and  size  manufactured  from same cast/lot  of  raw 
+material shall constitute a control unit. 
+ 
+5. LEVELS OF CONTROL - The tests as indicated in column 1 of Table 1 and the levels of 
+control in  column  3  of Table  1,  shall  be  carried  out  on  the  whole  production  of  the  factory 
+which  is  covered  by  this plan and  appropriate  records  maintained in  accordance  with    
+paragraph 2 above.  
+ 
+5.1 Each  consignment  of  BIS  certified material  confirming  to  IS  1786:  2008 shall  be 
+accompanied  by a  test  certificate as  given  in Annex- 1 which  shall  contain  the  Standard 
+Mark, cast/lot number, grade, size and corresponding test results.    
+ 
+6. REJECTIONS – Disposal of non-conforming product shall be done in such a way so as to 
+ensure that there is no violation of provisions of BIS Act, 2016. 
+ 
+
+                 PM/ IS 1786/ 3/ August 2019 
+ 
+6 
+ 
+TABLE 1 
+ 
+(1) (2) (3) 
+Test Details Test equipment 
+requirement 
+R: required (or)   
+S: Sub-contracting 
+permitted 
+Levels of Control 
+Cl. Requirement Test Methods  No. of 
+Sample 
+Frequency Remarks 
+Clause Reference 
+4  
+Chemical composition 
+Ladle  analysis (Primary 
+Producers) 
+4.1, 4.2 IS 1786 R 3 Each heat of 100 t or more Sample   shall   be   drawn   from 
+beginning/middle/end of teeming 
+2 Each heat < 100 t 
+Ladle     analysis (Other 
+than Primary producers) 
+4.1,  4.2 IS 1786 R 3 Each consignment of 40 t 
+or part thereof 
+Sample   shall   be   drawn   from 
+beginning/end of teeming 
+Check analysis 4.2 IS 1786 R 1 100 t or less from each cast No  further testing  is  required  if 
+accompanied with test certificate 
+or  ISI marked 
+4.3 Freedom from defects 4.3.1, 
+4.3.2 
+IS 1786 R All - - 
+5.2 
+to 
+5.6 
+Deformation  and  surface 
+characteristics 
+5.2 to 
+5.6, 
+8.3 
+IS 1786 R 1 Each size produced in a day - 
+5.7  Pull out test 5.7, 8.3 IS 1786 
+ 
+IS 2770  
+(Part 1) 
+S i)  The  frequency  of  bond  strength  test  as  required  in  5.7  shall  be  as 
+agreed to between the manufacturer and the purchaser/testing authority or 
+there  shall  be adequate  inspection  to  ensure that each  item is  within the 
+limits of the Standard. 
+ ii)  Pull  out  test  shall  be  done  in  addition  to  5.2  for  approval  of  new  or 
+amended geometry for the first time. 
+6, 7 Nominal   size,   effective 
+cross sectional area, 
+Mass of deformed bars 
+6, 7 
+Table 1 
+and 2 
+IS 1786 Adequate inspection to ensure that each item is within the limits of the Standard. 
+
+                 PM/ IS 1786/ 3/ August 2019 
+ 
+7 
+ 
+8 
+Physical properties 
+8.1 Tensile test 8.1, 9.2 IS 1786  
+ 
+IS 1608 
+R  
+3 
+ 
+ 
+ 
+2 
+For a cast ≥ 100 t Separate  sample  shall  be  tested 
+for each grade and size 
+manufactured 
+8.2 Bend  Test  and  re-bend 
+test 
+8.2, 9.3, 
+9.4 
+IS 1786 R For a cast < 100 t 
+ 
+Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empanelled by the Bureau. 
+ 
+Note-2: Levels of control given in column 3 are obligatory in nature. 
+  
+
+                 PM/ IS 1786/ 3/ August 2019 
+ 
+8 
+ 
+ANNEX- 1 
+                                                                                                                                                                                          STANDARD MARK 
+XYZ COMPANY 
+(Registered office address and works address) 
+ 
+TEST CERTIFICATE FOR HIGH STRENGTH DEFORMED STEEL BARS AND WIRES FOR CONCRETE REINFORCEMENT ACCORDING TO IS 1786: 2008 
+ 
+TEST CERTIFICATE No.                                                                                                                                                                  DATE _____________________________  
+ 
+TO M/s__________________________________________________________________________________________________________________________________ 
+ 
+It is certified that the material described below fully conforms to IS 1786: 2008.  Chemical composition and Mechanical properties of the Product, as tested in accordance with 
+the Scheme of Inspection and Testing contained in the BIS Certification Marks Licence CM/L                                          are as indicated below against each order No. . 
+(PLEASE REFER TO IS 1786: 2008 FOR DETAILS OF SPECIFICATION REQUIREMENTS) 
+TEST RESULTS 
+ 
+Order 
+No. & 
+Date 
+Nominal 
+size 
+Cast/ Heat 
+No 
+Quantity  
+(t) 
+Date of 
+testing 
+CHEMICAL ANALYSIS 
+MECHANICAL  PROPERTIES  
+REMARKS 
+C 
+ 
+ 
+% 
+S 
+ 
+ 
+% 
+P 
+ 
+ 
+% 
+S + P 
+ 
+ 
+% 
+CE 
+ 
+ 
+% 
+0.2 % Proof Stress/ 
+YS 
+ 
+N/mm
+2 
+min 
+0.2 % Proof Stress/ 
+YS 
+ 
+N/mm
+2 
+max 
+Tensile 
+strength 
+ 
+N/mm
+2 
+ 
+TS/YS 
+ratio 
+Elongation 
+ 
+ 
+% 
+ 
+Total elongation 
+at maximum force 
+ 
+% 
+ 
+ 
+ 
+Bend 
+test 
+Re-bend 
+test 
+     
+  
+ 
+ 
+ 
+  
+    
+   
+The material supplied confirms to the standard rolling and mass tolerance 
+ 
+ 
+Surface defects : 
+a)   Piping   
+ 
+Absent/Present 
+b)  Other defects Absent/Presnet. 
+ 
+REMARK 
+ 
+SHIPPING ADVICE No.                                                                                                                                                                                  SIGNATURE:  
+WAGON NOS.                                                                                                                                                                                      
+                                                                                                                                                                                                                               NAME & DESIGNATION: 
+                                                                                                                                                                                                                               FOR XYZ COMPANY
+ 
+ 
+  
+
+                 PM/ IS 1786/ 3/ August 2019 
+ 
+9 
+ 
+ANNEX- D 
+ 
+SCOPE OF LICENCE  
+ 
+ 
+“Licence is granted to use Standard Mark as per IS 1786 : 2008 with the following scope: 
+Name of the product High strength deformed steel bars and wires for concrete reinforcement 
+Grade 
+Fe 415/Fe 415D/Fe 415S 
+Fe 500/Fe 500D/Fe 500S 
+Fe 550/Fe 550D 
+Fe 600 
+Fe 650 
+Fe 700 
+Nominal Size 
+4 mm, 5 mm, 6 mm, 8 mm, 10 mm, 12 mm, 16 mm, 20 mm, 25 mm, 
+28 mm, 32 mm, 36 mm, 40 mm, 45 mm, 50 mm
