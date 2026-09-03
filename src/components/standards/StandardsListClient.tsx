@@ -142,8 +142,8 @@ export function StandardsListClient({ standards }: { standards: StandardSummary[
         </div>
       ) : (
         <div className="mt-4 divide-y divide-border border border-border">
-          {filtered.map((s) => (
-            <div key={s.id} className="flex items-start gap-4 bg-surface-raised p-4 transition-colors hover:bg-surface-alt/50">
+          {filtered.map((s, idx) => (
+            <div key={`${s.id}-${idx}`} className="flex items-start gap-4 bg-surface-raised p-4 transition-colors hover:bg-surface-alt/50">
               <label className="mt-0.5 flex items-center">
                 <span className="sr-only">Select {s.standardNumber ?? s.title} for comparison</span>
                 <input
