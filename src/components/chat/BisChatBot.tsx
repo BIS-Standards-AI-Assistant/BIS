@@ -1,22 +1,25 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
-
-interface Message {
-  id: string;
-  sender: "user" | "assistant";
-  text: string;
-  timestamp: string;
-  standards?: { number: string | null; title: string; id?: string }[];
-  /** Which scope actually produced this answer — shown so the user never has to guess (P0 audit, 2026-09-03). */
-  scope?: "current_results" | "global";
-}
+import {
+  getConversationServerSnapshot,
+  getConversationSnapshot,
+  resetConversation,
+  sendAssistantMessage,
+  subscribeToConversation,
+} from "@/lib/assistant-conversation";
 
 interface BisChatBotProps {
   currentQuery?: string;
   /** Real standard numbers from the current results, so the server can resolve authoritative context by ID — never the recommendations' text/reason fields. */
   standardNumbers?: string[];
+  /**
+   * How many of `standardNumbers` came from documents the reader added in
+   * the Sources panel, so the scope line can say where the context came
+   * from rather than leaving them to guess.
+   */
+  fromAddedSources?: number;
 }
 
 const QUICK_PROMPTS = [
@@ -26,42 +29,39 @@ const QUICK_PROMPTS = [
   "Which standard should I investigate?",
 ];
 
-function greetingFor(currentQuery: string): Message {
-  const text = currentQuery
+function greetingFor(currentQuery: string): string {
+  return currentQuery
     ? `You're exploring "${currentQuery}". Ask about what makes a result relevant, the supporting evidence, or what's still missing.`
     : "Ask a question about Indian Standards, product certifications, QCO orders, or laboratory test requirements.";
-
-  return {
-    id: "initial-welcome",
-    sender: "assistant",
-    text,
-    timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-  };
 }
 
-export function BisChatBot({ currentQuery = "", standardNumbers = [] }: BisChatBotProps) {
+export function BisChatBot({ currentQuery = "", standardNumbers = [], fromAddedSources = 0 }: BisChatBotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<Message[]>(() => [greetingFor(currentQuery)]);
-  const [hasUnread, setHasUnread] = useState(false);
-  const [syncedQuery, setSyncedQuery] = useState(currentQuery);
+  // Which search the reader has already opened the chat for. Derived rather
+  // than synced: an effect that calls setState to keep a flag in step with a
+  // prop is the same value expressed twice, and only one of them can be right.
+  const [openedFor, setOpenedFor] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-  const idCounterRef = useRef(0);
 
-  function nextId(prefix: string) {
-    idCounterRef.current += 1;
-    return `${prefix}-${idCounterRef.current}`;
-  }
+  // One conversation, shared with the Sources panel's prompt box — a message
+  // sent from either surface appears in both.
+  const { messages, pending: loading } = useSyncExternalStore(
+    subscribeToConversation,
+    getConversationSnapshot,
+    getConversationServerSnapshot,
+  );
 
-  // Reset the greeting when currentQuery changes (adjusting state during render, not in an effect)
-  if (currentQuery !== syncedQuery) {
-    setSyncedQuery(currentQuery);
-    setMessages([greetingFor(currentQuery)]);
-    if (currentQuery) {
-      setHasUnread(true);
-    }
-  }
+  // Start (or restart) the thread when the search changes. This has to be an
+  // effect, not a render-phase adjustment: the conversation is shared, so
+  // writing to it during render updates the Sources panel mid-render, which
+  // React rightly refuses. resetConversation is a no-op when the greeting is
+  // already the current one, so re-running it is harmless.
+  useEffect(() => {
+    resetConversation(greetingFor(currentQuery), currentQuery);
+  }, [currentQuery]);
+
+  const hasUnread = Boolean(currentQuery) && openedFor !== currentQuery;
 
   useEffect(() => {
     if (isOpen) {
@@ -71,88 +71,19 @@ export function BisChatBot({ currentQuery = "", standardNumbers = [] }: BisChatB
 
   function openChat() {
     setIsOpen(true);
-    setHasUnread(false);
+    setOpenedFor(currentQuery);
   }
 
   async function handleSend(textToSend?: string) {
     const text = (textToSend ?? input).trim();
     if (!text || loading) return;
-
-    const userMessage: Message = {
-      id: nextId("user"),
-      sender: "user",
-      text,
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
     setInput("");
-    setLoading(true);
-
-    try {
-      // Server-side scoped context (P0 audit, 2026-09-03): send only the
-      // original query text and real standard numbers from the current
-      // results — the server resolves everything else from the database
-      // itself. This request never asks the server to trust a client-
-      // supplied "reason" or evidence string.
-      const response = await fetch("/api/v1/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ originalQuery: currentQuery || text, standardNumbers, message: text }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const data = await response.json();
-      const scope: "current_results" | "global" = data.scope === "global" ? "global" : "current_results";
-
-      let messageText: string;
-      let extractedStandards: { number: string | null; title: string; id?: string }[] = [];
-
-      if (scope === "global") {
-        // The pipeline's global response shape (recommendations, answer).
-        messageText = `${data.scopeChangeNotice}\n\n${data.answer ?? ""}`.trim();
-        extractedStandards = (data.recommendations ?? []).slice(0, 3).map((r: { standardNumber: string | null; title: string; evidence?: { documentId?: string }[] }) => ({
-          number: r.standardNumber,
-          title: r.title,
-          id: r.evidence?.[0]?.documentId,
-        }));
-      } else {
-        // The scoped chat-context response shape (answer, evidence[]).
-        messageText = data.answer ?? "I don't have enough evidence in the current results to establish that.";
-        extractedStandards = (data.evidence ?? []).slice(0, 3).map((e: { standardNumber: string | null; document: string; documentId: string }) => ({
-          number: e.standardNumber,
-          title: e.document,
-          id: e.documentId,
-        }));
-      }
-
-      const botMessage: Message = {
-        id: nextId("assistant"),
-        sender: "assistant",
-        text: messageText,
-        standards: extractedStandards.length > 0 ? extractedStandards : undefined,
-        scope,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-      };
-
-      setMessages((prev) => [...prev, botMessage]);
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: nextId("error"),
-          sender: "assistant",
-          text: "I am temporarily unable to consult the Bureau knowledge base. Please verify your connection or try again in a moment.",
-          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        },
-      ]);
-    } finally {
-      setLoading(false);
-    }
+    // Scoped by identifier only — never a client-supplied "reason" or
+    // evidence string (P0 audit, 2026-09-03). The scope is decided by one
+    // caller and passed in, so every surface asks with the same one.
+    await sendAssistantMessage({ message: text, standardNumbers, originalQuery: currentQuery || text });
   }
+
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
@@ -198,7 +129,8 @@ export function BisChatBot({ currentQuery = "", standardNumbers = [] }: BisChatB
                 </p>
                 {standardNumbers.length > 0 && (
                   <p className="text-[9.5px] text-white/60 font-medium">
-                    Scope: current results ({standardNumbers.length})
+                    Scope: {standardNumbers.length} standard{standardNumbers.length === 1 ? "" : "s"}
+                    {fromAddedSources > 0 && ` · ${fromAddedSources} from your sources`}
                   </p>
                 )}
               </div>

@@ -36,13 +36,13 @@ describe("SearchOverlay", () => {
     expect(screen.queryByText(/chat with ai/i)).not.toBeInTheDocument();
   });
 
-  test("submitting a typed query navigates to /search?q=<query> and closes the overlay", () => {
+  test("submitting a typed query navigates to the AI Assistant and closes the overlay", () => {
     const onClose = vi.fn();
     render(<SearchOverlay open onClose={onClose} />);
     const input = screen.getByPlaceholderText("Search BIS Standards, Services & Documents");
     fireEvent.change(input, { target: { value: "some random keyword" } });
     fireEvent.submit(input.closest("form")!);
-    expect(pushMock).toHaveBeenCalledWith("/search?q=some%20random%20keyword");
+    expect(pushMock).toHaveBeenCalledWith("/?q=some%20random%20keyword");
     expect(onClose).toHaveBeenCalled();
   });
 

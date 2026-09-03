@@ -47,7 +47,7 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
       kind: "identifier" as const,
       label: r.normalized,
       sublabel: "Look up this exact standard",
-      href: `/search?q=${encodeURIComponent(r.normalized)}`,
+      href: `/?q=${encodeURIComponent(r.normalized)}`,
     }));
   }, [query]);
 
@@ -144,7 +144,11 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
     const trimmed = q.trim();
     if (!trimmed) return;
     onClose();
-    router.push(`/search?q=${encodeURIComponent(trimmed)}`);
+    // A typed question goes to the AI Assistant on the home workspace, not
+    // to /search — that page is keyword document search, reached from the
+    // navigation, and answers nothing. The assistant picks the query up
+    // from ?q= and runs it straight away.
+    router.push(`/?q=${encodeURIComponent(trimmed)}`);
   }
 
   function selectSuggestion(s: SearchSuggestion) {

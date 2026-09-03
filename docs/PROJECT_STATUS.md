@@ -488,3 +488,187 @@ other transport error.
 
 `npm run verify` green: 0 lint errors, 294 vitest tests across 38 files (up
 from 253 across 35), all three routes prerendered in the production build.
+### Assistant workspace layout (this session, follow-up)
+
+The results view was rebuilt as a three-column workspace from a supplied
+NotebookLM-style design: official sources on the left, the assistant and
+its results in the centre, output formats on the right. UI only — no new
+backend.
+
+| Item | Status | Notes |
+|---|---|---|
+| `src/components/workspace/SourcesPanel.tsx` | DONE | Official BIS sources + the existing Search Context panel, collapsible |
+| `src/components/workspace/WorkspacePanel.tsx` | DONE | Three actions + real recent searches, collapsible (was "Studio", renamed) |
+| `HomeClient` three-column results view | DONE | Columns follow which panels are open; both side panels hide below their breakpoint |
+| Shared recent-query store bindings | DONE | `subscribeToRecentQueries` / `getRecentQueriesSnapshot` extracted from `RecentQueries.tsx` into `src/lib/recent-queries.ts` so both surfaces share one implementation |
+| Truthfulness of the supplied design | ADAPTED | See below — 11 panel tests pin these |
+
+Three things in the design could not be reproduced literally without
+breaking the project's own rules, so they were adapted rather than copied:
+
+1. **Source counts.** The design shows "1,245 standards", "467 orders",
+   "18,765 notifications". This app does not hold those figures, and a
+   plausible number beside a government source is exactly the fabrication
+   CLAUDE.md forbids. Each row shows its real host instead — checkable,
+   where a total would not be. A test asserts no count-shaped subtitle.
+2. **"Recent notebooks."** The design lists notebooks that do not exist.
+   Replaced with this browser's real query history, which the app already
+   keeps; empty history says so rather than showing placeholder rows.
+3. **Studio formats.** Video Overview, Mind Map, Reports, Flashcards, Quiz,
+   Infographic and Data Table are not built. They render disabled and
+   labelled "Planned", with a line saying they are not built yet — the same
+   honest-placeholder rule the section pages already follow.
+
+**Left panel vs "no permanent left sidebar."** CLAUDE.md rules out a
+dashboard sidebar. This panel is a working surface beside the results, not
+navigation: the full-width government top navigation is untouched and
+remains the only way around the app, the panel collapses, and it is hidden
+entirely below `lg`. Flagged rather than assumed — say if it should go.
+
+Source selection is presentational: the checkboxes toggle but do not
+re-scope retrieval, and the panel says so where a user will see it.
+The duplicated "Official BIS Portal" card was dropped from the results
+column; e-BIS is now a row in the sources list.
+
+`npm run verify` green: 0 lint errors, 264 vitest tests across 36 files (up
+from 253 across 35).
+
+### Sources panel: reader-supplied documents, shared with the assistant (this session, follow-up)
+
+The Sources panel was rebuilt from a supplied design into a working source
+library. A reader adds a PDF or text file; it is analysed; the Indian
+Standards it cites become part of what the assistant discusses.
+
+| Item | Status | Notes |
+|---|---|---|
+| `src/lib/source-library.ts` | DONE | Shared store + `useSyncExternalStore` bindings; 13 unit tests |
+| `SourcesPanel` upload / drag-drop / remove / select | DONE | Posts to the pre-existing `/api/v1/analyze-document`; 27 panel tests |
+| Source prompt box | DONE | Asks a question of the added sources through `/api/v1/chat`, scoped by the standards they cite; renders the answer with its evidence, clause and page |
+| Web search from the prompt box | BLOCKED | No web-search provider exists in this codebase and no key is configured. Needs a provider decision — see below |
+| Shared knowledge base with the assistant | DONE | `HomeClient` unions result standards with library standards into `BisChatBot`'s `standardNumbers` |
+| Scope made visible | DONE | Chat header and centre column both say how much context came from added sources |
+| Web discovery ("Web" / "Fast Research") | REMOVED | Drawn from the design at first, then removed on request — there is no web-search service, so no control claims one |
+
+**No new backend was needed.** `/api/v1/analyze-document` already existed,
+fully built and unit-tested, with no UI calling it — it parses PDF/text,
+extracts BIS identifiers deterministically, and never sends the file to a
+model. This panel is its front end.
+
+**What is shared is identifiers, never document text.** The standards a
+document cites travel to the chat exactly like those from a search, and the
+server resolves the facts from the database. Posting the document's prose as
+chat input would re-open what `src/lib/chat-context.ts` closed and would let
+an uploaded file's wording act on the assistant. The panel therefore does
+not claim the assistant can answer "what does paragraph 3 of my file say" —
+a test asserts the wording stays honest about this.
+
+Cited-but-unindexed standards are shown dimmed and excluded from what is
+shared: the document really does cite them, but the assistant has nothing to
+answer from, and the two cases must not look identical.
+
+**Verified live**: uploading a text file citing IS 15450:2004 and
+IS 4985:2021 returns both identifiers with `inDatabase: false` and an
+explicit limitation string. Which is the honest catch — **the `standards`
+table is still empty in this environment (0 rows), so nothing an uploaded
+document cites currently resolves, and the shared scope stays empty.** The
+panel reports this accurately rather than appearing broken; it starts
+contributing context as soon as ingest populates `standards`.
+
+Files are held in `sessionStorage` for the tab only, and are sent nowhere
+except to be read for the standards they cite.
+
+`npm run verify` green: 0 lint errors, 285 vitest tests across 37 files (up
+from 253 across 35).
+
+**Web search from the Sources prompt box is BLOCKED, not skipped.** The
+request was for answers grounded in the added documents *and* a web search.
+The first half is built. The second cannot be: there is no web-search
+provider anywhere in `src/`, no API key for one in the environment, and
+adding one means a new outbound integration (Tavily/Brave/SerpAPI or
+similar), most of them paid — which docs/ui/SIH.md §23 makes a deliberate
+decision rather than an implementation detail.
+
+It is also worth deciding rather than assuming: this service answers from
+BIS evidence and cites clause and page for every claim. Arbitrary web
+results have no such provenance, so mixing them into the same answer
+surface would weaken the evidence model the whole product rests on. If web
+results are wanted, they should be visibly separated from BIS evidence and
+never cited as if they were a standard.
+
+No placeholder web results are rendered; the box does not offer a web
+option it cannot honour.
+
+### Assistant column: bottom prompt bar, and one entry point (this session, follow-up)
+
+| Item | Status | Notes |
+|---|---|---|
+| Global search redirects into the assistant | DONE | `SearchOverlay` now pushes `/?q=…` instead of `/search?q=…`; `HomeClient` already ran a `?q=` query on arrival, so the query lands in the assistant's own prompt bar and runs |
+| Prompt bar moved to the bottom of the column | DONE | Results above, prompt below, as in a chat |
+| Results render in the assistant column | DONE | The column scrolls with the page; the prompt bar is `sticky bottom-0` so it floats at the viewport bottom at every width |
+
+`/search` (keyword Document Search) is **kept** — it is a distinct feature
+reached from the navigation, ServiceActions, and the Testing and About
+pages, and it answers nothing. Only the free-text global search and the
+overlay's identifier suggestions now go to the assistant instead.
+
+Three `HomeClient` tests pin the behaviour: a `?q=` arrival runs the query
+and fills the prompt bar; the prompt bar is positioned after the results in
+document order; and both live inside the assistant column.
+
+`npm run verify` green: 0 lint errors, 292 vitest tests across 37 files.
+
+**Correction to the above (same session).** The assistant column was first
+given `lg:h-[calc(100vh-7rem)]` with its own internal scroll, on the
+assumption that `7rem` covered the government bar plus the navigation. It
+does not — the real header is taller, so the column overflowed the viewport
+and pushed the prompt bar below the fold, which is what it was supposed to
+prevent. Replaced with a `sticky bottom-0` prompt bar over a normally
+scrolling column: it floats at the bottom of the viewport without depending
+on the header's height being any particular value, and works below `lg` too.
+
+### Studio renamed to Workspace, cut to three actions (this session, follow-up)
+
+The seven output-format cards taken from the original design are removed.
+The panel is now titled **Workspace** and holds three actions:
+
+| Action | Status | Notes |
+|---|---|---|
+| Audio Overview | PLANNED | No speech synthesis exists anywhere in this codebase, so it renders disabled and labelled "Planned" |
+| Testings | DONE | Links to `/testing`, a real page in this service |
+| Certifications | DONE | Links to `/certification`, a real page in this service |
+
+Two of the three are real links rather than placeholders — `/testing` and
+`/certification` already exist and work, so there was no reason to render
+them disabled. Only Audio Overview is genuinely unbuilt.
+
+`StudioPanel.tsx` was renamed to `WorkspacePanel.tsx` with `git mv` so the
+history follows the file, and `showStudio` became `showWorkspace`.
+
+`npm run verify` green: 0 lint errors, 295 vitest tests across 37 files.
+
+### One assistant conversation, one scope (this session, follow-up)
+
+The Sources prompt box and the docked chat were two conversations asking
+two different questions. The box sent only the standards the added
+documents cite; the chat sent those *plus* the current result's standards.
+The same question put to the two could come back with different answers —
+in a service whose claim is traceable evidence, not a cosmetic problem.
+
+| Item | Status | Notes |
+|---|---|---|
+| `src/lib/assistant-conversation.ts` | DONE | One message thread + `useSyncExternalStore` bindings; `sendAssistantMessage` performs the single request |
+| `BisChatBot` reads the shared thread | DONE | Local `messages`/`loading` state removed |
+| Sources prompt box reads the shared thread | DONE | Shows the assistant's latest reply and says the exchange is in the conversation too |
+| One scope for both | DONE | `HomeClient` computes it once and passes it to both surfaces; neither derives its own |
+
+Four tests pin the behaviour: a question asked in the panel appears in the
+chat, a question asked in the chat appears in the panel, both surfaces send
+byte-identical `standardNumbers` and `originalQuery`, and the thread keeps
+both exchanges in order.
+
+Scope is still identifiers only — the server resolves the facts from the
+database, per `src/lib/chat-context.ts`. The pre-existing empty `standards`
+table still means scoped answers come back empty in this environment.
+
+`npm run verify` green: 0 lint errors, 299 vitest tests across 37 files.
+
