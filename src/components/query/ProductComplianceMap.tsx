@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import type { ComplianceMap } from "@/types/api";
 import { LaboratoryMap } from "./LaboratoryMap";
 
@@ -8,12 +9,19 @@ interface ProductComplianceMapProps {
 
 export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProps) {
   const [activeTab, setActiveTab] = useState<"standards" | "certifications" | "testing" | "laboratories">("standards");
+  const [selectedState, setSelectedState] = useState<string>("All States");
+
+  const uniqueStates = ["All States", ...Array.from(new Set(complianceMap.laboratories.map(l => l.state))).filter(Boolean).sort()];
+
+  const filteredLabs = selectedState === "All States" 
+    ? complianceMap.laboratories 
+    : complianceMap.laboratories.filter(l => l.state === selectedState);
 
   const tabs = [
     { id: "standards", label: "Applicable Standards", count: complianceMap.standards.length },
     { id: "certifications", label: "Certifications", count: complianceMap.certifications.length },
     { id: "testing", label: "Testing Requirements", count: complianceMap.testing.length },
-    { id: "laboratories", label: "Labs Near You", count: complianceMap.laboratories.length },
+    { id: "laboratories", label: "Labs Near You", count: filteredLabs.length },
   ] as const;
 
   return (
@@ -77,9 +85,18 @@ export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProp
                     </div>
                     <p className="text-sm text-slate-700 mt-1 font-medium">{std.title}</p>
                   </div>
-                  <button className="mt-3 sm:mt-0 px-4 py-2 text-sm font-medium text-[#075DA8] bg-blue-50 hover:bg-blue-100 rounded-md transition-colors whitespace-nowrap">
-                    View Details
-                  </button>
+                  {(() => {
+                    const docId = std.documentId || (std.standardNumber !== "Unknown" ? std.standardNumber.toLowerCase().replace(/[^a-z0-9]+/g, "-") : null);
+                    return docId ? (
+                      <Link href={`/standards/${docId}`} className="mt-3 sm:mt-0 px-4 py-2 text-sm font-medium text-[#075DA8] bg-blue-50 hover:bg-blue-100 rounded-md transition-colors whitespace-nowrap text-center">
+                        View Details
+                      </Link>
+                    ) : (
+                      <button disabled className="mt-3 sm:mt-0 px-4 py-2 text-sm font-medium text-slate-400 bg-slate-50 border border-slate-200 rounded-md whitespace-nowrap cursor-not-allowed">
+                        View Details
+                      </button>
+                    );
+                  })()}
                 </div>
               ))
             )}
@@ -141,21 +158,59 @@ export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProp
         )}
 
         {activeTab === "laboratories" && (
-          <div>
-            <div className="mb-4 flex items-center justify-between">
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <p className="text-sm text-slate-600">
                 Recognised laboratories capable of testing against the identified standards.
               </p>
-              <div className="flex gap-2">
-                 <select className="text-sm border border-slate-200 rounded-md px-3 py-1.5 text-slate-700 bg-white outline-none focus:border-[#075DA8]">
-                   <option>All States</option>
-                   <option>Delhi</option>
-                   <option>Maharashtra</option>
-                   <option>U.P.</option>
+              <div className="flex shrink-0 gap-2">
+                 <select 
+                   value={selectedState}
+                   onChange={(e) => setSelectedState(e.target.value)}
+                   className="text-sm border border-slate-200 rounded-md px-3 py-1.5 text-slate-700 bg-white outline-none focus:border-[#075DA8]"
+                 >
+                   {uniqueStates.map(state => (
+                     <option key={state} value={state}>{state}</option>
+                   ))}
                  </select>
               </div>
             </div>
-            <LaboratoryMap laboratories={complianceMap.laboratories} />
+            
+            <LaboratoryMap laboratories={filteredLabs} />
+
+            <div className="mt-8">
+              <h3 className="text-sm font-semibold text-slate-900 mb-4 border-b border-slate-200 pb-2">Laboratory Directory</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {filteredLabs.length === 0 ? (
+                  <div className="col-span-full">
+                    <EmptyState message="No laboratories found for the selected state." />
+                  </div>
+                ) : (
+                  filteredLabs.map((lab, i) => (
+                    <div key={i} className="p-4 rounded-lg border border-slate-200 bg-white hover:border-blue-200 transition-colors">
+                      <h4 className="font-bold text-slate-800 text-sm">{lab.name}</h4>
+                      <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {lab.city}, {lab.state}
+                      </p>
+                      <div className="mt-3 pt-3 border-t border-slate-100">
+                        <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider block mb-1.5">Capabilities</span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {lab.testingCapabilities.map((cap, j) => (
+                            <span key={j} className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600">
+                              {cap}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
           </div>
         )}
       </div>
