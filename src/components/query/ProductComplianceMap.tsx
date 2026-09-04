@@ -20,8 +20,11 @@ interface ProductComplianceMapProps {
 export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProps) {
   // Applicable standards are already shown on the left (Sources panel) and
   // as the centre's own recommendation cards — no "Standards" tab here, to
-  // avoid a third, differently-labelled copy of the same list.
-  const [activeTab, setActiveTab] = useState<"certifications" | "testing" | "laboratories">("certifications");
+  // avoid a third, differently-labelled copy of the same list. Defaults to
+  // "Labs" (the map) rather than "Certification": the map is this panel's
+  // one visually distinct, interactive element, and it was easy to miss
+  // sitting behind a third tab nobody clicked.
+  const [activeTab, setActiveTab] = useState<"certifications" | "testing" | "laboratories">("laboratories");
   const [selectedState, setSelectedState] = useState<string>("All States");
 
   const uniqueStates = ["All States", ...Array.from(new Set(complianceMap.laboratories.map((l) => l.state))).filter(Boolean).sort()];
@@ -29,9 +32,9 @@ export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProp
   const filteredLabs = selectedState === "All States" ? complianceMap.laboratories : complianceMap.laboratories.filter((l) => l.state === selectedState);
 
   const tabs = [
+    { id: "laboratories", label: "Labs", count: filteredLabs.length },
     { id: "certifications", label: "Certification", count: complianceMap.certifications.length },
     { id: "testing", label: "Testing", count: complianceMap.testing.length },
-    { id: "laboratories", label: "Labs", count: filteredLabs.length },
   ] as const;
 
   return (
