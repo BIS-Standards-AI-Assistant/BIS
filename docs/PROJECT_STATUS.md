@@ -672,3 +672,76 @@ table still means scoped answers come back empty in this environment.
 
 `npm run verify` green: 0 lint errors, 299 vitest tests across 37 files.
 
+### PRD conformance pass — latency, transparency, logging, multilingual, fixed refusal (this session, 2026-09-04)
+
+Audited the external v1.0 PRD (`AI-Powered Intelligent Assistant for Indian
+Standards & BIS Services`) requirement by requirement against the code
+(full audit: `docs/PRD_GAP_ANALYSIS.md`). The PRD's FastAPI/FAISS stack is
+treated as superseded by `CLAUDE.md`; behaviour was audited, not stack.
+Executed the gaps that were fully completable this pass:
+
+| Item | Status | Notes |
+|---|---|---|
+| FR16 — response latency on screen | DONE | `runQueryPipeline` now returns `latencyMs`; `HomeClient` shows "N.Ns response" in the synthesis header. Voice path inherits it. |
+| NFR-Transparency — corpus boundary stated in-product | DONE | Fixed line under every synthesis answer naming what the corpus is (public titles/scopes, scheme docs, FAQs — not full standard text), per PRD §3.1. |
+| FR13 — log answered-vs-refused + language | DONE | `query_logs` gains nullable `outcome`, `language`, `translated` columns (schema only — run `npm run db:push`). Logged from `/api/v1/query` (both paths) and `/api/v1/chat`. |
+| FR2 / FR11 / §7 — multilingual query & answer (Hindi) | DONE (Hindi), pluggable | New `src/lib/language.ts` (deterministic script-range detection + explicit-choice resolution), `src/lib/translate.ts` (translate-in via the provider adapter, Tier-0 fallback = use original text). `generateAnswer` takes `answerLanguage`; standard numbers/titles never translated; evidence-only fallback stays English **and says so**. `HomeClient` sends the UI language. Other 7 UI languages detect + label but answer in English with a note until verified. |
+| FR4 / §8 — fixed, explicit refusal naming the corpus boundary | DONE | New `src/lib/refusal.ts` (fixed en+hi copy for out-of-scope / insufficient-evidence / not-in-database). Pipeline swaps the synthesis prose for the fixed refusal whenever the deterministic engine's top-candidate grounding is `insufficient_evidence`, there are no candidates, or `knowledgeBoundary` is `NOT_IN_DATABASE`. Retrieved candidates still render as related context; the refusal copy says exactly that. §8c citation gate wired via the same `anyEvidenceShown` check. |
+| §8.1 — threshold calibration against real in/out-of-corpus queries | NOT DONE | Needs a live DB + provider run to collect top-1 scores; cannot be completed offline this pass. The fixed-refusal wiring above reuses the existing deterministic grounding decision rather than a new uncalibrated cutoff. |
+| FR8 — cross-encoder re-ranker evaluation | NOT DONE | Separate track. |
+| Corpus expansion (scheme PDFs, FAQs) | NOT DONE | Separate data-engineering track, per the user's scoping. |
+
+Verification: `npm run lint` clean, `npm run typecheck` clean, `npx vitest
+run` 347/347 (up from 331; +16 across `language.test.ts`,
+`refusal.test.ts`, `translate.test.ts`, `answer.test.ts`), `npm run
+test:ml` 30/30, `next build` compiles + typechecks clean (the parallel
+page-data collection phase OOMs on this machine — a local resource limit,
+not a code error; `--experimental-build-mode=compile` completes). Retrieval
+regression not re-run (needs the dev server) — retrieval.ts is unchanged
+and the English query path is byte-identical to before except the new
+response fields and the fixed-refusal swap.
+
+**Migration required before deploy:** `npm run db:push` to add the three
+nullable `query_logs` columns. The insert is already wrapped in try/catch,
+so logging degrades quietly until the columns exist — no request fails.
+
+#### Live verification (2026-09-04, `npm run smoke:prd`)
+
+Ran against the real Neon DB (re-ingested the 19 seed docs first — the
+branch had 0 chunks) and OpenRouter. `.env.local`'s
+`OPENROUTER_MODEL=google/gemma-3-27b-it:free` is **discontinued** by
+OpenRouter ("unavailable for free"); swapped to
+`minimax/minimax-m3:free`, which works for text (translation) but is not
+on the structured-output allowlist, so intent + answer stay deterministic
+(evidence-only) — the designed Tier-0 path.
+
+| Case | Result |
+|---|---|
+| EN "tests for packaged drinking water" | ✓ `answered`, IS 14543 + IS 13428, both `verified` / `DIRECTLY_APPLICABLE`, 6 evidence each. latency 16 s. |
+| EN "boiling point of xenon at 3 atmospheres" (nonsense) | ✗ **`answered`, confidence `high`, 4 `verified` / `DIRECTLY_APPLICABLE` standards.** Grounding is too lenient — see below. |
+| EN "certification route … helmets IS 2925" (real id, not indexed) | ✓ `refused_not_in_database`, fixed refusal string, candidates shown as `insufficient_evidence`. |
+| HI "पैकेज्ड पेयजल के लिए कौन से परीक्षण आवश्यक हैं?" | ✓ `translated: true`, `answerLanguage: hi`, same two standards as the English query (**multilingual parity**), Hindi refusal/limitation copy, honest "Hindi prose unavailable" note. latency 7.7 s. |
+
+**Confirmed working:** language detection, translate-in, multilingual
+parity, `latencyMs` in the response, the `not_in_database` refusal + the
+identifier gate (only fires when the user actually named a standard), the
+Hindi refusal/limitation strings.
+
+**Bugs surfaced (pre-existing, not from this pass — tracked for follow-up):**
+
+1. **Grounding accepts nonsense.** With semantic search intermittently
+   failing (a `<=> $n::vector` param-binding error under the neon-http
+   driver — retrieval falls back to keyword-only), a garbage query keyword-
+   matches unrelated chunks and `grounding.ts` still rates the top
+   candidate `verified` + `high` confidence. The fixed-refusal wiring
+   relies on that grounding decision, so it doesn't catch this. **This is
+   exactly what PRD §8.1's top-1 relevance floor is for** — now
+   empirically confirmed, not theoretical. Highest-priority follow-up.
+2. **Semantic-search SQL error** (`operator does not exist` / param count
+   on the `embedding <=> $n::vector` query) — intermittent, forces
+   keyword-only retrieval. Needs a `retrieval.ts` fix independent of this
+   pass.
+3. **Latency 8–38 s** vs the PRD's 10 s target — slow free model + agent
+   orchestrator + provider retries. `refused_not_in_database` (no LLM
+   call) came in at 9.4 s; the answered cases did not.
+

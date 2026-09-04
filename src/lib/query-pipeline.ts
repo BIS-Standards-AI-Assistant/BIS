@@ -13,6 +13,9 @@ import { assessApplicability } from "@/lib/applicability";
 import { buildReferenceEntry } from "@/lib/reference-registry";
 import { getNeighbors, type GraphNeighbor } from "@/lib/graph/graph-retrieval";
 import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
+import { detectLanguage, resolveQueryLanguage, type UiLanguage } from "@/lib/language";
+import { translateQueryToEnglish } from "@/lib/translate";
+import { refusalCopy, type RefusalReason } from "@/lib/refusal";
 import { getDb } from "@/db";
 import { queryLogs } from "@/db/schema";
 
@@ -29,18 +32,55 @@ import { queryLogs } from "@/db/schema";
 const MAX_CANDIDATES = 4;
 const RETRIEVAL_LIMIT = 12;
 
-export async function runQueryPipeline(query: string, opts: { debug?: boolean } = {}) {
+export async function runQueryPipeline(
+  query: string,
+  opts: { debug?: boolean; language?: UiLanguage } = {},
+) {
   const start = Date.now();
   const debug = opts.debug ?? false;
 
-  const normalized = normalizeQuery(query);
+  // PRD FR2/§7: resolve the query language (explicit UI choice vs detected
+  // script), then translate a non-English query to English for retrieval
+  // against the English-only index. Translation is best-effort — with no
+  // provider it falls back to using the original text.
+  const detection = detectLanguage(query);
+  const { queryLanguage, answerLanguage } = resolveQueryLanguage(opts.language, detection);
+  const translation = await translateQueryToEnglish(query, queryLanguage);
+  const retrievalQuery = translation.queryForRetrieval;
+  const languageMeta = {
+    language: queryLanguage,
+    answerLanguage,
+    translated: translation.translated,
+    translationMethod: translation.method,
+  };
+
+  const normalized = normalizeQuery(retrievalQuery);
   const intent = await extractQueryIntent(normalized.normalizedQuery);
   if (intent.isRelevant === false) {
+    const refusal = refusalCopy("out_of_scope", answerLanguage);
+    if (process.env.DATABASE_URL) {
+      try {
+        await getDb().insert(queryLogs).values({
+          query,
+          intent: intent.intent,
+          retrievedChunkIds: [],
+          confidence: "none",
+          latencyMs: Date.now() - start,
+          outcome: "refused_out_of_scope",
+          language: queryLanguage,
+          translated: translation.translated,
+        });
+      } catch (logErr) {
+        console.warn("[query-pipeline] queryLogs insert (out-of-scope) failed:", logErr);
+      }
+    }
     return {
       isRelevant: false,
-      answer:
-        intent.relevanceMessage ||
-        "This search does not appear to be relevant to Indian Standards (BIS), product compliance, or certification schemes. BIS Standards Navigator is dedicated to helping discover applicable Indian Standards, product testing requirements, and ISI/CRS certification schemes. Please search for a physical product (e.g., 'Steel water bottle', 'Cement', 'LED bulb'), material, or standard code (e.g., 'IS 14543').",
+      answer: refusal.answer,
+      query,
+      ...languageMeta,
+      latencyMs: Date.now() - start,
+      outcome: "refused_out_of_scope" as const,
       intent: intent.intent,
       interpretation: {
         product: intent.product,
@@ -69,7 +109,7 @@ export async function runQueryPipeline(query: string, opts: { debug?: boolean } 
         groundingState: "insufficient_evidence" as const,
       },
       conflicts: [],
-      limitations: ["This query is not related to products, materials, or Indian Standards."],
+      limitations: [refusal.limitation],
     };
   }
 
@@ -149,7 +189,7 @@ export async function runQueryPipeline(query: string, opts: { debug?: boolean } 
     engineConfidence,
   };
 
-  const llmAnswer = await generateAnswer(evidencePackage);
+  const llmAnswer = await generateAnswer(evidencePackage, { answerLanguage });
 
   const validStandardNumbers = new Set(aggregated.map((c) => c.standardNumber));
   const { accepted } = validateRecommendationExplanations(llmAnswer.recommendationExplanations, validStandardNumbers);
@@ -192,6 +232,39 @@ export async function runQueryPipeline(query: string, opts: { debug?: boolean } 
     limitations.push("No BIS-recognized laboratory data is indexed in this system yet — check bis.gov.in's official laboratory list directly.");
   }
 
+  // PRD FR4 / §8: below the grounding bar, replace the synthesised prose
+  // with a FIXED refusal that names the corpus boundary — never a hedged
+  // guess. The retrieved candidates still render below as related context;
+  // the refusal copy says exactly that. §8c citation gate: if nothing
+  // shown to the user carries a citation, that is also a failed answer.
+  const topGroundingState = topCandidate ? groundingByStandard.get(topCandidate.documentId)!.state : null;
+  const anyEvidenceShown = recommendations.some((r) => r.evidence.length > 0);
+  let synthesisAnswer = llmAnswer.answer;
+  let outcome:
+    | "answered"
+    | "refused_insufficient_evidence"
+    | "refused_not_in_database" = "answered";
+
+  // "not_in_database" only makes sense when the user actually named a
+  // standard — otherwise a fuzzy agent resolution over an empty retrieval
+  // set would wrongly tell the user "that standard was identified" when
+  // they named none. Everything else that can't be grounded is
+  // "insufficient_evidence".
+  const queryHasExplicitIdentifier = normalized.identifiers.length > 0;
+  const forcedRefusal: RefusalReason | null =
+    knowledgeBoundary.state === "NOT_IN_DATABASE" && queryHasExplicitIdentifier
+      ? "not_in_database"
+      : aggregated.length === 0 || topGroundingState === "insufficient_evidence" || !anyEvidenceShown
+        ? "insufficient_evidence"
+        : null;
+
+  if (forcedRefusal) {
+    const r = refusalCopy(forcedRefusal, answerLanguage);
+    synthesisAnswer = r.answer;
+    outcome = forcedRefusal === "not_in_database" ? "refused_not_in_database" : "refused_insufficient_evidence";
+    if (!limitations.includes(r.limitation)) limitations.unshift(r.limitation);
+  }
+
   const certSchemeStep = agentRun?.steps.find(
     (s) => s.tool === "getCertificationScheme" && s.result.status === "ok",
   );
@@ -213,7 +286,11 @@ export async function runQueryPipeline(query: string, opts: { debug?: boolean } 
 
   const response = {
     isRelevant: true,
-    answer: llmAnswer.answer,
+    answer: synthesisAnswer,
+    query,
+    ...languageMeta,
+    latencyMs: Date.now() - start,
+    outcome,
     intent: intent.intent,
     interpretation: {
       product: intent.product,
@@ -296,6 +373,9 @@ export async function runQueryPipeline(query: string, opts: { debug?: boolean } 
         retrievedChunkIds: chunks.map((c) => c.chunkId),
         confidence: engineConfidence.band,
         latencyMs: Date.now() - start,
+        outcome,
+        language: queryLanguage,
+        translated: translation.translated,
       });
     } catch (logErr) {
       console.warn("[query-pipeline] queryLogs insert failed:", logErr);

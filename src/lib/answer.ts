@@ -4,6 +4,7 @@ import type { CoverageResult } from "./coverage-analysis";
 import type { Conflict } from "./conflict-detection";
 import type { EngineConfidence } from "./confidence";
 import { getProviderChain, generateStructuredWithFallback } from "./providers";
+import { LANGUAGE_NAMES, type AnswerLanguage } from "./language";
 
 /**
  * The LLM's responsibility has been deliberately narrowed (see the ML
@@ -65,6 +66,19 @@ Rules (non-negotiable):
 - If the candidate list is empty, say plainly that no relevant BIS evidence was found — do not fill the gap with plausible-sounding but unverified content.
 - Do not treat semantic similarity as certainty: a chunk merely mentioning a related material or product is not proof that a standard applies to the user's specific case.`;
 
+/**
+ * Language instruction appended to the system prompt when the answer must
+ * be in a language other than English (PRD §7, step 3-4). Standard
+ * numbers, standard titles, clause and section identifiers are NEVER
+ * translated — they must appear exactly as BIS publishes them; only the
+ * surrounding explanation is in the target language.
+ */
+function languageInstruction(answerLanguage: AnswerLanguage): string {
+  if (answerLanguage === "en") return "";
+  const name = LANGUAGE_NAMES[answerLanguage];
+  return `\n\nLanguage: Write "answer", every "reason", "certificationNotes", "testingNotes", "nextSteps" and "limitations" in ${name}. Do NOT translate standard numbers (e.g. "IS 14543:2016"), standard titles, clause numbers, or section names — reproduce those exactly as given in the evidence. Only the explanatory prose around them is in ${name}.`;
+}
+
 function buildPrompt(pkg: EvidencePackage): string {
   const candidateBlocks = pkg.candidates
     .map((c, i) => {
@@ -104,7 +118,15 @@ ${candidateBlocks || "(none — no evidence was retrieved for this query)"}`;
  * never a hard dependency of this function's ability to return something
  * useful.
  */
-function buildEvidenceOnlyAnswer(pkg: EvidencePackage): LLMAnswer {
+function buildEvidenceOnlyAnswer(pkg: EvidencePackage, answerLanguage: AnswerLanguage = "en"): LLMAnswer {
+  // The deterministic fallback is composed from fixed English fragments, so
+  // it cannot be produced in another language without a provider. When one
+  // was requested, return the English summary but say so plainly rather
+  // than silently switching languages on the user.
+  const languageNote =
+    answerLanguage !== "en"
+      ? [`An automatically written summary in ${LANGUAGE_NAMES[answerLanguage]} was not available, so this summary is in English. The cited standards and evidence below are unaffected.`]
+      : [];
   if (pkg.candidates.length === 0) {
     return {
       answer:
@@ -116,7 +138,7 @@ function buildEvidenceOnlyAnswer(pkg: EvidencePackage): LLMAnswer {
         "Try rephrasing with the specific product name or material.",
         "Consult the official BIS website (bis.gov.in) or BIS Care portal directly for standards not yet in this system's knowledge base.",
       ],
-      limitations: ["No relevant BIS evidence was found in the knowledge base for this query."],
+      limitations: [...languageNote, "No relevant BIS evidence was found in the knowledge base for this query."],
     };
   }
 
@@ -151,6 +173,7 @@ function buildEvidenceOnlyAnswer(pkg: EvidencePackage): LLMAnswer {
       "Consult the official BIS website (bis.gov.in) or BIS Care portal to confirm applicability.",
     ],
     limitations: [
+      ...languageNote,
       "This summary is generated directly from indexed evidence and has not been rewritten by a language model.",
       ...pkg.engineConfidence.limitingSignals,
     ],
@@ -165,21 +188,26 @@ function buildEvidenceOnlyAnswer(pkg: EvidencePackage): LLMAnswer {
  * a provider failure, and paid LLM inference is never required for the
  * engine to produce a response.
  */
-export async function generateAnswer(pkg: EvidencePackage): Promise<LLMAnswer> {
+export async function generateAnswer(
+  pkg: EvidencePackage,
+  opts: { answerLanguage?: AnswerLanguage } = {},
+): Promise<LLMAnswer> {
+  const answerLanguage = opts.answerLanguage ?? "en";
+
   if (pkg.candidates.length === 0) {
-    return buildEvidenceOnlyAnswer(pkg);
+    return buildEvidenceOnlyAnswer(pkg, answerLanguage);
   }
 
   const chain = getProviderChain();
   const { response } = await generateStructuredWithFallback(chain, {
     schema: LLMAnswerSchema,
-    system: SYSTEM_PROMPT,
+    system: SYSTEM_PROMPT + languageInstruction(answerLanguage),
     prompt: buildPrompt(pkg),
     maxOutputTokens: 800,
   });
 
   if (response?.structuredData) return response.structuredData;
-  return buildEvidenceOnlyAnswer(pkg);
+  return buildEvidenceOnlyAnswer(pkg, answerLanguage);
 }
 
 /**

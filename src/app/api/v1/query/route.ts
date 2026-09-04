@@ -5,6 +5,10 @@ import { rateLimitOrNull } from "@/lib/rate-limit-http";
 
 const QueryRequestSchema = z.object({
   query: z.string().min(1).max(2000),
+  // Optional explicit language from the UI switcher (PRD FR2/FR17). When
+  // absent, the pipeline detects the query's script. Unknown values are
+  // ignored rather than rejected.
+  language: z.enum(["en", "hi", "bn", "ta", "te", "mr", "gu", "kn"]).optional(),
 });
 
 /**
@@ -27,11 +31,11 @@ export async function POST(req: NextRequest) {
   if (!parsed.success) {
     return NextResponse.json({ error: "Invalid request", details: parsed.error.flatten() }, { status: 400 });
   }
-  const { query } = parsed.data;
+  const { query, language } = parsed.data;
   const debug = req.nextUrl.searchParams.get("debug") === "1";
 
   try {
-    const response = await runQueryPipeline(query, { debug });
+    const response = await runQueryPipeline(query, { debug, language });
     return NextResponse.json(response);
   } catch (err) {
     console.error("[api/v1/query]", err);

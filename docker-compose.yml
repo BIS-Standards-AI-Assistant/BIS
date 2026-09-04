@@ -50,5 +50,15 @@ services:
     volumes:
       - ollama-data:/root/.ollama
 
+  bharatstt:
+    profiles: ["stt"]
+    build:
+      context: ./stt_service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: "8000"
+
 volumes:
   ollama-data:

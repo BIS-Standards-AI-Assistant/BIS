@@ -82,6 +82,13 @@ export const queryLogs = pgTable("query_logs", {
   retrievedChunkIds: jsonb("retrieved_chunk_ids").$type<string[]>(),
   confidence: text("confidence"), // "high" | "medium" | "low" | "none"
   latencyMs: integer("latency_ms"),
+  // PRD FR13: log whether the system answered or refused, and why. Nullable
+  // and added additively — existing rows predate these columns.
+  outcome: text("outcome"), // "answered" | "refused_out_of_scope" | "refused_insufficient_evidence" | "refused_not_in_database"
+  // PRD FR2/§7: the language the query was treated as, and whether it was
+  // translated to English before retrieval.
+  language: text("language"), // "en" | "hi" | ... (UI language codes)
+  translated: boolean("translated"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 

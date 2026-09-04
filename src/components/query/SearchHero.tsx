@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SearchIcon, ArrowRightIcon, CloseIcon } from "@/components/ui/icons";
+import { VoiceSearchButton } from "@/components/ui/VoiceSearchButton";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function SearchHero({
@@ -22,6 +23,11 @@ export function SearchHero({
 
   function submit(q: string) {
     if (q.trim()) onSubmit(q.trim());
+  }
+
+  function handleVoiceTranscript(transcript: string) {
+    setValue(transcript);
+    submit(transcript);
   }
 
   return (
@@ -65,6 +71,11 @@ export function SearchHero({
               <CloseIcon className="h-4 w-4" />
             </button>
           )}
+          <VoiceSearchButton
+            onTranscript={handleVoiceTranscript}
+            compact={compact}
+            disabled={loading}
+          />
           <button
             type="submit"
             disabled={loading || !value.trim()}

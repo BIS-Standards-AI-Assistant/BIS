@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { SearchIcon, CloseIcon } from "@/components/ui/icons";
+import { VoiceSearchButton } from "@/components/ui/VoiceSearchButton";
 import { resolveStandardIds } from "@/lib/standards-id";
 import type { SearchState, SearchSuggestion } from "@/lib/search-state";
 import type { RetrievedChunk } from "@/types/api";
@@ -202,6 +203,13 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
             aria-controls="search-overlay-suggestions"
             aria-activedescendant={activeIndex >= 0 ? `search-suggestion-${activeIndex}` : undefined}
             className="flex-1 bg-transparent text-[15px] text-ink outline-none placeholder:text-ink-faint"
+          />
+          <VoiceSearchButton
+            onTranscript={(text) => {
+              setQuery(text);
+              submit(text);
+            }}
+            compact
           />
           <button
             type="button"

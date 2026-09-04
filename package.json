@@ -27,6 +27,7 @@
     "eval:validate": "dotenv -e .env.local -- tsx scripts/validate-generation.ts",
     "eval:calibration": "tsx scripts/calibrate-confidence.ts",
     "ml:evaluate": "tsx scripts/ml-evaluate.ts",
+    "smoke:prd": "dotenv -e .env.local -- tsx scripts/live-prd-smoke.ts",
     "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
     "data:discover": "tsx scripts/data-discover.ts",
     "data:fetch": "tsx scripts/data-fetch.ts",
@@ -37,7 +38,8 @@
     "data:relationships": "dotenv -e .env.local -- tsx scripts/data-relationships.ts",
     "data:relationships-extract": "dotenv -e .env.local -- tsx scripts/data-relationships-extract.ts",
     "tools:smoke": "dotenv -e .env.local -- tsx scripts/tools-smoke.ts",
-    "agent:smoke": "dotenv -e .env.local -- tsx scripts/agent-smoke.ts"
+    "agent:smoke": "dotenv -e .env.local -- tsx scripts/agent-smoke.ts",
+    "verify:stt": "dotenv -e .env.local -- tsx scripts/verify-stt.ts"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.86",

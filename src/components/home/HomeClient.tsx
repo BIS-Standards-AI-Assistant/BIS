@@ -28,6 +28,7 @@ import {
 } from "@/lib/source-library";
 import { WorkspacePanel } from "@/components/workspace/WorkspacePanel";
 import { addRecentQuery } from "@/lib/recent-queries";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 import type { QueryResponse } from "@/types/api";
 
 const CACHE_PREFIX = "bis-query-cache:";
@@ -69,6 +70,7 @@ function setCachedResult(query: string, result: QueryResponse) {
 export function HomeClient() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { lang } = useLanguage();
   const urlQuery = searchParams.get("q") ?? "";
 
   const [loading, setLoading] = useState(false);
@@ -102,7 +104,7 @@ export function HomeClient() {
         const res = await fetch("/api/v1/query", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: trimmed }),
+          body: JSON.stringify({ query: trimmed, language: lang }),
         });
         if (!res.ok) {
           // Never surface a raw backend/provider error string to the user
@@ -129,7 +131,7 @@ export function HomeClient() {
         setLoading(false);
       }
     },
-    [router, searchParams],
+    [router, searchParams, lang],
   );
 
   const didAutoRun = useRef(false);
@@ -286,6 +288,12 @@ export function HomeClient() {
                         {" · "}
                         {result.recommendations.reduce((n, r) => n + r.evidence.length, 0)} supporting source
                         {result.recommendations.reduce((n, r) => n + r.evidence.length, 0) === 1 ? "" : "s"}
+                        {typeof result.latencyMs === "number" && (
+                          <>
+                            {" · "}
+                            <span className="tabular-nums">{(result.latencyMs / 1000).toFixed(1)}s response</span>
+                          </>
+                        )}
                       </p>
                     </div>
                     <ConfidenceBadge confidence={result.confidence} />
@@ -295,6 +303,14 @@ export function HomeClient() {
                       {result.answer}
                     </p>
                   </div>
+                  {result.translated && (
+                    <p className="mt-2.5 text-[11px] text-ink-faint">
+                      Your question was translated to English to search the index; the answer above is in your language. Standard numbers and titles are shown exactly as BIS publishes them.
+                    </p>
+                  )}
+                  <p className="mt-3 border-t border-border/50 pt-2.5 text-[10.5px] leading-relaxed text-ink-faint">
+                    This service searches public BIS standard titles and scope summaries, public certification-scheme documentation, and BIS public FAQs. It does not hold the full text of Indian Standards.
+                  </p>
                   {result.limitations.length > 0 && (
                     <details className="mt-4 rounded-md bg-surface-alt/80 border border-border/60 p-3.5 text-xs">
                       <summary className="cursor-pointer font-bold uppercase tracking-wider text-[10.5px] text-ink-faint">

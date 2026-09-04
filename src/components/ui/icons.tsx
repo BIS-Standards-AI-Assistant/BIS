@@ -195,3 +195,13 @@ export function XCircleIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function MicrophoneIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8} stroke="currentColor" aria-hidden="true" {...props}>
+      <rect x="9" y="3" width="6" height="11" rx="3" />
+      <path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v4M8 22h8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+

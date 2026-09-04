@@ -3,6 +3,29 @@ import { z } from "zod";
 import { runQueryPipeline } from "@/lib/query-pipeline";
 import { classifyChatIntent, resolveScopedContext, buildScopedAnswer } from "@/lib/chat-context";
 import { rateLimitOrNull } from "@/lib/rate-limit-http";
+import { getDb } from "@/db";
+import { queryLogs } from "@/db/schema";
+
+/** PRD FR13: chat turns are queries too — log them, never blocking the response on it. */
+async function logChatTurn(fields: {
+  message: string;
+  subIntent: string;
+  outcome: string;
+  latencyMs: number;
+}): Promise<void> {
+  if (!process.env.DATABASE_URL) return;
+  try {
+    await getDb().insert(queryLogs).values({
+      query: fields.message,
+      intent: `chat:${fields.subIntent}`,
+      retrievedChunkIds: [],
+      latencyMs: fields.latencyMs,
+      outcome: fields.outcome,
+    });
+  } catch (err) {
+    console.warn("[api/v1/chat] queryLogs insert failed:", err);
+  }
+}
 
 /**
  * "Discuss these results" (P0 audit, 2026-09-03). The client sends only
@@ -36,11 +59,13 @@ export async function POST(req: NextRequest) {
   }
   const { originalQuery, standardNumbers, message } = parsed.data;
 
+  const started = Date.now();
   try {
     const subIntent = classifyChatIntent(message);
 
     if (subIntent === "wider_search") {
       const result = await runQueryPipeline(message);
+      await logChatTurn({ message, subIntent, outcome: result.outcome ?? "answered", latencyMs: Date.now() - started });
       return NextResponse.json({
         scope: "global",
         scopeChangeNotice: "This requires searching beyond your current results.",
@@ -51,6 +76,12 @@ export async function POST(req: NextRequest) {
 
     const scoped = await resolveScopedContext(standardNumbers);
     const scopedAnswer = await buildScopedAnswer(subIntent, originalQuery, scoped);
+    await logChatTurn({
+      message,
+      subIntent,
+      outcome: (scopedAnswer.evidence?.length ?? 0) > 0 ? "answered" : "refused_insufficient_evidence",
+      latencyMs: Date.now() - started,
+    });
 
     return NextResponse.json({
       scope: "current_results",

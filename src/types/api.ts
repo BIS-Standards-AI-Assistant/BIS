@@ -83,10 +83,28 @@ export interface QueryInterpretation {
   testingRequested: boolean;
 }
 
+export type QueryOutcome =
+  | "answered"
+  | "refused_out_of_scope"
+  | "refused_insufficient_evidence"
+  | "refused_not_in_database";
+
 export interface QueryResponse {
   answer: string;
+  /** The user's query, echoed back unchanged. */
+  query?: string;
   intent: string;
   isRelevant?: boolean;
+  /** Language the query was treated as (UI language code). PRD FR2/§7. */
+  language?: string;
+  /** Language the synthesis answer is written in ("en" | "hi"). */
+  answerLanguage?: "en" | "hi";
+  /** True when a non-English query was translated to English for retrieval. */
+  translated?: boolean;
+  /** End-to-end pipeline time in milliseconds. PRD FR16. */
+  latencyMs?: number;
+  /** Whether the system answered or refused, and why. PRD FR13. */
+  outcome?: QueryOutcome;
   interpretation: QueryInterpretation;
   clarificationNeeded?: string[];
   recommendations: Recommendation[];

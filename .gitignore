@@ -50,3 +50,15 @@ next-env.d.ts
 !.env.example
 /prompts
 .neon
+
+# live PRD smoke test output
+scripts/_smoke-report.json
+
+# python / stt
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+
