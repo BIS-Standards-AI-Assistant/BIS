@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Link from "next/link";
 import type { ComplianceMap } from "@/types/api";
 import { LaboratoryMap } from "./LaboratoryMap";
 
@@ -19,7 +18,10 @@ interface ProductComplianceMapProps {
  * instead of raw Tailwind slate/blue, to match everything around it.
  */
 export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProps) {
-  const [activeTab, setActiveTab] = useState<"standards" | "certifications" | "testing" | "laboratories">("standards");
+  // Applicable standards are already shown on the left (Sources panel) and
+  // as the centre's own recommendation cards — no "Standards" tab here, to
+  // avoid a third, differently-labelled copy of the same list.
+  const [activeTab, setActiveTab] = useState<"certifications" | "testing" | "laboratories">("certifications");
   const [selectedState, setSelectedState] = useState<string>("All States");
 
   const uniqueStates = ["All States", ...Array.from(new Set(complianceMap.laboratories.map((l) => l.state))).filter(Boolean).sort()];
@@ -27,7 +29,6 @@ export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProp
   const filteredLabs = selectedState === "All States" ? complianceMap.laboratories : complianceMap.laboratories.filter((l) => l.state === selectedState);
 
   const tabs = [
-    { id: "standards", label: "Standards", count: complianceMap.standards.length },
     { id: "certifications", label: "Certification", count: complianceMap.certifications.length },
     { id: "testing", label: "Testing", count: complianceMap.testing.length },
     { id: "laboratories", label: "Labs", count: filteredLabs.length },
@@ -68,42 +69,6 @@ export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProp
       </div>
 
       <div className="p-3">
-        {activeTab === "standards" && (
-          <div className="space-y-2.5">
-            {complianceMap.standards.length === 0 ? (
-              <EmptyState message="No applicable standards mapped to this product." />
-            ) : (
-              complianceMap.standards.map((std, i) => (
-                <div key={i} className="rounded-lg border border-border/60 bg-surface-alt/40 p-2.5">
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    <span className="font-mono text-[11.5px] font-bold text-navy">{std.standardNumber}</span>
-                    {std.confidence === "high" && (
-                      <span className="inline-flex items-center gap-1 rounded bg-success-soft px-1.5 py-0.5 text-[10px] font-bold text-success">
-                        High confidence
-                      </span>
-                    )}
-                  </div>
-                  <p className="mt-1 text-[12px] leading-snug text-ink">{std.title}</p>
-                  {(() => {
-                    const docId = std.documentId || (std.standardNumber !== "Unknown" ? std.standardNumber.toLowerCase().replace(/[^a-z0-9]+/g, "-") : null);
-                    return docId ? (
-                      <Link
-                        href={`/standards/${docId}`}
-                        className="mt-2 inline-block rounded-md bg-navy/10 px-2.5 py-1 text-[11px] font-bold text-navy transition-colors hover:bg-navy/15"
-                      >
-                        View details
-                      </Link>
-                    ) : (
-                      <span className="mt-2 inline-block rounded-md border border-border/60 px-2.5 py-1 text-[11px] font-bold text-ink-faint">
-                        Not indexed
-                      </span>
-                    );
-                  })()}
-                </div>
-              ))
-            )}
-          </div>
-        )}
 
         {activeTab === "certifications" && (
           <div className="space-y-2.5">

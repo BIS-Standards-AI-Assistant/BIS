@@ -114,10 +114,14 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
     expect(screen.getByText("Related but not applicable (1)")).toBeInTheDocument();
     expect(screen.queryByText(/^Recommended standards?/)).not.toBeInTheDocument();
 
-    // The exact misleading combination from the bug report must never appear.
+    // The centre list is now a compact row (RecommendationRow) — the
+    // exact misleading combination from the bug report ("High relevance" /
+    // "Directly supported by evidence") must never appear there, and the
+    // row's own applicability badge must say material mismatch, not
+    // endorse the candidate.
     expect(screen.queryByText("High relevance")).not.toBeInTheDocument();
     expect(screen.queryByText("Directly supported by evidence")).not.toBeInTheDocument();
-    expect(screen.getByText("Related to your search")).toBeInTheDocument();
+    expect(screen.getByText("Related standard — material mismatch")).toBeInTheDocument();
   });
 
   test("positive control: a real, applicable steel standard renders under 'Recommended standards' with full relevance/grounding language", async () => {
@@ -140,6 +144,11 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
 
     expect(screen.getByText("Recommended standard")).toBeInTheDocument();
     expect(screen.queryByText("Related but not applicable")).not.toBeInTheDocument();
+    expect(screen.getByText("Directly applicable")).toBeInTheDocument();
+
+    // The full relevance/grounding language lives in the popup opened from
+    // the compact row, not inline in the centre list.
+    fireEvent.click(screen.getByText("View evidence →"));
     expect(screen.getByText("High relevance")).toBeInTheDocument();
     expect(screen.getByText("Directly supported by evidence")).toBeInTheDocument();
   });

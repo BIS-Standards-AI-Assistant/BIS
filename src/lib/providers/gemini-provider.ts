@@ -29,72 +29,83 @@ function parseJsonFromText(raw: string): unknown {
   throw new Error(`Failed to parse JSON from text: ${trimmed.slice(0, 150)}...`);
 }
 
-function normalizeStructuredObject(obj: any): any {
-  if (!obj || typeof obj !== "object") return obj;
-  
-  // Normalization for Answer
-  if (!obj.answer && obj.summary) obj.answer = obj.summary;
-  if (!obj.answer && obj.directAnswer) obj.answer = obj.directAnswer;
-  if (!obj.answer && obj.response) obj.answer = obj.response;
-  if (!obj.answer && typeof obj.text === "string") obj.answer = obj.text;
+interface RecommendationExplanationLike {
+  standardNumber?: unknown;
+  standard_number?: unknown;
+  id?: unknown;
+  reason?: unknown;
+  explanation?: unknown;
+  description?: unknown;
+}
 
-  if (!obj.recommendationExplanations) {
-    if (Array.isArray(obj.standards)) obj.recommendationExplanations = obj.standards;
-    else if (Array.isArray(obj.recommendations)) obj.recommendationExplanations = obj.recommendations;
-    else if (Array.isArray(obj.candidates)) obj.recommendationExplanations = obj.candidates;
-    else obj.recommendationExplanations = [];
+function normalizeStructuredObject(obj: unknown): Record<string, unknown> {
+  if (!obj || typeof obj !== "object") return {};
+  const record = obj as Record<string, unknown>;
+
+  // Normalization for Answer
+  if (!record.answer && record.summary) record.answer = record.summary;
+  if (!record.answer && record.directAnswer) record.answer = record.directAnswer;
+  if (!record.answer && record.response) record.answer = record.response;
+  if (!record.answer && typeof record.text === "string") record.answer = record.text;
+
+  if (!record.recommendationExplanations) {
+    if (Array.isArray(record.standards)) record.recommendationExplanations = record.standards;
+    else if (Array.isArray(record.recommendations)) record.recommendationExplanations = record.recommendations;
+    else if (Array.isArray(record.candidates)) record.recommendationExplanations = record.candidates;
+    else record.recommendationExplanations = [];
   }
-  if (Array.isArray(obj.recommendationExplanations)) {
-    obj.recommendationExplanations = obj.recommendationExplanations.map((item: any) => ({
+  if (Array.isArray(record.recommendationExplanations)) {
+    record.recommendationExplanations = (record.recommendationExplanations as RecommendationExplanationLike[]).map((item) => ({
       standardNumber: item.standardNumber ?? item.standard_number ?? item.id ?? null,
       reason: item.reason ?? item.explanation ?? item.description ?? "Relevant standard identified from BIS evidence.",
     }));
   } else {
-    obj.recommendationExplanations = [];
+    record.recommendationExplanations = [];
   }
 
-  if (!obj.answer) {
-    obj.answer = obj.recommendationExplanations.length > 0
-      ? `Based on BIS evidence, ${obj.recommendationExplanations.map((r: any) => r.standardNumber).filter(Boolean).join(", ")} applies to your query.`
+  if (!record.answer) {
+    const explanations = record.recommendationExplanations as { standardNumber: unknown }[];
+    record.answer = explanations.length > 0
+      ? `Based on BIS evidence, ${explanations.map((r) => r.standardNumber).filter(Boolean).join(", ")} applies to your query.`
       : "Information retrieved from the indexed BIS evidence.";
   }
 
-  if (!obj.nextSteps && obj.next_steps) obj.nextSteps = obj.next_steps;
-  if (!Array.isArray(obj.nextSteps)) obj.nextSteps = [];
+  if (!record.nextSteps && record.next_steps) record.nextSteps = record.next_steps;
+  if (!Array.isArray(record.nextSteps)) record.nextSteps = [];
 
-  if (!obj.limitations && obj.uncertainty) obj.limitations = obj.uncertainty;
-  if (!Array.isArray(obj.limitations)) obj.limitations = [];
+  if (!record.limitations && record.uncertainty) record.limitations = record.uncertainty;
+  if (!Array.isArray(record.limitations)) record.limitations = [];
 
-  if (!obj.certificationNotes && obj.certification_notes) obj.certificationNotes = obj.certification_notes;
-  if (obj.certificationNotes === undefined) obj.certificationNotes = null;
+  if (!record.certificationNotes && record.certification_notes) record.certificationNotes = record.certification_notes;
+  if (record.certificationNotes === undefined) record.certificationNotes = null;
 
-  if (!obj.testingNotes && obj.testing_notes) obj.testingNotes = obj.testing_notes;
-  if (obj.testingNotes === undefined) obj.testingNotes = null;
+  if (!record.testingNotes && record.testing_notes) record.testingNotes = record.testing_notes;
+  if (record.testingNotes === undefined) record.testingNotes = null;
 
   // Normalization for Intent
   const validIntents = new Set(["find_applicable_standard", "certification_process", "testing_requirements", "general_information", "unclear"]);
-  if (obj.intent && !validIntents.has(obj.intent)) {
-    const rawIntent = String(obj.intent).toLowerCase().replace(/[^a-z_]/g, "_");
-    if (rawIntent.includes("certif")) obj.intent = "certification_process";
-    else if (rawIntent.includes("test")) obj.intent = "testing_requirements";
-    else if (rawIntent.includes("standard") || rawIntent.includes("find")) obj.intent = "find_applicable_standard";
-    else obj.intent = "general_information";
+  if (record.intent && !validIntents.has(record.intent as string)) {
+    const rawIntent = String(record.intent).toLowerCase().replace(/[^a-z_]/g, "_");
+    if (rawIntent.includes("certif")) record.intent = "certification_process";
+    else if (rawIntent.includes("test")) record.intent = "testing_requirements";
+    else if (rawIntent.includes("standard") || rawIntent.includes("find")) record.intent = "find_applicable_standard";
+    else record.intent = "general_information";
   }
-  if (!obj.intent) obj.intent = "find_applicable_standard";
+  if (!record.intent) record.intent = "find_applicable_standard";
 
-  if (obj.isRelevant === undefined) obj.isRelevant = true;
-  if (obj.relevanceMessage === undefined) obj.relevanceMessage = null;
-  if (obj.product === undefined) obj.product = null;
-  if (obj.material === undefined) obj.material = null;
-  if (obj.useCase === undefined) obj.useCase = null;
-  if (obj.targetUser === undefined) obj.targetUser = null;
-  if (obj.sector === undefined) obj.sector = null;
-  if (obj.certificationRequested === undefined) obj.certificationRequested = false;
-  if (obj.testingRequested === undefined) obj.testingRequested = false;
-  if (obj.searchQuery === undefined) obj.searchQuery = "";
-  if (!Array.isArray(obj.missingInformation)) obj.missingInformation = [];
+  if (record.isRelevant === undefined) record.isRelevant = true;
+  if (record.relevanceMessage === undefined) record.relevanceMessage = null;
+  if (record.product === undefined) record.product = null;
+  if (record.material === undefined) record.material = null;
+  if (record.useCase === undefined) record.useCase = null;
+  if (record.targetUser === undefined) record.targetUser = null;
+  if (record.sector === undefined) record.sector = null;
+  if (record.certificationRequested === undefined) record.certificationRequested = false;
+  if (record.testingRequested === undefined) record.testingRequested = false;
+  if (record.searchQuery === undefined) record.searchQuery = "";
+  if (!Array.isArray(record.missingInformation)) record.missingInformation = [];
 
-  return obj;
+  return record;
 }
 
 export class GeminiProvider implements LLMProvider {

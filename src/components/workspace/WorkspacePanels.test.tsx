@@ -4,18 +4,6 @@ import userEvent from "@testing-library/user-event";
 import { SourcesPanel } from "./SourcesPanel";
 import type { SourceCandidate } from "@/lib/source-search";
 import { WorkspacePanel } from "./WorkspacePanel";
-import type { QueryInterpretation } from "@/types/api";
-
-const INTERPRETATION = {
-  product: "pressure cooker",
-  material: null,
-  useCase: null,
-  targetUser: null,
-  sector: null,
-  certificationRequested: false,
-  testingRequested: false,
-} as unknown as QueryInterpretation;
-
 
 /** The real /api/v1/analyze-document response shape. */
 
@@ -60,6 +48,7 @@ function renderSources(over: Partial<Parameters<typeof SourcesPanel>[0]> = {}) {
     selectedSources: [] as SourceCandidate[],
     onSelectionChange: vi.fn(),
     onResearch: vi.fn(),
+    onOpenRecommendation: vi.fn(),
     onCollapse: vi.fn(),
     ...over,
   };
@@ -149,13 +138,6 @@ describe("SourcesPanel — left panel retrieves sources, it does not chat (§3, 
     renderSources();
     expect(screen.getByText(/add your document/i)).toBeInTheDocument();
     expect(screen.getByLabelText("Add source documents")).toBeInTheDocument();
-  });
-
-  test("shows what the search was understood as, once there is a result", () => {
-    renderSources({ interpretation: INTERPRETATION });
-    // The heading, not the empty-state prose that also says "research context".
-    expect(screen.getByRole("heading", { name: /Search Context/i })).toBeInTheDocument();
-    expect(screen.getByText("pressure cooker")).toBeInTheDocument();
   });
 
   test("collapses on request", async () => {

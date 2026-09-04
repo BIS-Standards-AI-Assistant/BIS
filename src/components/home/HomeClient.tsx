@@ -12,13 +12,10 @@ import { QuickLinks } from "@/components/home/QuickLinks";
 import { ResearchChat } from "@/components/chat/ResearchChat";
 import { ClarificationPanel } from "@/components/query/ClarificationPanel";
 import { LoadingIndicator } from "@/components/query/LoadingIndicator";
-import { InfoCard } from "@/components/query/InfoCard";
 import { RecommendationCard } from "@/components/standards/RecommendationCard";
+import { Modal } from "@/components/ui/Modal";
 import type { MatchedAttribute } from "@/components/trust/WhyPanel";
-import { ConflictPanel } from "@/components/standards/ConflictPanel";
-import { EmptyState } from "@/components/feedback/EmptyState";
 import { ErrorState } from "@/components/feedback/ErrorState";
-import { BisChatBot } from "@/components/chat/BisChatBot";
 import { SourcesPanel } from "@/components/workspace/SourcesPanel";
 import { buildChatScope } from "@/lib/chat-scope";
 import type { SourceCandidate } from "@/lib/source-search";
@@ -84,6 +81,11 @@ export function HomeClient() {
   const [result, setResult] = useState<QueryResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [activeQuery, setActiveQuery] = useState(urlQuery);
+  // Which recommendation's full evidence card is open in the popup, if any.
+  // The centre list itself only shows RecommendationRow (one compact line
+  // per standard) — the full card (relevance meter, why-this-applies,
+  // coverage, every evidence excerpt) was crowding out the conversation.
+  const [openRecommendationIndex, setOpenRecommendationIndex] = useState<number | null>(null);
 
   // Tracks the last ?q= a run has already been started for — set here and
   // in the auto-run effect below, so a router.replace triggered by this
@@ -306,11 +308,11 @@ export function HomeClient() {
               {showSources && (
                 <div className="hidden lg:block lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
                   <SourcesPanel
-                    interpretation={result?.interpretation ?? null}
                     result={result}
                     selectedSources={selectedSources}
                     onSelectionChange={setSelectedSources}
                     onResearch={runQuery}
+                    onOpenRecommendation={setOpenRecommendationIndex}
                     onCollapse={() => setShowSources(false)}
                   />
                 </div>
@@ -382,6 +384,23 @@ export function HomeClient() {
                   </div>
                 </div>
 
+                {/* Pinned above the scrollable chat, not inside it (shrink-0,
+                    outside the flex-1 overflow-y-auto region below) — refining
+                    the product spec is a standing action for this query, not
+                    a message in the conversation history that should scroll
+                    away. */}
+                {result && result.isRelevant !== false && (
+                  <div className="shrink-0">
+                    <ClarificationPanel
+                      items={result.clarificationNeeded ?? []}
+                      product={result.interpretation?.product}
+                      currentQuery={activeQuery}
+                      onRefine={runQuery}
+                      loading={loading}
+                    />
+                  </div>
+                )}
+
                 <div className="min-h-0 flex-1 lg:overflow-y-auto">
             {loading && (
               <div className="mx-auto max-w-3xl mt-8">
@@ -395,205 +414,6 @@ export function HomeClient() {
               </div>
             )}
 
-            {result && (
-              <div className="mt-6 space-y-6">
-                {/* §7: the evidence-grounded summary moved to the Sources
-                    panel on the left, so the centre stays a conversation
-                    rather than competing with the chat for primary space. */}
-                <div className="space-y-6 min-w-0">
-                  {/* Irrelevant Query Alert */}
-                  {result.isRelevant === false && (
-                    <div className="rounded-lg border border-danger/30 bg-danger-soft/40 p-5">
-                      <div className="flex items-start gap-3.5">
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-danger/15 text-danger font-bold text-base">
-                          !
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <h3 className="text-sm font-bold text-danger">
-                            This is not a relevant BIS search
-                          </h3>
-                          <p className="mt-1 text-xs leading-relaxed text-ink-soft">
-                            {result.answer}
-                          </p>
-                          <div className="mt-3.5 border-t border-danger/15 pt-3">
-                            <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint">
-                              Try searching for any physical product or standard:
-                            </p>
-                            <div className="mt-2 flex flex-wrap gap-1.5">
-                              {[
-                                "Steel water bottle",
-                                "Packaged drinking water",
-                                "Stainless steel utensils",
-                                "Helmets for two wheeler riders",
-                                "Domestic pressure cooker",
-                                "LED bulb",
-                              ].map((prompt) => (
-                                <button
-                                  key={prompt}
-                                  type="button"
-                                  onClick={() => runQuery(prompt)}
-                                  className="rounded-full border border-border-strong bg-surface-raised px-2.5 py-1 text-xs font-medium text-navy hover:border-navy hover:bg-navy/5 transition-colors cursor-pointer"
-                                >
-                                  {prompt}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Interactive Clarification & Refinement Panel (Horizontally organized with input below) */}
-                  {result.isRelevant !== false && (
-                    <ClarificationPanel
-                      items={result.clarificationNeeded ?? []}
-                      product={result.interpretation?.product}
-                      currentQuery={activeQuery}
-                      onRefine={runQuery}
-                      loading={loading}
-                    />
-                  )}
-
-                  {result.conflicts.length > 0 && <ConflictPanel conflicts={result.conflicts} />}
-
-                  {/* Best match + other candidates — the strongest result gets
-                      the strongest visual hierarchy, per docs/ui/SIH.md's
-                      evidence-first UX rule. */}
-                  <div className="space-y-6">
-                    {result.recommendations.length === 0 ? (
-                      <EmptyState
-                        title="No sufficiently relevant standard found"
-                        body="We couldn't find strong evidence for this query in the current BIS knowledge base."
-                        tips={[
-                          "Add the product's material.",
-                          "Describe the intended use or user group.",
-                          "Name the product category more specifically.",
-                        ]}
-                      />
-                    ) : (
-                      <>
-                        {/* 2026-09-04 applicability-gate fix: partition on the
-                            server-authoritative `primaryRecommendation` field,
-                            never on array position. Previously this only
-                            checked recommendations[0]'s applicability state —
-                            a material-mismatched candidate ranked #2+ still
-                            rendered identically to a real recommendation
-                            under a generic "Other relevant standards" heading.
-                            The server already partitions `recommendations`
-                            (primary first), but this filters explicitly
-                            rather than relying on that ordering alone. */}
-                        {(() => {
-                          const primary = result.recommendations.filter((r) => r.primaryRecommendation);
-                          const related = result.recommendations.filter((r) => !r.primaryRecommendation);
-                          return (
-                            <>
-                              {primary.length > 0 ? (
-                                <div>
-                                  <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint pb-2 border-b border-border/70">
-                                    {primary.length === 1 ? "Recommended standard" : `Recommended standards (${primary.length})`}
-                                  </p>
-                                  <div className="mt-4 space-y-4">
-                                    {primary.map((rec, i) => (
-                                      <RecommendationCard key={i} recommendation={rec} matchedAttributes={matchedAttributes} />
-                                    ))}
-                                  </div>
-                                </div>
-                              ) : (
-                                <EmptyState
-                                  title="No standard meets the applicability bar for this query"
-                                  body="Evidence was retrieved, but none of it establishes that a standard applies to what you described — see the related candidates below for context."
-                                  tips={[
-                                    "Add the product's material.",
-                                    "Describe the intended use or user group.",
-                                    "Name the product category more specifically.",
-                                  ]}
-                                />
-                              )}
-
-                              {related.length > 0 && (
-                                <div>
-                                  <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint pb-2 border-b border-border/70">
-                                    Related but not applicable ({related.length})
-                                  </p>
-                                  <p className="mt-2 text-[12px] leading-relaxed text-ink-faint">
-                                    Retrieved because it is semantically related to your search, but the available evidence does not establish that it applies — not a recommendation.
-                                  </p>
-                                  <div className="mt-4 space-y-4">
-                                    {related.map((rec, i) => (
-                                      <RecommendationCard key={i} recommendation={rec} matchedAttributes={matchedAttributes} />
-                                    ))}
-                                  </div>
-                                </div>
-                              )}
-                            </>
-                          );
-                        })()}
-                      </>
-                    )}
-                  </div>
-
-                  {/* Certification & Testing */}
-                  {(result.certification.available || result.testing.available) && (
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      <InfoCard
-                        title="Certification"
-                        available={result.certification.available}
-                        notes={result.certification.notes}
-                        unavailableMessage="We could not establish a reliable certification pathway from the available sources."
-                      />
-                      <InfoCard
-                        title="Testing"
-                        available={result.testing.available}
-                        notes={result.testing.notes}
-                        unavailableMessage="No testing information could be verified from the available sources."
-                      />
-                    </div>
-                  )}
-
-                  {/* Recommended Next Steps */}
-                  {result.nextSteps.length > 0 && (
-                    <section className="rounded-xl border border-border/80 bg-surface-raised p-5 shadow-xs">
-                      <div className="flex items-center gap-2 border-b border-border/60 pb-3">
-                        <svg className="h-4 w-4 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                        <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
-                          Recommended next steps
-                        </h2>
-                      </div>
-                      <ol className="mt-3.5 space-y-2.5">
-                        {result.nextSteps.map((step, i) => (
-                          <li key={i} className="flex items-start gap-3 text-xs sm:text-sm text-ink leading-relaxed">
-                            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-navy/10 font-mono text-[11px] font-bold text-navy">
-                              {String(i + 1).padStart(2, "0")}
-                            </span>
-                            <span>{step}</span>
-                          </li>
-                        ))}
-                      </ol>
-                    </section>
-                  )}
-
-                  {/* Uncertainty & Limitations */}
-                  {result.limitations.length > 0 && (
-                    <section className="rounded-xl border border-border bg-surface-alt/70 p-5 shadow-xs">
-                      <h2 className="text-xs font-bold uppercase tracking-wider text-ink-faint">
-                        Uncertainty &amp; limitations
-                      </h2>
-                      <ul className="mt-2.5 space-y-1.5 text-xs text-ink-soft">
-                        {result.limitations.map((l, i) => (
-                          <li key={i} className="flex gap-2">
-                            <span className="text-ink-faint">•</span>
-                            {l}
-                          </li>
-                        ))}
-                      </ul>
-                    </section>
-                  )}
-                </div>
-              </div>
-            )}
               </div>
                 {/* The centre is a conversation, not a second search box.
                     This used to be a SearchHero calling runQuery, which
@@ -624,14 +444,21 @@ export function HomeClient() {
         )}
       </main>
       <Footer />
-      {/* BIS Chat Bot at Right Corner — real standard numbers only, so the
-          server can resolve authoritative context by ID (P0 audit,
-          2026-09-03), never trusting recommendation text/reason fields. */}
-      <BisChatBot
-        currentQuery={activeQuery}
-        standardNumbers={chatScope.standardNumbers}
-        fromAddedSources={chatScope.fromSources}
-      />
+      {/* Full evidence card for whichever recommendation was clicked in the
+          centre's compact list — same RecommendationCard content as before,
+          just shown on demand instead of permanently inline. */}
+      {result && openRecommendationIndex !== null && result.recommendations[openRecommendationIndex] && (
+        <Modal
+          open
+          onClose={() => setOpenRecommendationIndex(null)}
+          title={result.recommendations[openRecommendationIndex].standardNumber ?? "Standard evidence"}
+        >
+          <RecommendationCard
+            recommendation={result.recommendations[openRecommendationIndex]}
+            matchedAttributes={matchedAttributes}
+          />
+        </Modal>
+      )}
     </div>
   );
 }
