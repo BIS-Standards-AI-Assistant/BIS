@@ -34,7 +34,7 @@ const CANDIDATES = process.argv.slice(2).length
       "inclusionai/ling-3.0-flash-fin:free",
     ];
 
-const RUNS = 3;
+const RUNS = Number(process.env.RUNS ?? 5);
 
 const INTENT_SYSTEM =
   "You extract structured intent from user questions about Indian Standards (BIS). Use null for anything not stated. isRelevant is false only for clearly off-topic queries (weather, recipes, code).";
