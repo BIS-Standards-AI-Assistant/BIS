@@ -446,7 +446,8 @@ function generateComplianceMap(productName: string, recommendations: any[]): Com
     standards: recommendations.filter(r => r.primaryRecommendation).map(r => ({
       standardNumber: r.standardNumber || "Unknown",
       title: r.title,
-      confidence: r.groundingState === "verified" ? "high" : r.groundingState === "supported_inference" ? "medium" : "low"
+      confidence: r.groundingState === "verified" ? "high" : r.groundingState === "supported_inference" ? "medium" : "low",
+      documentId: r.evidence[0]?.documentId
     })),
     certifications: [],
     testing: [],

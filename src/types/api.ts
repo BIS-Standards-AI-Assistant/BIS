@@ -112,6 +112,7 @@ export interface ComplianceMap {
     standardNumber: string;
     title: string;
     confidence: "high" | "medium" | "low";
+    documentId?: string;
   }[];
   certifications: {
     scheme: string;
