@@ -1,4 +1,4 @@
-import { NormalizedVoiceQuery } from "./stt-types";
+import type { NormalizedVoiceQuery } from "./types";
 
 // Indic digit mapping for common Indian scripts to Arabic numerals (0-9)
 const INDIC_DIGIT_MAP: Record<string, string> = {

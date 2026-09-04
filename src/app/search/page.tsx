@@ -8,6 +8,7 @@ import { EvidenceExcerpt } from "@/components/evidence/EvidenceExcerpt";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { ErrorState } from "@/components/feedback/ErrorState";
 import { LoadingIndicator } from "@/components/query/LoadingIndicator";
+import { VoiceInputButton } from "@/components/query/VoiceInputButton";
 import type { SearchResponse } from "@/types/api";
 
 export default function SearchPage() {
@@ -16,9 +17,8 @@ export default function SearchPage() {
   const [result, setResult] = useState<SearchResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  async function runSearch(e: React.FormEvent) {
-    e.preventDefault();
-    if (!query.trim() || loading) return;
+  async function runSearch(text: string) {
+    if (!text.trim() || loading) return;
     setLoading(true);
     setError(null);
     setResult(null);
@@ -26,7 +26,7 @@ export default function SearchPage() {
       const res = await fetch("/api/v1/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: query.trim() }),
+        body: JSON.stringify({ query: text.trim() }),
       });
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
       setResult(await res.json());
@@ -52,14 +52,28 @@ export default function SearchPage() {
             document corpus. This is keyword and semantic retrieval only — no generated answer.
           </p>
 
-          <form onSubmit={runSearch} className="mt-6 flex flex-col gap-2 sm:flex-row">
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="e.g. IS 5522, stainless steel utensils, packaged drinking water…"
-              aria-label="Search Indian Standards"
-              className="flex-1 rounded-md border border-border-strong bg-surface-raised px-4 py-2.5 text-sm text-ink outline-none focus:border-navy"
-            />
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              runSearch(query);
+            }}
+            className="mt-6 flex flex-col gap-2 sm:flex-row"
+          >
+            <div className="flex flex-1 items-center gap-1 rounded-md border border-border-strong bg-surface-raised pr-1.5 focus-within:border-navy">
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="e.g. IS 5522, stainless steel utensils, packaged drinking water…"
+                aria-label="Search Indian Standards"
+                className="flex-1 bg-transparent px-4 py-2.5 text-sm text-ink outline-none"
+              />
+              <VoiceInputButton
+                onResult={(transcript) => {
+                  setQuery(transcript);
+                  runSearch(transcript);
+                }}
+              />
+            </div>
             <button
               type="submit"
               disabled={loading || !query.trim()}
