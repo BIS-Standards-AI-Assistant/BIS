@@ -1,6 +1,6 @@
 # BIS Knowledge Graph — Coverage Report
 
-Generated: 2026-09-03T20:43:03.053Z
+Generated: 2026-09-04T07:09:30.272Z
 
 Every number below is a live count from the database at generation time —
 none of this is projected or estimated.
@@ -9,70 +9,39 @@ none of this is projected or estimated.
 
 | Entity | Count |
 |---|---|
-| Standards | 51 |
+| Standards | 0 |
 | Documents (ingested, retrieval-indexed) | 19 |
 | Chunks | 557 |
-| Certification schemes | 4 |
-| QCOs | 46 |
-| Relationships | 70 |
-| Sources | 44 |
+| Certification schemes | 0 |
+| QCOs | 0 |
+| Relationships | 0 |
+| Sources | 0 |
 
 ## Verification status
 
 | Metric | Value |
 |---|---|
-| Verified standards | 25 / 51 |
-| Standards needing review | 26 / 51 |
-| Verified relationships | 40 / 70 |
-| Relationships needing review | 30 / 70 |
+| Verified standards | 0 / 0 |
+| Standards needing review | 0 / 0 |
+| Verified relationships | 0 / 0 |
+| Relationships needing review | 0 / 0 |
 
 ## Graph density (§39 — which standards are worth prioritizing next)
 
 | Metric | Value |
 |---|---|
-| Standards with at least one ingested document | 19 / 51 |
-| Standards with at least one QCO relationship | 46 / 51 |
-| Standards with zero documents AND zero QCOs (lowest graph density) | 2 |
+| Standards with at least one ingested document | 0 / 0 |
+| Standards with at least one QCO relationship | 0 / 0 |
+| Standards with zero documents AND zero QCOs (lowest graph density) | 0 |
 
 ## Coverage by classification/domain
 
-- Electrical Appliances: 4
-- Automotive Components: 4
-- Civil Construction: 3
-- (unclassified): 3
-- Food & Beverages: 2
-- Electronics: 2
-- Solar Energy: 2
-- Precious Metals: 2
-- Toys & Children Products: 2
-- Consumer Electricals: 2
-- Smart Metering & Power: 2
-- Consumer Electronics: 2
-- Plumbing & Piping: 2
-- Dairy: 1
-- Dairy & Nutrition: 1
-- Electronics & IT: 1
-- Telecommunications: 1
-- Household Electronics: 1
-- Household Appliances: 1
-- Safety Gear: 1
-- PPE: 1
-- Industrial PPE: 1
-- Electrical & Lighting: 1
-- Electrical Infrastructure: 1
-- Electrical Accessories: 1
-- Management Systems: 1
-- Enterprise IT: 1
-- Building Materials: 1
-- Wood & Timber Products: 1
-- Sanitaryware & Ceramics: 1
-- Kitchen & Domestic Appliances: 1
-- Medical Equipment & Devices: 1
+
 
 ## Known gaps (stated honestly, not glossed over)
 
 - No laboratory data collected yet (`laboratories` table does not exist).
 - No committee data collected yet.
-- No amendment/revision graph populated yet — all 51 standards are single, undated edition records.
-- Relationship count above (70) comes from two sources: `scripts/data-relationships.ts` materializes structural FK-mirror edges (STANDARD_HAS_PRODUCT_MANUAL, STANDARD_SUBJECT_TO_QCO), and `scripts/data-relationships-extract.ts` (added P1-A, 2026-09-03) does real text-based extraction — STANDARD_RELATED_TO_STANDARD from shared base identifiers, STANDARD_REFERENCES_STANDARD from ingested chunk text naming another real standard — both kept at `needs_review`, never auto-verified. No amendment/supersession evidence exists in the corpus yet, so STANDARD_SUPERSEDES_STANDARD/DOCUMENT_AMENDS_DOCUMENT remain unpopulated — that is a data gap, not a missing script.
+- No amendment/revision graph populated yet — all 0 standards are single, undated edition records.
+- Relationship count above (0) comes from two sources: `scripts/data-relationships.ts` materializes structural FK-mirror edges (STANDARD_HAS_PRODUCT_MANUAL, STANDARD_SUBJECT_TO_QCO), and `scripts/data-relationships-extract.ts` (added P1-A, 2026-09-03) does real text-based extraction — STANDARD_RELATED_TO_STANDARD from shared base identifiers, STANDARD_REFERENCES_STANDARD from ingested chunk text naming another real standard — both kept at `needs_review`, never auto-verified. No amendment/supersession evidence exists in the corpus yet, so STANDARD_SUPERSEDES_STANDARD/DOCUMENT_AMENDS_DOCUMENT remain unpopulated — that is a data gap, not a missing script.
 - `data/manifests/discovered-sources.json` contains candidate URLs found via sitemap crawling, all `needs_review` — none have been downloaded, confirmed, or extracted from.

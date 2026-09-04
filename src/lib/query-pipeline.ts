@@ -125,7 +125,11 @@ export async function runQueryPipeline(
   }
 
   const chunks = await retrieveChunks(intent.searchQuery || normalized.normalizedQuery, { limit: RETRIEVAL_LIMIT });
-  const aggregated = aggregateEvidence(chunks).slice(0, MAX_CANDIDATES);
+  const aggregatedAll = aggregateEvidence(chunks);
+  const topCandidateScore = aggregatedAll[0]?.weightedScore ?? 0;
+  const aggregated = aggregatedAll
+    .filter((c, idx) => idx === 0 || c.weightedScore >= topCandidateScore * 0.35)
+    .slice(0, MAX_CANDIDATES);
 
   const coverageByStandard = new Map(
     aggregated.map((c) => [c.documentId, analyzeCoverage(intent, c, normalized.identifiers)]),

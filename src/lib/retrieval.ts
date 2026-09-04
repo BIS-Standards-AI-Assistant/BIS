@@ -97,6 +97,26 @@ export function getLocalSeedChunks(): SeedChunkItem[] {
  * configured or unreachable. Ensures the app remains completely operational
  * with verified BIS standard documents out of the box.
  */
+const STOP_WORDS = new Set([
+  "a", "about", "above", "after", "again", "against", "all", "am", "an", "and",
+  "any", "are", "as", "at", "be", "because", "been", "before", "being", "below",
+  "between", "both", "but", "by", "can", "did", "do", "does", "doing", "don",
+  "down", "during", "each", "few", "for", "from", "further", "had", "has",
+  "have", "having", "he", "her", "here", "hers", "herself", "him", "himself",
+  "his", "how", "i", "if", "in", "into", "is", "it", "its", "itself", "just",
+  "me", "more", "most", "my", "myself", "no", "nor", "not", "now", "of", "off",
+  "on", "once", "only", "or", "other", "our", "ours", "ourselves", "out", "over",
+  "own", "s", "same", "she", "should", "so", "some", "such", "t", "than",
+  "that", "the", "their", "theirs", "them", "themselves", "then", "there",
+  "these", "they", "this", "those", "through", "to", "too", "under", "until",
+  "up", "very", "was", "we", "were", "what", "when", "where", "which", "while",
+  "who", "whom", "why", "will", "with", "you", "your", "yours", "yourself",
+  "yourselves",
+  "tell", "give", "show", "find", "list", "need", "want", "require", "required",
+  "standard", "standards", "india", "indian", "manufacture", "manufacturing",
+  "produce", "production", "make", "making"
+]);
+
 async function retrieveSeedChunks(
   query: string,
   { limit = 8, reranker = documentDiversityReranker }: { limit?: number; reranker?: Reranker } = {},
@@ -105,27 +125,42 @@ async function retrieveSeedChunks(
   if (seedChunks.length === 0) return [];
 
   const resolvedIds = resolveStandardIds(query);
-  const queryTerms = query
+  const rawTerms = query
     .toLowerCase()
     .replace(/[^\w\s]/g, " ")
     .split(/\s+/)
     .filter((w) => w.length > 1);
 
+  const filteredTerms = rawTerms.filter((w) => !STOP_WORDS.has(w));
+  const queryTerms = filteredTerms.length > 0 ? filteredTerms : rawTerms;
+
   const scored = seedChunks.map((item) => {
     let kwScore = 0;
-    const content = `${item.doc.standardNumber} ${item.doc.title} ${item.text}`.toLowerCase();
+    const titleLower = item.doc.title.toLowerCase();
+    const stdNumLower = item.doc.standardNumber.toLowerCase();
+    const textLower = item.text.toLowerCase();
+
     for (const term of queryTerms) {
-      if (content.includes(term)) {
+      if (stdNumLower.includes(term)) {
+        kwScore += 15;
+      }
+      if (titleLower.includes(term)) {
+        kwScore += 10;
+        const re = new RegExp(`\\b${term}\\b`, "gi");
+        const count = (titleLower.match(re) || []).length;
+        kwScore += count * 2;
+      }
+      if (textLower.includes(term)) {
         kwScore += 1;
         const re = new RegExp(`\\b${term}\\b`, "gi");
-        const count = (content.match(re) || []).length;
+        const count = (textLower.match(re) || []).length;
         kwScore += count * 0.2;
       }
     }
 
     const idMatch = resolvedIds.some((r) => matchesResolvedId(item.doc.standardNumber, r));
     if (idMatch) {
-      kwScore += 10;
+      kwScore += 25;
     }
 
     return { item, kwScore, idMatch };
@@ -134,7 +169,13 @@ async function retrieveSeedChunks(
   const matching = scored.filter((s) => s.kwScore > 0 || s.idMatch);
   matching.sort((a, b) => b.kwScore - a.kwScore);
 
-  const pool = matching.slice(0, limit * 4);
+  const maxKwScore = matching[0]?.kwScore ?? 0;
+  // If we have strong matches (e.g. title/ID match), prune low-scoring noise
+  const filteredMatching = maxKwScore >= 5
+    ? matching.filter((s) => s.kwScore >= maxKwScore * 0.35 || s.idMatch)
+    : matching;
+
+  const pool = filteredMatching.slice(0, limit * 4);
   const candidates: RetrievalCandidate[] = pool.map((m, idx) => ({
     chunkId: m.item.id,
     documentId: slugifyStandardNumber(m.item.doc.standardNumber),
@@ -212,7 +253,16 @@ async function keywordSearch(
   const strictRows = strict.rows as unknown as Array<{ id: string; rank: number }>;
   if (strictRows.length > 0) return strictRows;
 
-  const lexemes = await db.execute(sql`SELECT string_agg(lexeme, ' | ') AS q FROM unnest(to_tsvector('english', ${query})) AS lexeme`);
+  const cleaned = query
+    .toLowerCase()
+    .replace(/[^\w\s]/g, " ")
+    .split(/\s+/)
+    .filter((w) => w.length > 1 && !STOP_WORDS.has(w))
+    .join(" ");
+
+  const queryToBroaden = cleaned.trim().length > 0 ? cleaned : query;
+
+  const lexemes = await db.execute(sql`SELECT string_agg(lexeme, ' | ') AS q FROM unnest(to_tsvector('english', ${queryToBroaden})) AS lexeme`);
   const orQuery = (lexemes.rows as unknown as Array<{ q: string | null }>)[0]?.q;
   if (!orQuery) return [];
 

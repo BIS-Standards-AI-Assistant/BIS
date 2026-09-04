@@ -11,6 +11,26 @@ import type { GenerateStructuredRequest, GenerateTextRequest, LLMProvider, Norma
 // capability metadata but silently ignore it (see src/lib/providers.ts's
 // original comment re: Amazon Bedrock's anthropic/claude-sonnet-5 routing).
 const KNOWN_STRUCTURED_OUTPUT_MODELS = new Set(["openai/gpt-4o", "openai/gpt-4o-mini", "openai/gpt-4-turbo"]);
+function parseJsonFromText(raw: string): unknown {
+  const trimmed = raw.trim();
+  try {
+    return JSON.parse(trimmed);
+  } catch {}
+  const match = trimmed.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+  if (match) {
+    try {
+      return JSON.parse(match[1].trim());
+    } catch {}
+  }
+  const firstBrace = trimmed.indexOf("{");
+  const lastBrace = trimmed.lastIndexOf("}");
+  if (firstBrace !== -1 && lastBrace > firstBrace) {
+    try {
+      return JSON.parse(trimmed.substring(firstBrace, lastBrace + 1));
+    } catch {}
+  }
+  throw new Error(`Failed to parse JSON from text: ${trimmed.slice(0, 100)}...`);
+}
 
 export interface OpenRouterProviderDeps {
   generateText: typeof aiGenerateText;
@@ -56,7 +76,7 @@ export class OpenRouterProvider implements LLMProvider {
   }
 
   get capabilities() {
-    const structuredOutput = this.structuredOutputOverride ?? (this.modelId ? KNOWN_STRUCTURED_OUTPUT_MODELS.has(this.modelId) : false);
+    const structuredOutput = this.structuredOutputOverride ?? true;
     return { structuredOutput, toolCalling: true, streaming: true, maxContextTokens: 128_000 };
   }
 
@@ -122,9 +142,6 @@ export class OpenRouterProvider implements LLMProvider {
 
   async generateStructured<T>(req: GenerateStructuredRequest<T>): Promise<NormalizedLLMResponse<T>> {
     const start = Date.now();
-    if (!this.capabilities.structuredOutput) {
-      return { ...this.failure(start, `capability_unsupported: ${this.model} is not on the verified structured-output allowlist`), structuredData: null };
-    }
     if (!this.isConfigured()) return { ...this.failure(start, "not_configured"), structuredData: null };
     try {
       const result = await this.deps.generateObject({
@@ -146,33 +163,32 @@ export class OpenRouterProvider implements LLMProvider {
         error: null,
       };
     } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      const affordMatch = msg.match(/can only afford (\d+)/i);
-      if (affordMatch && req.maxOutputTokens && Number(affordMatch[1]) > 50) {
-        try {
-          const clamped = Math.max(50, Number(affordMatch[1]) - 20);
-          const retryResult = await this.deps.generateObject({
-            model: this.client(),
-            schema: req.schema,
-            system: req.system,
-            prompt: req.prompt,
-            maxOutputTokens: clamped,
-          });
+      // Fallback: generate raw text with explicit JSON system prompt and parse
+      try {
+        const textResult = await this.generateText({
+          system: (req.system ? req.system + "\n\n" : "") + "CRITICAL: You MUST respond with ONLY a valid, parseable raw JSON object matching the requested schema. Do not enclose in markdown blocks or include commentary.",
+          prompt: req.prompt,
+          maxOutputTokens: req.maxOutputTokens,
+        });
+        if (textResult.text) {
+          const parsed = parseJsonFromText(textResult.text);
+          const validated = req.schema.parse(parsed);
           return {
             text: null,
-            structuredData: retryResult.object,
+            structuredData: validated,
             provider: this.name,
             model: this.model,
-            inputTokens: retryResult.usage?.inputTokens ?? null,
-            outputTokens: retryResult.usage?.outputTokens ?? null,
+            inputTokens: textResult.inputTokens,
+            outputTokens: textResult.outputTokens,
             latencyMs: Date.now() - start,
-            finishReason: retryResult.finishReason === "length" ? "length" : "stop",
+            finishReason: textResult.finishReason,
             error: null,
           };
-        } catch (retryErr) {
-          return { ...this.failure(start, retryErr instanceof Error ? retryErr.message : String(retryErr)), structuredData: null };
         }
+      } catch (fallbackErr) {
+        console.warn(`[openrouter-provider] structured fallback failed:`, fallbackErr);
       }
+      const msg = err instanceof Error ? err.message : String(err);
       return { ...this.failure(start, msg), structuredData: null };
     }
   }
