@@ -10,6 +10,7 @@ import { computeEngineConfidence } from "@/lib/confidence";
 import { generateAnswer, validateRecommendationExplanations, type EvidencePackage, type EvidencePackageCandidate } from "@/lib/answer";
 import { classifyKnowledgeBoundary } from "@/lib/knowledge-boundary";
 import { assessApplicability, deriveRecommendationStatus } from "@/lib/applicability";
+import type { Recommendation } from "@/types/api";
 import { buildReferenceEntry } from "@/lib/reference-registry";
 import { getNeighbors, type GraphNeighbor } from "@/lib/graph/graph-retrieval";
 import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
@@ -441,7 +442,7 @@ export async function runQueryPipeline(
  * Helper to generate compliance map data. If running without a live DB,
  * it reads the CSV to provide mock data for the Product Compliance Map.
  */
-function generateComplianceMap(productName: string, recommendations: any[]): ComplianceMap {
+function generateComplianceMap(productName: string, recommendations: Recommendation[]): ComplianceMap {
   const map: ComplianceMap = {
     standards: recommendations.filter(r => r.primaryRecommendation).map(r => ({
       standardNumber: r.standardNumber || "Unknown",

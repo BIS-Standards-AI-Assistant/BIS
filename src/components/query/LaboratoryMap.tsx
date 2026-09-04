@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import "leaflet/dist/leaflet.css";
 import type { ComplianceMap } from "@/types/api";
@@ -10,11 +10,18 @@ const TileLayer = dynamic(() => import("react-leaflet").then((mod) => mod.TileLa
 const Marker = dynamic(() => import("react-leaflet").then((mod) => mod.Marker), { ssr: false });
 const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), { ssr: false });
 
-let customIcon: any = null;
+type LeafletIcon = import("leaflet").Icon;
+
+let customIcon: LeafletIcon | null = null;
 if (typeof window !== "undefined") {
-  const L = require("leaflet");
-  // Fix for default marker icons in Next.js
-  delete L.Icon.Default.prototype._getIconUrl;
+  // leaflet must load lazily and only in the browser; a static import
+  // breaks SSR, which is why this is a require and not an import.
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const L = require("leaflet") as typeof import("leaflet");
+  // Leaflet's bundled default-icon URLs break under a bundler. Removing the
+  // private resolver forces mergeOptions' explicit URLs to be used. The cast
+  // is because _getIconUrl is intentionally absent from Leaflet's types.
+  delete (L.Icon.Default.prototype as unknown as { _getIconUrl?: unknown })._getIconUrl;
   L.Icon.Default.mergeOptions({
     iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
     iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
@@ -35,11 +42,14 @@ interface LaboratoryMapProps {
 }
 
 export function LaboratoryMap({ laboratories }: LaboratoryMapProps) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  // "Have we hydrated?" without a setState-in-effect render cascade: the
+  // server snapshot is false, the client snapshot true, and React swaps
+  // them during hydration.
+  const isMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   if (!isMounted) return <div className="h-[400px] bg-slate-100 animate-pulse rounded-lg flex items-center justify-center text-slate-500">Loading map...</div>;
 
@@ -51,7 +61,7 @@ export function LaboratoryMap({ laboratories }: LaboratoryMapProps) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
         <h3 className="text-lg font-medium text-slate-700">No laboratories found</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">We couldn't find any recognised laboratories for these specific testing requirements in the dataset.</p>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">We couldn&apos;t find any recognised laboratories for these specific testing requirements in the dataset.</p>
       </div>
     );
   }
@@ -67,7 +77,7 @@ export function LaboratoryMap({ laboratories }: LaboratoryMapProps) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {laboratories.map((lab, i) => (
-          <Marker key={i} position={[lab.lat, lab.lng]} icon={customIcon}>
+          <Marker key={i} position={[lab.lat, lab.lng]} icon={customIcon ?? undefined}>
             <Popup>
               <div className="p-1">
                 <h4 className="font-semibold text-slate-800 text-sm">{lab.name}</h4>

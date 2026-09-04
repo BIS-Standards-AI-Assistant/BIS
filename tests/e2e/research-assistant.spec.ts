@@ -10,7 +10,7 @@ import { KNOWN_QUERIES } from "./fixtures/known-data";
 test.describe("Journey C/D: Research Assistant — scoped context, then explicit global expansion", () => {
   test("chat opens scoped to the current results and stays scoped for context/evidence/missing-info questions", async ({ page }) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-    await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
 
     await page.getByRole("button", { name: "Discuss these results" }).click();
     await expect(page.getByText(`Discussing: "${KNOWN_QUERIES.exactStandard}"`)).toBeVisible();
@@ -43,7 +43,7 @@ test.describe("Journey C/D: Research Assistant — scoped context, then explicit
 
   test("chat context is isolated per search — a fresh query resets the discussion scope", async ({ page }) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-    await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
     await page.getByRole("button", { name: "Discuss these results" }).click();
     await expect(page.getByText(`Discussing: "${KNOWN_QUERIES.exactStandard}"`)).toBeVisible();
 
@@ -51,7 +51,7 @@ test.describe("Journey C/D: Research Assistant — scoped context, then explicit
     const searchInput = page.getByRole("textbox", { name: /product or compliance question/i });
     await searchInput.fill(KNOWN_QUERIES.materialMismatch);
     await searchInput.press("Enter");
-    await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
 
     // The chat's context indicator must reflect the NEW query, not the old one.
     await expect(page.getByText(`Discussing: "${KNOWN_QUERIES.materialMismatch}"`)).toBeVisible({ timeout: 10_000 });

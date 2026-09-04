@@ -27,12 +27,12 @@ for (const bp of BREAKPOINTS) {
 
       await input.fill(KNOWN_QUERIES.exactStandard);
       await input.press("Enter");
-      await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+      await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
     });
 
     test("results render without horizontal overflow and the Best Match section is reachable", async ({ page }) => {
       await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-      await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+      await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
 
       const hasHorizontalScroll = await page.evaluate(
         () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
@@ -46,7 +46,7 @@ for (const bp of BREAKPOINTS) {
 
     test("research assistant chat is usable at this breakpoint", async ({ page }) => {
       await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-      await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+      await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
 
       const chatButton = page.getByRole("button", { name: "Discuss these results" });
       await chatButton.scrollIntoViewIfNeeded();
