@@ -278,24 +278,15 @@ export function HomeClient() {
               <div className="mt-6 space-y-6">
                 {/* Evidence-grounded synthesis of the whole result set */}
                 <section className="rounded-lg border border-border-strong/70 bg-surface-raised p-5 sm:p-6">
+                  {/* prompts/UI_UX_FINAL.md §8: raw retrieval metrics (candidate
+                      counts, response time) read as internal telemetry and must
+                      not sit in the primary answer view — moved into the
+                      "Technical details" disclosure below, never removed
+                      (still real, still inspectable). */}
                   <div className="flex items-center justify-between gap-3 border-b border-border/60 pb-3.5">
-                    <div>
-                      <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
-                        Search Synthesis
-                      </h2>
-                      <p className="text-[10.5px] text-ink-faint">
-                        {result.recommendations.length} candidate standard{result.recommendations.length === 1 ? "" : "s"}
-                        {" · "}
-                        {result.recommendations.reduce((n, r) => n + r.evidence.length, 0)} supporting source
-                        {result.recommendations.reduce((n, r) => n + r.evidence.length, 0) === 1 ? "" : "s"}
-                        {typeof result.latencyMs === "number" && (
-                          <>
-                            {" · "}
-                            <span className="tabular-nums">{(result.latencyMs / 1000).toFixed(1)}s response</span>
-                          </>
-                        )}
-                      </p>
-                    </div>
+                    <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
+                      Research Summary
+                    </h2>
                     <ConfidenceBadge confidence={result.confidence} />
                   </div>
                   <div className="mt-4">
@@ -311,18 +302,30 @@ export function HomeClient() {
                   <p className="mt-3 border-t border-border/50 pt-2.5 text-[10.5px] leading-relaxed text-ink-faint">
                     This service searches public BIS standard titles and scope summaries, public certification-scheme documentation, and BIS public FAQs. It does not hold the full text of Indian Standards.
                   </p>
-                  {result.limitations.length > 0 && (
-                    <details className="mt-4 rounded-md bg-surface-alt/80 border border-border/60 p-3.5 text-xs">
-                      <summary className="cursor-pointer font-bold uppercase tracking-wider text-[10.5px] text-ink-faint">
-                        Why this result — technical detail
-                      </summary>
+                  <details className="mt-4 rounded-md bg-surface-alt/80 border border-border/60 p-3.5 text-xs">
+                    <summary className="cursor-pointer font-bold uppercase tracking-wider text-[10.5px] text-ink-faint">
+                      Technical details
+                    </summary>
+                    <p className="mt-2 text-ink-soft leading-relaxed">
+                      {result.recommendations.length} candidate standard{result.recommendations.length === 1 ? "" : "s"}
+                      {" · "}
+                      {result.recommendations.reduce((n, r) => n + r.evidence.length, 0)} supporting source
+                      {result.recommendations.reduce((n, r) => n + r.evidence.length, 0) === 1 ? "" : "s"}
+                      {typeof result.latencyMs === "number" && (
+                        <>
+                          {" · "}
+                          <span className="tabular-nums">{(result.latencyMs / 1000).toFixed(1)}s response</span>
+                        </>
+                      )}
+                    </p>
+                    {result.limitations.length > 0 && (
                       <ul className="mt-2 space-y-1 text-ink-soft leading-relaxed">
                         {result.limitations.map((l, i) => (
                           <li key={i}>{l}</li>
                         ))}
                       </ul>
-                    </details>
-                  )}
+                    )}
+                  </details>
                 </section>
 
                 <div className="space-y-6 min-w-0">
