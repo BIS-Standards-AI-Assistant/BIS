@@ -61,7 +61,7 @@ function logProviderEvent(event: string, fields: Record<string, unknown>): void 
   console.log(`[llm-provider] ${event}`, JSON.stringify(fields));
 }
 
-const ROUTING_ORDER: ProviderName[] = ["local", "openrouter-free", "paid"];
+const ROUTING_ORDER: ProviderName[] = ["gemini", "local", "openrouter-free", "paid"];
 
 /**
  * Resolves which providers to try, and in what order, from `LLM_PROVIDER`.

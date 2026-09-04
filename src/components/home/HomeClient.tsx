@@ -146,17 +146,16 @@ export function HomeClient() {
     [router, searchParams, lang],
   );
 
-  // Runs a query that arrived via ?q= (a hard load, or a new search from
-  // the header's global Search overlay). Guarded by lastAutoRunQuery so
-  // this doesn't re-fire for a ?q= this component itself just set via
-  // runQuery's router.replace above — only a genuinely new query value
-  // (one this effect hasn't already started) triggers a run. A ref that
-  // only ever latched "has this ever run" would silently ignore every
-  // ?q= change after the first, leaving stale results on screen.
+  const prevUrlQueryRef = useRef<string | null>(null);
   useEffect(() => {
-    if (urlQuery && lastAutoRunQuery.current !== urlQuery) {
-      lastAutoRunQuery.current = urlQuery;
+    const prev = prevUrlQueryRef.current;
+    prevUrlQueryRef.current = urlQuery;
+    if (urlQuery && urlQuery !== prev) {
       queueMicrotask(() => runQuery(urlQuery));
+    } else if (!urlQuery && prev) {
+      setResult(null);
+      setError(null);
+      setActiveQuery("");
     }
   }, [urlQuery, runQuery]);
 
@@ -164,6 +163,7 @@ export function HomeClient() {
     setResult(null);
     setError(null);
     setActiveQuery("");
+    prevUrlQueryRef.current = "";
     router.replace("/", { scroll: false });
   }
 
@@ -258,7 +258,49 @@ export function HomeClient() {
         )}
 
         {!showHomepage && (
-          <div className="mx-auto max-w-[1640px] px-4 py-5 sm:px-6">
+          <div className="mx-auto max-w-[1640px] px-4 py-4 sm:px-6">
+            {/* Quick Return to Landing Page Navigation Bar */}
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-surface-raised px-4 py-2.5 shadow-xs">
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={handleClearResults}
+                  className="group inline-flex items-center gap-2 rounded-md bg-navy px-3.5 py-1.5 text-xs font-semibold text-white shadow-xs transition-all hover:bg-navy-deep focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-1"
+                  title="Return to the landing page search bar to enter a new question"
+                >
+                  <svg
+                    className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  <span>Back to Landing Page (New Search)</span>
+                </button>
+                <span className="hidden text-xs text-ink-faint sm:inline">
+                  Enter a new product query or standard question
+                </span>
+              </div>
+
+              {activeQuery && (
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="text-ink-faint">Showing research for:</span>
+                  <span className="max-w-[200px] truncate font-semibold text-navy sm:max-w-[380px]">
+                    &ldquo;{activeQuery}&rdquo;
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleClearResults}
+                    className="ml-1 font-semibold text-blue hover:underline"
+                  >
+                    Clear &amp; Ask New
+                  </button>
+                </div>
+              )}
+            </div>
+
             <div className={`grid grid-cols-1 gap-5 ${workspaceColumns}`}>
               {/* LEFT: official sources in scope + what the search was read as */}
               {showSources && (
@@ -311,8 +353,12 @@ export function HomeClient() {
                     <button
                       type="button"
                       onClick={handleClearResults}
-                      className="rounded-md border border-border-strong px-2.5 py-1 text-[11px] font-bold text-ink-soft transition-colors hover:border-navy hover:text-navy"
+                      className="inline-flex items-center gap-1 rounded-md border border-navy/30 bg-navy/5 px-2.5 py-1 text-[11px] font-bold text-navy transition-colors hover:bg-navy hover:text-white"
+                      title="Return to the landing page search prompt"
                     >
+                      <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                      </svg>
                       + New research
                     </button>
                     {!showSources && (

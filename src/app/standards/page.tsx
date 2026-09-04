@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StandardsListClient, type StandardSummary } from "@/components/standards/StandardsListClient";
@@ -114,6 +115,11 @@ export default async function StandardsPage() {
       <Header />
       <main className="flex-1">
         <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-14">
+          <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-xs">
+            <Link href="/" className="inline-flex items-center gap-1 font-semibold text-navy hover:underline">
+              <span>&larr;</span> Back to Home (AI Search)
+            </Link>
+          </nav>
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">
               Indian Standards Knowledge Base

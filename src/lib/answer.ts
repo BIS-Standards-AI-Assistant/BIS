@@ -238,7 +238,7 @@ export async function generateAnswer(
     schema: LLMAnswerSchema,
     system: SYSTEM_PROMPT + languageInstruction(answerLanguage),
     prompt: buildPrompt(pkg),
-    maxOutputTokens: 800,
+    maxOutputTokens: 3000,
   });
 
   if (response?.structuredData) return response.structuredData;

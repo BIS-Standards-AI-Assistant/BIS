@@ -6,7 +6,7 @@ import type { ZodType } from "zod";
  * a provider SDK's own request/response shapes. See docs/ARCHITECTURE.md.
  */
 
-export type ProviderName = "local" | "openrouter-free" | "paid";
+export type ProviderName = "gemini" | "local" | "openrouter-free" | "paid";
 
 export interface ProviderCapabilities {
   /** Can this provider reliably return schema-conformant structured JSON? Never assumed true by default. */
