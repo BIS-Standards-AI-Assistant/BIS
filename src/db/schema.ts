@@ -235,3 +235,61 @@ export const relationshipsRelations = relations(relationships, ({ one }) => ({
   document: one(documents, { fields: [relationships.documentId], references: [documents.id] }),
   source: one(sources, { fields: [relationships.sourceId], references: [sources.id] }),
 }));
+
+/**
+ * BIS Recognised Laboratories for Product Testing.
+ */
+export const laboratories = pgTable("laboratories", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  state: text("state"),
+  city: text("city"), // Derived or parsed from name/address
+  status: text("status"), // e.g. "Private", "Govt."
+  oslCode: text("osl_code"),
+  recognitionValidUpTo: text("recognition_valid_up_to"),
+  remarks: text("remarks"),
+  lat: real("lat"),
+  lng: real("lng"),
+  verificationStatus: text("verification_status").notNull().default("unverified").$type<VerificationStatus>(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+/**
+ * Specific testing requirements that apply to a Standard.
+ */
+export const testingRequirements = pgTable("testing_requirements", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  testName: text("test_name").notNull(), // e.g. "Electrical Safety", "Leakage Current"
+  standardId: uuid("standard_id").notNull().references(() => standards.id),
+  clause: text("clause"),
+  category: text("category"), // e.g. "Safety", "Performance"
+  sourceId: uuid("source_id").references(() => sources.id),
+  verificationStatus: text("verification_status").notNull().default("unverified").$type<VerificationStatus>(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+/**
+ * Mapping between Laboratories and the Testing Requirements they can perform.
+ */
+export const laboratoryCapabilities = pgTable("laboratory_capabilities", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  laboratoryId: uuid("laboratory_id").notNull().references(() => laboratories.id),
+  testingRequirementId: uuid("testing_requirement_id").notNull().references(() => testingRequirements.id),
+  verificationStatus: text("verification_status").notNull().default("unverified").$type<VerificationStatus>(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const laboratoriesRelations = relations(laboratories, ({ many }) => ({
+  capabilities: many(laboratoryCapabilities),
+}));
+
+export const testingRequirementsRelations = relations(testingRequirements, ({ one, many }) => ({
+  standard: one(standards, { fields: [testingRequirements.standardId], references: [standards.id] }),
+  source: one(sources, { fields: [testingRequirements.sourceId], references: [sources.id] }),
+  laboratories: many(laboratoryCapabilities),
+}));
+
+export const laboratoryCapabilitiesRelations = relations(laboratoryCapabilities, ({ one }) => ({
+  laboratory: one(laboratories, { fields: [laboratoryCapabilities.laboratoryId], references: [laboratories.id] }),
+  testingRequirement: one(testingRequirements, { fields: [laboratoryCapabilities.testingRequirementId], references: [testingRequirements.id] }),
+}));
