@@ -21,6 +21,8 @@ import { EmptyState } from "@/components/feedback/EmptyState";
 import { ErrorState } from "@/components/feedback/ErrorState";
 import { BisChatBot } from "@/components/chat/BisChatBot";
 import { SourcesPanel } from "@/components/workspace/SourcesPanel";
+import { buildChatScope } from "@/lib/chat-scope";
+import type { SourceCandidate } from "@/lib/source-search";
 import {
   getSourcesServerSnapshot,
   getSourcesSnapshot,
@@ -76,6 +78,9 @@ export function HomeClient() {
 
   const [loading, setLoading] = useState(false);
   const [showSources, setShowSources] = useState(true);
+  // §34: one owner for the research-context state. The left panel reports
+  // selection here; the centre and the chat both read it from here.
+  const [selectedSources, setSelectedSources] = useState<SourceCandidate[]>([]);
   const [showWorkspace, setShowWorkspace] = useState(true);
   const [result, setResult] = useState<QueryResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -166,6 +171,18 @@ export function HomeClient() {
   const resultStandardNumbers =
     result?.recommendations.map((r) => r.standardNumber).filter((n): n is string => n !== null) ?? [];
   const sourceStandardNumbers = selectedStandardNumbers(librarySources);
+  // Sources the reader chose take priority over standards the search
+  // happened to return — see src/lib/chat-scope.ts for why ordering these
+  // the other way round silently dropped their own documents.
+  // Standards the reader explicitly selected in the left panel outrank both
+  // their uploaded documents' citations and the search's own results.
+  const selectedSourceNumbers = selectedSources
+    .map((s) => s.standardNumber)
+    .filter((n): n is string => Boolean(n));
+  const chatScope = buildChatScope(
+    [...new Set([...selectedSourceNumbers, ...sourceStandardNumbers])],
+    resultStandardNumbers,
+  );
 
   // What the reader actually told us, as the explainability panel shows it
   // (§8). Only fields the interpreter genuinely extracted — an axis it could
@@ -179,7 +196,7 @@ export function HomeClient() {
         { attribute: "Sector", value: result.interpretation.sector },
       ].filter((a): a is MatchedAttribute => typeof a.value === "string" && a.value.length > 0))
     : [];
-  const chatStandardNumbers = [...new Set([...resultStandardNumbers, ...sourceStandardNumbers])];
+
 
   // Column template follows which panels are open. Both side panels are
   // hidden below their breakpoint (sources under lg, workspace under xl), so
@@ -227,8 +244,9 @@ export function HomeClient() {
                 <div className="hidden lg:block lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
                   <SourcesPanel
                     interpretation={result?.interpretation ?? null}
-                    scopeStandardNumbers={chatStandardNumbers}
-                    scopeQuery={activeQuery}
+                    selectedSources={selectedSources}
+                    onSelectionChange={setSelectedSources}
+                    onResearch={runQuery}
                     onCollapse={() => setShowSources(false)}
                   />
                 </div>
@@ -244,12 +262,22 @@ export function HomeClient() {
                   <div className="min-w-0">
                     <h1 className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-navy">
                       <AssistantIcon className="h-4.5 w-4.5" />
-                      AI Assistant
+                      BIS Research
                     </h1>
-                    {sourceStandardNumbers.length > 0 && (
+                    {/* §20's context chip: says what the assistant is
+                        discussing, so an answer never appears to come from
+                        nowhere. */}
+                    <p className="mt-0.5 text-[11px] text-ink-faint">
+                      {chatScope.standardNumbers.length > 0
+                        ? `${chatScope.standardNumbers.length} source${chatScope.standardNumbers.length === 1 ? "" : "s"} in context`
+                        : "No sources selected — search BIS sources on the left"}
+                    </p>
+                    {chatScope.fromSources > 0 && (
                       <p className="mt-0.5 text-[11px] text-ink-faint">
-                        Including {sourceStandardNumbers.length} standard
-                        {sourceStandardNumbers.length === 1 ? "" : "s"} cited by your added sources
+                        Including {chatScope.fromSources} standard
+                        {chatScope.fromSources === 1 ? "" : "s"} cited by your added sources
+                        {chatScope.droppedResults > 0 &&
+                          ` · ${chatScope.droppedResults} search result${chatScope.droppedResults === 1 ? "" : "s"} beyond the assistant's limit`}
                       </p>
                     )}
                   </div>
@@ -566,8 +594,8 @@ export function HomeClient() {
           2026-09-03), never trusting recommendation text/reason fields. */}
       <BisChatBot
         currentQuery={activeQuery}
-        standardNumbers={chatStandardNumbers}
-        fromAddedSources={sourceStandardNumbers.length}
+        standardNumbers={chatScope.standardNumbers}
+        fromAddedSources={chatScope.fromSources}
       />
     </div>
   );

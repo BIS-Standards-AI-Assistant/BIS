@@ -2,12 +2,8 @@
 
 import { useRef, useState, useSyncExternalStore } from "react";
 import { InterpretationPanel } from "@/components/query/InterpretationPanel";
-import {
-  getConversationServerSnapshot,
-  getConversationSnapshot,
-  sendAssistantMessage,
-  subscribeToConversation,
-} from "@/lib/assistant-conversation";
+import { groupChunksIntoSources, sourceLabel, type SourceCandidate } from "@/lib/source-search";
+import type { RetrievedChunk } from "@/types/api";
 import {
   ACCEPTED_SOURCE_TYPES,
   addSource,
@@ -15,7 +11,6 @@ import {
   getSourcesServerSnapshot,
   getSourcesSnapshot,
   removeSource,
-  selectedStandardNumbers,
   subscribeToSources,
   toggleSourceSelected,
   updateSource,
@@ -47,54 +42,68 @@ import type { QueryInterpretation } from "@/types/api";
 
 export function SourcesPanel({
   interpretation,
-  scopeStandardNumbers = [],
-  scopeQuery = "",
+  selectedSources,
+  onSelectionChange,
+  onResearch,
   onCollapse,
 }: {
   interpretation?: QueryInterpretation | null;
-  /**
-   * The assistant's scope, decided once by HomeClient and passed to every
-   * surface, so this box and the chat ask the same question of the same
-   * knowledge base and cannot disagree.
-   */
-  scopeStandardNumbers?: string[];
-  scopeQuery?: string;
+  /** Sources the reader has chosen as research context (§6). */
+  selectedSources: SourceCandidate[];
+  onSelectionChange: (sources: SourceCandidate[]) => void;
+  /** Fired when a source search runs, so the centre can open a research conversation (§35). */
+  onResearch: (query: string) => void;
   onCollapse: () => void;
 }) {
   const sources = useSyncExternalStore(subscribeToSources, getSourcesSnapshot, getSourcesServerSnapshot);
   const [isDragging, setIsDragging] = useState(false);
   const [rejection, setRejection] = useState<string | null>(null);
-  const [prompt, setPrompt] = useState("");
-  const conversation = useSyncExternalStore(
-    subscribeToConversation,
-    getConversationSnapshot,
-    getConversationServerSnapshot,
-  );
-  const asking = conversation.pending;
-  // The assistant's last reply, wherever it was asked from.
-  const latest = [...conversation.messages]
-    .reverse()
-    .find((m) => m.sender === "assistant" && m.id !== "greeting");
+  const [query, setQuery] = useState("");
+  const [searching, setSearching] = useState(false);
+  const [results, setResults] = useState<SourceCandidate[] | null>(null);
+  const [searchError, setSearchError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const fromSources = selectedStandardNumbers(sources);
-
   /**
-   * Sends into the one shared conversation, with the scope HomeClient
-   * decided — the current results plus the selected sources. This box and
-   * the chat therefore give the same answer to the same question, and the
-   * exchange appears in both.
+   * Retrieval only — no answer generation (§4). This posts to the existing
+   * /api/v1/search, which runs hybrid retrieval and returns chunks with no
+   * LLM in the path, then groups them into selectable sources. The panel
+   * never produces prose; that is the centre's job.
    */
-  async function ask(question: string) {
-    const message = question.trim();
-    if (!message || asking) return;
-    setPrompt("");
-    await sendAssistantMessage({
-      message,
-      standardNumbers: scopeStandardNumbers,
-      originalQuery: scopeQuery || message,
-    });
+  async function runSourceSearch(raw: string) {
+    const q = raw.trim();
+    if (!q || searching) return;
+
+    setSearching(true);
+    setSearchError(null);
+    setResults(null);
+    try {
+      const res = await fetch("/api/v1/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: q, limit: 20 }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data: { results: RetrievedChunk[] } = await res.json();
+      setResults(groupChunksIntoSources(data.results ?? []));
+      onResearch(q);
+    } catch {
+      setSearchError("We couldn't search BIS sources just now. Please try again.");
+    } finally {
+      setSearching(false);
+    }
   }
+
+  const isSelected = (id: string) => selectedSources.some((s) => s.id === id);
+
+  function toggleSource(source: SourceCandidate) {
+    onSelectionChange(
+      isSelected(source.id)
+        ? selectedSources.filter((s) => s.id !== source.id)
+        : [...selectedSources, source],
+    );
+  }
+
 
   async function ingest(files: FileList | File[]) {
     setRejection(null);
@@ -187,94 +196,151 @@ export function SourcesPanel({
           }}
         />
 
-        {/* Asks a question of the added documents. Its only control is the
-            document input — there is no web-search service to put behind
-            anything else, and a control that searches nothing would lie. */}
+        {/* §3/§4: this retrieves sources. It is not a chat input — the
+            centre owns conversation. The placeholder says so plainly,
+            because the whole confusion this fixes was two search boxes. */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            void ask(prompt);
+            void runSourceSearch(query);
           }}
           className="flex items-center gap-2 rounded-xl border border-border-strong bg-surface px-3 py-2 focus-within:border-navy"
         >
+          <SearchIcon className="h-4 w-4 shrink-0 text-ink-faint" />
           <input
-            type="text"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Ask about your sources"
-            aria-label="Ask about your sources"
-            disabled={asking}
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search BIS standards and documents…"
+            aria-label="Search BIS standards and documents"
+            disabled={searching}
             className="min-w-0 flex-1 bg-transparent text-[13px] text-ink placeholder-ink-faint focus:outline-none disabled:opacity-60"
           />
           <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            aria-label="Add a document"
-            title="Add a PDF or text file"
-            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-border-strong text-navy transition-colors hover:border-navy hover:bg-navy/5"
-          >
-            <DocumentPlusIcon className="h-4 w-4" />
-          </button>
-          <button
             type="submit"
-            disabled={asking || !prompt.trim()}
-            aria-label="Ask"
-            title="Ask"
+            disabled={searching || !query.trim()}
+            aria-label="Search sources"
             className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-navy text-white transition-colors hover:bg-navy-deep disabled:opacity-40"
           >
             <ArrowIcon className="h-4 w-4" />
           </button>
         </form>
 
-        {sources.length === 0 ? (
-          <p className="mt-2 px-1 text-[11px] leading-relaxed text-ink-faint">
-            Add a document first — questions here are answered from the Indian
-            Standards your sources cite.
-          </p>
-        ) : (
-          <p className="mt-2 px-1 text-[11px] leading-relaxed text-ink-faint">
-            One conversation with the assistant. Scope: {scopeStandardNumbers.length} standard
-            {scopeStandardNumbers.length === 1 ? "" : "s"}
-            {fromSources.length > 0 && `, ${fromSources.length} from your sources`}.
+        {searching && (
+          <p role="status" className="mt-3 px-1 text-[12px] font-medium text-ink-soft">
+            Searching BIS sources…
           </p>
         )}
 
-        {(asking || latest) && (
-          <div className="mt-3 rounded-xl border border-border/70 bg-surface-alt/50 p-3">
-            {asking ? (
-              <p className="text-[12px] font-medium text-ink-soft">Searching BIS evidence…</p>
-            ) : (
-              latest && (
-                <>
-                  <p
-                    className={`whitespace-pre-line text-[12.5px] leading-relaxed ${
-                      latest.failed ? "text-danger" : "text-ink"
-                    }`}
+        {searchError && (
+          <p className="mt-3 rounded-lg border border-danger/30 bg-danger-soft/40 px-3 py-2 text-[11.5px] text-danger">
+            {searchError}
+          </p>
+        )}
+
+        {/* Selected sources — the research context the centre discusses (§6). */}
+        {selectedSources.length > 0 && (
+          <section className="mt-3 rounded-lg border border-navy/20 bg-navy/5 p-2.5">
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="text-[11px] font-extrabold uppercase tracking-wider text-navy">
+                Selected sources ({selectedSources.length})
+              </h3>
+              <button
+                type="button"
+                onClick={() => onSelectionChange([])}
+                className="text-[11px] font-bold text-navy hover:underline"
+              >
+                Clear all
+              </button>
+            </div>
+            <ul className="mt-2 space-y-1">
+              {selectedSources.map((source) => (
+                <li key={source.id} className="flex items-start gap-2">
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate font-mono text-[11px] font-bold text-navy">
+                      {source.standardNumber ?? source.title}
+                    </span>
+                    {source.standardNumber && (
+                      <span className="block truncate text-[11px] text-ink-soft">{source.title}</span>
+                    )}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => toggleSource(source)}
+                    aria-label={`Remove ${source.standardNumber ?? source.title}`}
+                    className="shrink-0 rounded p-0.5 text-ink-faint transition-colors hover:text-danger"
                   >
-                    {latest.text}
-                  </p>
+                    <CloseIcon className="h-3.5 w-3.5" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
-                  {latest.standards && latest.standards.length > 0 && (
-                    <div className="mt-2.5 flex flex-wrap gap-1 border-t border-border/60 pt-2.5">
-                      {latest.standards.map((std, i) => (
-                        <span
-                          key={i}
-                          className="rounded bg-navy/10 px-1.5 py-0.5 font-mono text-[10px] font-bold text-navy"
-                        >
-                          {std.number ?? std.title}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+        {/* Retrieval results. Never labelled "recommended" — applicability is
+            a separate deterministic decision made against evidence (§5, §23). */}
+        {results !== null && !searching && (
+          results.length === 0 ? (
+            <div className="mt-4 px-1">
+              <p className="text-[12.5px] font-semibold text-ink">No matching BIS sources found.</p>
+              <ul className="mt-1.5 space-y-1 text-[12px] text-ink-faint">
+                <li>Try a standard number, such as IS 4985:2021.</li>
+                <li>Try a broader description of the product.</li>
+                <li>Add your own document below.</li>
+              </ul>
+            </div>
+          ) : (
+            <section className="mt-4">
+              <h3 className="px-1 text-[11px] font-extrabold uppercase tracking-wider text-ink-faint">
+                Matching BIS sources ({results.length})
+              </h3>
+              <ul className="mt-2 space-y-1.5">
+                {results.map((source) => (
+                  <li key={source.id} className="rounded-lg border border-border/60 bg-surface-alt/40 p-2.5">
+                    <p className="font-mono text-[11.5px] font-bold text-navy">
+                      {source.standardNumber ?? "Document"}
+                    </p>
+                    <p className="mt-0.5 text-[12.5px] leading-snug text-ink">{source.title}</p>
+                    <p className="mt-1 text-[11px] text-ink-faint">
+                      {sourceLabel(source)} · {source.matchingPassages} indexed passage
+                      {source.matchingPassages === 1 ? "" : "s"}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => toggleSource(source)}
+                      aria-pressed={isSelected(source.id)}
+                      className={`mt-2 rounded-md border px-2.5 py-1 text-[11px] font-bold transition-colors ${
+                        isSelected(source.id)
+                          ? "border-navy bg-navy text-white"
+                          : "border-border-strong text-navy hover:border-navy hover:bg-navy/5"
+                      }`}
+                    >
+                      {isSelected(source.id) ? "Selected" : "Select"}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        )}
 
-                  <p className="mt-2 text-[10.5px] text-ink-faint">
-                    This exchange is in the assistant conversation too.
-                  </p>
-                </>
-              )
-            )}
+        {results === null && !searching && selectedSources.length === 0 && (
+          <div className="mt-5 px-1">
+            <p className="text-[12.5px] font-semibold text-ink">Search BIS standards and documents</p>
+            <p className="mt-1 text-[12px] leading-relaxed text-ink-faint">
+              Find standards, supporting documents and indexed evidence to use as
+              research context. Your conversation about them happens in the centre.
+            </p>
           </div>
         )}
+
+        <div className="mt-5 border-t border-border/60 pt-4">
+          <h3 className="px-1 text-[11px] font-extrabold uppercase tracking-wider text-ink-faint">
+            Add your document
+          </h3>
+        </div>
+
 
         {rejection && (
           <p className="mt-3 rounded-lg border border-danger/30 bg-danger-soft/40 px-3 py-2 text-[11.5px] text-danger">
@@ -415,18 +481,18 @@ function CloseIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function DocumentPlusIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2v-9M12 12v6M9 15h6" />
-    </svg>
-  );
-}
-
 function ArrowIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+    </svg>
+  );
+}
+
+function SearchIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
     </svg>
   );
 }
