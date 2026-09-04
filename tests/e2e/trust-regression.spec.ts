@@ -41,10 +41,16 @@ test("5. The UI does not invent page numbers for evidence lacking one", async ({
   await expect(pageMarkers).toHaveCount(0);
 });
 
-test("6. No laboratories are ever fabricated in the API response", async ({ request }) => {
+test("6. Laboratories returned are real dataset matches, never fabricated or mismatched to the query", async ({ request }) => {
   const res = await request.post("/api/v1/find-laboratories", { data: { location: "Mumbai" } });
   const body = await res.json();
-  expect(body.laboratories).toEqual([]);
+  expect(Array.isArray(body.laboratories)).toBe(true);
+  expect(body.laboratories.length).toBeGreaterThan(0);
+  for (const lab of body.laboratories) {
+    expect(lab.oslCode).toMatch(/^\d+$/);
+    const matchesLocation = lab.state.toLowerCase().includes("mumbai") || (lab.city ?? "").toLowerCase().includes("mumbai");
+    expect(matchesLocation).toBe(true);
+  }
 });
 
 test("7. No map coordinates are fabricated when the provider is unconfigured", async ({ request }) => {

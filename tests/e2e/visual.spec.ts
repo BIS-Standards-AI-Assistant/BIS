@@ -60,10 +60,11 @@ test.describe("@visual Stable surface screenshots", () => {
     );
   });
 
-  test("laboratory finder blocked state (API response shape, captured as rendered JSON for visibility in reports)", async ({ page }) => {
-    // No dedicated UI page exists for this feature yet (docs/FINAL_E2E_AUDIT.md)
-    // — screenshotting the raw JSON response is the honest equivalent of a
-    // "blocked state" visual for a feature that is API-only right now.
+  test("laboratory finder API response shape (real data + map-provider-blocked, captured as rendered JSON for visibility in reports)", async ({ page }) => {
+    // No dedicated UI page exists for THIS route yet (find-laboratories is
+    // API-only; the laboratory directory UI lives at /testing/laboratory-search
+    // against /api/v1/laboratories instead) — screenshotting the raw JSON
+    // response is the honest equivalent of a visual for an API-only feature.
     await page.goto("about:blank");
     const res = await page.request.post("/api/v1/find-laboratories", { data: { location: "Delhi" } });
     const body = await res.json();

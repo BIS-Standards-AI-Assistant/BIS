@@ -39,12 +39,12 @@ const WHAT_YOU_CAN_DO = [
     internal: true,
   },
   {
-    icon: ExternalLinkIcon,
-    title: "Find official BIS laboratories",
-    body: "Find BIS-recognized laboratories for product testing via the official BIS portal.",
-    href: "https://www.bis.gov.in/laboratorys/testing-overview/?lang=en",
-    cta: "Visit BIS Testing →",
-    internal: false,
+    icon: FlaskIcon,
+    title: "Search recognised laboratories",
+    body: "Browse the BIS Group 1 recognised-laboratory list by name, city, state, and current recognition status.",
+    href: "/testing/laboratory-search",
+    cta: "Search laboratories →",
+    internal: true,
   },
 ];
 
