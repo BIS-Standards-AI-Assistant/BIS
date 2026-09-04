@@ -329,10 +329,17 @@ describe("HomeClient — assistant column layout", () => {
     renderHome();
     await waitFor(() => expect(screen.getByText("test answer")).toBeInTheDocument(), { timeout: 10000 });
 
-    const assistant = screen.getByRole("heading", { name: /AI Assistant/i }).closest("div")?.parentElement
-      ?.parentElement;
-    expect(assistant).toContainElement(screen.getByText("test answer"));
-    expect(assistant).toContainElement(screen.getByLabelText(/Describe your product or compliance question/i));
+    // Walk up from the heading to the column that holds both, rather than a
+    // fixed number of parents — the header gained a context chip (§20) and
+    // counting levels made this brittle.
+    const heading = screen.getByRole("heading", { name: /BIS Research/i });
+    const answer = screen.getByText("test answer");
+    const prompt = screen.getByLabelText(/Describe your product or compliance question/i);
+    let column: HTMLElement | null = heading.parentElement;
+    while (column && !(column.contains(answer) && column.contains(prompt))) column = column.parentElement;
+    expect(column).not.toBeNull();
+    expect(column).toContainElement(answer);
+    expect(column).toContainElement(prompt);
   }, 15000);
 });
 
