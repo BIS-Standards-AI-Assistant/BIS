@@ -107,16 +107,37 @@ test.describe("Journey I/J: Certification and Testing reachability", () => {
   });
 });
 
-test.describe("Journey K: Laboratory Finder — honest no-data state", () => {
-  test("laboratory search reports no verified data, never a fabricated laboratory list", async ({ request }) => {
+test.describe("Journey K: Laboratory Finder — real dataset, honest scope limits", () => {
+  test("laboratory search returns real matches from the recognised-laboratory dataset, not fabricated ones", async ({ request }) => {
     const res = await request.post("/api/v1/find-laboratories", {
       data: { location: LAB_SEARCH_LOCATION, standardNumber: KNOWN_QUERIES.exactStandard },
     });
     expect(res.ok()).toBeTruthy();
     const body = await res.json();
-    expect(body.laboratoryDataAvailable).toBe(false);
+    expect(body.laboratoryDataAvailable).toBe(true);
+    expect(Array.isArray(body.laboratories)).toBe(true);
+    expect(body.laboratories.length).toBeGreaterThan(0);
+    for (const lab of body.laboratories) {
+      const matchesLocation =
+        lab.state.toLowerCase().includes(LAB_SEARCH_LOCATION.toLowerCase()) ||
+        (lab.city ?? "").toLowerCase().includes(LAB_SEARCH_LOCATION.toLowerCase());
+      expect(matchesLocation).toBe(true);
+      // standardNumber must never narrow results to a claimed capability —
+      // the source dataset has no per-standard testing-scope field.
+      expect(lab).not.toHaveProperty("standards");
+      expect(lab).not.toHaveProperty("testingScope");
+    }
+    expect(body.testingScopeNote).toMatch(/does not indicate which standards/i);
+  });
+
+  test("an unmatched location reports the gap honestly, not a silent empty list", async ({ request }) => {
+    const res = await request.post("/api/v1/find-laboratories", {
+      data: { location: "Nowhereistan-Not-A-Real-Place" },
+    });
+    expect(res.ok()).toBeTruthy();
+    const body = await res.json();
     expect(body.laboratories).toEqual([]);
-    expect(body.message).toMatch(/no verified laboratory records/i);
+    expect(body.message).toMatch(/no recognised laboratory matched/i);
   });
 });
 

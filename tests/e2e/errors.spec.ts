@@ -71,8 +71,8 @@ test("a nonsense query never shows fabricated high-confidence matches — trust 
   await expect(page.getByText("Directly applicable")).not.toBeVisible();
 });
 
-test("laboratory search's no-data state explains the gap, not a silent empty list", async ({ request }) => {
-  const res = await request.post("/api/v1/find-laboratories", { data: { location: "Delhi" } });
+test("laboratory search's no-match state explains the gap, not a silent empty list", async ({ request }) => {
+  const res = await request.post("/api/v1/find-laboratories", { data: { location: "Nowhereistan-Not-A-Real-Place" } });
   const body = await res.json();
   expect(body.message).toBeTruthy();
   expect(body.message.length).toBeGreaterThan(10);
