@@ -6,6 +6,7 @@ import { extractQueryIntent } from "./intent";
 import { analyzeCoverage } from "./coverage-analysis";
 import type { AggregatedEvidence } from "./evidence-aggregation";
 import type { RetrievedChunk, EvidenceRef } from "@/types/api";
+import { getProviderChain, generateTextWithFallback } from "./providers";
 
 /**
  * True server-side chat context scoping (P0 audit, 2026-09-03). The
@@ -229,12 +230,59 @@ export async function buildScopedAnswer(
     }
 
     default:
-      return {
-        answer: NO_EVIDENCE_ANSWER,
-        evidence: [],
-        limitations: [
-          "This question could not be confidently matched to the current research context. Try asking about relevance, evidence, certification, or testing — or explicitly ask to search wider BIS knowledge.",
-        ],
-      };
+      return buildFreeformAnswer(originalQuery, scoped);
   }
+}
+
+/**
+ * A genuinely open-ended follow-up ("which states offer tax relief for
+ * this?") matches none of the fixed intent patterns above, and the fixed
+ * intents deliberately don't try to guess at open-ended questions — they
+ * are precise, evidence-shaped answers for precise, evidence-shaped
+ * questions. This is the one place an LLM is allowed to phrase an answer,
+ * and only under a hard constraint: it may only draw on the indexed chunk
+ * text already resolved into `scoped` (real DB rows for real standard
+ * numbers, resolved above `scoped`'s definition) — never on its own
+ * training knowledge, and it must say so plainly when that text doesn't
+ * answer the question, rather than filling the gap with plausible-sounding
+ * invention. If every configured provider fails (or none is configured),
+ * this falls back to the same honest NO_EVIDENCE_ANSWER the rest of this
+ * module uses — evidence-only behavior always still works with zero LLM
+ * dependency, per docs/ARCHITECTURE.md.
+ */
+async function buildFreeformAnswer(originalQuery: string, scoped: ScopedStandard[]): Promise<ScopedAnswer> {
+  const evidenceBlock = scoped
+    .map((s) => {
+      const excerpts = s.chunks
+        .slice(0, 4)
+        .map((c) => `  - "${c.text.trim().slice(0, 500)}"`)
+        .join("\n");
+      return `${s.standardNumber} (${s.title ?? "untitled"}):\n${excerpts || "  - no indexed evidence chunk available"}`;
+    })
+    .join("\n\n");
+
+  const chain = getProviderChain();
+  const { response } = await generateTextWithFallback(chain, {
+    system:
+      "You are a research assistant for BIS Standards Navigator, a government service. " +
+      "You answer ONLY from the indexed BIS evidence excerpts given to you below — never from general knowledge, " +
+      "never inventing a fact, statistic, regulation, tax rule, government scheme, or standard clause that is not " +
+      "literally present in the excerpts. If the excerpts do not contain information that answers the question, " +
+      "say so plainly and explain what the indexed evidence does cover instead — do not fill the gap with a " +
+      "plausible-sounding guess. Keep the answer concise (2-4 sentences) and do not use markdown formatting.",
+    prompt: `Question: ${originalQuery}\n\nIndexed BIS evidence for the standards in scope:\n\n${evidenceBlock}`,
+    maxOutputTokens: 1200,
+  });
+
+  if (response?.text?.trim()) {
+    return { answer: response.text.trim(), evidence: [], limitations: [] };
+  }
+
+  return {
+    answer: NO_EVIDENCE_ANSWER,
+    evidence: [],
+    limitations: [
+      "This question could not be confidently matched to the current research context, and no AI provider was available to attempt an evidence-grounded answer. Try asking about relevance, evidence, certification, or testing — or explicitly ask to search wider BIS knowledge.",
+    ],
+  };
 }

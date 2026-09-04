@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import {
   getRecentQueriesServerSnapshot,
@@ -11,27 +10,13 @@ import { ProductComplianceMap } from "@/components/query/ProductComplianceMap";
 import type { ComplianceMap } from "@/types/api";
 
 /**
- * The workspace's right panel: what to do next with a result, and the
- * searches this browser has actually run.
- *
- * Testing and Certification go to the real sections of this app.
+ * The workspace's right panel: the product compliance map (when a search
+ * produced one — testing/certification live in its own tabs there now),
+ * and the searches this browser has actually run.
  *
  * The recent list is real: it comes from this browser's own query history
  * (src/lib/recent-queries.ts), not from invented "notebooks".
  */
-
-interface WorkspaceAction {
-  name: string;
-  description: string;
-  icon: React.ReactNode;
-  /** Where it goes, when it goes anywhere. */
-  href?: string;
-}
-
-const ACTIONS: WorkspaceAction[] = [
-  { name: "Testings", description: "Test methods and recognised laboratories", icon: <FlaskIcon />, href: "/testing" },
-  { name: "Certifications", description: "Schemes, licences and the ISI mark", icon: <BadgeIcon />, href: "/certification" },
-];
 
 export function WorkspacePanel({
   complianceMap,
@@ -73,55 +58,6 @@ export function WorkspacePanel({
             <ProductComplianceMap complianceMap={complianceMap} />
           </div>
         )}
-        <div className="p-3">
-          <div className="space-y-2">
-            {ACTIONS.map((action) =>
-              action.href ? (
-                <Link
-                  key={action.name}
-                  href={action.href}
-                  className="group flex items-center gap-3 rounded-lg border border-border/70 bg-surface-alt/40 p-3 transition-colors hover:border-navy hover:bg-navy/5"
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-navy/10 text-navy">
-                    {action.icon}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-[13px] font-bold text-ink group-hover:text-navy">
-                      {action.name}
-                    </span>
-                    <span className="mt-0.5 block text-[11px] leading-snug text-ink-faint">
-                      {action.description}
-                    </span>
-                  </span>
-                  <ChevronIcon className="h-3.5 w-3.5 shrink-0 text-ink-faint group-hover:text-navy" />
-                </Link>
-              ) : (
-                <button
-                  key={action.name}
-                  type="button"
-                  disabled
-                  aria-disabled="true"
-                  title={`${action.name} — not built yet`}
-                  className="flex w-full cursor-not-allowed items-center gap-3 rounded-lg border border-border/70 bg-surface-alt/50 p-3 text-left opacity-70"
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-navy/8 text-navy">
-                    {action.icon}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-[13px] font-bold text-ink">{action.name}</span>
-                    <span className="mt-0.5 block text-[11px] leading-snug text-ink-faint">
-                      {action.description}
-                    </span>
-                  </span>
-                  <span className="shrink-0 rounded bg-surface px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-ink-faint">
-                    Planned
-                  </span>
-                </button>
-              ),
-            )}
-          </div>
-        </div>
-
         <div className="border-t border-border/60 p-4">
           <h3 className="flex items-center gap-2 text-[12px] font-bold text-navy">
             <ClockIcon className="h-3.5 w-3.5" />
@@ -186,35 +122,6 @@ function PanelIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-const iconProps = {
-  className: "h-4 w-4",
-  fill: "none",
-  viewBox: "0 0 24 24",
-  stroke: "currentColor",
-  "aria-hidden": true,
-} as const;
-
-function FlaskIcon() {
-  return (
-    <svg {...iconProps}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3h6M10 3v6L5 18a2 2 0 001.7 3h10.6a2 2 0 001.7-3l-5-9V3M8 14h8" />
-    </svg>
-  );
-}
-function BadgeIcon() {
-  return (
-    <svg {...iconProps}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m-3-7l2.1 1.6 2.6.1.9 2.4 2 1.7-1 2.4 1 2.4-2 1.7-.9 2.4-2.6.1L12 21l-2.1-1.6-2.6-.1-.9-2.4-2-1.7 1-2.4-1-2.4 2-1.7.9-2.4 2.6-.1L12 3z" />
-    </svg>
-  );
-}
-function ChevronIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M9 5l7 7-7 7" />
-    </svg>
-  );
-}
 function ClockIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

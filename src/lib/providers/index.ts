@@ -1,4 +1,5 @@
 import { GeminiProvider } from "./gemini-provider";
+import { GroqProvider } from "./groq-provider";
 import { LocalProvider } from "./local-provider";
 import { OpenRouterProvider } from "./openrouter-provider";
 import { resolveProviderChain } from "./router";
@@ -8,6 +9,7 @@ export type { LLMProvider, NormalizedLLMResponse, ProviderCapabilities, Provider
 export { generateTextWithFallback, generateStructuredWithFallback, resolveProviderChain, resetProviderCooldowns } from "./router";
 export type { FallbackResult, FallbackTraceEntry } from "./router";
 export { GeminiProvider } from "./gemini-provider";
+export { GroqProvider } from "./groq-provider";
 export { LocalProvider } from "./local-provider";
 export { OpenRouterProvider } from "./openrouter-provider";
 
@@ -26,6 +28,7 @@ export { OpenRouterProvider } from "./openrouter-provider";
 export function getProviderChain(): LLMProvider[] {
   const providers: LLMProvider[] = [
     new GeminiProvider(),
+    new GroqProvider(),
     new LocalProvider(),
     new OpenRouterProvider("openrouter-free"),
     new OpenRouterProvider("paid"),

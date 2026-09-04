@@ -148,14 +148,9 @@ describe("SourcesPanel — left panel retrieves sources, it does not chat (§3, 
 });
 
 describe("WorkspacePanel", () => {
-  test("offers exactly the two workspace actions", () => {
+  test("no longer offers standalone Testing/Certification quick links — the compliance map's own tabs cover that", () => {
     render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
-    for (const name of ["Testings", "Certifications"]) {
-      expect(screen.getByText(name)).toBeInTheDocument();
-    }
-    // The formats from the earlier design are gone, and Audio Overview is
-    // withdrawn for now rather than shown as a disabled placeholder.
-    for (const gone of ["Audio Overview", "Video Overview", "Mind Map", "Reports", "Flashcards", "Quiz", "Infographic", "Data Table"]) {
+    for (const gone of ["Testings", "Certifications", "Audio Overview", "Video Overview", "Mind Map", "Reports", "Flashcards", "Quiz", "Infographic", "Data Table"]) {
       expect(screen.queryByText(gone), gone).not.toBeInTheDocument();
     }
   });
@@ -164,12 +159,6 @@ describe("WorkspacePanel", () => {
     render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
     expect(screen.getByRole("heading", { name: "Workspace" })).toBeInTheDocument();
     expect(screen.queryByText("Studio")).not.toBeInTheDocument();
-  });
-
-  test("Testing and Certification go to this service's real sections", () => {
-    render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
-    expect(screen.getByRole("link", { name: /Testings/ })).toHaveAttribute("href", "/testing");
-    expect(screen.getByRole("link", { name: /Certifications/ })).toHaveAttribute("href", "/certification");
   });
 
   test("shows real search history, not invented notebooks", async () => {
