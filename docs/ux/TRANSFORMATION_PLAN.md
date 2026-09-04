@@ -46,23 +46,39 @@ distinction does not exist in the codebase today, in tokens or components.
 | Search | `/search` keyword mode + `/api/v1/search` |
 | Confidence language | `src/lib/confidence.ts` already uses words, not fake percentages (§11 already satisfied) |
 
-## 2. The constraint that shapes everything: data availability
+## 2. Data availability
 
-Measured directly against the configured database:
+**Updated after the maintainer supplied a new `.env.local` pointing at a
+populated Neon database.** The original audit ran against a near-empty
+database; those numbers and the conclusions drawn from them are superseded.
 
-| Table | Rows | Consequence |
+| Table | Rows (was) | Consequence |
 |---|---|---|
-| `documents` | 19 | Retrieval works |
-| `chunks` | 557 | Evidence, clauses and excerpts are real |
-| `standards` | **0** | No standard records resolve |
-| `sources` | **0** | — |
-| `certificationSchemes` | **0** | No scheme/licence data |
-| `qcos` | **0** | No QCO status |
-| `relationships` | **0** | **Knowledge graph has no edges** |
+| `documents` | 19 (19) | Retrieval works |
+| `chunks` | 557 (557) | Evidence, clauses and excerpts are real |
+| `standards` | **51** (0) | Standard records resolve — scoped chat works |
+| `sources` | **44** (0) | Provenance has records behind it |
+| `certificationSchemes` | **4** (0) | Some scheme data exists |
+| `qcos` | **46** (0) | QCO status available |
+| `relationships` | **70** (0) | **Knowledge graph has edges** |
+| `queryLogs` | 953 | Real usage history |
 
-Verified live: `/?q=Helmets` returns IS 4151:2015 and IS 9873 (Part 1):2019
-with real clause-level evidence. So the **core journey is groundable**. But
-identifier-scoped chat resolves nothing, because `standards` is empty.
+Verified live on the new database:
+
+- `/api/v1/query` for "stainless steel water bottle for children" returns
+  four **verified** recommendations (IS 15757:2022, IS 2082:2018,
+  IS 15410:2003, IS 13428:2005) at high confidence.
+- `/api/v1/chat` scoped to `IS 15410:2003` now resolves it and returns three
+  real evidence items. This had returned "not enough evidence" for every
+  query throughout development.
+
+**What this unblocks:** the compliance workspace, testing/certification
+requirements, the source library's shared knowledge base, and the academic
+knowledge graph (§23), which now has 70 edges to draw.
+
+**Still absent, unchanged:** laboratory dataset and map provider (§15),
+HUID/mark verification (§16), regulatory and laboratory operational data
+(§21/§22), and any auth layer (§20).
 
 ### Deliverables by what they can honestly be built on
 
@@ -89,7 +105,7 @@ standards, fees, laboratories and regulatory information.
 ### 2.1 Product DNA is blocked on extraction that does not currently run
 
 Measured, not assumed. `POST /api/v1/query` with
-`"stainless steel water bottle for children"` returns:
+`"stainless steel water bottle for children"` still returns:
 
 ```json
 "interpretation": { "product": null, "material": null, "useCase": null,
@@ -97,12 +113,35 @@ Measured, not assumed. `POST /api/v1/query` with
 ```
 
 Every axis is null for a description that names a material, a product and a
-user group. The cause is in `src/lib/intent.ts`:
-`deterministicIntentFallback()` sets only `intent`, `isRelevant`,
-`certificationRequested` and `testingRequested` — it never populates the
-descriptive axes. So whenever the LLM provider is unavailable (as it is
-here), extraction yields nothing, and the Search Context panel correctly
-shows "Not specified" for all five.
+user group. **This survived the new `.env.local`**, and the server log gives
+the exact reason:
+
+```
+[llm-provider] all_providers_exhausted
+  local           skipped: no_structured_output_capability
+  openrouter-free skipped: no_structured_output_capability
+  paid            skipped: no_structured_output_capability
+```
+
+`OPENROUTER_API_KEY` is set but **`OPENROUTER_MODEL` is not**. In
+`openrouter-provider.ts` the model id defaults to `undefined`, and
+structured-output capability is `modelId ? KNOWN_STRUCTURED_OUTPUT_MODELS.has(modelId) : false`
+— so with no model id every provider is skipped before it is ever called.
+Intent extraction needs structured output, so it falls through to
+`deterministicIntentFallback()`, which sets only `intent`, `isRelevant`,
+`certificationRequested` and `testingRequested` and never populates the
+descriptive axes.
+
+Two independent gaps, then:
+
+1. **Config**: set `OPENROUTER_MODEL` to one of the three models the
+   provider recognises for structured output — `openai/gpt-4o-mini`,
+   `openai/gpt-4o`, `openai/gpt-4-turbo`. All are paid on OpenRouter, so
+   this is a cost decision for the maintainer, not a default to assume.
+2. **Code**: even with a model configured, the zero-cost path still extracts
+   nothing. SIH.md §23 requires the system to be useful with no LLM at all,
+   so `deterministicIntentFallback()` needs a real lexicon-based extractor
+   regardless of which model is chosen.
 
 This contradicts docs/ui/SIH.md §24, which records the deterministic
 fallback as DONE with "keyword heuristics", and it directly blocks §5/§6:
