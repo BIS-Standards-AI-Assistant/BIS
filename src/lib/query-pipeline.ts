@@ -9,7 +9,7 @@ import { computeGrounding } from "@/lib/grounding";
 import { computeEngineConfidence } from "@/lib/confidence";
 import { generateAnswer, validateRecommendationExplanations, type EvidencePackage, type EvidencePackageCandidate } from "@/lib/answer";
 import { classifyKnowledgeBoundary } from "@/lib/knowledge-boundary";
-import { assessApplicability } from "@/lib/applicability";
+import { assessApplicability, deriveRecommendationStatus } from "@/lib/applicability";
 import { buildReferenceEntry } from "@/lib/reference-registry";
 import { getNeighbors, type GraphNeighbor } from "@/lib/graph/graph-retrieval";
 import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
@@ -173,12 +173,46 @@ export async function runQueryPipeline(
     };
   }
 
+  // APPLICABILITY GATE (2026-09-04 fix for the steel-query/PVC-standard
+  // bug): computed once, here, BEFORE the LLM ever sees a candidate —
+  // previously this ran only after generateAnswer(), so the LLM's
+  // evidence package carried no applicability signal at all and a
+  // MATERIAL_MISMATCH candidate could still be worded as a confident
+  // recommendation. deriveRecommendationStatus is the single
+  // authoritative gate (src/lib/applicability.ts) every consumer of
+  // this pipeline (this route, /api/v1/chat, /api/v1/analyze-product)
+  // now shares — a hard mismatch is a categorical exclusion from
+  // `primaryRecommendation`, never a lower score.
+  const applicabilityByStandard = new Map(
+    aggregated.map((c) => {
+      const grounding = groundingByStandard.get(c.documentId)!;
+      const coverage = coverageByStandard.get(c.documentId)!;
+      const applicability = assessApplicability({
+        query,
+        intentMaterial: intent.material,
+        candidateTitle: c.title,
+        coverage,
+        groundingState: grounding.state,
+      });
+      const hasConflict = c.standardNumber
+        ? conflicts.some((conflict) => conflict.affectedStandards.includes(c.standardNumber!))
+        : false;
+      const gate = deriveRecommendationStatus(applicability, grounding.state, hasConflict);
+      return [c.documentId, { applicability, gate }] as const;
+    }),
+  );
+
   const evidencePackageCandidates: EvidencePackageCandidate[] = aggregated.map((c) => ({
     standardNumber: c.standardNumber,
     title: c.title,
     groundingState: groundingByStandard.get(c.documentId)!.state,
     coverage: coverageByStandard.get(c.documentId)!,
     chunks: c.chunks.map((ch) => ({ chunkId: ch.chunkId, section: ch.section, clause: ch.clause, text: ch.text })),
+    // LLM Safety: the LLM sees the same gate result the server enforces
+    // below, so its "reason" text is written knowing this candidate is
+    // blocked, not by accident agreeing with a mismatch it never saw.
+    primaryRecommendation: applicabilityByStandard.get(c.documentId)!.gate.primary,
+    applicabilityReason: applicabilityByStandard.get(c.documentId)!.applicability.reason,
   }));
 
   const evidencePackage: EvidencePackage = {
@@ -195,24 +229,28 @@ export async function runQueryPipeline(
   const { accepted } = validateRecommendationExplanations(llmAnswer.recommendationExplanations, validStandardNumbers);
   const reasonByStandard = new Map<string | null, string>(accepted.map((exp) => [exp.standardNumber, exp.reason]));
 
-  const recommendations = aggregated.map((c) => {
+  const recommendationsUnordered = aggregated.map((c) => {
     const grounding = groundingByStandard.get(c.documentId)!;
     const coverage = coverageByStandard.get(c.documentId)!;
-    const applicability = assessApplicability({
-      query,
-      intentMaterial: intent.material,
-      candidateTitle: c.title,
-      coverage,
-      groundingState: grounding.state,
-    });
+    const { applicability, gate } = applicabilityByStandard.get(c.documentId)!;
     return {
       standardNumber: c.standardNumber,
       title: c.title,
       relevanceScore: grounding.score,
       groundingState: grounding.state,
-      reason: reasonByStandard.get(c.standardNumber) ?? "This standard was retrieved as evidence for the query; no further explanation was provided.",
+      // Deterministic override, not just a prompt instruction: a
+      // non-primary candidate's "reason" is always the engine's own
+      // applicability.reason, never the LLM's phrasing — this is the
+      // enforcement point for "the LLM cannot override deterministic
+      // applicability" regardless of whether it actually followed the
+      // system prompt's instruction.
+      reason: gate.primary
+        ? (reasonByStandard.get(c.standardNumber) ?? "This standard was retrieved as evidence for the query; no further explanation was provided.")
+        : applicability.reason,
       coverage,
       applicability,
+      recommendationStatus: gate.status,
+      primaryRecommendation: gate.primary,
       evidence: c.chunks.map((ch) => ({
         chunkId: ch.chunkId,
         documentId: ch.documentId,
@@ -226,6 +264,16 @@ export async function runQueryPipeline(
       })),
     };
   });
+
+  // Partition, not re-sort: primary recommendations first (in their
+  // existing relevance order), then everything the gate excluded (also
+  // in their existing relevance order) — "filter safety first, rank
+  // second," never a blended score that could let a high relevance
+  // number pull a blocked candidate back toward the top.
+  const recommendations = [
+    ...recommendationsUnordered.filter((r) => r.primaryRecommendation),
+    ...recommendationsUnordered.filter((r) => !r.primaryRecommendation),
+  ];
 
   const limitations = [...new Set([...engineConfidence.limitingSignals, ...llmAnswer.limitations])];
   if (intent.testingRequested && /laborator/i.test(query)) {

@@ -71,6 +71,83 @@ export interface ApplicabilityInput {
   groundingState: GroundingState;
 }
 
+/**
+ * The hard applicability gate (2026-09-04 fix — steel-query/PVC-standard
+ * bug). Root cause: assessApplicability() above already correctly
+ * detected MATERIAL_MISMATCH, but nothing downstream ever consulted
+ * that result — every retrieved candidate flowed straight into the
+ * `recommendations` array with no primary/blocked distinction, so a
+ * material mismatch could still render as "High relevance / Directly
+ * supported by evidence" (see src/lib/query-pipeline.ts and
+ * src/components/standards/RecommendationCard.tsx before this change).
+ *
+ * This function is the single source of truth for "does this candidate
+ * get to be a primary recommendation" — every caller (the main query
+ * pipeline, Product Analyzer, Research Assistant all share
+ * runQueryPipeline) must go through it rather than re-deriving the same
+ * decision ad hoc. It only ever *demotes* based on signals the engine
+ * already computed deterministically (materialConflict, a conflict
+ * affecting this exact standard, or a grounding/applicability state
+ * that was already "not established") — it never invents a new
+ * rejection rule, never touches relevanceScore, and never multiplies
+ * scores together (a hard incompatibility is a categorical gate, not a
+ * lower number).
+ */
+export type RecommendationStatus =
+  | "RECOMMENDED"
+  | "RELATED_BUT_NOT_APPLICABLE"
+  | "INSUFFICIENT_EVIDENCE"
+  | "CONFLICTING_EVIDENCE";
+
+export interface RecommendationGateResult {
+  status: RecommendationStatus;
+  /** Authoritative — the only field consumers should branch on to decide whether to render this in the primary recommendations section. */
+  primary: boolean;
+}
+
+export function deriveRecommendationStatus(
+  applicability: ApplicabilityResult,
+  groundingState: GroundingState,
+  hasConflict: boolean,
+): RecommendationGateResult {
+  // The one deterministic HARD signal (see assessApplicability's own
+  // doc comment) — a candidate whose title names a conflicting material
+  // family can never be a primary recommendation, full stop, regardless
+  // of how it scored on relevance/grounding.
+  if (applicability.materialConflict) {
+    return { status: "RELATED_BUT_NOT_APPLICABLE", primary: false };
+  }
+
+  // A version/evidence conflict affecting this specific standard
+  // (conflict-detection.ts — already deterministic, already computed
+  // upstream) means the evidence itself is contested; presenting it as
+  // a confident primary recommendation would misrepresent that.
+  if (hasConflict) {
+    return { status: "CONFLICTING_EVIDENCE", primary: false };
+  }
+
+  // groundingState "insufficient_evidence" and the applicability states
+  // that mean "not established" (INSUFFICIENT_EVIDENCE, SCOPE_UNCLEAR,
+  // and the never-currently-produced-but-declared NOT_APPLICABLE) are
+  // all cases where the engine already decided it doesn't have enough
+  // to confirm this candidate — none of those should look like a
+  // recommendation either.
+  if (
+    groundingState === "insufficient_evidence" ||
+    applicability.state === "INSUFFICIENT_EVIDENCE" ||
+    applicability.state === "SCOPE_UNCLEAR" ||
+    applicability.state === "NOT_APPLICABLE"
+  ) {
+    return { status: "INSUFFICIENT_EVIDENCE", primary: false };
+  }
+
+  // DIRECTLY_APPLICABLE, POTENTIALLY_APPLICABLE, and RELATED (no
+  // material signal available at all, e.g. no LLM/intent extraction) —
+  // none of these were disqualified by any of the deterministic checks
+  // above, so this candidate is eligible to be a primary recommendation.
+  return { status: "RECOMMENDED", primary: true };
+}
+
 export function assessApplicability(input: ApplicabilityInput): ApplicabilityResult {
   const { query, intentMaterial, candidateTitle, coverage, groundingState } = input;
 

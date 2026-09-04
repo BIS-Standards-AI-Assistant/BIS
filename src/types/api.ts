@@ -45,6 +45,20 @@ export interface Applicability {
   materialConflict: boolean;
 }
 
+/**
+ * The hard applicability gate's output (src/lib/applicability.ts's
+ * deriveRecommendationStatus). "RECOMMENDED" is the only status that
+ * may render in a primary-recommendations section — every other status
+ * means a deterministic check already found a reason this candidate
+ * isn't established as applicable, and no relevance score, evidence
+ * count, or LLM reasoning is allowed to override that.
+ */
+export type RecommendationStatus =
+  | "RECOMMENDED"
+  | "RELATED_BUT_NOT_APPLICABLE"
+  | "INSUFFICIENT_EVIDENCE"
+  | "CONFLICTING_EVIDENCE";
+
 export interface Recommendation {
   standardNumber: string | null;
   title: string;
@@ -55,6 +69,10 @@ export interface Recommendation {
   evidence: EvidenceRef[];
   /** Deterministic, separate from relevanceScore/groundingState — "relevant" is not the same claim as "applicable". See src/lib/applicability.ts. */
   applicability: Applicability;
+  /** The authoritative recommendation/applicability state — see RecommendationStatus. Never re-derive this on the client; the server response is authoritative. */
+  recommendationStatus: RecommendationStatus;
+  /** true only when recommendationStatus is "RECOMMENDED" — the single field a UI should check before rendering this candidate as a recommendation. */
+  primaryRecommendation: boolean;
 }
 
 export type Confidence = "high" | "medium" | "low" | "none";

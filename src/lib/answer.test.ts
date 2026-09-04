@@ -40,6 +40,8 @@ function pkg(overrides: Partial<EvidencePackage> = {}): EvidencePackage {
           overallCoverageRatio: 0.5,
         },
         chunks: [{ chunkId: "c1", section: null, clause: null, text: "Some evidence text." }],
+        primaryRecommendation: true,
+        applicabilityReason: "",
       },
     ],
     conflicts: [],

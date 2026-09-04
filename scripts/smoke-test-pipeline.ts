@@ -76,6 +76,8 @@ async function runQuery(query: string) {
     groundingState: groundingByStandard.get(c.documentId)!.state,
     coverage: coverageByStandard.get(c.documentId)!,
     chunks: c.chunks.map((ch) => ({ chunkId: ch.chunkId, section: ch.section, clause: ch.clause, text: ch.text })),
+    primaryRecommendation: true, // this manual smoke script doesn't exercise the applicability gate — see query-pipeline.ts for the real wiring
+    applicabilityReason: "",
   }));
   const pkg: EvidencePackage = { query, intent, candidates: evidencePackageCandidates, conflicts, engineConfidence };
   console.log(`    evidence package built for ${pkg.candidates.length} candidate(s), engine-owned groundingState/confidence attached before LLM call`);
