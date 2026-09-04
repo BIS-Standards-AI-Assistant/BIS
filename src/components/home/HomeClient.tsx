@@ -148,18 +148,13 @@ export function HomeClient() {
     [router, searchParams, lang],
   );
 
-  // Runs a query that arrived via ?q= (a hard load, or a new search from
-  // the header's global Search overlay). Guarded by lastAutoRunQuery so
-  // this doesn't re-fire for a ?q= this component itself just set via
-  // runQuery's router.replace above — only a genuinely new query value
-  // (one this effect hasn't already started) triggers a run. When ?q= is
-  // cleared (e.g. by navigating back home), resets state back to the landing page.
+  const prevUrlQueryRef = useRef<string | null>(null);
   useEffect(() => {
-    if (urlQuery && lastAutoRunQuery.current !== urlQuery) {
-      lastAutoRunQuery.current = urlQuery;
+    const prev = prevUrlQueryRef.current;
+    prevUrlQueryRef.current = urlQuery;
+    if (urlQuery && urlQuery !== prev) {
       queueMicrotask(() => runQuery(urlQuery));
-    } else if (!urlQuery && lastAutoRunQuery.current !== null) {
-      lastAutoRunQuery.current = null;
+    } else if (!urlQuery && prev) {
       setResult(null);
       setError(null);
       setActiveQuery("");
@@ -170,7 +165,7 @@ export function HomeClient() {
     setResult(null);
     setError(null);
     setActiveQuery("");
-    lastAutoRunQuery.current = null;
+    prevUrlQueryRef.current = "";
     router.replace("/", { scroll: false });
   }
 
