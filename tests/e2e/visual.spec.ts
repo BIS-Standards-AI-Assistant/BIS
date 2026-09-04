@@ -20,7 +20,7 @@ test.describe("@visual Stable surface screenshots", () => {
 
   test("search results", async ({ page }) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-    await page.getByText("Search Synthesis").waitFor({ timeout: 60_000 });
+    await page.getByText("Research Summary").waitFor({ timeout: 60_000 });
     await page.waitForLoadState("networkidle");
     await expect(page).toHaveScreenshot("search-results.png", {
       fullPage: true,
@@ -43,7 +43,7 @@ test.describe("@visual Stable surface screenshots", () => {
   test("Standard Passport", async ({ page }) => {
     test.fail(true, "Known defect: passport page height is intermittently ~7.3x too tall — see docs/UI_UX_TEST_REPORT.md");
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-    await page.getByText("Search Synthesis").waitFor({ timeout: 60_000 });
+    await page.getByText("Research Summary").waitFor({ timeout: 60_000 });
     await page.getByRole("link", { name: "View Complete Standard Passport" }).first().click();
     await page.waitForLoadState("networkidle");
     await expect(page).toHaveScreenshot("standard-passport.png", { fullPage: true, maxDiffPixelRatio: 0.05 });
@@ -51,7 +51,7 @@ test.describe("@visual Stable surface screenshots", () => {
 
   test("research assistant open state", async ({ page }) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-    await page.getByText("Search Synthesis").waitFor({ timeout: 60_000 });
+    await page.getByText("Research Summary").waitFor({ timeout: 60_000 });
     await page.getByRole("button", { name: "Discuss these results" }).click();
     await page.getByPlaceholder("Ask any question about BIS standards...").waitFor();
     await expect(page.locator("div").filter({ hasText: "Discuss these results" }).last()).toHaveScreenshot(

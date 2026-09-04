@@ -8,7 +8,7 @@ import { KNOWN_QUERIES } from "./fixtures/known-data";
 
 test("1/2. Relevant != applicable — MATERIAL_MISMATCH is shown when evidence supports it", async ({ page }) => {
   await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.materialMismatch)}`);
-  await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
   await expect(page.getByText("Related standard — material mismatch")).toBeVisible({ timeout: 60_000 });
   // The section heading itself must not say "Best match" for a result
   // whose applicability state is a mismatch.
@@ -29,7 +29,7 @@ test("4. The UI does not render invented technical requirements when Knowledge B
 
 test("5. The UI does not invent page numbers for evidence lacking one", async ({ page }) => {
   await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-  await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
 
   // Per docs/FINAL_E2E_COMPLETION_REPORT.md: 0 chunks currently carry a
   // real page number in this corpus. The evidence locator line
@@ -61,7 +61,7 @@ test("7. No map coordinates are fabricated when the provider is unconfigured", a
 
 test("8. 'Current' status is never rendered unless backed by real data (no version/status evidence exists in this corpus)", async ({ page }) => {
   await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-  await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
   // Per docs/P1_IMPLEMENTATION_AUDIT.md, no standard in this database has
   // a populated status field — the word "Current" as a status claim
   // must not appear on the results page.
@@ -70,7 +70,7 @@ test("8. 'Current' status is never rendered unless backed by real data (no versi
 
 test("9. Official source links are only shown when a real sourceUrl exists", async ({ page }) => {
   await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-  await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
   const links = page.getByRole("link", { name: "Official Gazette Text" });
   const count = await links.count();
   for (let i = 0; i < count; i++) {
@@ -82,7 +82,7 @@ test("9. Official source links are only shown when a real sourceUrl exists", asy
 
 test("10. Research context does not leak between independent chat sessions (fresh page load has no stale scope)", async ({ page }) => {
   await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-  await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
   await page.getByRole("button", { name: "Discuss these results" }).click();
   await expect(page.getByText(`Discussing: "${KNOWN_QUERIES.exactStandard}"`)).toBeVisible();
 
@@ -92,7 +92,7 @@ test("10. Research context does not leak between independent chat sessions (fres
   await page.context().clearCookies();
   await page.evaluate(() => sessionStorage.clear());
   await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.materialMismatch)}`);
-  await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
   await expect(page.getByText(`Discussing: "${KNOWN_QUERIES.exactStandard}"`)).not.toBeVisible();
 });
 

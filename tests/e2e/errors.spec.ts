@@ -65,7 +65,7 @@ test("a nonsense query never shows fabricated high-confidence matches — trust 
   // pass. This test locks in the fix: gibberish input must not produce
   // a "Best match" heading or a "Directly applicable" badge.
   await page.goto(`/?q=${encodeURIComponent("xyzzy-nonexistent-product-qqq")}`);
-  await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
 
   await expect(page.getByText("Best match")).not.toBeVisible();
   await expect(page.getByText("Directly applicable")).not.toBeVisible();

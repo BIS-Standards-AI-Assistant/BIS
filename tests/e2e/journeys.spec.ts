@@ -10,10 +10,10 @@ test.describe("Journey A/B: Search -> results -> evidence", () => {
   test("searching a known product returns a Best Match with real evidence, navigable to the Standard Passport", async ({ page }) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
 
-    // Search Synthesis appears once the pipeline resolves.
-    await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+    // The Research Summary appears once the pipeline resolves.
+    await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
 
-    const bestMatchHeading = page.getByText(/Best match|Related standard/).first();
+    const bestMatchHeading = page.getByText(/Recommended standard|Related but not applicable/).first();
     await expect(bestMatchHeading).toBeVisible();
 
     // At least one evidence excerpt with a real, dereferenceable source link.
@@ -37,7 +37,7 @@ test.describe("Journey A/B: Search -> results -> evidence", () => {
 test.describe("Journey E/F: Product applicability, including material mismatch", () => {
   test("a query with no material stated resolves to real candidates with an applicability label on each", async ({ page }) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-    await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
 
     // Every recommendation card must show an "Applicability" section —
     // never just a bare relevance score standing in for it.
@@ -47,7 +47,7 @@ test.describe("Journey E/F: Product applicability, including material mismatch",
 
   test("MATERIAL_MISMATCH: a steel-material query does not present a plastics standard as directly applicable", async ({ page }) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.materialMismatch)}`);
-    await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
 
     // Trust regression: relevance != applicability. The page must contain
     // the material-mismatch badge text somewhere in the result set for
@@ -57,7 +57,7 @@ test.describe("Journey E/F: Product applicability, including material mismatch",
 
     // And the reason text must actually explain the conflict in plain
     // language, not just show a badge with no justification.
-    await expect(page.getByText(/specifies "steel".*concerns "plastic"/i)).toBeVisible();
+    await expect(page.getByText(/specifies "steel".*concerns "plastic"/i).first()).toBeVisible();
   });
 });
 
@@ -81,9 +81,19 @@ test.describe("Out-of-domain query", () => {
   test("a non-BIS query is rejected as irrelevant, not answered with an invented standard", async ({ page }) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.outOfDomain)}`);
     // The same relevanceMessage legitimately renders twice on this page
-    // (the Search Synthesis card and the red "not relevant" alert both
+    // (the Research Summary card and the red "not relevant" alert both
     // read result.answer — HomeClient.tsx) — .first() is correct here,
     // not a workaround for a bug.
-    await expect(page.getByText(/not appear to be relevant/i).first()).toBeVisible({ timeout: 60_000 });
+    //
+    // Matched on the substance of the refusal rather than one phrasing: the
+    // wording has already changed once ("does not appear to be relevant" ->
+    // "outside what BIS Standards Navigator covers") and silently broke this
+    // test, which is the regression it exists to catch.
+    await expect(
+      page.getByText(/outside what BIS Standards Navigator covers|not appear to be relevant/i).first(),
+    ).toBeVisible({ timeout: 60_000 });
+
+    // The point of the test: no standard is offered as an answer.
+    await expect(page.getByText(/Recommended standard/)).not.toBeVisible();
   });
 });

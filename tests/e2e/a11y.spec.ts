@@ -13,13 +13,13 @@ test.describe("@a11y Accessibility — axe-core against major pages", () => {
 
   test("search results page", async ({ page }, testInfo) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-    await page.getByText("Search Synthesis").waitFor({ timeout: 60_000 });
+    await page.getByText("Research Summary").waitFor({ timeout: 60_000 });
     await expectNoA11yViolations(page, testInfo);
   });
 
   test("Standard Passport page", async ({ page }, testInfo) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-    await page.getByText("Search Synthesis").waitFor({ timeout: 60_000 });
+    await page.getByText("Research Summary").waitFor({ timeout: 60_000 });
     const link = page.getByRole("link", { name: "View Complete Standard Passport" }).first();
     await link.click();
     await page.waitForLoadState("networkidle");
@@ -28,7 +28,7 @@ test.describe("@a11y Accessibility — axe-core against major pages", () => {
 
   test("research assistant open state", async ({ page }, testInfo) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-    await page.getByText("Search Synthesis").waitFor({ timeout: 60_000 });
+    await page.getByText("Research Summary").waitFor({ timeout: 60_000 });
     await page.getByRole("button", { name: "Discuss these results" }).click();
     await expectNoA11yViolations(page, testInfo);
   });
@@ -54,12 +54,12 @@ test.describe("@a11y Keyboard navigation — critical flows without a mouse", ()
     await input.focus();
     await input.fill(KNOWN_QUERIES.exactStandard);
     await page.keyboard.press("Enter");
-    await expect(page.getByText("Search Synthesis")).toBeVisible({ timeout: 60_000 });
+    await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
   });
 
   test("research assistant chat can be opened and used via keyboard, including Escape to close", async ({ page }) => {
     await page.goto(`/?q=${encodeURIComponent(KNOWN_QUERIES.exactStandard)}`);
-    await page.getByText("Search Synthesis").waitFor({ timeout: 60_000 });
+    await page.getByText("Research Summary").waitFor({ timeout: 60_000 });
 
     const openButton = page.getByRole("button", { name: "Discuss these results" });
     await openButton.focus();
