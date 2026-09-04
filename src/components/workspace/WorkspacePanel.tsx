@@ -7,18 +7,14 @@ import {
   getRecentQueriesSnapshot,
   subscribeToRecentQueries,
 } from "@/lib/recent-queries";
+import { ProductComplianceMap } from "@/components/query/ProductComplianceMap";
+import type { ComplianceMap } from "@/types/api";
 
 /**
  * The workspace's right panel: what to do next with a result, and the
  * searches this browser has actually run.
  *
- * Testing and Certification go to the real sections of this app. Audio
- * Overview does not exist — there is no speech synthesis anywhere in this
- * codebase — so it is rendered disabled and labelled "Planned" rather than
- * as a button that silently does nothing. A government service offering an
- * audio overview that produces no audio has told the user something
- * untrue; an honest "not yet" costs nothing, and is the same rule the
- * placeholder pages already follow.
+ * Testing and Certification go to the real sections of this app.
  *
  * The recent list is real: it comes from this browser's own query history
  * (src/lib/recent-queries.ts), not from invented "notebooks".
@@ -33,15 +29,17 @@ interface WorkspaceAction {
 }
 
 const ACTIONS: WorkspaceAction[] = [
-  { name: "Audio Overview", description: "Spoken summary of the result", icon: <SpeakerIcon /> },
   { name: "Testings", description: "Test methods and recognised laboratories", icon: <FlaskIcon />, href: "/testing" },
   { name: "Certifications", description: "Schemes, licences and the ISI mark", icon: <BadgeIcon />, href: "/certification" },
 ];
 
 export function WorkspacePanel({
+  complianceMap,
   onRerun,
   onCollapse,
 }: {
+  /** The current search's regulatory pathway (standards/certification/testing/labs), when the pipeline produced one. */
+  complianceMap?: ComplianceMap | null;
   onRerun: (query: string) => void;
   onCollapse: () => void;
 }) {
@@ -70,6 +68,11 @@ export function WorkspacePanel({
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto">
+        {complianceMap && (
+          <div className="border-b border-border/60 p-3">
+            <ProductComplianceMap complianceMap={complianceMap} />
+          </div>
+        )}
         <div className="p-3">
           <div className="space-y-2">
             {ACTIONS.map((action) =>
@@ -117,10 +120,6 @@ export function WorkspacePanel({
               ),
             )}
           </div>
-          <p className="mt-2.5 px-1 text-[11px] leading-relaxed text-ink-faint">
-            Audio Overview is not built yet. Testing and Certification open this
-            service&apos;s own sections.
-          </p>
         </div>
 
         <div className="border-t border-border/60 p-4">
@@ -195,13 +194,6 @@ const iconProps = {
   "aria-hidden": true,
 } as const;
 
-function SpeakerIcon() {
-  return (
-    <svg {...iconProps}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5L6 9H3v6h3l5 4V5zM15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13" />
-    </svg>
-  );
-}
 function FlaskIcon() {
   return (
     <svg {...iconProps}>

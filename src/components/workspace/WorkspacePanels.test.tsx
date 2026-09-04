@@ -166,13 +166,14 @@ describe("SourcesPanel — left panel retrieves sources, it does not chat (§3, 
 });
 
 describe("WorkspacePanel", () => {
-  test("offers exactly the three workspace actions", () => {
+  test("offers exactly the two workspace actions", () => {
     render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
-    for (const name of ["Audio Overview", "Testings", "Certifications"]) {
+    for (const name of ["Testings", "Certifications"]) {
       expect(screen.getByText(name)).toBeInTheDocument();
     }
-    // The formats from the earlier design are gone.
-    for (const gone of ["Video Overview", "Mind Map", "Reports", "Flashcards", "Quiz", "Infographic", "Data Table"]) {
+    // The formats from the earlier design are gone, and Audio Overview is
+    // withdrawn for now rather than shown as a disabled placeholder.
+    for (const gone of ["Audio Overview", "Video Overview", "Mind Map", "Reports", "Flashcards", "Quiz", "Infographic", "Data Table"]) {
       expect(screen.queryByText(gone), gone).not.toBeInTheDocument();
     }
   });
@@ -187,14 +188,6 @@ describe("WorkspacePanel", () => {
     render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
     expect(screen.getByRole("link", { name: /Testings/ })).toHaveAttribute("href", "/testing");
     expect(screen.getByRole("link", { name: /Certifications/ })).toHaveAttribute("href", "/certification");
-  });
-
-  test("Audio Overview does not pretend to work — there is no speech synthesis here", () => {
-    render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
-    const planned = screen.getAllByText("Planned");
-    expect(planned).toHaveLength(1);
-    expect(planned[0].closest("button")).toBeDisabled();
-    expect(screen.getByText(/Audio Overview is not built yet/i)).toBeInTheDocument();
   });
 
   test("shows real search history, not invented notebooks", async () => {

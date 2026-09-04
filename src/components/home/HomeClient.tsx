@@ -11,9 +11,7 @@ import { WhatsNew } from "@/components/home/WhatsNew";
 import { QuickLinks } from "@/components/home/QuickLinks";
 import { ResearchChat } from "@/components/chat/ResearchChat";
 import { ClarificationPanel } from "@/components/query/ClarificationPanel";
-import { ProductComplianceMap } from "@/components/query/ProductComplianceMap";
 import { LoadingIndicator } from "@/components/query/LoadingIndicator";
-import { ConfidenceBadge } from "@/components/query/ConfidenceBadge";
 import { InfoCard } from "@/components/query/InfoCard";
 import { RecommendationCard } from "@/components/standards/RecommendationCard";
 import type { MatchedAttribute } from "@/components/trust/WhyPanel";
@@ -267,6 +265,7 @@ export function HomeClient() {
                 <div className="hidden lg:block lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
                   <SourcesPanel
                     interpretation={result?.interpretation ?? null}
+                    result={result}
                     selectedSources={selectedSources}
                     onSelectionChange={setSelectedSources}
                     onResearch={runQuery}
@@ -275,12 +274,16 @@ export function HomeClient() {
                 </div>
               )}
 
-              {/* CENTRE: the assistant itself. The column scrolls with the
-                  page — a viewport-height column here depended on the header
-                  height being what we guessed, and pushed the prompt bar off
-                  screen when it wasn't. The prompt bar sticks to the bottom
-                  of the viewport instead, which needs no such assumption. */}
-              <div className="flex min-w-0 flex-col">
+              {/* CENTRE: the assistant itself. Same sticky+height formula as
+                  the side panels (lg:h-[calc(100vh-7rem)]) rather than a
+                  guessed value — with the chat header pinned (shrink-0) and
+                  only the scrollable area below it constrained, the
+                  composer's sticky bottom-0 now sticks to the bottom of
+                  *this* column, not the page. Previously this column had no
+                  bounded height, so on a short conversation the "sticky to
+                  the page" composer sat far below the last message with a
+                  large empty gap above it. */}
+              <div className="flex min-w-0 flex-col lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
                 <div className="mb-3 flex shrink-0 items-center justify-between gap-3">
                   <div className="min-w-0">
                     <h1 className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-navy">
@@ -333,7 +336,7 @@ export function HomeClient() {
                   </div>
                 </div>
 
-                <div className="min-h-0 flex-1">
+                <div className="min-h-0 flex-1 lg:overflow-y-auto">
             {loading && (
               <div className="mx-auto max-w-3xl mt-8">
                 <LoadingIndicator />
@@ -348,58 +351,9 @@ export function HomeClient() {
 
             {result && (
               <div className="mt-6 space-y-6">
-                {/* Evidence-grounded synthesis of the whole result set */}
-                <section className="rounded-lg border border-border-strong/70 bg-surface-raised p-5 sm:p-6">
-                  {/* prompts/UI_UX_FINAL.md §8: raw retrieval metrics (candidate
-                      counts, response time) read as internal telemetry and must
-                      not sit in the primary answer view — moved into the
-                      "Technical details" disclosure below, never removed
-                      (still real, still inspectable). */}
-                  <div className="flex items-center justify-between gap-3 border-b border-border/60 pb-3.5">
-                    <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
-                      Research Summary
-                    </h2>
-                    <ConfidenceBadge confidence={result.confidence} />
-                  </div>
-                  <div className="mt-4">
-                    <p className="text-[14.5px] leading-[1.75] text-ink font-normal">
-                      {result.answer}
-                    </p>
-                  </div>
-                  {result.translated && (
-                    <p className="mt-2.5 text-[11px] text-ink-faint">
-                      Your question was translated to English to search the index; the answer above is in your language. Standard numbers and titles are shown exactly as BIS publishes them.
-                    </p>
-                  )}
-                  <p className="mt-3 border-t border-border/50 pt-2.5 text-[10.5px] leading-relaxed text-ink-faint">
-                    This service searches public BIS standard titles and scope summaries, public certification-scheme documentation, and BIS public FAQs. It does not hold the full text of Indian Standards.
-                  </p>
-                  <details className="mt-4 rounded-md bg-surface-alt/80 border border-border/60 p-3.5 text-xs">
-                    <summary className="cursor-pointer font-bold uppercase tracking-wider text-[10.5px] text-ink-faint">
-                      Technical details
-                    </summary>
-                    <p className="mt-2 text-ink-soft leading-relaxed">
-                      {result.recommendations.length} candidate standard{result.recommendations.length === 1 ? "" : "s"}
-                      {" · "}
-                      {result.recommendations.reduce((n, r) => n + r.evidence.length, 0)} supporting source
-                      {result.recommendations.reduce((n, r) => n + r.evidence.length, 0) === 1 ? "" : "s"}
-                      {typeof result.latencyMs === "number" && (
-                        <>
-                          {" · "}
-                          <span className="tabular-nums">{(result.latencyMs / 1000).toFixed(1)}s response</span>
-                        </>
-                      )}
-                    </p>
-                    {result.limitations.length > 0 && (
-                      <ul className="mt-2 space-y-1 text-ink-soft leading-relaxed">
-                        {result.limitations.map((l, i) => (
-                          <li key={i}>{l}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </details>
-                </section>
-
+                {/* §7: the evidence-grounded summary moved to the Sources
+                    panel on the left, so the centre stays a conversation
+                    rather than competing with the chat for primary space. */}
                 <div className="space-y-6 min-w-0">
                   {/* Irrelevant Query Alert */}
                   {result.isRelevant === false && (
@@ -453,10 +407,6 @@ export function HomeClient() {
                       onRefine={runQuery}
                       loading={loading}
                     />
-                  )}
-
-                  {result.complianceMap && (
-                    <ProductComplianceMap complianceMap={result.complianceMap} />
                   )}
 
                   {result.conflicts.length > 0 && <ConflictPanel conflicts={result.conflicts} />}
@@ -616,7 +566,11 @@ export function HomeClient() {
                   own recent searches */}
               {showWorkspace && (
                 <div className="hidden xl:block xl:sticky xl:top-4 xl:h-[calc(100vh-7rem)]">
-                  <WorkspacePanel onRerun={runQuery} onCollapse={() => setShowWorkspace(false)} />
+                  <WorkspacePanel
+                    complianceMap={result?.complianceMap ?? null}
+                    onRerun={runQuery}
+                    onCollapse={() => setShowWorkspace(false)}
+                  />
                 </div>
               )}
             </div>

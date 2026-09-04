@@ -105,7 +105,10 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
     fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "I want to manufacture steel pipes" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
-    await waitFor(() => expect(screen.getByText("IS 4985:2021")).toBeInTheDocument());
+    // IS 4985:2021 legitimately appears twice: once auto-populated into the
+    // left Sources panel from this same query's retrieval, and once as the
+    // blocked recommendation card itself — assert presence, not uniqueness.
+    await waitFor(() => expect(screen.getAllByText("IS 4985:2021").length).toBeGreaterThan(0));
 
     // The section heading itself must say this is NOT a recommendation.
     expect(screen.getByText("Related but not applicable (1)")).toBeInTheDocument();
@@ -160,7 +163,8 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
     fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "steel pipes and utensils" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
-    await waitFor(() => expect(screen.getByText("IS 4985:2021")).toBeInTheDocument());
+    // Same auto-populated-left-panel duplication as above.
+    await waitFor(() => expect(screen.getAllByText("IS 4985:2021").length).toBeGreaterThan(0));
 
     const recommendedHeading = screen.getByText("Recommended standard");
     const relatedHeading = screen.getByText("Related but not applicable (1)");
