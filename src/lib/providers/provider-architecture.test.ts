@@ -197,6 +197,8 @@ describe("8. Evidence-only response", () => {
             overallCoverageRatio: 1,
           },
           chunks: [{ chunkId: "c1", section: null, clause: null, text: "evidence text" }],
+          primaryRecommendation: true,
+          applicabilityReason: "",
         },
       ],
       conflicts: [],

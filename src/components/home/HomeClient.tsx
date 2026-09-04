@@ -278,24 +278,15 @@ export function HomeClient() {
               <div className="mt-6 space-y-6">
                 {/* Evidence-grounded synthesis of the whole result set */}
                 <section className="rounded-lg border border-border-strong/70 bg-surface-raised p-5 sm:p-6">
+                  {/* prompts/UI_UX_FINAL.md §8: raw retrieval metrics (candidate
+                      counts, response time) read as internal telemetry and must
+                      not sit in the primary answer view — moved into the
+                      "Technical details" disclosure below, never removed
+                      (still real, still inspectable). */}
                   <div className="flex items-center justify-between gap-3 border-b border-border/60 pb-3.5">
-                    <div>
-                      <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
-                        Search Synthesis
-                      </h2>
-                      <p className="text-[10.5px] text-ink-faint">
-                        {result.recommendations.length} candidate standard{result.recommendations.length === 1 ? "" : "s"}
-                        {" · "}
-                        {result.recommendations.reduce((n, r) => n + r.evidence.length, 0)} supporting source
-                        {result.recommendations.reduce((n, r) => n + r.evidence.length, 0) === 1 ? "" : "s"}
-                        {typeof result.latencyMs === "number" && (
-                          <>
-                            {" · "}
-                            <span className="tabular-nums">{(result.latencyMs / 1000).toFixed(1)}s response</span>
-                          </>
-                        )}
-                      </p>
-                    </div>
+                    <h2 className="text-xs font-bold uppercase tracking-wider text-navy">
+                      Research Summary
+                    </h2>
                     <ConfidenceBadge confidence={result.confidence} />
                   </div>
                   <div className="mt-4">
@@ -311,18 +302,30 @@ export function HomeClient() {
                   <p className="mt-3 border-t border-border/50 pt-2.5 text-[10.5px] leading-relaxed text-ink-faint">
                     This service searches public BIS standard titles and scope summaries, public certification-scheme documentation, and BIS public FAQs. It does not hold the full text of Indian Standards.
                   </p>
-                  {result.limitations.length > 0 && (
-                    <details className="mt-4 rounded-md bg-surface-alt/80 border border-border/60 p-3.5 text-xs">
-                      <summary className="cursor-pointer font-bold uppercase tracking-wider text-[10.5px] text-ink-faint">
-                        Why this result — technical detail
-                      </summary>
+                  <details className="mt-4 rounded-md bg-surface-alt/80 border border-border/60 p-3.5 text-xs">
+                    <summary className="cursor-pointer font-bold uppercase tracking-wider text-[10.5px] text-ink-faint">
+                      Technical details
+                    </summary>
+                    <p className="mt-2 text-ink-soft leading-relaxed">
+                      {result.recommendations.length} candidate standard{result.recommendations.length === 1 ? "" : "s"}
+                      {" · "}
+                      {result.recommendations.reduce((n, r) => n + r.evidence.length, 0)} supporting source
+                      {result.recommendations.reduce((n, r) => n + r.evidence.length, 0) === 1 ? "" : "s"}
+                      {typeof result.latencyMs === "number" && (
+                        <>
+                          {" · "}
+                          <span className="tabular-nums">{(result.latencyMs / 1000).toFixed(1)}s response</span>
+                        </>
+                      )}
+                    </p>
+                    {result.limitations.length > 0 && (
                       <ul className="mt-2 space-y-1 text-ink-soft leading-relaxed">
                         {result.limitations.map((l, i) => (
                           <li key={i}>{l}</li>
                         ))}
                       </ul>
-                    </details>
-                  )}
+                    )}
+                  </details>
                 </section>
 
                 <div className="space-y-6 min-w-0">
@@ -398,35 +401,62 @@ export function HomeClient() {
                       />
                     ) : (
                       <>
-                        <div>
-                          <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint pb-2 border-b border-border/70">
-                            {/* P0 audit, 2026-09-03: a top-ranked result is only
-                                labeled "Best match" when its applicability is
-                                actually established — never on relevance/rank
-                                alone. A material mismatch or unclear scope is
-                                shown as a related standard instead. */}
-                            {result.recommendations[0].applicability.state === "DIRECTLY_APPLICABLE" ||
-                            result.recommendations[0].applicability.state === "POTENTIALLY_APPLICABLE"
-                              ? "Best match"
-                              : "Related standard"}
-                          </p>
-                          <div className="mt-4">
-                            <RecommendationCard recommendation={result.recommendations[0]} />
-                          </div>
-                        </div>
+                        {/* 2026-09-04 applicability-gate fix: partition on the
+                            server-authoritative `primaryRecommendation` field,
+                            never on array position. Previously this only
+                            checked recommendations[0]'s applicability state —
+                            a material-mismatched candidate ranked #2+ still
+                            rendered identically to a real recommendation
+                            under a generic "Other relevant standards" heading.
+                            The server already partitions `recommendations`
+                            (primary first), but this filters explicitly
+                            rather than relying on that ordering alone. */}
+                        {(() => {
+                          const primary = result.recommendations.filter((r) => r.primaryRecommendation);
+                          const related = result.recommendations.filter((r) => !r.primaryRecommendation);
+                          return (
+                            <>
+                              {primary.length > 0 ? (
+                                <div>
+                                  <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint pb-2 border-b border-border/70">
+                                    {primary.length === 1 ? "Recommended standard" : `Recommended standards (${primary.length})`}
+                                  </p>
+                                  <div className="mt-4 space-y-4">
+                                    {primary.map((rec, i) => (
+                                      <RecommendationCard key={i} recommendation={rec} />
+                                    ))}
+                                  </div>
+                                </div>
+                              ) : (
+                                <EmptyState
+                                  title="No standard meets the applicability bar for this query"
+                                  body="Evidence was retrieved, but none of it establishes that a standard applies to what you described — see the related candidates below for context."
+                                  tips={[
+                                    "Add the product's material.",
+                                    "Describe the intended use or user group.",
+                                    "Name the product category more specifically.",
+                                  ]}
+                                />
+                              )}
 
-                        {result.recommendations.length > 1 && (
-                          <div>
-                            <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint pb-2 border-b border-border/70">
-                              Other relevant standards ({result.recommendations.length - 1})
-                            </p>
-                            <div className="mt-4 space-y-4">
-                              {result.recommendations.slice(1).map((rec, i) => (
-                                <RecommendationCard key={i} recommendation={rec} />
-                              ))}
-                            </div>
-                          </div>
-                        )}
+                              {related.length > 0 && (
+                                <div>
+                                  <p className="text-[11px] font-bold uppercase tracking-wider text-ink-faint pb-2 border-b border-border/70">
+                                    Related but not applicable ({related.length})
+                                  </p>
+                                  <p className="mt-2 text-[12px] leading-relaxed text-ink-faint">
+                                    Retrieved because it is semantically related to your search, but the available evidence does not establish that it applies — not a recommendation.
+                                  </p>
+                                  <div className="mt-4 space-y-4">
+                                    {related.map((rec, i) => (
+                                      <RecommendationCard key={i} recommendation={rec} />
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                            </>
+                          );
+                        })()}
                       </>
                     )}
                   </div>

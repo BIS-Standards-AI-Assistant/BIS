@@ -85,6 +85,8 @@ const evidencePackageCandidates: EvidencePackageCandidate[] = aggregated.map((c)
   groundingState: grounding.state,
   coverage,
   chunks: c.chunks.map((ch) => ({ chunkId: ch.chunkId, section: ch.section, clause: ch.clause, text: ch.text })),
+  primaryRecommendation: true, // this suite tests schema/citation validation, not the applicability gate — see src/lib/applicability.test.ts for that
+  applicabilityReason: "",
 }));
 const validStandardNumbers = new Set(aggregated.map((c) => c.standardNumber));
 

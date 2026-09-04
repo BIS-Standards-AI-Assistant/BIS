@@ -45,9 +45,19 @@ export const APPLICABILITY_TONE: Record<ApplicabilityState, "success" | "warning
 export function RecommendationCard({ recommendation }: { recommendation: Recommendation }) {
   const [showStats, setShowStats] = useState(false);
   const documentId = recommendation.evidence[0]?.documentId;
+  const isPrimary = recommendation.primaryRecommendation;
 
   return (
-    <article className="rounded-lg border border-border-strong/70 bg-surface-raised p-5 sm:p-7">
+    <article
+      className={`rounded-lg border p-5 sm:p-7 ${isPrimary ? "border-border-strong/70 bg-surface-raised" : "border-border/60 bg-surface-alt/40"}`}
+    >
+      {!isPrimary && (
+        <div className="mb-4 -mt-1 -mx-1 rounded-md border border-border-strong/50 bg-surface-raised px-3 py-2">
+          <p className="text-[11.5px] font-bold uppercase tracking-wide text-ink-faint">Related but not applicable</p>
+          <p className="mt-0.5 text-[13px] leading-relaxed text-ink-soft">Not applicable to the specified material or scope — see Applicability below.</p>
+        </div>
+      )}
+
       {/* Card Header: Standard Number, Title, and Relevance Meter */}
       <div className="flex flex-wrap items-start justify-between gap-3.5 border-b border-border/60 pb-4">
         <div className="min-w-0 flex-1">
@@ -59,18 +69,22 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
           </h3>
         </div>
         <div className="shrink-0 pt-0.5">
-          <RelevanceMeter score={recommendation.relevanceScore} />
+          <RelevanceMeter score={recommendation.relevanceScore} primary={isPrimary} />
         </div>
       </div>
 
-      {/* Why this result */}
+      {/* Why this result. When the applicability gate has excluded this
+          candidate, "evidence exists for the standard" must not be
+          worded as "applicability is supported" (2026-09-04 fix) — the
+          standard-evidence claim (groundingState) and the
+          applicability-evidence claim (below) are kept visibly separate. */}
       <div className="mt-4">
         <div className="flex flex-wrap items-center gap-2">
           <p className="text-[11px] font-extrabold uppercase tracking-wider text-ink-faint">
             Why this result
           </p>
-          <Badge tone={GROUNDING_TONE[recommendation.groundingState]}>
-            {GROUNDING_LABEL[recommendation.groundingState]}
+          <Badge tone={isPrimary ? GROUNDING_TONE[recommendation.groundingState] : "neutral"}>
+            {isPrimary ? GROUNDING_LABEL[recommendation.groundingState] : "Standard information verified"}
           </Badge>
         </div>
         <p className="mt-2 text-[14.5px] leading-relaxed text-ink/90 font-medium">

@@ -40,6 +40,8 @@ function pkg(overrides: Partial<EvidencePackage> = {}): EvidencePackage {
           overallCoverageRatio: 0.5,
         },
         chunks: [{ chunkId: "c1", section: null, clause: null, text: "Some evidence text." }],
+        primaryRecommendation: true,
+        applicabilityReason: "",
       },
     ],
     conflicts: [],
@@ -66,5 +68,62 @@ describe("generateAnswer — language handling with no provider", () => {
     const a = await generateAnswer(pkg({ candidates: [] }), { answerLanguage: "hi" });
     expect(a.recommendationExplanations).toHaveLength(0);
     expect(a.answer.length).toBeGreaterThan(0);
+  });
+});
+
+describe("generateAnswer — applicability gate (steel pipes / PVC standard regression)", () => {
+  // 2026-09-04 bug: the deterministic no-LLM summary sentence named a
+  // material-mismatched candidate in the same breath as "N directly
+  // supported by evidence" — the whole-answer-level version of the same
+  // bug fixed per-card in RecommendationCard.test.tsx.
+  const mismatchedCandidate = (overrides: Partial<EvidencePackage["candidates"][number]> = {}) => ({
+    standardNumber: "IS 4985:2021",
+    title: "Unplasticized Polyvinyl Chloride (PVC-U) Pipes for Potable Water Supplies - Specification",
+    groundingState: "verified", // deliberately strong, as in the real bug report
+    coverage: {
+      product: "covered" as const, material: "unknown" as const, application: "unknown" as const, targetUser: "unknown" as const,
+      sector: "unknown" as const, testing: "unknown" as const, certification: "unknown" as const, identifier: "unknown" as const,
+      overallCoverageRatio: 1,
+    },
+    chunks: [{ chunkId: "c-pvc", section: null, clause: null, text: "PVC pipe evidence." }],
+    primaryRecommendation: false,
+    applicabilityReason: 'The query specifies "steel", but this standard\'s title concerns "plastic" — applicability to a steel product is not established by the available evidence.',
+    ...overrides,
+  });
+
+  test("a blocked candidate's recommendationExplanation is the applicability reason, never a grounding-based endorsement", async () => {
+    const a = await generateAnswer(pkg({ candidates: [mismatchedCandidate()] }));
+    expect(a.recommendationExplanations).toHaveLength(1);
+    expect(a.recommendationExplanations[0].reason).toContain("steel");
+    expect(a.recommendationExplanations[0].reason).toContain("plastic");
+    expect(a.recommendationExplanations[0].reason).not.toMatch(/directly supported by indexed BIS evidence/);
+  });
+
+  test("the whole-answer summary sentence never counts a blocked candidate toward 'directly supported by evidence'", async () => {
+    const a = await generateAnswer(pkg({ candidates: [mismatchedCandidate()] }));
+    // No primary candidates at all in this package.
+    expect(a.answer).not.toMatch(/directly supported by evidence/);
+    expect(a.answer).toContain("IS 4985:2021");
+    expect(a.answer).toMatch(/none established applicability/);
+  });
+
+  test("mixed package: the summary sentence separates the primary candidate from the blocked one, with an accurate directly-supported count", async () => {
+    const goodCandidate = {
+      standardNumber: "IS 5522:2014",
+      title: "Stainless Steel Sheets and Strips for Utensils",
+      groundingState: "verified" as const,
+      coverage: {
+        product: "covered" as const, material: "covered" as const, application: "unknown" as const, targetUser: "unknown" as const,
+        sector: "unknown" as const, testing: "unknown" as const, certification: "unknown" as const, identifier: "unknown" as const,
+        overallCoverageRatio: 1,
+      },
+      chunks: [{ chunkId: "c-steel", section: null, clause: null, text: "Steel sheet evidence." }],
+      primaryRecommendation: true,
+      applicabilityReason: "",
+    };
+    const a = await generateAnswer(pkg({ candidates: [goodCandidate, mismatchedCandidate()] }));
+    expect(a.answer).toContain("1 candidate standard was found (1 directly supported by evidence): IS 5522:2014");
+    expect(a.answer).toContain("did not pass applicability checks");
+    expect(a.answer).toContain("IS 4985:2021");
   });
 });

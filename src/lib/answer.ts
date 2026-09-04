@@ -44,6 +44,20 @@ export interface EvidencePackageCandidate {
   groundingState: string;
   coverage: CoverageResult;
   chunks: Array<{ chunkId: string; section: string | null; clause: string | null; text: string }>;
+  /**
+   * The deterministic applicability gate's verdict (src/lib/
+   * applicability.ts), computed BEFORE this package is built — never
+   * something the LLM decides. false means a hard check (e.g. a
+   * material mismatch) already excluded this candidate from being a
+   * recommendation; the LLM must not write a "reason" that recommends
+   * it anyway (see SYSTEM_PROMPT below). The server also enforces this
+   * deterministically regardless of what the LLM writes (see
+   * query-pipeline.ts's reason override), so this field is defense in
+   * depth, not the only guardrail.
+   */
+  primaryRecommendation: boolean;
+  /** Why the gate excluded this candidate, when primaryRecommendation is false — the LLM should defer to this rather than invent its own framing. */
+  applicabilityReason: string;
 }
 
 export interface EvidencePackage {
@@ -64,7 +78,8 @@ Rules (non-negotiable):
 - Only reference standardNumber values that appear in the candidate list you were given. Never introduce a standard number that isn't already listed.
 - If a conflict is listed for a candidate, acknowledge the uncertainty it implies rather than ignoring it.
 - If the candidate list is empty, say plainly that no relevant BIS evidence was found — do not fill the gap with plausible-sounding but unverified content.
-- Do not treat semantic similarity as certainty: a chunk merely mentioning a related material or product is not proof that a standard applies to the user's specific case.`;
+- Do not treat semantic similarity as certainty: a chunk merely mentioning a related material or product is not proof that a standard applies to the user's specific case.
+- Each candidate's "primaryRecommendation" field is a deterministic verdict you must never override: if it is false, that candidate already failed a hard applicability check (see its "applicabilityReason") — for example a material mismatch (the query asks about steel, the standard concerns plastic). For such a candidate, your "reason" text must explain why it was retrieved and why it does not apply, using the given applicabilityReason — it must NOT recommend the candidate, must NOT say it is a good match, and must NOT imply applicability the reason text denies. You cannot "reason around" this block; treat it exactly as authoritative as groundingState.`;
 
 /**
  * Language instruction appended to the system prompt when the answer must
@@ -85,7 +100,7 @@ function buildPrompt(pkg: EvidencePackage): string {
       const evidenceText = c.chunks
         .map((ch) => `  chunkId=${ch.chunkId} | section="${ch.section ?? "n/a"}" | clause="${ch.clause ?? "n/a"}"\n  <source_document>\n  ${ch.text}\n  </source_document>`)
         .join("\n");
-      return `[${i + 1}] standardNumber=${c.standardNumber ?? "n/a"} | title="${c.title}" | groundingState=${c.groundingState} | coverage=${JSON.stringify(c.coverage)}\n${evidenceText}`;
+      return `[${i + 1}] standardNumber=${c.standardNumber ?? "n/a"} | title="${c.title}" | groundingState=${c.groundingState} | coverage=${JSON.stringify(c.coverage)} | primaryRecommendation=${c.primaryRecommendation}${c.primaryRecommendation ? "" : ` | applicabilityReason="${c.applicabilityReason}"`}\n${evidenceText}`;
     })
     .join("\n\n");
 
@@ -148,12 +163,30 @@ function buildEvidenceOnlyAnswer(pkg: EvidencePackage, answerLanguage: AnswerLan
     insufficient_evidence: "not clearly established as applicable by the evidence currently indexed.",
   };
 
-  const verifiedCount = pkg.candidates.filter((c) => c.groundingState === "verified").length;
-  const names = pkg.candidates.map((c) => c.standardNumber ?? c.title);
-  const nameList =
-    names.length <= 2
-      ? names.join(" and ")
-      : `${names.slice(0, -1).join(", ")}, and ${names[names.length - 1]}`;
+  const nameListOf = (candidates: EvidencePackageCandidate[]) => {
+    const names = candidates.map((c) => c.standardNumber ?? c.title);
+    return names.length <= 2 ? names.join(" and ") : `${names.slice(0, -1).join(", ")}, and ${names[names.length - 1]}`;
+  };
+
+  // 2026-09-04 applicability-gate fix: the summary sentence must not
+  // blend gated-out candidates into a "directly supported" count — that
+  // was the exact reported bug at the whole-answer level (a
+  // material-mismatched standard named in the same breath as "N directly
+  // supported by evidence"). Primary and blocked candidates get their
+  // own clauses, both grounded in real per-candidate data.
+  const primaryCandidates = pkg.candidates.filter((c) => c.primaryRecommendation);
+  const blockedCandidates = pkg.candidates.filter((c) => !c.primaryRecommendation);
+  const verifiedPrimaryCount = primaryCandidates.filter((c) => c.groundingState === "verified").length;
+
+  let answer: string;
+  if (primaryCandidates.length > 0) {
+    answer = `Based on indexed BIS evidence, ${primaryCandidates.length} candidate standard${primaryCandidates.length === 1 ? "" : "s"} ${primaryCandidates.length === 1 ? "was" : "were"} found${verifiedPrimaryCount > 0 ? ` (${verifiedPrimaryCount} directly supported by evidence)` : ""}: ${nameListOf(primaryCandidates)}.`;
+    if (blockedCandidates.length > 0) {
+      answer += ` ${blockedCandidates.length} additional candidate${blockedCandidates.length === 1 ? "" : "s"} ${blockedCandidates.length === 1 ? "was" : "were"} retrieved but did not pass applicability checks (see below for why): ${nameListOf(blockedCandidates)}.`;
+    }
+  } else {
+    answer = `Evidence was retrieved for ${blockedCandidates.length} candidate standard${blockedCandidates.length === 1 ? "" : "s"}, but none established applicability to this specific query: ${nameListOf(blockedCandidates)}. See below for why each was excluded.`;
+  }
 
   return {
     // A deterministic, single-sentence summary built directly from the
@@ -161,10 +194,12 @@ function buildEvidenceOnlyAnswer(pkg: EvidencePackage, answerLanguage: AnswerLan
     // availability, which is an implementation detail, not something the
     // reader needs to act on. Per-candidate grounding detail lives in
     // recommendationExplanations below, not crammed into this sentence.
-    answer: `Based on indexed BIS evidence, ${pkg.candidates.length} candidate standard${pkg.candidates.length === 1 ? "" : "s"} ${pkg.candidates.length === 1 ? "was" : "were"} found${verifiedCount > 0 ? ` (${verifiedCount} directly supported by evidence)` : ""}: ${nameList}.`,
+    answer,
     recommendationExplanations: pkg.candidates.map((c) => ({
       standardNumber: c.standardNumber,
-      reason: `This standard is ${groundingLabel[c.groundingState] ?? "of uncertain relevance based on the available evidence."}`,
+      reason: c.primaryRecommendation
+        ? `This standard is ${groundingLabel[c.groundingState] ?? "of uncertain relevance based on the available evidence."}`
+        : c.applicabilityReason,
     })),
     certificationNotes: null,
     testingNotes: null,

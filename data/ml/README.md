@@ -6,7 +6,7 @@ described as more complete than that.
 
 | Directory | Purpose | Current contents |
 |---|---|---|
-| `datasets/` | Versioned raw datasets for training (e.g. `query_document_relevance.jsonl`) | Empty — no labeled dataset exists yet |
+| `datasets/` | Versioned raw datasets for training (e.g. `query_document_relevance.jsonl`) | **1 real entry** (`query_document_relevance.jsonl` — a hard negative from a real production bug, 2026-09-04: "steel pipes" vs. IS 4985:2021 PVC pipes). Still 1/300+ — nowhere near enough to train a reranker; see final.md's own threshold table |
 | `labels/` | Human-labeled examples with provenance (§7) | Empty — 0 real labels collected |
 | `eval/` | Golden evaluation queries + evaluation run results | `eval/results/` has real baseline runs from `scripts/ml-evaluate.ts` (see below) |
 | `exports/` | Exported feature sets for offline training | Empty |
