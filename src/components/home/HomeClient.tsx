@@ -15,6 +15,7 @@ import { LoadingIndicator } from "@/components/query/LoadingIndicator";
 import { ConfidenceBadge } from "@/components/query/ConfidenceBadge";
 import { InfoCard } from "@/components/query/InfoCard";
 import { RecommendationCard } from "@/components/standards/RecommendationCard";
+import type { MatchedAttribute } from "@/components/trust/WhyPanel";
 import { ConflictPanel } from "@/components/standards/ConflictPanel";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { ErrorState } from "@/components/feedback/ErrorState";
@@ -165,6 +166,19 @@ export function HomeClient() {
   const resultStandardNumbers =
     result?.recommendations.map((r) => r.standardNumber).filter((n): n is string => n !== null) ?? [];
   const sourceStandardNumbers = selectedStandardNumbers(librarySources);
+
+  // What the reader actually told us, as the explainability panel shows it
+  // (§8). Only fields the interpreter genuinely extracted — an axis it could
+  // not determine is omitted rather than shown as an empty match.
+  const matchedAttributes: MatchedAttribute[] = result
+    ? ([
+        { attribute: "Product", value: result.interpretation.product },
+        { attribute: "Material", value: result.interpretation.material },
+        { attribute: "Intended use", value: result.interpretation.useCase },
+        { attribute: "User", value: result.interpretation.targetUser },
+        { attribute: "Sector", value: result.interpretation.sector },
+      ].filter((a): a is MatchedAttribute => typeof a.value === "string" && a.value.length > 0))
+    : [];
   const chatStandardNumbers = [...new Set([...resultStandardNumbers, ...sourceStandardNumbers])];
 
   // Column template follows which panels are open. Both side panels are
@@ -423,7 +437,7 @@ export function HomeClient() {
                                   </p>
                                   <div className="mt-4 space-y-4">
                                     {primary.map((rec, i) => (
-                                      <RecommendationCard key={i} recommendation={rec} />
+                                      <RecommendationCard key={i} recommendation={rec} matchedAttributes={matchedAttributes} />
                                     ))}
                                   </div>
                                 </div>
@@ -449,7 +463,7 @@ export function HomeClient() {
                                   </p>
                                   <div className="mt-4 space-y-4">
                                     {related.map((rec, i) => (
-                                      <RecommendationCard key={i} recommendation={rec} />
+                                      <RecommendationCard key={i} recommendation={rec} matchedAttributes={matchedAttributes} />
                                     ))}
                                   </div>
                                 </div>
