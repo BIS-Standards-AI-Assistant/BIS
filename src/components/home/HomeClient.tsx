@@ -11,6 +11,7 @@ import { WhatsNew } from "@/components/home/WhatsNew";
 import { QuickLinks } from "@/components/home/QuickLinks";
 import { SearchHero } from "@/components/query/SearchHero";
 import { ClarificationPanel } from "@/components/query/ClarificationPanel";
+import { ProductComplianceMap } from "@/components/query/ProductComplianceMap";
 import { LoadingIndicator } from "@/components/query/LoadingIndicator";
 import { ConfidenceBadge } from "@/components/query/ConfidenceBadge";
 import { InfoCard } from "@/components/query/InfoCard";
@@ -423,6 +424,10 @@ export function HomeClient() {
                       onRefine={runQuery}
                       loading={loading}
                     />
+                  )}
+
+                  {result.complianceMap && (
+                    <ProductComplianceMap complianceMap={result.complianceMap} />
                   )}
 
                   {result.conflicts.length > 0 && <ConflictPanel conflicts={result.conflicts} />}

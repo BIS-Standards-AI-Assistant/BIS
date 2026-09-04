@@ -107,6 +107,32 @@ export type QueryOutcome =
   | "refused_insufficient_evidence"
   | "refused_not_in_database";
 
+export interface ComplianceMap {
+  standards: {
+    standardNumber: string;
+    title: string;
+    confidence: "high" | "medium" | "low";
+  }[];
+  certifications: {
+    scheme: string;
+    status: string;
+    sourceUrl?: string;
+  }[];
+  testing: {
+    testName: string;
+    standard: string;
+    clause?: string;
+  }[];
+  laboratories: {
+    name: string;
+    city: string;
+    state: string;
+    lat: number;
+    lng: number;
+    testingCapabilities: string[];
+  }[];
+}
+
 export interface QueryResponse {
   answer: string;
   /** The user's query, echoed back unchanged. */
@@ -128,6 +154,7 @@ export interface QueryResponse {
   recommendations: Recommendation[];
   certification: { available: boolean; notes: string | null };
   testing: { available: boolean; notes: string | null };
+  complianceMap?: ComplianceMap;
   nextSteps: string[];
   confidence: Confidence;
   engineConfidence: EngineConfidence;
