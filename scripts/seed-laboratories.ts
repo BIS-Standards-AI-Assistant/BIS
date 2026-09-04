@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { getDb } from "../src/db";
 import { laboratories } from "../src/db/schema";
-import { eq } from "drizzle-orm";
+
 
 function parseCSVLine(line: string): string[] {
   const result: string[] = [];
@@ -41,7 +41,7 @@ async function main() {
     if (fields.length < 6) continue;
     
     // Sl.No,Name of Lab,State,Status,OSL Code,Recognition Valid Up To,Remarks
-    const [slNo, nameWithCity, state, status, oslCode, validUpTo, remarks] = fields;
+    const [, nameWithCity, state, status, oslCode, validUpTo, remarks] = fields;
     
     // Try to extract city from name "AES Laboratories (P) Ltd, Noida" -> "Noida"
     let name = nameWithCity.trim();
