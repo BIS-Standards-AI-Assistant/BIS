@@ -179,6 +179,7 @@ describe("8. Evidence-only response", () => {
         testingRequested: false,
         searchQuery: "test",
         missingInformation: [],
+        language: "en" as const,
       },
       candidates: [
         {

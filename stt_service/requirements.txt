@@ -1,9 +1,0 @@
-fastapi>=0.110.0
-uvicorn>=0.28.0
-python-multipart>=0.0.9
-soundfile>=0.12.1
-torch>=2.1.0
-faster-whisper>=1.0.0
-nemo_toolkit[asr]>=1.20.0
-silero-vad>=5.1.0
-numpy>=1.24.0

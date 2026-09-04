@@ -38,8 +38,7 @@
     "data:relationships": "dotenv -e .env.local -- tsx scripts/data-relationships.ts",
     "data:relationships-extract": "dotenv -e .env.local -- tsx scripts/data-relationships-extract.ts",
     "tools:smoke": "dotenv -e .env.local -- tsx scripts/tools-smoke.ts",
-    "agent:smoke": "dotenv -e .env.local -- tsx scripts/agent-smoke.ts",
-    "verify:stt": "dotenv -e .env.local -- tsx scripts/verify-stt.ts"
+    "agent:smoke": "dotenv -e .env.local -- tsx scripts/agent-smoke.ts"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.86",
