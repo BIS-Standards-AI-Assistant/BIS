@@ -129,7 +129,11 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
     fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "I want to manufacture steel utensils" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
-    await waitFor(() => expect(screen.getByText("IS 5522:2014")).toBeInTheDocument());
+    // An applicable standard legitimately appears twice: on its result card
+    // and as a research-context chip beside the conversation. That is the
+    // correct behaviour — only material-mismatched candidates are kept out
+    // of context — so assert presence rather than uniqueness here.
+    await waitFor(() => expect(screen.getAllByText("IS 5522:2014").length).toBeGreaterThan(0));
 
     expect(screen.getByText("Recommended standard")).toBeInTheDocument();
     expect(screen.queryByText("Related but not applicable")).not.toBeInTheDocument();
