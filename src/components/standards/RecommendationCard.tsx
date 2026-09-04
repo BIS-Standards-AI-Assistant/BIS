@@ -7,6 +7,10 @@ import { RelevanceMeter } from "@/components/ui/RelevanceMeter";
 import { EvidenceExcerpt } from "@/components/evidence/EvidenceExcerpt";
 import { Badge } from "@/components/ui/Badge";
 import { CoveragePanel } from "@/components/standards/CoveragePanel";
+import { WhyPanel, type MatchedAttribute } from "@/components/trust/WhyPanel";
+import { ConfidenceIndicator } from "@/components/trust/ConfidenceIndicator";
+import { SourceTag } from "@/components/trust/SourceTag";
+import { confidenceFromGrounding } from "@/lib/provenance";
 
 const GROUNDING_LABEL: Record<GroundingState, string> = {
   verified: "Directly supported by evidence",
@@ -42,7 +46,18 @@ export const APPLICABILITY_TONE: Record<ApplicabilityState, "success" | "warning
   NOT_APPLICABLE: "danger",
 };
 
-export function RecommendationCard({ recommendation }: { recommendation: Recommendation }) {
+export function RecommendationCard({
+  recommendation,
+  matchedAttributes = [],
+}: {
+  recommendation: Recommendation;
+  /**
+   * What the reader told us that drove this match (§8). Passed in rather
+   * than derived here, because only the caller knows which interpretation
+   * produced these results.
+   */
+  matchedAttributes?: MatchedAttribute[];
+}) {
   const [showStats, setShowStats] = useState(false);
   const documentId = recommendation.evidence[0]?.documentId;
   const isPrimary = recommendation.primaryRecommendation;
@@ -73,25 +88,41 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
         </div>
       </div>
 
-      {/* Why this result. When the applicability gate has excluded this
-          candidate, "evidence exists for the standard" must not be
-          worded as "applicability is supported" (2026-09-04 fix) — the
-          standard-evidence claim (groundingState) and the
-          applicability-evidence claim (below) are kept visibly separate. */}
+      {/* Why this applies — §8's explainability, over upstream's applicability
+          gate (2026-09-04). Both claims are kept, and kept separate: the
+          WhyPanel carries the reasoning and its evidence, while the badge
+          below still distinguishes "evidence exists for this standard"
+          (groundingState) from "this standard applies to your product".
+          When the gate has excluded a candidate the confidence indicator is
+          withheld entirely — showing "High confidence" beside a card that
+          says "related but not applicable" would re-introduce exactly the
+          conflation upstream just fixed. */}
       <div className="mt-4">
-        <div className="flex flex-wrap items-center gap-2">
-          <p className="text-[11px] font-extrabold uppercase tracking-wider text-ink-faint">
-            Why this result
-          </p>
+        <WhyPanel reason={recommendation.reason} attributes={matchedAttributes}>
+          {recommendation.evidence.length > 0 && (
+            <ul className="space-y-1">
+              {recommendation.evidence.slice(0, 3).map((ev) => (
+                <li key={ev.chunkId} className="text-[12px] leading-relaxed text-ink-soft">
+                  <span className="font-mono font-bold text-navy">
+                    {ev.standardNumber ?? ev.document}
+                  </span>
+                  {ev.clause && <span className="text-ink-faint"> · clause {ev.clause}</span>}
+                  {ev.page && <span className="text-ink-faint"> · p. {ev.page}</span>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </WhyPanel>
+
+        <div className="mt-3 flex flex-wrap items-start gap-x-4 gap-y-2">
+          {isPrimary && (
+            <ConfidenceIndicator level={confidenceFromGrounding(recommendation.groundingState)} />
+          )}
           <Badge tone={isPrimary ? GROUNDING_TONE[recommendation.groundingState] : "neutral"}>
             {isPrimary ? GROUNDING_LABEL[recommendation.groundingState] : "Standard information verified"}
           </Badge>
         </div>
-        <p className="mt-2 text-[14.5px] leading-relaxed text-ink/90 font-medium">
-          {recommendation.reason}
-        </p>
       </div>
-
       {/* Applicability — separate claim from relevance/grounding above.
           "This appeared" is not "this applies"; see APPLICABILITY_LABEL. */}
       <div className="mt-3">
@@ -128,6 +159,7 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
             <h4 className="text-xs font-black uppercase tracking-wider text-navy">
               {recommendation.evidence.length} Supporting BIS Evidence Source{recommendation.evidence.length > 1 ? "s" : ""}
             </h4>
+            <SourceTag provenance="official" />
           </div>
           {recommendation.evidence.map((ev) => (
             <EvidenceExcerpt
