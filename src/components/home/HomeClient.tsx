@@ -87,11 +87,18 @@ export function HomeClient() {
   const [error, setError] = useState<string | null>(null);
   const [activeQuery, setActiveQuery] = useState(urlQuery);
 
+  // Tracks the last ?q= a run has already been started for — set here and
+  // in the auto-run effect below, so a router.replace triggered by this
+  // same call doesn't loop back through that effect as a duplicate second
+  // run of the query this call is already handling.
+  const lastAutoRunQuery = useRef<string | null>(null);
+
   const runQuery = useCallback(
     async (query: string) => {
       const trimmed = query.trim();
       if (!trimmed) return;
 
+      lastAutoRunQuery.current = trimmed;
       setActiveQuery(trimmed);
       setError(null);
 
@@ -141,10 +148,16 @@ export function HomeClient() {
     [router, searchParams, lang],
   );
 
-  const didAutoRun = useRef(false);
+  // Runs a query that arrived via ?q= (a hard load, or a new search from
+  // the header's global Search overlay). Guarded by lastAutoRunQuery so
+  // this doesn't re-fire for a ?q= this component itself just set via
+  // runQuery's router.replace above — only a genuinely new query value
+  // (one this effect hasn't already started) triggers a run. A ref that
+  // only ever latched "has this ever run" would silently ignore every
+  // ?q= change after the first, leaving stale results on screen.
   useEffect(() => {
-    if (urlQuery && !didAutoRun.current) {
-      didAutoRun.current = true;
+    if (urlQuery && lastAutoRunQuery.current !== urlQuery) {
+      lastAutoRunQuery.current = urlQuery;
       queueMicrotask(() => runQuery(urlQuery));
     }
   }, [urlQuery, runQuery]);

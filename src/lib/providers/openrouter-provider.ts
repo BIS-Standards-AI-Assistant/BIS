@@ -76,7 +76,7 @@ export class OpenRouterProvider implements LLMProvider {
   }
 
   get capabilities() {
-    const structuredOutput = this.structuredOutputOverride ?? true;
+    const structuredOutput = this.structuredOutputOverride ?? (this.modelId ? KNOWN_STRUCTURED_OUTPUT_MODELS.has(this.modelId) : false);
     return { structuredOutput, toolCalling: true, streaming: true, maxContextTokens: 128_000 };
   }
 

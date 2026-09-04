@@ -47,8 +47,12 @@ test.describe("Journey C/D: Research Assistant — scoped context, then explicit
     await page.getByRole("button", { name: "Discuss these results" }).click();
     await expect(page.getByText(`Discussing: "${KNOWN_QUERIES.exactStandard}"`)).toBeVisible();
 
-    // Run a new, different search from the compact search bar.
-    const searchInput = page.getByRole("textbox", { name: /product or compliance question/i });
+    // Run a new, different search. The results page no longer has a second
+    // inline search box — "the centre is a research conversation, not a
+    // second search box" (src/components/home/HomeClient.tsx) — so a new
+    // search now goes through the header's global Search overlay instead.
+    await page.getByRole("button", { name: "Search the site" }).click();
+    const searchInput = page.getByRole("textbox", { name: "Search BIS Standards, Services & Documents" });
     await searchInput.fill(KNOWN_QUERIES.materialMismatch);
     await searchInput.press("Enter");
     await expect(page.getByText("Research Summary")).toBeVisible({ timeout: 60_000 });
