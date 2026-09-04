@@ -1,3 +1,4 @@
+import { GeminiProvider } from "./gemini-provider";
 import { LocalProvider } from "./local-provider";
 import { OpenRouterProvider } from "./openrouter-provider";
 import { resolveProviderChain } from "./router";
@@ -6,6 +7,7 @@ import type { LLMProvider } from "./types";
 export type { LLMProvider, NormalizedLLMResponse, ProviderCapabilities, ProviderName, GenerateTextRequest, GenerateStructuredRequest } from "./types";
 export { generateTextWithFallback, generateStructuredWithFallback, resolveProviderChain, resetProviderCooldowns } from "./router";
 export type { FallbackResult, FallbackTraceEntry } from "./router";
+export { GeminiProvider } from "./gemini-provider";
 export { LocalProvider } from "./local-provider";
 export { OpenRouterProvider } from "./openrouter-provider";
 
@@ -22,6 +24,11 @@ export { OpenRouterProvider } from "./openrouter-provider";
  * deterministic behavior (see docs/ARCHITECTURE.md).
  */
 export function getProviderChain(): LLMProvider[] {
-  const providers: LLMProvider[] = [new LocalProvider(), new OpenRouterProvider("openrouter-free"), new OpenRouterProvider("paid")];
+  const providers: LLMProvider[] = [
+    new GeminiProvider(),
+    new LocalProvider(),
+    new OpenRouterProvider("openrouter-free"),
+    new OpenRouterProvider("paid"),
+  ];
   return resolveProviderChain(providers);
 }

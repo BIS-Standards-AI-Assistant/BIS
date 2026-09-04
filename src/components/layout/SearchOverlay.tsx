@@ -10,6 +10,7 @@ import type { SearchState, SearchSuggestion } from "@/lib/search-state";
 import type { RetrievedChunk } from "@/types/api";
 
 const SHORTCUT_LINKS = [
+  { label: "Home (AI Search)", href: "/" },
   { label: "Standards", href: "/standards" },
   { label: "Certification", href: "/certification" },
   { label: "Testing", href: "/testing" },
