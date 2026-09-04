@@ -163,12 +163,30 @@ function buildEvidenceOnlyAnswer(pkg: EvidencePackage, answerLanguage: AnswerLan
     insufficient_evidence: "not clearly established as applicable by the evidence currently indexed.",
   };
 
-  const verifiedCount = pkg.candidates.filter((c) => c.groundingState === "verified").length;
-  const names = pkg.candidates.map((c) => c.standardNumber ?? c.title);
-  const nameList =
-    names.length <= 2
-      ? names.join(" and ")
-      : `${names.slice(0, -1).join(", ")}, and ${names[names.length - 1]}`;
+  const nameListOf = (candidates: EvidencePackageCandidate[]) => {
+    const names = candidates.map((c) => c.standardNumber ?? c.title);
+    return names.length <= 2 ? names.join(" and ") : `${names.slice(0, -1).join(", ")}, and ${names[names.length - 1]}`;
+  };
+
+  // 2026-09-04 applicability-gate fix: the summary sentence must not
+  // blend gated-out candidates into a "directly supported" count — that
+  // was the exact reported bug at the whole-answer level (a
+  // material-mismatched standard named in the same breath as "N directly
+  // supported by evidence"). Primary and blocked candidates get their
+  // own clauses, both grounded in real per-candidate data.
+  const primaryCandidates = pkg.candidates.filter((c) => c.primaryRecommendation);
+  const blockedCandidates = pkg.candidates.filter((c) => !c.primaryRecommendation);
+  const verifiedPrimaryCount = primaryCandidates.filter((c) => c.groundingState === "verified").length;
+
+  let answer: string;
+  if (primaryCandidates.length > 0) {
+    answer = `Based on indexed BIS evidence, ${primaryCandidates.length} candidate standard${primaryCandidates.length === 1 ? "" : "s"} ${primaryCandidates.length === 1 ? "was" : "were"} found${verifiedPrimaryCount > 0 ? ` (${verifiedPrimaryCount} directly supported by evidence)` : ""}: ${nameListOf(primaryCandidates)}.`;
+    if (blockedCandidates.length > 0) {
+      answer += ` ${blockedCandidates.length} additional candidate${blockedCandidates.length === 1 ? "" : "s"} ${blockedCandidates.length === 1 ? "was" : "were"} retrieved but did not pass applicability checks (see below for why): ${nameListOf(blockedCandidates)}.`;
+    }
+  } else {
+    answer = `Evidence was retrieved for ${blockedCandidates.length} candidate standard${blockedCandidates.length === 1 ? "" : "s"}, but none established applicability to this specific query: ${nameListOf(blockedCandidates)}. See below for why each was excluded.`;
+  }
 
   return {
     // A deterministic, single-sentence summary built directly from the
@@ -176,7 +194,7 @@ function buildEvidenceOnlyAnswer(pkg: EvidencePackage, answerLanguage: AnswerLan
     // availability, which is an implementation detail, not something the
     // reader needs to act on. Per-candidate grounding detail lives in
     // recommendationExplanations below, not crammed into this sentence.
-    answer: `Based on indexed BIS evidence, ${pkg.candidates.length} candidate standard${pkg.candidates.length === 1 ? "" : "s"} ${pkg.candidates.length === 1 ? "was" : "were"} found${verifiedCount > 0 ? ` (${verifiedCount} directly supported by evidence)` : ""}: ${nameList}.`,
+    answer,
     recommendationExplanations: pkg.candidates.map((c) => ({
       standardNumber: c.standardNumber,
       reason: c.primaryRecommendation

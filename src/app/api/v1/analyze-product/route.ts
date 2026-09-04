@@ -47,12 +47,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ...result, standards: [] });
     }
 
+    // 2026-09-04 applicability-gate fix: this route built its own
+    // `standards` shape from `result.recommendations` but never carried
+    // recommendationStatus/primaryRecommendation through — so a
+    // MATERIAL_MISMATCH candidate collapsed into the same coarse
+    // "RELATED" label as a genuinely-related, non-conflicting one, and
+    // nothing here told a caller "this one is gated out." The
+    // authoritative gate result now passes through explicitly, same as
+    // /api/v1/query's response.
     const standards = result.recommendations.map((r) => ({
       standardNumber: r.standardNumber,
       title: r.title,
       label: APPLICABILITY_TO_LABEL[r.applicability.state],
       applicabilityState: r.applicability.state,
       applicabilityReason: r.applicability.reason,
+      recommendationStatus: r.recommendationStatus,
+      primaryRecommendation: r.primaryRecommendation,
       groundingState: r.groundingState,
       evidenceCount: r.evidence.length,
     }));
