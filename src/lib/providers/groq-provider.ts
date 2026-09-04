@@ -1,36 +1,23 @@
 import { generateText as aiGenerateText } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import type { GenerateStructuredRequest, GenerateTextRequest, LLMProvider, NormalizedLLMResponse } from "./types";
+import { parseJsonFromText, normalizeStructuredObject } from "./normalize-structured";
 
-function parseJsonFromText(raw: string): unknown {
-  const trimmed = raw.trim();
-  try {
-    return JSON.parse(trimmed);
-  } catch {}
-  const match = trimmed.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
-  if (match) {
-    try {
-      return JSON.parse(match[1].trim());
-    } catch {}
-  }
-  const firstBrace = trimmed.indexOf("{");
-  const lastBrace = trimmed.lastIndexOf("}");
-  if (firstBrace !== -1 && lastBrace > firstBrace) {
-    try {
-      return JSON.parse(trimmed.substring(firstBrace, lastBrace + 1));
-    } catch {}
-  }
-  throw new Error(`Failed to parse JSON from text: ${trimmed.slice(0, 100)}...`);
-}
+// Verified live (2026-09-04, direct raw-fetch against Groq's real API,
+// response_format: json_object) to return clean, schema-parseable JSON in
+// its `content` field with reasoning kept separate — never assumed for a
+// model not actually checked, per the same rule OpenRouterProvider follows.
+const KNOWN_STRUCTURED_OUTPUT_MODELS = new Set(["openai/gpt-oss-120b", "openai/gpt-oss-20b"]);
 
 /**
- * Groq — an OpenAI-compatible chat completions API (https://api.groq.com/openai/v1),
- * used here strictly as an additional fallback tier behind Gemini. Groq's
- * hosted open-weight models are not verified to reliably honor
- * response_format=json_object across the board, so structuredOutput
- * defaults to false and generateStructured always goes through the same
- * "ask for raw JSON in the prompt, then parse" path generateText uses —
- * never assumed, per the same rule the OpenRouter provider follows.
+ * Groq — an OpenAI-compatible chat completions API (https://api.groq.com/openai/v1).
+ * Fast (sub-second on the verified model) and used as the primary tier
+ * ahead of Gemini in the routing order. structuredOutput is gated by
+ * KNOWN_STRUCTURED_OUTPUT_MODELS, not assumed true by default — the same
+ * rule the OpenRouter provider follows — and generateStructured still
+ * goes through "ask for raw JSON in the prompt, then parse" rather than
+ * the API's own response_format parameter, since that's what was actually
+ * verified live.
  */
 export class GroqProvider implements LLMProvider {
   readonly name = "groq" as const;
@@ -40,7 +27,7 @@ export class GroqProvider implements LLMProvider {
 
   constructor(opts: { apiKey?: string; modelId?: string } = {}) {
     this.apiKey = opts.apiKey ?? process.env.GROQ_API_KEY;
-    this.modelId = opts.modelId ?? process.env.GROQ_MODEL ?? "llama-3.3-70b-versatile";
+    this.modelId = opts.modelId ?? process.env.GROQ_MODEL ?? "openai/gpt-oss-120b";
   }
 
   get model(): string {
@@ -48,7 +35,12 @@ export class GroqProvider implements LLMProvider {
   }
 
   get capabilities() {
-    return { structuredOutput: false, toolCalling: true, streaming: true, maxContextTokens: 128_000 };
+    return {
+      structuredOutput: KNOWN_STRUCTURED_OUTPUT_MODELS.has(this.modelId),
+      toolCalling: true,
+      streaming: true,
+      maxContextTokens: 128_000,
+    };
   }
 
   isConfigured(): boolean {
@@ -100,7 +92,8 @@ export class GroqProvider implements LLMProvider {
       });
       if (textResult.text) {
         const parsed = parseJsonFromText(textResult.text);
-        const validated = req.schema.parse(parsed);
+        const normalized = normalizeStructuredObject(parsed);
+        const validated = req.schema.parse(normalized);
         return {
           text: null,
           structuredData: validated,
