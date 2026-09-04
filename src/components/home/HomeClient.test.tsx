@@ -66,6 +66,19 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
+
+/**
+ * The centre is a conversation now, so a *new global query* can no longer be
+ * started from the results view. "+ New research" returns to the homepage,
+ * where the hero search still runs one. Tests that need a second query go
+ * through that path rather than a control that no longer exists.
+ */
+async function startAnotherQuery(value: string) {
+  fireEvent.click(screen.getByRole("button", { name: /new research/i }));
+  fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value } });
+  fireEvent.click(screen.getByRole("button", { name: "Search" }));
+}
+
 describe("HomeClient — component breakage & flow disruption", () => {
   test("network failure surfaces a generic error, never a raw fetch/provider error string", async () => {
     (global.fetch as ReturnType<typeof vi.fn>).mockRejectedValue(new TypeError("Failed to fetch"));
@@ -128,14 +141,16 @@ describe("HomeClient — component breakage & flow disruption", () => {
     fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
-    // Submitting swaps the full-width homepage hero for the compact
-    // in-results search bar, so re-query rather than reuse the old node.
-    await waitFor(() => expect(screen.getByRole("button", { name: /^(Search|Searching…)$/ })).toBeDisabled());
-    fireEvent.click(screen.getByRole("button", { name: /^(Search|Searching…)$/ }));
+    // Submitting leaves the homepage for the research view, which has no
+    // search control at all now — the centre is a conversation. The
+    // invariant that mattered is still testable: one request in flight, and
+    // the loading state visible rather than a stale or blank screen.
+    await waitFor(() => expect(screen.getByRole("status")).toBeInTheDocument());
     expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(screen.queryByRole("button", { name: "Search" })).not.toBeInTheDocument();
 
     resolveFetch({ ok: true, json: async () => baseResponse() });
-    await waitFor(() => expect(screen.getByRole("button", { name: /^(Search|Searching…)$/ })).not.toBeDisabled());
+    await waitFor(() => expect(screen.getByText("test answer")).toBeInTheDocument());
   });
 
   test("empty recommendations render an honest empty state, never a fabricated standard", async () => {
@@ -157,7 +172,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
     await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
 
-    fireEvent.click(screen.getByLabelText("Clear search"));
+    fireEvent.click(screen.getByRole("button", { name: /new research/i }));
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
     expect(replace).toHaveBeenCalledWith("/", { scroll: false });
   });
@@ -203,8 +218,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
     await waitFor(() => expect(screen.getByText("first answer")).toBeInTheDocument());
 
     (global.fetch as ReturnType<typeof vi.fn>).mockClear();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
-    fireEvent.click(screen.getByRole("button", { name: "Search" }));
+    await startAnotherQuery("helmet");
 
     expect(screen.getByText("first answer")).toBeInTheDocument();
     expect(global.fetch).not.toHaveBeenCalled();
@@ -227,8 +241,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
     await waitFor(() => expect(screen.getByText("answer A")).toBeInTheDocument());
 
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "query B" } });
-    fireEvent.click(screen.getByRole("button", { name: "Search" }));
+    await startAnotherQuery("query B");
     await waitFor(() => expect(screen.getByText("answer B")).toBeInTheDocument());
     expect(screen.queryByText("answer A")).not.toBeInTheDocument();
   });
@@ -245,7 +258,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
     await waitFor(() => expect(screen.getByText(/Searching BIS sources/i)).toBeInTheDocument());
 
-    fireEvent.click(screen.getByLabelText("Clear search"));
+    fireEvent.click(screen.getByRole("button", { name: /new research/i }));
     resolveFetch({ ok: true, json: async () => baseResponse({ answer: "late answer" }) });
 
     await waitFor(() => {
@@ -280,11 +293,11 @@ describe("HomeClient — assistant column layout", () => {
     await waitFor(() => expect(global.fetch).toHaveBeenCalled(), { timeout: 10000 });
     const body = JSON.parse((global.fetch as ReturnType<typeof vi.fn>).mock.calls[0][1].body);
     expect(body.query).toBe("helmet");
-    // ...and it lands in the assistant's own prompt bar.
-    expect(screen.getByLabelText(/Describe your product or compliance question/i)).toHaveValue("helmet");
+    // ...and the research conversation is scoped to it.
+    expect(screen.getByLabelText(/ask a follow-up about these standards/i)).toBeInTheDocument();
   }, 15000);
 
-  test("the prompt bar sits below the results, not above them", async () => {
+  test("the chat composer sits below the results, not above them", async () => {
     searchParamsValue = "helmet";
     (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
       ok: true,
@@ -295,12 +308,12 @@ describe("HomeClient — assistant column layout", () => {
     await waitFor(() => expect(screen.getByText("test answer")).toBeInTheDocument(), { timeout: 10000 });
 
     const results = screen.getByText("test answer");
-    const promptBar = screen.getByLabelText(/Describe your product or compliance question/i);
+    const promptBar = screen.getByLabelText(/ask a follow-up about these standards/i);
     // DOCUMENT_POSITION_FOLLOWING: the prompt bar comes after the results.
     expect(results.compareDocumentPosition(promptBar) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   }, 15000);
 
-  test("the prompt bar is stuck to the bottom of the viewport, not to a guessed column height", async () => {
+  test("the chat composer is stuck to the bottom of the viewport, not to a guessed column height", async () => {
     searchParamsValue = "helmet";
     (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
       ok: true,
@@ -310,9 +323,7 @@ describe("HomeClient — assistant column layout", () => {
     renderHome();
     await waitFor(() => expect(screen.getByText("test answer")).toBeInTheDocument(), { timeout: 10000 });
 
-    const bar = screen
-      .getByLabelText(/Describe your product or compliance question/i)
-      .closest("div.sticky");
+    const bar = screen.getByLabelText(/ask a follow-up about these standards/i).closest("form.sticky");
     expect(bar).not.toBeNull();
     expect(bar!.className).toContain("bottom-0");
     // Opaque, because the answers scroll underneath it.
@@ -334,7 +345,7 @@ describe("HomeClient — assistant column layout", () => {
     // counting levels made this brittle.
     const heading = screen.getByRole("heading", { name: /BIS Research/i });
     const answer = screen.getByText("test answer");
-    const prompt = screen.getByLabelText(/Describe your product or compliance question/i);
+    const prompt = screen.getByLabelText(/ask a follow-up about these standards/i);
     let column: HTMLElement | null = heading.parentElement;
     while (column && !(column.contains(answer) && column.contains(prompt))) column = column.parentElement;
     expect(column).not.toBeNull();

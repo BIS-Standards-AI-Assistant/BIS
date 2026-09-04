@@ -9,7 +9,7 @@ import { ServicesSection } from "@/components/home/ServicesSection";
 import { RecentQueries } from "@/components/home/RecentQueries";
 import { WhatsNew } from "@/components/home/WhatsNew";
 import { QuickLinks } from "@/components/home/QuickLinks";
-import { SearchHero } from "@/components/query/SearchHero";
+import { ResearchChat } from "@/components/chat/ResearchChat";
 import { ClarificationPanel } from "@/components/query/ClarificationPanel";
 import { LoadingIndicator } from "@/components/query/LoadingIndicator";
 import { ConfidenceBadge } from "@/components/query/ConfidenceBadge";
@@ -168,8 +168,17 @@ export function HomeClient() {
     getSourcesSnapshot,
     getSourcesServerSnapshot,
   );
+  // Only standards the applicability gate passed as primary. A
+  // material-mismatched candidate (the steel-query/PVC-standard case) is
+  // still shown in the results under "Related but not applicable", but it
+  // must not be listed as research context — a chip saying "IS 4985:2021"
+  // beside the conversation presents it as a basis for answers, which is
+  // exactly the conflation the gate exists to prevent.
   const resultStandardNumbers =
-    result?.recommendations.map((r) => r.standardNumber).filter((n): n is string => n !== null) ?? [];
+    result?.recommendations
+      .filter((r) => r.primaryRecommendation)
+      .map((r) => r.standardNumber)
+      .filter((n): n is string => n !== null) ?? [];
   const sourceStandardNumbers = selectedStandardNumbers(librarySources);
   // Sources the reader chose take priority over standards the search
   // happened to return — see src/lib/chat-scope.ts for why ordering these
@@ -282,6 +291,13 @@ export function HomeClient() {
                     )}
                   </div>
                   <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handleClearResults}
+                      className="rounded-md border border-border-strong px-2.5 py-1 text-[11px] font-bold text-ink-soft transition-colors hover:border-navy hover:text-navy"
+                    >
+                      + New research
+                    </button>
                     {!showSources && (
                       <button
                         type="button"
@@ -565,19 +581,17 @@ export function HomeClient() {
               </div>
             )}
               </div>
-                {/* Floats at the bottom of the viewport while the answers
-                    scroll behind it, so it is always where it is typed into.
-                    Opaque, because results pass underneath. */}
-                <div className="sticky bottom-0 z-20 -mx-1 mt-3 border-t border-border/60 bg-surface px-1 pb-3 pt-3">
-                  <SearchHero
-                    key={activeQuery}
-                    onSubmit={runQuery}
-                    loading={loading}
-                    compact
-                    initialValue={activeQuery}
-                    onClear={handleClearResults}
-                  />
-                </div>
+                {/* The centre is a conversation, not a second search box.
+                    This used to be a SearchHero calling runQuery, which
+                    rewrote ?q= and ran the global pipeline — so a follow-up
+                    question discarded the research context. Source search
+                    lives in the left panel; this asks about what is there. */}
+                <ResearchChat
+                  scopeStandardNumbers={chatScope.standardNumbers}
+                  scopeQuery={activeQuery}
+                  hasSelectedSources={selectedSources.length > 0}
+                  onManageSources={() => setShowSources(true)}
+                />
               </div>
 
               {/* RIGHT: what to do next with this result, and this browser's
