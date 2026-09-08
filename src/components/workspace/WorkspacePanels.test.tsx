@@ -4,18 +4,6 @@ import userEvent from "@testing-library/user-event";
 import { SourcesPanel } from "./SourcesPanel";
 import type { SourceCandidate } from "@/lib/source-search";
 import { WorkspacePanel } from "./WorkspacePanel";
-import type { QueryInterpretation } from "@/types/api";
-
-const INTERPRETATION = {
-  product: "pressure cooker",
-  material: null,
-  useCase: null,
-  targetUser: null,
-  sector: null,
-  certificationRequested: false,
-  testingRequested: false,
-} as unknown as QueryInterpretation;
-
 
 /** The real /api/v1/analyze-document response shape. */
 
@@ -60,6 +48,7 @@ function renderSources(over: Partial<Parameters<typeof SourcesPanel>[0]> = {}) {
     selectedSources: [] as SourceCandidate[],
     onSelectionChange: vi.fn(),
     onResearch: vi.fn(),
+    onOpenRecommendation: vi.fn(),
     onCollapse: vi.fn(),
     ...over,
   };
@@ -151,13 +140,6 @@ describe("SourcesPanel — left panel retrieves sources, it does not chat (§3, 
     expect(screen.getByLabelText("Add source documents")).toBeInTheDocument();
   });
 
-  test("shows what the search was understood as, once there is a result", () => {
-    renderSources({ interpretation: INTERPRETATION });
-    // The heading, not the empty-state prose that also says "research context".
-    expect(screen.getByRole("heading", { name: /Search Context/i })).toBeInTheDocument();
-    expect(screen.getByText("pressure cooker")).toBeInTheDocument();
-  });
-
   test("collapses on request", async () => {
     const { props } = renderSources();
     await userEvent.setup().click(screen.getByRole("button", { name: /collapse sources panel/i }));
@@ -166,13 +148,9 @@ describe("SourcesPanel — left panel retrieves sources, it does not chat (§3, 
 });
 
 describe("WorkspacePanel", () => {
-  test("offers exactly the three workspace actions", () => {
+  test("no longer offers standalone Testing/Certification quick links — the compliance map's own tabs cover that", () => {
     render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
-    for (const name of ["Audio Overview", "Testings", "Certifications"]) {
-      expect(screen.getByText(name)).toBeInTheDocument();
-    }
-    // The formats from the earlier design are gone.
-    for (const gone of ["Video Overview", "Mind Map", "Reports", "Flashcards", "Quiz", "Infographic", "Data Table"]) {
+    for (const gone of ["Testings", "Certifications", "Audio Overview", "Video Overview", "Mind Map", "Reports", "Flashcards", "Quiz", "Infographic", "Data Table"]) {
       expect(screen.queryByText(gone), gone).not.toBeInTheDocument();
     }
   });
@@ -181,20 +159,6 @@ describe("WorkspacePanel", () => {
     render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
     expect(screen.getByRole("heading", { name: "Workspace" })).toBeInTheDocument();
     expect(screen.queryByText("Studio")).not.toBeInTheDocument();
-  });
-
-  test("Testing and Certification go to this service's real sections", () => {
-    render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
-    expect(screen.getByRole("link", { name: /Testings/ })).toHaveAttribute("href", "/testing");
-    expect(screen.getByRole("link", { name: /Certifications/ })).toHaveAttribute("href", "/certification");
-  });
-
-  test("Audio Overview does not pretend to work — there is no speech synthesis here", () => {
-    render(<WorkspacePanel onRerun={vi.fn()} onCollapse={vi.fn()} />);
-    const planned = screen.getAllByText("Planned");
-    expect(planned).toHaveLength(1);
-    expect(planned[0].closest("button")).toBeDisabled();
-    expect(screen.getByText(/Audio Overview is not built yet/i)).toBeInTheDocument();
   });
 
   test("shows real search history, not invented notebooks", async () => {

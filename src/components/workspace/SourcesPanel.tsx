@@ -1,8 +1,11 @@
 "use client";
 
 import { useRef, useState, useSyncExternalStore } from "react";
-import { InterpretationPanel } from "@/components/query/InterpretationPanel";
-import { groupChunksIntoSources, sourceLabel, type SourceCandidate } from "@/lib/source-search";
+import { ConfidenceBadge } from "@/components/query/ConfidenceBadge";
+import { InfoCard } from "@/components/query/InfoCard";
+import { ConflictPanel } from "@/components/standards/ConflictPanel";
+import { RecommendationsList } from "@/components/standards/RecommendationsList";
+import { groupChunksIntoSources, sourceLabel, sourcesFromRecommendations, type SourceCandidate } from "@/lib/source-search";
 import type { RetrievedChunk } from "@/types/api";
 import {
   ACCEPTED_SOURCE_TYPES,
@@ -16,7 +19,7 @@ import {
   updateSource,
   type LibrarySource,
 } from "@/lib/source-library";
-import type { QueryInterpretation } from "@/types/api";
+import type { QueryResponse } from "@/types/api";
 
 /**
  * The workspace's left panel: the reader's own source documents, and what
@@ -41,18 +44,22 @@ import type { QueryInterpretation } from "@/types/api";
  */
 
 export function SourcesPanel({
-  interpretation,
+  result,
   selectedSources,
   onSelectionChange,
   onResearch,
+  onOpenRecommendation,
   onCollapse,
 }: {
-  interpretation?: QueryInterpretation | null;
+  /** The current search's evidence-grounded summary, shown compactly here rather than competing with the centre conversation for space. */
+  result?: QueryResponse | null;
   /** Sources the reader has chosen as research context (§6). */
   selectedSources: SourceCandidate[];
   onSelectionChange: (sources: SourceCandidate[]) => void;
   /** Fired when a source search runs, so the centre can open a research conversation (§35). */
   onResearch: (query: string) => void;
+  /** Opens the full evidence card for one recommendation, by its index in result.recommendations. */
+  onOpenRecommendation: (index: number) => void;
   onCollapse: () => void;
 }) {
   const sources = useSyncExternalStore(subscribeToSources, getSourcesSnapshot, getSourcesServerSnapshot);
@@ -63,6 +70,27 @@ export function SourcesPanel({
   const [results, setResults] = useState<SourceCandidate[] | null>(null);
   const [searchError, setSearchError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // A manual left-panel search overrides the auto-populated list below, but
+  // only until the next centre query — otherwise a stale manual search from
+  // an earlier, unrelated question would keep hiding the current one's real
+  // matches. Reset during render (React's documented pattern for "adjusting
+  // state when a prop changes"), not in an effect: an effect would commit
+  // one extra stale render first.
+  const [lastQueryKey, setLastQueryKey] = useState(result?.query);
+  if (result?.query !== lastQueryKey) {
+    setLastQueryKey(result?.query);
+    setResults(null);
+    setSearchError(null);
+  }
+
+  // The centre query already ran real retrieval — this reshapes its
+  // recommendations into the same source-card shape the left panel's own
+  // search produces, so what was just searched for shows up here without
+  // the reader re-typing it into a second box.
+  const autoResults =
+    !results && result && result.recommendations.length > 0 ? sourcesFromRecommendations(result.recommendations) : null;
+  const displayedResults = results ?? autoResults;
 
   /**
    * Retrieval only — no answer generation (§4). This posts to the existing
@@ -238,6 +266,137 @@ export function SourcesPanel({
           </p>
         )}
 
+        {/* §7: the evidence-grounded summary for the current search, kept
+            compact here rather than competing with the centre conversation
+            for primary screen space. Same underlying data as before — only
+            the location and density changed. */}
+        {result && (
+          <section className="mt-3 rounded-lg border border-border-strong/70 bg-surface-raised p-3">
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="text-[10.5px] font-bold uppercase tracking-wider text-navy">
+                Research Summary
+              </h3>
+              <ConfidenceBadge confidence={result.confidence} />
+            </div>
+            <p className="mt-2 text-[12.5px] leading-relaxed text-ink">{result.answer}</p>
+            {result.translated && (
+              <p className="mt-2 text-[10.5px] text-ink-faint">
+                Translated to English for search; shown here in your language.
+              </p>
+            )}
+            <details className="mt-2.5 rounded-md bg-surface-alt/80 border border-border/60 p-2.5 text-[11px]">
+              <summary className="cursor-pointer font-bold uppercase tracking-wider text-[10px] text-ink-faint">
+                Technical details
+              </summary>
+              <p className="mt-1.5 text-ink-soft leading-relaxed">
+                {result.recommendations.length} candidate standard{result.recommendations.length === 1 ? "" : "s"}
+                {" · "}
+                {result.recommendations.reduce((n, r) => n + r.evidence.length, 0)} supporting source
+                {result.recommendations.reduce((n, r) => n + r.evidence.length, 0) === 1 ? "" : "s"}
+                {typeof result.latencyMs === "number" && (
+                  <>
+                    {" · "}
+                    <span className="tabular-nums">{(result.latencyMs / 1000).toFixed(1)}s response</span>
+                  </>
+                )}
+              </p>
+              {result.limitations.length > 0 && (
+                <ul className="mt-1.5 space-y-1 text-ink-soft leading-relaxed">
+                  {result.limitations.map((l, i) => (
+                    <li key={i}>{l}</li>
+                  ))}
+                </ul>
+              )}
+            </details>
+          </section>
+        )}
+
+        {/* Everything below used to live in the centre column; moved here
+            so the centre is the research conversation only. */}
+        {result && result.isRelevant === false && (
+          <div className="mt-3 rounded-lg border border-danger/30 bg-danger-soft/40 p-3">
+            <div className="flex items-start gap-2.5">
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-danger/15 text-xs font-bold text-danger">
+                !
+              </div>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-[12px] font-bold text-danger">This is not a relevant BIS search</h3>
+                <p className="mt-1 text-[11.5px] leading-relaxed text-ink-soft">{result.answer}</p>
+                <div className="mt-2.5 border-t border-danger/15 pt-2">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-ink-faint">Try instead:</p>
+                  <div className="mt-1.5 flex flex-wrap gap-1">
+                    {[
+                      "Steel water bottle",
+                      "Packaged drinking water",
+                      "Stainless steel utensils",
+                      "Helmets for two wheeler riders",
+                      "Domestic pressure cooker",
+                      "LED bulb",
+                    ].map((prompt) => (
+                      <button
+                        key={prompt}
+                        type="button"
+                        onClick={() => onResearch(prompt)}
+                        className="rounded-full border border-border-strong bg-surface-raised px-2 py-0.5 text-[10.5px] font-medium text-navy transition-colors hover:border-navy hover:bg-navy/5"
+                      >
+                        {prompt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+
+        {result && result.conflicts.length > 0 && (
+          <div className="mt-3">
+            <ConflictPanel conflicts={result.conflicts} />
+          </div>
+        )}
+
+        {result && (
+          <div className="mt-3">
+            <RecommendationsList recommendations={result.recommendations} onOpen={onOpenRecommendation} />
+          </div>
+        )}
+
+        {result && (result.certification.available || result.testing.available) && (
+          <div className="mt-3 space-y-2">
+            <InfoCard
+              title="Certification"
+              available={result.certification.available}
+              notes={result.certification.notes}
+              unavailableMessage="We could not establish a reliable certification pathway from the available sources."
+            />
+            <InfoCard
+              title="Testing"
+              available={result.testing.available}
+              notes={result.testing.notes}
+              unavailableMessage="No testing information could be verified from the available sources."
+            />
+          </div>
+        )}
+
+        {result && result.nextSteps.length > 0 && (
+          <details className="mt-3 rounded-lg border border-navy/30 bg-navy/5 p-2.5 text-[11px]">
+            <summary className="flex cursor-pointer items-center gap-1.5 font-bold uppercase tracking-wider text-[10.5px] text-navy">
+              <svg className="h-3.5 w-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              View insight — next steps
+            </summary>
+            <ol className="mt-1.5 space-y-1">
+              {result.nextSteps.map((step, i) => (
+                <li key={i} className="text-[11.5px] leading-snug text-ink-soft">
+                  {i + 1}. {step}
+                </li>
+              ))}
+            </ol>
+          </details>
+        )}
+
         {/* Selected sources — the research context the centre discusses (§6). */}
         {selectedSources.length > 0 && (
           <section className="mt-3 rounded-lg border border-navy/20 bg-navy/5 p-2.5">
@@ -278,10 +437,13 @@ export function SourcesPanel({
           </section>
         )}
 
-        {/* Retrieval results. Never labelled "recommended" — applicability is
-            a separate deterministic decision made against evidence (§5, §23). */}
-        {results !== null && !searching && (
-          results.length === 0 ? (
+        {/* Retrieval results — either from this panel's own search box, or
+            (when that hasn't been used) auto-populated from the centre
+            query's own retrieval, so a search never leaves this list empty.
+            Never labelled "recommended" — applicability is a separate
+            deterministic decision made against evidence (§5, §23). */}
+        {displayedResults !== null && !searching && (
+          displayedResults.length === 0 ? (
             <div className="mt-4 px-1">
               <p className="text-[12.5px] font-semibold text-ink">No matching BIS sources found.</p>
               <ul className="mt-1.5 space-y-1 text-[12px] text-ink-faint">
@@ -293,10 +455,10 @@ export function SourcesPanel({
           ) : (
             <section className="mt-4">
               <h3 className="px-1 text-[11px] font-extrabold uppercase tracking-wider text-ink-faint">
-                Matching BIS sources ({results.length})
+                Matching BIS sources ({displayedResults.length})
               </h3>
               <ul className="mt-2 space-y-1.5">
-                {results.map((source) => (
+                {displayedResults.map((source) => (
                   <li key={source.id} className="rounded-lg border border-border/60 bg-surface-alt/40 p-2.5">
                     <p className="font-mono text-[11.5px] font-bold text-navy">
                       {source.standardNumber ?? "Document"}
@@ -349,24 +511,35 @@ export function SourcesPanel({
         )}
 
         {sources.length === 0 ? (
-          <div
-            className={`mt-6 rounded-xl border border-dashed px-4 py-10 text-center transition-colors ${
-              isDragging ? "border-navy bg-navy/5" : "border-border/70"
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className={`mt-6 w-full rounded-xl border border-dashed px-4 py-10 text-center transition-colors cursor-pointer ${
+              isDragging ? "border-navy bg-navy/5" : "border-border/70 hover:border-navy hover:bg-navy/5"
             }`}
           >
             <DocumentIcon className="mx-auto h-7 w-7 text-ink-faint" />
-            <p className="mt-3 text-[13.5px] font-medium text-ink-soft">Saved sources will appear here</p>
+            <p className="mt-3 text-[13.5px] font-medium text-ink-soft">Click to add a document, or drop it here</p>
             <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink-faint">
               Add a PDF or text file. The Indian Standards it cites become part of
               what the assistant can discuss.
             </p>
-          </div>
+          </button>
         ) : (
-          <ul className="mt-3 space-y-1.5">
-            {sources.map((source) => (
-              <SourceRow key={source.id} source={source} />
-            ))}
-          </ul>
+          <>
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="mt-3 w-full rounded-lg border border-dashed border-border-strong px-3 py-2 text-[11.5px] font-bold text-navy transition-colors hover:border-navy hover:bg-navy/5"
+            >
+              + Add another document
+            </button>
+            <ul className="mt-3 space-y-1.5">
+              {sources.map((source) => (
+                <SourceRow key={source.id} source={source} />
+              ))}
+            </ul>
+          </>
         )}
 
         <p className="mt-4 border-t border-border/60 px-1 pt-3 text-[11px] leading-relaxed text-ink-faint">
@@ -375,11 +548,6 @@ export function SourcesPanel({
           are not uploaded anywhere except to be read for the standards they cite.
         </p>
 
-        {interpretation && (
-          <div className="mt-3 border-t border-border/60 pt-3">
-            <InterpretationPanel interpretation={interpretation} />
-          </div>
-        )}
       </div>
     </aside>
   );

@@ -1,4 +1,4 @@
-import type { RetrievedChunk } from "@/types/api";
+import type { Recommendation, RetrievedChunk } from "@/types/api";
 
 /**
  * Groups raw retrieval hits into selectable *sources* for the left panel.
@@ -69,4 +69,29 @@ export function groupChunksIntoSources(chunks: RetrievedChunk[]): SourceCandidat
 /** What the panel says about a source. Never "recommended" (§5). */
 export function sourceLabel(source: SourceCandidate): string {
   return source.identifierMatch ? "Named in your search" : "Matching source";
+}
+
+/**
+ * The main search already ran retrieval and produced `recommendations` —
+ * this reshapes that response into the same `SourceCandidate` list the
+ * left panel's own search box produces, so a source found by the main
+ * query shows up here without the reader having to re-type it into a
+ * second box. No new retrieval call, no second engine — the same
+ * candidates, one presentation.
+ */
+export function sourcesFromRecommendations(recommendations: Recommendation[]): SourceCandidate[] {
+  return recommendations.map((r) => {
+    const firstEvidence = r.evidence[0];
+    return {
+      id: r.standardNumber ?? firstEvidence?.documentId ?? r.title,
+      standardNumber: r.standardNumber,
+      title: r.title,
+      documentId: firstEvidence?.documentId ?? "",
+      sourceUrl: firstEvidence?.sourceUrl ?? "",
+      sourceOrg: "BIS",
+      matchingPassages: r.evidence.length,
+      topScore: r.relevanceScore,
+      identifierMatch: r.coverage.identifier === "covered",
+    };
+  });
 }

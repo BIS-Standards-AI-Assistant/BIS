@@ -1,17 +1,33 @@
-import { generateText as aiGenerateText, generateObject as aiGenerateObject } from "ai";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { generateText as aiGenerateText } from "ai";
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import type { GenerateStructuredRequest, GenerateTextRequest, LLMProvider, NormalizedLLMResponse } from "./types";
 import { parseJsonFromText, normalizeStructuredObject } from "./normalize-structured";
 
-export class GeminiProvider implements LLMProvider {
-  readonly name = "gemini" as const;
+// Verified live (2026-09-04, direct raw-fetch against Groq's real API,
+// response_format: json_object) to return clean, schema-parseable JSON in
+// its `content` field with reasoning kept separate — never assumed for a
+// model not actually checked, per the same rule OpenRouterProvider follows.
+const KNOWN_STRUCTURED_OUTPUT_MODELS = new Set(["openai/gpt-oss-120b", "openai/gpt-oss-20b"]);
+
+/**
+ * Groq — an OpenAI-compatible chat completions API (https://api.groq.com/openai/v1).
+ * Fast (sub-second on the verified model) and used as the primary tier
+ * ahead of Gemini in the routing order. structuredOutput is gated by
+ * KNOWN_STRUCTURED_OUTPUT_MODELS, not assumed true by default — the same
+ * rule the OpenRouter provider follows — and generateStructured still
+ * goes through "ask for raw JSON in the prompt, then parse" rather than
+ * the API's own response_format parameter, since that's what was actually
+ * verified live.
+ */
+export class GroqProvider implements LLMProvider {
+  readonly name = "groq" as const;
 
   private readonly apiKey: string | undefined;
   private readonly modelId: string;
 
   constructor(opts: { apiKey?: string; modelId?: string } = {}) {
-    this.apiKey = opts.apiKey ?? process.env.GEMINI_API_KEY ?? process.env.GOOGLE_GENERATIVE_AI_API_KEY;
-    this.modelId = opts.modelId ?? process.env.GEMINI_MODEL ?? "gemini-3.6-flash";
+    this.apiKey = opts.apiKey ?? process.env.GROQ_API_KEY;
+    this.modelId = opts.modelId ?? process.env.GROQ_MODEL ?? "openai/gpt-oss-120b";
   }
 
   get model(): string {
@@ -20,10 +36,10 @@ export class GeminiProvider implements LLMProvider {
 
   get capabilities() {
     return {
-      structuredOutput: true,
+      structuredOutput: KNOWN_STRUCTURED_OUTPUT_MODELS.has(this.modelId),
       toolCalling: true,
       streaming: true,
-      maxContextTokens: 1_000_000,
+      maxContextTokens: 128_000,
     };
   }
 
@@ -32,12 +48,16 @@ export class GeminiProvider implements LLMProvider {
   }
 
   private client() {
-    return createGoogleGenerativeAI({ apiKey: this.apiKey! })(this.modelId);
+    return createOpenAICompatible({
+      name: "groq",
+      apiKey: this.apiKey!,
+      baseURL: "https://api.groq.com/openai/v1",
+    }).chatModel(this.modelId);
   }
 
   async generateText(req: GenerateTextRequest): Promise<NormalizedLLMResponse<never>> {
     const start = Date.now();
-    if (!this.isConfigured()) return this.failure(start, "not_configured: GEMINI_API_KEY / GOOGLE_GENERATIVE_AI_API_KEY not set");
+    if (!this.isConfigured()) return this.failure(start, "not_configured: GROQ_API_KEY not set");
     try {
       const result = await aiGenerateText({
         model: this.client(),
@@ -63,14 +83,12 @@ export class GeminiProvider implements LLMProvider {
 
   async generateStructured<T>(req: GenerateStructuredRequest<T>): Promise<NormalizedLLMResponse<T>> {
     const start = Date.now();
-    if (!this.isConfigured()) return { ...this.failure(start, "not_configured: GEMINI_API_KEY / GOOGLE_GENERATIVE_AI_API_KEY not set"), structuredData: null };
-    
-    // First, try fast text generation with explicit JSON format instruction (reliable across all Gemini models)
+    if (!this.isConfigured()) return { ...this.failure(start, "not_configured: GROQ_API_KEY not set"), structuredData: null };
     try {
       const textResult = await this.generateText({
-        system: (req.system ? req.system + "\n\n" : "") + "CRITICAL INSTRUCTION: You MUST output ONLY a valid JSON object matching the requested schema. Do NOT include markdown code blocks, backticks, reasoning, or conversational text.",
-        prompt: req.prompt + "\n\nProvide the complete response as a single, valid JSON object strictly complying with the required structure.",
-        maxOutputTokens: req.maxOutputTokens || 2000,
+        system: (req.system ? req.system + "\n\n" : "") + "CRITICAL: You MUST respond with ONLY a valid, parseable raw JSON object matching the requested schema. Do not enclose in markdown blocks or include commentary.",
+        prompt: req.prompt,
+        maxOutputTokens: req.maxOutputTokens,
       });
       if (textResult.text) {
         const parsed = parseJsonFromText(textResult.text);
@@ -88,31 +106,10 @@ export class GeminiProvider implements LLMProvider {
           error: null,
         };
       }
+      return { ...this.failure(start, "empty response"), structuredData: null };
     } catch (err) {
-      console.warn("[gemini-provider] text JSON generation failed, trying aiGenerateObject:", err);
-    }
-
-    try {
-      const result = await aiGenerateObject({
-        model: this.client(),
-        schema: req.schema,
-        system: req.system,
-        prompt: req.prompt,
-        maxOutputTokens: req.maxOutputTokens,
-      });
-      return {
-        text: null,
-        structuredData: result.object,
-        provider: this.name,
-        model: this.model,
-        inputTokens: result.usage?.inputTokens ?? null,
-        outputTokens: result.usage?.outputTokens ?? null,
-        latencyMs: Date.now() - start,
-        finishReason: result.finishReason === "length" ? "length" : "stop",
-        error: null,
-      };
-    } catch (err) {
-      return { ...this.failure(start, err instanceof Error ? err.message : String(err)), structuredData: null };
+      const msg = err instanceof Error ? err.message : String(err);
+      return { ...this.failure(start, msg), structuredData: null };
     }
   }
 

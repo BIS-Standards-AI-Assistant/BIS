@@ -105,16 +105,23 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
     fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "I want to manufacture steel pipes" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
-    await waitFor(() => expect(screen.getByText("IS 4985:2021")).toBeInTheDocument());
+    // IS 4985:2021 legitimately appears twice: once auto-populated into the
+    // left Sources panel from this same query's retrieval, and once as the
+    // blocked recommendation card itself — assert presence, not uniqueness.
+    await waitFor(() => expect(screen.getAllByText("IS 4985:2021").length).toBeGreaterThan(0));
 
     // The section heading itself must say this is NOT a recommendation.
     expect(screen.getByText("Related but not applicable (1)")).toBeInTheDocument();
     expect(screen.queryByText(/^Recommended standards?/)).not.toBeInTheDocument();
 
-    // The exact misleading combination from the bug report must never appear.
+    // The centre list is now a compact row (RecommendationRow) — the
+    // exact misleading combination from the bug report ("High relevance" /
+    // "Directly supported by evidence") must never appear there, and the
+    // row's own applicability badge must say material mismatch, not
+    // endorse the candidate.
     expect(screen.queryByText("High relevance")).not.toBeInTheDocument();
     expect(screen.queryByText("Directly supported by evidence")).not.toBeInTheDocument();
-    expect(screen.getByText("Related to your search")).toBeInTheDocument();
+    expect(screen.getByText("Related standard — material mismatch")).toBeInTheDocument();
   });
 
   test("positive control: a real, applicable steel standard renders under 'Recommended standards' with full relevance/grounding language", async () => {
@@ -137,6 +144,11 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
 
     expect(screen.getByText("Recommended standard")).toBeInTheDocument();
     expect(screen.queryByText("Related but not applicable")).not.toBeInTheDocument();
+    expect(screen.getByText("Directly applicable")).toBeInTheDocument();
+
+    // The full relevance/grounding language lives in the popup opened from
+    // the compact row, not inline in the centre list.
+    fireEvent.click(screen.getByText("View evidence →"));
     expect(screen.getByText("High relevance")).toBeInTheDocument();
     expect(screen.getByText("Directly supported by evidence")).toBeInTheDocument();
   });
@@ -160,7 +172,8 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
     fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "steel pipes and utensils" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
-    await waitFor(() => expect(screen.getByText("IS 4985:2021")).toBeInTheDocument());
+    // Same auto-populated-left-panel duplication as above.
+    await waitFor(() => expect(screen.getAllByText("IS 4985:2021").length).toBeGreaterThan(0));
 
     const recommendedHeading = screen.getByText("Recommended standard");
     const relatedHeading = screen.getByText("Related but not applicable (1)");
