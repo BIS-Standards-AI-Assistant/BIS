@@ -278,7 +278,9 @@ describe("11. Provider timeout", () => {
     });
     const provider = new LocalProvider("http://localhost:11434/v1", "llama3", false, fetchMock as unknown as typeof fetch, 20);
     const result = await provider.generateText({ prompt: "p", maxOutputTokens: 10 });
-    expect(result.error).toMatch(/aborted/i);
+    // The abort is normalized to a "timeout:" prefix so callers/the smoke
+    // test can tell it apart from a connection failure or an HTTP error.
+    expect(result.error).toMatch(/timeout/i);
   });
 });
 

@@ -17,6 +17,9 @@ const eslintConfig = defineConfig([
     // vendor JS bundles otherwise get linted as if they were source).
     "playwright-report/**",
     "test-results/**",
+    // Local Python virtualenv (gitignored) — its site-packages ship
+    // minified JS that would otherwise be linted as source.
+    ".venv/**",
   ]),
 ]);
 

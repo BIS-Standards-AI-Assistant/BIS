@@ -176,7 +176,8 @@ Status is tracked in detail — and honestly — in
 | Hybrid retrieval (pgvector + FTS + RRF), ML reranking | DONE — 12/12 recall, 8/8 no-false-match on the retrieval regression set |
 | Evidence aggregation, coverage analysis, conflict/version detection | DONE — unit-tested against real query numbers |
 | Deterministic grounding + engine confidence | DONE — grounding bug found & fixed via live smoke test; guaranteed consistent with grounding state |
-| Provider-independent LLM adapter (local / OpenRouter / paid) + automatic fallback | DONE — 23 unit tests (mocked); no API key required to pass |
+| Provider-independent LLM adapter (Groq / Gemini / local / OpenRouter / paid) + automatic fallback | DONE — unit tests (mocked); no API key required to pass |
+| Local inference via **Ollama** (zero-cost floor) | DONE — live-verified 2026-09-09 (`llama3.2:3b`): `npm run ollama:smoke`, full pipeline under `LLM_PROVIDER=local`, and primary→Ollama→evidence-only fallback. Structured output stays off by default for small local models. |
 | Evidence-only answer path (never fabricates prose) | DONE — first-class tested response path, not a bolt-on |
 | Deterministic intent fast path (exact-ID queries skip the LLM) | DONE |
 | Citation / standard-number validation & abstention | DONE — validated against fabricated & unknown identifiers |
@@ -198,7 +199,7 @@ Status is tracked in detail — and honestly — in
 | Corpus size | PARTIAL | ~19 seed documents ingested; ~51 standards in the reference dataset (25 fact-checked `verified`, 26 `needs_review`). Corpus expansion (scheme PDFs, FAQs, circulars) is a separate data-engineering track. |
 | Knowledge-graph relationship extraction | PARTIAL | 50 relationship rows *materialized from existing foreign keys*; text-based relationship extraction not yet built. |
 | Query planner / tool registry / agent orchestrator | PARTIAL | Built, tested (10 tools, DB-smoke-verified), and wired additively into `/api/v1/query` as a supplementary `toolEvidence` field — does not yet replace the core pipeline. |
-| Real local (Ollama) + real paid-tier inference | PLANNED | Only the OpenRouter free tier has been exercised live. |
+| Real paid-tier OpenRouter inference | PLANNED | Only the free tier has been exercised live. |
 | Dedicated responsive / a11y / dark-mode audit passes | PLANNED | Playwright suites exist; a full screenshot-verified audit at every breakpoint has not been run. |
 
 **Overall AI/ML completion: ~45%. Not production-ready** — see
@@ -274,7 +275,7 @@ behavior. For AI-generated prose, pick one of:
 
 | Path | Setup | Cost |
 |---|---|---|
-| **Local (Ollama / any OpenAI-compatible server)** | Run the server, pull a model, set `LOCAL_LLM_BASE_URL` + `LOCAL_LLM_MODEL` | Free, fully offline |
+| **Local (Ollama / any OpenAI-compatible server)** | `ollama pull llama3.2:3b`, set `LOCAL_LLM_BASE_URL=http://localhost:11434/v1` + `LOCAL_LLM_MODEL=llama3.2:3b`, then `npm run ollama:smoke` to verify | Free, fully offline |
 | **OpenRouter (free tier)** | Set `OPENROUTER_API_KEY` + `OPENROUTER_MODEL` | Free tier available |
 | **Paid** | Set `PAID_PROVIDER_API_KEY` + `PAID_PROVIDER_MODEL` (any OpenRouter-compatible endpoint) | Pay-as-you-go — **never required** |
 
@@ -296,7 +297,7 @@ docker compose --profile openrouter up --build
 
 # Fully local path — no API key
 docker compose --profile local up --build
-docker compose --profile local exec ollama ollama pull llama3
+docker compose --profile local exec ollama ollama pull llama3.2:3b
 ```
 
 Neither profile provisions a database — both read `DATABASE_URL` from `.env.local` via
@@ -363,6 +364,7 @@ docs/                      HLD, architecture, ML engine, evaluation, project sta
 | `npm run eval:generation` / `eval:validate` | Full generation-layer golden-query eval (needs a working LLM provider, burns credit) |
 | `npm run eval:calibration` | Confidence calibration report (reports "insufficient data" honestly) |
 | `npm run smoke:prd` | Live end-to-end smoke against the real DB + provider for the PRD demo cases |
+| `npm run ollama:smoke` | Verify a real local-Ollama round trip (reachability → model pulled → generateText). DB-independent. |
 | `npm run links:check` | Verify every official BIS link the app renders still resolves |
 | `npm run data:*` | Data-engineering pipeline (discovery, fetch, parse, migrate, report, relationships) |
 

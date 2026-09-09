@@ -28,7 +28,7 @@ fallback order.
 
 | Tier | Class | Configuration | Notes |
 |---|---|---|---|
-| Local | `LocalProvider` | `LOCAL_LLM_BASE_URL`, `LOCAL_LLM_MODEL` | Plain `fetch` to an OpenAI-compatible `/chat/completions` endpoint (Ollama, LM Studio, vLLM's OpenAI-compat server, etc.). No SDK dependency, no model name hardcoded. |
+| Local | `LocalProvider` | `LOCAL_LLM_BASE_URL`, `LOCAL_LLM_MODEL`, `LOCAL_LLM_TIMEOUT_MS` (opt), `LOCAL_LLM_SUPPORTS_STRUCTURED_OUTPUT` (opt) | Plain `fetch` to an OpenAI-compatible `/chat/completions` endpoint (Ollama, LM Studio, vLLM's OpenAI-compat server, etc.). No SDK dependency, no model name hardcoded. See "Local inference (Ollama)" below. |
 | OpenRouter free | `OpenRouterProvider("openrouter-free")` | `OPENROUTER_API_KEY`, `OPENROUTER_MODEL` | Uses the existing `@openrouter/ai-sdk-provider` + Vercel `ai` SDK. |
 | Paid | `OpenRouterProvider("paid")` | `PAID_PROVIDER_API_KEY`, `PAID_PROVIDER_MODEL` | Same OpenRouter-compatible interface with different credentials/model — activates only when explicitly configured. |
 
@@ -65,6 +65,60 @@ they've verified themselves.
 The router (`generateStructuredWithFallback`) skips any provider lacking
 this capability before even attempting a call — see test scenario 9 in
 `src/lib/providers/provider-architecture.test.ts`.
+
+## Local inference (Ollama)
+
+The `local` tier is the zero-cost floor of the architecture: with Ollama
+running and a model pulled, the app needs no API key and no network beyond
+Postgres.
+
+**Configuration** (host or Docker — same code, config only):
+
+| Env var | Host default | Docker (`local` profile) |
+|---|---|---|
+| `LOCAL_LLM_BASE_URL` | `http://localhost:11434/v1` | `http://ollama:11434/v1` |
+| `LOCAL_LLM_MODEL` | `llama3.2:3b` (documented default; override freely) | same |
+| `LOCAL_LLM_TIMEOUT_MS` | `15000` | `15000` |
+| `LOCAL_LLM_SUPPORTS_STRUCTURED_OUTPUT` | unset → `false` | unset → `false` |
+
+The base URL is the OpenAI-compat root and **must end in `/v1`** for Ollama
+— `LocalProvider` appends `/chat/completions`. The model is **not**
+downloaded on startup; `ollama pull <model>` is a manual, documented step
+(`docker compose --profile local exec ollama ollama pull llama3.2:3b`).
+
+**Structured output.** `llama3.2:3b` reliably drives `generateText` (the
+freeform-chat and translate-in calls) but is **not** verified for the
+production intent/answer JSON schemas — `LocalProvider.generateStructured`
+does a bare `JSON.parse` + `schema.parse`, and a small model's output
+(prose prefixes, unfenced JSON, missing optional fields) fails that often
+enough that it must not be trusted. So `structuredOutput` stays `false` by
+default: the router skips `local` for structured calls and the
+deterministic intent / evidence-only answer path handles them. Set
+`LOCAL_LLM_SUPPORTS_STRUCTURED_OUTPUT=true` only for a model/server *you*
+have verified with `npm run ollama:smoke` (which exercises a real
+structured round trip when the flag is set).
+
+**Local inference is not a source of BIS truth.** Ollama synthesizes prose
+from the same engine-produced evidence package every other provider gets.
+It cannot choose candidates, invent citations, or set grounding/confidence
+— the pipeline decides all of that before the provider is called, and
+`LLMAnswerSchema` has no field for any of it (same as every other
+provider).
+
+**Error normalization.** `LocalProvider` maps failures to prefixed
+messages so callers and `npm run ollama:smoke` can tell them apart:
+`not_configured:`, `connection_failed:` (server down), `timeout:`,
+`model_not_found:` (server up, model not pulled), `http_error:`,
+`invalid_response:` (2xx but no usable completion), and
+`schema_validation_failed:` (structured only). Each is surfaced as a
+normal `NormalizedLLMResponse` with `error` set — never a thrown
+exception — so fallback stays a plain data flow.
+
+**Verification.** `npm run ollama:smoke` (`scripts/ollama-smoke.ts`)
+checks reachability → model presence → a real `generateText` round trip
+(→ structured too if opted in), prints latency, and exits non-zero on
+failure. It is DB-independent. See `docs/PROJECT_STATUS.md` for the last
+recorded live result.
 
 ## Intent routing
 
@@ -134,8 +188,10 @@ content.
 
 ## Cost control
 
-- **Timeout**: `LocalProvider` uses an `AbortController` (default 15s).
-  OpenRouter calls inherit the underlying SDK's own timeout behavior.
+- **Timeout**: `LocalProvider` uses an `AbortController` (default 15s,
+  tunable via `LOCAL_LLM_TIMEOUT_MS` — a knob, not a silent bump). An
+  abort is normalized to a `timeout:` error. OpenRouter/Groq/Gemini calls
+  inherit the underlying SDK's own timeout behavior.
 - **Retry limit = 0 per provider.** A failed call moves to the next
   provider rather than retrying the one that just failed — retrying an
   already-failed expensive call rarely helps (a rate limit or credit
@@ -155,13 +211,24 @@ per query (intent + answer), no new database, no replacement of pgvector or
 the existing reranker, no speculative ML, no hardcoded model, and no
 provider (local, OpenRouter, or paid) is ever made mandatory.
 
-## What was NOT verified live
+## Verification status
 
 The provider architecture itself (routing, fallback, capability detection,
-evidence-only fallback) is verified by 23 unit tests using mocks — no real
-API key or local server required (`npx vitest run
-src/lib/providers/provider-architecture.test.ts`). A real local Ollama
-server and a real paid-tier OpenRouter call have **not** been tested this
-session — only OpenRouter's free tier has ever been exercised live (see
-`docs/ML_ENGINE.md`), and even that has been credit-exhausted for most of
-this project's history.
+evidence-only fallback) is verified by unit tests using mocks — no real
+API key or local server required (`npx vitest run src/lib/providers/`).
+
+**Local (Ollama) — VERIFIED LIVE (2026-09-09).** `ollama` 0.33.3,
+`llama3.2:3b`, on the host. `npm run ollama:smoke` passed (real
+`generateText` ~3.5–4.6 s; a trivial-schema structured round trip also
+passed). Full pipeline via `npm run smoke:prd` with `LLM_PROVIDER=local`:
+Ollama served the Hindi translate-in call (`provider_succeeded`, ~3.2 s)
+and — with `structuredOutput` off, as designed — intent/answer fell to the
+deterministic / evidence-only path; grounding, refusal, and multilingual
+behavior unchanged. Provider fallback verified end-to-end: a failing
+primary (bad Gemini key) → Ollama success → (Ollama also down) → `null` →
+evidence-only. With `LOCAL_LLM_SUPPORTS_STRUCTURED_OUTPUT=true`,
+`llama3.2:3b` failed the real intent schema (`schema_validation_failed`)
+and the router correctly fell back — hence the default stays `false`. See
+`docs/PROJECT_STATUS.md`.
+
+A real **paid-tier** OpenRouter call still has not been exercised live.

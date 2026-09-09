@@ -147,7 +147,7 @@ longer call an LLM SDK directly — both route through `src/lib/providers/`.
 | Evidence-only fallback (never fabricates prose) | DONE | Used whenever every configured provider fails |
 | Structured-output capability detection | DONE | Small verified allowlist; nothing assumed capable by default |
 | Cost-control (timeout, cooldown, no-retry policy) | DONE | See docs/ARCHITECTURE.md's cost-control section |
-| Real local (Ollama) inference | PLANNED | Never tested against a real local server |
+| Real local (Ollama) inference | DONE | Verified live 2026-09-09 — `ollama` 0.33.3 + `llama3.2:3b`, `npm run ollama:smoke` + full-pipeline + fallback tests. See "Ollama local provider — live-verified" section below. |
 | Real paid-tier OpenRouter call | PLANNED | Only the free tier has been exercised live, and only intermittently |
 
 ## Testing infrastructure (this session)
@@ -744,4 +744,49 @@ Hindi refusal/limitation strings.
 3. **Latency 8–38 s** vs the PRD's 10 s target — slow free model + agent
    orchestrator + provider retries. `refused_not_in_database` (no LLM
    call) came in at 9.4 s; the answered cases did not.
+
+### Ollama local provider — live-verified (this session, 2026-09-09)
+
+`docs/PROJECT_STATUS.md` and `docs/AI_ML_STATUS_REPORT.md` had listed
+"Real local (Ollama) inference" as the last unproven piece of the
+provider architecture — the entire zero-cost floor was mock-tested only.
+It is now verified against a real server. **No architectural change** —
+the existing `LocalProvider` (OpenAI-compat `fetch`, `LOCAL_LLM_*` env,
+`AbortController` timeout, opt-in structured output) was already the
+right shape; this session hardened its error handling, added a real
+smoke test, and ran it.
+
+| Item | Status | Notes |
+|---|---|---|
+| `LocalProvider` error normalization | DONE | Failures now carry a prefix — `connection_failed:` / `timeout:` / `model_not_found:` / `http_error:` / `invalid_response:` — so a down server, an unpulled model, and a slow model are distinguishable (§13 of the task). An empty 2xx completion is now a failure, not a silent success. |
+| `LOCAL_LLM_TIMEOUT_MS` | DONE | Optional; default unchanged at 15000. A knob for slow hardware, not a silent bump. |
+| `scripts/ollama-smoke.ts` / `npm run ollama:smoke` | DONE | DB-independent. Checks reachability → model pulled → real `generateText` round trip → (structured too if opted in). Exits non-zero on failure. |
+| `src/lib/providers/local-provider.test.ts` | DONE | 19 mocked cases: config parsing, request shape, all six error modes, structured opt-in on/off, timeout parsing. `npx vitest run` 542/542 green (was 523 + 19). |
+| Real `generateText` round trip | VERIFIED | `ollama` 0.33.3, `llama3.2:3b`, host. ~3.5–4.6 s for a one-sentence grounded answer. `finishReason=stop`, token counts returned. |
+| Real `generateStructured` round trip | PARTIAL | Passes a **trivial** 2-field schema (~5.6 s). **Fails the real `QueryIntentSchema`** — `llama3.2:3b` returns non-JSON prose (`schema_validation_failed: Unexpected token 'i', "isRelevant"...`). `LocalProvider.generateStructured` uses a bare `JSON.parse` (it deliberately does not pull in the Gemini/Groq normalize-and-alias helpers). So `structuredOutput` **stays `false` by default** for local — the router skips it for intent/answer and the deterministic path handles them, exactly as designed. Not marked capable. |
+| Full pipeline, `LLM_PROVIDER=local` (`npm run smoke:prd`) | VERIFIED | 4 PRD cases against the real Neon DB (19 docs / 557 chunks). Ollama served the Hindi **translate-in** call live (`provider_succeeded`, ~3.2 s). Intent + answer used the deterministic / evidence-only path (local skipped for structured). Grounding, `refused_not_in_database`, and Hindi language handling all unchanged from the OpenRouter/Gemini runs. |
+| Provider fallback | VERIFIED | Real chain, `generateTextWithFallback`: (1) bad Gemini key → **Ollama success** (`local`, ~3.3 s, grounded text). (2) bad Gemini key + Ollama pointed at a dead port → `connection_failed: fetch failed` → `response: null` → caller does evidence-only. Retry-limit 0 and 60 s cooldown observed (cases 2–4 of the opt-in run skipped `local` after its first structured failure). |
+| Docker `local` profile | NOT ATTEMPTED | No Docker daemon on this machine. `docker-compose.yml` was corrected (`LOCAL_LLM_MODEL` default `llama3` → `llama3.2:3b`, `depends_on` now waits on an `ollama` healthcheck instead of just container start, pull step documented) but **not run**. The app→Ollama hostname (`http://ollama:11434/v1`) and the same `LocalProvider` code path are exercised on the host; only the container networking is unverified. |
+
+**Pre-existing issue re-confirmed, NOT caused by Ollama:** the nonsense
+query "boiling point of xenon at 3 atmospheres" still returns
+`answered` / `high` / verified standards under `LLM_PROVIDER=local` —
+identical to the OpenRouter/Gemini behavior, because the LLM is not
+involved in that decision at all (local is skipped for structured; the
+answer is evidence-only). This is the same grounding-leniency defect
+already tracked above (PRD §8.1 top-1 relevance floor). The Ollama
+integration is not responsible for it and does not change it.
+
+**Environment note:** `node_modules` on this machine was stale relative
+to the committed manifests (`@ai-sdk/openai-compatible`, a dependency of
+the merged Groq provider, was in `package.json` + `package-lock.json`
+but not installed) — `npm install` fixed it. Not a repo defect; CI/`npm
+ci` from a clean checkout is unaffected. `.venv/**` was added to
+`eslint.config.mjs`'s ignore list (a local Python virtualenv, gitignored,
+whose bundled minified JS was being linted as source — same fix already
+applied to `playwright-report/**`).
+
+Verification: `npm run lint` clean, `npm run typecheck` clean, `npx
+vitest run` 542/542, `npm run test:ml` 30/30 + 20/20, `npm run build`
+clean. `npm run verify` green.
 

@@ -1036,3 +1036,59 @@ and surfaces a new, real, unresolved latency concern. Per §97, this must
 not be read as "ML roadmap complete" — it is "Phase 0 of a 8-phase,
 25-milestone program complete; phases 1-8 correctly BLOCKED or NOT
 STARTED, not silently skipped."
+
+---
+
+## UPDATE 4 — 2026-09-09, local (Ollama) provider verified live
+
+The one provider claim this report had held at **NOT VERIFIED, ever**
+since the original audit — "a local (Ollama) call has succeeded live in
+this project's history" (see the "Provider/fallback behavior" note in
+§9-12 above, and §421, §686, §730, §771) — is now **VERIFIED**.
+
+- **Setup:** `ollama` 0.33.3, `llama3.2:3b` (documented default;
+  `LOCAL_LLM_MODEL`-overridable), host install, `LOCAL_LLM_BASE_URL=
+  http://localhost:11434/v1`.
+- **`npm run ollama:smoke`** (new, `scripts/ollama-smoke.ts`, DB-free):
+  reachability → model-pulled check → real `generateText` round trip
+  through the *existing* `LocalProvider` — **PASS**, ~3.5–4.6 s for a
+  one-sentence grounded answer, real token counts, `finishReason=stop`.
+- **Full pipeline, `LLM_PROVIDER=local`** (`npm run smoke:prd`, real
+  Neon DB, 19 docs / 557 chunks): Ollama served the Hindi translate-in
+  call live (`[llm-provider] provider_succeeded {"provider":"local"...}`,
+  ~3.2 s); intent + answer used the deterministic / evidence-only path
+  because `structuredOutput` is `false` for local by default. Grounding,
+  `refused_not_in_database`, and Hindi handling **unchanged** from the
+  hosted-provider runs.
+- **Fallback:** real `generateTextWithFallback` chain — bad Gemini key →
+  **Ollama success**; bad Gemini key + Ollama on a dead port →
+  `connection_failed:` → `response: null` → evidence-only. Retry-0 and
+  60 s cooldown observed.
+- **Structured output — deliberately still `false` for local.** With the
+  opt-in flag on, `llama3.2:3b` **fails the real `QueryIntentSchema`**
+  (`schema_validation_failed: Unexpected token 'i', "isRelevant"...` —
+  it emits prose, not JSON, and `LocalProvider.generateStructured` uses a
+  bare `JSON.parse`). The router correctly falls back. The
+  capability allowlist stays authoritative; the model is **not** marked
+  capable.
+
+**No architectural change.** `LocalProvider` was already the right shape.
+This pass hardened its error normalization (`connection_failed:` /
+`timeout:` / `model_not_found:` / `http_error:` / `invalid_response:`
+prefixes; empty 2xx completion is now a failure), added
+`LOCAL_LLM_TIMEOUT_MS` (default unchanged), added 19 mocked unit tests
+(`src/lib/providers/local-provider.test.ts`), and added the smoke script.
+`npm run verify` green (lint, typecheck, `npx vitest run` 542/542,
+`npm run test:ml` 30+20, `next build`).
+
+**Not verified:** the Docker `local` profile end-to-end (no Docker daemon
+on this machine). `docker-compose.yml` was corrected (model default,
+`ollama` healthcheck gate on `depends_on`, documented pull step) but not
+run; the same `LocalProvider` code and the `http://<host>:11434/v1`
+shape are exercised on the host.
+
+**Pre-existing, not caused by Ollama:** the "boiling point of xenon"
+nonsense query still returns `answered` / `high` under
+`LLM_PROVIDER=local` — identical to every other provider, because the
+LLM is not consulted for that decision. Same grounding-leniency defect
+already tracked (PRD §8.1 top-1 relevance floor). Unchanged by this work.

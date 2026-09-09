@@ -8,8 +8,11 @@
 #   docker compose --profile openrouter up --build
 #
 # Ollama path (fully local, no API key, needs a model pulled first):
+#   docker compose --profile local up -d --build ollama
+#   docker compose --profile local exec ollama ollama pull llama3.2:3b
 #   docker compose --profile local up --build
-#   docker compose --profile local exec ollama ollama pull llama3
+# (pull the model before the app needs it — the model is NOT downloaded
+#  automatically on startup; verify with `npm run ollama:smoke` on the host)
 #
 # Both paths use LLM_PROVIDER=auto by default — see docs/ARCHITECTURE.md.
 # If neither provider is configured/reachable, the app still runs: it falls
@@ -38,9 +41,13 @@ services:
     environment:
       LLM_PROVIDER: "${LLM_PROVIDER:-local}"
       LOCAL_LLM_BASE_URL: "http://ollama:11434/v1"
-      LOCAL_LLM_MODEL: "${LOCAL_LLM_MODEL:-llama3}"
+      LOCAL_LLM_MODEL: "${LOCAL_LLM_MODEL:-llama3.2:3b}"
     depends_on:
-      - ollama
+      ollama:
+        # Wait for the server to answer, not just for the container to start
+        # — otherwise the app's first few queries race the Ollama boot and
+        # fall back to evidence-only for no good reason.
+        condition: service_healthy
 
   ollama:
     profiles: ["local"]
@@ -49,6 +56,12 @@ services:
       - "11434:11434"
     volumes:
       - ollama-data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
 
   bharatstt:
     profiles: ["stt"]

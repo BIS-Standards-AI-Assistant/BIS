@@ -27,11 +27,19 @@ dependency**. It is fully testable offline: 43 unit tests across
 `scripts/test-query-normalization.ts`, `scripts/test-evidence-aggregation.ts`,
 `scripts/test-grounding-pipeline.ts`, and `scripts/test-answer-schema-validation.ts`.
 
-## Provider independence (added 2026-08-29)
+## Provider independence (added 2026-08-29; local verified live 2026-09-09)
 
 `intent.ts` and `answer.ts` no longer call an LLM SDK directly — both go
-through the provider adapter in `src/lib/providers/` (local / OpenRouter
-free / paid, with automatic fallback and an evidence-only final fallback).
+through the provider adapter in `src/lib/providers/` (Groq / Gemini /
+local / OpenRouter free / paid, with automatic fallback and an
+evidence-only final fallback). The **local (Ollama) tier is now
+live-verified** — `npm run ollama:smoke` and a full `LLM_PROVIDER=local`
+pipeline run with `llama3.2:3b`. Structured output stays disabled for
+small local models (they don't reliably emit schema-conformant JSON), so
+under `LLM_PROVIDER=local` intent/answer run deterministically and the
+evidence-only answer path produces the prose. Full detail in
+`docs/ARCHITECTURE.md` ("Local inference (Ollama)") and
+`docs/PROJECT_STATUS.md`.
 Full architecture in `docs/ARCHITECTURE.md`. This does not change LLM call
 count per query (still up to 2: intent + answer) — it changes *how* those
 2 calls are dispatched and what happens when they fail.

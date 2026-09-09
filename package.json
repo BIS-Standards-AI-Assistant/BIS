@@ -28,6 +28,7 @@
     "eval:calibration": "tsx scripts/calibrate-confidence.ts",
     "ml:evaluate": "tsx scripts/ml-evaluate.ts",
     "smoke:prd": "dotenv -e .env.local -- tsx scripts/live-prd-smoke.ts",
+    "ollama:smoke": "dotenv -e .env.local -- tsx scripts/ollama-smoke.ts",
     "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
     "data:discover": "tsx scripts/data-discover.ts",
     "data:fetch": "tsx scripts/data-fetch.ts",
