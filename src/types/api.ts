@@ -107,6 +107,28 @@ export type QueryOutcome =
   | "refused_insufficient_evidence"
   | "refused_not_in_database";
 
+/**
+ * The regulatory picture for a query, assembled ONLY from the fact-checked
+ * certification reference dataset (data/bis-standards-dataset/
+ * qco-standards.json, loaded via src/lib/certification-schemes.ts).
+ *
+ * History, because it matters for how this type is shaped: an earlier
+ * version of this map was populated by hardcoded literals — every result
+ * got the same "ISI Mark Scheme (Scheme-I)" / "Mandatory (QCO Active)"
+ * certification row, the same two invented test names against invented
+ * clause numbers ("Section 4.1", "Section 5"), and a laboratory list whose
+ * coordinates were produced by `Math.random()`. All of it rendered as
+ * fact. Every field here is now traceable to a real dataset entry, and
+ * fields that cannot be sourced (a test's clause number; a laboratory's
+ * coordinates or per-standard testing scope) do not exist on this type
+ * rather than being filled with plausible values.
+ *
+ * Laboratories are deliberately NOT part of this payload. The recognised-
+ * laboratory dataset carries no per-standard testing scope, so "labs that
+ * can test this standard" is not a question it can answer; the panel
+ * fetches the directory from /api/v1/laboratories separately and presents
+ * it as what it is.
+ */
 export interface ComplianceMap {
   standards: {
     standardNumber: string;
@@ -115,23 +137,27 @@ export interface ComplianceMap {
     documentId?: string;
   }[];
   certifications: {
+    /** The standard this scheme entry was matched to, by exact edition. */
+    standardNumber: string;
     scheme: string;
-    status: string;
-    sourceUrl?: string;
+    /** From the dataset's `mandatory_qco` field — never inferred. */
+    mandatoryQco: boolean;
+    certificationRoute: string | null;
+    verificationStatus: string | null;
+    sourceUrl: string | null;
   }[];
   testing: {
-    testName: string;
-    standard: string;
-    clause?: string;
+    /** A verbatim entry from the matched scheme's `key_testing_parameters`. */
+    parameter: string;
+    standardNumber: string;
+    sourceUrl: string | null;
   }[];
-  laboratories: {
-    name: string;
-    city: string;
-    state: string;
-    lat: number;
-    lng: number;
-    testingCapabilities: string[];
-  }[];
+  /**
+   * Why a section is empty, when it is — so the panel can say "no
+   * reference entry matched this edition" instead of rendering a blank
+   * that reads as "no certification required".
+   */
+  unmatchedStandards: string[];
 }
 
 export interface QueryResponse {
@@ -175,6 +201,14 @@ export interface RetrievedChunk {
   page: number | null;
   text: string;
   semanticScore: number;
+  /**
+   * Raw pgvector cosine similarity against the query embedding — the only
+   * absolute relevance magnitude in the payload (`semanticScore` and
+   * `score` are rank reciprocals). Null when semantic search did not
+   * produce this chunk. Mirrors src/lib/retrieval.ts's RetrievedChunk;
+   * see src/lib/relevance-floor.ts for what it is used for.
+   */
+  semanticSimilarity: number | null;
   keywordScore: number;
   identifierMatch: boolean;
   score: number;

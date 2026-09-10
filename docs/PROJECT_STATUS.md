@@ -1,6 +1,6 @@
 # Project Status
 
-Last updated: 2026-08-30. Categories: DONE, PARTIAL, BLOCKED, PLANNED — only
+Last updated: 2026-09-09. Categories: DONE, PARTIAL, BLOCKED, PLANNED — only
 recording what was actually observed this session or in prior sessions'
 verified work, never projected.
 
@@ -790,3 +790,148 @@ Verification: `npm run lint` clean, `npm run typecheck` clean, `npx
 vitest run` 542/542, `npm run test:ml` 30/30 + 20/20, `npm run build`
 clean. `npm run verify` green.
 
+---
+
+# Session 2026-09-09 — PRD completion pass
+
+Full requirement-by-requirement detail in `docs/PRD_GAP_ANALYSIS.md`
+("Session 2026-09-09"). Summary of what is now true, measured live against
+the Neon index (19 documents, 557 chunks):
+
+| Item | Status | Notes |
+|---|---|---|
+| PRD §8.1 — post-retrieval relevance floor | DONE | `src/lib/relevance-floor.ts`, `RELEVANCE_FLOOR = 0.45`, calibrated from real in/out-of-corpus measurements (`npm run eval:refusal-threshold`). 10 unit tests |
+| Real cosine similarity in retrieval | DONE | `RetrievedChunk.semanticSimilarity` — the pipeline previously had no absolute relevance magnitude at all, only rank reciprocals |
+| PRD §9 — refusal correctness | DONE, 12/12 | `npm run eval:refusal`. Asserts both directions (out-of-corpus refuses, in-corpus does not); 0 refusals assert a primary standard |
+| Refusal no longer leaves primary recommendations standing | DONE | Real defect caught by the new eval — see below |
+| PRD §9 — multilingual parity | DONE, measured | `npm run eval:multilingual`. §7 language contract 5/5; strict grounding parity 3/5 — see below |
+| PRD FR12 — document removal / inspection | DONE | `npm run corpus -- list \| orphans \| remove`. Verified live |
+| Fabricated compliance map | FIXED | Was inventing certification status, test clauses, and lab coordinates. See below |
+| Latency NFR (under 10s) | MET on local, MISSED on Gemini | local Ollama: median 6.9s, 2/12 over. Gemini free tier: median 16.2s, 7/12 over |
+| PRD FR8 — cross-encoder comparison | NOT ATTEMPTED | Deliberate; re-ranking itself is done and still measures 12/12 vs the no-op baseline's 11/12 |
+| PRD FR6 — corpus expansion | NOT ATTEMPTED | Separate data-acquisition track |
+
+## The fabrication defect (most important item in this session)
+
+`generateComplianceMap` in `query-pipeline.ts` was fabricating its entire
+output and rendering it to users as fact in the Product Compliance Map
+panel:
+
+- a hardcoded `"ISI Mark Scheme (Scheme-I)"` / `"Mandatory (QCO Active)"`
+  certification row on **every** result, whatever the standard
+- two invented test names against invented clause numbers
+  (`"Section 4.1"`, `"Section 5"`)
+- a laboratory list with coordinates from `Math.random()`, plotted on a
+  Leaflet map and captioned "capable of testing against the identified
+  standards"
+
+This violated this project's own "no invented clauses, certification
+routes, testing requirements" rule and the PRD's zero-fabrication NFR. It
+also contradicted the rest of the codebase, which is careful about exactly
+this: `map-provider.ts` refuses to return fabricated coordinates, and
+`find-laboratories` refuses to claim a per-standard capability match.
+
+Now `src/lib/compliance-map.ts`, reading the fact-checked reference dataset
+and nothing else, matched on exact standard number **including edition**.
+Unsourceable fields were removed from the type rather than filled with
+plausible values. Standards with no reference entry are reported as
+`unmatchedStandards` and the panel says so, because an empty section must
+not read as "no certification required". 8 regression tests against the
+real dataset (`src/lib/compliance-map.test.ts`).
+
+Per the project owner's decision, the laboratory map was removed rather
+than re-pinned: the recognised-laboratory dataset has no coordinates and no
+per-standard testing scope, so there was no honest map to draw. The Labs
+tab now fetches the real directory from `/api/v1/laboratories` and states
+that it is *not* filtered by the standards above.
+`LaboratoryMap.tsx`/`LaboratoryMapInner.tsx` deleted; `leaflet` and
+`react-leaflet` are now unused dependencies.
+
+## Defect caught by the new refusal eval
+
+The out-of-corpus query "turbine blade coatings for aircraft jet engines"
+returned the fixed "not found in the indexed corpus" answer while still
+marking IS 15636:2012, IS 13428:2005 and IS 14756:2017 as
+`primaryRecommendation` — refusal prose sitting directly above three
+confident recommendation cards. Cause: the applicability gate runs per
+candidate and never saw the pipeline-level refusal. A forced refusal now
+demotes every candidate to `INSUFFICIENT_EVIDENCE`. Verified fixed on a
+later live run (Hindi refusals now list no primary standards at all).
+
+## Latency
+
+Measured end to end across the 12-query refusal eval, on both providers:
+
+| Provider | median | max | over the 10s target |
+|---|---|---|---|
+| Local Ollama `llama3.2:3b` (Tier 0) | 6.9s | 12.2s | 2/12 |
+| Gemini free tier (remote) | 16.2s | 80.4s | 7/12 |
+
+The NFR is essentially met by the architecture and missed by one provider.
+Gemini takes 20-35s per structured call and the pipeline makes up to three
+(translate, intent, synthesis); some calls also fail JSON parsing and retry
+through a second code path, doubling that call's cost.
+
+A structural fix landed on the way to these numbers: the pipeline was
+generating an LLM answer **and then discarding it** on every below-floor
+refusal — 106s and 82s for two out-of-corpus queries whose entire output is
+a fixed string. `generateAnswer` now takes `skipSynthesis`, set once the
+floor has decided the outcome; that cut one of those from 106s to 26s on
+Gemini and makes refusal the cheapest path rather than the dearest.
+
+## Multilingual parity — measured on the Tier-0 local provider
+
+Final numbers (local Ollama `llama3.2:3b`, `LOCAL_LLM_TIMEOUT_MS=90000`):
+
+| Metric | Result |
+|---|---|
+| Hindi detected | 5/5 |
+| Hindi translated to English before retrieval | 5/5 |
+| Answer written in Hindi | 5/5 |
+| Identifiers left in Latin script (PRD §7) | 5/5 |
+| Strict parity (identical primary standards + same outcome) | 3/5 |
+| Partial parity (Hindi retrieved at least one of the English standards) | 4/5 |
+
+The §7 language contract holds completely. Strict grounding parity does
+not, and that is a real gap — though narrower than 3/5 suggests: on the
+failures the Hindi side generally retrieves the correct standard and
+differs in the surrounding candidate set, because translation rewords the
+query and reranking then sees a slightly different field. The numbers also
+move between runs (2/5 then 3/5 strict on identical input) because a 3B
+model translates nondeterministically. A stronger translation model is the
+obvious next lever; the harness now exists to measure whether it helps.
+
+Two earlier runs produced numbers that looked like product failures and
+were not — both worth knowing about:
+
+- **Unpaced against Gemini: 0/5.** All five Hindi runs reported
+  `translated=false`. The free tier is capped at 20 `generate_content`
+  requests, and one 429 puts the provider in a 60s cooldown
+  (`COOLDOWN_MS`, `src/lib/providers/router.ts`). Translation is the
+  *first* call each request makes, so it is the call that consistently
+  absorbs that cooldown while later calls in the same request find it
+  expired — exactly how a spent quota disguises itself as "translation is
+  broken". Confirmed by calling the translation path in isolation, where it
+  returned a correct English translation immediately.
+- **Local Ollama at the default timeout: 1/5.** Translation succeeded only
+  2/5, failing with `timeout: no response within 15000ms`. A CPU-bound 3B
+  model needs more than the 15s default; `LOCAL_LLM_TIMEOUT_MS` is already
+  operator-tunable, so no code change was required.
+
+Both eval scripts now pace themselves (`EVAL_PACE_MS`) and the multilingual
+one reports translation success separately from parity, so an
+infrastructure failure cannot be read as a product failure again.
+
+One product improvement came out of this: when translation is unavailable
+the pipeline still retrieves on the untranslated text and the relevance
+floor turns that noise into a refusal — correct, but the generic "not found
+in the indexed corpus" wording blamed the corpus for what was an
+unavailable translation step. The pipeline now adds an explicit limitation,
+in English or Hindi, saying which it was.
+
+## Re-run obligations
+
+The relevance floor is calibrated for the current corpus and embedding
+configuration only. After any corpus or embedding change, re-run
+`npm run eval:refusal-threshold` and check the recorded numbers in
+`data/evaluation/refusal-calibration.json` before trusting the floor.

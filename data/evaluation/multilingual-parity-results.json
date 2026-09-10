@@ -1,0 +1,206 @@
+{
+  "generatedAt": "2026-09-09T11:21:10.354Z",
+  "note": "Parity is measured on the primary recommended standard numbers and the outcome, not on answer text — PRD §7 requires the prose to be in the query's language while citations stay in their published Latin-script form.",
+  "summary": {
+    "parityPass": 3,
+    "sharedAnyPass": 4,
+    "total": 5,
+    "hindiDetected": 5,
+    "hindiTranslated": 5,
+    "answeredInHindi": 5,
+    "identifiersUntranslated": 5
+  },
+  "rows": [
+    {
+      "id": "ML1",
+      "en": {
+        "query": "What are the requirements for packaged drinking water?",
+        "outcome": "answered",
+        "standards": [
+          "IS 13428:2005",
+          "IS 14543:2016"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 12857,
+        "answerPreview": "Based on indexed BIS evidence, 2 candidate standards were found (2 directly supported by e"
+      },
+      "hi": {
+        "query": "पैकेज्ड पेयजल के लिए क्या आवश्यकताएं हैं?",
+        "outcome": "answered",
+        "standards": [
+          "IS 13428:2005",
+          "IS 14543:2016"
+        ],
+        "language": "hi",
+        "translated": true,
+        "answerLanguage": "hi",
+        "latencyMs": 12364,
+        "answerPreview": "Based on indexed BIS evidence, 2 candidate standards were found (2 directly supported by e"
+      },
+      "sameStandards": true,
+      "sameOutcome": true,
+      "pass": true,
+      "overlap": [
+        "IS 13428:2005",
+        "IS 14543:2016"
+      ],
+      "enCoveredByHi": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detectedHindi": true,
+      "answeredInHindi": true
+    },
+    {
+      "id": "ML2",
+      "en": {
+        "query": "stainless steel cookware specification",
+        "outcome": "answered",
+        "standards": [
+          "IS 14756:2017",
+          "IS 15757:2022",
+          "IS 5522:2014"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 9324,
+        "answerPreview": "Based on indexed BIS evidence, 3 candidate standards were found (3 directly supported by e"
+      },
+      "hi": {
+        "query": "स्टेनलेस स्टील के बर्तनों का विनिर्देश",
+        "outcome": "answered",
+        "standards": [
+          "IS 5522:2014"
+        ],
+        "language": "hi",
+        "translated": true,
+        "answerLanguage": "hi",
+        "latencyMs": 7313,
+        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+      },
+      "sameStandards": false,
+      "sameOutcome": true,
+      "pass": false,
+      "overlap": [
+        "IS 5522:2014"
+      ],
+      "enCoveredByHi": false,
+      "anyShared": true,
+      "latinIds": true,
+      "detectedHindi": true,
+      "answeredInHindi": true
+    },
+    {
+      "id": "ML3",
+      "en": {
+        "query": "protective helmet for two wheeler riders",
+        "outcome": "answered",
+        "standards": [
+          "IS 4151:2015"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 6493,
+        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+      },
+      "hi": {
+        "query": "दोपहिया वाहन चालकों के लिए सुरक्षा हेलमेट",
+        "outcome": "refused_insufficient_evidence",
+        "standards": [],
+        "language": "hi",
+        "translated": true,
+        "answerLanguage": "hi",
+        "latencyMs": 5316,
+        "answerPreview": "अनुक्रमित सामग्री में नहीं मिला। BIS Standards Navigator केवल सार्वजनिक BIS सामग्री — मानक"
+      },
+      "sameStandards": false,
+      "sameOutcome": false,
+      "pass": false,
+      "overlap": [],
+      "enCoveredByHi": false,
+      "anyShared": false,
+      "latinIds": true,
+      "detectedHindi": true,
+      "answeredInHindi": true
+    },
+    {
+      "id": "ML4",
+      "en": {
+        "query": "safety requirements for toys",
+        "outcome": "answered",
+        "standards": [
+          "IS 9873 (Part 1):2019"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 5448,
+        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+      },
+      "hi": {
+        "query": "खिलौनों के लिए सुरक्षा आवश्यकताएं",
+        "outcome": "answered",
+        "standards": [
+          "IS 9873 (Part 1):2019"
+        ],
+        "language": "hi",
+        "translated": true,
+        "answerLanguage": "hi",
+        "latencyMs": 14141,
+        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+      },
+      "sameStandards": true,
+      "sameOutcome": true,
+      "pass": true,
+      "overlap": [
+        "IS 9873 (Part 1):2019"
+      ],
+      "enCoveredByHi": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detectedHindi": true,
+      "answeredInHindi": true
+    },
+    {
+      "id": "ML5",
+      "en": {
+        "query": "unplasticized PVC pipes for water supply",
+        "outcome": "answered",
+        "standards": [
+          "IS 4985:2021"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 6212,
+        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+      },
+      "hi": {
+        "query": "जल आपूर्ति के लिए अनप्लास्टिसाइज्ड पीवीसी पाइप",
+        "outcome": "answered",
+        "standards": [
+          "IS 4985:2021"
+        ],
+        "language": "hi",
+        "translated": true,
+        "answerLanguage": "hi",
+        "latencyMs": 8118,
+        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+      },
+      "sameStandards": true,
+      "sameOutcome": true,
+      "pass": true,
+      "overlap": [
+        "IS 4985:2021"
+      ],
+      "enCoveredByHi": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detectedHindi": true,
+      "answeredInHindi": true
+    }
+  ]
+}

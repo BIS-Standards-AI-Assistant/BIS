@@ -112,6 +112,9 @@ function toAggregatedEvidence(s: ScopedStandard): AggregatedEvidence {
     page: c.page,
     text: c.text,
     semanticScore: 0,
+    // These chunks are fetched directly by standard id, not by semantic
+    // search, so no similarity was ever computed for them — null, not 0.
+    semanticSimilarity: null,
     keywordScore: 0,
     identifierMatch: false,
     score: 0,

@@ -1,0 +1,19 @@
+{
+  "note": "Calibration set for PRD §8.1 (refusal threshold). Split into queries the indexed corpus genuinely covers and queries it genuinely does not. IN-CORPUS entries name products that actually have an ingested document (verified against the live `documents` table on 2026-09-09); OUT-OF-CORPUS entries are either unrelated topics or manufactured-product categories with no ingested document. Nothing here asserts an expected standard number — this set measures retrieval score magnitude only, not answer correctness. See scripts/calibrate-refusal-threshold.ts.",
+  "inCorpus": [
+    { "id": "IC1", "query": "What are the requirements for packaged drinking water?", "coveredBy": "IS 14543:2016" },
+    { "id": "IC2", "query": "stainless steel cookware specification", "coveredBy": "IS 14756:2017" },
+    { "id": "IC3", "query": "protective helmet for two wheeler riders", "coveredBy": "IS 4151:2015" },
+    { "id": "IC4", "query": "ordinary portland cement grade requirements", "coveredBy": "IS 269:2015" },
+    { "id": "IC5", "query": "unplasticized PVC pipes for water supply", "coveredBy": "IS 4985:2021" },
+    { "id": "IC6", "query": "safety requirements for toys", "coveredBy": "IS 9873 (Part 1):2019" },
+    { "id": "IC7", "query": "concrete paving blocks", "coveredBy": "IS 15658:2021" }
+  ],
+  "outOfCorpus": [
+    { "id": "OC1", "query": "How do I file my income tax return in India?", "why": "unrelated topic — not standards or certification at all" },
+    { "id": "OC2", "query": "best recipe for chocolate chip cookies", "why": "unrelated topic" },
+    { "id": "OC3", "query": "how to sort a list in Python", "why": "unrelated topic" },
+    { "id": "OC4", "query": "turbine blade coatings for aircraft jet engines", "why": "plausible engineering product category with no ingested document" },
+    { "id": "OC5", "query": "semiconductor photolithography mask alignment tolerance", "why": "plausible technical product category with no ingested document" }
+  ]
+}

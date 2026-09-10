@@ -1,0 +1,114 @@
+{
+  "generatedAt": "2026-09-09T07:04:49.133Z",
+  "metric": "max pgvector cosine similarity (1 - cosine distance) across the retrieved set",
+  "retrievalLimit": 12,
+  "note": "Measured live against the ingested corpus. These are real observed numbers, not projections. Re-run after any change to the embedding model, the corpus, or the retrieval query — the floor in src/lib/relevance-floor.ts is only valid for the configuration recorded here.",
+  "inCorpus": [
+    {
+      "id": "IC1",
+      "query": "What are the requirements for packaged drinking water?",
+      "topSimilarity": 0.6716378941687298,
+      "rank1Similarity": 0.6360490833103642,
+      "topStandardNumber": "IS 14543:2016",
+      "chunkCount": 12
+    },
+    {
+      "id": "IC2",
+      "query": "stainless steel cookware specification",
+      "topSimilarity": 0.5557294263597955,
+      "rank1Similarity": 0.5557294263597955,
+      "topStandardNumber": "IS 14756:2017",
+      "chunkCount": 12
+    },
+    {
+      "id": "IC3",
+      "query": "protective helmet for two wheeler riders",
+      "topSimilarity": 0.5671645638188854,
+      "rank1Similarity": 0.5671645638188854,
+      "topStandardNumber": "IS 4151:2015",
+      "chunkCount": 12
+    },
+    {
+      "id": "IC4",
+      "query": "ordinary portland cement grade requirements",
+      "topSimilarity": 0.5829052306070689,
+      "rank1Similarity": 0.5690530605214543,
+      "topStandardNumber": "IS 269:2015",
+      "chunkCount": 12
+    },
+    {
+      "id": "IC5",
+      "query": "unplasticized PVC pipes for water supply",
+      "topSimilarity": 0.6073928285407573,
+      "rank1Similarity": 0.6073928285407573,
+      "topStandardNumber": "IS 4985:2021",
+      "chunkCount": 12
+    },
+    {
+      "id": "IC6",
+      "query": "safety requirements for toys",
+      "topSimilarity": 0.6467680838286702,
+      "rank1Similarity": 0.6370707025656683,
+      "topStandardNumber": "IS 9873 (Part 1):2019",
+      "chunkCount": 12
+    },
+    {
+      "id": "IC7",
+      "query": "concrete paving blocks",
+      "topSimilarity": 0.5737853575102917,
+      "rank1Similarity": 0.5737853575102917,
+      "topStandardNumber": "IS 15658:2021",
+      "chunkCount": 12
+    }
+  ],
+  "outOfCorpus": [
+    {
+      "id": "OC1",
+      "query": "How do I file my income tax return in India?",
+      "topSimilarity": 0.26486239210948037,
+      "rank1Similarity": 0.1893533319713656,
+      "topStandardNumber": "IS 1293:2019",
+      "chunkCount": 12
+    },
+    {
+      "id": "OC2",
+      "query": "best recipe for chocolate chip cookies",
+      "topSimilarity": 0.1862552774363031,
+      "rank1Similarity": 0.1862552774363031,
+      "topStandardNumber": "IS 269:2015",
+      "chunkCount": 12
+    },
+    {
+      "id": "OC3",
+      "query": "how to sort a list in Python",
+      "topSimilarity": 0.14129950994761553,
+      "rank1Similarity": 0.14129950994761553,
+      "topStandardNumber": "IS 9873 (Part 1):2019",
+      "chunkCount": 12
+    },
+    {
+      "id": "OC4",
+      "query": "turbine blade coatings for aircraft jet engines",
+      "topSimilarity": 0.26451599463668196,
+      "rank1Similarity": 0.24310662704986563,
+      "topStandardNumber": "IS 15636:2012",
+      "chunkCount": 12
+    },
+    {
+      "id": "OC5",
+      "query": "semiconductor photolithography mask alignment tolerance",
+      "topSimilarity": 0.3493398075672156,
+      "rank1Similarity": 0.342723521396084,
+      "topStandardNumber": "IS 303:1989",
+      "chunkCount": 12
+    }
+  ],
+  "summary": {
+    "inMin": 0.5557294263597955,
+    "inMax": 0.6716378941687298,
+    "outMin": 0.14129950994761553,
+    "outMax": 0.3493398075672156,
+    "separated": true,
+    "suggestedFloor": 0.45253461696350555
+  }
+}

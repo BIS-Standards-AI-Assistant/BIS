@@ -22,6 +22,13 @@ export interface RetrievedChunk {
   page: number | null;
   text: string;
   semanticScore: number;
+  /**
+   * Raw pgvector cosine similarity against the query embedding, or null
+   * when this chunk did not come from semantic search (keyword-only hit,
+   * embedding failure, or the seed-corpus fallback). See
+   * RetrievalCandidate.semanticSimilarity and src/lib/relevance-floor.ts.
+   */
+  semanticSimilarity: number | null;
   keywordScore: number;
   identifierMatch: boolean;
   score: number;
@@ -184,6 +191,9 @@ async function retrieveSeedChunks(
     clause: m.item.clause,
     text: m.item.text,
     semanticScore: 0,
+    // The seed corpus carries no embeddings, so there is no similarity to
+    // report — null, never 0, which would read as "measured, and bad".
+    semanticSimilarity: null,
     keywordScore: 1 / (idx + 1),
     identifierMatch: m.idMatch,
     fusedScore: (m.idMatch ? 1 / RRF_K : 0) + 1 / (RRF_K + (idx + 1)),
@@ -206,6 +216,7 @@ async function retrieveSeedChunks(
       page: null,
       text: c.text,
       semanticScore: c.semanticScore,
+      semanticSimilarity: c.semanticSimilarity,
       keywordScore: c.keywordScore,
       identifierMatch: c.identifierMatch,
       score: c.rerankScore,
@@ -293,18 +304,24 @@ export async function retrieveChunks(
     const db = getDb();
     const candidatePoolSize = limit * 4;
 
-    let semanticRows: Array<{ id: string; rank: number }> = [];
+    // `similarity` (1 - cosine distance) is selected alongside the rank
+    // because rank alone cannot answer "is the best hit actually any good?"
+    // — the nearest neighbour in a small corpus is rank 1 no matter how
+    // far away it is. PRD §8.1's relevance floor needs the magnitude.
+    let semanticRows: Array<{ id: string; rank: number; similarity: number }> = [];
     try {
       const { embedding } = await embed({ model: embeddingModel(), value: query });
       const vectorLiteral = `[${embedding.join(",")}]`;
       const result = await db.execute(sql`
-        SELECT id, row_number() OVER (ORDER BY embedding <=> ${vectorLiteral}::vector) AS rank
+        SELECT id,
+               row_number() OVER (ORDER BY embedding <=> ${vectorLiteral}::vector) AS rank,
+               1 - (embedding <=> ${vectorLiteral}::vector) AS similarity
         FROM chunks
         WHERE embedding IS NOT NULL
         ORDER BY embedding <=> ${vectorLiteral}::vector
         LIMIT ${candidatePoolSize}
       `);
-      semanticRows = result.rows as unknown as Array<{ id: string; rank: number }>;
+      semanticRows = result.rows as unknown as Array<{ id: string; rank: number; similarity: number }>;
     } catch (err) {
       console.error("[retrieval] semantic search failed, falling back to keyword-only", err);
     }
@@ -335,7 +352,7 @@ export async function retrieveChunks(
       }
     }
 
-    const fused = new Map<string, { rrf: number; semRank?: number; kwRank?: number }>();
+    const fused = new Map<string, { rrf: number; semRank?: number; kwRank?: number; semSimilarity?: number }>();
     for (const id of identifierChunkIds) {
       const entry = fused.get(id) ?? { rrf: 0 };
       entry.rrf += 1 / RRF_K; // equivalent to a rank-1 hit in its own ranking list
@@ -345,6 +362,7 @@ export async function retrieveChunks(
       const entry = fused.get(row.id) ?? { rrf: 0 };
       entry.rrf += 1 / (RRF_K + Number(row.rank));
       entry.semRank = Number(row.rank);
+      entry.semSimilarity = Number(row.similarity);
       fused.set(row.id, entry);
     }
     for (const row of keywordRows) {
@@ -390,6 +408,7 @@ export async function retrieveChunks(
           clause: row.clause,
           text: row.text,
           semanticScore: fusion.semRank ? 1 / fusion.semRank : 0,
+          semanticSimilarity: fusion.semSimilarity ?? null,
           keywordScore: fusion.kwRank ? 1 / fusion.kwRank : 0,
           identifierMatch: identifierChunkIds.has(id),
           fusedScore: fusion.rrf,
@@ -413,6 +432,7 @@ export async function retrieveChunks(
         page: row.page,
         text: c.text,
         semanticScore: c.semanticScore,
+        semanticSimilarity: c.semanticSimilarity,
         keywordScore: c.keywordScore,
         identifierMatch: c.identifierMatch,
         score: c.rerankScore,

@@ -225,11 +225,21 @@ function buildEvidenceOnlyAnswer(pkg: EvidencePackage, answerLanguage: AnswerLan
  */
 export async function generateAnswer(
   pkg: EvidencePackage,
-  opts: { answerLanguage?: AnswerLanguage } = {},
+  opts: { answerLanguage?: AnswerLanguage; skipSynthesis?: boolean } = {},
 ): Promise<LLMAnswer> {
   const answerLanguage = opts.answerLanguage ?? "en";
 
-  if (pkg.candidates.length === 0) {
+  // `skipSynthesis` is set by the caller when the outcome is already
+  // decided — specifically when retrieval fell below the PRD §8.1
+  // relevance floor, so the pipeline is going to replace this prose with
+  // the fixed refusal string no matter what the model writes. Generating
+  // it anyway cost a full provider round trip per refused query (measured
+  // live on 2026-09-09: 82s and 106s end-to-end for two out-of-corpus
+  // queries, against the PRD's 10s target) and burned paid inference to
+  // produce text that was immediately discarded. Skipping straight to the
+  // deterministic evidence-only answer keeps the response's shape
+  // identical while making a refusal the cheapest path, not the dearest.
+  if (opts.skipSynthesis || pkg.candidates.length === 0) {
     return buildEvidenceOnlyAnswer(pkg, answerLanguage);
   }
 

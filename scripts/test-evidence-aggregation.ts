@@ -40,6 +40,7 @@ function chunk(overrides: Partial<RetrievedChunk> & { chunkId: string; documentI
     page: null,
     text: "text",
     semanticScore: 0,
+    semanticSimilarity: null,
     keywordScore: 0,
     identifierMatch: false,
     score: 0,

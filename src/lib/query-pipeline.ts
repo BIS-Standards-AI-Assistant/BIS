@@ -10,18 +10,16 @@ import { computeEngineConfidence } from "@/lib/confidence";
 import { generateAnswer, validateRecommendationExplanations, type EvidencePackage, type EvidencePackageCandidate } from "@/lib/answer";
 import { classifyKnowledgeBoundary } from "@/lib/knowledge-boundary";
 import { assessApplicability, deriveRecommendationStatus } from "@/lib/applicability";
-import type { Recommendation } from "@/types/api";
 import { buildReferenceEntry } from "@/lib/reference-registry";
 import { getNeighbors, type GraphNeighbor } from "@/lib/graph/graph-retrieval";
 import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
 import { detectLanguage, resolveQueryLanguage, type UiLanguage } from "@/lib/language";
 import { translateQueryToEnglish } from "@/lib/translate";
 import { refusalCopy, type RefusalReason } from "@/lib/refusal";
+import { evaluateRelevanceFloor } from "@/lib/relevance-floor";
+import { buildComplianceMap } from "@/lib/compliance-map";
 import { getDb } from "@/db";
 import { queryLogs } from "@/db/schema";
-import fs from "fs";
-import path from "path";
-import type { ComplianceMap } from "@/types/api";
 
 /**
  * The full query pipeline (normalize -> intent -> retrieval -> grounding
@@ -125,6 +123,16 @@ export async function runQueryPipeline(
   }
 
   const chunks = await retrieveChunks(intent.searchQuery || normalized.normalizedQuery, { limit: RETRIEVAL_LIMIT });
+
+  // PRD §8.1: the post-retrieval relevance floor. Hybrid retrieval always
+  // returns *some* nearest neighbours — it has no notion of "nothing here
+  // is relevant" — so without this gate an off-corpus query still produces
+  // a ranked list, and every downstream stage then reasons about candidates
+  // that should never have been considered. Applied to the top-1 cosine
+  // similarity, calibrated against real in/out-of-corpus measurements.
+  // See src/lib/relevance-floor.ts.
+  const relevanceFloor = evaluateRelevanceFloor(chunks);
+
   const aggregatedAll = aggregateEvidence(chunks);
   const topCandidateScore = aggregatedAll[0]?.weightedScore ?? 0;
   const aggregated = aggregatedAll
@@ -231,7 +239,13 @@ export async function runQueryPipeline(
     engineConfidence,
   };
 
-  const llmAnswer = await generateAnswer(evidencePackage, { answerLanguage });
+  // See generateAnswer's `skipSynthesis` note: below the relevance floor
+  // the fixed refusal replaces this text anyway, so there is nothing to
+  // gain from a provider round trip here.
+  const llmAnswer = await generateAnswer(evidencePackage, {
+    answerLanguage,
+    skipSynthesis: relevanceFloor.decision === "below_floor",
+  });
 
   const validStandardNumbers = new Set(aggregated.map((c) => c.standardNumber));
   const { accepted } = validateRecommendationExplanations(llmAnswer.recommendationExplanations, validStandardNumbers);
@@ -278,12 +292,29 @@ export async function runQueryPipeline(
   // in their existing relevance order) — "filter safety first, rank
   // second," never a blended score that could let a high relevance
   // number pull a blocked candidate back toward the top.
-  const recommendations = [
+  let recommendations = [
     ...recommendationsUnordered.filter((r) => r.primaryRecommendation),
     ...recommendationsUnordered.filter((r) => !r.primaryRecommendation),
   ];
 
   const limitations = [...new Set([...engineConfidence.limitingSignals, ...llmAnswer.limitations])];
+
+  // PRD §7 puts translation on the critical path for a non-English query:
+  // the index is English-only, so an untranslated Hindi query is embedded
+  // as Devanagari against English vectors and retrieves close to noise.
+  // When no provider is available to translate (Tier-0 degradation — see
+  // src/lib/translate.ts), retrieval still runs on the original text and
+  // the relevance floor will usually turn the resulting noise into a
+  // refusal. That is the right outcome, but the generic "not found in the
+  // indexed corpus" wording would attribute it to the corpus when the
+  // actual cause was an unavailable translation step. Say which it was.
+  if (translation.method === "skipped-no-provider") {
+    limitations.unshift(
+      answerLanguage === "hi"
+        ? "इस प्रश्न का अंग्रेज़ी में अनुवाद नहीं हो सका (अनुवाद सेवा उपलब्ध नहीं थी)। खोज केवल अंग्रेज़ी सामग्री पर चलती है, इसलिए परिणाम अधूरे हो सकते हैं — अंग्रेज़ी में प्रश्न पूछने पर बेहतर परिणाम मिलेंगे।"
+        : "This query could not be translated into English because no translation provider was available. The index is English-only, so retrieval ran against the untranslated text and the results may be incomplete — asking in English will give a more reliable answer.",
+    );
+  }
   if (intent.testingRequested && /laborator/i.test(query)) {
     limitations.push("No BIS-recognized laboratory data is indexed in this system yet — check bis.gov.in's official laboratory list directly.");
   }
@@ -310,15 +341,48 @@ export async function runQueryPipeline(
   const forcedRefusal: RefusalReason | null =
     knowledgeBoundary.state === "NOT_IN_DATABASE" && queryHasExplicitIdentifier
       ? "not_in_database"
-      : aggregated.length === 0 || topGroundingState === "insufficient_evidence" || !anyEvidenceShown
+      : relevanceFloor.decision === "below_floor" ||
+          aggregated.length === 0 ||
+          topGroundingState === "insufficient_evidence" ||
+          !anyEvidenceShown
         ? "insufficient_evidence"
         : null;
+
+  // Record the floor's own verdict as a limitation whenever it is what
+  // caused the refusal, so the reason the user sees is the measured one
+  // rather than a generic "not enough evidence".
+  if (relevanceFloor.decision === "below_floor" && !limitations.includes(relevanceFloor.reason)) {
+    limitations.unshift(relevanceFloor.reason);
+  }
 
   if (forcedRefusal) {
     const r = refusalCopy(forcedRefusal, answerLanguage);
     synthesisAnswer = r.answer;
     outcome = forcedRefusal === "not_in_database" ? "refused_not_in_database" : "refused_insufficient_evidence";
     if (!limitations.includes(r.limitation)) limitations.unshift(r.limitation);
+
+    // A refusal must not leave candidates standing as primary
+    // recommendations. Found by scripts/eval-refusal.ts on 2026-09-09:
+    // the out-of-corpus query "turbine blade coatings for aircraft jet
+    // engines" correctly returned the fixed "not found in the indexed
+    // corpus" answer while STILL marking IS 15636:2012, IS 13428:2005 and
+    // IS 14756:2017 as primaryRecommendation — so the prose said "no
+    // grounded answer" directly above three confident recommendation
+    // cards. That is precisely the "refuse, do not fabricate" failure the
+    // PRD guards against, produced by the two decisions being made in
+    // different places: the applicability gate runs per candidate and
+    // never sees the pipeline-level refusal.
+    //
+    // Demoting to INSUFFICIENT_EVIDENCE (rather than dropping the
+    // candidates) matches what the refusal copy already tells the user —
+    // that anything listed below was retrieved as loosely related context
+    // and is not confirmed as applicable — and keeps the evidence
+    // inspectable instead of hiding it.
+    recommendations = recommendations.map((rec) =>
+      rec.primaryRecommendation
+        ? { ...rec, primaryRecommendation: false, recommendationStatus: "INSUFFICIENT_EVIDENCE" as const }
+        : rec,
+    );
   }
 
   const certSchemeStep = agentRun?.steps.find(
@@ -379,7 +443,7 @@ export async function runQueryPipeline(
       available: llmAnswer.testingNotes !== null || deterministicTestingNotes !== null,
       notes: llmAnswer.testingNotes ?? deterministicTestingNotes,
     },
-    complianceMap: generateComplianceMap(intent.product || query, recommendations),
+    complianceMap: await buildComplianceMap(recommendations),
     nextSteps: llmAnswer.nextSteps,
     confidence: engineConfidence.band,
     engineConfidence,
@@ -404,6 +468,7 @@ export async function runQueryPipeline(
       _debug: {
         normalizedQuery: normalized,
         retrievedChunkCount: chunks.length,
+        relevanceFloor,
         aggregatedEvidence: aggregated.map((c) => ({
           documentId: c.documentId,
           standardNumber: c.standardNumber,
@@ -440,90 +505,4 @@ export async function runQueryPipeline(
   }
 
   return response;
-}
-
-/**
- * Helper to generate compliance map data. If running without a live DB,
- * it reads the CSV to provide mock data for the Product Compliance Map.
- */
-function generateComplianceMap(productName: string, recommendations: Recommendation[]): ComplianceMap {
-  const map: ComplianceMap = {
-    standards: recommendations.filter(r => r.primaryRecommendation).map(r => ({
-      standardNumber: r.standardNumber || "Unknown",
-      title: r.title,
-      confidence: r.groundingState === "verified" ? "high" : r.groundingState === "supported_inference" ? "medium" : "low",
-      documentId: r.evidence[0]?.documentId
-    })),
-    certifications: [],
-    testing: [],
-    laboratories: []
-  };
-
-  if (map.standards.length > 0) {
-    const std = map.standards[0].standardNumber;
-    map.certifications.push({
-      scheme: "ISI Mark Scheme (Scheme-I)",
-      status: "Mandatory (QCO Active)",
-      sourceUrl: "https://www.bis.gov.in"
-    });
-    map.testing.push({
-      testName: "Electrical Safety & Performance",
-      standard: std,
-      clause: "Section 4.1"
-    });
-    map.testing.push({
-      testName: "Mechanical Strength",
-      standard: std,
-      clause: "Section 5"
-    });
-  }
-
-  try {
-    const csvPath = path.join(process.cwd(), "data", "BIS_Group1_Recognised_Laboratories.csv");
-    if (fs.existsSync(csvPath)) {
-      const content = fs.readFileSync(csvPath, "utf-8");
-      const lines = content.split('\n').filter(l => l.trim().length > 0).slice(1, 11); // Take first 10 for demo
-      for (const line of lines) {
-        let inQuotes = false;
-        let currentWord = "";
-        const fields: string[] = [];
-        for (let i = 0; i < line.length; i++) {
-          const char = line[i];
-          if (char === '"') inQuotes = !inQuotes;
-          else if (char === ',' && !inQuotes) { fields.push(currentWord); currentWord = ""; }
-          else currentWord += char;
-        }
-        fields.push(currentWord);
-        if (fields.length >= 6) {
-          const nameWithCity = fields[1].trim();
-          let name = nameWithCity;
-          let city = "Unknown";
-          if (name.includes(",")) {
-            const parts = name.split(",");
-            city = parts[parts.length - 1].trim();
-            name = parts.slice(0, parts.length - 1).join(",").trim();
-          }
-          const state = fields[2].trim();
-          
-          let lat = 20 + Math.random() * 10;
-          let lng = 70 + Math.random() * 15;
-          if (city?.toLowerCase().includes("delhi") || state.toLowerCase().includes("delhi")) { lat = 28.6139; lng = 77.2090; }
-          else if (city?.toLowerCase().includes("mumbai") || state.toLowerCase().includes("maharashtra")) { lat = 19.0760; lng = 72.8777; }
-          
-          map.laboratories.push({
-            name,
-            city,
-            state,
-            lat,
-            lng,
-            testingCapabilities: ["Electrical Safety & Performance", "Mechanical Strength"]
-          });
-        }
-      }
-    }
-  } catch (err) {
-    console.error("Failed to load mock laboratories for compliance map:", err);
-  }
-
-  return map;
 }
