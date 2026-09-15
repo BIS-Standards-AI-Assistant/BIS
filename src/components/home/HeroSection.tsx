@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { SearchHero } from "@/components/query/SearchHero";
 import { TrustCard } from "@/components/home/TrustCard";
 import { ArchitecturalIllustration } from "@/components/home/ArchitecturalIllustration";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import { BadgeCheckIcon } from "@/components/ui/icons";
+import { SchemeDecisionTree } from "@/components/SchemeDecisionTree";
 
 export function HeroSection({
   onSubmit,
@@ -13,6 +16,7 @@ export function HeroSection({
   loading: boolean;
 }) {
   const { t } = useLanguage();
+  const [wizardOpen, setWizardOpen] = useState(false);
 
   return (
     <section className="relative overflow-hidden border-b border-border bg-surface min-h-[480px] lg:min-h-[520px] flex items-center">
@@ -43,6 +47,20 @@ export function HeroSection({
             <div className="mt-8 max-w-2xl">
               <SearchHero onSubmit={onSubmit} loading={loading} />
             </div>
+
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setWizardOpen(true)}
+                className="group inline-flex items-center gap-2 rounded-xl border border-navy/20 bg-surface-raised px-4 py-2 text-xs sm:text-sm font-semibold text-navy hover:bg-navy hover:text-white hover:border-navy transition-all shadow-xs cursor-pointer"
+              >
+                <BadgeCheckIcon className="h-4.5 w-4.5 text-blue group-hover:text-white transition-colors" />
+                <span>Check Your Certification Route</span>
+                <span className="rounded-full bg-blue/10 px-2 py-0.5 text-[10.5px] font-bold text-blue group-hover:bg-white/20 group-hover:text-white transition-colors">
+                  Interactive Wizard
+                </span>
+              </button>
+            </div>
           </div>
 
           <div className="lg:pt-1">
@@ -50,6 +68,13 @@ export function HeroSection({
           </div>
         </div>
       </div>
+
+      {/* Modal Scheme Decision Tree */}
+      <SchemeDecisionTree
+        mode="modal"
+        isOpen={wizardOpen}
+        onClose={() => setWizardOpen(false)}
+      />
     </section>
   );
 }

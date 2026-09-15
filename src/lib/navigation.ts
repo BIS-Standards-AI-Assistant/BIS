@@ -101,6 +101,7 @@ export const CERTIFICATION_SECTION: NavSection = {
       title: "Certification",
       items: [
         { label: "Certification Overview", slug: "", description: "What BIS certification is and when it applies." },
+        { label: "Certification Route Wizard", slug: "", real: true, href: "/certification#wizard", description: "Interactive 3-step decision tree to identify your applicable BIS scheme." },
         { label: "Find Certification Information", slug: "find", description: "Look up certification information for a specific product." },
         { label: "Product Certification", slug: "product", description: "Scheme-I product certification (the ISI mark)." },
         { label: "Management Systems Certification", slug: "management-systems", description: "Certification for quality, environmental, and other management systems." },
@@ -130,10 +131,10 @@ export const CERTIFICATION_SECTION: NavSection = {
     },
   ],
   cta: {
-    heading: "Not sure which certification information applies?",
-    body: "Describe your product and see what evidence-backed certification information exists for it — the query engine never determines legal compliance on its own.",
-    ctaLabel: "Explore Certification Information →",
-    ctaHref: "/certification",
+    heading: "Not sure which certification route applies?",
+    body: "Use our interactive 3-step decision tree to determine whether you need Scheme-I (ISI), Scheme-II (CRS), Scheme-IV (FMCS), or Hallmarking.",
+    ctaLabel: "Check Certification Route →",
+    ctaHref: "/certification#wizard",
   },
 };
 

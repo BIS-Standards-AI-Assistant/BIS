@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { CertificationDiscovery } from "@/components/certification/CertificationDiscovery";
 import { SchemeExplorer } from "@/components/certification/SchemeExplorer";
+import { SchemeDecisionTree } from "@/components/SchemeDecisionTree";
 import { BadgeCheckIcon, FlaskIcon, DocumentIcon, SearchIcon, CompareIcon, ExternalLinkIcon } from "@/components/ui/icons";
 
 const WORKFLOW = [
-  { step: "01", title: "Identify your product", href: "#discovery" },
+  { step: "01", title: "Determine certification route", href: "#wizard" },
   { step: "02", title: "Find the applicable scheme", href: "#discovery" },
   { step: "03", title: "Check requirements", href: "#discovery" },
   { step: "04", title: "Understand testing", href: "/testing" },
@@ -14,11 +15,11 @@ const WORKFLOW = [
 ];
 
 const TILES = [
+  { icon: BadgeCheckIcon, title: "Certification route wizard", body: "3-step interactive tree to find your mandatory BIS scheme.", href: "#wizard" },
   { icon: SearchIcon, title: "Find a certification scheme", body: "Search by product, sector, or standard.", href: "#discovery" },
   { icon: DocumentIcon, title: "Understand requirements", body: "See requirements associated with a scheme or standard.", href: "#discovery" },
   { icon: FlaskIcon, title: "Find testing requirements", body: "Discover relevant tests and referenced methods.", href: "/testing" },
   { icon: CompareIcon, title: "Check a standard", body: "Find the Indian Standards connected with a certification pathway.", href: "/standards" },
-  { icon: BadgeCheckIcon, title: "Understand the process", body: "Step through the certification journey.", href: "#process" },
   { icon: ExternalLinkIcon, title: "Explore BIS services", body: "Find the appropriate official BIS service.", href: "#official-services" },
 ];
 
@@ -61,7 +62,10 @@ export function CertificationPageBody() {
             using verified BIS information.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#discovery" className="rounded-md bg-navy px-5 py-2.5 text-sm font-medium text-white hover:bg-navy-deep">
+            <a href="#wizard" className="rounded-md bg-navy px-5 py-2.5 text-sm font-medium text-white hover:bg-navy-deep">
+              Check Certification Route (Wizard)
+            </a>
+            <a href="#discovery" className="rounded-md border border-navy/30 bg-surface-raised px-5 py-2.5 text-sm font-medium text-navy hover:bg-surface-alt">
               Find a Certification Scheme
             </a>
             <a href="#process" className="rounded-md border border-border-strong px-5 py-2.5 text-sm font-medium text-ink-soft hover:border-navy hover:text-navy">
@@ -109,6 +113,20 @@ export function CertificationPageBody() {
               </a>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Interactive Compliance Wizard */}
+      <section id="wizard" className="border-b border-border bg-surface-alt/60 px-6 py-14 scroll-mt-6">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="max-w-2xl mb-6">
+            <p className="text-[11.5px] font-semibold uppercase tracking-wide text-blue">Interactive Compliance Assessment</p>
+            <h2 className="mt-1 text-[22px] font-semibold text-navy">Check Your Certification Route</h2>
+            <p className="mt-2 text-[14px] text-ink-soft">
+              Determine whether your enterprise needs Scheme-I (ISI Mark), Scheme-II (CRS), Scheme-IV (FMCS), or BIS Hallmarking through this 3-step decision tree.
+            </p>
+          </div>
+          <SchemeDecisionTree mode="inline" />
         </div>
       </section>
 
