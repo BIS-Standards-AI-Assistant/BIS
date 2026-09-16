@@ -13,9 +13,9 @@ import { assessApplicability, deriveRecommendationStatus } from "@/lib/applicabi
 import { buildReferenceEntry } from "@/lib/reference-registry";
 import { getNeighbors, type GraphNeighbor } from "@/lib/graph/graph-retrieval";
 import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
-import { detectLanguage, resolveQueryLanguage, type UiLanguage } from "@/lib/language";
+import { detectLanguage, resolveQueryLanguage, LANGUAGE_NAMES, type UiLanguage } from "@/lib/language";
 import { translateQueryToEnglish } from "@/lib/translate";
-import { refusalCopy, type RefusalReason } from "@/lib/refusal";
+import { refusalCopy, REFUSAL_COPY_LANGUAGES, type RefusalReason } from "@/lib/refusal";
 import { evaluateRelevanceFloor } from "@/lib/relevance-floor";
 import { buildComplianceMap } from "@/lib/compliance-map";
 import { getDb } from "@/db";
@@ -47,7 +47,17 @@ export async function runQueryPipeline(
   // provider it falls back to using the original text.
   const detection = detectLanguage(query);
   const { queryLanguage, answerLanguage } = resolveQueryLanguage(opts.language, detection);
-  const translation = await translateQueryToEnglish(query, queryLanguage);
+  // Only ask the LLM to "translate" text that was actually detected in a
+  // non-Latin script. Real bug found live-testing Bengali: a script-neutral
+  // query ("stainless steel utensils standard") with the language toggle
+  // set to bn/hi/etc. resolves queryLanguage to that toggle value (by
+  // design, for bare identifiers like "IS 14543"), but the text itself is
+  // already English — telling the LLM "this is Bengali" on real English
+  // prose produced a garbled "translation" that retrieved an unrelated
+  // standard. The toggle still controls answerLanguage; only the
+  // translation-for-retrieval step needs the actual detected script.
+  const translationSourceLanguage = detection.method === "script-range" ? queryLanguage : "en";
+  const translation = await translateQueryToEnglish(query, translationSourceLanguage);
   const retrievalQuery = translation.queryForRetrieval;
   const languageMeta = {
     language: queryLanguage,
@@ -111,7 +121,12 @@ export async function runQueryPipeline(
         groundingState: "insufficient_evidence" as const,
       },
       conflicts: [],
-      limitations: [refusal.limitation],
+      limitations: REFUSAL_COPY_LANGUAGES.has(answerLanguage)
+        ? [refusal.limitation]
+        : [
+            `This refusal message is shown in English because a reviewed ${LANGUAGE_NAMES[answerLanguage]} translation of the fixed refusal text does not exist yet.`,
+            refusal.limitation,
+          ],
     };
   }
 
@@ -360,6 +375,15 @@ export async function runQueryPipeline(
     synthesisAnswer = r.answer;
     outcome = forcedRefusal === "not_in_database" ? "refused_not_in_database" : "refused_insufficient_evidence";
     if (!limitations.includes(r.limitation)) limitations.unshift(r.limitation);
+    // refusal.ts only has reviewed fixed copy in English and Hindi — say so
+    // rather than silently showing English refusal text under a non-en/hi
+    // answerLanguage (queries in the other six UI languages can still
+    // reach a refusal via the relevance floor).
+    if (!REFUSAL_COPY_LANGUAGES.has(answerLanguage)) {
+      limitations.unshift(
+        `This refusal message is shown in English because a reviewed ${LANGUAGE_NAMES[answerLanguage]} translation of the fixed refusal text does not exist yet.`,
+      );
+    }
 
     // A refusal must not leave candidates standing as primary
     // recommendations. Found by scripts/eval-refusal.ts on 2026-09-09:

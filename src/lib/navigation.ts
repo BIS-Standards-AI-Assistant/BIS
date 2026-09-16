@@ -254,6 +254,7 @@ export const ESERVICES_SECTION: NavSection = {
         { label: "Verify Certificate", slug: "verify-certificate", description: "Verify a certificate's authenticity." },
         { label: "Verify BIS Mark", slug: "verify-bis-mark", description: "Verify a product's BIS/ISI mark." },
         { label: "Application Status", slug: "application-status", description: "Check application status." },
+        { label: "Consumer Services", slug: "consumer-services", description: "Verify a mark or hallmark, get consumer FAQs, and file a complaint." },
       ],
     },
     {

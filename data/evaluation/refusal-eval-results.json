@@ -1,24 +1,24 @@
 {
-  "generatedAt": "2026-09-09T11:26:38.195Z",
+  "generatedAt": "2026-09-16T12:18:07.929Z",
   "latencyTargetMs": 10000,
   "summary": {
     "passed": 12,
     "total": 12,
     "refusalsWithPrimaryClaims": 0,
-    "medianLatencyMs": 6866,
-    "maxLatencyMs": 12158,
-    "overLatencyTarget": 2
+    "medianLatencyMs": 18086,
+    "maxLatencyMs": 342079,
+    "overLatencyTarget": 11
   },
   "rows": [
     {
       "id": "OC1",
       "query": "How do I file my income tax return in India?",
       "group": "out-of-corpus",
-      "outcome": "refused_insufficient_evidence",
+      "outcome": "refused_out_of_scope",
       "refused": true,
       "expectedRefusal": true,
       "pass": true,
-      "latencyMs": 11874,
+      "latencyMs": 15585,
       "citedStandards": []
     },
     {
@@ -29,7 +29,7 @@
       "refused": true,
       "expectedRefusal": true,
       "pass": true,
-      "latencyMs": 325,
+      "latencyMs": 14469,
       "citedStandards": []
     },
     {
@@ -40,7 +40,7 @@
       "refused": true,
       "expectedRefusal": true,
       "pass": true,
-      "latencyMs": 248,
+      "latencyMs": 14124,
       "citedStandards": []
     },
     {
@@ -51,18 +51,18 @@
       "refused": true,
       "expectedRefusal": true,
       "pass": true,
-      "latencyMs": 12158,
+      "latencyMs": 15690,
       "citedStandards": []
     },
     {
       "id": "OC5",
       "query": "semiconductor photolithography mask alignment tolerance",
       "group": "out-of-corpus",
-      "outcome": "refused_insufficient_evidence",
+      "outcome": "refused_out_of_scope",
       "refused": true,
       "expectedRefusal": true,
       "pass": true,
-      "latencyMs": 6866,
+      "latencyMs": 4480,
       "citedStandards": []
     },
     {
@@ -73,7 +73,7 @@
       "refused": false,
       "expectedRefusal": false,
       "pass": true,
-      "latencyMs": 9421,
+      "latencyMs": 342079,
       "citedStandards": [
         "IS 14543:2016",
         "IS 13428:2005"
@@ -87,11 +87,9 @@
       "refused": false,
       "expectedRefusal": false,
       "pass": true,
-      "latencyMs": 7775,
+      "latencyMs": 18279,
       "citedStandards": [
-        "IS 14756:2017",
-        "IS 5522:2014",
-        "IS 15757:2022"
+        "IS 14756:2017"
       ]
     },
     {
@@ -102,7 +100,7 @@
       "refused": false,
       "expectedRefusal": false,
       "pass": true,
-      "latencyMs": 6091,
+      "latencyMs": 18116,
       "citedStandards": [
         "IS 4151:2015"
       ]
@@ -115,7 +113,7 @@
       "refused": false,
       "expectedRefusal": false,
       "pass": true,
-      "latencyMs": 6398,
+      "latencyMs": 41821,
       "citedStandards": [
         "IS 269:2015"
       ]
@@ -128,7 +126,7 @@
       "refused": false,
       "expectedRefusal": false,
       "pass": true,
-      "latencyMs": 6302,
+      "latencyMs": 15704,
       "citedStandards": [
         "IS 4985:2021"
       ]
@@ -141,7 +139,7 @@
       "refused": false,
       "expectedRefusal": false,
       "pass": true,
-      "latencyMs": 6287,
+      "latencyMs": 18086,
       "citedStandards": [
         "IS 9873 (Part 1):2019"
       ]
@@ -154,7 +152,7 @@
       "refused": false,
       "expectedRefusal": false,
       "pass": true,
-      "latencyMs": 7144,
+      "latencyMs": 21816,
       "citedStandards": [
         "IS 15658:2021"
       ]

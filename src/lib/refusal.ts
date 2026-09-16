@@ -62,6 +62,9 @@ const HI: Record<RefusalReason, RefusalCopy> = {
   },
 };
 
+/** Languages with real, reviewed fixed refusal copy — everything else falls back to English. */
+export const REFUSAL_COPY_LANGUAGES: ReadonlySet<AnswerLanguage> = new Set(["en", "hi"]);
+
 export function refusalCopy(reason: RefusalReason, language: AnswerLanguage): RefusalCopy {
   return (language === "hi" ? HI : EN)[reason];
 }

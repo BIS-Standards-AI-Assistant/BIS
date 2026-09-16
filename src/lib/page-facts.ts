@@ -529,6 +529,18 @@ const FACTS: Record<string, PageFacts> = {
     retrieved: READ_ON,
   },
 
+  "e-services:consumer-services": {
+    points: [
+      "BIS publishes a free mobile app — BIS Care — for Android and iOS, specifically so a consumer can check a mark without needing the web portal.",
+      "'Verify Licence Details' in the app checks whether a product carrying the Standard Mark is backed by a real licence; 'Verify HUID' checks a hallmarked gold or silver item by its six-digit HUID number.",
+      "The app supports 12 languages — ten regional languages plus Hindi and English — and carries consumer education material on rights and penalties under the BIS Act, 2016.",
+      "A complaint about a product carrying the ISI mark or a hallmark is filed through Online Complaint Registration, separately from the app.",
+      "Standards India, BIS's fortnightly bilingual journal, is written for both technical and consumer audiences rather than specialists only.",
+    ],
+    source: { label: "BIS Care App", href: en("bis-apps") },
+    retrieved: READ_ON,
+  },
+
   "e-services:check-licence": {
     points: [
       "BIS publishes licence data online in two streams: the Product Certification Scheme for domestic manufacturers, and the Hallmarking Scheme.",

@@ -60,6 +60,14 @@ __pycache__/
 *$py.class
 .pytest_cache/
 .venv/
+.venv-ml/
 venv/
+
+# fine-tuned model weights -- large binaries, not source; the training
+# script + registry entry (data/ml/artifacts/registry.json) document how
+# to reproduce them. Config/tokenizer/label-map JSON stay tracked (tiny).
+data/ml/artifacts/*/model.safetensors
+data/ml/artifacts/*/*.bin
+data/ml/artifacts/*/checkpoints/
 
 env.download
