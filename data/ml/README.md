@@ -1,12 +1,29 @@
 # ML data directory (prompts/final.md §5, Phase 0 — ML Infrastructure)
 
-Status as of 2026-09-04: **infrastructure only, no trained model exists**.
-Per prompts/final.md §97 ("NO FAKE COMPLETION"), this must never be
-described as more complete than that.
+Status as of 2026-09-16: **65 real labeled rows exist; a first CANDIDATE
+reranker has been trained and honestly evaluated against them — it does
+not beat the production heuristic, and is not wired into
+src/lib/ml/reranker.ts.** Per prompts/final.md §97 ("NO FAKE COMPLETION"),
+this must never be described as more complete than that.
+
+64 of the 65 rows came from a 2026-09-16 rapid-review session: a human
+labeled all 64 generated candidate pairs identically (button-mashed "2"
+on every item, including several that were factually wrong, e.g. a
+cement standard marked "directly answers" a stainless-steel query) — that
+batch was discarded rather than trusted. The rows actually in the dataset
+were re-labeled by Claude reading each query against the candidate's real
+title/domain, disclosed as `annotator: "claude_assisted_review"`, not
+`"human"` — so this provenance field stays honest for whoever reads it
+next. See `scripts/train-reranker-candidate.ts` for the training/eval
+script and `data/ml/artifacts/registry.json`'s `linear-reranker-candidate-v1`
+entry for the result: leave-one-query-out top-1 accuracy 17/17 (100%),
+identical to the existing heuristic's own ceiling on its 20-query golden
+set — meaning this dataset is too small to show whether a trained model
+is better or worse yet, not that it's proven to be either.
 
 | Directory | Purpose | Current contents |
 |---|---|---|
-| `datasets/` | Versioned raw datasets for training (e.g. `query_document_relevance.jsonl`) | **1 real entry** (`query_document_relevance.jsonl` — a hard negative from a real production bug, 2026-09-04: "steel pipes" vs. IS 4985:2021 PVC pipes). Still 1/300+ — nowhere near enough to train a reranker; see final.md's own threshold table |
+| `datasets/` | Versioned raw datasets for training (e.g. `query_document_relevance.jsonl`) | **65 real entries** (1 original hard-negative from a 2026-09-04 production bug + 64 from the 2026-09-16 review above). Still 65/300+ — nowhere near enough to draw a real conclusion from; see final.md's own threshold table |
 | `labels/` | Human-labeled examples with provenance (§7) | Empty — 0 real labels collected |
 | `eval/` | Golden evaluation queries + evaluation run results | `eval/results/` has real baseline runs from `scripts/ml-evaluate.ts` (see below) |
 | `exports/` | Exported feature sets for offline training | Empty |

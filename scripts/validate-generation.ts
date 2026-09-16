@@ -76,10 +76,20 @@ interface ValidationRow {
   notes: string[];
 }
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 async function citationIsValid(
   db: ReturnType<typeof getDb>,
   ev: Recommendation["evidence"][number],
 ): Promise<{ valid: boolean; reason?: string }> {
+  // Defends against a real defect this script surfaced: at least one stored
+  // generation result has evidence.chunkId holding a standard number
+  // (e.g. "IS 2553 (Part 2):2019-11") instead of a chunk UUID, which crashes
+  // the uuid-typed lookup below. Report it as an invalid citation with a
+  // clear reason instead of crashing the whole validation run.
+  if (!UUID_RE.test(ev.chunkId)) {
+    return { valid: false, reason: `chunkId is not a UUID: "${ev.chunkId}"` };
+  }
   const row = await db.query.chunks.findFirst({
     where: (c, { eq }) => eq(c.id, ev.chunkId),
     with: { document: true },

@@ -18,5 +18,23 @@
     "status": "PRODUCTION",
     "approvedBy": null,
     "checksum": null
+  },
+  {
+    "modelId": "linear-reranker-candidate-v1",
+    "modelName": "2-feature linear reranker (exact-ID match, title token overlap)",
+    "version": "v1",
+    "artifactPath": null,
+    "modelType": "trained_ml",
+    "datasetVersion": "query_document_relevance-65rows",
+    "metrics": {
+      "leaveOneQueryOutTop1Accuracy": 1,
+      "trainingRows": 65,
+      "distinctQueries": 18
+    },
+    "createdAt": "2026-09-16T12:35:34.768Z",
+    "status": "CANDIDATE",
+    "approvedBy": null,
+    "checksum": null,
+    "notes": "Trained on 65 rows (65 from a 2026-09-16 rapid-review session, 1 pre-existing) — far below the project's 300+ threshold for a meaningful reranker. Not wired into src/lib/ml/reranker.ts. Weights: exactIdMatch=1.653, titleOverlapRatio=2.298, bias=0.117."
   }
 ]
