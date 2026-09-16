@@ -13,9 +13,9 @@ import { assessApplicability, deriveRecommendationStatus } from "@/lib/applicabi
 import { buildReferenceEntry } from "@/lib/reference-registry";
 import { getNeighbors, type GraphNeighbor } from "@/lib/graph/graph-retrieval";
 import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
-import { detectLanguage, resolveQueryLanguage, type AnswerLanguage, type UiLanguage } from "@/lib/language";
+import { detectLanguage, resolveQueryLanguage, LANGUAGE_NAMES, type AnswerLanguage, type UiLanguage } from "@/lib/language";
 import { translateQueryToEnglish } from "@/lib/translate";
-import { refusalCopy, type RefusalReason } from "@/lib/refusal";
+import { refusalCopy, REFUSAL_COPY_LANGUAGES, type RefusalReason } from "@/lib/refusal";
 import { evaluateRelevanceFloor } from "@/lib/relevance-floor";
 import { buildComplianceMap } from "@/lib/compliance-map";
 import { getDb } from "@/db";
@@ -35,18 +35,26 @@ const MAX_CANDIDATES = 4;
 const RETRIEVAL_LIMIT = 12;
 
 /**
- * Shown when translation was needed (a fully-supported non-English answer
- * language) but no provider was available to do it — attributes the gap
- * honestly to the missing translation step, not the corpus. Marathi/Bengali
- * strings are LLM-authored; flagged for a native-speaker spot-check before
- * being treated as final, same as the Hindi copy in refusal.ts.
+ * Shown when translation was needed but no provider was available to do
+ * it — attributes the gap honestly to the missing translation step, not
+ * the corpus. Only English/Hindi/Marathi/Bengali have reviewed copy here
+ * (Marathi/Bengali are LLM-authored, flagged for a native-speaker
+ * spot-check, same as the Hindi copy in refusal.ts); the other four
+ * languages get the English text, same REFUSAL_COPY_LANGUAGES-style
+ * honest-fallback pattern used for refusal copy below rather than an
+ * unreviewed translation.
  */
-const TRANSLATION_UNAVAILABLE_NOTE: Record<AnswerLanguage, string> = {
-  en: "This query could not be translated into English because no translation provider was available. The index is English-only, so retrieval ran against the untranslated text and the results may be incomplete — asking in English will give a more reliable answer.",
+const REVIEWED_TRANSLATION_UNAVAILABLE_NOTE: Partial<Record<AnswerLanguage, string>> = {
   hi: "इस प्रश्न का अंग्रेज़ी में अनुवाद नहीं हो सका (अनुवाद सेवा उपलब्ध नहीं थी)। खोज केवल अंग्रेज़ी सामग्री पर चलती है, इसलिए परिणाम अधूरे हो सकते हैं — अंग्रेज़ी में प्रश्न पूछने पर बेहतर परिणाम मिलेंगे।",
   mr: "या प्रश्नाचे इंग्रजीत भाषांतर होऊ शकले नाही (भाषांतर सेवा उपलब्ध नव्हती). शोध फक्त इंग्रजी मजकुरावर चालतो, त्यामुळे निकाल अपूर्ण असू शकतात — इंग्रजीत प्रश्न विचारल्यास अधिक विश्वासार्ह उत्तर मिळेल.",
   bn: "এই প্রশ্নটি ইংরেজিতে অনুবাদ করা যায়নি (অনুবাদ পরিষেবা উপলব্ধ ছিল না)। অনুসন্ধান শুধুমাত্র ইংরেজি বিষয়বস্তুর উপর চলে, তাই ফলাফল অসম্পূর্ণ হতে পারে — ইংরেজিতে প্রশ্ন করলে আরও নির্ভরযোগ্য উত্তর পাওয়া যাবে।",
 };
+const TRANSLATION_UNAVAILABLE_NOTE_EN =
+  "This query could not be translated into English because no translation provider was available. The index is English-only, so retrieval ran against the untranslated text and the results may be incomplete — asking in English will give a more reliable answer.";
+
+function translationUnavailableNote(language: AnswerLanguage): string {
+  return REVIEWED_TRANSLATION_UNAVAILABLE_NOTE[language] ?? TRANSLATION_UNAVAILABLE_NOTE_EN;
+}
 
 export async function runQueryPipeline(
   query: string,
@@ -61,7 +69,17 @@ export async function runQueryPipeline(
   // provider it falls back to using the original text.
   const detection = detectLanguage(query);
   const { queryLanguage, answerLanguage } = resolveQueryLanguage(opts.language, detection);
-  const translation = await translateQueryToEnglish(query, queryLanguage);
+  // Only ask the LLM to "translate" text that was actually detected in a
+  // non-Latin script. Real bug found live-testing Bengali: a script-neutral
+  // query ("stainless steel utensils standard") with the language toggle
+  // set to bn/hi/etc. resolves queryLanguage to that toggle value (by
+  // design, for bare identifiers like "IS 14543"), but the text itself is
+  // already English — telling the LLM "this is Bengali" on real English
+  // prose produced a garbled "translation" that retrieved an unrelated
+  // standard. The toggle still controls answerLanguage; only the
+  // translation-for-retrieval step needs the actual detected script.
+  const translationSourceLanguage = detection.method === "script-range" ? queryLanguage : "en";
+  const translation = await translateQueryToEnglish(query, translationSourceLanguage);
   const retrievalQuery = translation.queryForRetrieval;
   const languageMeta = {
     language: queryLanguage,
@@ -125,7 +143,12 @@ export async function runQueryPipeline(
         groundingState: "insufficient_evidence" as const,
       },
       conflicts: [],
-      limitations: [refusal.limitation],
+      limitations: REFUSAL_COPY_LANGUAGES.has(answerLanguage)
+        ? [refusal.limitation]
+        : [
+            `This refusal message is shown in English because a reviewed ${LANGUAGE_NAMES[answerLanguage]} translation of the fixed refusal text does not exist yet.`,
+            refusal.limitation,
+          ],
     };
   }
 
@@ -323,7 +346,7 @@ export async function runQueryPipeline(
   // indexed corpus" wording would attribute it to the corpus when the
   // actual cause was an unavailable translation step. Say which it was.
   if (translation.method === "skipped-no-provider") {
-    limitations.unshift(TRANSLATION_UNAVAILABLE_NOTE[answerLanguage]);
+    limitations.unshift(translationUnavailableNote(answerLanguage));
   }
   if (intent.testingRequested && /laborator/i.test(query)) {
     limitations.push("No BIS-recognized laboratory data is indexed in this system yet — check bis.gov.in's official laboratory list directly.");
@@ -370,6 +393,15 @@ export async function runQueryPipeline(
     synthesisAnswer = r.answer;
     outcome = forcedRefusal === "not_in_database" ? "refused_not_in_database" : "refused_insufficient_evidence";
     if (!limitations.includes(r.limitation)) limitations.unshift(r.limitation);
+    // refusal.ts only has reviewed fixed copy in English and Hindi — say so
+    // rather than silently showing English refusal text under a non-en/hi
+    // answerLanguage (queries in the other six UI languages can still
+    // reach a refusal via the relevance floor).
+    if (!REFUSAL_COPY_LANGUAGES.has(answerLanguage)) {
+      limitations.unshift(
+        `This refusal message is shown in English because a reviewed ${LANGUAGE_NAMES[answerLanguage]} translation of the fixed refusal text does not exist yet.`,
+      );
+    }
 
     // A refusal must not leave candidates standing as primary
     // recommendations. Found by scripts/eval-refusal.ts on 2026-09-09:

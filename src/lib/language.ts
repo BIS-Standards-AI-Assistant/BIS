@@ -8,19 +8,23 @@
  * resolution. It never calls a provider, so it works at Tier 0 (see
  * docs/ui/SIH.md §23). Translation itself lives in src/lib/translate.ts.
  *
- * Scope for this pass: English, Hindi, Marathi and Bengali are the
- * fully-supported set ("Hindi minimum" in the PRD, extended once Marathi
- * and Bengali were verified end to end via scripts/eval-multilingual.ts).
- * The remaining Indic scripts the UI language switcher offers are detected
- * here too so the pipeline can label them and degrade honestly, but only
- * this set gets the translate-in / answer-in-language treatment until each
- * one is separately verified.
+ * Scope: English, Hindi, Marathi and Bengali are live-verified against the
+ * real DB and provider (see docs/PROJECT_STATUS.md's multilingual-parity
+ * numbers — Hindi 3/5, Marathi 3/5, Bengali 4/5 strict parity, all four
+ * 5/5 on detection/translation/answered-in-language/identifiers-Latin).
+ * The other four Indic scripts the UI language switcher offers now also
+ * get real translate-in and answer-in-language treatment (translate.ts and
+ * answer.ts's languageInstruction() were already generic over any
+ * UiLanguage — only this function's answerLanguage computation hardcoded
+ * everything but Hindi to English), but are unverified in the same way
+ * Hindi itself was before it was measured: expect similar or worse parity
+ * until each is actually run against real queries. The one place still
+ * English/Hindi-only is refusal.ts's FIXED copy, which only exists
+ * reviewed in those two languages — see the limitation note
+ * query-pipeline.ts adds for the other six.
  */
 
-export type AnswerLanguage = "en" | "hi" | "mr" | "bn";
-
-/** Languages that get the full translate-in / answer-in-language treatment. */
-const FULLY_SUPPORTED_ANSWER_LANGUAGES = new Set<UiLanguage>(["hi", "mr", "bn"]);
+export type AnswerLanguage = UiLanguage;
 
 /** Every language the UI switcher can be set to — mirrors LANGUAGES in src/lib/i18n.ts. */
 export type UiLanguage = "en" | "hi" | "bn" | "ta" | "te" | "mr" | "gu" | "kn";
@@ -103,12 +107,13 @@ export function resolveQueryLanguage(
     source = explicit ? "explicit" : "detected";
   }
 
-  // Only the languages in FULLY_SUPPORTED_ANSWER_LANGUAGES are wired end to
-  // end; anything else answers in English (the pipeline adds an honest
-  // limitation note when it does — see query-pipeline.ts).
-  const answerLanguage: AnswerLanguage = FULLY_SUPPORTED_ANSWER_LANGUAGES.has(queryLanguage)
-    ? (queryLanguage as AnswerLanguage)
-    : "en";
+  // Answer in whatever language the query was resolved to — translate.ts
+  // and answer.ts's languageInstruction() are generic over every
+  // UiLanguage, not just Hindi. refusal.ts's FIXED copy is the one
+  // remaining English/Hindi-only surface; query-pipeline.ts adds an
+  // honest limitation note for the other six rather than silently
+  // falling back to English refusal text.
+  const answerLanguage: AnswerLanguage = queryLanguage;
   return { queryLanguage, answerLanguage, source };
 }
 

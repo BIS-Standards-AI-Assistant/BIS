@@ -52,7 +52,7 @@ describe("resolveQueryLanguage", () => {
     expect(r.source).toBe("explicit");
   });
 
-  test("explicit Marathi with Devanagari text answers in Marathi", () => {
+test("explicit Marathi with Devanagari text is kept as both the query and answer language", () => {
     const r = resolveQueryLanguage("mr", detectLanguage("मानक कोणते लागू आहे"));
     expect(r.queryLanguage).toBe("mr");
     expect(r.answerLanguage).toBe("mr");
@@ -65,10 +65,18 @@ describe("resolveQueryLanguage", () => {
     expect(r.source).toBe("detected");
   });
 
-  test("a language outside the fully-supported set still detects/labels correctly but answers in English", () => {
-    const r = resolveQueryLanguage(undefined, detectLanguage("தமிழில் ஒரு கேள்வி"));
-    expect(r.queryLanguage).toBe("ta");
-    expect(r.answerLanguage).toBe("en");
+  test("every UiLanguage answers in itself now - no language is hardcoded to fall back to English", () => {
+    const cases: Array<[string, string]> = [
+      ["தமிழில் ஒரு கேள்வி", "ta"],
+      ["తెలుగులో ఒక ప్రశ్న", "te"],
+      ["ગુજરાતીમાં એક પ્રશ્ન", "gu"],
+      ["ಕನ್ನಡದಲ್ಲಿ ದೆದದಿದಿದಿ", "kn"],
+    ];
+    for (const [text, expected] of cases) {
+      const r = resolveQueryLanguage(undefined, detectLanguage(text));
+      expect(r.queryLanguage).toBe(expected);
+      expect(r.answerLanguage).toBe(expected);
+    }
   });
 
   test("no explicit choice, plain English → en/en", () => {

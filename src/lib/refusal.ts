@@ -44,46 +44,6 @@ const EN: Record<RefusalReason, RefusalCopy> = {
   },
 };
 
-// Marathi and Bengali copy is LLM-authored, mirroring the EN/HI strings
-// above sentence-for-sentence. Flagged for a native-speaker spot-check
-// before being treated as final — same honesty convention as the
-// verification_note fields on the certification/QCO reference dataset.
-const MR: Record<RefusalReason, RefusalCopy> = {
-  out_of_scope: {
-    answer:
-      "हा प्रश्न BIS Standards Navigator च्या कार्यक्षेत्राबाहेर आहे. ही सेवा सार्वजनिक भारतीय मानकांचे शीर्षक आणि व्याप्ती-सारांश, सार्वजनिक BIS प्रमाणन-योजना दस्तऐवज आणि BIS चे सार्वजनिक FAQ शोधते — ती सर्वसाधारण प्रश्नांची उत्तरे देत नाही. एखादे उत्पादन, साहित्य किंवा मानक क्रमांक वापरून शोधा, उदा. “LED बल्ब”, “स्टेनलेस स्टील भांडी” किंवा “IS 14543”.",
-    limitation: "प्रश्न भारतीय मानके, उत्पादन अनुपालन आणि BIS प्रमाणनाच्या कार्यक्षेत्राबाहेर आहे.",
-  },
-  insufficient_evidence: {
-    answer:
-      "अनुक्रमित सामग्रीत आढळले नाही. BIS Standards Navigator फक्त सार्वजनिक BIS सामग्रीच्या अनुक्रमित संचामधून उत्तर देते — मानक शीर्षके आणि व्याप्ती-सारांश, प्रमाणन-योजना दस्तऐवज आणि सार्वजनिक FAQ — आणि या प्रश्नाला समर्थन देणारा स्रोत त्या संचात सापडला नाही. यात भारतीय मानकांचा संपूर्ण मजकूर नाही. खाली दाखवलेले कोणतेही मानक केवळ सैलसर संबंधित संदर्भ म्हणून मिळाले आहेत आणि ते लागू असल्याची खात्री नाही.",
-    limitation: "या प्रश्नाला आधारभूत उत्तर देणारा कोणताही अनुक्रमित BIS स्रोत नाही; अनुक्रमित सामग्रीत मानकाचा संपूर्ण मजकूर समाविष्ट नाही.",
-  },
-  not_in_database: {
-    answer:
-      "ते मानक ओळखले गेले, परंतु त्याचे अधिकृत दस्तऐवज सध्या BIS Standards Navigator मध्ये अनुक्रमित नाही, त्यामुळे त्याच्या आवश्यकता येथे उद्धृत करता येत नाहीत. संपूर्ण मानकासाठी www.bis.gov.in किंवा BIS Standards पोर्टल पहा.",
-    limitation: "ओळखलेल्या मानकाचे दस्तऐवज अनुक्रमित सामग्रीत नाही.",
-  },
-};
-
-const BN: Record<RefusalReason, RefusalCopy> = {
-  out_of_scope: {
-    answer:
-      "এই প্রশ্নটি BIS Standards Navigator-এর আওতার বাইরে। এই পরিষেবাটি সর্বজনীন ভারতীয় মান (Indian Standard)-এর শিরোনাম ও পরিধি-সারাংশ, সর্বজনীন BIS প্রত্যয়ন-প্রকল্প নথি এবং BIS-এর সর্বজনীন FAQ অনুসন্ধান করে — এটি সাধারণ প্রশ্নের উত্তর দেয় না। কোনো পণ্য, উপাদান বা মান নম্বর দিয়ে খুঁজুন, যেমন “LED বাল্ব”, “স্টেইনলেস স্টিল বাসনপত্র” বা “IS 14543”।",
-    limitation: "প্রশ্নটি ভারতীয় মান, পণ্য সম্মতি এবং BIS প্রত্যয়নের আওতার বাইরে।",
-  },
-  insufficient_evidence: {
-    answer:
-      "সূচিত (indexed) তথ্যভাণ্ডারে পাওয়া যায়নি। BIS Standards Navigator শুধুমাত্র সর্বজনীন BIS উপাদানের একটি সূচিত সেট থেকে উত্তর দেয় — মান শিরোনাম ও পরিধি-সারাংশ, প্রত্যয়ন-প্রকল্প নথি এবং সর্বজনীন FAQ — এবং এই প্রশ্নের উত্তর সমর্থন করে এমন কোনো উৎস সেই সেটে পাওয়া যায়নি। এতে ভারতীয় মানের সম্পূর্ণ পাঠ্য নেই। নিচে তালিকাভুক্ত যেকোনো মান শুধুমাত্র শিথিলভাবে সম্পর্কিত প্রসঙ্গ হিসেবে পাওয়া গেছে এবং প্রযোজ্য বলে নিশ্চিত নয়।",
-    limitation: "এই প্রশ্নের একটি সুনিশ্চিত উত্তর সমর্থনকারী কোনো সূচিত BIS উৎস নেই; তথ্যভাণ্ডারে মানের সম্পূর্ণ পাঠ্য অন্তর্ভুক্ত নেই।",
-  },
-  not_in_database: {
-    answer:
-      "সেই মানটি শনাক্ত করা হয়েছে, কিন্তু এর প্রামাণিক নথিটি বর্তমানে BIS Standards Navigator-এ সূচিত নয়, তাই এর প্রয়োজনীয়তাগুলো এখানে উদ্ধৃত করা যাচ্ছে না। সম্পূর্ণ মানের জন্য www.bis.gov.in বা BIS Standards পোর্টাল দেখুন।",
-    limitation: "শনাক্ত করা মানের নথিটি সূচিত তথ্যভাণ্ডারে নেই।",
-  },
-};
-
 const HI: Record<RefusalReason, RefusalCopy> = {
   out_of_scope: {
     answer:
@@ -102,8 +62,9 @@ const HI: Record<RefusalReason, RefusalCopy> = {
   },
 };
 
-const COPY_BY_LANGUAGE: Record<AnswerLanguage, Record<RefusalReason, RefusalCopy>> = { en: EN, hi: HI, mr: MR, bn: BN };
+/** Languages with real, reviewed fixed refusal copy — everything else falls back to English. */
+export const REFUSAL_COPY_LANGUAGES: ReadonlySet<AnswerLanguage> = new Set(["en", "hi"]);
 
 export function refusalCopy(reason: RefusalReason, language: AnswerLanguage): RefusalCopy {
-  return COPY_BY_LANGUAGE[language][reason];
+  return (language === "hi" ? HI : EN)[reason];
 }
