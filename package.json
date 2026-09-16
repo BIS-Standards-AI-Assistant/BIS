@@ -29,6 +29,7 @@
     "ml:evaluate": "tsx scripts/ml-evaluate.ts",
     "smoke:prd": "dotenv -e .env.local -- tsx scripts/live-prd-smoke.ts",
     "corpus": "dotenv -e .env.local -- tsx scripts/corpus-admin.ts",
+    "feedback": "dotenv -e .env.local -- tsx scripts/feedback-admin.ts",
     "eval:refusal-threshold": "dotenv -e .env.local -- tsx scripts/calibrate-refusal-threshold.ts",
     "eval:refusal": "dotenv -e .env.local -- tsx scripts/eval-refusal.ts",
     "eval:multilingual": "dotenv -e .env.local -- tsx scripts/eval-multilingual.ts",

@@ -10,6 +10,7 @@ import { CoveragePanel } from "@/components/standards/CoveragePanel";
 import { WhyPanel, type MatchedAttribute } from "@/components/trust/WhyPanel";
 import { ConfidenceIndicator } from "@/components/trust/ConfidenceIndicator";
 import { SourceTag } from "@/components/trust/SourceTag";
+import { FeedbackControl } from "@/components/standards/FeedbackControl";
 import { confidenceFromGrounding } from "@/lib/provenance";
 
 const GROUNDING_LABEL: Record<GroundingState, string> = {
@@ -49,6 +50,7 @@ export const APPLICABILITY_TONE: Record<ApplicabilityState, "success" | "warning
 export function RecommendationCard({
   recommendation,
   matchedAttributes = [],
+  query,
 }: {
   recommendation: Recommendation;
   /**
@@ -57,6 +59,10 @@ export function RecommendationCard({
    * produced these results.
    */
   matchedAttributes?: MatchedAttribute[];
+  /** The search query that produced this recommendation — feeds the
+   * "Report an issue" control. Omitted where the caller has no single
+   * query text (e.g. CertificationDiscovery's scheme-driven flow). */
+  query?: string;
 }) {
   const [showStats, setShowStats] = useState(false);
   const documentId = recommendation.evidence[0]?.documentId;
@@ -201,6 +207,16 @@ export function RecommendationCard({
           <span>{showStats ? "Hide technical detail" : "Technical detail"}</span>
         </button>
       </div>
+
+      {query && recommendation.standardNumber && (
+        <div className="mt-3">
+          <FeedbackControl
+            query={query}
+            standardNumber={recommendation.standardNumber}
+            standardTitle={recommendation.title}
+          />
+        </div>
+      )}
 
       {/* Technical detail: the raw metrics behind "Why this result", for
           readers who want to inspect the engine's output directly rather
