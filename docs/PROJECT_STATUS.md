@@ -967,3 +967,21 @@ shifting reranking on the margins), not a new regression. The
 Marathi/Bengali copy itself is LLM-authored and still flagged in-code for
 a native-speaker check — the live eval verifies pipeline *behavior*, not
 that every word is idiomatic.
+
+**Merged same day with a teammate's parallel work** (`upstream/master`,
+commit `b2dcf81`): a teammate independently extended these same files to
+all 8 UI languages and found a real bug this session's narrower 4-language
+version didn't have (a script-neutral English query with a non-English
+toggle was mistranslated — fixed by keying translation-for-retrieval on
+the actually-detected script, not the resolved toggle value). Reconciled
+in favor of their version: `AnswerLanguage` is no longer a restricted
+allowlist, every language now gets real translate-in/answer-in-language
+treatment, and this session's unreviewed Marathi/Bengali refusal copy was
+dropped in favor of their more conservative `REFUSAL_COPY_LANGUAGES`
+pattern — only English/Hindi have reviewed fixed refusal text; every other
+language gets an explicit, user-visible "shown in English because a
+reviewed translation doesn't exist yet" note instead. Live-verified after
+merging: a Marathi refusal correctly carries that note, and a Tamil query
+correctly detects/translates/retrieves/answers end to end
+(`IS 14543:2016`, packaged drinking water). `npm run verify` green (612
+tests) after reconciliation.

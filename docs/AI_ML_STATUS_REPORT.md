@@ -615,14 +615,42 @@ as final — same disclosure convention as this dataset's own
 (no native speaker available) — the live eval verifies the *pipeline*
 behaves correctly, not that every word of the copy itself is idiomatic.
 
-**Updated claim that must not be made**: "multilingual support" without
-qualifying which languages get the full translate-in/answer-in-language
-treatment (currently Hindi, Marathi, Bengali — see
-`FULLY_SUPPORTED_ANSWER_LANGUAGES` in `src/lib/language.ts`) versus which
-only get honest detection/labeling and answer in English (Tamil, Telugu,
-Gujarati, Kannada). Marathi/Bengali are now live-verified against a real
-provider (table above), not just unit-tested — but the translated copy
-itself has not had a native-speaker review.
+**UPDATE 2 (2026-09-16, same day, merged from a teammate's parallel work)**:
+the "Updated claim that must not be made" paragraph immediately below is
+now itself stale — superseded by merging `upstream/master`, which contained
+a teammate's own extension of these exact files to all 8 `UiLanguage`
+values, done in parallel and independently. Reconciled in favor of their
+broader, additionally bug-fixed version (full resolution notes in the merge
+commit): `AnswerLanguage` is no longer a restricted allowlist — every UI
+language now gets real translate-in/answer-in-language treatment
+(`resolveQueryLanguage` answers in whatever language the query resolved to,
+unconditionally). Their pass also fixed a real bug this session's narrower
+version didn't have: a script-neutral English query with a non-English UI
+toggle set was being sent to the translation LLM labeled as that language,
+producing a garbled "translation" of real English text and retrieving the
+wrong standard — fixed by keying translation-for-retrieval on the actual
+*detected* script, not the resolved toggle value.
+
+This session's Marathi/Bengali `MR`/`BN` refusal-copy blocks were dropped
+during reconciliation in favor of the teammate's more conservative,
+arguably more honest design: `REFUSAL_COPY_LANGUAGES` names only the
+languages with real, reviewed fixed refusal text (English, Hindi — still
+just those two), and every other language gets an explicit, user-visible
+limitation note ("shown in English because a reviewed \[language]
+translation of the fixed refusal text does not exist yet") rather than
+presenting an unreviewed LLM translation as final. Live-verified after the
+merge: a Marathi out-of-scope query correctly carries that exact honest
+note; a Tamil packaged-drinking-water query correctly detects, translates,
+retrieves `IS 14543:2016`, and answers coherently in Tamil end to end —
+confirming the broader 8-language path genuinely works, not just compiles.
+
+**Current claim that must not be made**: "multilingual support" without
+qualifying that only English and Hindi have *reviewed* fixed refusal copy
+(`REFUSAL_COPY_LANGUAGES` in `src/lib/refusal.ts`) and only
+English/Hindi/Marathi/Bengali are *live-measured* against real queries
+(`docs/PROJECT_STATUS.md`'s parity table) — the other four languages
+(Tamil, Telugu, Gujarati, Kannada) get the identical real code path but are
+unverified in the same way Hindi itself was before it was measured.
 
 ---
 
