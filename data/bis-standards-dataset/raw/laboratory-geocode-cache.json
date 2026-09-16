@@ -1,0 +1,486 @@
+{
+  "Noida|Uttar Pradesh": {
+    "lat": 28.5706333,
+    "lng": 77.3272147
+  },
+  "New Delhi|Delhi": {
+    "lat": 28.6138954,
+    "lng": 77.2090057
+  },
+  "Nagpur|Maharashtra": {
+    "lat": 21.1498134,
+    "lng": 79.0820556
+  },
+  "Nasik|Maharashtra": {
+    "lat": 19.9480582,
+    "lng": 73.8420837
+  },
+  "Pune|Maharashtra": {
+    "lat": 18.5213738,
+    "lng": 73.8545071
+  },
+  "Delhi|Delhi": {
+    "lat": 28.6664535,
+    "lng": 77.2169781
+  },
+  "Uttar Pradesh": {
+    "lat": 27.1303344,
+    "lng": 80.859666
+  },
+  "Mohali|Punjab": {
+    "lat": 30.6908804,
+    "lng": 76.7114879
+  },
+  "Gurgaon|Haryana": {
+    "lat": 28.4646148,
+    "lng": 77.0299194
+  },
+  "Ghaziabad|Uttar Pradesh": {
+    "lat": 28.7749966,
+    "lng": 77.4586967
+  },
+  "Sonipat|Haryana": {
+    "lat": 28.9953758,
+    "lng": 77.0233627
+  },
+  "Chennai|Tamil Nadu": {
+    "lat": 13.0836939,
+    "lng": 80.270186
+  },
+  "Faridabad|Haryana": {
+    "lat": 28.4031478,
+    "lng": 77.3105561
+  },
+  "Sonepat|Haryana": {
+    "lat": 28.9895406,
+    "lng": 77.1510394
+  },
+  "Vijayawada|Andhra Pradesh": {
+    "lat": 16.5115306,
+    "lng": 80.6160469
+  },
+  "Greater Noida|Uttar Pradesh": {
+    "lat": 28.4670734,
+    "lng": 77.5137649
+  },
+  "Kolkata|West Bengal": {
+    "lat": 22.5726459,
+    "lng": 88.3638953
+  },
+  "Visakhapatnam|Andhra Pradesh": {
+    "lat": 17.6935526,
+    "lng": 83.2921297
+  },
+  "Ahmedabad|Gujarat": {
+    "lat": 23.0215374,
+    "lng": 72.5800568
+  },
+  "New Delh|Delhi": null,
+  "Raigad|Maharashtra": {
+    "lat": 18.4928092,
+    "lng": 73.138071
+  },
+  "Bangalore|Karnataka": {
+    "lat": 12.9767936,
+    "lng": 77.590082
+  },
+  "Ahmedabad.|Gujarat": {
+    "lat": 23.0215374,
+    "lng": 72.5800568
+  },
+  "Jharkhand|Jharkhand": {
+    "lat": 23.3104522,
+    "lng": 85.2748774
+  },
+  "Rohini|Delhi": {
+    "lat": 28.7063083,
+    "lng": 77.1087892
+  },
+  "Vadodara|Gujarat": {
+    "lat": 22.2973142,
+    "lng": 73.1942567
+  },
+  "Thiruvallur|Tamil Nadu": {
+    "lat": 13.2537619,
+    "lng": 80.0562572
+  },
+  "Bengaluru|Karnataka": {
+    "lat": 12.9767936,
+    "lng": 77.590082
+  },
+  "Gujarat": {
+    "lat": 22.3850051,
+    "lng": 71.745261
+  },
+  "Ghaziabad|Delhi": {
+    "lat": 28.7172505,
+    "lng": 77.2869559
+  },
+  "Bahadurgarh|Haryana": {
+    "lat": 28.6933239,
+    "lng": 76.9332373
+  },
+  "Hoshiarpur|Punjab": {
+    "lat": 31.6092942,
+    "lng": 75.8459754
+  },
+  "Hyderabad|Telangana": {
+    "lat": 17.360589,
+    "lng": 78.4740613
+  },
+  "Howrah|West Bengal": {
+    "lat": 22.5736296,
+    "lng": 88.3251045
+  },
+  "North West Delhi|Delhi": {
+    "lat": 28.7063083,
+    "lng": 77.1087892
+  },
+  "Jammu & Kashmir": {
+    "lat": 33.6649297,
+    "lng": 75.1629584
+  },
+  "NOIDA|Uttar Pradesh": {
+    "lat": 28.5706333,
+    "lng": 77.3272147
+  },
+  "Thane|Maharashtra": {
+    "lat": 19.3653598,
+    "lng": 73.3685437
+  },
+  "Ahmadabad|Gujarat": {
+    "lat": 23.0215374,
+    "lng": 72.5800568
+  },
+  "Gurugram|Haryana": {
+    "lat": 28.4646148,
+    "lng": 77.0299194
+  },
+  "Bhopal|Madhya Pradesh": {
+    "lat": 23.2584857,
+    "lng": 77.401989
+  },
+  "Jaipur|Rajasthan": {
+    "lat": 26.9154576,
+    "lng": 75.8189817
+  },
+  "Kakkalur|Tamil Nadu": {
+    "lat": 13.1305159,
+    "lng": 79.9243758
+  },
+  "Amritsar|Punjab": {
+    "lat": 31.6356659,
+    "lng": 74.8787496
+  },
+  "Aurangabad|Maharashtra": {
+    "lat": 19.877263,
+    "lng": 75.3390241
+  },
+  "Bhubaneswar|Odisha": {
+    "lat": 20.2602964,
+    "lng": 85.8394521
+  },
+  "Guwahati|Assam": {
+    "lat": 26.1805978,
+    "lng": 91.753943
+  },
+  "Hajipur|Bihar": {
+    "lat": 25.6905702,
+    "lng": 85.2090351
+  },
+  "Haldia|West Bengal": {
+    "lat": 22.028124,
+    "lng": 88.0632655
+  },
+  "Hyderabad|Andhra Pradesh": {
+    "lat": 15.8159044,
+    "lng": 78.0256065
+  },
+  "Lucknow|Uttar Pradesh": {
+    "lat": 26.8381,
+    "lng": 80.9346001
+  },
+  "Mysore|Karnataka": {
+    "lat": 12.3051828,
+    "lng": 76.6553609
+  },
+  "Panipat|Haryana": {
+    "lat": 29.3912753,
+    "lng": 76.9771675
+  },
+  "Indore|Madhya Pradesh": {
+    "lat": 22.7203616,
+    "lng": 75.8681996
+  },
+  "Kochi|Kerala": {
+    "lat": 9.9679032,
+    "lng": 76.2444378
+  },
+  "Ahmednagar|Maharashtra": {
+    "lat": 19.092952,
+    "lng": 74.7493451
+  },
+  "Madurai|Tamil Nadu": {
+    "lat": 9.9261153,
+    "lng": 78.1140983
+  },
+  "Karaikudi|Tamil Nadu": {
+    "lat": 10.0728444,
+    "lng": 78.7795194
+  },
+  "Raipur|Chhattisgarh": {
+    "lat": 21.2380912,
+    "lng": 81.6336993
+  },
+  "Tamil Nadu": {
+    "lat": 11.3323723,
+    "lng": 78.6098639
+  },
+  "Agartala|Tripura": {
+    "lat": 23.8312377,
+    "lng": 91.2823821
+  },
+  "Ranchi|Jharkhand": {
+    "lat": 23.3700501,
+    "lng": 85.3250387
+  },
+  "Chandrapur|Maharashtra": {
+    "lat": 20.0967555,
+    "lng": 79.5045475
+  },
+  "Mumbai|Maharashtra": {
+    "lat": 19.054999,
+    "lng": 72.8692035
+  },
+  "Dehradun|Uttarakhand": {
+    "lat": 30.3255646,
+    "lng": 78.0436813
+  },
+  "Amhedabad|Gujarat": null,
+  "Khargone|Madhya Pradesh": {
+    "lat": 21.9544729,
+    "lng": 75.7521248
+  },
+  "BATHINDA|Punjab": {
+    "lat": 30.1794814,
+    "lng": 75.0471098
+  },
+  "KOCHI|Kerala": {
+    "lat": 9.9679032,
+    "lng": 76.2444378
+  },
+  "RAJKOT|Gujarat": {
+    "lat": 22.3053263,
+    "lng": 70.8028377
+  },
+  "JALGAON|Maharashtra": {
+    "lat": 20.8428827,
+    "lng": 75.5261246
+  },
+  "Kudli (Sonepat)|Haryana": null,
+  "Rajkot|Gujarat": {
+    "lat": 22.3053263,
+    "lng": 70.8028377
+  },
+  "North West|Delhi": {
+    "lat": 28.7118315,
+    "lng": 77.1238141
+  },
+  "Gandhinagar|Gujarat": {
+    "lat": 23.2232877,
+    "lng": 72.6492267
+  },
+  "Navi Mumbai|Maharashtra": {
+    "lat": 19.0308262,
+    "lng": 73.0198537
+  },
+  "Navi Mumabi|Maharashtra": null,
+  "Palghar|Maharashtra": {
+    "lat": 19.757249,
+    "lng": 73.0931199
+  },
+  "Telangana": {
+    "lat": 17.8495919,
+    "lng": 79.1151663
+  },
+  "North Delhi|Delhi": {
+    "lat": 28.7320192,
+    "lng": 77.1853448
+  },
+  "Palakkad|Kerala": {
+    "lat": 10.7873692,
+    "lng": 76.4742172
+  },
+  "Salem|Tamil Nadu": {
+    "lat": 11.6469616,
+    "lng": 78.2106958
+  },
+  "Maharashtra": {
+    "lat": 19.5670323,
+    "lng": 76.4164557
+  },
+  "Bhilwara|Rajasthan": {
+    "lat": 25.470994,
+    "lng": 74.6961316
+  },
+  "Ambala|Haryana": {
+    "lat": 30.3843674,
+    "lng": 76.770421
+  },
+  "Ambala Cantt.|Haryana": {
+    "lat": 30.3663493,
+    "lng": 76.8200483
+  },
+  "Ahemdabad|Gujarat": {
+    "lat": 22.296681,
+    "lng": 73.2535718
+  },
+  "MYSORE|Karnataka": {
+    "lat": 12.3051828,
+    "lng": 76.6553609
+  },
+  "Ludhiana|Punjab": {
+    "lat": 30.9090157,
+    "lng": 75.851601
+  },
+  "Cochin|Kerala": {
+    "lat": 9.9679032,
+    "lng": 76.2444378
+  },
+  "Panchkula|Haryana": {
+    "lat": 30.6975401,
+    "lng": 76.8551066
+  },
+  "Delhi": {
+    "lat": 28.6328027,
+    "lng": 77.2197713
+  },
+  "Meerut|Uttar Pradesh": {
+    "lat": 29.0018557,
+    "lng": 77.7679671
+  },
+  "Karnataka": {
+    "lat": 14.9562045,
+    "lng": 75.7896741
+  },
+  "Tirupati|Andhra Pradesh": {
+    "lat": 13.6316368,
+    "lng": 79.4231711
+  },
+  "PANCHKULA|Haryana": {
+    "lat": 30.6975401,
+    "lng": 76.8551066
+  },
+  "Jalandhar|Punjab": {
+    "lat": 31.2922312,
+    "lng": 75.5678878
+  },
+  "Daman|Daman & Diu": {
+    "lat": 20.4169701,
+    "lng": 72.833173
+  },
+  "Karad|Maharashtra": {
+    "lat": 17.2852127,
+    "lng": 74.1822147
+  },
+  "Surat|Gujarat": {
+    "lat": 21.2094892,
+    "lng": 72.8317058
+  },
+  "Ganjam|Odisha": {
+    "lat": 19.6090068,
+    "lng": 84.7080633
+  },
+  "Coimbatore|Tamil Nadu": {
+    "lat": 11.0018115,
+    "lng": 76.9628425
+  },
+  "Derabassi|Punjab": null,
+  "GHAZIABAD|Uttar Pradesh": {
+    "lat": 28.7749966,
+    "lng": 77.4586967
+  },
+  "Mysuru|Karnataka": {
+    "lat": 12.3041464,
+    "lng": 76.6529521
+  },
+  "Morbi|Gujarat": {
+    "lat": 22.8003959,
+    "lng": 70.886232
+  },
+  "Hosur|Tamil Nadu": {
+    "lat": 12.7183361,
+    "lng": 77.8229481
+  },
+  "Ballabhgarh|Haryana": {
+    "lat": 28.340002,
+    "lng": 77.3164509
+  },
+  "Rajpura|Punjab": {
+    "lat": 30.4776857,
+    "lng": 76.5937658
+  },
+  "Punjab|Punjab": {
+    "lat": 31.2501702,
+    "lng": 75.614612
+  },
+  "Solan|Himachal Pradesh": {
+    "lat": 30.9077569,
+    "lng": 77.1023645
+  },
+  "Nashik|Maharashtra": {
+    "lat": 20.0112475,
+    "lng": 73.7902364
+  },
+  "Sampla|Haryana": {
+    "lat": 28.8192189,
+    "lng": 76.7609033
+  },
+  "Kanpur|Uttar Pradesh": {
+    "lat": 26.4609135,
+    "lng": 80.3217588
+  },
+  "Rayagada|Odisha": {
+    "lat": 19.4426698,
+    "lng": 83.5873053
+  },
+  "NEW DELHI|Delhi": {
+    "lat": 28.6138954,
+    "lng": 77.2090057
+  },
+  "Patiala|Punjab": {
+    "lat": 30.2092778,
+    "lng": 76.3397231
+  },
+  "Alwar|Rajasthan": {
+    "lat": 27.4140049,
+    "lng": 76.6170387
+  },
+  "Udaipur|Rajasthan": {
+    "lat": 24.578721,
+    "lng": 73.6862571
+  },
+  "New Modern Shahdara|Delhi": null,
+  "Agra|Uttar Pradesh": {
+    "lat": 27.1752554,
+    "lng": 78.0098161
+  },
+  "Faridabad.|Haryana": {
+    "lat": 28.4031478,
+    "lng": 77.3105561
+  },
+  "Haridwar|Uttarakhand": {
+    "lat": 29.9384473,
+    "lng": 78.1452985
+  },
+  "Vishakhapatnam|Andhra Pradesh": null,
+  "Bengulur|Karnataka": null,
+  "Jharkhand": {
+    "lat": 23.4559809,
+    "lng": 85.2557301
+  },
+  "Tirupur|Tamil Nadu": {
+    "lat": 11.1671878,
+    "lng": 77.3472673
+  }
+}

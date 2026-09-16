@@ -43,6 +43,7 @@
     "data:policy-pages": "tsx scripts/scrape-bis-policy-pages.ts",
     "data:relationships": "dotenv -e .env.local -- tsx scripts/data-relationships.ts",
     "data:relationships-extract": "dotenv -e .env.local -- tsx scripts/data-relationships-extract.ts",
+    "data:geocode-laboratories": "tsx scripts/geocode-laboratories.ts",
     "tools:smoke": "dotenv -e .env.local -- tsx scripts/tools-smoke.ts",
     "agent:smoke": "dotenv -e .env.local -- tsx scripts/agent-smoke.ts"
   },

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/Badge";
+import { LaboratoryMap } from "./LaboratoryMap";
 import type { LaboratoryItem } from "@/lib/laboratories";
 
 const STATUS_TONE: Record<LaboratoryItem["currentStatus"], "success" | "danger" | "warning" | "neutral"> = {
@@ -22,6 +23,7 @@ export function LaboratoriesDirectory({ laboratories }: { laboratories: Laborato
   const [state, setState] = useState("All");
   const [status, setStatus] = useState<"All" | LaboratoryItem["currentStatus"]>("All");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [view, setView] = useState<"list" | "map">("list");
 
   const stateCounts = useMemo(() => {
     const counts = new Map<string, number>();
@@ -47,9 +49,10 @@ export function LaboratoriesDirectory({ laboratories }: { laboratories: Laborato
 
   return (
     <div>
-      {/* By-state summary — a count-by-state bar, not a geolocated map: the
-          source dataset has no coordinates, so this is the honest ceiling
-          on "where are these labs" without inventing precision. */}
+      {/* By-state summary — a quick count-by-state bar; the map view below
+          (city/state-level, geocoded — see scripts/geocode-laboratories.ts)
+          is the actual "where are these labs" answer, honestly bounded to
+          the precision the source data supports (no street address). */}
       <section aria-labelledby="labs-by-state-heading" className="mb-8 border border-border bg-surface-raised p-5">
         <h2 id="labs-by-state-heading" className="text-sm font-semibold text-ink">
           Recognised laboratories by state
@@ -132,12 +135,38 @@ export function LaboratoriesDirectory({ laboratories }: { laboratories: Laborato
         </select>
       </div>
 
-      <p className="mb-3 text-xs text-ink-faint">
-        {filtered.length} of {laboratories.length} recognised laboratories
-      </p>
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <p className="text-xs text-ink-faint">
+          {filtered.length} of {laboratories.length} recognised laboratories
+        </p>
+        <div className="flex overflow-hidden rounded-lg border border-border text-xs">
+          <button
+            type="button"
+            onClick={() => setView("list")}
+            aria-pressed={view === "list"}
+            className={`px-3 py-1.5 font-medium transition-colors ${view === "list" ? "bg-navy text-white" : "bg-surface-raised text-ink-soft hover:bg-surface-alt"}`}
+          >
+            List
+          </button>
+          <button
+            type="button"
+            onClick={() => setView("map")}
+            aria-pressed={view === "map"}
+            className={`px-3 py-1.5 font-medium transition-colors ${view === "map" ? "bg-navy text-white" : "bg-surface-raised text-ink-soft hover:bg-surface-alt"}`}
+          >
+            Map
+          </button>
+        </div>
+      </div>
+
+      {view === "map" && (
+        <div className="mb-5">
+          <LaboratoryMap laboratories={filtered} />
+        </div>
+      )}
 
       {/* Results */}
-      {filtered.length === 0 ? (
+      {view === "list" && (filtered.length === 0 ? (
         <div className="border border-border bg-surface-raised p-8 text-center">
           <p className="text-sm font-medium text-ink">No recognised laboratory matches these filters.</p>
           <p className="mt-1 text-xs text-ink-faint">Try a different search term, state, or status.</p>
@@ -181,7 +210,7 @@ export function LaboratoriesDirectory({ laboratories }: { laboratories: Laborato
             </li>
           ))}
         </ul>
-      )}
+      ))}
     </div>
   );
 }
