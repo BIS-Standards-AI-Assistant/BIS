@@ -293,3 +293,37 @@ export const laboratoryCapabilitiesRelations = relations(laboratoryCapabilities,
   laboratory: one(laboratories, { fields: [laboratoryCapabilities.laboratoryId], references: [laboratories.id] }),
   testingRequirement: one(testingRequirements, { fields: [laboratoryCapabilities.testingRequirementId], references: [testingRequirements.id] }),
 }));
+
+/**
+ * User-submitted correction on a query/standard pairing — the raw input to
+ * the ML dataset pipeline (data/ml/README.md, prompts/final.md §6/§7).
+ * Deliberately NOT training data on its own: prompts/final.md §6 forbids
+ * training directly from unreviewed feedback, so every row starts
+ * `reviewStatus: "pending"` and only a human running
+ * `npm run feedback -- promote` can turn it into a labeled dataset row in
+ * data/ml/datasets/*.jsonl. See scripts/feedback-admin.ts.
+ */
+export const feedback = pgTable("feedback", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  queryLogId: uuid("query_log_id").references(() => queryLogs.id, { onDelete: "set null" }),
+  query: text("query").notNull(),
+  standardNumber: text("standard_number").notNull(),
+  standardTitle: text("standard_title"),
+  // Matches EXECUTION_CHECKLIST.md / BIS_NAVIGATOR_FULL_EXECUTION.md §6's fixed feedback-reason set.
+  reason: text("reason").notNull().$type<
+    "wrong_standard" | "wrong_applicability" | "missing_evidence" | "poor_explanation" | "outdated_information" | "other"
+  >(),
+  comment: text("comment"),
+  reviewStatus: text("review_status").notNull().default("pending").$type<"pending" | "promoted" | "rejected">(),
+  // Set only by a human reviewer at promotion time — the 0/1/2 relevance
+  // label from query_document_relevance.jsonl's schema, never by the submitter.
+  reviewedLabel: integer("reviewed_label"),
+  reviewedCategory: text("reviewed_category"),
+  reviewedBy: text("reviewed_by"),
+  reviewedAt: timestamp("reviewed_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const feedbackRelations = relations(feedback, ({ one }) => ({
+  queryLog: one(queryLogs, { fields: [feedback.queryLogId], references: [queryLogs.id] }),
+}));

@@ -456,6 +456,7 @@ export function HomeClient() {
           <RecommendationCard
             recommendation={result.recommendations[openRecommendationIndex]}
             matchedAttributes={matchedAttributes}
+            query={activeQuery}
           />
         </Modal>
       )}
