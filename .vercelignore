@@ -1,0 +1,8 @@
+# Vercel's own deploy file-listing doesn't always honor nested .gitignore
+# entries the way git itself does -- .venv-ml/ alone is 35,000+ files
+# (PyTorch/transformers site-packages) and blew past Vercel's 15,000-file
+# upload limit. None of this is needed for the deployed app anyway: the
+# Python fine-tuning scripts run offline, never at request time.
+.venv-ml/
+.venv/
+data/ml/artifacts/
