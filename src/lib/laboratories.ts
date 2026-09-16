@@ -27,6 +27,15 @@ export interface LaboratoryItem {
   recognitionValidUptoRaw: string;
   currentStatus: "Active" | "Suspended" | "Deferred" | "Unknown";
   remarks: string | null;
+  /**
+   * City/state-level coordinates from scripts/geocode-laboratories.ts
+   * (OpenStreetMap Nominatim). Null, never a guess, when geocoding could
+   * not resolve the entry — see that script for why fabricating a point
+   * here is exactly the bug this dataset already had to have removed once
+   * (src/lib/compliance-map.ts's doc comment).
+   */
+  lat: number | null;
+  lng: number | null;
 }
 
 let cache: LaboratoryItem[] | null = null;

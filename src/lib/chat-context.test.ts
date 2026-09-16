@@ -56,6 +56,34 @@ describe("buildScopedAnswer", () => {
     expect(result.limitations.length).toBeGreaterThan(0);
   });
 
+  test("deterministic sub-intents (why_relevant/evidence/certification/testing/missing_info) always answer 'en' regardless of the requested language — their text is always built from English evidence fields", async () => {
+    const scoped = [{ standardId: "s1", standardNumber: "IS 15410:2003", title: "Plastics Bottles", chunks: [] }];
+    for (const subIntent of ["why_relevant", "evidence", "certification", "testing", "missing_info"] as const) {
+      const result = await buildScopedAnswer(subIntent, "steel bottle", scoped, "hi");
+      expect(result.answerLanguage).toBe("en");
+    }
+  });
+
+  test("empty scoped context answers 'en' regardless of requested language", async () => {
+    const result = await buildScopedAnswer("why_relevant", "steel bottle", [], "hi");
+    expect(result.answerLanguage).toBe("en");
+  });
+
+  test("'other' sub-intent with no provider available falls back to 'en', never claiming a language it didn't actually answer in", async () => {
+    const result = await buildScopedAnswer(
+      "other",
+      "steel bottle",
+      [{ standardId: "s1", standardNumber: "IS 15410:2003", title: "Plastics Bottles", chunks: [] }],
+      "hi",
+    );
+    expect(result.answerLanguage).toBe("en");
+  });
+
+  test("omitting the language argument defaults to English", async () => {
+    const result = await buildScopedAnswer("why_relevant", "steel bottle", []);
+    expect(result.answerLanguage).toBe("en");
+  });
+
   test("evidence sub-intent with no indexed chunks does not fabricate an excerpt", async () => {
     const result = await buildScopedAnswer(
       "evidence",

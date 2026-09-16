@@ -935,3 +935,53 @@ The relevance floor is calibrated for the current corpus and embedding
 configuration only. After any corpus or embedding change, re-run
 `npm run eval:refusal-threshold` and check the recorded numbers in
 `data/evaluation/refusal-calibration.json` before trusting the floor.
+
+## Multilingual: Marathi + Bengali extension (2026-09-16)
+
+Extended the fully-supported answer-language set from English+Hindi to also
+include Marathi and Bengali — `src/lib/language.ts`'s `AnswerLanguage`
+widened, `src/lib/refusal.ts` gained real `MR`/`BN` copy blocks,
+`scripts/eval-multilingual.ts` restructured from a fixed English/Hindi pair
+to N languages. `translate.ts` and `answer.ts` needed **zero** code changes
+— both were already generic over `AnswerLanguage`, so the only real gaps
+were the hardcoded `hi` check in `language.ts` and the missing refusal copy.
+
+**Verified this session**: `npm run verify` green (579 vitest tests, up
+from 570; lint/typecheck/build clean), then a real live `npm run
+eval:multilingual` run once `DATABASE_URL`/`OPENROUTER_API_KEY` became
+available partway through the session (`openai/gpt-4o-mini` via
+OpenRouter). Results (`data/evaluation/multilingual-parity-results.json`):
+
+| Language | Strict parity | Partial parity | Detected/translated/answered-in-language/identifiers-Latin |
+|---|---|---|---|
+| Hindi | 3/5 | 5/5 | 5/5 on all four |
+| Marathi | 3/5 | 4/5 | 5/5 on all four |
+| Bengali | 4/5 | 5/5 | 5/5 on all four |
+
+Marathi/Bengali perform in the same range as the already-shipped Hindi
+baseline — every §7 contract check (detection, translation, answering in
+the right language, citations never mistranslated) is 5/5 for all three
+languages; the weaker "strict parity" number matches Hindi's own
+pre-existing, already-documented pattern (translation rewords the query,
+shifting reranking on the margins), not a new regression. The
+Marathi/Bengali copy itself is LLM-authored and still flagged in-code for
+a native-speaker check — the live eval verifies pipeline *behavior*, not
+that every word is idiomatic.
+
+**Merged same day with a teammate's parallel work** (`upstream/master`,
+commit `b2dcf81`): a teammate independently extended these same files to
+all 8 UI languages and found a real bug this session's narrower 4-language
+version didn't have (a script-neutral English query with a non-English
+toggle was mistranslated — fixed by keying translation-for-retrieval on
+the actually-detected script, not the resolved toggle value). Reconciled
+in favor of their version: `AnswerLanguage` is no longer a restricted
+allowlist, every language now gets real translate-in/answer-in-language
+treatment, and this session's unreviewed Marathi/Bengali refusal copy was
+dropped in favor of their more conservative `REFUSAL_COPY_LANGUAGES`
+pattern — only English/Hindi have reviewed fixed refusal text; every other
+language gets an explicit, user-visible "shown in English because a
+reviewed translation doesn't exist yet" note instead. Live-verified after
+merging: a Marathi refusal correctly carries that note, and a Tamil query
+correctly detects/translates/retrieves/answers end to end
+(`IS 14543:2016`, packaged drinking water). `npm run verify` green (612
+tests) after reconciliation.

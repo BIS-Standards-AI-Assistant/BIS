@@ -1,18 +1,41 @@
 {
-  "generatedAt": "2026-09-09T11:21:10.354Z",
-  "note": "Parity is measured on the primary recommended standard numbers and the outcome, not on answer text — PRD §7 requires the prose to be in the query's language while citations stay in their published Latin-script form.",
-  "summary": {
-    "parityPass": 3,
-    "sharedAnyPass": 4,
-    "total": 5,
-    "hindiDetected": 5,
-    "hindiTranslated": 5,
-    "answeredInHindi": 5,
-    "identifiersUntranslated": 5
+  "generatedAt": "2026-09-16T13:53:28.119Z",
+  "note": "Parity is measured on the primary recommended standard numbers and the outcome, not on answer text — PRD §7 requires the prose to be in the query's language while citations stay in their published Latin-script form. English runs once per case and is compared against every fully-supported non-English language.",
+  "languages": [
+    "hi",
+    "mr",
+    "bn"
+  ],
+  "summaryByLanguage": {
+    "hi": {
+      "parityPass": 3,
+      "sharedAnyPass": 5,
+      "detectedPass": 5,
+      "translatedPass": 5,
+      "answeredPass": 5,
+      "identifierPass": 5
+    },
+    "mr": {
+      "parityPass": 3,
+      "sharedAnyPass": 4,
+      "detectedPass": 5,
+      "translatedPass": 5,
+      "answeredPass": 5,
+      "identifierPass": 5
+    },
+    "bn": {
+      "parityPass": 4,
+      "sharedAnyPass": 5,
+      "detectedPass": 5,
+      "translatedPass": 5,
+      "answeredPass": 5,
+      "identifierPass": 5
+    }
   },
   "rows": [
     {
       "id": "ML1",
+      "language": "hi",
       "en": {
         "query": "What are the requirements for packaged drinking water?",
         "outcome": "answered",
@@ -23,10 +46,10 @@
         "language": "en",
         "translated": false,
         "answerLanguage": "en",
-        "latencyMs": 12857,
-        "answerPreview": "Based on indexed BIS evidence, 2 candidate standards were found (2 directly supported by e"
+        "latencyMs": 22619,
+        "answerPreview": "The requirements for packaged drinking water in India are governed primarily by IS 14543:2"
       },
-      "hi": {
+      "other": {
         "query": "पैकेज्ड पेयजल के लिए क्या आवश्यकताएं हैं?",
         "outcome": "answered",
         "standards": [
@@ -36,8 +59,8 @@
         "language": "hi",
         "translated": true,
         "answerLanguage": "hi",
-        "latencyMs": 12364,
-        "answerPreview": "Based on indexed BIS evidence, 2 candidate standards were found (2 directly supported by e"
+        "latencyMs": 19569,
+        "answerPreview": "पैकेज्ड पेयजल के लिए आवश्यकताएं IS 14543:2016 के अनुसार निर्धारित हैं। इस मानक में पैकेजिं"
       },
       "sameStandards": true,
       "sameOutcome": true,
@@ -46,14 +69,99 @@
         "IS 13428:2005",
         "IS 14543:2016"
       ],
-      "enCoveredByHi": true,
+      "enCoveredByOther": true,
       "anyShared": true,
       "latinIds": true,
-      "detectedHindi": true,
-      "answeredInHindi": true
+      "detected": true,
+      "answeredInLanguage": true
+    },
+    {
+      "id": "ML1",
+      "language": "mr",
+      "en": {
+        "query": "What are the requirements for packaged drinking water?",
+        "outcome": "answered",
+        "standards": [
+          "IS 13428:2005",
+          "IS 14543:2016"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 22619,
+        "answerPreview": "The requirements for packaged drinking water in India are governed primarily by IS 14543:2"
+      },
+      "other": {
+        "query": "पॅकेज्ड पिण्याच्या पाण्यासाठी काय आवश्यकता आहेत?",
+        "outcome": "answered",
+        "standards": [
+          "IS 13428:2005",
+          "IS 14543:2016"
+        ],
+        "language": "mr",
+        "translated": true,
+        "answerLanguage": "mr",
+        "latencyMs": 21276,
+        "answerPreview": "पॅकेज्ड पिण्याच्या पाण्यासाठी आवश्यकतांची माहिती IS 14543:2016 या मानकात दिली आहे. या मानक"
+      },
+      "sameStandards": true,
+      "sameOutcome": true,
+      "pass": true,
+      "overlap": [
+        "IS 13428:2005",
+        "IS 14543:2016"
+      ],
+      "enCoveredByOther": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detected": true,
+      "answeredInLanguage": true
+    },
+    {
+      "id": "ML1",
+      "language": "bn",
+      "en": {
+        "query": "What are the requirements for packaged drinking water?",
+        "outcome": "answered",
+        "standards": [
+          "IS 13428:2005",
+          "IS 14543:2016"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 22619,
+        "answerPreview": "The requirements for packaged drinking water in India are governed primarily by IS 14543:2"
+      },
+      "other": {
+        "query": "প্যাকেজড পানীয় জলের জন্য কী কী প্রয়োজনীয়তা রয়েছে?",
+        "outcome": "answered",
+        "standards": [
+          "IS 13428:2005",
+          "IS 14543:2016"
+        ],
+        "language": "bn",
+        "translated": true,
+        "answerLanguage": "bn",
+        "latencyMs": 23980,
+        "answerPreview": "প্যাকেজড পানীয় জলের জন্য প্রধানত দুইটি মান (IS 14543:2016 এবং IS 13428:2005) প্রযোজ্য। এই"
+      },
+      "sameStandards": true,
+      "sameOutcome": true,
+      "pass": true,
+      "overlap": [
+        "IS 13428:2005",
+        "IS 14543:2016"
+      ],
+      "enCoveredByOther": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detected": true,
+      "answeredInLanguage": true
     },
     {
       "id": "ML2",
+      "language": "hi",
       "en": {
         "query": "stainless steel cookware specification",
         "outcome": "answered",
@@ -65,10 +173,10 @@
         "language": "en",
         "translated": false,
         "answerLanguage": "en",
-        "latencyMs": 9324,
-        "answerPreview": "Based on indexed BIS evidence, 3 candidate standards were found (3 directly supported by e"
+        "latencyMs": 26091,
+        "answerPreview": "The Indian Standard for stainless steel cookware is covered by IS 14756:2017. This standar"
       },
-      "hi": {
+      "other": {
         "query": "स्टेनलेस स्टील के बर्तनों का विनिर्देश",
         "outcome": "answered",
         "standards": [
@@ -77,8 +185,8 @@
         "language": "hi",
         "translated": true,
         "answerLanguage": "hi",
-        "latencyMs": 7313,
-        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+        "latencyMs": 17671,
+        "answerPreview": "स्टेनलेस स्टील के बर्तनों के लिए, IS 5522:2014 मानक उपयुक्त है। यह मानक स्टेनलेस स्टील की "
       },
       "sameStandards": false,
       "sameOutcome": true,
@@ -86,14 +194,97 @@
       "overlap": [
         "IS 5522:2014"
       ],
-      "enCoveredByHi": false,
+      "enCoveredByOther": false,
       "anyShared": true,
       "latinIds": true,
-      "detectedHindi": true,
-      "answeredInHindi": true
+      "detected": true,
+      "answeredInLanguage": true
+    },
+    {
+      "id": "ML2",
+      "language": "mr",
+      "en": {
+        "query": "stainless steel cookware specification",
+        "outcome": "answered",
+        "standards": [
+          "IS 14756:2017",
+          "IS 15757:2022",
+          "IS 5522:2014"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 26091,
+        "answerPreview": "The Indian Standard for stainless steel cookware is covered by IS 14756:2017. This standar"
+      },
+      "other": {
+        "query": "स्टेनलेस स्टील भांड्यांचे तपशील",
+        "outcome": "refused_out_of_scope",
+        "standards": [],
+        "language": "mr",
+        "translated": true,
+        "answerLanguage": "mr",
+        "latencyMs": 7058,
+        "answerPreview": "हा प्रश्न BIS Standards Navigator च्या कार्यक्षेत्राबाहेर आहे. ही सेवा सार्वजनिक भारतीय मा"
+      },
+      "sameStandards": false,
+      "sameOutcome": false,
+      "pass": false,
+      "overlap": [],
+      "enCoveredByOther": false,
+      "anyShared": false,
+      "latinIds": true,
+      "detected": true,
+      "answeredInLanguage": true
+    },
+    {
+      "id": "ML2",
+      "language": "bn",
+      "en": {
+        "query": "stainless steel cookware specification",
+        "outcome": "answered",
+        "standards": [
+          "IS 14756:2017",
+          "IS 15757:2022",
+          "IS 5522:2014"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 26091,
+        "answerPreview": "The Indian Standard for stainless steel cookware is covered by IS 14756:2017. This standar"
+      },
+      "other": {
+        "query": "স্টেইনলেস স্টিল রান্নার বাসনের স্পেসিফিকেশন",
+        "outcome": "answered",
+        "standards": [
+          "IS 14756:2017",
+          "IS 15757:2022",
+          "IS 5522:2014"
+        ],
+        "language": "bn",
+        "translated": true,
+        "answerLanguage": "bn",
+        "latencyMs": 57680,
+        "answerPreview": "Based on indexed BIS evidence, 3 candidate standards were found (1 directly supported by e"
+      },
+      "sameStandards": true,
+      "sameOutcome": true,
+      "pass": true,
+      "overlap": [
+        "IS 14756:2017",
+        "IS 15757:2022",
+        "IS 5522:2014"
+      ],
+      "enCoveredByOther": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detected": true,
+      "answeredInLanguage": true
     },
     {
       "id": "ML3",
+      "language": "hi",
       "en": {
         "query": "protective helmet for two wheeler riders",
         "outcome": "answered",
@@ -103,31 +294,116 @@
         "language": "en",
         "translated": false,
         "answerLanguage": "en",
-        "latencyMs": 6493,
-        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+        "latencyMs": 22436,
+        "answerPreview": "The applicable standard for protective helmets for two-wheeler riders is IS 4151:2015. Thi"
       },
-      "hi": {
+      "other": {
         "query": "दोपहिया वाहन चालकों के लिए सुरक्षा हेलमेट",
-        "outcome": "refused_insufficient_evidence",
-        "standards": [],
+        "outcome": "answered",
+        "standards": [
+          "IS 4151:2015"
+        ],
         "language": "hi",
         "translated": true,
         "answerLanguage": "hi",
-        "latencyMs": 5316,
-        "answerPreview": "अनुक्रमित सामग्री में नहीं मिला। BIS Standards Navigator केवल सार्वजनिक BIS सामग्री — मानक"
+        "latencyMs": 29832,
+        "answerPreview": "दोपहिया वाहन चालकों के लिए सुरक्षा हेलमेट के लिए मानक IS 4151:2015 को लागू किया जा सकता है"
+      },
+      "sameStandards": true,
+      "sameOutcome": true,
+      "pass": true,
+      "overlap": [
+        "IS 4151:2015"
+      ],
+      "enCoveredByOther": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detected": true,
+      "answeredInLanguage": true
+    },
+    {
+      "id": "ML3",
+      "language": "mr",
+      "en": {
+        "query": "protective helmet for two wheeler riders",
+        "outcome": "answered",
+        "standards": [
+          "IS 4151:2015"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 22436,
+        "answerPreview": "The applicable standard for protective helmets for two-wheeler riders is IS 4151:2015. Thi"
+      },
+      "other": {
+        "query": "दुचाकी चालकांसाठी संरक्षक हेल्मेट",
+        "outcome": "answered",
+        "standards": [
+          "IS 4151:2015",
+          "IS 9873 (Part 1):2019"
+        ],
+        "language": "mr",
+        "translated": true,
+        "answerLanguage": "mr",
+        "latencyMs": 29892,
+        "answerPreview": "दुचाकी चालकांसाठी संरक्षक हेल्मेटसाठी एक संबंधित मानक आहे: IS 4151:2015. हा मानक दुचाकी चा"
       },
       "sameStandards": false,
-      "sameOutcome": false,
+      "sameOutcome": true,
       "pass": false,
-      "overlap": [],
-      "enCoveredByHi": false,
-      "anyShared": false,
+      "overlap": [
+        "IS 4151:2015"
+      ],
+      "enCoveredByOther": true,
+      "anyShared": true,
       "latinIds": true,
-      "detectedHindi": true,
-      "answeredInHindi": true
+      "detected": true,
+      "answeredInLanguage": true
+    },
+    {
+      "id": "ML3",
+      "language": "bn",
+      "en": {
+        "query": "protective helmet for two wheeler riders",
+        "outcome": "answered",
+        "standards": [
+          "IS 4151:2015"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 22436,
+        "answerPreview": "The applicable standard for protective helmets for two-wheeler riders is IS 4151:2015. Thi"
+      },
+      "other": {
+        "query": "দুই চাকার যানবাহন চালকদের জন্য সুরক্ষামূলক হেলমেট",
+        "outcome": "answered",
+        "standards": [
+          "IS 4151:2015",
+          "IS 9873 (Part 1):2019"
+        ],
+        "language": "bn",
+        "translated": true,
+        "answerLanguage": "bn",
+        "latencyMs": 16668,
+        "answerPreview": "মোটরসাইকেল চালকদের জন্য সুরক্ষামূলক হেলমেটের জন্য যে মান আছে সেটি হল IS 4151:2015। এই মানট"
+      },
+      "sameStandards": false,
+      "sameOutcome": true,
+      "pass": false,
+      "overlap": [
+        "IS 4151:2015"
+      ],
+      "enCoveredByOther": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detected": true,
+      "answeredInLanguage": true
     },
     {
       "id": "ML4",
+      "language": "hi",
       "en": {
         "query": "safety requirements for toys",
         "outcome": "answered",
@@ -137,10 +413,10 @@
         "language": "en",
         "translated": false,
         "answerLanguage": "en",
-        "latencyMs": 5448,
-        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+        "latencyMs": 15826,
+        "answerPreview": "The standard for safety requirements of toys is outlined in IS 9873 (Part 1):2019, which a"
       },
-      "hi": {
+      "other": {
         "query": "खिलौनों के लिए सुरक्षा आवश्यकताएं",
         "outcome": "answered",
         "standards": [
@@ -149,8 +425,8 @@
         "language": "hi",
         "translated": true,
         "answerLanguage": "hi",
-        "latencyMs": 14141,
-        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+        "latencyMs": 22467,
+        "answerPreview": "खिलौनों के लिए सुरक्षा आवश्यकताओं के संदर्भ में, IS 9873 (Part 1):2019 मानक लागू होता है। "
       },
       "sameStandards": true,
       "sameOutcome": true,
@@ -158,14 +434,93 @@
       "overlap": [
         "IS 9873 (Part 1):2019"
       ],
-      "enCoveredByHi": true,
+      "enCoveredByOther": true,
       "anyShared": true,
       "latinIds": true,
-      "detectedHindi": true,
-      "answeredInHindi": true
+      "detected": true,
+      "answeredInLanguage": true
+    },
+    {
+      "id": "ML4",
+      "language": "mr",
+      "en": {
+        "query": "safety requirements for toys",
+        "outcome": "answered",
+        "standards": [
+          "IS 9873 (Part 1):2019"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 15826,
+        "answerPreview": "The standard for safety requirements of toys is outlined in IS 9873 (Part 1):2019, which a"
+      },
+      "other": {
+        "query": "खेळण्यांसाठी सुरक्षा आवश्यकता",
+        "outcome": "answered",
+        "standards": [
+          "IS 9873 (Part 1):2019"
+        ],
+        "language": "mr",
+        "translated": true,
+        "answerLanguage": "mr",
+        "latencyMs": 25546,
+        "answerPreview": "खेलण्यांच्या सुरक्षेसाठी IS 9873 (Part 1):2019 मानक महत्त्वाचे आहे. या मानकात खेळण्यांच्या"
+      },
+      "sameStandards": true,
+      "sameOutcome": true,
+      "pass": true,
+      "overlap": [
+        "IS 9873 (Part 1):2019"
+      ],
+      "enCoveredByOther": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detected": true,
+      "answeredInLanguage": true
+    },
+    {
+      "id": "ML4",
+      "language": "bn",
+      "en": {
+        "query": "safety requirements for toys",
+        "outcome": "answered",
+        "standards": [
+          "IS 9873 (Part 1):2019"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 15826,
+        "answerPreview": "The standard for safety requirements of toys is outlined in IS 9873 (Part 1):2019, which a"
+      },
+      "other": {
+        "query": "খেলনার জন্য নিরাপত্তা প্রয়োজনীয়তা",
+        "outcome": "answered",
+        "standards": [
+          "IS 9873 (Part 1):2019"
+        ],
+        "language": "bn",
+        "translated": true,
+        "answerLanguage": "bn",
+        "latencyMs": 20757,
+        "answerPreview": "আপনার উল্লেখিত খেলনা নিরাপত্তা প্রয়োজনীয়তার জন্য উপযুক্ত মান হিসাবে IS 9873 (Part 1):201"
+      },
+      "sameStandards": true,
+      "sameOutcome": true,
+      "pass": true,
+      "overlap": [
+        "IS 9873 (Part 1):2019"
+      ],
+      "enCoveredByOther": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detected": true,
+      "answeredInLanguage": true
     },
     {
       "id": "ML5",
+      "language": "hi",
       "en": {
         "query": "unplasticized PVC pipes for water supply",
         "outcome": "answered",
@@ -175,20 +530,61 @@
         "language": "en",
         "translated": false,
         "answerLanguage": "en",
-        "latencyMs": 6212,
-        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+        "latencyMs": 13910,
+        "answerPreview": "The relevant standard for unplasticized PVC pipes for water supplies is IS 4985:2021. This"
       },
-      "hi": {
+      "other": {
         "query": "जल आपूर्ति के लिए अनप्लास्टिसाइज्ड पीवीसी पाइप",
         "outcome": "answered",
         "standards": [
+          "IS 13428:2005",
+          "IS 15450:2004",
           "IS 4985:2021"
         ],
         "language": "hi",
         "translated": true,
         "answerLanguage": "hi",
-        "latencyMs": 8118,
-        "answerPreview": "Based on indexed BIS evidence, 1 candidate standard was found (1 directly supported by evi"
+        "latencyMs": 19869,
+        "answerPreview": "IS 4985:2021 अनप्लास्टिसाइज्ड पीवीसी पाइप के लिए मानक है जो जल आपूर्ति में उपयोग के लिए सु"
+      },
+      "sameStandards": false,
+      "sameOutcome": true,
+      "pass": false,
+      "overlap": [
+        "IS 4985:2021"
+      ],
+      "enCoveredByOther": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detected": true,
+      "answeredInLanguage": true
+    },
+    {
+      "id": "ML5",
+      "language": "mr",
+      "en": {
+        "query": "unplasticized PVC pipes for water supply",
+        "outcome": "answered",
+        "standards": [
+          "IS 4985:2021"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 13910,
+        "answerPreview": "The relevant standard for unplasticized PVC pipes for water supplies is IS 4985:2021. This"
+      },
+      "other": {
+        "query": "पाणीपुरवठ्यासाठी अनप्लास्टिसाइज्ड पीव्हीसी पाईप्स",
+        "outcome": "answered",
+        "standards": [
+          "IS 4985:2021"
+        ],
+        "language": "mr",
+        "translated": true,
+        "answerLanguage": "mr",
+        "latencyMs": 15232,
+        "answerPreview": "अनप्लास्टिसाइज्ड पीव्हीसी पाईप्ससाठी भारतात मान्यताप्राप्त मानक म्हणजे IS 4985:2021. हे मा"
       },
       "sameStandards": true,
       "sameOutcome": true,
@@ -196,11 +592,50 @@
       "overlap": [
         "IS 4985:2021"
       ],
-      "enCoveredByHi": true,
+      "enCoveredByOther": true,
       "anyShared": true,
       "latinIds": true,
-      "detectedHindi": true,
-      "answeredInHindi": true
+      "detected": true,
+      "answeredInLanguage": true
+    },
+    {
+      "id": "ML5",
+      "language": "bn",
+      "en": {
+        "query": "unplasticized PVC pipes for water supply",
+        "outcome": "answered",
+        "standards": [
+          "IS 4985:2021"
+        ],
+        "language": "en",
+        "translated": false,
+        "answerLanguage": "en",
+        "latencyMs": 13910,
+        "answerPreview": "The relevant standard for unplasticized PVC pipes for water supplies is IS 4985:2021. This"
+      },
+      "other": {
+        "query": "জল সরবরাহের জন্য আনপ্লাস্টিসাইজড পিভিসি পাইপ",
+        "outcome": "answered",
+        "standards": [
+          "IS 4985:2021"
+        ],
+        "language": "bn",
+        "translated": true,
+        "answerLanguage": "bn",
+        "latencyMs": 13609,
+        "answerPreview": "জল সরবরাহের জন্য আনপ্লাস্টিসাইজড পিভিসি পাইপের জন্য যে মানগুলো প্রযোজ্য, তার মধ্যে IS 4985"
+      },
+      "sameStandards": true,
+      "sameOutcome": true,
+      "pass": true,
+      "overlap": [
+        "IS 4985:2021"
+      ],
+      "enCoveredByOther": true,
+      "anyShared": true,
+      "latinIds": true,
+      "detected": true,
+      "answeredInLanguage": true
     }
   ]
 }

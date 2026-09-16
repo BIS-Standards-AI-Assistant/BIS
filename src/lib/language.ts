@@ -8,18 +8,20 @@
  * resolution. It never calls a provider, so it works at Tier 0 (see
  * docs/ui/SIH.md §23). Translation itself lives in src/lib/translate.ts.
  *
- * Scope: English and Hindi are the verified, live-tested pair ("Hindi
- * minimum" in the PRD — see docs/PROJECT_STATUS.md's multilingual-parity
- * numbers, 3/5 strict grounding parity). The other six Indic scripts the
- * UI language switcher offers now also get real translate-in and
- * answer-in-language treatment (translate.ts and answer.ts's
- * languageInstruction() were already generic over any UiLanguage — only
- * this function's answerLanguage computation hardcoded them to English).
- * They are unverified in the same way Hindi itself was before it was
- * measured: expect similar or worse parity until each is actually run
- * against real queries. The one place still English-only is refusal.ts's
- * FIXED copy, which only exists reviewed in English and Hindi — see the
- * limitation note query-pipeline.ts adds for the other six.
+ * Scope: English, Hindi, Marathi and Bengali are live-verified against the
+ * real DB and provider (see docs/PROJECT_STATUS.md's multilingual-parity
+ * numbers — Hindi 3/5, Marathi 3/5, Bengali 4/5 strict parity, all four
+ * 5/5 on detection/translation/answered-in-language/identifiers-Latin).
+ * The other four Indic scripts the UI language switcher offers now also
+ * get real translate-in and answer-in-language treatment (translate.ts and
+ * answer.ts's languageInstruction() were already generic over any
+ * UiLanguage — only this function's answerLanguage computation hardcoded
+ * everything but Hindi to English), but are unverified in the same way
+ * Hindi itself was before it was measured: expect similar or worse parity
+ * until each is actually run against real queries. The one place still
+ * English/Hindi-only is refusal.ts's FIXED copy, which only exists
+ * reviewed in those two languages — see the limitation note
+ * query-pipeline.ts adds for the other six.
  */
 
 export type AnswerLanguage = UiLanguage;

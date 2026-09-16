@@ -9,6 +9,7 @@ import {
   subscribeToConversation,
 } from "@/lib/assistant-conversation";
 import { SourceTag } from "@/components/trust/SourceTag";
+import { SpeakButton } from "@/components/query/SpeakButton";
 
 /**
  * The centre panel's research conversation (§3, §26, §27).
@@ -120,6 +121,9 @@ export function ResearchChat({
                       <span className="rounded bg-navy/10 px-1.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-navy">
                         Wider BIS search
                       </span>
+                    )}
+                    {!m.failed && m.text.trim() && (
+                      <SpeakButton text={m.text} language={m.answerLanguage ?? "en"} className="ml-auto" />
                     )}
                   </div>
                   <p className={`whitespace-pre-line text-[13.5px] leading-relaxed ${m.failed ? "text-danger" : "text-ink"}`}>

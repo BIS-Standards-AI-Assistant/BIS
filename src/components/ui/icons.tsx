@@ -204,3 +204,21 @@ export function MicIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function SpeakerIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.7} stroke="currentColor" aria-hidden="true" {...props}>
+      <path d="M4 9.5h3L11.5 6v12L7 14.5H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1Z" strokeLinejoin="round" />
+      <path d="M15 9.5a3.5 3.5 0 0 1 0 5M17.5 7a7 7 0 0 1 0 10" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function SpeakerStopIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.7} stroke="currentColor" aria-hidden="true" {...props}>
+      <path d="M4 9.5h3L11.5 6v12L7 14.5H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1Z" strokeLinejoin="round" />
+      <rect x="14.5" y="9.5" width="5" height="5" rx="1" />
+    </svg>
+  );
+}
