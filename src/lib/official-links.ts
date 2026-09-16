@@ -387,6 +387,13 @@ const LINKS: Record<string, OfficialLink[]> = {
     { label: "Licence and application reports", href: PORTALS.manakLicence },
     { label: "Manak Online (BIS e-services portal)", href: PORTALS.manak },
   ],
+  "e-services:consumer-services": [
+    { label: "BIS Care app", href: en("bis-apps"), note: "Verify an ISI mark, hallmark, or registration number; file a complaint." },
+    { label: "Consumer Overview", href: en("consumer-overview") },
+    { label: "Consumer FAQ", href: en("consumer-overview/for-consumers-faq") },
+    { label: "Online Complaint Registration", href: en("consumer-overview/online-complaint-registration") },
+    { label: "Standards India", href: en("consumer-overview/standards-india"), note: "BIS's own bilingual consumer/technical magazine." },
+  ],
   "e-services:payments": [
     { label: "Manak Online (BIS e-services portal)", href: PORTALS.manak, note: "Fees are paid through the portal that holds the application." },
     { label: "Product Certification Fee", href: en("product-certification/product-certification-fee") },

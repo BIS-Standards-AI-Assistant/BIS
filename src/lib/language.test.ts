@@ -52,10 +52,10 @@ describe("resolveQueryLanguage", () => {
     expect(r.source).toBe("explicit");
   });
 
-  test("explicit Marathi with Devanagari text is kept as the query language, answer falls back to English", () => {
+  test("explicit Marathi with Devanagari text is kept as both the query and answer language", () => {
     const r = resolveQueryLanguage("mr", detectLanguage("मानक कोणते लागू आहे"));
     expect(r.queryLanguage).toBe("mr");
-    expect(r.answerLanguage).toBe("en");
+    expect(r.answerLanguage).toBe("mr");
   });
 
   test("no explicit choice, plain English → en/en", () => {
