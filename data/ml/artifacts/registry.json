@@ -35,6 +35,32 @@
     "status": "CANDIDATE",
     "approvedBy": null,
     "checksum": null,
-    "notes": "Trained on 65 rows (65 from a 2026-09-16 rapid-review session, 1 pre-existing) — far below the project's 300+ threshold for a meaningful reranker. Not wired into src/lib/ml/reranker.ts. Weights: exactIdMatch=1.653, titleOverlapRatio=2.298, bias=0.117."
+    "notes": "Trained on 65 rows (65 from a 2026-09-16 rapid-review session, 1 pre-existing) \u2014 far below the project's 300+ threshold for a meaningful reranker. Not wired into src/lib/ml/reranker.ts. Weights: exactIdMatch=1.653, titleOverlapRatio=2.298, bias=0.117."
+  },
+  {
+    "modelId": "intent-classifier-candidate-v1",
+    "modelName": "Fine-tuned distilbert-base-uncased for intent classification",
+    "version": "v1",
+    "artifactPath": "data/ml/artifacts/intent-classifier-v1",
+    "modelType": "trained_ml",
+    "datasetVersion": "generation-results-20rows",
+    "metrics": {
+      "trainSetAccuracy": 1.0,
+      "trainingRows": 20,
+      "numClasses": 5,
+      "classCounts": {
+        "certification_process": 2,
+        "find_applicable_standard": 13,
+        "general_information": 1,
+        "testing_requirements": 2,
+        "unclear": 2
+      },
+      "note": "Train-set fit only, not a held-out evaluation -- 20 examples across 5 classes cannot support one."
+    },
+    "createdAt": "2026-09-16T13:39:32.648011Z",
+    "status": "CANDIDATE",
+    "approvedBy": null,
+    "checksum": null,
+    "notes": "Fine-tuned offline in Python (scripts/ml-finetune/finetune_intent_classifier.py), base model distilbert-base-uncased (66M params, chosen for CPU feasibility -- no GPU in this environment, no LoRA of the 3B Ollama LLM is tractable here). NOT wired into src/lib/intent.ts or any runtime path -- this repo's own execution contract forbids a Python runtime inference service in the live app. Checkpoint exists purely as offline infrastructure/proof that the fine-tuning pipeline runs end-to-end on real data, not as a production capability."
   }
 ]
