@@ -62,5 +62,25 @@
     "approvedBy": null,
     "checksum": null,
     "notes": "Fine-tuned offline in Python (scripts/ml-finetune/finetune_intent_classifier.py), base model distilbert-base-uncased (66M params, chosen for CPU feasibility -- no GPU in this environment, no LoRA of the 3B Ollama LLM is tractable here). NOT wired into src/lib/intent.ts or any runtime path -- this repo's own execution contract forbids a Python runtime inference service in the live app. Checkpoint exists purely as offline infrastructure/proof that the fine-tuning pipeline runs end-to-end on real data, not as a production capability."
+  },
+  {
+    "modelId": "answer-style-lora-candidate-v1",
+    "modelName": "LoRA adapter on distilgpt2 for grounded-answer style",
+    "version": "v1",
+    "artifactPath": "data/ml/artifacts/answer-style-lora-v1",
+    "modelType": "trained_ml",
+    "datasetVersion": "generation-results-20rows",
+    "metrics": {
+      "trainingRows": 20,
+      "finalTrainLoss": 3.910215711593628,
+      "loraTrainableParams": 147456,
+      "loraTrainableParamsPct": 0.17969283755580304,
+      "note": "No held-out evaluation -- 20 examples is a memorization demonstration, not a generalization test."
+    },
+    "createdAt": "2026-09-16T13:58:03.016891+00:00",
+    "status": "CANDIDATE",
+    "approvedBy": null,
+    "checksum": null,
+    "notes": "LoRA fine-tune (r=8, target_modules=['c_attn']) of distilgpt2 (82M params) on 20 real query/answer pairs from this session's own live generation runs. NOT a fine-tune of llama3.2:3b (the model actually serving traffic via Ollama) -- no GPU in this environment makes that impractical, and 20 examples could not move a 3B-parameter model's behavior regardless. NOT wired into src/lib/answer.ts or any runtime path; this repo's execution contract forbids a Python runtime inference service in the live app. Exists purely as a reproducible proof that the LoRA pipeline runs end-to-end on real data, at the scale this hardware can execute."
   }
 ]

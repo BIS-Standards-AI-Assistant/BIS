@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
+import { BisChatBot } from "@/components/chat/BisChatBot";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -44,7 +45,17 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body className="min-h-full flex flex-col">
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          {children}
+          {/* Site-wide "Ask BIS Assistant" widget -- present on every page (not
+              just the homepage's inline search), for general questions about
+              standards/certification/testing. Goes through the same
+              /api/v1/chat -> runQueryPipeline path as the main search, so it
+              inherits the same guardrails (fixed refusal, relevance floor,
+              no fabricated citations) rather than being a separate, looser
+              chat surface. */}
+          <BisChatBot />
+        </LanguageProvider>
       </body>
     </html>
   );

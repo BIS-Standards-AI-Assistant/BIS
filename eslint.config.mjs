@@ -20,6 +20,12 @@ const eslintConfig = defineConfig([
     // Local Python virtualenv (gitignored) — its site-packages ship
     // minified JS that would otherwise be linted as source.
     ".venv/**",
+    ".venv-ml/**",
+    // Fine-tuned model artifacts (scripts/ml-finetune/) — tokenizer.json
+    // ships as one giant single-line JSON file that ESLint otherwise
+    // tries to parse as JS/TS, the same class of bug .venv/** guards
+    // against above.
+    "data/ml/artifacts/**",
   ]),
 ]);
 
