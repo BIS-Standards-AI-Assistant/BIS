@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { documents } from "@/db/schema";
+import { rateLimitOrNull } from "@/lib/rate-limit-http";
+
+// PRODUCTION_AUDIT.md §10: every other /api/v1/* route was rate-limited;
+// this one and two others were found without it. A single DB read is
+// cheap, but unbounded volume from a script isn't -- same generous
+// budget as /search since this is also a plain read, no LLM call.
+const RATE_LIMIT = { limit: 60, windowMs: 60_000 };
 
 /**
  * `documents.id` is a uuid column, so a malformed id makes Postgres raise
@@ -13,7 +20,10 @@ import { documents } from "@/db/schema";
  */
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const limited = rateLimitOrNull(req, "standards-id", RATE_LIMIT);
+  if (limited) return limited;
+
   const { id } = await params;
 
   // An id that cannot be a uuid cannot identify a document, so this is a

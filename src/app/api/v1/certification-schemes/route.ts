@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { loadCertificationSchemes } from "@/lib/certification-schemes";
+import { rateLimitOrNull } from "@/lib/rate-limit-http";
 
 export type { CertificationSchemeItem } from "@/lib/certification-schemes";
+
+// PRODUCTION_AUDIT.md §10: found without rate limiting alongside
+// laboratories and standards/[id].
+const RATE_LIMIT = { limit: 60, windowMs: 60_000 };
 
 /**
  * Serves the fact-checked reference dataset (data/bis-standards-dataset/
@@ -14,6 +19,9 @@ export type { CertificationSchemeItem } from "@/lib/certification-schemes";
  * — see docs/ui/UI_DATA_AND_TRUTH_RULES.md.
  */
 export async function GET(req: NextRequest) {
+  const limited = rateLimitOrNull(req, "certification-schemes", RATE_LIMIT);
+  if (limited) return limited;
+
   const q = req.nextUrl.searchParams.get("q")?.trim().toLowerCase() ?? "";
   const sector = req.nextUrl.searchParams.get("sector")?.trim().toLowerCase() ?? "";
 
