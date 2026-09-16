@@ -48,13 +48,13 @@ function features(r: Row): [number, number] {
 
 function trainLinear(rows: Row[]): { w: number[]; b: number } {
   // Least-squares via simple gradient descent — 2 features, no dependency needed.
-  let w = [0, 0];
+  const w = [0, 0];
   let b = 0;
   const lr = 0.3;
   const X = rows.map(features);
   const y = rows.map((r) => r.label);
   for (let epoch = 0; epoch < 2000; epoch++) {
-    let gw = [0, 0];
+    const gw = [0, 0];
     let gb = 0;
     for (let i = 0; i < X.length; i++) {
       const pred = w[0] * X[i][0] + w[1] * X[i][1] + b;
