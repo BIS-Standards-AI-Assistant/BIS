@@ -579,28 +579,50 @@ widened in `src/lib/language.ts`; new `MR`/`BN` refusal copy blocks in
 fixed English/Hindi pair to support N languages, with Marathi/Bengali golden
 queries added).
 
-**What was actually verified this session**: unit/deterministic-level only —
-`npm run verify` (579 vitest tests, up from 570; lint/typecheck/build all
-clean). `translate.ts`/`answer.ts` required zero code changes because they
-were already generic over `AnswerLanguage` — only `language.ts`'s
-hardcoded `=== "hi"` check and `refusal.ts`'s missing copy blocks were the
-actual gaps. **NOT verified this session**: a live run of
-`scripts/eval-multilingual.ts` against the real database and an LLM
-provider — no `DATABASE_URL` or provider credentials were available in this
-environment. The Marathi/Bengali refusal and translation-unavailable copy
-is LLM-authored, mirroring the existing Hindi strings sentence-for-sentence,
+**What was actually verified this session**: `npm run verify` (579 vitest
+tests, up from 570; lint/typecheck/build all clean), then a REAL live run
+of `scripts/eval-multilingual.ts` against the real database and OpenRouter
+(`openai/gpt-4o-mini`), once `DATABASE_URL`/`OPENROUTER_API_KEY` became
+available partway through this session. `translate.ts`/`answer.ts`
+required zero code changes because they were already generic over
+`AnswerLanguage` — only `language.ts`'s hardcoded `=== "hi"` check and
+`refusal.ts`'s missing copy blocks were the actual gaps.
+
+**Live measured results** (`data/evaluation/multilingual-parity-results.json`,
+5 golden queries × 3 languages = 15 non-English pipeline runs, English run
+once per query and compared against each):
+
+| Language | Strict parity | Partial parity | Detected | Translated | Answered in-language | Identifiers stayed Latin |
+|---|---|---|---|---|---|---|
+| Hindi | 3/5 | 5/5 | 5/5 | 5/5 | 5/5 | 5/5 |
+| Marathi | 3/5 | 4/5 | 5/5 | 5/5 | 5/5 | 5/5 |
+| Bengali | 4/5 | 5/5 | 5/5 | 5/5 | 5/5 | 5/5 |
+
+All three languages hit 5/5 on every §7 contract check that matters for
+correctness (detection, translation, answering in the right language, never
+mistranslating a citation). "Strict parity" — the exact same primary
+standard set as the English run — is weaker across all three, which
+matches the pre-existing, already-documented pattern for Hindi (translation
+rewords the query, which shifts reranking on the margins; this is not a
+Marathi/Bengali-specific regression). Marathi and Bengali perform in the
+same range as the already-shipped Hindi baseline, not worse.
+
+The Marathi/Bengali refusal and translation-unavailable copy is
+LLM-authored, mirroring the existing Hindi strings sentence-for-sentence,
 and is flagged in-code for a native-speaker spot-check before being treated
 as final — same disclosure convention as this dataset's own
-`verification_note` fields.
+`verification_note` fields. That spot-check did not happen this session
+(no native speaker available) — the live eval verifies the *pipeline*
+behaves correctly, not that every word of the copy itself is idiomatic.
 
 **Updated claim that must not be made**: "multilingual support" without
 qualifying which languages get the full translate-in/answer-in-language
 treatment (currently Hindi, Marathi, Bengali — see
 `FULLY_SUPPORTED_ANSWER_LANGUAGES` in `src/lib/language.ts`) versus which
 only get honest detection/labeling and answer in English (Tamil, Telugu,
-Gujarati, Kannada), and without qualifying that Marathi/Bengali support is
-code-complete and unit-tested but not yet live-verified against a real
-provider.
+Gujarati, Kannada). Marathi/Bengali are now live-verified against a real
+provider (table above), not just unit-tested — but the translated copy
+itself has not had a native-speaker review.
 
 ---
 

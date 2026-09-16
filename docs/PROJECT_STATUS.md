@@ -947,11 +947,23 @@ to N languages. `translate.ts` and `answer.ts` needed **zero** code changes
 were the hardcoded `hi` check in `language.ts` and the missing refusal copy.
 
 **Verified this session**: `npm run verify` green (579 vitest tests, up
-from 570; lint/typecheck/build clean).
+from 570; lint/typecheck/build clean), then a real live `npm run
+eval:multilingual` run once `DATABASE_URL`/`OPENROUTER_API_KEY` became
+available partway through the session (`openai/gpt-4o-mini` via
+OpenRouter). Results (`data/evaluation/multilingual-parity-results.json`):
 
-**NOT verified this session**: no live run against the real database/LLM
-provider — no `DATABASE_URL` or provider credentials available in this
-environment. `npm run eval:multilingual` needs to be run for real before
-Marathi/Bengali can be called measured-working the way Hindi is (§ above,
-"multilingual parity — measured"). The Marathi/Bengali copy itself is
-LLM-authored and flagged in-code for a native-speaker check.
+| Language | Strict parity | Partial parity | Detected/translated/answered-in-language/identifiers-Latin |
+|---|---|---|---|
+| Hindi | 3/5 | 5/5 | 5/5 on all four |
+| Marathi | 3/5 | 4/5 | 5/5 on all four |
+| Bengali | 4/5 | 5/5 | 5/5 on all four |
+
+Marathi/Bengali perform in the same range as the already-shipped Hindi
+baseline — every §7 contract check (detection, translation, answering in
+the right language, citations never mistranslated) is 5/5 for all three
+languages; the weaker "strict parity" number matches Hindi's own
+pre-existing, already-documented pattern (translation rewords the query,
+shifting reranking on the margins), not a new regression. The
+Marathi/Bengali copy itself is LLM-authored and still flagged in-code for
+a native-speaker check — the live eval verifies pipeline *behavior*, not
+that every word is idiomatic.
