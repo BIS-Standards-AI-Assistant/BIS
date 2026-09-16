@@ -24,6 +24,8 @@ export interface AssistantMessage {
   timestamp: string;
   standards?: { number: string | null; title: string; id?: string }[];
   scope?: "current_results" | "global";
+  /** Language `text` is actually written in (see ScopedAnswer.answerLanguage / query-pipeline's answerLanguage) — read by SpeakButton, not necessarily the UI toggle. */
+  answerLanguage?: string;
   /** Set when the request itself failed, so the UI can style it as an error. */
   failed?: boolean;
 }
@@ -127,6 +129,7 @@ export async function sendAssistantMessage({ message, standardNumbers, originalQ
 
     let messageText: string;
     let standards: { number: string | null; title: string; id?: string }[] = [];
+    const answerLanguage: string | undefined = data.answerLanguage;
 
     if (scope === "global") {
       messageText = `${data.scopeChangeNotice ?? ""}\n\n${data.answer ?? ""}`.trim();
@@ -159,6 +162,7 @@ export async function sendAssistantMessage({ message, standardNumbers, originalQ
           text: messageText,
           standards: standards.length > 0 ? standards : undefined,
           scope,
+          answerLanguage,
           timestamp: now(),
         },
       ],

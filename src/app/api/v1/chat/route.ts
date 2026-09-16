@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { runQueryPipeline } from "@/lib/query-pipeline";
 import { classifyChatIntent, resolveScopedContext, buildScopedAnswer } from "@/lib/chat-context";
+import { detectLanguage, resolveQueryLanguage } from "@/lib/language";
 import { rateLimitOrNull } from "@/lib/rate-limit-http";
 import { getDb } from "@/db";
 import { queryLogs } from "@/db/schema";
@@ -74,8 +75,16 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    // §7: a chat follow-up gets the same language treatment as the initial
+    // query — script-detected, no LLM needed for detection itself. Only
+    // buildFreeformAnswer's LLM branch can actually honor a non-English
+    // request; the deterministic template branches always answer "en"
+    // regardless (see ScopedAnswer.answerLanguage's doc comment) — the
+    // response's answerLanguage always reflects which really happened.
+    const { answerLanguage: requestedLanguage } = resolveQueryLanguage(undefined, detectLanguage(message));
+
     const scoped = await resolveScopedContext(standardNumbers);
-    const scopedAnswer = await buildScopedAnswer(subIntent, originalQuery, scoped);
+    const scopedAnswer = await buildScopedAnswer(subIntent, originalQuery, scoped, requestedLanguage);
     await logChatTurn({
       message,
       subIntent,
@@ -89,6 +98,7 @@ export async function POST(req: NextRequest) {
       answer: scopedAnswer.answer,
       evidence: scopedAnswer.evidence,
       limitations: scopedAnswer.limitations,
+      answerLanguage: scopedAnswer.answerLanguage,
       resolvedStandards: scoped.map((s) => s.standardNumber),
     });
   } catch (err) {
