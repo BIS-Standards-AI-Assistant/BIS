@@ -494,14 +494,6 @@
     "latencyMs": 10088
   },
   {
-    "id": "Q05",
-    "query": "IS 302 (Part 2/Sec 6):2009",
-    "source": "live_this_run",
-    "httpStatus": 500,
-    "error": "This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.",
-    "latencyMs": 7877
-  },
-  {
     "id": "Q06",
     "query": "IS 302 (Part 2/Sec 26):2014",
     "source": "live_this_run",
@@ -5061,5 +5053,383 @@
     "httpStatus": 200,
     "error": null,
     "latencyMs": 6456
+  },
+  {
+    "id": "Q05",
+    "query": "IS 302 (Part 2/Sec 6):2009",
+    "source": "live_this_run",
+    "response": {
+      "isRelevant": true,
+      "answer": "That standard was identified, but its authoritative document is not currently indexed in BIS Standards Navigator, so its requirements cannot be quoted here. Check the official catalogue at www.bis.gov.in or the BIS Standards portal for the full standard.",
+      "query": "IS 302 (Part 2/Sec 6):2009",
+      "language": "en",
+      "answerLanguage": "en",
+      "translated": false,
+      "translationMethod": "skipped-not-needed",
+      "latencyMs": 2188,
+      "outcome": "refused_not_in_database",
+      "intent": "find_applicable_standard",
+      "interpretation": {
+        "product": null,
+        "material": null,
+        "useCase": null,
+        "targetUser": null,
+        "sector": null,
+        "certificationRequested": false,
+        "testingRequested": false
+      },
+      "clarificationNeeded": [
+        "SAFETY GLASS FOR ROAD TRANSPORT (IS 2553 (Part 2):2019)",
+        "Safety of Toys (IS 9873 (Part 1):2019)"
+      ],
+      "recommendations": [
+        {
+          "standardNumber": "IS 2553 (Part 2):2019",
+          "title": "SAFETY GLASS FOR ROAD TRANSPORT",
+          "relevanceScore": 0.6,
+          "groundingState": "insufficient_evidence",
+          "reason": "The available evidence does not clearly establish that this standard applies to the query.",
+          "coverage": {
+            "product": "unknown",
+            "material": "unknown",
+            "application": "unknown",
+            "targetUser": "unknown",
+            "sector": "unknown",
+            "testing": "unknown",
+            "certification": "unknown",
+            "identifier": "not_covered",
+            "overallCoverageRatio": 0
+          },
+          "applicability": {
+            "state": "INSUFFICIENT_EVIDENCE",
+            "reason": "The available evidence does not clearly establish that this standard applies to the query.",
+            "materialConflict": false
+          },
+          "recommendationStatus": "INSUFFICIENT_EVIDENCE",
+          "primaryRecommendation": false,
+          "evidence": [
+            {
+              "chunkId": "IS 2553 (Part 2):2019-11",
+              "documentId": "is-2553-part-2-2019",
+              "document": "SAFETY GLASS FOR ROAD TRANSPORT",
+              "standardNumber": "IS 2553 (Part 2):2019",
+              "section": "ANNEX D",
+              "clause": "5.4.2",
+              "page": null,
+              "text": "each type -- 5.4.2 Secondary image separation test 6.13, Table 1, Table 1A IS 2553 (Part 2) S Four Once in two years for each type -- 5.4.3 Head-form test 6.5, Table 1 IS 2553 (Part 2) S Eight Once in two years for each type -- 5.4.4 2260 g Ball test 6.4, Table 1, Table 1A IS 2553 (Part 2) S Twelve Once in two years for each type and nominal thickness -- 5.4.5 227 g Ball test 6.3, Table 1, Table 1A IS 2553 (Part 2) R Ten Once in a month for each type and nominal thickness -- 5.5 Additional Requirements applicable to Panes 5.5.1 Requirements applicable only to uniformly Toughened Glass Panes 5.5.1.1 Fragmentation test 6.2, Table 1, Table 1A IS 2553 (Part 2) S Four Once in six months for each type -- 5.5.1.2 227 g Ball test 6.3, Table 1, Table 1A IS 2553 (Part 2) S Six Once in a month for each type and nominal thickness -- 5.5.2 Requirements applicable only to Laminated-Glass and Glass-Plastic Panes 5.5.2.1 227 g Ball test 6.3, Table 1, Table 1A IS 2553 (Part 2) R Eight Once in a month for each type and nominal thickness -- PM/ IS 2553 (Part 2)/ 5/ October 2023 10 5.5.3 Requirements applicable only to Double-Glazed Units 5.5.3.1 Individual components 5.5.3.1, Table 1 IS 2553 (Part 2) As outlined in the SIT for that type of glazing",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-IS-2553-2.pdf"
+            },
+            {
+              "chunkId": "IS 2553 (Part 2):2019-10",
+              "documentId": "is-2553-part-2-2019",
+              "document": "SAFETY GLASS FOR ROAD TRANSPORT",
+              "standardNumber": "IS 2553 (Part 2):2019",
+              "section": "ANNEX D",
+              "clause": "6.10",
+              "page": null,
+              "text": "Temperature Changes 6.10, Table 1, Table 1A IS 2553 (Part 2) S Two Once in six months for each type -- 5.2.2 Resistance to fire 6.14, Table 1, Table 1A IS 2553 (Part 2) S Five Once in six months for each type -- 5.2.3 Resistance to chemicals 6.15, Table 1, Table 1A IS 2553 (Part 2) S Four Once in six months for each type -- 5.3 Additional Requirements applicable to All Laminated-Glass and All Glazing faced with Plastics, Glass Plastics 5.1.2 Resistance to abrasion 6.6, Table 1, Table 1A IS 2553 (Part 2) S Three Once in six months for each type -- 5.3.1 Resistance to Radiation 6.8, 6.11, Table 1, Table 1A IS 2553 (Part 2) S Three Once in two years for each type -- PM/ IS 2553 (Part 2)/ 5/ October 2023 9 5.3.2 Resistance to High Temperature 6.7, Table 1, Table 1A IS 2553 (Part 2) S Three Once in two years for each type -- 5.3.3 Resistance to humidity 6.9, Table 1, Table 1A IS 2553 (Part 2) S Three Once in six months for each type -- 5.4 Additional Requirements applicable to Windscreens 5.1.2 Resistance to abrasion 6.6, Table 1, Table 1A IS 2553 (Part 2) S Three Once in six months for each type -- 5.4.1 Optical Distortion Test 6.12, Table 1, Table 1A IS 2553 (Part 2) S Four Once in two years for",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-IS-2553-2.pdf"
+            },
+            {
+              "chunkId": "IS 2553 (Part 2):2019-12",
+              "documentId": "is-2553-part-2-2019",
+              "document": "SAFETY GLASS FOR ROAD TRANSPORT",
+              "standardNumber": "IS 2553 (Part 2):2019",
+              "section": "ANNEX D",
+              "clause": "5.5.3.2",
+              "page": null,
+              "text": "5.5.3.2 Head-form test 6.5, Table 1, Table 1A IS 2553 (Part 2) S Twelve Once in two years for each type -- 5.5.2.1 227 g Ball test 6.3, Table 1 IS 2553 (Part 2) R Eight Once in a month for each type and nominal thickness -- 5.6 Additional requirements specific to Rigid Plastic Glazing 5.1.2 Resistance to abrasion 6.6, Table 1, Table 1A IS 2553 (Part 2) S Three Once in six months for each type -- 5.6.1 Head-form test 6.16, Table 1, Table 1A IS 2553 (Part 2) S Six Once in two years for each type -- 5.6.2 Mechanical Strength test- 227g Ball test 6.3, Table 1, Table 1A IS 2553 (Part 2) R Ten Once in a month for each type and nominal thickness -- 5.6.2.5 227g Ball Test at –18° ± 2°C 6.3, Table 1, Table 1A IS 2553 (Part 2) S Ten Once in six months for each type and nominal thickness -- 5.6.3 Flexibility and Fold test 6.17, Table 1, Table 1A IS 2553 (Part 2) R One Once in a month for each type -- 5.6.4 Weathering 6.18, Table 1, Table 1A IS 2553 (Part 2) S Three Once in two years for each type -- 5.6.5 Cross-cut 6.19, Table 1, Table 1A IS 2553 (Part 2) R One Once in a month for each type -- 5.7 Additional requirements specific to Flexible Plastic Glazing 5.7.1 227g Ball Test at 20° ± 5°C 6.3, Table 1 IS 2553 (Part 2) R Ten Once in a month for",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-IS-2553-2.pdf"
+            },
+            {
+              "chunkId": "IS 2553 (Part 2):2019-7",
+              "documentId": "is-2553-part-2-2019",
+              "document": "SAFETY GLASS FOR ROAD TRANSPORT",
+              "standardNumber": "IS 2553 (Part 2):2019",
+              "section": "ANNEX C",
+              "clause": "5.4.1",
+              "page": null,
+              "text": "9) 5.4.1 Optical Distortion Test Optical Distortion Tester Consisting projector, rasters and supporting stand as per Cl. 6.12 10) 5.4.2 Secondary image separation test Apparatus for image separation test as mentioned in Cl. 6.13 11) 5.4.3 5.5.3.2 5.6.1, 5.8.3 Head-form test Head form Supporting Fixture PM/ IS 2553 (Part 2)/ 5/ October 2023 12) 5.4.4 2.260 g Ball test Solid Hardened Steel ball, set up as per Cl. 6.4 13) 5.4.5, 5.5.1.2, 5.5.2.1, 5.6.2, 5.7.1 227 g Ball test Hardened Steel ball fixture, set up as per Cl. 6.3 14) 5.5.1.1, 5.8.2 Fragmentation test Spring Loaded Centre punch or hammer, Adhesive tape, set up as per Cl. 6.3 15) 5.6.3 5.7.2 Flexibility and Fold Thermometer, Hygrometer 16) 5.6.4, 5.7.4 Weathering Long-arc xenon lamp as per Cl. 6.18 17) 5.6.5 Cross-cut Cutting tool with 6 blades set, Magnifying glass The above list is indicative only and may not be treated as exhaustive PM/ IS 2553 (Part 2)/ 5/ October 2023 7",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-IS-2553-2.pdf"
+            },
+            {
+              "chunkId": "IS 2553 (Part 2):2019-13",
+              "documentId": "is-2553-part-2-2019",
+              "document": "SAFETY GLASS FOR ROAD TRANSPORT",
+              "standardNumber": "IS 2553 (Part 2):2019",
+              "section": "ANNEX D",
+              "clause": "5.7.2",
+              "page": null,
+              "text": "each type and nominal thickness -- PM/ IS 2553 (Part 2)/ 5/ October 2023 11 5.7.2 227g Ball Test at -18° ± 2°C 6.3, Table 1 IS 2553 (Part 2) S Ten Once in six months for each type and nominal thickness -- 5.7.3 Flexibility and Fold test 6.17, Table 1 IS 2553 (Part 2) R One Once in a month for each type -- 5.7.4 Weathering test 6.18, Table 1, Table 1A IS 2553 (Part 2) S Three Once in two years for each type -- 5.8 Additional requirements specific to Toughened glass windscreens for Agricultural Tractor 5.8.2 Fragmentation test 6.2.1, 6.2.2.1, 6.2.2.2, 6.2.2.4, Table 1A IS 2553 (Part 2) S Six Once in six months for each type 5.8.3 Head-form test 6.5.3, Table 1A IS 2553 (Part 2) S Four Once in two years for each type Note-1: Sub-contracting is permitted to a laboratory recognized by the Bureau or Government laboratories empanelled by the Bureau. Note-2: The control unit and levels of control as decided by the Bureau are obligatory to which the licensee shall comply with. Note-3: Type of safety glass is defined at para 1 of Grouping Guidelines PM/ IS 2553 (Part 2)/ 5/ October 2023 12",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-IS-2553-2.pdf"
+            },
+            {
+              "chunkId": "IS 2553 (Part 2):2019-14",
+              "documentId": "is-2553-part-2-2019",
+              "document": "SAFETY GLASS FOR ROAD TRANSPORT",
+              "standardNumber": "IS 2553 (Part 2):2019",
+              "section": "Annex-E",
+              "clause": "3.7",
+              "page": null,
+              "text": "Possible tests in a day i) Thickness measurement (Cl. 3.7) ii) Marking Cl. 4.1 iii) Light transmittance test (Cl. 5.1.1) iv) Thickness (Cl. 3.7) v) Resistance to temperature change (Cl. 5.2.1) vi) Resistance to High Temperature (Cl. 5.3.2) vii) Optical Distortion (Cl. 5.4.1) viii) Secondary Image Separation (Cl. 5.4.2) ix) Fragmentation Test (Cl. 5.5.1.1) x) 227g Ball (Cl. 5.5.1.2) Note: Fragmentation test shall be done on all applicable varieties available during surveillance inspection. PM/ IS 2553 (Part 2)/ 5/ October 2023 13",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-IS-2553-2.pdf"
+            }
+          ]
+        },
+        {
+          "standardNumber": "IS 9873 (Part 1):2019",
+          "title": "Safety of Toys",
+          "relevanceScore": 0.4666336278439359,
+          "groundingState": "insufficient_evidence",
+          "reason": "The available evidence does not clearly establish that this standard applies to the query.",
+          "coverage": {
+            "product": "unknown",
+            "material": "unknown",
+            "application": "unknown",
+            "targetUser": "unknown",
+            "sector": "unknown",
+            "testing": "unknown",
+            "certification": "unknown",
+            "identifier": "not_covered",
+            "overallCoverageRatio": 0
+          },
+          "applicability": {
+            "state": "INSUFFICIENT_EVIDENCE",
+            "reason": "The available evidence does not clearly establish that this standard applies to the query.",
+            "materialConflict": false
+          },
+          "recommendationStatus": "INSUFFICIENT_EVIDENCE",
+          "primaryRecommendation": false,
+          "evidence": [
+            {
+              "chunkId": "IS 9873 (Part 1):2019-2",
+              "documentId": "is-9873-part-1-2019",
+              "document": "Safety of Toys",
+              "standardNumber": "IS 9873 (Part 1):2019",
+              "section": null,
+              "clause": null,
+              "page": null,
+              "text": "to Mechanical and Physical Properties NIL 2. IS 9873 (Part 2) : 2017 Safety of Toys Part 2 Flammability NIL 3. IS 9873 (Part 3) : 2020 Safety of Toys Part 3 Migration of Certain Elements NIL 4. IS 9873 (Part 4) : 2017 Safety of Toys Part 4 Swings, Slides and Similar Activity Toys for Indoor and Outdoor Family Domestic Use 01 5. IS 9873 (Part 7) : 2017 Safety of Toys Part 7 Requirements and Test Methods for Finger Paints NIL 6. IS 9873 (Part 9) :2017 Safety of Toys Part 9 Certain Phthalates Esters in Toys and Children’s Products NIL PM/ 9873/11 Oct 2023 2 7. IS 15644:2006 Safety of Electric Toys 1 8 . नमूना वदशावनदेश /Sampling Guidelines: (In a single operative year, one factory sample and two market samples of electric and non-electric toys per license shall be drawn for testing in third party lab) a) कच्चामाि Raw material : All materials shall be visually clean and free from infestation. The materials shall be assessed visually by normal corrected vision rather than under magnification. (Cl4.3 of IS 9873 (Part 1):2019) b) समूहीकरण वदशावनदेश Grouping Guidelines : Please refer ANNEX – A c) नमूने का आकार Sample Size : 03-10 pieces. However, depending on the size of toys, the",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-9873-Oct-2023.pdf"
+            },
+            {
+              "chunkId": "IS 9873 (Part 1):2019-45",
+              "documentId": "is-9873-part-1-2019",
+              "document": "Safety of Toys",
+              "standardNumber": "IS 9873 (Part 1):2019",
+              "section": "ANNEX C",
+              "clause": "4.8",
+              "page": null,
+              "text": "101(Pt.1/ Sec 8) S -do- -do- -do- 4.8 Binding agents, extenders, humectants and surfactants 4.8 4.1 Annex- F IS9873 (Part7) S -do- -do- -do- 4.9 N- Nitrosamine s 4.9 Annex- A IS9873 (Part7) EN 71- 12 S -do- -do- -do- 4.10 Container 4.10 Annex- A IS9873 (Part7) S -do- -do- -do- A.11 Labelling Guidelines Annex- A -do- R Each Package of finger paint Each Package of finger paint PART F: LEVELS OF CONTROL FOR CERTAIN PHTHALATES ESTERS IN TOYS AND CHILDREN’SPRODUCTS AS PER IS 9873 (PART 9):2017 (1) (2) (3) Test Details Test equipment requiremen t R: required (or) S: Sub- contracting permitted Levels of Control Cl. Requirement Test Method No. of Sample Frequency Remarks Clause Referenc e 3 Maximum acceptable levels of phthalates i) Vinyl in toys or childcare articles IS9873 (Part6) S One sample per series Once in 12 months Also to be tested whenever supplier of material PM/ 9873/11 Oct 2023 38 changes ii) Vinyl in any part of the toy or childcare article that can be placed in mouth of child under 4 years ofage IS9873 (Part6) S -do- -do- -do- PART G: LEVELS OF CONTROL FOR SAFETY OF ELECTRIC TOYSAS PER IS 15644:2006 (1) (2) (3) Test Details Test equipment requiremen t R: required",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-9873-Oct-2023.pdf"
+            },
+            {
+              "chunkId": "IS 9873 (Part 1):2019-3",
+              "documentId": "is-9873-part-1-2019",
+              "document": "Safety of Toys",
+              "standardNumber": "IS 9873 (Part 1):2019",
+              "section": null,
+              "clause": null,
+              "page": null,
+              "text": "certification officer shall consult with the lab and ensure that sufficient quantity required for complete testing is sent to lab. (Samples to be fully packaged and labeled) 9. परीक्षण उपकरणोों की सूची List of Test Equipment : Please refer ANNEX –B 10. वनरीक्षण और परीक्षण की स्कीम Scheme of Inspection and Testing : Please refer ANNEX –C 11. एक वदन में सोंिावित परीक्षण /Possible tests in a day : All possible applicable tests as per IS 9873 (Part 1) and IS 15644 12. लाइसेंस का दायरा /Scope of the Licence : Licence is granted for use of BIS Standard Mark on toys for safety requirements as per the applicable Indian Standards given below * Type Descrip tion of toy Category No. and Name Sub- category No. and Name Input source for electric toy** Starting Age Series No.# Applicable primary standard Applicable Secondary standard Non electric Rattle Category A- Toys for sensorimot or activities — First age Subcateg ory 1 - Rattles and rings NA 0 months + S01 IS 9873 Part 1 IS 9873 Part 2, 3 and 9 Ring -do- -do- NA -do- *Details in the table are given for illustration. Also see sampling guidelines at Annex-A ** Input source for electric toys - battery operated, transformer operated or dual supply",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-9873-Oct-2023.pdf"
+            },
+            {
+              "chunkId": "IS 9873 (Part 1):2019-64",
+              "documentId": "is-9873-part-1-2019",
+              "document": "Safety of Toys",
+              "standardNumber": "IS 9873 (Part 1):2019",
+              "section": "ANNEX C",
+              "clause": null,
+              "page": null,
+              "text": "Indian Standards under Scheme I of Schedule II of BIS (Conformity Assessment) Regulations, 2018, I hereby declare the following: 1. I am applying for grant of licence/addition in scope of licence (strike out whichever is not applicable) for the following toys: Type Descripti on of toy Category No. and Name Sub- category No. and Name Input source for electric toy** Starting Age Series No.# Applicable primary standard Applicable Secondary standard Non electric Rattle Category A- Toys for sensorimotor activities — First age Subcateg ory 1- Rattles and rings NA 0 months+ S01 IS 9873 Part 1 IS 9873 Part 2, 3 and 9 Ring -do- -do- NA -do- *Details in the table are given for illustration. Also see sampling guidelines at Annex-A ** Input source for electric toys - battery operated, transformer operated or dual supply #Details of models contained in each series with starting ages etc. shall be declared by manufacturer to BIS separately and BIS shall endorse the series wise details of models separately in the licence document as",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-9873-Oct-2023.pdf"
+            },
+            {
+              "chunkId": "IS 9873 (Part 1):2019-67",
+              "documentId": "is-9873-part-1-2019",
+              "document": "Safety of Toys",
+              "standardNumber": "IS 9873 (Part 1):2019",
+              "section": "ANNEX-I",
+              "clause": null,
+              "page": null,
+              "text": "electric toy** Starting Age Series No.# Applicable primary standard Applicable Secondary standard Non electric Rattle Category A- Toys for sensorimotor Subcateg ory 1- Rattles NA 0 months+ S01 IS 9873 Part 1 IS 9873 Part 2, 3 and 9 activities — First age and rings Ring -do- -do- NA -do- *Details in the table are given for illustration. Also see sampling guidelines at Annex-A ** Input source for electric toys - battery operated, transformer operated or dual supply #Details of models contained in each series with starting ages etc. shall be declared by manufacturer to BIS separately and BIS shall endorse the series wise details of models separately in the licence document as",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-9873-Oct-2023.pdf"
+            },
+            {
+              "chunkId": "IS 9873 (Part 1):2019-5",
+              "documentId": "is-9873-part-1-2019",
+              "document": "Safety of Toys",
+              "standardNumber": "IS 9873 (Part 1):2019",
+              "section": "ANNEX A",
+              "clause": null,
+              "page": null,
+              "text": "GROUPING/SAMPLING GUIDELINES 1. For the purpose of certification, toys have been classified into 2 types. For each type, one primary standard shall apply against which licence would be granted and the other standards against which testing may also be required to be done shall be taken as secondary standards. However, testing will be considered by the lab based on both the primary and secondary standards applicable. The classification is as follows: Sl. No. Type Primary Standard Applicable Secondary Standards (As Applicable) 1 Non Electric Toys IS 9873 Part 1 IS 9873 Parts 2, 3,4, 7 and 9 2 Electric Toys IS 15644 IS 9873 Parts 1, 2, 3,4, 7 and 9 2. Further, based on their specific purpose and function, toys have also been classified into 7 Categories and 146 sub-categories as per APPENDIX I (based on IS 9873 (Part8):2019). 3. For the purpose of certification, all varieties of toys of similar design 1 , made from the same materials 2 and covered under a single sub-category, shall be considered as a series (group of varieties). 4. Accordingly, the following sampling or grouping guidelines shall be followed for",
+              "sourceUrl": "https://www.bis.gov.in/wp-content/uploads/2023/10/PM-9873-Oct-2023.pdf"
+            }
+          ]
+        }
+      ],
+      "certification": {
+        "available": false,
+        "notes": null
+      },
+      "testing": {
+        "available": false,
+        "notes": null
+      },
+      "complianceMap": {
+        "standards": [],
+        "certifications": [],
+        "testing": [],
+        "laboratories": [
+          {
+            "name": "AES Laboratories (P) Ltd",
+            "city": "Noida",
+            "state": "U.P.",
+            "lat": 29.27818644556071,
+            "lng": 74.77260564503902,
+            "testingCapabilities": [
+              "Electrical Safety & Performance",
+              "Mechanical Strength"
+            ]
+          },
+          {
+            "name": "Alpha Test House Private Limited",
+            "city": "New Delhi",
+            "state": "Delhi",
+            "lat": 28.6139,
+            "lng": 77.209,
+            "testingCapabilities": [
+              "Electrical Safety & Performance",
+              "Mechanical Strength"
+            ]
+          },
+          {
+            "name": "Anacon Laboratories Pvt Ltd",
+            "city": "Nagpur",
+            "state": "Maharashtra",
+            "lat": 19.076,
+            "lng": 72.8777,
+            "testingCapabilities": [
+              "Electrical Safety & Performance",
+              "Mechanical Strength"
+            ]
+          },
+          {
+            "name": "Arbro Pharmaceutical Private Ltd",
+            "city": "New Delhi",
+            "state": "Delhi",
+            "lat": 28.6139,
+            "lng": 77.209,
+            "testingCapabilities": [
+              "Electrical Safety & Performance",
+              "Mechanical Strength"
+            ]
+          },
+          {
+            "name": "Ashwamedh Engineers & Consultants",
+            "city": "Nasik",
+            "state": "Maharashtra",
+            "lat": 19.076,
+            "lng": 72.8777,
+            "testingCapabilities": [
+              "Electrical Safety & Performance",
+              "Mechanical Strength"
+            ]
+          },
+          {
+            "name": "Automotive Research Association of India (ARAI)",
+            "city": "Pune",
+            "state": "Maharashtra",
+            "lat": 19.076,
+            "lng": 72.8777,
+            "testingCapabilities": [
+              "Electrical Safety & Performance",
+              "Mechanical Strength"
+            ]
+          },
+          {
+            "name": "AVON food Lab",
+            "city": "Delhi",
+            "state": "Delhi",
+            "lat": 28.6139,
+            "lng": 77.209,
+            "testingCapabilities": [
+              "Electrical Safety & Performance",
+              "Mechanical Strength"
+            ]
+          },
+          {
+            "name": "Atharva Laboratories. Noida",
+            "city": "Unknown",
+            "state": "U.P.",
+            "lat": 27.506857804837914,
+            "lng": 76.19838677483234,
+            "testingCapabilities": [
+              "Electrical Safety & Performance",
+              "Mechanical Strength"
+            ]
+          },
+          {
+            "name": "Alpha Test House Services LLP",
+            "city": "Mohali",
+            "state": "Pubjab",
+            "lat": 24.397290765620767,
+            "lng": 74.9234079758073,
+            "testingCapabilities": [
+              "Electrical Safety & Performance",
+              "Mechanical Strength"
+            ]
+          },
+          {
+            "name": "Aforeserve Labs Private Limited",
+            "city": "Gurgaon",
+            "state": "Haryana",
+            "lat": 25.347503034605566,
+            "lng": 78.2703310002607,
+            "testingCapabilities": [
+              "Electrical Safety & Performance",
+              "Mechanical Strength"
+            ]
+          }
+        ]
+      },
+      "nextSteps": [],
+      "confidence": "low",
+      "engineConfidence": {
+        "score": 0.6,
+        "band": "low",
+        "groundingState": "insufficient_evidence",
+        "supportingSignals": [
+          "Evidence spans 6 distinct clauses, not one clause repeated.",
+          "No conflicting or superseded-standard signals detected."
+        ],
+        "limitingSignals": [
+          "Query named a standard identifier that does not match this candidate.",
+          "Evidence does not address: identifier."
+        ]
+      },
+      "conflicts": [],
+      "limitations": [
+        "The identified standard's document is not in the indexed corpus.",
+        "Query named a standard identifier that does not match this candidate.",
+        "Evidence does not address: identifier.",
+        "The query mentioned a specific standard identifier that does not match any found standard.",
+        "The evidence does not address the identifier IS 302 (Part 2/Sec 6):2009."
+      ],
+      "knowledgeBoundary": {
+        "state": "NOT_IN_DATABASE",
+        "answerable": false,
+        "knowledgeGap": true,
+        "reason": "A standard was identified, but the authoritative document or the specific technical detail requested is not currently indexed in the Navigator's knowledge base."
+      },
+      "referenceEntry": null,
+      "graphNeighbors": [],
+      "toolEvidence": null
+    },
+    "httpStatus": 200,
+    "error": null,
+    "latencyMs": 2286
   }
 ]

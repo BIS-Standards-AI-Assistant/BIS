@@ -98,22 +98,6 @@
     "notes": []
   },
   {
-    "id": "Q05",
-    "category": "part_section",
-    "ran": false,
-    "standardCorrect": null,
-    "falseStandardDetected": false,
-    "groundingCorrect": null,
-    "confidenceCorrect": null,
-    "citationsChecked": 0,
-    "citationsValid": 0,
-    "policyViolation": false,
-    "failureMode": "INFRASTRUCTURE_FAILURE",
-    "notes": [
-      "Not run / errored: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
-    ]
-  },
-  {
     "id": "Q06",
     "category": "part_section",
     "ran": true,
@@ -404,6 +388,35 @@
       "Invalid citation (chunk IS 15410): chunkId is not a UUID: \"IS 15410:2003-5\"",
       "Invalid citation (chunk IS 15410): chunkId is not a UUID: \"IS 15410:2003-2\"",
       "Invalid citation (chunk IS 15410): chunkId is not a UUID: \"IS 15410:2003-6\""
+    ]
+  },
+  {
+    "id": "Q05",
+    "category": "part_section",
+    "ran": true,
+    "standardCorrect": false,
+    "falseStandardDetected": false,
+    "groundingCorrect": null,
+    "confidenceCorrect": false,
+    "citationsChecked": 12,
+    "citationsValid": 0,
+    "policyViolation": false,
+    "failureMode": "POLICY_FAILURE",
+    "notes": [
+      "Expected no recommendations, got IS 2553 (Part 2):2019,IS 9873 (Part 1):2019",
+      "Expected confidence === none, got low",
+      "Invalid citation (chunk IS 2553 ): chunkId is not a UUID: \"IS 2553 (Part 2):2019-11\"",
+      "Invalid citation (chunk IS 2553 ): chunkId is not a UUID: \"IS 2553 (Part 2):2019-10\"",
+      "Invalid citation (chunk IS 2553 ): chunkId is not a UUID: \"IS 2553 (Part 2):2019-12\"",
+      "Invalid citation (chunk IS 2553 ): chunkId is not a UUID: \"IS 2553 (Part 2):2019-7\"",
+      "Invalid citation (chunk IS 2553 ): chunkId is not a UUID: \"IS 2553 (Part 2):2019-13\"",
+      "Invalid citation (chunk IS 2553 ): chunkId is not a UUID: \"IS 2553 (Part 2):2019-14\"",
+      "Invalid citation (chunk IS 9873 ): chunkId is not a UUID: \"IS 9873 (Part 1):2019-2\"",
+      "Invalid citation (chunk IS 9873 ): chunkId is not a UUID: \"IS 9873 (Part 1):2019-45\"",
+      "Invalid citation (chunk IS 9873 ): chunkId is not a UUID: \"IS 9873 (Part 1):2019-3\"",
+      "Invalid citation (chunk IS 9873 ): chunkId is not a UUID: \"IS 9873 (Part 1):2019-64\"",
+      "Invalid citation (chunk IS 9873 ): chunkId is not a UUID: \"IS 9873 (Part 1):2019-67\"",
+      "Invalid citation (chunk IS 9873 ): chunkId is not a UUID: \"IS 9873 (Part 1):2019-5\""
     ]
   }
 ]
