@@ -29,7 +29,7 @@ export const SPEECH_LOCALES: Record<string, string> = {
  * docs/AI_ML_STATUS_REPORT.md §26. Keeping these two facts visibly separate
  * is the point; conflating them would overstate what the system does.
  */
-const QUERY_UNDERSTOOD_LANGUAGES = new Set(["en", "hi"]);
+const QUERY_UNDERSTOOD_LANGUAGES = new Set(["en", "hi", "mr", "bn"]);
 
 export interface VoiceLanguageOption {
   code: string;

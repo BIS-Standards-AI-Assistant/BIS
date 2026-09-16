@@ -568,6 +568,40 @@ No formal benchmarking exists. What can be reported:
 
 **Claim that must not be made**: "multilingual support" without immediately qualifying it as "UI chrome only, English/Hindi, does not extend to search or answers."
 
+**UPDATE (2026-09-16)**: the paragraph above describes an earlier state of this
+repo and is now stale — a real, non-UI-chrome multilingual query pipeline
+exists (`src/lib/language.ts` script detection, `src/lib/translate.ts`
+translate-before-retrieval, `src/lib/refusal.ts` localized fixed refusals,
+`answer.ts`'s `languageInstruction`). This session extended it from
+English+Hindi to also include **Marathi and Bengali** (`AnswerLanguage`
+widened in `src/lib/language.ts`; new `MR`/`BN` refusal copy blocks in
+`src/lib/refusal.ts`; `scripts/eval-multilingual.ts` restructured from a
+fixed English/Hindi pair to support N languages, with Marathi/Bengali golden
+queries added).
+
+**What was actually verified this session**: unit/deterministic-level only —
+`npm run verify` (579 vitest tests, up from 570; lint/typecheck/build all
+clean). `translate.ts`/`answer.ts` required zero code changes because they
+were already generic over `AnswerLanguage` — only `language.ts`'s
+hardcoded `=== "hi"` check and `refusal.ts`'s missing copy blocks were the
+actual gaps. **NOT verified this session**: a live run of
+`scripts/eval-multilingual.ts` against the real database and an LLM
+provider — no `DATABASE_URL` or provider credentials were available in this
+environment. The Marathi/Bengali refusal and translation-unavailable copy
+is LLM-authored, mirroring the existing Hindi strings sentence-for-sentence,
+and is flagged in-code for a native-speaker spot-check before being treated
+as final — same disclosure convention as this dataset's own
+`verification_note` fields.
+
+**Updated claim that must not be made**: "multilingual support" without
+qualifying which languages get the full translate-in/answer-in-language
+treatment (currently Hindi, Marathi, Bengali — see
+`FULLY_SUPPORTED_ANSWER_LANGUAGES` in `src/lib/language.ts`) versus which
+only get honest detection/labeling and answer in English (Tamil, Telugu,
+Gujarati, Kannada), and without qualifying that Marathi/Bengali support is
+code-complete and unit-tested but not yet live-verified against a real
+provider.
+
 ---
 
 ## 27. Current architecture diagram

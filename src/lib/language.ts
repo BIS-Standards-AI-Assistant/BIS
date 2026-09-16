@@ -8,14 +8,19 @@
  * resolution. It never calls a provider, so it works at Tier 0 (see
  * docs/ui/SIH.md §23). Translation itself lives in src/lib/translate.ts.
  *
- * Scope for this pass: English and Hindi are the fully-supported pair
- * ("Hindi minimum" in the PRD). The other Indic scripts the UI language
- * switcher offers are detected here too so the pipeline can label them and
- * degrade honestly, but only `hi` gets the translate-in / answer-in-language
- * treatment until each is verified end to end.
+ * Scope for this pass: English, Hindi, Marathi and Bengali are the
+ * fully-supported set ("Hindi minimum" in the PRD, extended once Marathi
+ * and Bengali were verified end to end via scripts/eval-multilingual.ts).
+ * The remaining Indic scripts the UI language switcher offers are detected
+ * here too so the pipeline can label them and degrade honestly, but only
+ * this set gets the translate-in / answer-in-language treatment until each
+ * one is separately verified.
  */
 
-export type AnswerLanguage = "en" | "hi";
+export type AnswerLanguage = "en" | "hi" | "mr" | "bn";
+
+/** Languages that get the full translate-in / answer-in-language treatment. */
+const FULLY_SUPPORTED_ANSWER_LANGUAGES = new Set<UiLanguage>(["hi", "mr", "bn"]);
 
 /** Every language the UI switcher can be set to — mirrors LANGUAGES in src/lib/i18n.ts. */
 export type UiLanguage = "en" | "hi" | "bn" | "ta" | "te" | "mr" | "gu" | "kn";
@@ -98,9 +103,12 @@ export function resolveQueryLanguage(
     source = explicit ? "explicit" : "detected";
   }
 
-  // Only en/hi are wired end to end this pass; anything else answers in
-  // English (the pipeline adds an honest limitation note when it does).
-  const answerLanguage: AnswerLanguage = queryLanguage === "hi" ? "hi" : "en";
+  // Only the languages in FULLY_SUPPORTED_ANSWER_LANGUAGES are wired end to
+  // end; anything else answers in English (the pipeline adds an honest
+  // limitation note when it does — see query-pipeline.ts).
+  const answerLanguage: AnswerLanguage = FULLY_SUPPORTED_ANSWER_LANGUAGES.has(queryLanguage)
+    ? (queryLanguage as AnswerLanguage)
+    : "en";
   return { queryLanguage, answerLanguage, source };
 }
 

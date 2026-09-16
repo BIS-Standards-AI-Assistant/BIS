@@ -935,3 +935,23 @@ The relevance floor is calibrated for the current corpus and embedding
 configuration only. After any corpus or embedding change, re-run
 `npm run eval:refusal-threshold` and check the recorded numbers in
 `data/evaluation/refusal-calibration.json` before trusting the floor.
+
+## Multilingual: Marathi + Bengali extension (2026-09-16)
+
+Extended the fully-supported answer-language set from English+Hindi to also
+include Marathi and Bengali — `src/lib/language.ts`'s `AnswerLanguage`
+widened, `src/lib/refusal.ts` gained real `MR`/`BN` copy blocks,
+`scripts/eval-multilingual.ts` restructured from a fixed English/Hindi pair
+to N languages. `translate.ts` and `answer.ts` needed **zero** code changes
+— both were already generic over `AnswerLanguage`, so the only real gaps
+were the hardcoded `hi` check in `language.ts` and the missing refusal copy.
+
+**Verified this session**: `npm run verify` green (579 vitest tests, up
+from 570; lint/typecheck/build clean).
+
+**NOT verified this session**: no live run against the real database/LLM
+provider — no `DATABASE_URL` or provider credentials available in this
+environment. `npm run eval:multilingual` needs to be run for real before
+Marathi/Bengali can be called measured-working the way Hindi is (§ above,
+"multilingual parity — measured"). The Marathi/Bengali copy itself is
+LLM-authored and flagged in-code for a native-speaker check.

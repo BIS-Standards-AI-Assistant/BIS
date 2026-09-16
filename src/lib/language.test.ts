@@ -52,9 +52,22 @@ describe("resolveQueryLanguage", () => {
     expect(r.source).toBe("explicit");
   });
 
-  test("explicit Marathi with Devanagari text is kept as the query language, answer falls back to English", () => {
+  test("explicit Marathi with Devanagari text answers in Marathi", () => {
     const r = resolveQueryLanguage("mr", detectLanguage("मानक कोणते लागू आहे"));
     expect(r.queryLanguage).toBe("mr");
+    expect(r.answerLanguage).toBe("mr");
+  });
+
+  test("Bengali script detection answers in Bengali", () => {
+    const r = resolveQueryLanguage(undefined, detectLanguage("প্রেসার কুকারের জন্য কোন মান প্রযোজ্য?"));
+    expect(r.queryLanguage).toBe("bn");
+    expect(r.answerLanguage).toBe("bn");
+    expect(r.source).toBe("detected");
+  });
+
+  test("a language outside the fully-supported set still detects/labels correctly but answers in English", () => {
+    const r = resolveQueryLanguage(undefined, detectLanguage("தமிழில் ஒரு கேள்வி"));
+    expect(r.queryLanguage).toBe("ta");
     expect(r.answerLanguage).toBe("en");
   });
 
@@ -66,9 +79,10 @@ describe("resolveQueryLanguage", () => {
 });
 
 describe("needsTranslationForRetrieval", () => {
-  test("english does not need translation, hindi does", () => {
+  test("english does not need translation, hindi/marathi/bengali do", () => {
     expect(needsTranslationForRetrieval("en")).toBe(false);
     expect(needsTranslationForRetrieval("hi")).toBe(true);
+    expect(needsTranslationForRetrieval("mr")).toBe(true);
     expect(needsTranslationForRetrieval("bn")).toBe(true);
   });
 });

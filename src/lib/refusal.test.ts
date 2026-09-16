@@ -21,6 +21,30 @@ describe("refusalCopy", () => {
     expect(/[ऀ-ॿ]/.test(hi.answer)).toBe(true);
   });
 
+  test("Marathi copy is in Devanagari, distinct from Hindi copy", () => {
+    const hi = refusalCopy("insufficient_evidence", "hi");
+    const mr = refusalCopy("insufficient_evidence", "mr");
+    expect(/[ऀ-ॿ]/.test(mr.answer)).toBe(true);
+    expect(mr.answer).not.toBe(hi.answer);
+  });
+
+  test("Bengali copy is actually in Bengali script and differs from English", () => {
+    const en = refusalCopy("insufficient_evidence", "en");
+    const bn = refusalCopy("insufficient_evidence", "bn");
+    expect(bn.answer).not.toBe(en.answer);
+    expect(/[ঀ-৿]/.test(bn.answer)).toBe(true);
+  });
+
+  test("every reason has copy for all four fully-supported languages", () => {
+    for (const lang of ["en", "hi", "mr", "bn"] as const) {
+      for (const reason of ["out_of_scope", "insufficient_evidence", "not_in_database"] as const) {
+        const copy = refusalCopy(reason, lang);
+        expect(copy.answer.length).toBeGreaterThan(0);
+        expect(copy.limitation.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
   test("copy is fixed — same input yields byte-identical output", () => {
     expect(refusalCopy("out_of_scope", "en")).toEqual(refusalCopy("out_of_scope", "en"));
   });

@@ -168,8 +168,8 @@ export interface QueryResponse {
   isRelevant?: boolean;
   /** Language the query was treated as (UI language code). PRD FR2/§7. */
   language?: string;
-  /** Language the synthesis answer is written in ("en" | "hi"). */
-  answerLanguage?: "en" | "hi";
+  /** Language the synthesis answer is written in — see src/lib/language.ts AnswerLanguage. */
+  answerLanguage?: "en" | "hi" | "mr" | "bn";
   /** True when a non-English query was translated to English for retrieval. */
   translated?: boolean;
   /** End-to-end pipeline time in milliseconds. PRD FR16. */
