@@ -8,7 +8,7 @@ import {
   resetConversation,
   sendAssistantMessage,
   subscribeToConversation,
-} from "@/lib/assistant-conversation";
+} from "@/lib/general-assistant-conversation";
 
 interface BisChatBotProps {
   currentQuery?: string;
@@ -44,8 +44,13 @@ export function BisChatBot({ currentQuery = "", standardNumbers = [], fromAddedS
   const [openedFor, setOpenedFor] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // One conversation, shared with the Sources panel's prompt box — a message
-  // sent from either surface appears in both.
+  // Its own conversation instance (src/lib/general-assistant-conversation.ts)
+  // — separate from ResearchChat's, the homepage's inline "Ask a follow-up"
+  // thread (src/lib/assistant-conversation.ts). A message sent here never
+  // appears there and vice versa: this widget is the site-wide surface for
+  // general questions, independent of whatever standards happen to be on
+  // screen, so it has no reason to mirror a thread that's specifically
+  // scoped to "these results."
   const { messages, pending: loading } = useSyncExternalStore(
     subscribeToConversation,
     getConversationSnapshot,
@@ -83,7 +88,6 @@ export function BisChatBot({ currentQuery = "", standardNumbers = [], fromAddedS
     // caller and passed in, so every surface asks with the same one.
     await sendAssistantMessage({ message: text, standardNumbers, originalQuery: currentQuery || text });
   }
-
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
