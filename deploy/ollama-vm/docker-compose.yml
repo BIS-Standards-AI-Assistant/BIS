@@ -1,0 +1,56 @@
+# Standalone Ollama host for the "Vercel (app) + VM (Ollama)" split deployment
+# — see ../../README.md's Deployment section. Run this on a small persistent
+# VM (DigitalOcean/Hetzner/AWS Lightsail/GCE/etc.) — anywhere that supports a
+# long-running process. Vercel's serverless functions cannot host Ollama
+# themselves (no persistent process), so the Next.js app calls this VM's
+# Ollama over the network instead of a local one.
+#
+# Caddy sits in front of Ollama (which has no auth of its own) and requires
+# a bearer token on every request — same token the app sends via
+# LOCAL_LLM_API_KEY (see src/lib/providers/local-provider.ts). Never expose
+# the ollama service's port 11434 directly to the internet.
+#
+# Usage:
+#   cp .env.example .env
+#   # fill in OLLAMA_TOKEN and (if using a real domain) OLLAMA_DOMAIN
+#   docker compose up -d
+#   docker compose exec ollama ollama pull llama3.2:3b
+#   curl -H "Authorization: Bearer $OLLAMA_TOKEN" https://<your-domain>/v1/models
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    volumes:
+      - ollama-data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    # No ports: exposed here — only reachable from the caddy container, on
+    # the compose-internal network.
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      ollama:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "11434:11434"
+    environment:
+      OLLAMA_TOKEN: "${OLLAMA_TOKEN:?set OLLAMA_TOKEN in .env}"
+      OLLAMA_DOMAIN: "${OLLAMA_DOMAIN:-:11434}"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  ollama-data:
+  caddy-data:
+  caddy-config:

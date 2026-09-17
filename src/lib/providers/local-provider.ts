@@ -13,6 +13,13 @@ import type { GenerateStructuredRequest, GenerateTextRequest, LLMProvider, Norma
  * `npm run ollama:smoke` before relying on this path — see
  * docs/ARCHITECTURE.md.
  *
+ * `LOCAL_LLM_API_KEY`, when set, is sent as `Authorization: Bearer <key>`.
+ * Ollama itself has no auth, so this only matters when `LOCAL_LLM_BASE_URL`
+ * points at a remote host (e.g. a separate VM running Ollama behind a
+ * reverse proxy that checks this bearer token) — see deploy/ollama-vm/.
+ * Unset for a same-machine/same-Docker-network Ollama, where the network
+ * boundary itself is the protection.
+ *
  * Structured output is NOT assumed. Most local models don't reliably honor
  * JSON-schema-constrained decoding, so `capabilities.structuredOutput` is
  * false unless the operator explicitly opts in via
@@ -50,6 +57,7 @@ export class LocalProvider implements LLMProvider {
     private readonly structuredOutputOptIn: boolean = process.env.LOCAL_LLM_SUPPORTS_STRUCTURED_OUTPUT === "true",
     private readonly fetchImpl: typeof fetch = fetch,
     timeoutMs: number | undefined = undefined,
+    private readonly apiKey: string | undefined = process.env.LOCAL_LLM_API_KEY,
   ) {
     // Local CPU inference is slower and more variable than a hosted API, so
     // the timeout is operator-tunable via LOCAL_LLM_TIMEOUT_MS (or the
@@ -87,7 +95,10 @@ export class LocalProvider implements LLMProvider {
     try {
       res = await this.fetchImpl(`${this.baseUrl}/chat/completions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(this.apiKey ? { Authorization: `Bearer ${this.apiKey}` } : {}),
+        },
         signal: controller.signal,
         body: JSON.stringify({
           model: this.modelId,

@@ -83,6 +83,22 @@ describe("LocalProvider — text generation", () => {
     ]);
   });
 
+  test("no Authorization header when LOCAL_LLM_API_KEY is unset", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(completion("ok"));
+    const provider = new LocalProvider(BASE, MODEL, false, fetchMock as unknown as typeof fetch, undefined, undefined);
+    await provider.generateText({ prompt: "p", maxOutputTokens: 10 });
+    const headers = (fetchMock.mock.calls[0][1] as RequestInit).headers as Record<string, string>;
+    expect(headers.Authorization).toBeUndefined();
+  });
+
+  test("Authorization: Bearer <key> is sent when an api key is configured (remote Ollama behind a reverse proxy)", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(completion("ok"));
+    const provider = new LocalProvider(BASE, MODEL, false, fetchMock as unknown as typeof fetch, undefined, "secret-token");
+    await provider.generateText({ prompt: "p", maxOutputTokens: 10 });
+    const headers = (fetchMock.mock.calls[0][1] as RequestInit).headers as Record<string, string>;
+    expect(headers.Authorization).toBe("Bearer secret-token");
+  });
+
   test("system message is omitted when not provided", async () => {
     const fetchMock = vi.fn().mockResolvedValue(completion("ok"));
     const provider = new LocalProvider(BASE, MODEL, false, fetchMock as unknown as typeof fetch);

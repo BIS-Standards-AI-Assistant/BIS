@@ -163,3 +163,25 @@ research tool, not a multi-user SaaS product**, and every feature should be desc
 is deployable, evidence-grounded, and honest about its limitations — three of the four
 adjectives in the spec's Definition of Done. It is not yet "secure" in the multi-tenant sense
 the spec assumes (no auth), and "recoverable" (backup/restore) was not exercised this session.
+
+---
+
+## 8. Follow-up session — 2026-09-17
+
+Scope: close the two safe, independently-verifiable gaps this audit flagged as "not fixed this
+session," plus wire up the network-security piece needed for the "Vercel app + separate Ollama
+VM" split deployment. **Auth/multi-tenancy is deliberately still out of scope** — §2's own
+recommendation stands: building it superficially inside an unrelated session would be worse
+than the gap it fixes.
+
+| Item | Change |
+|---|---|
+| Startup env validation | `src/db/index.ts`'s `getDb()` now throws a clear, actionable error ("DATABASE_URL is not set...") instead of relying on `!` and letting a missing var fail deep inside the Neon driver. Unit-tested (`src/db/index.test.ts`). |
+| CI branch coverage | `.github/workflows/ci.yml` now triggers on `production` and `client`, not just `master`. Added a `Test` step (`npm run test` — the same ML + vitest suite run locally) and a non-blocking `npm audit --omit=dev --audit-level=high` step, plus a cheap dependency-free grep for obviously live-secret-shaped strings. Still not a substitute for a real secret scanner, but this is real coverage where there was none. |
+| Remote-Ollama auth | `src/lib/providers/local-provider.ts` now sends `LOCAL_LLM_API_KEY` as `Authorization: Bearer <key>` when set — needed because Ollama itself has no auth, and a production deployment can't run it on Vercel (serverless, no persistent process). New `deploy/ollama-vm/` runs Ollama on a separate VM behind a Caddy reverse proxy that checks this token before ever reaching Ollama. Same-machine/same-Docker-network Ollama (the existing `docker-compose.yml` `local` profile) is unaffected — the token stays unset there, and the network boundary is the protection. |
+
+Both items were genuine gaps, not paperwork: the env-validation fix changes what a
+misconfigured deploy actually reports, and the CI fix changes what commits actually get tested
+before landing on the branch this app deploys from. Not fixed this session, still open: the
+auth/multi-tenancy gap (§2), a real backup/restore drill, and a full secret-scanning tool (the
+grep above catches known key-prefix patterns only, not arbitrary secrets).

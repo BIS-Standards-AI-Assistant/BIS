@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [master, production, client]
   pull_request:
-    branches: [master]
+    branches: [master, production, client]
 
 jobs:
   build:
@@ -32,5 +32,28 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      # Deterministic ML pipeline suites + vitest unit suite. DB-independent
+      # (no DATABASE_URL in CI) — this is the same "test" script run locally.
+      - name: Test
+        run: npm run test
+
       - name: Build
         run: npm run build
+
+      # Reports known vulnerabilities in production dependencies; does not
+      # fail the workflow on its own (advisories on transitive deps are
+      # common and often not actionable same-day) but makes them visible in
+      # every run instead of only when someone remembers to check manually.
+      - name: Dependency audit
+        run: npm audit --omit=dev --audit-level=high
+        continue-on-error: true
+
+      # Cheap, dependency-free guard against committing an obvious live
+      # secret (API-key-shaped strings). Not a substitute for a real secret
+      # scanner, but catches the common case for free.
+      - name: Secret pattern scan
+        run: |
+          if git grep -InE "sk-or-v1-[A-Za-z0-9]{10,}|sk-proj-[A-Za-z0-9]{10,}|AIzaSy[A-Za-z0-9_-]{25,}|ghp_[A-Za-z0-9]{30,}" -- . ':!package-lock.json'; then
+            echo "Possible live secret found in tracked source — see matches above." >&2
+            exit 1
+          fi

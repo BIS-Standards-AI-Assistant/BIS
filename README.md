@@ -557,8 +557,30 @@ is for the Docker path and must be skipped on Vercel** — Vercel has its own ou
 output: process.env.VERCEL ? undefined : "standalone",
 ```
 
-Ollama cannot run on Vercel (serverless, no persistent process) — the deployed app uses the
-OpenRouter/paid provider path; the local-Ollama path is for `npm run dev` / Docker only.
+### Using Ollama in production (split deployment)
+
+Ollama cannot run on Vercel itself — serverless functions have no persistent process for a
+model server to live in. To use Ollama (rather than OpenRouter/paid) for production traffic,
+run the app on Vercel as above **and** run Ollama separately on a persistent VM, with the app
+calling it over the network:
+
+```bash
+vercel env add LLM_PROVIDER production        # local
+vercel env add LOCAL_LLM_BASE_URL production   # https://<your-ollama-vm-domain>/v1
+vercel env add LOCAL_LLM_MODEL production       # llama3.2:3b
+vercel env add LOCAL_LLM_API_KEY production     # bearer token the VM's reverse proxy checks
+vercel --prod
+```
+
+See [`deploy/ollama-vm/`](deploy/ollama-vm/) for the VM-side setup (Docker Compose, a Caddy
+reverse proxy that gates the otherwise-unauthenticated Ollama server behind that bearer token,
+and host-provider suggestions). The guardrails that keep answers on-topic and evidence-grounded
+(fixed refusal text, the relevance floor, the citation-identity-free response schema — see
+[Guardrails](#guardrails--staying-on-topic)) run in the pipeline around the LLM call, not inside
+the model itself, so they apply identically regardless of which provider is configured.
+
+If instead you don't need Ollama specifically, the simplest production path is Vercel +
+OpenRouter (no second host to run) — the block above this section.
 
 ---
 
