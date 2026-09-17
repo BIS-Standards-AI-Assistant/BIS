@@ -24,8 +24,15 @@ export { OpenRouterProvider } from "./openrouter-provider";
  * provider's `isConfigured()` returns false, the chain resolves as
  * effectively empty at call time, and intent.ts/answer.ts fall back to
  * deterministic behavior (see docs/ARCHITECTURE.md).
+ *
+ * `routingOverride` pins this one call to a specific provider instead of
+ * reading `LLM_PROVIDER` from the environment — e.g. chat-context.ts's
+ * freeform answer path forces "openrouter-free" (operator decision:
+ * OpenRouter's hosted model follows the "stay grounded in the given
+ * evidence" instruction more reliably than a small local model) without
+ * changing the global chain every other call site still uses.
  */
-export function getProviderChain(): LLMProvider[] {
+export function getProviderChain(routingOverride?: string): LLMProvider[] {
   const providers: LLMProvider[] = [
     new GeminiProvider(),
     new GroqProvider(),
@@ -33,5 +40,5 @@ export function getProviderChain(): LLMProvider[] {
     new OpenRouterProvider("openrouter-free"),
     new OpenRouterProvider("paid"),
   ];
-  return resolveProviderChain(providers);
+  return resolveProviderChain(providers, routingOverride ?? process.env.LLM_PROVIDER);
 }

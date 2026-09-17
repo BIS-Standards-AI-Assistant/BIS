@@ -7,6 +7,7 @@ import { analyzeCoverage } from "./coverage-analysis";
 import type { AggregatedEvidence } from "./evidence-aggregation";
 import type { RetrievedChunk, EvidenceRef } from "@/types/api";
 import { getProviderChain, generateTextWithFallback } from "./providers";
+import { refusalCopy } from "./refusal";
 
 /**
  * True server-side chat context scoping (P0 audit, 2026-09-03). The
@@ -157,6 +158,7 @@ const NO_EVIDENCE_ANSWER = "I don't have enough evidence in the current results 
 export async function buildScopedAnswer(
   subIntent: ChatSubIntent,
   originalQuery: string,
+  message: string,
   scoped: ScopedStandard[],
 ): Promise<ScopedAnswer> {
   if (scoped.length === 0) {
@@ -260,7 +262,7 @@ export async function buildScopedAnswer(
     }
 
     default:
-      return buildFreeformAnswer(originalQuery, scoped);
+      return buildFreeformAnswer(originalQuery, message, scoped);
   }
 }
 
@@ -279,8 +281,30 @@ export async function buildScopedAnswer(
  * this falls back to the same honest NO_EVIDENCE_ANSWER the rest of this
  * module uses — evidence-only behavior always still works with zero LLM
  * dependency, per docs/ARCHITECTURE.md.
+ *
+ * Before any of that: the same off-topic check query-pipeline.ts uses
+ * (extractQueryIntent's isRelevant) runs on the raw message first. Without
+ * it, an off-topic message here would depend entirely on the LLM's own
+ * judgment to stay grounded — every other refusal in this app is a fixed
+ * string a model can't talk its way around (src/lib/refusal.ts), and this
+ * path had no equivalent. `isRelevant === false` returns that same fixed
+ * "out_of_scope" text instead of ever reaching the LLM call below.
+ *
+ * Pinned to the "openrouter-free" provider specifically (operator
+ * decision) rather than the global auto chain — this is the one path in
+ * the app where a model freely phrases prose around arbitrary follow-up
+ * questions, so it gets the provider best verified to follow the "stay
+ * grounded, refuse cleanly" instruction, independent of whichever
+ * provider LLM_PROVIDER=auto picks for the rest of the app (e.g. a local
+ * model reachable via a dev tunnel).
  */
-async function buildFreeformAnswer(originalQuery: string, scoped: ScopedStandard[]): Promise<ScopedAnswer> {
+async function buildFreeformAnswer(originalQuery: string, message: string, scoped: ScopedStandard[]): Promise<ScopedAnswer> {
+  const messageIntent = await extractQueryIntent(message);
+  if (messageIntent.isRelevant === false) {
+    const refusal = refusalCopy("out_of_scope", "en");
+    return { answer: refusal.answer, evidence: [], limitations: [refusal.limitation] };
+  }
+
   const evidenceBlock = scoped
     .map((s) => {
       const excerpts = s.chunks
@@ -291,7 +315,7 @@ async function buildFreeformAnswer(originalQuery: string, scoped: ScopedStandard
     })
     .join("\n\n");
 
-  const chain = getProviderChain();
+  const chain = getProviderChain("openrouter-free");
   const { response } = await generateTextWithFallback(chain, {
     system:
       "You are a research assistant for BIS Standards Navigator, a government service. " +
@@ -300,7 +324,10 @@ async function buildFreeformAnswer(originalQuery: string, scoped: ScopedStandard
       "literally present in the excerpts. If the excerpts do not contain information that answers the question, " +
       "say so plainly and explain what the indexed evidence does cover instead — do not fill the gap with a " +
       "plausible-sounding guess. Keep the answer concise (2-4 sentences) and do not use markdown formatting.",
-    prompt: `Question: ${originalQuery}\n\nIndexed BIS evidence for the standards in scope:\n\n${evidenceBlock}`,
+    prompt:
+      `The reader originally searched for: ${originalQuery}\n\n` +
+      `They are now asking: ${message}\n\n` +
+      `Indexed BIS evidence for the standards in scope:\n\n${evidenceBlock}`,
     maxOutputTokens: 1200,
   });
 

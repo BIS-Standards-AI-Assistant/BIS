@@ -49,7 +49,7 @@ describe("classifyChatIntent", () => {
 
 describe("buildScopedAnswer", () => {
   test("empty scoped context never fabricates — returns the honest 'not enough evidence' answer", async () => {
-    const result = await buildScopedAnswer("why_relevant", "steel bottle", []);
+    const result = await buildScopedAnswer("why_relevant", "steel bottle", "why did this appear", []);
     expect(result.answer).toContain("don't have enough evidence");
     expect(result.evidence).toEqual([]);
   });
@@ -58,16 +58,35 @@ describe("buildScopedAnswer", () => {
     const result = await buildScopedAnswer(
       "other",
       "steel bottle",
+      "what does this actually require",
       [{ standardId: "s1", standardNumber: "IS 15410:2003", title: "Plastics Bottles", chunks: [] }],
     );
     expect(result.answer).toContain("don't have enough evidence");
     expect(result.limitations.length).toBeGreaterThan(0);
   });
 
+  test("'other' sub-intent checks the live follow-up message, not the original search, for off-topic content", async () => {
+    // Regression test: buildFreeformAnswer used to receive only
+    // originalQuery and never saw the reader's actual new question, so an
+    // off-topic follow-up ("tell me a joke") mid-conversation about an
+    // on-topic search ("steel bottle") would silently re-describe the
+    // original search's evidence instead of refusing. The message itself
+    // must now drive both the off-topic gate and the answer.
+    const result = await buildScopedAnswer(
+      "other",
+      "steel bottle",
+      "tell me a joke",
+      [{ standardId: "s1", standardNumber: "IS 15410:2003", title: "Plastics Bottles", chunks: [] }],
+    );
+    expect(result.answer).toContain("outside what BIS Standards Navigator covers");
+    expect(result.limitations[0]).toContain("outside the scope");
+  });
+
   test("evidence sub-intent with no indexed chunks does not fabricate an excerpt", async () => {
     const result = await buildScopedAnswer(
       "evidence",
       "steel bottle",
+      "show me the evidence",
       [{ standardId: "s1", standardNumber: "IS 15410:2003", title: "Plastics Bottles", chunks: [] }],
     );
     expect(result.evidence).toEqual([]);
@@ -88,6 +107,7 @@ describe("buildScopedAnswer", () => {
     const result = await buildScopedAnswer(
       "evidence",
       "steel bottle",
+      "show me the evidence",
       [{ standardId: "s1", standardNumber: "IS 15410:2003", title: "Plastics Bottles", chunks }],
     );
     expect(result.evidence.length).toBe(3);
@@ -98,6 +118,7 @@ describe("buildScopedAnswer", () => {
     const result = await buildScopedAnswer(
       "why_relevant",
       "steel bottle",
+      "why did this appear",
       [
         {
           standardId: "s1",

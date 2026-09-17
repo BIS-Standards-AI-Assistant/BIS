@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
     }
 
     const scoped = await resolveScopedContext(standardNumbers);
-    const scopedAnswer = await buildScopedAnswer(subIntent, originalQuery, scoped);
+    const scopedAnswer = await buildScopedAnswer(subIntent, originalQuery, message, scoped);
     await logChatTurn({
       message,
       subIntent,
