@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LaboratoriesDirectory } from "@/components/testing/LaboratoriesDirectory";
-import { LaboratoriesMapLoader } from "@/components/testing/LaboratoriesMapLoader";
 import { loadLaboratories } from "@/lib/laboratories";
 
 // The dataset is a static, versioned JSON file (see
@@ -58,13 +57,6 @@ export default async function LaboratorySearchPage() {
               </a>
               .
             </p>
-          </div>
-        </section>
-
-        <section className="px-6 pt-10">
-          <div className="mx-auto max-w-[1100px]">
-            <h2 className="mb-3 text-sm font-semibold text-ink">Laboratory locations</h2>
-            <LaboratoriesMapLoader laboratories={laboratories} />
           </div>
         </section>
 

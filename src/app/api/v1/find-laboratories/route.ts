@@ -10,13 +10,20 @@ import { loadLaboratories } from "@/lib/laboratories";
  * an actual laboratory dataset. The dataset now exists (data/bis-standards-
  * dataset/recognised-laboratories.json, from the official BIS Group 1
  * recognised-laboratory list — see scripts/data-laboratories-convert.ts),
- * so `location` is matched against each laboratory's state/city text. The
- * map-provider blocker is unchanged and still reported separately: a
- * geocoded point is informational only, never used to compute or claim a
- * distance, because the dataset carries no coordinates. `standardNumber`
- * is accepted but never used to filter — the source data has no per-
- * standard testing-scope field, so claiming a capability match here would
- * be fabrication (§24: "do not fabricate laboratories").
+ * so `location` is matched against each laboratory's state/city text.
+ * `standardNumber` is accepted but never used to filter — the source data
+ * has no per-standard testing-scope field, so claiming a capability match
+ * here would be fabrication (§24: "do not fabricate laboratories").
+ *
+ * Matched laboratories now carry real `lat`/`lng` (city/state-level, from
+ * scripts/geocode-laboratories.ts — OpenStreetMap Nominatim, never
+ * fabricated; null when unresolved) so a map view is possible. This is a
+ * DIFFERENT geocoding path from `mapProvider` below, which geocodes the
+ * user's *typed search string* via Google Maps and is unrelated to
+ * per-laboratory coordinates — still blocked on a missing API key, still
+ * reported separately, and results below are still never distance-sorted
+ * (combining two different geocoders' coordinate systems/precision for a
+ * distance claim is a separate, not-yet-made decision).
  */
 const RequestSchema = z.object({
   location: z.string().min(1).max(200),
@@ -51,6 +58,8 @@ export async function POST(req: NextRequest) {
       oslCode: lab.oslCode,
       currentStatus: lab.currentStatus,
       recognitionValidUpto: lab.recognitionValidUpto,
+      lat: lab.lat,
+      lng: lab.lng,
     }));
 
   let geocodeResult: Awaited<ReturnType<typeof geocode>> | null = null;
@@ -68,7 +77,7 @@ export async function POST(req: NextRequest) {
         : geocodeResult?.blocked
           ? geocodeResult.reason
           : null,
-      note: "Geocoding, when available, is informational only — the laboratory dataset has no coordinates, so results are never distance-sorted.",
+      note: "This is a separate geocoder from the laboratories' own coordinates (see each entry's lat/lng) — it geocodes your typed search text only, informationally, and results below are not distance-sorted by it.",
     },
     laboratoryDataAvailable,
     laboratories: matches,

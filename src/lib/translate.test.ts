@@ -33,4 +33,18 @@ describe("translateQueryToEnglish", () => {
     expect(r.queryForRetrieval).toBe("प्रेशर कुकर मानक");
     expect(r.originalQuery).toBe("प्रेशर कुकर मानक");
   });
+
+  test("Marathi query with no provider available falls back to the original text", async () => {
+    const r = await translateQueryToEnglish("मानक कोणते लागू आहे", "mr");
+    expect(r.translated).toBe(false);
+    expect(r.method).toBe("skipped-no-provider");
+    expect(r.queryForRetrieval).toBe("मानक कोणते लागू आहे");
+  });
+
+  test("Bengali query with no provider available falls back to the original text", async () => {
+    const r = await translateQueryToEnglish("প্রেসার কুকারের মান", "bn");
+    expect(r.translated).toBe(false);
+    expect(r.method).toBe("skipped-no-provider");
+    expect(r.queryForRetrieval).toBe("প্রেসার কুকারের মান");
+  });
 });

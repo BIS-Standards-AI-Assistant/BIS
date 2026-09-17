@@ -69,6 +69,18 @@ describe("generateAnswer — language handling with no provider", () => {
     expect(a.recommendationExplanations).toHaveLength(0);
     expect(a.answer.length).toBeGreaterThan(0);
   });
+
+  test("Marathi request without a provider: English summary + an explicit note that Marathi was unavailable", async () => {
+    const a = await generateAnswer(pkg(), { answerLanguage: "mr" });
+    expect(a.limitations.join(" ")).toMatch(/Marathi/);
+    expect(a.limitations.join(" ")).toMatch(/not available|English/i);
+  });
+
+  test("Bengali request without a provider: English summary + an explicit note that Bengali was unavailable", async () => {
+    const a = await generateAnswer(pkg(), { answerLanguage: "bn" });
+    expect(a.limitations.join(" ")).toMatch(/Bengali/);
+    expect(a.limitations.join(" ")).toMatch(/not available|English/i);
+  });
 });
 
 describe("generateAnswer — applicability gate (steel pipes / PVC standard regression)", () => {

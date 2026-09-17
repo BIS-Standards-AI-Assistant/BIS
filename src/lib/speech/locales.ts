@@ -22,14 +22,17 @@ export const SPEECH_LOCALES: Record<string, string> = {
 };
 
 /**
- * Languages whose *queries* the pipeline actually understands — as opposed
- * to languages the mic can merely transcribe. Speech recognition working
- * for a language does not mean retrieval, intent extraction or answer
- * generation understand it: see src/lib/query-language.ts and
- * docs/AI_ML_STATUS_REPORT.md §26. Keeping these two facts visibly separate
- * is the point; conflating them would overstate what the system does.
+ * Languages whose *queries* the pipeline actually attempts to understand —
+ * as opposed to languages the mic can merely transcribe. As of the
+ * multilingual extension (src/lib/language.ts's resolveQueryLanguage), all
+ * eight now get real translate-in / answer-in-language treatment, so this
+ * is no longer a hard yes/no split. Quality varies: English/Hindi/Marathi/
+ * Bengali are live-measured against real queries (docs/PROJECT_STATUS.md's
+ * multilingual-parity numbers); Tamil/Telugu/Gujarati/Kannada get the same
+ * real code path but are unverified in the same way Hindi itself was
+ * before it was measured — see docs/AI_ML_STATUS_REPORT.md §26.
  */
-const QUERY_UNDERSTOOD_LANGUAGES = new Set(["en", "hi"]);
+const QUERY_UNDERSTOOD_LANGUAGES = new Set(["en", "hi", "bn", "ta", "te", "mr", "gu", "kn"]);
 
 export interface VoiceLanguageOption {
   code: string;

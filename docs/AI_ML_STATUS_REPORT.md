@@ -568,6 +568,90 @@ No formal benchmarking exists. What can be reported:
 
 **Claim that must not be made**: "multilingual support" without immediately qualifying it as "UI chrome only, English/Hindi, does not extend to search or answers."
 
+**UPDATE (2026-09-16)**: the paragraph above describes an earlier state of this
+repo and is now stale — a real, non-UI-chrome multilingual query pipeline
+exists (`src/lib/language.ts` script detection, `src/lib/translate.ts`
+translate-before-retrieval, `src/lib/refusal.ts` localized fixed refusals,
+`answer.ts`'s `languageInstruction`). This session extended it from
+English+Hindi to also include **Marathi and Bengali** (`AnswerLanguage`
+widened in `src/lib/language.ts`; new `MR`/`BN` refusal copy blocks in
+`src/lib/refusal.ts`; `scripts/eval-multilingual.ts` restructured from a
+fixed English/Hindi pair to support N languages, with Marathi/Bengali golden
+queries added).
+
+**What was actually verified this session**: `npm run verify` (579 vitest
+tests, up from 570; lint/typecheck/build all clean), then a REAL live run
+of `scripts/eval-multilingual.ts` against the real database and OpenRouter
+(`openai/gpt-4o-mini`), once `DATABASE_URL`/`OPENROUTER_API_KEY` became
+available partway through this session. `translate.ts`/`answer.ts`
+required zero code changes because they were already generic over
+`AnswerLanguage` — only `language.ts`'s hardcoded `=== "hi"` check and
+`refusal.ts`'s missing copy blocks were the actual gaps.
+
+**Live measured results** (`data/evaluation/multilingual-parity-results.json`,
+5 golden queries × 3 languages = 15 non-English pipeline runs, English run
+once per query and compared against each):
+
+| Language | Strict parity | Partial parity | Detected | Translated | Answered in-language | Identifiers stayed Latin |
+|---|---|---|---|---|---|---|
+| Hindi | 3/5 | 5/5 | 5/5 | 5/5 | 5/5 | 5/5 |
+| Marathi | 3/5 | 4/5 | 5/5 | 5/5 | 5/5 | 5/5 |
+| Bengali | 4/5 | 5/5 | 5/5 | 5/5 | 5/5 | 5/5 |
+
+All three languages hit 5/5 on every §7 contract check that matters for
+correctness (detection, translation, answering in the right language, never
+mistranslating a citation). "Strict parity" — the exact same primary
+standard set as the English run — is weaker across all three, which
+matches the pre-existing, already-documented pattern for Hindi (translation
+rewords the query, which shifts reranking on the margins; this is not a
+Marathi/Bengali-specific regression). Marathi and Bengali perform in the
+same range as the already-shipped Hindi baseline, not worse.
+
+The Marathi/Bengali refusal and translation-unavailable copy is
+LLM-authored, mirroring the existing Hindi strings sentence-for-sentence,
+and is flagged in-code for a native-speaker spot-check before being treated
+as final — same disclosure convention as this dataset's own
+`verification_note` fields. That spot-check did not happen this session
+(no native speaker available) — the live eval verifies the *pipeline*
+behaves correctly, not that every word of the copy itself is idiomatic.
+
+**UPDATE 2 (2026-09-16, same day, merged from a teammate's parallel work)**:
+the "Updated claim that must not be made" paragraph immediately below is
+now itself stale — superseded by merging `upstream/master`, which contained
+a teammate's own extension of these exact files to all 8 `UiLanguage`
+values, done in parallel and independently. Reconciled in favor of their
+broader, additionally bug-fixed version (full resolution notes in the merge
+commit): `AnswerLanguage` is no longer a restricted allowlist — every UI
+language now gets real translate-in/answer-in-language treatment
+(`resolveQueryLanguage` answers in whatever language the query resolved to,
+unconditionally). Their pass also fixed a real bug this session's narrower
+version didn't have: a script-neutral English query with a non-English UI
+toggle set was being sent to the translation LLM labeled as that language,
+producing a garbled "translation" of real English text and retrieving the
+wrong standard — fixed by keying translation-for-retrieval on the actual
+*detected* script, not the resolved toggle value.
+
+This session's Marathi/Bengali `MR`/`BN` refusal-copy blocks were dropped
+during reconciliation in favor of the teammate's more conservative,
+arguably more honest design: `REFUSAL_COPY_LANGUAGES` names only the
+languages with real, reviewed fixed refusal text (English, Hindi — still
+just those two), and every other language gets an explicit, user-visible
+limitation note ("shown in English because a reviewed \[language]
+translation of the fixed refusal text does not exist yet") rather than
+presenting an unreviewed LLM translation as final. Live-verified after the
+merge: a Marathi out-of-scope query correctly carries that exact honest
+note; a Tamil packaged-drinking-water query correctly detects, translates,
+retrieves `IS 14543:2016`, and answers coherently in Tamil end to end —
+confirming the broader 8-language path genuinely works, not just compiles.
+
+**Current claim that must not be made**: "multilingual support" without
+qualifying that only English and Hindi have *reviewed* fixed refusal copy
+(`REFUSAL_COPY_LANGUAGES` in `src/lib/refusal.ts`) and only
+English/Hindi/Marathi/Bengali are *live-measured* against real queries
+(`docs/PROJECT_STATUS.md`'s parity table) — the other four languages
+(Tamil, Telugu, Gujarati, Kannada) get the identical real code path but are
+unverified in the same way Hindi itself was before it was measured.
+
 ---
 
 ## 27. Current architecture diagram

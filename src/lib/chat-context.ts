@@ -8,6 +8,7 @@ import type { AggregatedEvidence } from "./evidence-aggregation";
 import type { RetrievedChunk, EvidenceRef } from "@/types/api";
 import { getProviderChain, generateTextWithFallback } from "./providers";
 import { refusalCopy } from "./refusal";
+import { type AnswerLanguage, LANGUAGE_NAMES } from "./language";
 
 /**
  * True server-side chat context scoping (P0 audit, 2026-09-03). The
@@ -150,6 +151,20 @@ export interface ScopedAnswer {
   answer: string;
   evidence: EvidenceRef[];
   limitations: string[];
+  /**
+   * Language the `answer` text is actually written in — NOT necessarily the
+   * language the question was asked in. Five of six subIntent branches
+   * build a deterministic template string directly from English evidence
+   * fields (standard titles, certification scheme names) and always answer
+   * "en" regardless of input language — translating a template string
+   * word-by-word without an LLM risks a worse, half-translated result than
+   * honestly staying in English. Only the freeform/LLM branch
+   * (buildFreeformAnswer) can honor the requested language, the same way
+   * src/lib/answer.ts's languageInstruction does for the main query
+   * pipeline. This field exists so callers (e.g. SpeakButton) read text
+   * aloud in the language it's actually written in, never a mismatched one.
+   */
+  answerLanguage: AnswerLanguage;
 }
 
 const NO_EVIDENCE_ANSWER = "I don't have enough evidence in the current results to establish that.";
@@ -160,12 +175,14 @@ export async function buildScopedAnswer(
   originalQuery: string,
   message: string,
   scoped: ScopedStandard[],
+  language: AnswerLanguage = "en",
 ): Promise<ScopedAnswer> {
   if (scoped.length === 0) {
     return {
       answer: NO_EVIDENCE_ANSWER,
       evidence: [],
       limitations: ["No standards from the current results could be resolved in the database."],
+      answerLanguage: "en",
     };
   }
 
@@ -177,7 +194,7 @@ export async function buildScopedAnswer(
           ? `${s.standardNumber} (${s.title ?? "untitled"}): indexed evidence includes "${snippet}${s.chunks[0].text.length > 240 ? "…" : ""}"`
           : `${s.standardNumber} (${s.title ?? "untitled"}): no indexed evidence chunk is available to explain why it appeared.`;
       });
-      return { answer: lines.join("\n\n"), evidence: [], limitations: [] };
+      return { answer: lines.join("\n\n"), evidence: [], limitations: [], answerLanguage: "en" };
     }
 
     case "evidence": {
@@ -195,12 +212,13 @@ export async function buildScopedAnswer(
         })),
       );
       if (evidence.length === 0) {
-        return { answer: NO_EVIDENCE_ANSWER, evidence: [], limitations: ["No indexed chunks exist for the selected standard(s)."] };
+        return { answer: NO_EVIDENCE_ANSWER, evidence: [], limitations: ["No indexed chunks exist for the selected standard(s)."], answerLanguage: "en" };
       }
       return {
         answer: `Indexed evidence for ${scoped.map((s) => s.standardNumber).join(", ")}:`,
         evidence,
         limitations: [],
+        answerLanguage: "en",
       };
     }
 
@@ -220,6 +238,7 @@ export async function buildScopedAnswer(
           "laboratories by state or city, then confirm testing scope directly with the laboratory or BIS.",
         evidence: [],
         limitations: ["Laboratory-to-standard/product matching is not available in the current dataset."],
+        answerLanguage: "en",
       };
     }
 
@@ -241,7 +260,7 @@ export async function buildScopedAnswer(
           parts.push(`${s.standardNumber}: no certification scheme record is indexed for this standard.`);
         }
       }
-      return { answer: parts.join("\n"), evidence: [], limitations: [] };
+      return { answer: parts.join("\n"), evidence: [], limitations: [], answerLanguage: "en" };
     }
 
     case "missing_info": {
@@ -258,12 +277,17 @@ export async function buildScopedAnswer(
             : `${s.standardNumber}: no specific evidence gap detected against the requested dimensions.`,
         );
       }
-      return { answer: gaps.join("\n"), evidence: [], limitations: [] };
+      return { answer: gaps.join("\n"), evidence: [], limitations: [], answerLanguage: "en" };
     }
 
     default:
-      return buildFreeformAnswer(originalQuery, message, scoped);
+      return buildFreeformAnswer(originalQuery, message, scoped, language);
   }
+}
+
+function freeformLanguageInstruction(language: AnswerLanguage): string {
+  if (language === "en") return "";
+  return ` Write your answer in ${LANGUAGE_NAMES[language]}. Do NOT translate standard numbers (e.g. "IS 14543:2016") or standard titles — reproduce those exactly as given in the evidence; only the surrounding explanation is in ${LANGUAGE_NAMES[language]}.`;
 }
 
 /**
@@ -304,10 +328,15 @@ export async function buildScopedAnswer(
  * provider LLM_PROVIDER=auto picks for the rest of the app (e.g. a local
  * model reachable via a dev tunnel).
  */
-async function buildFreeformAnswer(originalQuery: string, message: string, scoped: ScopedStandard[]): Promise<ScopedAnswer> {
+async function buildFreeformAnswer(
+  originalQuery: string,
+  message: string,
+  scoped: ScopedStandard[],
+  language: AnswerLanguage = "en",
+): Promise<ScopedAnswer> {
   if (OFF_TOPIC_PATTERN.test(message.toLowerCase())) {
     const refusal = refusalCopy("out_of_scope", "en");
-    return { answer: refusal.answer, evidence: [], limitations: [refusal.limitation] };
+    return { answer: refusal.answer, evidence: [], limitations: [refusal.limitation], answerLanguage: "en" };
   }
 
   const evidenceBlock = scoped
@@ -328,7 +357,8 @@ async function buildFreeformAnswer(originalQuery: string, message: string, scope
       "never inventing a fact, statistic, regulation, tax rule, government scheme, or standard clause that is not " +
       "literally present in the excerpts. If the excerpts do not contain information that answers the question, " +
       "say so plainly and explain what the indexed evidence does cover instead — do not fill the gap with a " +
-      "plausible-sounding guess. Keep the answer concise (2-4 sentences) and do not use markdown formatting.",
+      "plausible-sounding guess. Keep the answer concise (2-4 sentences) and do not use markdown formatting." +
+      freeformLanguageInstruction(language),
     prompt:
       `The reader originally searched for: ${originalQuery}\n\n` +
       `They are now asking: ${message}\n\n` +
@@ -337,7 +367,7 @@ async function buildFreeformAnswer(originalQuery: string, message: string, scope
   });
 
   if (response?.text?.trim()) {
-    return { answer: response.text.trim(), evidence: [], limitations: [] };
+    return { answer: response.text.trim(), evidence: [], limitations: [], answerLanguage: language };
   }
 
   return {
@@ -346,5 +376,6 @@ async function buildFreeformAnswer(originalQuery: string, message: string, scope
     limitations: [
       "This question could not be confidently matched to the current research context, and no AI provider was available to attempt an evidence-grounded answer. Try asking about relevance, evidence, certification, or testing — or explicitly ask to search wider BIS knowledge.",
     ],
+    answerLanguage: "en",
   };
 }

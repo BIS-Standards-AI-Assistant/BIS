@@ -28,20 +28,14 @@ export interface LaboratoryItem {
   currentStatus: "Active" | "Suspended" | "Deferred" | "Unknown";
   remarks: string | null;
   /**
-   * City-level coordinates from scripts/data-laboratories-geocode.ts
-   * (OpenStreetMap Nominatim, real geocoding of the lab's own city/state —
-   * never invented). Null when that city/state combination couldn't be
-   * resolved. This is a city-level point, not the lab's exact address —
-   * the source recognition list has no street address to geocode.
+   * City/state-level coordinates from scripts/geocode-laboratories.ts
+   * (OpenStreetMap Nominatim). Null, never a guess, when geocoding could
+   * not resolve the entry — see that script for why fabricating a point
+   * here is exactly the bug this dataset already had to have removed once
+   * (src/lib/compliance-map.ts's doc comment).
    */
-  latitude: number | null;
-  longitude: number | null;
-}
-
-interface GeoPoint {
-  latitude: number;
-  longitude: number;
-  displayName: string;
+  lat: number | null;
+  lng: number | null;
 }
 
 let cache: LaboratoryItem[] | null = null;
@@ -50,21 +44,7 @@ export async function loadLaboratories(): Promise<LaboratoryItem[]> {
   if (cache) return cache;
   const filePath = path.join(process.cwd(), "data/bis-standards-dataset/recognised-laboratories.json");
   const raw = await fs.readFile(filePath, "utf-8");
-  const records = JSON.parse(raw) as Array<Omit<LaboratoryItem, "latitude" | "longitude">>;
-
-  let coordinates: Record<string, GeoPoint | null> = {};
-  try {
-    const coordPath = path.join(process.cwd(), "data/bis-standards-dataset/laboratory-coordinates.json");
-    coordinates = JSON.parse(await fs.readFile(coordPath, "utf-8")) as Record<string, GeoPoint | null>;
-  } catch {
-    // Not generated yet (npx tsx scripts/data-laboratories-geocode.ts) — the
-    // directory still works without a map, just with no coordinates.
-  }
-
-  cache = records.map((r) => {
-    const point = coordinates[`${r.city ?? ""}|${r.state}`];
-    return { ...r, latitude: point?.latitude ?? null, longitude: point?.longitude ?? null };
-  });
+  cache = JSON.parse(raw) as LaboratoryItem[];
   return cache;
 }
 

@@ -11,7 +11,9 @@
     "recognitionValidUpto": "2027-02-14",
     "recognitionValidUptoRaw": "14.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8131026",
@@ -25,7 +27,9 @@
     "recognitionValidUpto": "2027-05-17",
     "recognitionValidUptoRaw": "17.05.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 17-11-2017. Suspended w.e.f. 22 May 2017. Suspension revoked w.e.f. 30-01-2017. (Present status operative) Suspended w.e.f. 16 Nov 2016. Suspension revoked w.e.f. 29 Feb 2016. (Present status operative) Suspended w.e.f. 21 Jan 2016."
+    "remarks": "Suspension revoked w.e.f. 17-11-2017. Suspended w.e.f. 22 May 2017. Suspension revoked w.e.f. 30-01-2017. (Present status operative) Suspended w.e.f. 16 Nov 2016. Suspension revoked w.e.f. 29 Feb 2016. (Present status operative) Suspended w.e.f. 21 Jan 2016.",
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "7124116",
@@ -39,7 +43,9 @@
     "recognitionValidUpto": "2026-12-15",
     "recognitionValidUptoRaw": "15.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 23-08-2024 (Present status operative) Suspended w.e.f. 05- 04-2024. Suspension revoked w.e.f. 07-08-2020 (Present status operative) SUSPENDED W.E.F. 31-01-2020 Suspension revoked w.e.f. 05-11-2019. (Present status operative) Suspended for three months w.e.f. 25-09- 2019. Suspension revoked w.e.f. 09-04-2018. Suspension Cum Deferrment of Renewal of recognition w.e.f. 16- 12-2017 Suspension revoked w.e.f. 21 July 2015. (Present status operative) Suspended w.e.f. 6 July 2015."
+    "remarks": "Suspension revoked w.e.f. 23-08-2024 (Present status operative) Suspended w.e.f. 05- 04-2024. Suspension revoked w.e.f. 07-08-2020 (Present status operative) SUSPENDED W.E.F. 31-01-2020 Suspension revoked w.e.f. 05-11-2019. (Present status operative) Suspended for three months w.e.f. 25-09- 2019. Suspension revoked w.e.f. 09-04-2018. Suspension Cum Deferrment of Renewal of recognition w.e.f. 16- 12-2017 Suspension revoked w.e.f. 21 July 2015. (Present status operative) Suspended w.e.f. 6 July 2015.",
+    "lat": 21.1498134,
+    "lng": 79.0820556
   },
   {
     "id": "8116816",
@@ -53,7 +59,9 @@
     "recognitionValidUpto": "2026-01-14",
     "recognitionValidUptoRaw": "14.01.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 08-01-2025. (Present status operative) Suspended w.e.f. 06- 12-2024"
+    "remarks": "Suspension revoked w.e.f. 08-01-2025. (Present status operative) Suspended w.e.f. 06- 12-2024",
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "7130916",
@@ -67,7 +75,9 @@
     "recognitionValidUpto": "2027-05-13",
     "recognitionValidUptoRaw": "13.05.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.9480582,
+    "lng": 73.8420837
   },
   {
     "id": "7106935",
@@ -81,7 +91,9 @@
     "recognitionValidUpto": "2028-01-11",
     "recognitionValidUptoRaw": "11.01.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 07-07-2023. (Present status operative) Suspended w.e.f. 31- 05-2023"
+    "remarks": "Suspension revoked w.e.f. 07-07-2023. (Present status operative) Suspended w.e.f. 31- 05-2023",
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "8117816",
@@ -95,7 +107,9 @@
     "recognitionValidUpto": "2027-02-19",
     "recognitionValidUptoRaw": "19.02.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f 14-12-2022. (Present status operative) Suspended w.e.f. 28- 03-2022 Suspension revoked w.e.f 17-01-2017. Suspended w.e.f. 27- 10-2016."
+    "remarks": "Suspension revoked w.e.f 14-12-2022. (Present status operative) Suspended w.e.f. 28- 03-2022 Suspension revoked w.e.f 17-01-2017. Suspended w.e.f. 27- 10-2016.",
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "8134206",
@@ -109,7 +123,9 @@
     "recognitionValidUpto": "2028-07-21",
     "recognitionValidUptoRaw": "21.07.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 09-03-2026. (Present status operative) SUSPENDED W.E.F. 19-12-2025 Suspension revoked w.e.f. 22-09-2023. (Present status operative) SUSPENDED W.E.F. 01-08-2023 Suspension revoked w.e.f. 01-02-2022. (Present status operative) SUSPENDED W.E.F. 28-12-2021"
+    "remarks": "Suspension revoked w.e.f. 09-03-2026. (Present status operative) SUSPENDED W.E.F. 19-12-2025 Suspension revoked w.e.f. 22-09-2023. (Present status operative) SUSPENDED W.E.F. 01-08-2023 Suspension revoked w.e.f. 01-02-2022. (Present status operative) SUSPENDED W.E.F. 28-12-2021",
+    "lat": 27.1303344,
+    "lng": 80.859666
   },
   {
     "id": "9138706",
@@ -123,7 +139,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31-12-2026",
     "currentStatus": "Suspended",
-    "remarks": "Suspended w.e.f. 23.04.2026"
+    "remarks": "Suspended w.e.f. 23.04.2026",
+    "lat": 30.6908804,
+    "lng": 76.7114879
   },
   {
     "id": "9140626",
@@ -137,7 +155,9 @@
     "recognitionValidUpto": "2027-06-06",
     "recognitionValidUptoRaw": "06.06.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 08-12-2023. (Present status operative) Suspended w.e.f. 19.10.2023"
+    "remarks": "Suspension revoked w.e.f. 08-12-2023. (Present status operative) Suspended w.e.f. 19.10.2023",
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "8141226",
@@ -151,7 +171,9 @@
     "recognitionValidUpto": "2027-07-04",
     "recognitionValidUptoRaw": "04.07.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8141606",
@@ -165,7 +187,9 @@
     "recognitionValidUpto": "2027-07-26",
     "recognitionValidUptoRaw": "26.07.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8161906",
@@ -179,7 +203,9 @@
     "recognitionValidUpto": "2027-08-26",
     "recognitionValidUptoRaw": "26.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "9162826",
@@ -193,7 +219,9 @@
     "recognitionValidUpto": "2027-11-14",
     "recognitionValidUptoRaw": "14.11.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.9953758,
+    "lng": 77.0233627
   },
   {
     "id": "6164516",
@@ -207,7 +235,9 @@
     "recognitionValidUpto": "2028-12-04",
     "recognitionValidUptoRaw": "04.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "8165026",
@@ -221,7 +251,9 @@
     "recognitionValidUpto": "2029-02-23",
     "recognitionValidUptoRaw": "23-02-2029",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 18-12-2024. Suspended w.e.f. 07.11.2024."
+    "remarks": "Suspension revoked w.e.f. 18-12-2024. Suspended w.e.f. 07.11.2024.",
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8165826",
@@ -235,7 +267,9 @@
     "recognitionValidUpto": "2026-09-24",
     "recognitionValidUptoRaw": "24.09.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "8166826",
@@ -249,7 +283,9 @@
     "recognitionValidUpto": "2027-01-07",
     "recognitionValidUptoRaw": "07.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "8166916",
@@ -263,7 +299,9 @@
     "recognitionValidUpto": "2027-01-13",
     "recognitionValidUptoRaw": "13.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "8167506",
@@ -277,7 +315,9 @@
     "recognitionValidUpto": "2027-02-25",
     "recognitionValidUptoRaw": "25.02.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 26-09-2025. SUSPENDED W.E.F. 08-08-2025."
+    "remarks": "Suspension revoked w.e.f. 26-09-2025. SUSPENDED W.E.F. 08-08-2025.",
+    "lat": 28.4031478,
+    "lng": 77.3105561
   },
   {
     "id": "9167906",
@@ -291,7 +331,9 @@
     "recognitionValidUpto": "2027-06-02",
     "recognitionValidUptoRaw": "02.06.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.9895406,
+    "lng": 77.1510394
   },
   {
     "id": "6168516",
@@ -305,7 +347,9 @@
     "recognitionValidUpto": "2027-08-03",
     "recognitionValidUptoRaw": "03.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 16.5115306,
+    "lng": 80.6160469
   },
   {
     "id": "8170806",
@@ -319,7 +363,9 @@
     "recognitionValidUpto": "2028-07-15",
     "recognitionValidUptoRaw": "15.07.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4670734,
+    "lng": 77.5137649
   },
   {
     "id": "8172006",
@@ -333,7 +379,9 @@
     "recognitionValidUpto": "2029-04-16",
     "recognitionValidUptoRaw": "16.04.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "5172106",
@@ -347,7 +395,9 @@
     "recognitionValidUpto": "2026-05-03",
     "recognitionValidUptoRaw": "03.05.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "6172206",
@@ -361,7 +411,9 @@
     "recognitionValidUpto": "2026-05-18",
     "recognitionValidUptoRaw": "18.05.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 17.6935526,
+    "lng": 83.2921297
   },
   {
     "id": "8172626",
@@ -375,7 +427,9 @@
     "recognitionValidUpto": "2026-06-15",
     "recognitionValidUptoRaw": "15.06.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "7174006",
@@ -389,7 +443,9 @@
     "recognitionValidUpto": "2026-09-19",
     "recognitionValidUptoRaw": "19.09.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.0215374,
+    "lng": 72.5800568
   },
   {
     "id": "7174321",
@@ -403,7 +459,9 @@
     "recognitionValidUpto": "2026-11-05",
     "recognitionValidUptoRaw": "05.11.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "8174526",
@@ -417,7 +475,9 @@
     "recognitionValidUpto": "2026-11-13",
     "recognitionValidUptoRaw": "13.11.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4031478,
+    "lng": 77.3105561
   },
   {
     "id": "5174906",
@@ -431,7 +491,9 @@
     "recognitionValidUpto": "2026-11-30",
     "recognitionValidUptoRaw": "30.11.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "8175206",
@@ -445,7 +507,9 @@
     "recognitionValidUpto": "2026-12-13",
     "recognitionValidUptoRaw": "13.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "8175706",
@@ -459,7 +523,9 @@
     "recognitionValidUpto": "2027-01-11",
     "recognitionValidUptoRaw": "11.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "7175806",
@@ -473,7 +539,9 @@
     "recognitionValidUpto": "2027-01-14",
     "recognitionValidUptoRaw": "14.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.4928092,
+    "lng": 73.138071
   },
   {
     "id": "6175606",
@@ -487,7 +555,9 @@
     "recognitionValidUpto": "2027-01-11",
     "recognitionValidUptoRaw": "11.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8176106",
@@ -501,7 +571,9 @@
     "recognitionValidUpto": "2027-02-08",
     "recognitionValidUptoRaw": "08.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4670734,
+    "lng": 77.5137649
   },
   {
     "id": "7176516",
@@ -515,7 +587,9 @@
     "recognitionValidUpto": "2027-02-28",
     "recognitionValidUptoRaw": "28.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.0215374,
+    "lng": 72.5800568
   },
   {
     "id": "8176606",
@@ -529,7 +603,9 @@
     "recognitionValidUpto": "2027-03-03",
     "recognitionValidUptoRaw": "03.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "8176726",
@@ -543,7 +619,9 @@
     "recognitionValidUpto": "2027-03-11",
     "recognitionValidUptoRaw": "11.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "8176906",
@@ -557,7 +635,9 @@
     "recognitionValidUpto": "2027-03-19",
     "recognitionValidUptoRaw": "19.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8178326",
@@ -571,7 +651,9 @@
     "recognitionValidUpto": "2027-05-15",
     "recognitionValidUptoRaw": "15.05.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "5178506",
@@ -585,7 +667,9 @@
     "recognitionValidUpto": "2027-06-28",
     "recognitionValidUptoRaw": "28.06.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.3104522,
+    "lng": 85.2748774
   },
   {
     "id": "8178606",
@@ -599,7 +683,9 @@
     "recognitionValidUpto": "2027-07-10",
     "recognitionValidUptoRaw": "10.07.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8179926",
@@ -613,7 +699,9 @@
     "recognitionValidUpto": "2027-08-28",
     "recognitionValidUptoRaw": "28.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7063083,
+    "lng": 77.1087892
   },
   {
     "id": "8180426",
@@ -627,7 +715,9 @@
     "recognitionValidUpto": "2027-10-03",
     "recognitionValidUptoRaw": "03.10.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "7182426",
@@ -641,7 +731,9 @@
     "recognitionValidUpto": "2027-11-17",
     "recognitionValidUptoRaw": "17.11.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.2973142,
+    "lng": 73.1942567
   },
   {
     "id": "6182836",
@@ -655,7 +747,9 @@
     "recognitionValidUpto": "2027-11-27",
     "recognitionValidUptoRaw": "27.11.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.2537619,
+    "lng": 80.0562572
   },
   {
     "id": "6184126",
@@ -669,7 +763,9 @@
     "recognitionValidUpto": "2028-03-05",
     "recognitionValidUptoRaw": "05.03.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "7184406",
@@ -683,7 +779,9 @@
     "recognitionValidUpto": "2028-03-17",
     "recognitionValidUptoRaw": "17.03.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.3850051,
+    "lng": 71.745261
   },
   {
     "id": "9184906",
@@ -697,7 +795,9 @@
     "recognitionValidUpto": "2028-04-23",
     "recognitionValidUptoRaw": "23.04.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.6908804,
+    "lng": 76.7114879
   },
   {
     "id": "8185026",
@@ -711,7 +811,9 @@
     "recognitionValidUpto": "2028-04-30",
     "recognitionValidUptoRaw": "30.04.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7172505,
+    "lng": 77.2869559
   },
   {
     "id": "8185306",
@@ -725,7 +827,9 @@
     "recognitionValidUpto": "2028-05-06",
     "recognitionValidUptoRaw": "06.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6933239,
+    "lng": 76.9332373
   },
   {
     "id": "8186436",
@@ -739,7 +843,9 @@
     "recognitionValidUpto": "2028-06-17",
     "recognitionValidUptoRaw": "17.06.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6933239,
+    "lng": 76.9332373
   },
   {
     "id": "8186526",
@@ -753,7 +859,9 @@
     "recognitionValidUpto": "2028-06-19",
     "recognitionValidUptoRaw": "19.06.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8187926",
@@ -767,7 +875,9 @@
     "recognitionValidUpto": "2028-09-07",
     "recognitionValidUptoRaw": "07.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "9188436",
@@ -781,7 +891,9 @@
     "recognitionValidUpto": "2028-09-18",
     "recognitionValidUptoRaw": "18.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 31.6092942,
+    "lng": 75.8459754
   },
   {
     "id": "6189726",
@@ -795,7 +907,9 @@
     "recognitionValidUpto": "2028-11-06",
     "recognitionValidUptoRaw": "06.11.2028",
     "currentStatus": "Suspended",
-    "remarks": "Suspended w.e.f. 30.04.2026"
+    "remarks": "Suspended w.e.f. 30.04.2026",
+    "lat": 17.360589,
+    "lng": 78.4740613
   },
   {
     "id": "5191706",
@@ -809,7 +923,9 @@
     "recognitionValidUpto": "2028-11-27",
     "recognitionValidUptoRaw": "27.11.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.5736296,
+    "lng": 88.3251045
   },
   {
     "id": "8192806",
@@ -823,7 +939,9 @@
     "recognitionValidUpto": "2028-12-07",
     "recognitionValidUptoRaw": "07.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8194926",
@@ -837,7 +955,9 @@
     "recognitionValidUpto": "2028-12-23",
     "recognitionValidUptoRaw": "23.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7063083,
+    "lng": 77.1087892
   },
   {
     "id": "9198106",
@@ -851,7 +971,9 @@
     "recognitionValidUpto": "2029-04-09",
     "recognitionValidUptoRaw": "09.04.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 33.6649297,
+    "lng": 75.1629584
   },
   {
     "id": "6108116",
@@ -865,7 +987,9 @@
     "recognitionValidUpto": "2027-03-31",
     "recognitionValidUptoRaw": "31.03.2027",
     "currentStatus": "Suspended",
-    "remarks": "Suspended w.e.f. 27.02.2026 Suspension revoked w.e.f. 06-11-2020. (Present status operative) Suspended w.e.f. 14.02.2020"
+    "remarks": "Suspended w.e.f. 27.02.2026 Suspension revoked w.e.f. 06-11-2020. (Present status operative) Suspended w.e.f. 14.02.2020",
+    "lat": 17.360589,
+    "lng": 78.4740613
   },
   {
     "id": "6108016",
@@ -879,7 +1003,9 @@
     "recognitionValidUpto": "2026-07-31",
     "recognitionValidUptoRaw": "31.07.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 29-11-2018 (Present status operative) Suspended w.e.f. 13-04-2018."
+    "remarks": "Suspension revoked w.e.f. 29-11-2018 (Present status operative) Suspended w.e.f. 13-04-2018.",
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "8127706",
@@ -893,7 +1019,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "9135626",
@@ -907,7 +1035,9 @@
     "recognitionValidUpto": "2029-03-19",
     "recognitionValidUptoRaw": "19.03.2029",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 28-11-2025. (Present status operative) SUSPENDED W.E.F. 21-11-2025. Suspension revoked w.e.f. 14-01-2020. (Present status operative) SUSPENDED W.E.F. 27-08-2019. Suspension revoked w.e.f. 04.05.2018. (Present status operative) Suspended w.e.f. 22.03.2018"
+    "remarks": "Suspension revoked w.e.f. 28-11-2025. (Present status operative) SUSPENDED W.E.F. 21-11-2025. Suspension revoked w.e.f. 14-01-2020. (Present status operative) SUSPENDED W.E.F. 27-08-2019. Suspension revoked w.e.f. 04.05.2018. (Present status operative) Suspended w.e.f. 22.03.2018",
+    "lat": 28.9895406,
+    "lng": 77.1510394
   },
   {
     "id": "9137826",
@@ -921,7 +1051,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 14-01-2020. (Present status operative) SUSPENDED W.E.F. 27-08-2019. Suspension revoked w.e.f. 04.07.2018. (Present status operative) Suspended w.e.f. 22.03.2018"
+    "remarks": "Suspension revoked w.e.f. 14-01-2020. (Present status operative) SUSPENDED W.E.F. 27-08-2019. Suspension revoked w.e.f. 04.07.2018. (Present status operative) Suspended w.e.f. 22.03.2018",
+    "lat": 28.9895406,
+    "lng": 77.1510394
   },
   {
     "id": "7139416",
@@ -935,7 +1067,9 @@
     "recognitionValidUpto": "2027-03-15",
     "recognitionValidUptoRaw": "15.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.3653598,
+    "lng": 73.3685437
   },
   {
     "id": "8141726",
@@ -949,7 +1083,9 @@
     "recognitionValidUpto": "2027-08-05",
     "recognitionValidUptoRaw": "05.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "9168306",
@@ -963,7 +1099,9 @@
     "recognitionValidUpto": "2027-07-26",
     "recognitionValidUptoRaw": "26.07.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.9895406,
+    "lng": 77.1510394
   },
   {
     "id": "8168806",
@@ -977,7 +1115,9 @@
     "recognitionValidUpto": "2027-09-02",
     "recognitionValidUptoRaw": "02.09.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6933239,
+    "lng": 76.9332373
   },
   {
     "id": "8170306",
@@ -991,7 +1131,9 @@
     "recognitionValidUpto": "2028-05-22",
     "recognitionValidUptoRaw": "22.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "6174606",
@@ -1005,7 +1147,9 @@
     "recognitionValidUpto": "2026-11-14",
     "recognitionValidUptoRaw": "14.11.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "7175421",
@@ -1019,7 +1163,9 @@
     "recognitionValidUpto": "2026-12-21",
     "recognitionValidUptoRaw": "21.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.2973142,
+    "lng": 73.1942567
   },
   {
     "id": "6175936",
@@ -1033,7 +1179,9 @@
     "recognitionValidUpto": "2027-01-10",
     "recognitionValidUptoRaw": "10.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8186026",
@@ -1047,7 +1195,9 @@
     "recognitionValidUpto": "2028-06-04",
     "recognitionValidUptoRaw": "04.06.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4031478,
+    "lng": 77.3105561
   },
   {
     "id": "7188906",
@@ -1061,7 +1211,9 @@
     "recognitionValidUpto": "2028-10-26",
     "recognitionValidUptoRaw": "26.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.0215374,
+    "lng": 72.5800568
   },
   {
     "id": "8189436",
@@ -1075,7 +1227,9 @@
     "recognitionValidUpto": "2028-10-27",
     "recognitionValidUptoRaw": "27.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4031478,
+    "lng": 77.3105561
   },
   {
     "id": "8195736",
@@ -1089,7 +1243,9 @@
     "recognitionValidUpto": "2029-01-07",
     "recognitionValidUptoRaw": "07.01.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "8118116",
@@ -1103,7 +1259,9 @@
     "recognitionValidUpto": "2027-05-31",
     "recognitionValidUptoRaw": "31.05.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 06.04.2022. (Present status operative) SUSPENDED W.E.F. 18-01-2022"
+    "remarks": "Suspension revoked w.e.f. 06.04.2022. (Present status operative) SUSPENDED W.E.F. 18-01-2022",
+    "lat": 23.2584857,
+    "lng": 77.401989
   },
   {
     "id": "8119706",
@@ -1117,7 +1275,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.9154576,
+    "lng": 75.8189817
   },
   {
     "id": "6104524",
@@ -1131,7 +1291,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.1305159,
+    "lng": 79.9243758
   },
   {
     "id": "7116134",
@@ -1145,7 +1307,9 @@
     "recognitionValidUpto": "2027-12-31",
     "recognitionValidUptoRaw": "31.12.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.0215374,
+    "lng": 72.5800568
   },
   {
     "id": "9120034",
@@ -1159,7 +1323,9 @@
     "recognitionValidUpto": "2027-01-06",
     "recognitionValidUptoRaw": "06.01.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 15.12.2023. (Present status operative) Suspended w.e.f. 08.12.2023"
+    "remarks": "Suspension revoked w.e.f. 15.12.2023. (Present status operative) Suspended w.e.f. 08.12.2023",
+    "lat": 31.6356659,
+    "lng": 74.8787496
   },
   {
     "id": "7123534",
@@ -1173,7 +1339,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.877263,
+    "lng": 75.3390241
   },
   {
     "id": "8100534",
@@ -1187,7 +1355,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.2584857,
+    "lng": 77.401989
   },
   {
     "id": "5102634",
@@ -1201,7 +1371,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 20.09.2024. (Present status operative) SUSPENDED W.E.F. 06-09-2024"
+    "remarks": "Suspension revoked w.e.f. 20.09.2024. (Present status operative) SUSPENDED W.E.F. 06-09-2024",
+    "lat": 20.2602964,
+    "lng": 85.8394521
   },
   {
     "id": "6104634",
@@ -1215,7 +1387,9 @@
     "recognitionValidUpto": "2027-03-31",
     "recognitionValidUptoRaw": "31.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "5117534",
@@ -1229,7 +1403,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.1805978,
+    "lng": 91.753943
   },
   {
     "id": "5118334",
@@ -1243,7 +1419,9 @@
     "recognitionValidUpto": "2028-10-07",
     "recognitionValidUptoRaw": "07.10.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 25-08-2025. (Present status operative) Suspended w.e.f. 02.05.2025"
+    "remarks": "Suspension revoked w.e.f. 25-08-2025. (Present status operative) Suspended w.e.f. 02.05.2025",
+    "lat": 25.6905702,
+    "lng": 85.2090351
   },
   {
     "id": "5116334",
@@ -1257,7 +1435,9 @@
     "recognitionValidUpto": "2027-12-14",
     "recognitionValidUptoRaw": "14.12.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.028124,
+    "lng": 88.0632655
   },
   {
     "id": "6111634",
@@ -1271,7 +1451,9 @@
     "recognitionValidUpto": "2027-02-23",
     "recognitionValidUptoRaw": "23.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 15.8159044,
+    "lng": 78.0256065
   },
   {
     "id": "8122834",
@@ -1285,7 +1467,9 @@
     "recognitionValidUpto": "2029-02-21",
     "recognitionValidUptoRaw": "21.02.2029",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 13-01-2025. Suspended w.e.f. 24.10.2025"
+    "remarks": "Suspension revoked w.e.f. 13-01-2025. Suspended w.e.f. 24.10.2025",
+    "lat": 26.9154576,
+    "lng": 75.8189817
   },
   {
     "id": "9102534",
@@ -1299,7 +1483,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.8381,
+    "lng": 80.9346001
   },
   {
     "id": "6113734",
@@ -1313,7 +1499,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.3051828,
+    "lng": 76.6553609
   },
   {
     "id": "9121934",
@@ -1327,7 +1515,9 @@
     "recognitionValidUpto": "2028-08-09",
     "recognitionValidUptoRaw": "09.08.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 29.3912753,
+    "lng": 76.9771675
   },
   {
     "id": "7105101",
@@ -1341,7 +1531,9 @@
     "recognitionValidUpto": "2028-09-15",
     "recognitionValidUptoRaw": "15.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "6120236",
@@ -1355,7 +1547,9 @@
     "recognitionValidUpto": "2027-02-02",
     "recognitionValidUptoRaw": "02.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "6101024",
@@ -1369,7 +1563,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8100924",
@@ -1383,7 +1579,9 @@
     "recognitionValidUpto": "2027-06-30",
     "recognitionValidUptoRaw": "30.06.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.2584857,
+    "lng": 77.401989
   },
   {
     "id": "6131326",
@@ -1397,7 +1595,9 @@
     "recognitionValidUpto": "2027-06-08",
     "recognitionValidUptoRaw": "08.06.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "6133516",
@@ -1411,7 +1611,9 @@
     "recognitionValidUpto": "2028-04-05",
     "recognitionValidUptoRaw": "05-04-2028",
     "currentStatus": "Suspended",
-    "remarks": "Suspended w.e.f. 09- 02-2026 Suspension revoked w.e.f. 05-08-2019. (Present status operative) Suspended w.e.f. 20.05.2019."
+    "remarks": "Suspended w.e.f. 09- 02-2026 Suspension revoked w.e.f. 05-08-2019. (Present status operative) Suspended w.e.f. 20.05.2019.",
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "8134626",
@@ -1425,7 +1627,9 @@
     "recognitionValidUpto": "2028-09-19",
     "recognitionValidUptoRaw": "19-09-2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "8135126",
@@ -1439,7 +1643,9 @@
     "recognitionValidUpto": "2028-10-23",
     "recognitionValidUptoRaw": "23.10.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 20-07-2018. (Present status operative) Suspended w.e.f. 25.05.2018."
+    "remarks": "Suspension revoked w.e.f. 20-07-2018. (Present status operative) Suspended w.e.f. 25.05.2018.",
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "7136414",
@@ -1453,7 +1659,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.3850051,
+    "lng": 71.745261
   },
   {
     "id": "8136916",
@@ -1467,7 +1675,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 25.05.2021 (Present status operative) Suspended w.e.f. 09- 12-2020. Validity extended upto 31-12-2020 due to COVID-19 situation"
+    "remarks": "Suspension revoked w.e.f. 25.05.2021 (Present status operative) Suspended w.e.f. 09- 12-2020. Validity extended upto 31-12-2020 due to COVID-19 situation",
+    "lat": 22.7203616,
+    "lng": 75.8681996
   },
   {
     "id": "8137526",
@@ -1481,7 +1691,9 @@
     "recognitionValidUpto": "2026-07-17",
     "recognitionValidUptoRaw": "17.07.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 19-10-2023. SUSPENDED w.e.f. 10-08-2023. Suspension revoked w.e.f. 22-02-2023. SUSPENDED w.e.f. 24-01-2023."
+    "remarks": "Suspension revoked w.e.f. 19-10-2023. SUSPENDED w.e.f. 10-08-2023. Suspension revoked w.e.f. 22-02-2023. SUSPENDED w.e.f. 24-01-2023.",
+    "lat": 26.9154576,
+    "lng": 75.8189817
   },
   {
     "id": "6137634",
@@ -1495,7 +1707,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 9.9679032,
+    "lng": 76.2444378
   },
   {
     "id": "6138124",
@@ -1509,7 +1723,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Validity extended upto 31-12-2020 due to COVID-19 situation"
+    "remarks": "Validity extended upto 31-12-2020 due to COVID-19 situation",
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "7138534",
@@ -1523,7 +1739,9 @@
     "recognitionValidUpto": "2023-12-31",
     "recognitionValidUptoRaw": "31.12.2023",
     "currentStatus": "Suspended",
-    "remarks": "SUSPENDED W.E.F. 06-09-2024 Suspension revoked w.e.f. 16-11-2022. SUSPENDED W.E.F. 23-09-2021."
+    "remarks": "SUSPENDED W.E.F. 06-09-2024 Suspension revoked w.e.f. 16-11-2022. SUSPENDED W.E.F. 23-09-2021.",
+    "lat": 19.092952,
+    "lng": 74.7493451
   },
   {
     "id": "8139626",
@@ -1537,7 +1755,9 @@
     "recognitionValidUpto": "2027-04-05",
     "recognitionValidUptoRaw": "05.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "6139834",
@@ -1551,7 +1771,9 @@
     "recognitionValidUpto": "2027-05-22",
     "recognitionValidUptoRaw": "22.05.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 9.9261153,
+    "lng": 78.1140983
   },
   {
     "id": "6141334",
@@ -1565,7 +1787,9 @@
     "recognitionValidUpto": "2027-06-06",
     "recognitionValidUptoRaw": "06.06.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 11-12-2019 (Present status operative) SUSPENDED W.E.F. 13-09-2019."
+    "remarks": "Suspension revoked w.e.f. 11-12-2019 (Present status operative) SUSPENDED W.E.F. 13-09-2019.",
+    "lat": 16.5115306,
+    "lng": 80.6160469
   },
   {
     "id": "6162524",
@@ -1579,7 +1803,9 @@
     "recognitionValidUpto": "2027-09-24",
     "recognitionValidUptoRaw": "24.09.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 10.0728444,
+    "lng": 78.7795194
   },
   {
     "id": "5163604",
@@ -1593,7 +1819,9 @@
     "recognitionValidUpto": "2028-04-25",
     "recognitionValidUptoRaw": "25.04.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 21.2380912,
+    "lng": 81.6336993
   },
   {
     "id": "8167006",
@@ -1607,7 +1835,9 @@
     "recognitionValidUpto": "2027-01-13",
     "recognitionValidUptoRaw": "13.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "6167704",
@@ -1621,7 +1851,9 @@
     "recognitionValidUpto": "2027-05-02",
     "recognitionValidUptoRaw": "02.05.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 27-12-2024. (Present status operative) Suspended w.e.f 21.10.2024"
+    "remarks": "Suspension revoked w.e.f. 27-12-2024. (Present status operative) Suspended w.e.f 21.10.2024",
+    "lat": 11.3323723,
+    "lng": 78.6098639
   },
   {
     "id": "7170010",
@@ -1635,7 +1867,9 @@
     "recognitionValidUpto": "2028-04-07",
     "recognitionValidUptoRaw": "07.04.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "8171106",
@@ -1649,7 +1883,9 @@
     "recognitionValidUpto": "2028-07-28",
     "recognitionValidUptoRaw": "28.07.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "5173304",
@@ -1663,7 +1899,9 @@
     "recognitionValidUpto": "2026-07-20",
     "recognitionValidUptoRaw": "20.07.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.8312377,
+    "lng": 91.2823821
   },
   {
     "id": "5173614",
@@ -1677,7 +1915,9 @@
     "recognitionValidUpto": "2026-08-09",
     "recognitionValidUptoRaw": "09.08.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.3700501,
+    "lng": 85.3250387
   },
   {
     "id": "7173804",
@@ -1691,7 +1931,9 @@
     "recognitionValidUpto": "2026-09-10",
     "recognitionValidUptoRaw": "10.09.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 20.0967555,
+    "lng": 79.5045475
   },
   {
     "id": "7174706",
@@ -1705,7 +1947,9 @@
     "recognitionValidUpto": "2026-11-20",
     "recognitionValidUptoRaw": "20.11.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "8177224",
@@ -1719,7 +1963,9 @@
     "recognitionValidUpto": "2027-03-25",
     "recognitionValidUptoRaw": "25.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "9178004",
@@ -1733,7 +1979,9 @@
     "recognitionValidUpto": "2027-04-24",
     "recognitionValidUptoRaw": "24.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.3255646,
+    "lng": 78.0436813
   },
   {
     "id": "7178936",
@@ -1747,7 +1995,9 @@
     "recognitionValidUpto": "2025-07-10",
     "recognitionValidUptoRaw": "10.07.2025",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.0215374,
+    "lng": 72.5800568
   },
   {
     "id": "8180036",
@@ -1761,7 +2011,9 @@
     "recognitionValidUpto": "2025-08-29",
     "recognitionValidUptoRaw": "29.08.2025",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 21.9544729,
+    "lng": 75.7521248
   },
   {
     "id": "6180226",
@@ -1775,7 +2027,9 @@
     "recognitionValidUpto": "2027-09-16",
     "recognitionValidUptoRaw": "16.09.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8180306",
@@ -1789,7 +2043,9 @@
     "recognitionValidUpto": "2027-09-24",
     "recognitionValidUptoRaw": "24.09.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.9154576,
+    "lng": 75.8189817
   },
   {
     "id": "8180826",
@@ -1803,7 +2059,9 @@
     "recognitionValidUpto": "2027-10-15",
     "recognitionValidUptoRaw": "15.10.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "9182336",
@@ -1817,7 +2075,9 @@
     "recognitionValidUpto": "2025-11-11",
     "recognitionValidUptoRaw": "11-11-2025",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.1794814,
+    "lng": 75.0471098
   },
   {
     "id": "6183816",
@@ -1831,7 +2091,9 @@
     "recognitionValidUpto": "2028-02-03",
     "recognitionValidUptoRaw": "03.02.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 9.9679032,
+    "lng": 76.2444378
   },
   {
     "id": "7186336",
@@ -1845,7 +2107,9 @@
     "recognitionValidUpto": "2026-06-22",
     "recognitionValidUptoRaw": "22.06.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.3053263,
+    "lng": 70.8028377
   },
   {
     "id": "7186736",
@@ -1859,7 +2123,9 @@
     "recognitionValidUpto": "2028-07-08",
     "recognitionValidUptoRaw": "08.07.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.0215374,
+    "lng": 72.5800568
   },
   {
     "id": "8195606",
@@ -1873,7 +2139,9 @@
     "recognitionValidUpto": "2029-01-07",
     "recognitionValidUptoRaw": "07.01.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "7195836",
@@ -1887,7 +2155,9 @@
     "recognitionValidUpto": "2027-01-12",
     "recognitionValidUptoRaw": "12.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 20.8428827,
+    "lng": 75.5261246
   },
   {
     "id": "9127026",
@@ -1901,7 +2171,9 @@
     "recognitionValidUpto": "2028-06-23",
     "recognitionValidUptoRaw": "23.06.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 26-05-2015 (Present status operative) Suspended w.e.f. 14 May 2015."
+    "remarks": "Suspension revoked w.e.f. 26-05-2015 (Present status operative) Suspended w.e.f. 14 May 2015.",
+    "lat": 28.8696747,
+    "lng": 77.1198167
   },
   {
     "id": "8131406",
@@ -1915,7 +2187,9 @@
     "recognitionValidUpto": "2027-06-17",
     "recognitionValidUptoRaw": "17.06.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 18-11-2019. (Present status operative) SUSPENDED W.E.F. 28-08-2019."
+    "remarks": "Suspension revoked w.e.f. 18-11-2019. (Present status operative) SUSPENDED W.E.F. 28-08-2019.",
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "9138006",
@@ -1929,7 +2203,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 11-07-2023. (Present status operative) Suspended w.e.f. 14-06-2023. Suspension revoked w.e.f. 15-10-2019. (Present status operative) Suspended w.e.f. 19-07-2019."
+    "remarks": "Suspension revoked w.e.f. 11-07-2023. (Present status operative) Suspended w.e.f. 14-06-2023. Suspension revoked w.e.f. 15-10-2019. (Present status operative) Suspended w.e.f. 19-07-2019.",
+    "lat": 28.9895406,
+    "lng": 77.1510394
   },
   {
     "id": "7165436",
@@ -1943,7 +2219,9 @@
     "recognitionValidUpto": "2026-08-09",
     "recognitionValidUptoRaw": "09.08.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.3053263,
+    "lng": 70.8028377
   },
   {
     "id": "8169106",
@@ -1957,7 +2235,9 @@
     "recognitionValidUpto": "2027-10-26",
     "recognitionValidUptoRaw": "26.10.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "9179506",
@@ -1971,7 +2251,9 @@
     "recognitionValidUpto": "2027-08-21",
     "recognitionValidUptoRaw": "21.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "8186836",
@@ -1985,7 +2267,9 @@
     "recognitionValidUpto": "2028-07-23",
     "recognitionValidUptoRaw": "23.07.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7118315,
+    "lng": 77.1238141
   },
   {
     "id": "8193306",
@@ -1999,7 +2283,9 @@
     "recognitionValidUpto": "2028-12-09",
     "recognitionValidUptoRaw": "09.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "9197626",
@@ -2013,7 +2299,9 @@
     "recognitionValidUpto": "2029-03-15",
     "recognitionValidUptoRaw": "15.03.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.9953758,
+    "lng": 77.0233627
   },
   {
     "id": "5127516",
@@ -2027,7 +2315,9 @@
     "recognitionValidUpto": "2028-10-07",
     "recognitionValidUptoRaw": "07.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "7118234",
@@ -2041,7 +2331,9 @@
     "recognitionValidUpto": "2027-10-09",
     "recognitionValidUptoRaw": "09.10.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 27-12-2024. (Present status operative) SUSPENDED W.E.F. 06-09-2024"
+    "remarks": "Suspension revoked w.e.f. 27-12-2024. (Present status operative) SUSPENDED W.E.F. 06-09-2024",
+    "lat": 23.2232877,
+    "lng": 72.6492267
   },
   {
     "id": "7120616",
@@ -2055,7 +2347,9 @@
     "recognitionValidUpto": "2027-05-25",
     "recognitionValidUptoRaw": "25.05.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.3653598,
+    "lng": 73.3685437
   },
   {
     "id": "6130616",
@@ -2069,7 +2363,9 @@
     "recognitionValidUpto": "2027-04-20",
     "recognitionValidUptoRaw": "20.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "7101125",
@@ -2083,7 +2379,9 @@
     "recognitionValidUpto": "2028-11-30",
     "recognitionValidUptoRaw": "30.11.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.2973142,
+    "lng": 73.1942567
   },
   {
     "id": "5109624",
@@ -2097,7 +2395,9 @@
     "recognitionValidUpto": "2027-04-19",
     "recognitionValidUptoRaw": "19.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "8101924",
@@ -2111,7 +2411,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "7108424",
@@ -2125,7 +2427,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "6117624",
@@ -2139,7 +2443,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "6101724",
@@ -2153,7 +2459,9 @@
     "recognitionValidUpto": "2021-07-06",
     "recognitionValidUptoRaw": "06.07.2021",
     "currentStatus": "Deferred",
-    "remarks": "DEFERRED W.E.F. 08-10-2021."
+    "remarks": "DEFERRED W.E.F. 08-10-2021.",
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "6132436",
@@ -2167,7 +2475,9 @@
     "recognitionValidUpto": "2027-10-25",
     "recognitionValidUptoRaw": "25.10.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 17.360589,
+    "lng": 78.4740613
   },
   {
     "id": "7132925",
@@ -2181,7 +2491,9 @@
     "recognitionValidUpto": "2027-12-22",
     "recognitionValidUptoRaw": "22.12.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 30-09-2025. Present status operative. Suspended W.E.F 30.04.2025"
+    "remarks": "Suspension revoked w.e.f. 30-09-2025. Present status operative. Suspended W.E.F 30.04.2025",
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "6133416",
@@ -2195,7 +2507,9 @@
     "recognitionValidUpto": "2028-03-14",
     "recognitionValidUptoRaw": "14.03.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "5135906",
@@ -2209,7 +2523,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 06-08-2024. Present status operative. Suspended w.e.f. 16.07.2024"
+    "remarks": "Suspension revoked w.e.f. 06-08-2024. Present status operative. Suspended w.e.f. 16.07.2024",
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "8138926",
@@ -2223,7 +2539,9 @@
     "recognitionValidUpto": "2027-01-03",
     "recognitionValidUptoRaw": "03.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.7203616,
+    "lng": 75.8681996
   },
   {
     "id": "7140126",
@@ -2237,7 +2555,9 @@
     "recognitionValidUpto": "2027-06-10",
     "recognitionValidUptoRaw": "10.06.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 28-05-2025. Present status operative. Suspended W.E.F 30.04.2025"
+    "remarks": "Suspension revoked w.e.f. 28-05-2025. Present status operative. Suspended W.E.F 30.04.2025",
+    "lat": 22.2973142,
+    "lng": 73.1942567
   },
   {
     "id": "5141106",
@@ -2251,7 +2571,9 @@
     "recognitionValidUpto": "2027-07-08",
     "recognitionValidUptoRaw": "08.07.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 13-12-2019. Present status operative. Suspended w.e.f. 26 July 2019"
+    "remarks": "Suspension revoked w.e.f. 13-12-2019. Present status operative. Suspended w.e.f. 26 July 2019",
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "8141526",
@@ -2265,7 +2587,9 @@
     "recognitionValidUpto": "2027-07-19",
     "recognitionValidUptoRaw": "19.07.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 20-01-2021. Present status operative. SUSPENDED W.E.F. 08-12-2020."
+    "remarks": "Suspension revoked w.e.f. 20-01-2021. Present status operative. SUSPENDED W.E.F. 08-12-2020.",
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "8164006",
@@ -2279,7 +2603,9 @@
     "recognitionValidUpto": "2028-05-27",
     "recognitionValidUptoRaw": "27.05.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 19-02-2025. Present status operative. SUSPENDED W.E.F. 30-01-2025."
+    "remarks": "Suspension revoked w.e.f. 19-02-2025. Present status operative. SUSPENDED W.E.F. 30-01-2025.",
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "7169736",
@@ -2293,7 +2619,9 @@
     "recognitionValidUpto": "2028-02-02",
     "recognitionValidUptoRaw": "02.02.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "6171206",
@@ -2307,7 +2635,9 @@
     "recognitionValidUpto": "2028-08-02",
     "recognitionValidUptoRaw": "02.08.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "7171526",
@@ -2321,7 +2651,9 @@
     "recognitionValidUpto": "2025-09-13",
     "recognitionValidUptoRaw": "13.09.2025",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.757249,
+    "lng": 73.0931199
   },
   {
     "id": "7171806",
@@ -2335,7 +2667,9 @@
     "recognitionValidUpto": "2028-11-13",
     "recognitionValidUptoRaw": "13.11.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.3653598,
+    "lng": 73.3685437
   },
   {
     "id": "7175321",
@@ -2349,7 +2683,9 @@
     "recognitionValidUpto": "2026-12-19",
     "recognitionValidUptoRaw": "19.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.2973142,
+    "lng": 73.1942567
   },
   {
     "id": "9179806",
@@ -2363,7 +2699,9 @@
     "recognitionValidUpto": "2027-08-26",
     "recognitionValidUptoRaw": "26.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.9154576,
+    "lng": 75.8189817
   },
   {
     "id": "9179706",
@@ -2377,7 +2715,9 @@
     "recognitionValidUpto": "2027-08-26",
     "recognitionValidUptoRaw": "26.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 27.1303344,
+    "lng": 80.859666
   },
   {
     "id": "6185426",
@@ -2391,7 +2731,9 @@
     "recognitionValidUpto": "2028-05-07",
     "recognitionValidUptoRaw": "07.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "6190736",
@@ -2405,7 +2747,9 @@
     "recognitionValidUpto": "2028-11-12",
     "recognitionValidUptoRaw": "12.11.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 17.8495919,
+    "lng": 79.1151663
   },
   {
     "id": "7192524",
@@ -2419,7 +2763,9 @@
     "recognitionValidUpto": "2028-12-03",
     "recognitionValidUptoRaw": "03.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "8197426",
@@ -2433,7 +2779,9 @@
     "recognitionValidUpto": "2029-03-11",
     "recognitionValidUptoRaw": "11.03.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7320192,
+    "lng": 77.1853448
   },
   {
     "id": "8186926",
@@ -2447,7 +2795,9 @@
     "recognitionValidUpto": "2028-07-15",
     "recognitionValidUptoRaw": "15.07.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 30-03-2026. Present status operative. Suspended w.e.f. 10- 02-2026"
+    "remarks": "Suspension revoked w.e.f. 30-03-2026. Present status operative. Suspended w.e.f. 10- 02-2026",
+    "lat": 28.4031478,
+    "lng": 77.3105561
   },
   {
     "id": "6114324",
@@ -2461,7 +2811,9 @@
     "recognitionValidUpto": "2028-12-06",
     "recognitionValidUptoRaw": "06.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 10.7873692,
+    "lng": 76.4742172
   },
   {
     "id": "8112814",
@@ -2475,7 +2827,9 @@
     "recognitionValidUpto": "2028-05-31",
     "recognitionValidUptoRaw": "31.05.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 19-1-2016. Present status operative. Suspended w.e.f. 30- 10-2015"
+    "remarks": "Suspension revoked w.e.f. 19-1-2016. Present status operative. Suspended w.e.f. 30- 10-2015",
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8131215",
@@ -2489,7 +2843,9 @@
     "recognitionValidUpto": "2027-06-08",
     "recognitionValidUptoRaw": "08.06.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "8123835",
@@ -2503,7 +2859,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 15-07-20 (Present status operative) Suspended w.e.f. 02- 01-2020. Suspension revoked w.e.f. 10-04-2019 (Present status operative) Suspended w.e.f. 04- 04-2019"
+    "remarks": "Suspension revoked w.e.f. 15-07-20 (Present status operative) Suspended w.e.f. 02- 01-2020. Suspension revoked w.e.f. 10-04-2019 (Present status operative) Suspended w.e.f. 04- 04-2019",
+    "lat": 28.9895406,
+    "lng": 77.1510394
   },
   {
     "id": "7124016",
@@ -2517,7 +2875,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 18-04-2019 (Present status operative) Suspended w.e.f. 01- 03-2019."
+    "remarks": "Suspension revoked w.e.f. 18-04-2019 (Present status operative) Suspended w.e.f. 01- 03-2019.",
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "8135716",
@@ -2531,7 +2891,9 @@
     "recognitionValidUpto": "2029-03-09",
     "recognitionValidUptoRaw": "09.03.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "8166516",
@@ -2545,7 +2907,9 @@
     "recognitionValidUpto": "2026-11-25",
     "recognitionValidUptoRaw": "25.11.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "8188216",
@@ -2559,7 +2923,9 @@
     "recognitionValidUpto": "2028-09-16",
     "recognitionValidUptoRaw": "16.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "7115716",
@@ -2573,7 +2939,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 20-07-2023 (Present status operative) Suspended w.e.f. 08.06.2023 Suspension revoked w.e.f. 16-10-2015 (Present status operative) Suspended w.e.f. 04 Aug 2015"
+    "remarks": "Suspension revoked w.e.f. 20-07-2023 (Present status operative) Suspended w.e.f. 08.06.2023 Suspension revoked w.e.f. 16-10-2015 (Present status operative) Suspended w.e.f. 04 Aug 2015",
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "8125006",
@@ -2587,7 +2955,9 @@
     "recognitionValidUpto": "2027-09-30",
     "recognitionValidUptoRaw": "30.09.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 27-07-2023 (Present status operative) Suspended w.e.f. 17- 08-2022. Suspension revoked w.e.f. 01-10-2015 Suspended w.e.f. 30 April 2015."
+    "remarks": "Suspension revoked w.e.f. 27-07-2023 (Present status operative) Suspended w.e.f. 17- 08-2022. Suspension revoked w.e.f. 01-10-2015 Suspended w.e.f. 30 April 2015.",
+    "lat": 27.1303344,
+    "lng": 80.859666
   },
   {
     "id": "7109836",
@@ -2601,7 +2971,9 @@
     "recognitionValidUpto": "2027-07-15",
     "recognitionValidUptoRaw": "15.07.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 08-05-2024. Suspended w.e.f. 19.09.2023."
+    "remarks": "Suspension revoked w.e.f. 08-05-2024. Suspended w.e.f. 19.09.2023.",
+    "lat": 23.0215374,
+    "lng": 72.5800568
   },
   {
     "id": "7137016",
@@ -2615,7 +2987,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.0215374,
+    "lng": 72.5800568
   },
   {
     "id": "6180326",
@@ -2629,7 +3003,9 @@
     "recognitionValidUpto": "2027-09-30",
     "recognitionValidUptoRaw": "30.09.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8166106",
@@ -2643,7 +3019,9 @@
     "recognitionValidUpto": "2026-10-28",
     "recognitionValidUptoRaw": "28.10.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 23-05-2025. Suspended w.e.f. 24.03.2025."
+    "remarks": "Suspension revoked w.e.f. 23-05-2025. Suspended w.e.f. 24.03.2025.",
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "6170916",
@@ -2657,7 +3035,9 @@
     "recognitionValidUpto": "2028-07-13",
     "recognitionValidUptoRaw": "13.07.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 11.6469616,
+    "lng": 78.2106958
   },
   {
     "id": "5172706",
@@ -2671,7 +3051,9 @@
     "recognitionValidUpto": "2026-06-20",
     "recognitionValidUptoRaw": "20.06.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "7173406",
@@ -2685,7 +3067,9 @@
     "recognitionValidUpto": "2026-07-30",
     "recognitionValidUptoRaw": "30.07.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.5670323,
+    "lng": 76.4164557
   },
   {
     "id": "6177526",
@@ -2699,7 +3083,9 @@
     "recognitionValidUpto": "2027-04-03",
     "recognitionValidUptoRaw": "03.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8182606",
@@ -2713,7 +3099,9 @@
     "recognitionValidUpto": "2027-11-19",
     "recognitionValidUptoRaw": "19.11.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8184306",
@@ -2727,7 +3115,9 @@
     "recognitionValidUpto": "2028-03-11",
     "recognitionValidUptoRaw": "11.03.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8188316",
@@ -2741,7 +3131,9 @@
     "recognitionValidUpto": "2028-09-18",
     "recognitionValidUptoRaw": "18.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 25.470994,
+    "lng": 74.6961316
   },
   {
     "id": "9188536",
@@ -2755,7 +3147,9 @@
     "recognitionValidUpto": "2028-09-21",
     "recognitionValidUptoRaw": "21.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.3843674,
+    "lng": 76.770421
   },
   {
     "id": "8189526",
@@ -2769,7 +3163,9 @@
     "recognitionValidUpto": "2028-10-30",
     "recognitionValidUptoRaw": "30.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7320192,
+    "lng": 77.1853448
   },
   {
     "id": "7126926",
@@ -2783,7 +3179,9 @@
     "recognitionValidUpto": "2028-06-20",
     "recognitionValidUptoRaw": "20.06.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 22-01-2018. Suspended w.e.f. 28- 12-2017. Suspension revoked w.e.f. 23-09-2016. Present status operative"
+    "remarks": "Suspension revoked w.e.f. 22-01-2018. Suspended w.e.f. 28- 12-2017. Suspension revoked w.e.f. 23-09-2016. Present status operative",
+    "lat": 19.5670323,
+    "lng": 76.4164557
   },
   {
     "id": "9122136",
@@ -2797,7 +3195,9 @@
     "recognitionValidUpto": "2028-09-12",
     "recognitionValidUptoRaw": "12.09.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 12-09-2023. (Present status operative). Suspended w.e.f. 27-06-2023. Suspension revoked w.e.f. 23-10-2018. (Present status operative). Suspended w.e.f. 02- 04-2018."
+    "remarks": "Suspension revoked w.e.f. 12-09-2023. (Present status operative). Suspended w.e.f. 27-06-2023. Suspension revoked w.e.f. 23-10-2018. (Present status operative). Suspended w.e.f. 02- 04-2018.",
+    "lat": 30.3663493,
+    "lng": 76.8200483
   },
   {
     "id": "7131116",
@@ -2811,7 +3211,9 @@
     "recognitionValidUpto": "2027-06-01",
     "recognitionValidUptoRaw": "01.06.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.296681,
+    "lng": 73.2535718
   },
   {
     "id": "9137406",
@@ -2825,7 +3227,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 01.08.2018. (Present status operative) Suspended w.e.f. 20.03.2018"
+    "remarks": "Suspension revoked w.e.f. 01.08.2018. (Present status operative) Suspended w.e.f. 20.03.2018",
+    "lat": 29.3912753,
+    "lng": 76.9771675
   },
   {
     "id": "7161816",
@@ -2839,7 +3243,9 @@
     "recognitionValidUpto": "2027-08-23",
     "recognitionValidUptoRaw": "23.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "7167306",
@@ -2853,7 +3259,9 @@
     "recognitionValidUpto": "2027-02-07",
     "recognitionValidUptoRaw": "07.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.296681,
+    "lng": 73.2535718
   },
   {
     "id": "7173706",
@@ -2867,7 +3275,9 @@
     "recognitionValidUpto": "2026-08-21",
     "recognitionValidUptoRaw": "21.08.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.3053263,
+    "lng": 70.8028377
   },
   {
     "id": "8175006",
@@ -2881,7 +3291,9 @@
     "recognitionValidUpto": "2026-12-03",
     "recognitionValidUptoRaw": "03.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "6176216",
@@ -2895,7 +3307,9 @@
     "recognitionValidUpto": "2027-02-15",
     "recognitionValidUptoRaw": "15.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "6183136",
@@ -2909,7 +3323,9 @@
     "recognitionValidUpto": "2027-12-02",
     "recognitionValidUptoRaw": "02.12.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.3051828,
+    "lng": 76.6553609
   },
   {
     "id": "8187226",
@@ -2923,7 +3339,9 @@
     "recognitionValidUpto": "2028-08-06",
     "recognitionValidUptoRaw": "06.08.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "7118404",
@@ -2937,7 +3355,9 @@
     "recognitionValidUpto": "2028-06-30",
     "recognitionValidUptoRaw": "30.06.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "9126034",
@@ -2951,7 +3371,9 @@
     "recognitionValidUpto": "2028-02-17",
     "recognitionValidUptoRaw": "17.02.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.9090157,
+    "lng": 75.851601
   },
   {
     "id": "6124716",
@@ -2965,7 +3387,9 @@
     "recognitionValidUpto": "2027-07-02",
     "recognitionValidUptoRaw": "02.07.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 9.9679032,
+    "lng": 76.2444378
   },
   {
     "id": "8123735",
@@ -2979,7 +3403,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 30-01-2026. Suspended w.e.f. 21- 11-2025"
+    "remarks": "Suspension revoked w.e.f. 30-01-2026. Suspended w.e.f. 21- 11-2025",
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "9108716",
@@ -2993,7 +3419,9 @@
     "recognitionValidUpto": "2028-07-31",
     "recognitionValidUptoRaw": "31.07.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 28.12.2015 (Present status operative) Suspended w.e.f. 23- 11-2015"
+    "remarks": "Suspension revoked w.e.f. 28.12.2015 (Present status operative) Suspended w.e.f. 23- 11-2015",
+    "lat": 30.6975401,
+    "lng": 76.8551066
   },
   {
     "id": "6126316",
@@ -3007,7 +3435,9 @@
     "recognitionValidUpto": "2028-03-18",
     "recognitionValidUptoRaw": "18.03.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 28-10-2019 (Present status operative) Suspended w.e.f. 13- 08-2019."
+    "remarks": "Suspension revoked w.e.f. 28-10-2019 (Present status operative) Suspended w.e.f. 13- 08-2019.",
+    "lat": 15.8159044,
+    "lng": 78.0256065
   },
   {
     "id": "8122426",
@@ -3021,7 +3451,9 @@
     "recognitionValidUpto": "2028-10-27",
     "recognitionValidUptoRaw": "27.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6328027,
+    "lng": 77.2197713
   },
   {
     "id": "8125516",
@@ -3035,7 +3467,9 @@
     "recognitionValidUpto": "2027-12-07",
     "recognitionValidUptoRaw": "07.12.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "7119305",
@@ -3049,7 +3483,9 @@
     "recognitionValidUpto": "2026-06-30",
     "recognitionValidUptoRaw": "30.06.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.3653598,
+    "lng": 73.3685437
   },
   {
     "id": "8135535",
@@ -3063,7 +3499,9 @@
     "recognitionValidUpto": "2029-03-01",
     "recognitionValidUptoRaw": "01.03.2029",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 24-09-2025. (Present status operative) Suspended w.e.f. 18.06.2025"
+    "remarks": "Suspension revoked w.e.f. 24-09-2025. (Present status operative) Suspended w.e.f. 18.06.2025",
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "8136626",
@@ -3077,7 +3515,9 @@
     "recognitionValidUpto": "2029-04-27",
     "recognitionValidUptoRaw": "27.04.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "8163116",
@@ -3091,7 +3531,9 @@
     "recognitionValidUpto": "2028-02-17",
     "recognitionValidUptoRaw": "17.02.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "5164306",
@@ -3105,7 +3547,9 @@
     "recognitionValidUpto": "2028-10-16",
     "recognitionValidUptoRaw": "16.10.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 17-02-2026. (Present status operative) Suspended w.e.f. 30- 01-2026 Suspension revoked w.e.f. 13-10-2022. (Present status operative) SUSPENDED W.E.F. 21-04-2022."
+    "remarks": "Suspension revoked w.e.f. 17-02-2026. (Present status operative) Suspended w.e.f. 30- 01-2026 Suspension revoked w.e.f. 13-10-2022. (Present status operative) SUSPENDED W.E.F. 21-04-2022.",
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "8165726",
@@ -3119,7 +3563,9 @@
     "recognitionValidUpto": "2026-09-07",
     "recognitionValidUptoRaw": "07.09.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "8166336",
@@ -3133,7 +3579,9 @@
     "recognitionValidUpto": "2026-11-05",
     "recognitionValidUptoRaw": "05.11.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 17-05-2022. (Present status operative) SUSPENDED W.E.F. 10-02-2022."
+    "remarks": "Suspension revoked w.e.f. 17-05-2022. (Present status operative) SUSPENDED W.E.F. 10-02-2022.",
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "7170706",
@@ -3147,7 +3595,9 @@
     "recognitionValidUpto": "2028-07-06",
     "recognitionValidUptoRaw": "06.07.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "8171306",
@@ -3161,7 +3611,9 @@
     "recognitionValidUpto": "2028-08-15",
     "recognitionValidUptoRaw": "15.08.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 25-04-2024. (Present status operative) Suspended w.e.f. 19.01.2024"
+    "remarks": "Suspension revoked w.e.f. 25-04-2024. (Present status operative) Suspended w.e.f. 19.01.2024",
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "6173106",
@@ -3175,7 +3627,9 @@
     "recognitionValidUpto": "2026-07-07",
     "recognitionValidUptoRaw": "07.07.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "8177804",
@@ -3189,7 +3643,9 @@
     "recognitionValidUpto": "2027-04-15",
     "recognitionValidUptoRaw": "15.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 29.0018557,
+    "lng": 77.7679671
   },
   {
     "id": "6107716",
@@ -3203,7 +3659,9 @@
     "recognitionValidUpto": "2027-03-18",
     "recognitionValidUptoRaw": "18.03.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 17-04-2025. (Present status operative) Suspended w.e.f. 17.01.2025"
+    "remarks": "Suspension revoked w.e.f. 17-04-2025. (Present status operative) Suspended w.e.f. 17.01.2025",
+    "lat": 14.9562045,
+    "lng": 75.7896741
   },
   {
     "id": "8179206",
@@ -3217,7 +3675,9 @@
     "recognitionValidUpto": "2027-08-06",
     "recognitionValidUptoRaw": "06.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.9154576,
+    "lng": 75.8189817
   },
   {
     "id": "6179035",
@@ -3231,7 +3691,9 @@
     "recognitionValidUpto": "2027-08-22",
     "recognitionValidUptoRaw": "22.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.6316368,
+    "lng": 79.4231711
   },
   {
     "id": "8183336",
@@ -3245,7 +3707,9 @@
     "recognitionValidUpto": "2027-12-30",
     "recognitionValidUptoRaw": "30.12.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8188026",
@@ -3259,7 +3723,9 @@
     "recognitionValidUpto": "2028-09-07",
     "recognitionValidUptoRaw": "07.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4031478,
+    "lng": 77.3105561
   },
   {
     "id": "9123236",
@@ -3273,7 +3739,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 11-11-2025. (Present status operative)"
+    "remarks": "Suspension revoked w.e.f. 11-11-2025. (Present status operative)",
+    "lat": 30.6975401,
+    "lng": 76.8551066
   },
   {
     "id": "9164606",
@@ -3287,7 +3755,9 @@
     "recognitionValidUpto": "2028-12-04",
     "recognitionValidUptoRaw": "04.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 31.2922312,
+    "lng": 75.5678878
   },
   {
     "id": "7169416",
@@ -3301,7 +3771,9 @@
     "recognitionValidUpto": "2027-12-12",
     "recognitionValidUptoRaw": "12.12.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 01-03-2024. (Present status operative) Suspended w.e.f. 17- 07-2023."
+    "remarks": "Suspension revoked w.e.f. 01-03-2024. (Present status operative) Suspended w.e.f. 17- 07-2023.",
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "9172306",
@@ -3315,7 +3787,9 @@
     "recognitionValidUpto": "2026-05-22",
     "recognitionValidUptoRaw": "22.05.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 31.2922312,
+    "lng": 75.5678878
   },
   {
     "id": "8183216",
@@ -3329,7 +3803,9 @@
     "recognitionValidUpto": "2027-12-22",
     "recognitionValidUptoRaw": "22.12.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.9154576,
+    "lng": 75.8189817
   },
   {
     "id": "8125636",
@@ -3343,7 +3819,9 @@
     "recognitionValidUpto": "2027-12-18",
     "recognitionValidUptoRaw": "18.12.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.7203616,
+    "lng": 75.8681996
   },
   {
     "id": "7121526",
@@ -3357,7 +3835,9 @@
     "recognitionValidUpto": "2028-03-04",
     "recognitionValidUptoRaw": "04.03.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.3653598,
+    "lng": 73.3685437
   },
   {
     "id": "7119516",
@@ -3371,7 +3851,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 08-08-2019. (Present status operative) Suspended w.e.f. 28- 02-2019. Suspension revoked w.e.f. 29 Feb 2016. (Present status operative) Suspended w.e.f. 03- 02-2016"
+    "remarks": "Suspension revoked w.e.f. 08-08-2019. (Present status operative) Suspended w.e.f. 28- 02-2019. Suspension revoked w.e.f. 29 Feb 2016. (Present status operative) Suspended w.e.f. 03- 02-2016",
+    "lat": 20.4169701,
+    "lng": 72.833173
   },
   {
     "id": "5134116",
@@ -3385,7 +3867,9 @@
     "recognitionValidUpto": "2028-07-11",
     "recognitionValidUptoRaw": "11.07.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 28-11-2025. (Present status operative) Suspended w.e.f. 27.08.2025 Suspension revoked w.e.f 29-06-2018. (Present status operative) Suspended with effect from 03-11-2017. Suspension revoked w.e.f. 23-02-2017. (Present status operative) Suspended w.e.f. 15- 11-2016"
+    "remarks": "Suspension revoked w.e.f. 28-11-2025. (Present status operative) Suspended w.e.f. 27.08.2025 Suspension revoked w.e.f 29-06-2018. (Present status operative) Suspended with effect from 03-11-2017. Suspension revoked w.e.f. 23-02-2017. (Present status operative) Suspended w.e.f. 15- 11-2016",
+    "lat": 20.2602964,
+    "lng": 85.8394521
   },
   {
     "id": "9140406",
@@ -3399,7 +3883,9 @@
     "recognitionValidUpto": "2027-06-06",
     "recognitionValidUptoRaw": "06.06.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f 06-12-2022. (Present status operative) Suspended w.e.f. 19- 10-2022. Suspension revoked w.e.f. 22-07-2020 (Present status operative) SUSPENDED W.E.F. 02-03-2020"
+    "remarks": "Suspension revoked w.e.f 06-12-2022. (Present status operative) Suspended w.e.f. 19- 10-2022. Suspension revoked w.e.f. 22-07-2020 (Present status operative) SUSPENDED W.E.F. 02-03-2020",
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8168706",
@@ -3413,7 +3899,9 @@
     "recognitionValidUpto": "2027-08-19",
     "recognitionValidUptoRaw": "19.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.2584857,
+    "lng": 77.401989
   },
   {
     "id": "7186606",
@@ -3427,7 +3915,9 @@
     "recognitionValidUpto": "2028-06-23",
     "recognitionValidUptoRaw": "23.06.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.2973142,
+    "lng": 73.1942567
   },
   {
     "id": "7187626",
@@ -3441,7 +3931,9 @@
     "recognitionValidUpto": "2028-08-25",
     "recognitionValidUptoRaw": "25.08.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 17.2852127,
+    "lng": 74.1822147
   },
   {
     "id": "6121636",
@@ -3455,7 +3947,9 @@
     "recognitionValidUpto": "2028-04-19",
     "recognitionValidUptoRaw": "19.04.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 29-08-2023. (Present status operative) SUSPENDED W.E.F. 16-03-2023. Suspension revoked w.e.f. 03-06-2019 (Present status operative) SUSPENDED W.E.F. 13-03-2019"
+    "remarks": "Suspension revoked w.e.f. 29-08-2023. (Present status operative) SUSPENDED W.E.F. 16-03-2023. Suspension revoked w.e.f. 03-06-2019 (Present status operative) SUSPENDED W.E.F. 13-03-2019",
+    "lat": 15.8159044,
+    "lng": 78.0256065
   },
   {
     "id": "7137216",
@@ -3469,7 +3963,9 @@
     "recognitionValidUpto": "2026-06-11",
     "recognitionValidUptoRaw": "11.06.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 26-10-2023. (Present status operative) SUSPENDED W.E.F. 19-06-2023. Suspension revoked w.e.f. 15-09-2022."
+    "remarks": "Suspension revoked w.e.f. 26-10-2023. (Present status operative) SUSPENDED W.E.F. 19-06-2023. Suspension revoked w.e.f. 15-09-2022.",
+    "lat": 21.2094892,
+    "lng": 72.8317058
   },
   {
     "id": "8182036",
@@ -3483,7 +3979,9 @@
     "recognitionValidUpto": "2027-10-27",
     "recognitionValidUptoRaw": "27.10.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.9154576,
+    "lng": 75.8189817
   },
   {
     "id": "7119116",
@@ -3497,7 +3995,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 15-10-2025. (Present status operative) SUSPENDED W.E.F. 26-08-2025"
+    "remarks": "Suspension revoked w.e.f. 15-10-2025. (Present status operative) SUSPENDED W.E.F. 26-08-2025",
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "7123316",
@@ -3511,7 +4011,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 26-11-2021. (Present status operative) SUSPENDED W.E.F. 08-10-2021."
+    "remarks": "Suspension revoked w.e.f. 26-11-2021. (Present status operative) SUSPENDED W.E.F. 08-10-2021.",
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "5123116",
@@ -3525,7 +4027,9 @@
     "recognitionValidUpto": "2026-05-31",
     "recognitionValidUptoRaw": "31.05.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.6090068,
+    "lng": 84.7080633
   },
   {
     "id": "6118616",
@@ -3539,7 +4043,9 @@
     "recognitionValidUpto": "2028-10-04",
     "recognitionValidUptoRaw": "04.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "6105534",
@@ -3553,7 +4059,9 @@
     "recognitionValidUpto": "2028-01-14",
     "recognitionValidUptoRaw": "14.01.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 01-09-2022. (Present status operative) SUSPENDED W.E.F. 3-8-21."
+    "remarks": "Suspension revoked w.e.f. 01-09-2022. (Present status operative) SUSPENDED W.E.F. 3-8-21.",
+    "lat": 11.0018115,
+    "lng": 76.9628425
   },
   {
     "id": "6106704",
@@ -3567,7 +4075,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 14-05-2019. (Present status operative) SUSPENDED W.E.F. 07-03-2019"
+    "remarks": "Suspension revoked w.e.f. 14-05-2019. (Present status operative) SUSPENDED W.E.F. 07-03-2019",
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "5108204",
@@ -3581,7 +4091,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "7119404",
@@ -3595,7 +4107,9 @@
     "recognitionValidUpto": "2027-07-22",
     "recognitionValidUptoRaw": "22.07.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "8101204",
@@ -3609,7 +4123,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "5131716",
@@ -3623,7 +4139,9 @@
     "recognitionValidUpto": "2027-07-20",
     "recognitionValidUptoRaw": "20.07.2027",
     "currentStatus": "Deferred",
-    "remarks": "Deferred w.e.f. 29.04.2025 Suspension revoked w.e.f. 05-10-2016. (Present status operative) Suspended w.e.f. 27- 07-2016"
+    "remarks": "Deferred w.e.f. 29.04.2025 Suspension revoked w.e.f. 05-10-2016. (Present status operative) Suspended w.e.f. 27- 07-2016",
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "9134736",
@@ -3637,7 +4155,9 @@
     "recognitionValidUpto": "2028-10-02",
     "recognitionValidUptoRaw": "02.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.5882408,
+    "lng": 76.8438542
   },
   {
     "id": "8138626",
@@ -3651,7 +4171,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "7166626",
@@ -3665,7 +4187,9 @@
     "recognitionValidUpto": "2026-12-02",
     "recognitionValidUptoRaw": "02.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.296681,
+    "lng": 73.2535718
   },
   {
     "id": "6168016",
@@ -3679,7 +4203,9 @@
     "recognitionValidUpto": "2027-06-29",
     "recognitionValidUptoRaw": "29.06.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 01-12-2022. SUSPENDED W.E.F. 22-08-2022."
+    "remarks": "Suspension revoked w.e.f. 01-12-2022. SUSPENDED W.E.F. 22-08-2022.",
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "8175126",
@@ -3693,7 +4219,9 @@
     "recognitionValidUpto": "2026-12-13",
     "recognitionValidUptoRaw": "13.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8176306",
@@ -3707,7 +4235,9 @@
     "recognitionValidUpto": "2027-02-18",
     "recognitionValidUptoRaw": "18.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "8185126",
@@ -3721,7 +4251,9 @@
     "recognitionValidUpto": "2028-05-04",
     "recognitionValidUptoRaw": "04.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "9186006",
@@ -3735,7 +4267,9 @@
     "recognitionValidUpto": "2028-06-03",
     "recognitionValidUptoRaw": "03.06.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.9953758,
+    "lng": 77.0233627
   },
   {
     "id": "8187006",
@@ -3749,7 +4283,9 @@
     "recognitionValidUpto": "2028-07-28",
     "recognitionValidUptoRaw": "28.07.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8187716",
@@ -3763,7 +4299,9 @@
     "recognitionValidUpto": "2028-08-27",
     "recognitionValidUptoRaw": "27.08.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8190506",
@@ -3777,7 +4315,9 @@
     "recognitionValidUpto": "2028-11-10",
     "recognitionValidUptoRaw": "10.11.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "6188826",
@@ -3791,7 +4331,9 @@
     "recognitionValidUpto": "2028-10-12",
     "recognitionValidUptoRaw": "12.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.3041464,
+    "lng": 76.6529521
   },
   {
     "id": "8191236",
@@ -3805,7 +4347,9 @@
     "recognitionValidUpto": "2028-11-20",
     "recognitionValidUptoRaw": "20.11.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "7195306",
@@ -3819,7 +4363,9 @@
     "recognitionValidUpto": "2029-01-01",
     "recognitionValidUptoRaw": "01.01.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.8003959,
+    "lng": 70.886232
   },
   {
     "id": "8101304",
@@ -3833,7 +4379,9 @@
     "recognitionValidUpto": "2028-10-26",
     "recognitionValidUptoRaw": "26.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "5123904",
@@ -3847,7 +4395,9 @@
     "recognitionValidUpto": "2027-04-08",
     "recognitionValidUptoRaw": "08.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "8122904",
@@ -3861,7 +4411,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.9154576,
+    "lng": 75.8189817
   },
   {
     "id": "6122704",
@@ -3875,7 +4427,9 @@
     "recognitionValidUpto": "2028-11-28",
     "recognitionValidUptoRaw": "28.11.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "7107604",
@@ -3889,7 +4443,9 @@
     "recognitionValidUpto": "2028-07-24",
     "recognitionValidUptoRaw": "24.07.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "6126416",
@@ -3903,7 +4459,9 @@
     "recognitionValidUpto": "2028-03-21",
     "recognitionValidUptoRaw": "21.03.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 22.05.2024. Present status operative) SUSPENDED W.E.F. 14-12-2023 Suspension revoked w.e.f. 23 Dec 2015. Present status operative)"
+    "remarks": "Suspension revoked w.e.f. 22.05.2024. Present status operative) SUSPENDED W.E.F. 14-12-2023 Suspension revoked w.e.f. 23 Dec 2015. Present status operative)",
+    "lat": 12.7183361,
+    "lng": 77.8229481
   },
   {
     "id": "6114835",
@@ -3917,7 +4475,9 @@
     "recognitionValidUpto": "2027-08-14",
     "recognitionValidUptoRaw": "14.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 17.360589,
+    "lng": 78.4740613
   },
   {
     "id": "9102335",
@@ -3931,7 +4491,9 @@
     "recognitionValidUpto": "2027-05-15",
     "recognitionValidUptoRaw": "15.05.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.340002,
+    "lng": 77.3164509
   },
   {
     "id": "7104734",
@@ -3945,7 +4507,9 @@
     "recognitionValidUpto": "2028-06-14",
     "recognitionValidUptoRaw": "14.06.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.3053263,
+    "lng": 70.8028377
   },
   {
     "id": "9111924",
@@ -3959,7 +4523,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.4776857,
+    "lng": 76.5937658
   },
   {
     "id": "9135004",
@@ -3973,7 +4539,9 @@
     "recognitionValidUpto": "2028-10-24",
     "recognitionValidUptoRaw": "24.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 31.2501702,
+    "lng": 75.614612
   },
   {
     "id": "9136024",
@@ -3987,7 +4555,9 @@
     "recognitionValidUpto": "2026-04-10",
     "recognitionValidUptoRaw": "10.04.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.9077569,
+    "lng": 77.1023645
   },
   {
     "id": "8138426",
@@ -4001,7 +4571,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 20-07-2022. (Present status operative) SUSPENDED W.E.F. 13-04-2022."
+    "remarks": "Suspension revoked w.e.f. 20-07-2022. (Present status operative) SUSPENDED W.E.F. 13-04-2022.",
+    "lat": 28.4031478,
+    "lng": 77.3105561
   },
   {
     "id": "5140804",
@@ -4015,7 +4587,9 @@
     "recognitionValidUpto": "2027-06-14",
     "recognitionValidUptoRaw": "14.06.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "9140226",
@@ -4029,7 +4603,9 @@
     "recognitionValidUpto": "2027-06-06",
     "recognitionValidUptoRaw": "06.06.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 15-11-2019. Present status operative) SUSPENDED W.E.F. 02-08-2019."
+    "remarks": "Suspension revoked w.e.f. 15-11-2019. Present status operative) SUSPENDED W.E.F. 02-08-2019.",
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "5169204",
@@ -4043,7 +4619,9 @@
     "recognitionValidUpto": "2027-12-13",
     "recognitionValidUptoRaw": "13.12.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.1805978,
+    "lng": 91.753943
   },
   {
     "id": "5171706",
@@ -4057,7 +4635,9 @@
     "recognitionValidUpto": "2028-09-29",
     "recognitionValidUptoRaw": "29.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 21.2380912,
+    "lng": 81.6336993
   },
   {
     "id": "8174806",
@@ -4071,7 +4651,9 @@
     "recognitionValidUpto": "2026-11-23",
     "recognitionValidUptoRaw": "23.11.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "9176026",
@@ -4085,7 +4667,9 @@
     "recognitionValidUpto": "2027-02-06",
     "recognitionValidUptoRaw": "06.02.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 29-01-2026 Suspended w.e.f. 26.12.2025"
+    "remarks": "Suspension revoked w.e.f. 29-01-2026 Suspended w.e.f. 26.12.2025",
+    "lat": 30.6975401,
+    "lng": 76.8551066
   },
   {
     "id": "7176426",
@@ -4099,7 +4683,9 @@
     "recognitionValidUpto": "2027-02-21",
     "recognitionValidUptoRaw": "21.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 20.0112475,
+    "lng": 73.7902364
   },
   {
     "id": "8178406",
@@ -4113,7 +4699,9 @@
     "recognitionValidUpto": "2027-05-17",
     "recognitionValidUptoRaw": "17.05.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "9182206",
@@ -4127,7 +4715,9 @@
     "recognitionValidUpto": "2027-11-10",
     "recognitionValidUptoRaw": "10.11.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.8192189,
+    "lng": 76.7609033
   },
   {
     "id": "9182936",
@@ -4141,7 +4731,9 @@
     "recognitionValidUpto": "2027-11-28",
     "recognitionValidUptoRaw": "28.11.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.6975401,
+    "lng": 76.8551066
   },
   {
     "id": "8186826",
@@ -4155,7 +4747,9 @@
     "recognitionValidUpto": "2028-07-09",
     "recognitionValidUptoRaw": "09.07.2028",
     "currentStatus": "Suspended",
-    "remarks": "SUSPENDED W.E.F. 18.03.2026"
+    "remarks": "SUSPENDED W.E.F. 18.03.2026",
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8188136",
@@ -4169,7 +4763,9 @@
     "recognitionValidUpto": "2028-09-09",
     "recognitionValidUptoRaw": "09.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "7187406",
@@ -4183,7 +4779,9 @@
     "recognitionValidUpto": "2028-08-19",
     "recognitionValidUptoRaw": "19.08.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "5197706",
@@ -4197,7 +4795,9 @@
     "recognitionValidUpto": "2029-03-17",
     "recognitionValidUptoRaw": "17.03.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.3700501,
+    "lng": 85.3250387
   },
   {
     "id": "9125906",
@@ -4211,7 +4811,9 @@
     "recognitionValidUpto": "2028-01-20",
     "recognitionValidUptoRaw": "20.01.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 19-10-2022. (Present status operative) SUSPENDED W.E.F. 14-06-2022"
+    "remarks": "Suspension revoked w.e.f. 19-10-2022. (Present status operative) SUSPENDED W.E.F. 14-06-2022",
+    "lat": 26.4609135,
+    "lng": 80.3217588
   },
   {
     "id": "9121314",
@@ -4225,7 +4827,9 @@
     "recognitionValidUpto": "2028-02-18",
     "recognitionValidUptoRaw": "18.02.2028",
     "currentStatus": "Active",
-    "remarks": "Revoked w.e.f. 16- 04-2021 (Present status oprative) SUSPENDED W.E.F. 28-09-2020"
+    "remarks": "Revoked w.e.f. 16- 04-2021 (Present status oprative) SUSPENDED W.E.F. 28-09-2020",
+    "lat": 30.6908804,
+    "lng": 76.7114879
   },
   {
     "id": "9133933",
@@ -4239,7 +4843,9 @@
     "recognitionValidUpto": "2028-05-15",
     "recognitionValidUptoRaw": "15.05.2028",
     "currentStatus": "Active",
-    "remarks": "Revoked w.e.f. 31- 07-2023 (Present status oprative) SUSPENDED W.E.F. 31-08-2021."
+    "remarks": "Revoked w.e.f. 31- 07-2023 (Present status oprative) SUSPENDED W.E.F. 31-08-2021.",
+    "lat": 30.9090157,
+    "lng": 75.851601
   },
   {
     "id": "9163904",
@@ -4253,7 +4859,9 @@
     "recognitionValidUpto": "2028-05-16",
     "recognitionValidUptoRaw": "16.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.9077569,
+    "lng": 77.1023645
   },
   {
     "id": "5169006",
@@ -4267,7 +4875,9 @@
     "recognitionValidUpto": "2027-10-13",
     "recognitionValidUptoRaw": "13-10-2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.4426698,
+    "lng": 83.5873053
   },
   {
     "id": "8170206",
@@ -4281,7 +4891,9 @@
     "recognitionValidUpto": "2028-04-11",
     "recognitionValidUptoRaw": "11-04-2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "7171406",
@@ -4295,7 +4907,9 @@
     "recognitionValidUpto": "2028-08-23",
     "recognitionValidUptoRaw": "23.08.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.3653598,
+    "lng": 73.3685437
   },
   {
     "id": "7172436",
@@ -4309,7 +4923,9 @@
     "recognitionValidUpto": "2026-05-28",
     "recognitionValidUptoRaw": "28.05.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.2973142,
+    "lng": 73.1942567
   },
   {
     "id": "7174106",
@@ -4323,7 +4939,9 @@
     "recognitionValidUpto": "2026-10-31",
     "recognitionValidUptoRaw": "31.10.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 05-01-2026. Suspended w.e.f. 25.08.2025"
+    "remarks": "Suspension revoked w.e.f. 05-01-2026. Suspended w.e.f. 25.08.2025",
+    "lat": 23.0215374,
+    "lng": 72.5800568
   },
   {
     "id": "8174226",
@@ -4337,7 +4955,9 @@
     "recognitionValidUpto": "2026-11-05",
     "recognitionValidUptoRaw": "05.11.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "8176806",
@@ -4351,7 +4971,9 @@
     "recognitionValidUpto": "2027-03-10",
     "recognitionValidUptoRaw": "10.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "8183516",
@@ -4365,7 +4987,9 @@
     "recognitionValidUpto": "2028-01-07",
     "recognitionValidUptoRaw": "07.01.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.7203616,
+    "lng": 75.8681996
   },
   {
     "id": "8184506",
@@ -4379,7 +5003,9 @@
     "recognitionValidUpto": "2028-03-23",
     "recognitionValidUptoRaw": "23.03.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "8185226",
@@ -4393,7 +5019,9 @@
     "recognitionValidUpto": "2028-05-07",
     "recognitionValidUptoRaw": "07.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "8185506",
@@ -4407,7 +5035,9 @@
     "recognitionValidUpto": "2028-05-07",
     "recognitionValidUptoRaw": "07.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "9187136",
@@ -4421,7 +5051,9 @@
     "recognitionValidUpto": "2028-07-30",
     "recognitionValidUptoRaw": "30.07.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.4609135,
+    "lng": 80.3217588
   },
   {
     "id": "6187504",
@@ -4435,7 +5067,9 @@
     "recognitionValidUpto": "2028-08-25",
     "recognitionValidUptoRaw": "25.08.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8187826",
@@ -4449,7 +5083,9 @@
     "recognitionValidUpto": "2028-09-01",
     "recognitionValidUptoRaw": "01.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "9189006",
@@ -4463,7 +5099,9 @@
     "recognitionValidUpto": "2028-10-26",
     "recognitionValidUptoRaw": "26.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.2092778,
+    "lng": 76.3397231
   },
   {
     "id": "7196526",
@@ -4477,7 +5115,9 @@
     "recognitionValidUpto": "2029-02-02",
     "recognitionValidUptoRaw": "02.02.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 20.0112475,
+    "lng": 73.7902364
   },
   {
     "id": "7197106",
@@ -4491,7 +5131,9 @@
     "recognitionValidUpto": "2029-02-22",
     "recognitionValidUptoRaw": "22.02.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "7134016",
@@ -4505,7 +5147,9 @@
     "recognitionValidUpto": "2025-07-12",
     "recognitionValidUptoRaw": "12.07.2025",
     "currentStatus": "Deferred",
-    "remarks": "Deferred w.e.f. 22.07.2025"
+    "remarks": "Deferred w.e.f. 22.07.2025",
+    "lat": 21.1498134,
+    "lng": 79.0820556
   },
   {
     "id": "8169906",
@@ -4519,7 +5163,9 @@
     "recognitionValidUpto": "2028-04-05",
     "recognitionValidUptoRaw": "05.04.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "9171906",
@@ -4533,7 +5179,9 @@
     "recognitionValidUpto": "2029-01-12",
     "recognitionValidUptoRaw": "12.01.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.3843674,
+    "lng": 76.770421
   },
   {
     "id": "8184006",
@@ -4547,7 +5195,9 @@
     "recognitionValidUpto": "2028-02-23",
     "recognitionValidUptoRaw": "23.02.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "9192006",
@@ -4561,7 +5211,9 @@
     "recognitionValidUpto": "2028-12-02",
     "recognitionValidUptoRaw": "02.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 27.1303344,
+    "lng": 80.859666
   },
   {
     "id": "5197006",
@@ -4575,7 +5227,9 @@
     "recognitionValidUpto": "2029-02-22",
     "recognitionValidUptoRaw": "22.02.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 21.2380912,
+    "lng": 81.6336993
   },
   {
     "id": "6130526",
@@ -4589,7 +5243,9 @@
     "recognitionValidUpto": "2027-03-10",
     "recognitionValidUptoRaw": "10.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "9100634",
@@ -4603,7 +5259,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.9090157,
+    "lng": 75.851601
   },
   {
     "id": "5135804",
@@ -4617,7 +5275,9 @@
     "recognitionValidUpto": "2026-03-19",
     "recognitionValidUptoRaw": "19.03.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "9137734",
@@ -4631,7 +5291,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 16-07-2019. Suspended w.e.f. 27- 02-2019."
+    "remarks": "Suspension revoked w.e.f. 16-07-2019. Suspended w.e.f. 27- 02-2019.",
+    "lat": 28.9895406,
+    "lng": 77.1510394
   },
   {
     "id": "7165924",
@@ -4645,7 +5307,9 @@
     "recognitionValidUpto": "2026-10-26",
     "recognitionValidUptoRaw": "26-10-2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "7167626",
@@ -4659,7 +5323,9 @@
     "recognitionValidUpto": "2027-03-25",
     "recognitionValidUptoRaw": "25-03-2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 28-05-2025. Present status operative. Suspended w.e.f. 28.11.2024."
+    "remarks": "Suspension revoked w.e.f. 28-05-2025. Present status operative. Suspended w.e.f. 28.11.2024.",
+    "lat": 22.3053263,
+    "lng": 70.8028377
   },
   {
     "id": "8173526",
@@ -4673,7 +5339,9 @@
     "recognitionValidUpto": "2026-08-02",
     "recognitionValidUptoRaw": "02.08.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 27.4140049,
+    "lng": 76.6170387
   },
   {
     "id": "9177406",
@@ -4687,7 +5355,9 @@
     "recognitionValidUpto": "2027-04-03",
     "recognitionValidUptoRaw": "03.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "7183416",
@@ -4701,7 +5371,9 @@
     "recognitionValidUpto": "2028-01-05",
     "recognitionValidUptoRaw": "05.01.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 20.0112475,
+    "lng": 73.7902364
   },
   {
     "id": "6183606",
@@ -4715,7 +5387,9 @@
     "recognitionValidUpto": "2028-01-12",
     "recognitionValidUptoRaw": "12.01.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "7183706",
@@ -4729,7 +5403,9 @@
     "recognitionValidUpto": "2028-01-12",
     "recognitionValidUptoRaw": "12.01.2028",
     "currentStatus": "Suspended",
-    "remarks": "Suspended w.e.f. 17.03.2026."
+    "remarks": "Suspended w.e.f. 17.03.2026.",
+    "lat": 22.3053263,
+    "lng": 70.8028377
   },
   {
     "id": "8189106",
@@ -4743,7 +5419,9 @@
     "recognitionValidUpto": "2028-10-26",
     "recognitionValidUptoRaw": "26.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 24.578721,
+    "lng": 73.6862571
   },
   {
     "id": "6198036",
@@ -4757,7 +5435,9 @@
     "recognitionValidUpto": "2026-04-01",
     "recognitionValidUptoRaw": "01.04.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 11.3323723,
+    "lng": 78.6098639
   },
   {
     "id": "6191806",
@@ -4771,7 +5451,9 @@
     "recognitionValidUpto": "2028-12-01",
     "recognitionValidUptoRaw": "01.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 11.3323723,
+    "lng": 78.6098639
   },
   {
     "id": "5120906",
@@ -4785,7 +5467,9 @@
     "recognitionValidUpto": "2027-09-06",
     "recognitionValidUptoRaw": "06.09.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 13-10-2022. (Present status operative) SUSPENDED W.E.F. 04-07-2022 Suspension revoked w.e.f 03-09-2020 (Present status operative) SUSPENDED W.E.F. 24-06-2020."
+    "remarks": "Suspension revoked w.e.f. 13-10-2022. (Present status operative) SUSPENDED W.E.F. 04-07-2022 Suspension revoked w.e.f 03-09-2020 (Present status operative) SUSPENDED W.E.F. 24-06-2020.",
+    "lat": 22.5736296,
+    "lng": 88.3251045
   },
   {
     "id": "8197526",
@@ -4799,7 +5483,9 @@
     "recognitionValidUpto": "2029-03-12",
     "recognitionValidUptoRaw": "12.03.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 27.4140049,
+    "lng": 76.6170387
   },
   {
     "id": "6114716",
@@ -4813,7 +5499,9 @@
     "recognitionValidUpto": "2028-02-14",
     "recognitionValidUptoRaw": "14.02.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "6121716",
@@ -4827,7 +5515,9 @@
     "recognitionValidUpto": "2028-04-21",
     "recognitionValidUptoRaw": "21.04.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8122336",
@@ -4841,7 +5531,9 @@
     "recognitionValidUpto": "2028-10-05",
     "recognitionValidUptoRaw": "05.10.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 08-01-2026. Suspended w.e.f. 18- 06-2025."
+    "remarks": "Suspension revoked w.e.f. 08-01-2026. Suspended w.e.f. 18- 06-2025.",
+    "lat": 28.6734298,
+    "lng": 77.2898858
   },
   {
     "id": "6104206",
@@ -4855,7 +5547,9 @@
     "recognitionValidUpto": "2027-02-14",
     "recognitionValidUptoRaw": "14.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8102006",
@@ -4869,7 +5563,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "6117916",
@@ -4883,7 +5579,9 @@
     "recognitionValidUpto": "2027-03-31",
     "recognitionValidUptoRaw": "31.03.2027",
     "currentStatus": "Suspended",
-    "remarks": "Suspended w.e.f. 16.01.2026 Suspnsion revoked w.e.f. 29-06-2018. (Present status operative) Suspended w.e.f. 09- 04-2018 and deferment of renewal of recognition w.e.f. 01-04-2018."
+    "remarks": "Suspended w.e.f. 16.01.2026 Suspnsion revoked w.e.f. 29-06-2018. (Present status operative) Suspended w.e.f. 09- 04-2018 and deferment of renewal of recognition w.e.f. 01-04-2018.",
+    "lat": 17.360589,
+    "lng": 78.4740613
   },
   {
     "id": "8130426",
@@ -4897,7 +5595,9 @@
     "recognitionValidUpto": "2027-01-04",
     "recognitionValidUptoRaw": "04.01.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 22 May 2015. (Present status operative) Suspended w.e.f. 14 May 2015"
+    "remarks": "Suspension revoked w.e.f. 22 May 2015. (Present status operative) Suspended w.e.f. 14 May 2015",
+    "lat": 28.4670734,
+    "lng": 77.5137649
   },
   {
     "id": "5126636",
@@ -4911,7 +5611,9 @@
     "recognitionValidUpto": "2028-04-11",
     "recognitionValidUptoRaw": "11.04.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.3700501,
+    "lng": 85.3250387
   },
   {
     "id": "6132316",
@@ -4925,7 +5627,9 @@
     "recognitionValidUpto": "2027-10-08",
     "recognitionValidUptoRaw": "08.10.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 27-07-2020. Present status operative SUSPENDED W.E.F. 14-02-2020"
+    "remarks": "Suspension revoked w.e.f. 27-07-2020. Present status operative SUSPENDED W.E.F. 14-02-2020",
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "6132626",
@@ -4939,7 +5643,9 @@
     "recognitionValidUpto": "2027-11-17",
     "recognitionValidUptoRaw": "17.11.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 22-12-2017. Present status operative. Suspended w.e.f. 29-11-2017."
+    "remarks": "Suspension revoked w.e.f. 22-12-2017. Present status operative. Suspended w.e.f. 29-11-2017.",
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "5132706",
@@ -4953,7 +5659,9 @@
     "recognitionValidUpto": "2027-12-08",
     "recognitionValidUptoRaw": "08.12.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension Revoked w.e.f. 28-03-2023. Present status operative. SUSPENDED w.e.f. 10-01-2023. Partial suspension revoked w.e.f. 14.03.2018. Partial suspended for IS 13428 & 14543 w.e.f. 19-01-2018. Suspension revoked w.e.f. 25-10-2016. Present status operative. Suspended w.e.f. 09- 09-2016"
+    "remarks": "Suspension Revoked w.e.f. 28-03-2023. Present status operative. SUSPENDED w.e.f. 10-01-2023. Partial suspension revoked w.e.f. 14.03.2018. Partial suspended for IS 13428 & 14543 w.e.f. 19-01-2018. Suspension revoked w.e.f. 25-10-2016. Present status operative. Suspended w.e.f. 09- 09-2016",
+    "lat": 22.5726459,
+    "lng": 88.3638953
   },
   {
     "id": "8133016",
@@ -4967,7 +5675,9 @@
     "recognitionValidUpto": "2028-02-03",
     "recognitionValidUptoRaw": "03.02.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6933239,
+    "lng": 76.9332373
   },
   {
     "id": "8136216",
@@ -4981,7 +5691,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "5137936",
@@ -4995,7 +5707,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 20.2602964,
+    "lng": 85.8394521
   },
   {
     "id": "7139526",
@@ -5009,7 +5723,9 @@
     "recognitionValidUpto": "2027-03-15",
     "recognitionValidUptoRaw": "15.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "9139736",
@@ -5023,7 +5739,9 @@
     "recognitionValidUpto": "2027-05-15",
     "recognitionValidUptoRaw": "15.05.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 28.02.2025 (Present status operative) SUSPENDED W.E.F. 19-12-2024 Suspension revoked w.e.f. 11.09.2023 (Present status operative) SUSPENDED W.E.F. 10-04-2023"
+    "remarks": "Suspension revoked w.e.f. 28.02.2025 (Present status operative) SUSPENDED W.E.F. 19-12-2024 Suspension revoked w.e.f. 11.09.2023 (Present status operative) SUSPENDED W.E.F. 10-04-2023",
+    "lat": 27.1752554,
+    "lng": 78.0098161
   },
   {
     "id": "8141826",
@@ -5037,7 +5755,9 @@
     "recognitionValidUpto": "2027-09-17",
     "recognitionValidUptoRaw": "17.09.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 08-02-2023 SUSPENDED W.E.F. 06-12-2022 Suspension revoked w.e.f. 13 JULY 2020. (Present status operative) SUSPENDED W.E.F. 13-05-2020"
+    "remarks": "Suspension revoked w.e.f. 08-02-2023 SUSPENDED W.E.F. 06-12-2022 Suspension revoked w.e.f. 13 JULY 2020. (Present status operative) SUSPENDED W.E.F. 13-05-2020",
+    "lat": 28.4031478,
+    "lng": 77.3105561
   },
   {
     "id": "6162436",
@@ -5051,7 +5771,9 @@
     "recognitionValidUpto": "2027-09-26",
     "recognitionValidUptoRaw": "26.09.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "8163426",
@@ -5065,7 +5787,9 @@
     "recognitionValidUpto": "2028-03-31",
     "recognitionValidUptoRaw": "31.03.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 25.08.2025 (Present status operative) Suspended w.e.f. 02.05.2025"
+    "remarks": "Suspension revoked w.e.f. 25.08.2025 (Present status operative) Suspended w.e.f. 02.05.2025",
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "8163826",
@@ -5079,7 +5803,9 @@
     "recognitionValidUpto": "2028-05-15",
     "recognitionValidUptoRaw": "15.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8167436",
@@ -5093,7 +5819,9 @@
     "recognitionValidUpto": "2027-02-16",
     "recognitionValidUptoRaw": "16.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "8170106",
@@ -5107,7 +5835,9 @@
     "recognitionValidUpto": "2028-04-10",
     "recognitionValidUptoRaw": "10.04.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 24.01.2024 (Present status operative) Suspended w.e.f. 08.12.2023"
+    "remarks": "Suspension revoked w.e.f. 24.01.2024 (Present status operative) Suspended w.e.f. 08.12.2023",
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "6170406",
@@ -5121,7 +5851,9 @@
     "recognitionValidUpto": "2028-05-24",
     "recognitionValidUptoRaw": "24.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8171606",
@@ -5135,7 +5867,9 @@
     "recognitionValidUpto": "2025-09-26",
     "recognitionValidUptoRaw": "26.09.2025",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8177706",
@@ -5149,7 +5883,9 @@
     "recognitionValidUpto": "2027-04-11",
     "recognitionValidUptoRaw": "11.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "7177626",
@@ -5163,7 +5899,9 @@
     "recognitionValidUpto": "2027-04-11",
     "recognitionValidUptoRaw": "11.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "6178726",
@@ -5177,7 +5915,9 @@
     "recognitionValidUpto": "2027-07-10",
     "recognitionValidUptoRaw": "10.07.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4031478,
+    "lng": 77.3105561
   },
   {
     "id": "9179606",
@@ -5191,7 +5931,9 @@
     "recognitionValidUpto": "2027-08-20",
     "recognitionValidUptoRaw": "20.08.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "8180526",
@@ -5205,7 +5947,9 @@
     "recognitionValidUpto": "2027-10-07",
     "recognitionValidUptoRaw": "07.10.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.9154576,
+    "lng": 75.8189817
   },
   {
     "id": "8183006",
@@ -5219,7 +5963,9 @@
     "recognitionValidUpto": "2027-12-01",
     "recognitionValidUptoRaw": "01.12.2027",
     "currentStatus": "Suspended",
-    "remarks": "Suspended w.e.f. 24.03.2026"
+    "remarks": "Suspended w.e.f. 24.03.2026",
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "6184216",
@@ -5233,7 +5979,9 @@
     "recognitionValidUpto": "2028-03-12",
     "recognitionValidUptoRaw": "12.03.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "7184626",
@@ -5247,7 +5995,9 @@
     "recognitionValidUpto": "2028-03-24",
     "recognitionValidUptoRaw": "24.03.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.092952,
+    "lng": 74.7493451
   },
   {
     "id": "8184706",
@@ -5261,7 +6011,9 @@
     "recognitionValidUpto": "2028-04-08",
     "recognitionValidUptoRaw": "08.04.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6328027,
+    "lng": 77.2197713
   },
   {
     "id": "8185606",
@@ -5275,7 +6027,9 @@
     "recognitionValidUpto": "2028-05-12",
     "recognitionValidUptoRaw": "12.05.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 13 April 2026. (Present status operative) Suspended w.e.f. 06.03.2026"
+    "remarks": "Suspension revoked w.e.f. 13 April 2026. (Present status operative) Suspended w.e.f. 06.03.2026",
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "6189206",
@@ -5289,7 +6043,9 @@
     "recognitionValidUpto": "2028-10-27",
     "recognitionValidUptoRaw": "27.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 11.0018115,
+    "lng": 76.9628425
   },
   {
     "id": "7190106",
@@ -5303,7 +6059,9 @@
     "recognitionValidUpto": "2028-11-09",
     "recognitionValidUptoRaw": "09.11.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "9194336",
@@ -5317,7 +6075,9 @@
     "recognitionValidUpto": "2028-12-18",
     "recognitionValidUptoRaw": "18.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 26.8381,
+    "lng": 80.9346001
   },
   {
     "id": "9197206",
@@ -5331,7 +6091,9 @@
     "recognitionValidUpto": "2029-02-23",
     "recognitionValidUptoRaw": "23.02.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 29.9384473,
+    "lng": 78.1452985
   },
   {
     "id": "7103506",
@@ -5345,7 +6107,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "7126506",
@@ -5359,7 +6123,9 @@
     "recognitionValidUpto": "2028-04-08",
     "recognitionValidUptoRaw": "08.04.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "6126126",
@@ -5373,7 +6139,9 @@
     "recognitionValidUpto": "2028-02-17",
     "recognitionValidUptoRaw": "17.02.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 25 Sep 2018. (Present status operative) Suspended w.e.f. 3 Aug 2018. Suspension revoked w.e.f. 23 July 2018. (Present status operative) Suspended w.e.f. 01 March 2018"
+    "remarks": "Suspension revoked w.e.f. 25 Sep 2018. (Present status operative) Suspended w.e.f. 3 Aug 2018. Suspension revoked w.e.f. 23 July 2018. (Present status operative) Suspended w.e.f. 01 March 2018",
+    "lat": 14.9562045,
+    "lng": 75.7896741
   },
   {
     "id": "7133816",
@@ -5387,7 +6155,9 @@
     "recognitionValidUpto": "2028-05-08",
     "recognitionValidUptoRaw": "08.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "8138306",
@@ -5401,7 +6171,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 01-07-2020 SUSPENDED W.E.F. 20-02-2020."
+    "remarks": "Suspension revoked w.e.f. 01-07-2020 SUSPENDED W.E.F. 20-02-2020.",
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "6135404",
@@ -5415,7 +6187,9 @@
     "recognitionValidUpto": "2029-01-30",
     "recognitionValidUptoRaw": "30.01.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "6138806",
@@ -5429,7 +6203,9 @@
     "recognitionValidUpto": "2027-01-10",
     "recognitionValidUptoRaw": "10.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "7139026",
@@ -5443,7 +6219,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "6139136",
@@ -5457,7 +6235,9 @@
     "recognitionValidUpto": "2027-01-21",
     "recognitionValidUptoRaw": "21.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "9140526",
@@ -5471,7 +6251,9 @@
     "recognitionValidUpto": "2027-06-06",
     "recognitionValidUptoRaw": "06.06.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "6162126",
@@ -5485,7 +6267,9 @@
     "recognitionValidUpto": "2027-09-10",
     "recognitionValidUptoRaw": "10.09.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8167106",
@@ -5499,7 +6283,9 @@
     "recognitionValidUpto": "2027-01-19",
     "recognitionValidUptoRaw": "19.01.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "6167206",
@@ -5513,7 +6299,9 @@
     "recognitionValidUpto": "2027-02-03",
     "recognitionValidUptoRaw": "03.02.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 17.6935526,
+    "lng": 83.2921297
   },
   {
     "id": "6169526",
@@ -5527,7 +6315,9 @@
     "recognitionValidUpto": "2027-12-23",
     "recognitionValidUptoRaw": "23.12.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8171826",
@@ -5541,7 +6331,9 @@
     "recognitionValidUpto": "2028-10-18",
     "recognitionValidUptoRaw": "18.10.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 14-11-2025 Suspended w.e.f. 26.09.2025"
+    "remarks": "Suspension revoked w.e.f. 14-11-2025 Suspended w.e.f. 26.09.2025",
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "9173226",
@@ -5555,7 +6347,9 @@
     "recognitionValidUpto": "2026-07-16",
     "recognitionValidUptoRaw": "16.07.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "7174421",
@@ -5569,7 +6363,9 @@
     "recognitionValidUpto": "2026-11-07",
     "recognitionValidUptoRaw": "07.11.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "6177006",
@@ -5583,7 +6379,9 @@
     "recognitionValidUpto": "2027-03-20",
     "recognitionValidUptoRaw": "20.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 17.8495919,
+    "lng": 79.1151663
   },
   {
     "id": "6180126",
@@ -5597,7 +6395,9 @@
     "recognitionValidUpto": "2027-09-11",
     "recognitionValidUptoRaw": "11.09.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8180636",
@@ -5611,7 +6411,9 @@
     "recognitionValidUpto": "2027-10-09",
     "recognitionValidUptoRaw": "09.10.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6664535,
+    "lng": 77.2169781
   },
   {
     "id": "5182706",
@@ -5625,7 +6427,9 @@
     "recognitionValidUpto": "2027-11-25",
     "recognitionValidUptoRaw": "25.11.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.4559809,
+    "lng": 85.2557301
   },
   {
     "id": "8187126",
@@ -5639,7 +6443,9 @@
     "recognitionValidUpto": "2028-08-07",
     "recognitionValidUptoRaw": "07.08.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 23.2584857,
+    "lng": 77.401989
   },
   {
     "id": "8196926",
@@ -5653,7 +6459,9 @@
     "recognitionValidUpto": "2029-02-19",
     "recognitionValidUptoRaw": "19.02.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4031478,
+    "lng": 77.3105561
   },
   {
     "id": "6197936",
@@ -5667,7 +6475,9 @@
     "recognitionValidUpto": "2029-04-01",
     "recognitionValidUptoRaw": "01.04.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "8127226",
@@ -5681,7 +6491,9 @@
     "recognitionValidUpto": "2028-08-07",
     "recognitionValidUptoRaw": "07.08.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 17-11-2017 Suspended w.e.f. 07- 06-2017"
+    "remarks": "Suspension revoked w.e.f. 17-11-2017 Suspended w.e.f. 07- 06-2017",
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "6120526",
@@ -5695,7 +6507,9 @@
     "recognitionValidUpto": "2027-05-12",
     "recognitionValidUptoRaw": "12.05.2027",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 23-03-2017 . (Present status operative) Suspended w.e.f. 24- 11-2016. Suspension revoked w.e.f. 10-11-2015 . Suspended w.e.f. 18 Aug 2015."
+    "remarks": "Suspension revoked w.e.f. 23-03-2017 . (Present status operative) Suspended w.e.f. 24- 11-2016. Suspension revoked w.e.f. 10-11-2015 . Suspended w.e.f. 18 Aug 2015.",
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "9134536",
@@ -5709,7 +6523,9 @@
     "recognitionValidUpto": "2028-09-07",
     "recognitionValidUptoRaw": "07.09.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.6908804,
+    "lng": 76.7114879
   },
   {
     "id": "8136826",
@@ -5723,7 +6539,9 @@
     "recognitionValidUpto": "2026-12-31",
     "recognitionValidUptoRaw": "31.12.2026",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 21-06-2018 Suspended w.e.f. 25-01-2018."
+    "remarks": "Suspension revoked w.e.f. 21-06-2018 Suspended w.e.f. 25-01-2018.",
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8168906",
@@ -5737,7 +6555,9 @@
     "recognitionValidUpto": "2027-09-26",
     "recognitionValidUptoRaw": "26.09.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8169306",
@@ -5751,7 +6571,9 @@
     "recognitionValidUpto": "2027-11-28",
     "recognitionValidUptoRaw": "28.11.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.6138954,
+    "lng": 77.2090057
   },
   {
     "id": "7175516",
@@ -5765,7 +6587,9 @@
     "recognitionValidUpto": "2026-12-26",
     "recognitionValidUptoRaw": "26.12.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "7185816",
@@ -5779,7 +6603,9 @@
     "recognitionValidUpto": "2028-05-13",
     "recognitionValidUptoRaw": "13.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "7194806",
@@ -5793,7 +6619,9 @@
     "recognitionValidUpto": "2028-12-22",
     "recognitionValidUptoRaw": "22.12.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 18.5213738,
+    "lng": 73.8545071
   },
   {
     "id": "7196806",
@@ -5807,7 +6635,9 @@
     "recognitionValidUpto": "2029-02-17",
     "recognitionValidUptoRaw": "17.02.2029",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.3053263,
+    "lng": 70.8028377
   },
   {
     "id": "6102906",
@@ -5821,7 +6651,9 @@
     "recognitionValidUpto": "2028-03-31",
     "recognitionValidUptoRaw": "31.03.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 17.360589,
+    "lng": 78.4740613
   },
   {
     "id": "6139316",
@@ -5835,7 +6667,9 @@
     "recognitionValidUpto": "2027-03-18",
     "recognitionValidUptoRaw": "18.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "6164216",
@@ -5849,7 +6683,9 @@
     "recognitionValidUpto": "2028-10-15",
     "recognitionValidUptoRaw": "15.10.2028",
     "currentStatus": "Active",
-    "remarks": "Suspension revoked w.e.f. 16.07.2024 Suspended w.e.f. 20.05.2024"
+    "remarks": "Suspension revoked w.e.f. 16.07.2024 Suspended w.e.f. 20.05.2024",
+    "lat": 12.9767936,
+    "lng": 77.590082
   },
   {
     "id": "6169806",
@@ -5863,7 +6699,9 @@
     "recognitionValidUpto": "2028-02-20",
     "recognitionValidUptoRaw": "20.02.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 11.1671878,
+    "lng": 77.3472673
   },
   {
     "id": "8169616",
@@ -5877,7 +6715,9 @@
     "recognitionValidUpto": "2027-12-26",
     "recognitionValidUptoRaw": "26.12.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4646148,
+    "lng": 77.0299194
   },
   {
     "id": "9171026",
@@ -5891,7 +6731,9 @@
     "recognitionValidUpto": "2028-07-14",
     "recognitionValidUptoRaw": "14.07.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 29.9384473,
+    "lng": 78.1452985
   },
   {
     "id": "8178226",
@@ -5905,7 +6747,9 @@
     "recognitionValidUpto": "2027-04-29",
     "recognitionValidUptoRaw": "29.04.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.4670734,
+    "lng": 77.5137649
   },
   {
     "id": "8187316",
@@ -5919,7 +6763,9 @@
     "recognitionValidUpto": "2028-08-12",
     "recognitionValidUptoRaw": "12.08.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.5706333,
+    "lng": 77.3272147
   },
   {
     "id": "8185906",
@@ -5933,7 +6779,9 @@
     "recognitionValidUpto": "2028-05-22",
     "recognitionValidUptoRaw": "22.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 28.7749966,
+    "lng": 77.4586967
   },
   {
     "id": "6171906",
@@ -5947,7 +6795,9 @@
     "recognitionValidUpto": "2026-04-10",
     "recognitionValidUptoRaw": "10.04.2026",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 13.0836939,
+    "lng": 80.270186
   },
   {
     "id": "9177306",
@@ -5961,7 +6811,9 @@
     "recognitionValidUpto": "2027-03-30",
     "recognitionValidUptoRaw": "30.03.2027",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 30.6908804,
+    "lng": 76.7114879
   },
   {
     "id": "7182136",
@@ -5975,7 +6827,9 @@
     "recognitionValidUpto": "2025-10-29",
     "recognitionValidUptoRaw": "29.10.2025",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.054999,
+    "lng": 72.8692035
   },
   {
     "id": "7189336",
@@ -5989,7 +6843,9 @@
     "recognitionValidUpto": "2028-10-27",
     "recognitionValidUptoRaw": "27.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 19.0308262,
+    "lng": 73.0198537
   },
   {
     "id": "8116426",
@@ -6003,7 +6859,9 @@
     "recognitionValidUpto": "2028-05-31",
     "recognitionValidUptoRaw": "31.05.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 24.578721,
+    "lng": 73.6862571
   },
   {
     "id": "7188606",
@@ -6017,6 +6875,8 @@
     "recognitionValidUpto": "2028-10-06",
     "recognitionValidUptoRaw": "06.10.2028",
     "currentStatus": "Active",
-    "remarks": null
+    "remarks": null,
+    "lat": 22.3053263,
+    "lng": 70.8028377
   }
 ]

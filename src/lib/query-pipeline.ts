@@ -13,7 +13,7 @@ import { assessApplicability, deriveRecommendationStatus } from "@/lib/applicabi
 import { buildReferenceEntry } from "@/lib/reference-registry";
 import { getNeighbors, type GraphNeighbor } from "@/lib/graph/graph-retrieval";
 import { getProductRefinements, isForbiddenGeneric } from "@/lib/product-refinements";
-import { detectLanguage, resolveQueryLanguage, LANGUAGE_NAMES, type UiLanguage } from "@/lib/language";
+import { detectLanguage, resolveQueryLanguage, LANGUAGE_NAMES, type AnswerLanguage, type UiLanguage } from "@/lib/language";
 import { translateQueryToEnglish } from "@/lib/translate";
 import { refusalCopy, REFUSAL_COPY_LANGUAGES, type RefusalReason } from "@/lib/refusal";
 import { evaluateRelevanceFloor } from "@/lib/relevance-floor";
@@ -33,6 +33,28 @@ import { queryLogs } from "@/db/schema";
 
 const MAX_CANDIDATES = 4;
 const RETRIEVAL_LIMIT = 12;
+
+/**
+ * Shown when translation was needed but no provider was available to do
+ * it — attributes the gap honestly to the missing translation step, not
+ * the corpus. Only English/Hindi/Marathi/Bengali have reviewed copy here
+ * (Marathi/Bengali are LLM-authored, flagged for a native-speaker
+ * spot-check, same as the Hindi copy in refusal.ts); the other four
+ * languages get the English text, same REFUSAL_COPY_LANGUAGES-style
+ * honest-fallback pattern used for refusal copy below rather than an
+ * unreviewed translation.
+ */
+const REVIEWED_TRANSLATION_UNAVAILABLE_NOTE: Partial<Record<AnswerLanguage, string>> = {
+  hi: "इस प्रश्न का अंग्रेज़ी में अनुवाद नहीं हो सका (अनुवाद सेवा उपलब्ध नहीं थी)। खोज केवल अंग्रेज़ी सामग्री पर चलती है, इसलिए परिणाम अधूरे हो सकते हैं — अंग्रेज़ी में प्रश्न पूछने पर बेहतर परिणाम मिलेंगे।",
+  mr: "या प्रश्नाचे इंग्रजीत भाषांतर होऊ शकले नाही (भाषांतर सेवा उपलब्ध नव्हती). शोध फक्त इंग्रजी मजकुरावर चालतो, त्यामुळे निकाल अपूर्ण असू शकतात — इंग्रजीत प्रश्न विचारल्यास अधिक विश्वासार्ह उत्तर मिळेल.",
+  bn: "এই প্রশ্নটি ইংরেজিতে অনুবাদ করা যায়নি (অনুবাদ পরিষেবা উপলব্ধ ছিল না)। অনুসন্ধান শুধুমাত্র ইংরেজি বিষয়বস্তুর উপর চলে, তাই ফলাফল অসম্পূর্ণ হতে পারে — ইংরেজিতে প্রশ্ন করলে আরও নির্ভরযোগ্য উত্তর পাওয়া যাবে।",
+};
+const TRANSLATION_UNAVAILABLE_NOTE_EN =
+  "This query could not be translated into English because no translation provider was available. The index is English-only, so retrieval ran against the untranslated text and the results may be incomplete — asking in English will give a more reliable answer.";
+
+function translationUnavailableNote(language: AnswerLanguage): string {
+  return REVIEWED_TRANSLATION_UNAVAILABLE_NOTE[language] ?? TRANSLATION_UNAVAILABLE_NOTE_EN;
+}
 
 export async function runQueryPipeline(
   query: string,
@@ -324,11 +346,7 @@ export async function runQueryPipeline(
   // indexed corpus" wording would attribute it to the corpus when the
   // actual cause was an unavailable translation step. Say which it was.
   if (translation.method === "skipped-no-provider") {
-    limitations.unshift(
-      answerLanguage === "hi"
-        ? "इस प्रश्न का अंग्रेज़ी में अनुवाद नहीं हो सका (अनुवाद सेवा उपलब्ध नहीं थी)। खोज केवल अंग्रेज़ी सामग्री पर चलती है, इसलिए परिणाम अधूरे हो सकते हैं — अंग्रेज़ी में प्रश्न पूछने पर बेहतर परिणाम मिलेंगे।"
-        : "This query could not be translated into English because no translation provider was available. The index is English-only, so retrieval ran against the untranslated text and the results may be incomplete — asking in English will give a more reliable answer.",
-    );
+    limitations.unshift(translationUnavailableNote(answerLanguage));
   }
   if (intent.testingRequested && /laborator/i.test(query)) {
     limitations.push("No BIS-recognized laboratory data is indexed in this system yet — check bis.gov.in's official laboratory list directly.");
