@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import type { ComplianceMap } from "@/types/api";
 import type { LaboratoryItem } from "@/lib/laboratories";
+import { LaboratoriesMapLoader } from "@/components/testing/LaboratoriesMapLoader";
 
 interface ProductComplianceMapProps {
   complianceMap: ComplianceMap;
@@ -197,6 +198,10 @@ function LaboratoriesTab() {
           standards above — confirm scope with the laboratory or BIS directly.
         </p>
       </div>
+
+      {status === "ready" && data && data.items.length > 0 && (
+        <LaboratoriesMapLoader laboratories={data.items} heightClass="h-[220px]" />
+      )}
 
       <select
         value={selectedState}
