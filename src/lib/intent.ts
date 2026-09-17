@@ -79,6 +79,17 @@ export function deterministicIntentFastPath(query: string): QueryIntent | null {
 }
 
 /**
+ * Egregious, unambiguous off-topic pivots — a fixed keyword list, not a
+ * model judgment call, so it has zero false-positive risk against a
+ * legitimate but ambiguously-worded on-topic question (e.g. a pronoun-
+ * heavy chat follow-up like "how heavy is this thing allowed to be?").
+ * Exported so chat-context.ts's scoped-chat guardrail can reuse the exact
+ * same list instead of drifting from this one over time.
+ */
+export const OFF_TOPIC_PATTERN =
+  /\b(recipe|bake|cook|weather|forecast|movie|song|joke|cricket|football|match score|prime minister|capital of|who is|javascript|python|coding|crypto|bitcoin|horoscope)\b/i;
+
+/**
  * Used only when no configured/available provider can perform structured
  * generation. Deliberately conservative: it does not attempt to guess
  * product/material/useCase — a wrong guess would silently steer retrieval
@@ -87,8 +98,7 @@ export function deterministicIntentFastPath(query: string): QueryIntent | null {
  */
 export function deterministicIntentFallback(query: string): QueryIntent {
   const lower = query.toLowerCase();
-  const offTopicPattern = /\b(recipe|bake|cook|weather|forecast|movie|song|joke|cricket|football|match score|prime minister|capital of|who is|javascript|python|coding|crypto|bitcoin|horoscope)\b/i;
-  if (offTopicPattern.test(lower)) {
+  if (OFF_TOPIC_PATTERN.test(lower)) {
     return baseIntent({
       intent: "unclear",
       isRelevant: false,

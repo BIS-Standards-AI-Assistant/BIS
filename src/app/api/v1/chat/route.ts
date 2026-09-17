@@ -64,7 +64,15 @@ export async function POST(req: NextRequest) {
   try {
     const subIntent = classifyChatIntent(message);
 
-    if (subIntent === "wider_search") {
+    // With no standardNumbers there is no "current results" to scope to at
+    // all (the site-wide chat widget, opened from a page with no active
+    // search) -- resolveScopedContext([]) would always come back empty and
+    // buildScopedAnswer would always say "not enough evidence in the
+    // current results," which is a dead end for a real question rather
+    // than an honest refusal. Route straight to the same global pipeline
+    // /api/v1/query uses instead of forcing every general question to
+    // match classifyChatIntent's "wider_search" phrasing pattern first.
+    if (subIntent === "wider_search" || standardNumbers.length === 0) {
       const result = await runQueryPipeline(message);
       await logChatTurn({ message, subIntent, outcome: result.outcome ?? "answered", latencyMs: Date.now() - started });
       return NextResponse.json({
@@ -84,7 +92,7 @@ export async function POST(req: NextRequest) {
     const { answerLanguage: requestedLanguage } = resolveQueryLanguage(undefined, detectLanguage(message));
 
     const scoped = await resolveScopedContext(standardNumbers);
-    const scopedAnswer = await buildScopedAnswer(subIntent, originalQuery, scoped, requestedLanguage);
+    const scopedAnswer = await buildScopedAnswer(subIntent, originalQuery, message, scoped, requestedLanguage);
     await logChatTurn({
       message,
       subIntent,

@@ -48,13 +48,32 @@ function loadCache(): GeocodeCache {
   return JSON.parse(readFileSync(GEOCODE_CACHE_PATH, "utf-8")) as GeocodeCache;
 }
 
+/**
+ * The source recognition list has a handful of verified spelling errors
+ * (checked against real Indian place names — e.g. "Bengulur" is really
+ * Bengaluru). This corrects the geocoding QUERY only, keyed by the same
+ * locationKey() format as the cache — LaboratoryItem.city still shows the
+ * source list's original spelling verbatim in the UI, since that field
+ * represents what BIS's own list says, not a corrected version.
+ */
+const GEOCODE_QUERY_OVERRIDE: Record<string, string> = {
+  "New Delh|Delhi": "New Delhi, Delhi",
+  "Amhedabad|Gujarat": "Ahmedabad, Gujarat",
+  "Kudli (Sonepat)|Haryana": "Kundli, Haryana",
+  "Navi Mumabi|Maharashtra": "Navi Mumbai, Maharashtra",
+  "Derabassi|Punjab": "Dera Bassi, Punjab",
+  "New Modern Shahdara|Delhi": "Shahdara, Delhi",
+  "Vishakhapatnam|Andhra Pradesh": "Visakhapatnam, Andhra Pradesh",
+  "Bengulur|Karnataka": "Bengaluru, Karnataka",
+};
+
 interface NominatimResult {
   lat: string;
   lon: string;
 }
 
-async function geocodeLocation(city: string | null, state: string): Promise<CachedResult> {
-  const q = encodeURIComponent([city, state, "India"].filter(Boolean).join(", "));
+async function geocodeLocation(city: string | null, state: string, queryOverride?: string): Promise<CachedResult> {
+  const q = encodeURIComponent(queryOverride ? `${queryOverride}, India` : [city, state, "India"].filter(Boolean).join(", "));
   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${q}&limit=1&countrycodes=in`;
   try {
     const res = await politeFetch(url, { headers: { Accept: "application/json" } });
@@ -84,14 +103,17 @@ async function main() {
   const cache = loadCache();
 
   const uniqueKeys = [...new Set(labs.map((l) => locationKey(l)))];
-  const toGeocode = uniqueKeys.filter((k) => !(k in cache));
+  // A key with a query override is re-geocoded even if already cached
+  // (null) — fixing a source-data typo shouldn't require deleting the
+  // stale null entry by hand before re-running.
+  const toGeocode = uniqueKeys.filter((k) => !(k in cache) || (cache[k] === null && k in GEOCODE_QUERY_OVERRIDE));
 
   console.log(`${labs.length} laboratories across ${uniqueKeys.length} distinct city/state locations.`);
   console.log(`${uniqueKeys.length - toGeocode.length} already cached, ${toGeocode.length} to geocode.\n`);
 
   for (const [i, key] of toGeocode.entries()) {
     const lab = labs.find((l) => locationKey(l) === key)!;
-    const result = await geocodeLocation(lab.city, lab.state);
+    const result = await geocodeLocation(lab.city, lab.state, GEOCODE_QUERY_OVERRIDE[key]);
     cache[key] = result;
     console.log(`  [${i + 1}/${toGeocode.length}] ${key} -> ${result ? `${result.lat}, ${result.lng}` : "NOT RESOLVED"}`);
     // Persist incrementally so an interrupted run (rate limit, network) doesn't lose earlier progress.

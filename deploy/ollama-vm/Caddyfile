@@ -1,0 +1,16 @@
+# Fronts Ollama with a bearer-token check, since Ollama itself has no auth.
+# {$OLLAMA_DOMAIN} — a real domain (e.g. ollama.yourdomain.com) gets Caddy's
+# automatic HTTPS via Let's Encrypt; the default ":11434" serves plain HTTP
+# on that port instead (fine for a quick hackathon demo on a trusted network,
+# not for a public production deployment — get a domain for that).
+{$OLLAMA_DOMAIN}
+
+@authorized header Authorization "Bearer {$OLLAMA_TOKEN}"
+
+handle @authorized {
+	reverse_proxy ollama:11434
+}
+
+handle {
+	respond "unauthorized" 401
+}

@@ -263,6 +263,7 @@ from an older session without re-checking.
 | Citation / standard-number validation & abstention | DONE — validated against fabricated & unknown identifiers |
 | **Multilingual — all 8 UI languages answer natively** | DONE — English + Hindi are the measured pair (Hindi: 5/5 language contract, 3/5 strict grounding parity). Bengali/Tamil/Telugu/Marathi/Gujarati/Kannada now also translate-in and answer in-script (previously silently fell back to English); live-verified across all 6, quality unmeasured/varies by language — see [table below](#ml--fine-tuning-status). |
 | Feedback collection pipeline | DONE — `/api/v1/feedback` intake + `npm run feedback -- list/promote/reject` human-review CLI, live-verified end to end |
+| **Site-wide "Ask BIS Assistant" chat widget** | DONE — floating chatbot (`src/components/chat/BisChatBot.tsx`, previously built but not mounted anywhere) now renders on every page via the root layout, not just the homepage's inline search. Goes through the same `/api/v1/chat` → `runQueryPipeline` path, so it inherits every guardrail below rather than being a separate, looser surface. Fixed a real routing gap found while wiring it up: with no page context (`standardNumbers: []`), the route used to dead-end on "not enough evidence in the current results" for any question that didn't match a specific "wider search" phrasing regex — it now routes straight to the global pipeline whenever there's no scoped context to discuss, live-verified for both on-topic and off-topic questions. |
 | Fixed, explicit refusal naming the corpus boundary | DONE — wired to the deterministic grounding decision; non-Hindi/English languages get an honest "shown in English" note rather than silent downgrade |
 | Government-style navigation, homepage, Standards browse/compare, Standard Passport | DONE — verified visually |
 | Certification discovery + scheme explorer + interactive decision-tree wizard; testing-laboratory locator | DONE |
@@ -347,6 +348,7 @@ to say exactly what that means, not to round up.
 | `document-diversity-v1` | Deterministic heuristic reranker | **PRODUCTION** — recall@5/10/20 = 1.0 on the golden set | ✅ Yes — `src/lib/ml/reranker.ts` |
 | `linear-reranker-candidate-v1` | 2-feature linear regression (exact-ID match, title/query token overlap) | CANDIDATE — 17/17 leave-one-query-out top-1, **tied with the heuristic's own ceiling** | ❌ No |
 | `intent-classifier-candidate-v1` | Fine-tuned DistilBERT-base (66M params), 5-way intent classification | CANDIDATE — 100% train-set fit on 20 examples (not a held-out result) | ❌ No — would require a Python inference service, which this repo's execution rules explicitly forbid |
+| `answer-style-lora-candidate-v1` | LoRA adapter (r=8) on `distilgpt2` (82M params), generative answer style | CANDIDATE — **did not converge**: train loss stayed ~3.6-4.2 over 8 epochs, sample generation degenerates into repeating "Query: X / Answer: X" rather than producing prose. Reported as-is, not spun positively. | ❌ No |
 
 ### Why the reranker candidate doesn't beat the baseline (yet)
 
@@ -391,13 +393,47 @@ python -m venv .venv-ml
 ./.venv-ml/Scripts/python.exe scripts/ml-finetune/finetune_intent_classifier.py
 ```
 
+### A real LoRA attempt — and a real failure to report
+
+To go one step further than a classification head, `scripts/ml-finetune/
+finetune_answer_style_lora.py` LoRA-fine-tunes `distilgpt2` (82M params, `r=8`,
+`target_modules=["c_attn"]`) on the same 20 real query/answer pairs, aiming at docs/ui/SIH.md
+§14's "grounded answer style" fine-tuning target — the generative counterpart to the intent
+classifier above.
+
+**It did not work.** Training loss oscillated around 3.6-4.2 for all 8 epochs (never
+converged), and prompting the resulting adapter with one of its own training queries produces
+degenerate repetition —
+
+```
+Query: IS 5522:2014
+Answer: IS 5522:2014
+Answer: IS 5522:2014
+Answer: IS 5522:2014
+...
+```
+
+— instead of anything resembling the real training answer ("IS 5522:2014 refers to the
+standard for 'Stainless Steel Sheets and Strips for Utensils.'..."). Registered as
+`answer-style-lora-candidate-v1`, `status: "CANDIDATE"`, with this exact result in its
+`metrics`/`notes` fields — not smoothed over. 20 examples is too small a dataset and
+`distilgpt2` too weak a base model for this task; a real attempt at this would need
+substantially more real answer data and likely a stronger (but still CPU-feasible) base model.
+
+```bash
+./.venv-ml/Scripts/python.exe -m pip install peft
+./.venv-ml/Scripts/python.exe scripts/ml-finetune/finetune_answer_style_lora.py
+```
+
 **Ollama itself is hosting, not fine-tuning.** `docker compose --profile local up -d --build
 ollama` runs the *stock, unmodified* `llama3.2:3b` weights — verified live via
-`npm run ollama:smoke` (real round trip, ~10-22s per call on CPU). No `.gguf`, Modelfile, or
-LoRA adapter exists anywhere in this repo. If real LLM fine-tuning is wanted later, the honest
-path is: collect real judged examples through the feedback pipeline above, reach the 300+ row
-threshold, then either fine-tune a task model like the classifier above, or — for the
-generative model itself — do it on a machine with a GPU, since this one cannot.
+`npm run ollama:smoke` (real round trip, ~10-22s per call on CPU). The LoRA adapter above
+targets `distilgpt2`, not `llama3.2:3b` — no `.gguf`, Modelfile, or adapter for the model
+actually serving traffic exists anywhere in this repo, and given no GPU, that stays true until
+either more real data or different hardware is available. The honest path forward: collect
+real judged examples through the feedback pipeline above, reach the 300+ row threshold, then
+either fine-tune a task model like the classifier above, or — for the generative model
+itself — do it on a machine with a GPU, since this one cannot.
 
 ---
 
@@ -521,8 +557,30 @@ is for the Docker path and must be skipped on Vercel** — Vercel has its own ou
 output: process.env.VERCEL ? undefined : "standalone",
 ```
 
-Ollama cannot run on Vercel (serverless, no persistent process) — the deployed app uses the
-OpenRouter/paid provider path; the local-Ollama path is for `npm run dev` / Docker only.
+### Using Ollama in production (split deployment)
+
+Ollama cannot run on Vercel itself — serverless functions have no persistent process for a
+model server to live in. To use Ollama (rather than OpenRouter/paid) for production traffic,
+run the app on Vercel as above **and** run Ollama separately on a persistent VM, with the app
+calling it over the network:
+
+```bash
+vercel env add LLM_PROVIDER production        # local
+vercel env add LOCAL_LLM_BASE_URL production   # https://<your-ollama-vm-domain>/v1
+vercel env add LOCAL_LLM_MODEL production       # llama3.2:3b
+vercel env add LOCAL_LLM_API_KEY production     # bearer token the VM's reverse proxy checks
+vercel --prod
+```
+
+See [`deploy/ollama-vm/`](deploy/ollama-vm/) for the VM-side setup (Docker Compose, a Caddy
+reverse proxy that gates the otherwise-unauthenticated Ollama server behind that bearer token,
+and host-provider suggestions). The guardrails that keep answers on-topic and evidence-grounded
+(fixed refusal text, the relevance floor, the citation-identity-free response schema — see
+[Guardrails](#guardrails--staying-on-topic)) run in the pipeline around the LLM call, not inside
+the model itself, so they apply identically regardless of which provider is configured.
+
+If instead you don't need Ollama specifically, the simplest production path is Vercel +
+OpenRouter (no second host to run) — the block above this section.
 
 ---
 
