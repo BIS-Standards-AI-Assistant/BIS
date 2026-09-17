@@ -25,6 +25,7 @@ export type ChatSubIntent =
   | "missing_info"
   | "certification"
   | "testing"
+  | "laboratories"
   | "wider_search"
   | "other";
 
@@ -33,8 +34,14 @@ const WIDER_SEARCH_PATTERN =
 const WHY_PATTERN = /\bwhy\b|\bwhat makes\b.*\b(relevant|applicable|match)\b/i;
 const EVIDENCE_PATTERN = /\bevidence\b|\bshow me\b|\bsources?\b|\bproof\b|\bexcerpt/i;
 const MISSING_PATTERN = /\bmissing\b|\bwhat information\b|\bwhat.*(unclear|unknown|not (?:established|clear))\b/i;
+// "Where do I get this tested / certified / find a lab / do business" —
+// checked before CERT_PATTERN/TESTING_PATTERN because those would otherwise
+// claim words like "certified" or "tested" first and answer with testing
+// *parameters* instead of pointing at the actual laboratory directory.
+const LABORATORY_PATTERN =
+  /\blaborator|\blabs?\b|\bwhere\b.*\b(?:do business|get (?:it |this |the product )?(?:tested|certified)|find (?:a )?(?:lab|testing (?:facility|centre|center)))\b/i;
 const CERT_PATTERN = /\bcertif|licen[cs]e|scheme|isi mark/i;
-const TESTING_PATTERN = /\btest(s|ing|ed)?\b|\blaborator/i;
+const TESTING_PATTERN = /\btest(s|ing|ed)?\b/i;
 
 /** Deterministic sub-intent classification for a chat follow-up — regex-based, same philosophy as query-planner.ts: a fact about the literal text, not an LLM guess. */
 export function classifyChatIntent(message: string): ChatSubIntent {
@@ -43,6 +50,7 @@ export function classifyChatIntent(message: string): ChatSubIntent {
   if (WHY_PATTERN.test(m)) return "why_relevant";
   if (EVIDENCE_PATTERN.test(m)) return "evidence";
   if (MISSING_PATTERN.test(m)) return "missing_info";
+  if (LABORATORY_PATTERN.test(m)) return "laboratories";
   if (CERT_PATTERN.test(m)) return "certification";
   if (TESTING_PATTERN.test(m)) return "testing";
   return "other";
@@ -191,6 +199,25 @@ export async function buildScopedAnswer(
         answer: `Indexed evidence for ${scoped.map((s) => s.standardNumber).join(", ")}:`,
         evidence,
         limitations: [],
+      };
+    }
+
+    case "laboratories": {
+      // The real BIS recognised-laboratory dataset (data/bis-standards-
+      // dataset/recognised-laboratories.json) has no per-standard testing-
+      // scope field and no coordinates — matching "labs that can test
+      // *this* product" would be fabrication (see ProductComplianceMap.tsx
+      // and LaboratoriesDirectory.tsx, which enforce the same rule). This
+      // answer says so plainly and points at the real, working directory
+      // instead of guessing.
+      return {
+        answer:
+          "This assistant can't match a laboratory to a specific product or standard — the BIS recognised-laboratory " +
+          "list records location and recognition status only, with no per-standard testing scope. Open the Labs tab " +
+          "in this panel, or Testing → Laboratory Search in the top navigation, to browse BIS-recognised " +
+          "laboratories by state or city, then confirm testing scope directly with the laboratory or BIS.",
+        evidence: [],
+        limitations: ["Laboratory-to-standard/product matching is not available in the current dataset."],
       };
     }
 

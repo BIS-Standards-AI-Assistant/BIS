@@ -30,6 +30,14 @@ describe("classifyChatIntent", () => {
     expect(classifyChatIntent("What tests are required?")).toBe("testing");
   });
 
+  test("laboratory-flavored question classifies as laboratories, not testing or certification", () => {
+    expect(classifyChatIntent("Where can I find a laboratory to test this?")).toBe("laboratories");
+    expect(classifyChatIntent("Which labs can test my product?")).toBe("laboratories");
+    expect(classifyChatIntent("Where can I get this tested?")).toBe("laboratories");
+    expect(classifyChatIntent("Where can I get this certified?")).toBe("laboratories");
+    expect(classifyChatIntent("Where can I do business related to this product?")).toBe("laboratories");
+  });
+
   test("an unrelated/unclassifiable question falls through to other", () => {
     expect(classifyChatIntent("What color is the sky")).toBe("other");
   });
