@@ -2,14 +2,13 @@
 
 import { useState, useRef, useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import {
   getConversationServerSnapshot,
   getConversationSnapshot,
   resetConversation,
   sendAssistantMessage,
   subscribeToConversation,
-} from "@/lib/assistant-conversation";
+} from "@/lib/general-assistant-conversation";
 
 interface BisChatBotProps {
   currentQuery?: string;
@@ -37,7 +36,6 @@ function greetingFor(currentQuery: string): string {
 }
 
 export function BisChatBot({ currentQuery = "", standardNumbers = [], fromAddedSources = 0 }: BisChatBotProps) {
-  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   // Which search the reader has already opened the chat for. Derived rather
@@ -46,8 +44,13 @@ export function BisChatBot({ currentQuery = "", standardNumbers = [], fromAddedS
   const [openedFor, setOpenedFor] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // One conversation, shared with the Sources panel's prompt box — a message
-  // sent from either surface appears in both.
+  // Its own conversation instance (src/lib/general-assistant-conversation.ts)
+  // — separate from ResearchChat's, the homepage's inline "Ask a follow-up"
+  // thread (src/lib/assistant-conversation.ts). A message sent here never
+  // appears there and vice versa: this widget is the site-wide surface for
+  // general questions, independent of whatever standards happen to be on
+  // screen, so it has no reason to mirror a thread that's specifically
+  // scoped to "these results."
   const { messages, pending: loading } = useSyncExternalStore(
     subscribeToConversation,
     getConversationSnapshot,
@@ -85,18 +88,6 @@ export function BisChatBot({ currentQuery = "", standardNumbers = [], fromAddedS
     // caller and passed in, so every surface asks with the same one.
     await sendAssistantMessage({ message: text, standardNumbers, originalQuery: currentQuery || text });
   }
-
-  // The homepage (HomeClient.tsx) already has ResearchChat, an inline
-  // conversation surface reading the exact same shared store this widget
-  // does (see the useSyncExternalStore comment above) — the two were
-  // deliberately unified onto one store so they can never give different
-  // answers to the same question, but that also means any message sent
-  // from either one renders in both, doubled, on any page where both are
-  // mounted. Docked here, not floating, on the one page that already has
-  // its own conversation surface; everywhere else this remains the only
-  // assistant surface on the page, which is the actual point of it being
-  // site-wide.
-  if (pathname === "/") return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
