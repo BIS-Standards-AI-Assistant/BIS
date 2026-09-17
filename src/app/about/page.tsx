@@ -181,7 +181,7 @@ export default function AboutPage() {
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Hero Section */}
         <section className="border-b border-border bg-gradient-to-b from-surface-alt to-surface-raised px-6 py-12 lg:py-16">
           <div className="mx-auto max-w-[1380px]">

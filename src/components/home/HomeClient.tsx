@@ -87,10 +87,10 @@ export function HomeClient() {
   // coverage, every evidence excerpt) was crowding out the conversation.
   const [openRecommendationIndex, setOpenRecommendationIndex] = useState<number | null>(null);
 
-  // Tracks the last ?q= a run has already been started for — set here and
-  // in the auto-run effect below, so a router.replace triggered by this
-  // same call doesn't loop back through that effect as a duplicate second
-  // run of the query this call is already handling.
+  // P1-8: move focus to results heading when results arrive
+  const resultsHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  // Tracks the last ?q= a run has already been started for
   const lastAutoRunQuery = useRef<string | null>(null);
 
   const runQuery = useCallback(
@@ -143,6 +143,9 @@ export function HomeClient() {
         setError("The BIS Navigator service is temporarily unavailable. Please try again in a moment.");
       } finally {
         setLoading(false);
+        // P1-8: shift focus to the results heading so keyboard/SR users
+        // don't remain stranded at <body> after submit.
+        setTimeout(() => resultsHeadingRef.current?.focus(), 100);
       }
     },
     [router, searchParams, lang],
@@ -330,7 +333,13 @@ export function HomeClient() {
               <div className="flex min-w-0 flex-col lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
                 <div className="mb-3 flex shrink-0 items-center justify-between gap-3">
                   <div className="min-w-0">
-                    <h1 className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-navy">
+                    {/* P1-8: tabIndex=-1 so focus() works; outline-none hides the focus ring
+                        from mouse users while allowing programmatic focus for SR. */}
+                    <h1
+                      ref={resultsHeadingRef}
+                      tabIndex={-1}
+                      className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-navy outline-none"
+                    >
                       <AssistantIcon className="h-4.5 w-4.5" />
                       BIS Research
                     </h1>
