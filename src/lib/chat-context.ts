@@ -2,7 +2,7 @@ import { eq, inArray } from "drizzle-orm";
 import { getDb } from "@/db";
 import { standards, documents } from "@/db/schema";
 import { getCertificationSchemeTool } from "./tools/certification-tools";
-import { extractQueryIntent } from "./intent";
+import { extractQueryIntent, OFF_TOPIC_PATTERN } from "./intent";
 import { analyzeCoverage } from "./coverage-analysis";
 import type { AggregatedEvidence } from "./evidence-aggregation";
 import type { RetrievedChunk, EvidenceRef } from "@/types/api";
@@ -282,13 +282,19 @@ export async function buildScopedAnswer(
  * module uses — evidence-only behavior always still works with zero LLM
  * dependency, per docs/ARCHITECTURE.md.
  *
- * Before any of that: the same off-topic check query-pipeline.ts uses
- * (extractQueryIntent's isRelevant) runs on the raw message first. Without
- * it, an off-topic message here would depend entirely on the LLM's own
- * judgment to stay grounded — every other refusal in this app is a fixed
- * string a model can't talk its way around (src/lib/refusal.ts), and this
- * path had no equivalent. `isRelevant === false` returns that same fixed
- * "out_of_scope" text instead of ever reaching the LLM call below.
+ * Before any of that: OFF_TOPIC_PATTERN (src/lib/intent.ts) runs on the
+ * raw message first — a fixed keyword check, deliberately NOT an LLM
+ * judgment call. An LLM-based check was tried and reverted: asked to judge
+ * a bare follow-up in isolation (no conversation context), it produced a
+ * real false positive on a legitimate pronoun-heavy question ("how heavy
+ * is this thing allowed to be?", mid-conversation about a helmet
+ * standard) — ambiguous alone, obviously on-topic in context, and a
+ * scoped chat already only exists because `scoped` resolved to real
+ * standards, so a bare keyword check is enough to catch an actual pivot
+ * ("tell me a joke") without the false-positive risk. Every other refusal
+ * in this app is a fixed string a model can't talk its way around
+ * (src/lib/refusal.ts) — this keeps that property without adding a new
+ * way to be wrong.
  *
  * Pinned to the "openrouter-free" provider specifically (operator
  * decision) rather than the global auto chain — this is the one path in
@@ -299,8 +305,7 @@ export async function buildScopedAnswer(
  * model reachable via a dev tunnel).
  */
 async function buildFreeformAnswer(originalQuery: string, message: string, scoped: ScopedStandard[]): Promise<ScopedAnswer> {
-  const messageIntent = await extractQueryIntent(message);
-  if (messageIntent.isRelevant === false) {
+  if (OFF_TOPIC_PATTERN.test(message.toLowerCase())) {
     const refusal = refusalCopy("out_of_scope", "en");
     return { answer: refusal.answer, evidence: [], limitations: [refusal.limitation] };
   }

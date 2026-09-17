@@ -82,6 +82,22 @@ describe("buildScopedAnswer", () => {
     expect(result.limitations[0]).toContain("outside the scope");
   });
 
+  test("'other' sub-intent does NOT false-positive-refuse an ambiguous-alone but on-topic follow-up", async () => {
+    // Regression test: an earlier version of this gate ran a full LLM
+    // relevance judgment on the bare message with no conversation context,
+    // and a pronoun-heavy on-topic follow-up ("this thing" = the helmet
+    // under discussion) was misjudged as off-topic in isolation. The gate
+    // is now a fixed keyword check (OFF_TOPIC_PATTERN), which this
+    // question correctly does not match.
+    const result = await buildScopedAnswer(
+      "other",
+      "helmets for two wheeler riders",
+      "how heavy is this thing allowed to be?",
+      [{ standardId: "s1", standardNumber: "IS 4151:2015", title: "Protective Helmet", chunks: [] }],
+    );
+    expect(result.answer).not.toContain("outside what BIS Standards Navigator covers");
+  });
+
   test("evidence sub-intent with no indexed chunks does not fabricate an excerpt", async () => {
     const result = await buildScopedAnswer(
       "evidence",
