@@ -3,9 +3,10 @@
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-pgvector-4169E1?logo=postgresql&logoColor=white)
-![Vitest](https://img.shields.io/badge/tests-570%2F570-15803d?logo=vitest&logoColor=white)
+![Vitest](https://img.shields.io/badge/tests-618%2F618-15803d?logo=vitest&logoColor=white)
 ![Retrieval](https://img.shields.io/badge/retrieval%20recall-12%2F12-15803d)
 ![Grounding accuracy](https://img.shields.io/badge/grounding%20accuracy-90%25-15803d)
+![Laboratories geocoded](https://img.shields.io/badge/laboratory%20map-430%2F430%20geocoded-15803d)
 ![Ollama](https://img.shields.io/badge/local%20LLM-Ollama%20llama3.2%3A3b-1a1a2e)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 
@@ -13,7 +14,9 @@
 > *AI-Powered Intelligent Assistant for Indian Standards & BIS Services*
 > Ministry of Consumer Affairs, Food & Public Distribution
 
-> **Live deployment:** [bis-standards-client.vercel.app](https://bis-standards-client.vercel.app) — production, real database (19 documents / 557 chunks / 51 standards), real LLM provider chain. Every number in this README was re-measured against a running instance, not carried over from an older doc.
+> **Live deployment:** [bis-standards-client.vercel.app](https://bis-standards-client.vercel.app) — production, real database, real LLM provider chain (local Ollama first, OpenRouter fallback), real geocoded laboratory map. Every number and screenshot in this README was re-verified against the running instance on 2026-09-17, not carried over from an older doc.
+
+**[Jump to screenshots ↓](#screenshots)**
 
 An **evidence-first standards intelligence system** for discovering Indian Standards (IS)
 and related BIS certification and testing information. It answers natural-language questions
@@ -39,6 +42,7 @@ explicitly instead of guessing.
 ## Table of contents
 
 - [What this project does](#what-this-project-does)
+- [Screenshots](#screenshots)
 - [Architecture flow](#architecture-flow)
 - [Tech stack](#tech-stack)
 - [What's working vs. in progress](#whats-working-vs-in-progress)
@@ -92,6 +96,55 @@ override them.
 **Paid LLM inference is optional and is not a dependency.** With zero LLM provider configured
 (`LLM_PROVIDER=none`), every query falls back to deterministic intent extraction and an
 evidence-only answer — the app still works, just without AI-written prose.
+
+---
+
+## Screenshots
+
+Every image below is a real screenshot of the live production instance, captured 2026-09-17 —
+not a mockup. Full-resolution files are in [`docs/screenshots/`](docs/screenshots/).
+
+### Homepage — natural-language search, government identity primary
+
+![Homepage](docs/screenshots/01-homepage.png)
+
+### Search results — three-panel research workspace, honest grounding badges
+
+A query the corpus genuinely can't support ("stainless steel water bottles") gets an honest
+**Partially supported** badge and a plain explanation, not a hedged guess — the inline
+**"Ask a follow-up about these standards…"** box (its own conversation thread) sits alongside
+the floating general-assistant bubble bottom-right, each answering a different class of
+question without duplicating the other.
+
+![Search results](docs/screenshots/02-search-results.png)
+
+### Standard Passport — identity, evidence, certification, testing in one record
+
+![Standard Passport](docs/screenshots/03-standard-passport.png)
+
+### Laboratory locator — a real map, not a placeholder
+
+430/430 BIS-recognised laboratories geocoded via OpenStreetMap Nominatim (free, no API key) —
+see [ML / fine-tuning status](#ml--fine-tuning-status)'s sibling section below on the data
+pipeline. Every pin is a real city-level location; a lab with no resolvable city/state is
+listed but never plotted at a guessed point.
+
+![Laboratory map](docs/screenshots/04-laboratory-map.png)
+
+### Certification hub
+
+![Certification hub](docs/screenshots/05-certification.png)
+
+### Site-wide "Ask BIS Assistant" widget — a genuinely separate conversation
+
+The floating widget (present on every page) and the homepage's inline research thread are two
+independent conversation instances (`src/lib/general-assistant-conversation.ts` vs.
+`src/lib/assistant-conversation.ts`) — a message in one never appears in the other. Here it's
+open on a `/standards` page with no active search, correctly refusing a question the indexed
+corpus doesn't support (an LED bulb standard) rather than guessing, and naming the standards it
+did find as unconfirmed context.
+
+![Chat widget](docs/screenshots/06-chat-widget.png)
 
 ---
 
@@ -233,7 +286,7 @@ architecture, pipeline, provider fallback, data model, deployment) are in
 | **Unit / component tests** | Vitest + React Testing Library + jsdom | ~350 tests across ~40 files. |
 | **Deterministic pipeline tests** | Plain `tsx` scripts | No DB, no LLM, no network. |
 | **E2E / a11y / visual** | Playwright + `@axe-core/playwright` | Accessibility, responsive and visual suites. |
-| **Maps** | Leaflet / react-leaflet | Testing-laboratory locator. |
+| **Maps** | Leaflet / react-leaflet + OpenStreetMap Nominatim (geocoding) | Testing-laboratory locator — real city-level coordinates, 430/430 geocoded, never fabricated. |
 | **Container** | Multi-stage Dockerfile + docker-compose (two profiles) | OpenRouter path and fully-local Ollama path. |
 
 ---
@@ -243,8 +296,9 @@ architecture, pipeline, provider fallback, data model, deployment) are in
 Status is tracked in detail — and honestly — in
 [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) and
 [`docs/AI_ML_STATUS_REPORT.md`](docs/AI_ML_STATUS_REPORT.md). Every number below was
-re-measured live against a running instance on 2026-09-16 — none of it is carried forward
-from an older session without re-checking.
+re-measured live against a running instance — most recently 2026-09-17 for the rows touched
+this session (chat widget, laboratory map, production hardening) — none of it is carried
+forward from an older session without re-checking.
 
 ### ✅ Working (implemented, tested, and — where noted — live-verified)
 
@@ -262,8 +316,10 @@ from an older session without re-checking.
 | Deterministic intent fast path (exact-ID queries skip the LLM) | DONE |
 | Citation / standard-number validation & abstention | DONE — validated against fabricated & unknown identifiers |
 | **Multilingual — all 8 UI languages answer natively** | DONE — English + Hindi are the measured pair (Hindi: 5/5 language contract, 3/5 strict grounding parity). Bengali/Tamil/Telugu/Marathi/Gujarati/Kannada now also translate-in and answer in-script (previously silently fell back to English); live-verified across all 6, quality unmeasured/varies by language — see [table below](#ml--fine-tuning-status). |
+| **Read-aloud (TTS)** | DONE — server-side synthesis (`/api/v1/speak`, Google Cloud TTS) with a browser `speechSynthesis` fallback when unconfigured; answers read aloud in the language they were actually written in (`answerLanguage`), never a mismatched one. |
 | Feedback collection pipeline | DONE — `/api/v1/feedback` intake + `npm run feedback -- list/promote/reject` human-review CLI, live-verified end to end |
-| **Site-wide "Ask BIS Assistant" chat widget** | DONE — floating chatbot (`src/components/chat/BisChatBot.tsx`, previously built but not mounted anywhere) now renders on every page via the root layout, not just the homepage's inline search. Goes through the same `/api/v1/chat` → `runQueryPipeline` path, so it inherits every guardrail below rather than being a separate, looser surface. Fixed a real routing gap found while wiring it up: with no page context (`standardNumbers: []`), the route used to dead-end on "not enough evidence in the current results" for any question that didn't match a specific "wider search" phrasing regex — it now routes straight to the global pipeline whenever there's no scoped context to discuss, live-verified for both on-topic and off-topic questions. |
+| **Real laboratory map** | DONE — 430/430 BIS-recognised laboratories geocoded via OpenStreetMap Nominatim (free, no API key), cached, never a fabricated coordinate. List/Map toggle scoped to whatever filters are active. See [Screenshots](#screenshots). |
+| **Site-wide "Ask BIS Assistant" chat widget** | DONE — floating chatbot on every page, as its own independent conversation instance (`src/lib/general-assistant-conversation.ts`) separate from the homepage's inline "Ask a follow-up" thread (`src/lib/assistant-conversation.ts`) — the two used to share one store, which meant a message sent in either rendered doubled in both on the homepage; now split so neither surface's thread depends on the other, while both still go through the same guarded `/api/v1/chat` pipeline. With no page context (`standardNumbers: []`), the route routes straight to the global guarded pipeline instead of dead-ending on "not enough evidence." A scoped chat follow-up ("tell me a joke") is checked against a fixed off-topic keyword list before ever reaching an LLM — a real bug where the freeform answer path silently ignored the reader's actual follow-up (always re-describing the *original* search instead) was found and fixed live. |
 | Fixed, explicit refusal naming the corpus boundary | DONE — wired to the deterministic grounding decision; non-Hindi/English languages get an honest "shown in English" note rather than silent downgrade |
 | Government-style navigation, homepage, Standards browse/compare, Standard Passport | DONE — verified visually |
 | Certification discovery + scheme explorer + interactive decision-tree wizard; testing-laboratory locator | DONE |
@@ -271,7 +327,8 @@ from an older session without re-checking.
 | Hallmarking guidance (`/certification/hallmarking`) | DONE — real sourced facts (IS 15820:2009, HUID, jeweller registration), live-verified |
 | Document workspace (upload → extract cited IS identifiers → shared assistant scope) | DONE — identifiers only, file text never sent to a model |
 | In-app policy pages (Privacy / Terms / Accessibility, EN + HI, word-for-word from BIS) | DONE |
-| `npm run verify` (lint + typecheck + all tests + production build) | DONE — single green command, **570/570 tests** |
+| **Production hardening** | DONE — clear startup error on a missing `DATABASE_URL` instead of an opaque driver failure; CI runs on every deploy branch (was `master`-only) with a test step, dependency audit, and a basic secret-pattern scan; a documented split-deployment path for self-hosted Ollama (`deploy/ollama-vm/`) since Vercel can't run it directly. |
+| `npm run verify` (lint + typecheck + all tests + production build) | DONE — single green command, **618/618 tests** |
 
 ### 🟡 In progress / partial / candidate
 
@@ -592,16 +649,20 @@ src/
     page.tsx               Homepage (service proposition + natural-language search)
     standards/[id]/        Standard Passport (identity, evidence, certification, testing)
     certification/         Certification discovery + scheme explorer
-    testing/               Testing info + laboratory locator (Leaflet)
+    testing/               Testing info + laboratory locator (real geocoded Leaflet map)
     search/                Keyword document search
     api/v1/
       query/route.ts       Main pipeline orchestration
       search/route.ts      Hybrid retrieval endpoint
-      chat/route.ts        Scoped follow-up conversation
+      chat/route.ts        Scoped follow-up + general-assistant conversation
+      speak/route.ts       Server-side text-to-speech (Google Cloud TTS)
       analyze-document/    PDF/text → cited IS identifiers (no model call)
       feedback/route.ts    User-submitted correction intake (reviewed via scripts/feedback-admin.ts)
       health/route.ts      Liveness + dependency check
   components/              UI — Header/MegaMenu, SearchOverlay, evidence panels, workspace
+    chat/                  BisChatBot (floating, site-wide) + ResearchChat (homepage inline) —
+                           independent conversation threads, same guarded backend
+    testing/               LaboratoryMap / LaboratoryMapInner (react-leaflet, dynamic import)
   lib/
     query-normalization.ts standards-id.ts       Deterministic front of the pipeline
     retrieval.ts           ml/reranker.ts         Hybrid retrieval + reranking
@@ -612,19 +673,32 @@ src/
     providers/             Provider adapter + router (local / OpenRouter / paid)
     tools/  agent/  graph/                        Query planner, tool registry, orchestrator
     language.ts  translate.ts                     Multilingual (script-range detection)
+    tts/                   Text-to-speech provider adapter (Google Cloud, same fallback shape as LLM providers)
+    laboratories.ts        Laboratory dataset loader (real geocoded lat/lng, see scripts/geocode-laboratories.ts)
+    assistant-conversation.ts          Factory-built conversation store (createAssistantConversation) —
+    general-assistant-conversation.ts  this file's default instance (ResearchChat) vs. a second,
+                                        independent one (the floating widget)
   db/
     schema.ts              Drizzle schema — documents, chunks, query_logs, KG tables
 data/
   seed/                    ~19 real BIS documents + manifest with provenance
-  bis-standards-dataset/   Fact-checked QCO / standards reference set (+ fact-check notes)
+  bis-standards-dataset/   Fact-checked QCO / standards reference set, recognised-laboratories.json
+                           (430 labs, real lat/lng), laboratory-geocode-cache.json
   evaluation/              Golden-query sets and committed eval artifacts
   ml/                      1 -> 65 real labeled rows, candidate reranker, candidate DistilBERT
                            intent classifier (weights gitignored, ~257MB — see the section above)
 scripts/                   Ingestion, deterministic test suites, evals, data-engineering
   feedback-admin.ts        Human review CLI for /api/v1/feedback submissions
+  geocode-laboratories.ts  Real OpenStreetMap Nominatim geocoding, cached, resumable, never fabricates
   train-reranker-candidate.ts        Trains + evaluates the linear reranker candidate
   ml-finetune/             Offline Python fine-tuning (DistilBERT intent classifier)
+deploy/
+  ollama-vm/               Split-deployment setup for self-hosted Ollama — Vercel can't run a
+                           model server, so this runs it on a separate VM (Docker Compose + a
+                           Caddy reverse proxy gating the otherwise-unauthenticated Ollama API
+                           behind a bearer token) — see Deployment below
 docs/                      HLD, architecture, ML engine, evaluation, project status, UI spec
+  screenshots/             Real screenshots used in this README (see Screenshots above)
 ```
 
 ---
@@ -649,6 +723,7 @@ docs/                      HLD, architecture, ML engine, evaluation, project sta
 | `npm run smoke:prd` | Live end-to-end smoke against the real DB + provider for the PRD demo cases |
 | `npm run ollama:smoke` | Verify a real local-Ollama round trip (reachability → model pulled → generateText). DB-independent. |
 | `npm run links:check` | Verify every official BIS link the app renders still resolves |
+| `npm run data:geocode-laboratories` | Geocodes any new/unresolved laboratory city/state via OpenStreetMap Nominatim (free, 1 req/sec, cached — resumable, doesn't re-query what's already resolved) |
 | `npm run data:*` | Data-engineering pipeline (discovery, fetch, parse, migrate, report, relationships) |
 | `npm run feedback -- list \| show \| promote \| reject` | Review queue for user-submitted feedback (`/api/v1/feedback`) — the human gate before anything becomes a labeled training row |
 | `npx tsx scripts/train-reranker-candidate.ts` | Train + leave-one-query-out-evaluate the linear reranker candidate against `query_document_relevance.jsonl` |
@@ -662,7 +737,8 @@ docs/                      HLD, architecture, ML engine, evaluation, project sta
   network. Proves the grounding / confidence / citation logic offline.
 - **Provider architecture** — 23 Vitest cases, fully mocked; no real API key needed. Proves
   the fallback contract (`local → free → paid → evidence-only`, 0 retries, cooldowns).
-- **Frontend & lib** — React Testing Library component tests + module unit tests (~350 total).
+- **Frontend & lib** — React Testing Library component tests + module unit tests (618 tests
+  across 66 files, `npm run test:unit`).
 - **Retrieval regression** — `npm run eval:retrieval` against a live DB: 12/12 recall, 8/8
   no-false-match on a curated in/out-of-corpus set.
 - **Live smoke** — `npm run smoke:prd` exercises the PRD's exact demo script (English query,
