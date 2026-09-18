@@ -26,6 +26,7 @@ import {
   subscribeToSources,
 } from "@/lib/source-library";
 import { WorkspacePanel } from "@/components/workspace/WorkspacePanel";
+import { PanelResizeHandle } from "@/components/workspace/PanelResizeHandle";
 import { addRecentQuery } from "@/lib/recent-queries";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import type { QueryResponse } from "@/types/api";
@@ -74,6 +75,9 @@ export function HomeClient() {
 
   const [loading, setLoading] = useState(false);
   const [showSources, setShowSources] = useState(true);
+  // Reader-chosen width of the Sources column (px). Null keeps the default
+  // column widths below; set only by dragging the panel's right edge.
+  const [sourcesWidth, setSourcesWidth] = useState<number | null>(null);
   // §34: one owner for the research-context state. The left panel reports
   // selection here; the centre and the chat both read it from here.
   const [selectedSources, setSelectedSources] = useState<SourceCandidate[]>([]);
@@ -226,13 +230,13 @@ export function HomeClient() {
   // narrow screens get the assistant full-width rather than three columns
   // squeezed into one.
   const workspaceColumns = [
-    showSources ? "lg:grid-cols-[320px_1fr]" : "lg:grid-cols-1",
+    showSources ? "lg:grid-cols-[var(--sources-w,320px)_1fr]" : "lg:grid-cols-1",
     showWorkspace
       ? showSources
-        ? "xl:grid-cols-[330px_1fr_360px]"
+        ? "xl:grid-cols-[var(--sources-w,330px)_1fr_360px]"
         : "xl:grid-cols-[1fr_360px]"
       : showSources
-        ? "xl:grid-cols-[330px_1fr]"
+        ? "xl:grid-cols-[var(--sources-w,330px)_1fr]"
         : "xl:grid-cols-1",
   ].join(" ");
 
@@ -303,10 +307,25 @@ export function HomeClient() {
               )}
             </div>
 
-            <div className={`grid grid-cols-1 gap-5 ${workspaceColumns}`}>
+            <div
+              className={`grid grid-cols-1 gap-5 ${workspaceColumns}`}
+              style={
+                sourcesWidth !== null
+                  ? ({ "--sources-w": `${sourcesWidth}px` } as React.CSSProperties)
+                  : undefined
+              }
+            >
               {/* LEFT: official sources in scope + what the search was read as */}
               {showSources && (
-                <div className="hidden lg:block lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
+                <div className="relative hidden lg:block lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
+                  <PanelResizeHandle
+                    label="Resize sources panel"
+                    minWidth={260}
+                    maxWidth={760}
+                    reservedWidth={showWorkspace ? 820 : 460}
+                    onResize={setSourcesWidth}
+                    onReset={() => setSourcesWidth(null)}
+                  />
                   <SourcesPanel
                     result={result}
                     selectedSources={selectedSources}
