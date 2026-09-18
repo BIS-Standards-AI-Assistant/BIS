@@ -88,8 +88,16 @@ export function SourcesPanel({
   // recommendations into the same source-card shape the left panel's own
   // search produces, so what was just searched for shows up here without
   // the reader re-typing it into a second box.
+  //
+  // Not on a refusal: those candidates are already listed above under
+  // "Related but not applicable", and repeating them here as "Matching
+  // BIS sources" would call the same documents both not-applicable and
+  // matching. A manual search in this panel still works as usual.
+  const refused = result?.outcome?.startsWith("refused_") ?? false;
   const autoResults =
-    !results && result && result.recommendations.length > 0 ? sourcesFromRecommendations(result.recommendations) : null;
+    !results && !refused && result && result.recommendations.length > 0
+      ? sourcesFromRecommendations(result.recommendations)
+      : null;
   const displayedResults = results ?? autoResults;
 
   /**
@@ -358,7 +366,11 @@ export function SourcesPanel({
 
         {result && (
           <div className="mt-3">
-            <RecommendationsList recommendations={result.recommendations} onOpen={onOpenRecommendation} />
+            <RecommendationsList
+              recommendations={result.recommendations}
+              onOpen={onOpenRecommendation}
+              collapseRelated={refused}
+            />
           </div>
         )}
 

@@ -446,6 +446,17 @@ export async function runQueryPipeline(
       ? `Key testing parameters (from the applicable certification scheme): ${certSchemeData.testingParameters.join(", ")}.`
       : null;
 
+  // A refusal is, by definition, "no grounded answer" — the badge and the
+  // logged band must say so. Without this the fixed "not found in the
+  // indexed corpus" text rendered beside a "Verified evidence" badge,
+  // because engineConfidence was computed from the top candidate's
+  // grounding before the relevance floor / citation gate forced the
+  // refusal (seen live on "turbine blade coatings for aircraft jet
+  // engines", 2026-09-18). The out-of-scope path above already uses "none".
+  const responseEngineConfidence = forcedRefusal
+    ? { ...engineConfidence, band: "none" as const }
+    : engineConfidence;
+
   const response = {
     isRelevant: true,
     answer: synthesisAnswer,
@@ -463,7 +474,10 @@ export async function runQueryPipeline(
       certificationRequested: intent.certificationRequested,
       testingRequested: intent.testingRequested,
     },
-    clarificationNeeded: (() => {
+    // No refinement chips on a refusal: they are generated from the
+    // product name and would present unsourced domain specifics (e.g.
+    // coating chemistries) directly beside "not found in the corpus".
+    clarificationNeeded: forcedRefusal ? undefined : (() => {
       const rawMissing = intent.missingInformation ?? [];
       const validSpecific = rawMissing.filter((item) => !isForbiddenGeneric(item));
       const candidateHints = recommendations.map((r) => ({
@@ -487,8 +501,8 @@ export async function runQueryPipeline(
     },
     complianceMap: await buildComplianceMap(recommendations),
     nextSteps: llmAnswer.nextSteps,
-    confidence: engineConfidence.band,
-    engineConfidence,
+    confidence: responseEngineConfidence.band,
+    engineConfidence: responseEngineConfidence,
     conflicts,
     limitations,
     knowledgeBoundary,
@@ -535,7 +549,7 @@ export async function runQueryPipeline(
         query,
         intent: intent.intent,
         retrievedChunkIds: chunks.map((c) => c.chunkId),
-        confidence: engineConfidence.band,
+        confidence: responseEngineConfidence.band,
         latencyMs: Date.now() - start,
         outcome,
         language: queryLanguage,

@@ -70,6 +70,7 @@ interface Row {
   pass: boolean;
   latencyMs: number;
   citedStandards: string[];
+  confidence: string;
 }
 
 async function run(q: CalibrationQuery, group: Row["group"]): Promise<Row> {
@@ -77,6 +78,7 @@ async function run(q: CalibrationQuery, group: Row["group"]): Promise<Row> {
   const started = Date.now();
   const r = (await runQueryPipeline(q.query)) as {
     outcome?: string;
+    confidence?: string;
     recommendations?: Array<{ standardNumber: string | null; primaryRecommendation?: boolean }>;
   };
   const latencyMs = Date.now() - started;
@@ -100,6 +102,7 @@ async function run(q: CalibrationQuery, group: Row["group"]): Promise<Row> {
       .filter((rec) => rec.primaryRecommendation)
       .map((rec) => rec.standardNumber)
       .filter((s): s is string => s !== null),
+    confidence: r.confidence ?? "unknown",
   };
 }
 
@@ -141,6 +144,10 @@ async function main() {
   // is guarding against, so it is reported separately from the pass/fail
   // count rather than folded into it.
   const refusalsWithPrimaryClaims = rows.filter((r) => r.refused && r.citedStandards.length > 0);
+  // Same failure in badge form: a refusal shown with a "Verified evidence"
+  // or "Partially supported" badge (seen live 2026-09-18). A refusal's
+  // confidence must always be "none".
+  const refusalsWithConfidence = rows.filter((r) => r.refused && r.confidence !== "none");
 
   const passed = rows.filter((r) => r.pass).length;
   const latencies = rows.map((r) => r.latencyMs).sort((a, b) => a - b);
@@ -151,6 +158,10 @@ async function main() {
   console.log(`  refusals that still asserted a primary standard: ${refusalsWithPrimaryClaims.length}`);
   for (const r of refusalsWithPrimaryClaims) {
     console.log(`    ${r.id}: ${r.citedStandards.join(", ")}`);
+  }
+  console.log(`  refusals with a confidence other than "none": ${refusalsWithConfidence.length}`);
+  for (const r of refusalsWithConfidence) {
+    console.log(`    ${r.id}: ${r.confidence}`);
   }
   console.log(
     `  latency (PRD target ${LATENCY_TARGET_MS}ms): median ${latencies[Math.floor(latencies.length / 2)]}ms, max ${latencies[latencies.length - 1]}ms`,
@@ -171,6 +182,7 @@ async function main() {
           passed,
           total: rows.length,
           refusalsWithPrimaryClaims: refusalsWithPrimaryClaims.length,
+          refusalsWithConfidence: refusalsWithConfidence.length,
           medianLatencyMs: latencies[Math.floor(latencies.length / 2)],
           maxLatencyMs: latencies[latencies.length - 1],
           overLatencyTarget: overTarget.length,
@@ -183,7 +195,9 @@ async function main() {
   );
   console.log(`\nWrote ${path.relative(process.cwd(), outPath)}`);
 
-  if (passed < rows.length || refusalsWithPrimaryClaims.length > 0) process.exitCode = 1;
+  if (passed < rows.length || refusalsWithPrimaryClaims.length > 0 || refusalsWithConfidence.length > 0) {
+    process.exitCode = 1;
+  }
 }
 
 main().then(

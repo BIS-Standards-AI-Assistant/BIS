@@ -11,9 +11,17 @@ import { EmptyState } from "@/components/feedback/EmptyState";
 export function RecommendationsList({
   recommendations,
   onOpen,
+  collapseRelated = false,
 }: {
   recommendations: Recommendation[];
   onOpen: (index: number) => void;
+  /**
+   * On a refused query the related candidates are only loosely similar
+   * (often a different product entirely), so they sit behind a disclosure
+   * rather than reading as results. Still one click away — evidence stays
+   * inspectable, it just isn't presented as an answer.
+   */
+  collapseRelated?: boolean;
 }) {
   if (recommendations.length === 0) {
     return (
@@ -66,7 +74,24 @@ export function RecommendationsList({
         />
       )}
 
-      {related.length > 0 && (
+      {related.length > 0 && collapseRelated && (
+        <details className="mt-3 rounded-lg border border-border/70 p-2.5">
+          <summary className="cursor-pointer text-[10.5px] font-bold uppercase tracking-wider text-ink-faint">
+            Show loosely related results ({related.length})
+          </summary>
+          <p className="mt-1.5 text-[11px] leading-relaxed text-ink-faint">
+            No indexed source supports an answer to this query. These were retrieved only because their text is loosely similar — they are not applicable and not a recommendation.
+          </p>
+          <div className="mt-2 space-y-1.5">
+            {related.map((rec) => {
+              const idx = recommendations.indexOf(rec);
+              return <RecommendationRow key={idx} recommendation={rec} onOpen={() => onOpen(idx)} />;
+            })}
+          </div>
+        </details>
+      )}
+
+      {related.length > 0 && !collapseRelated && (
         <div className="mt-3">
           <p className="text-[10.5px] font-bold uppercase tracking-wider text-ink-faint pb-1.5 border-b border-border/70">
             Related but not applicable ({related.length})

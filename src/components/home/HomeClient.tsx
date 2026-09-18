@@ -136,7 +136,10 @@ export function HomeClient() {
 
         addRecentQuery({
           query: trimmed,
+          // Only standards that passed the applicability gate — a refused
+          // query's loosely related candidates are not results to count.
           standardNumbers: data.recommendations
+            .filter((r) => r.primaryRecommendation)
             .map((r) => r.standardNumber)
             .filter((s): s is string => s !== null)
             .slice(0, 3),
@@ -408,7 +411,11 @@ export function HomeClient() {
                     the product spec is a standing action for this query, not
                     a message in the conversation history that should scroll
                     away. */}
-                {result && result.isRelevant !== false && (
+                {/* Hidden on any refusal: the panel falls back to
+                    product-derived refinement chips even with no items, and
+                    those read as recommended specifications directly beside
+                    "not found in the indexed corpus". */}
+                {result && result.isRelevant !== false && !result.outcome?.startsWith("refused_") && (
                   <div className="shrink-0">
                     <ClarificationPanel
                       items={result.clarificationNeeded ?? []}
