@@ -102,7 +102,7 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
     });
 
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "I want to manufacture steel pipes" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "I want to manufacture steel pipes" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     // IS 4985:2021 legitimately appears twice: once auto-populated into the
@@ -133,7 +133,7 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
     });
 
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "I want to manufacture steel utensils" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "I want to manufacture steel utensils" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     // An applicable standard legitimately appears twice: on its result card
@@ -169,7 +169,7 @@ describe("HomeClient — applicability gate (steel pipes / PVC standard regressi
     });
 
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "steel pipes and utensils" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "steel pipes and utensils" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     // Same auto-populated-left-panel duplication as above.

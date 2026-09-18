@@ -40,11 +40,18 @@ export function SearchHero({
           }`}
         >
           <SearchIcon className="ml-2.5 h-5 w-5 shrink-0 text-ink-faint" />
+          {/* P2-15: visible label is sr-only; type="search" enables mobile
+              keyboard search key and browser clear-button affordance. */}
+          <label htmlFor="hero-search-input" className="sr-only">
+            {t.hero.searchPlaceholderFull}
+          </label>
           <input
+            id="hero-search-input"
+            type="search"
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder={compact ? t.hero.searchPlaceholderCompact : t.hero.searchPlaceholderFull}
-            aria-label={t.hero.searchPlaceholderCompact}
+            aria-label={t.hero.searchPlaceholderFull}
             // min-w-0: without it, a flex item's default content-based
             // minimum width (not 0) stops it shrinking below the
             // placeholder text's natural width, pushing the submit

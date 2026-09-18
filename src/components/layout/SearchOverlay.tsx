@@ -41,6 +41,10 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
   const [state, setState] = useState<SearchState>({ kind: "empty" });
   const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  // P2-13: capture the element that triggered open so we can restore focus on close
+  const triggerRef = useRef<Element | null>(null);
+  // P2-13: ref to the dialog container for focus trap
+  const dialogRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const identifierSuggestions: SearchSuggestion[] = useMemo(() => {
@@ -55,13 +59,41 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
 
   useEffect(() => {
     if (!open) return;
+    // Capture trigger before moving focus
+    triggerRef.current = document.activeElement;
     inputRef.current?.focus();
   }, [open]);
 
   useEffect(() => {
     if (!open) return;
     function onKeydown(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        // P2-13: restore focus to trigger
+        setTimeout(() => (triggerRef.current as HTMLElement | null)?.focus(), 0);
+      }
+      // P2-13: focus trap — keep Tab/Shift+Tab inside the dialog
+      if (e.key === "Tab" && dialogRef.current) {
+        const focusable = Array.from(
+          dialogRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])'
+          )
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
     }
     document.addEventListener("keydown", onKeydown);
     return () => document.removeEventListener("keydown", onKeydown);
@@ -142,10 +174,16 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
 
   if (!open) return null;
 
+  function closeAndRestore() {
+    onClose();
+    // P2-13: restore focus to the element that opened the overlay
+    setTimeout(() => (triggerRef.current as HTMLElement | null)?.focus(), 0);
+  }
+
   function submit(q: string) {
     const trimmed = q.trim();
     if (!trimmed) return;
-    onClose();
+    closeAndRestore();
     // A typed question goes to the AI Assistant on the home workspace, not
     // to /search — that page is keyword document search, reached from the
     // navigation, and answers nothing. The assistant picks the query up
@@ -154,7 +192,7 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
   }
 
   function selectSuggestion(s: SearchSuggestion) {
-    onClose();
+    closeAndRestore();
     router.push(s.href);
   }
 
@@ -173,8 +211,9 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-center bg-navy-deep/40 px-4 pt-[10vh] backdrop-blur-[2px]" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex justify-center bg-navy-deep/40 px-4 pt-[10vh] backdrop-blur-[2px]" onClick={closeAndRestore}>
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label="Search BIS Standards, Services & Documents"

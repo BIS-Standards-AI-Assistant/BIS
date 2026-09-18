@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { BisChatBot } from "@/components/chat/BisChatBot";
@@ -30,14 +31,22 @@ const THEME_INIT_SCRIPT = `
 })();
 `;
 
-export default function RootLayout({
+// P2-17: valid lang codes the app actually supports
+const VALID_LANGS = new Set(["en", "hi", "bn", "ta", "te", "mr", "gu", "kn"]);
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // P2-17: read the language cookie so SSR markup has the correct lang
+  const cookieStore = await cookies();
+  const cookieLang = cookieStore.get("bis-lang")?.value ?? "en";
+  const lang = VALID_LANGS.has(cookieLang) ? cookieLang : "en";
+
   return (
     <html
-      lang="en"
+      lang={lang}
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >

@@ -23,7 +23,7 @@ export default async function StandardsExplorePage({ params }: { params: Promise
     return (
       <div className="flex min-h-screen flex-col bg-surface">
         <Header />
-        <main className="flex-1">
+        <main id="main-content" className="flex-1">
           <RelevanceExplainer />
         </main>
         <Footer />

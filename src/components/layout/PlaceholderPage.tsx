@@ -35,7 +35,7 @@ export function PlaceholderPage({ crumbs, title, description, links = [], facts 
   return (
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <PlaceholderPageBody crumbs={crumbs} title={title} description={description} links={links} facts={facts} />
       </main>
       <Footer />

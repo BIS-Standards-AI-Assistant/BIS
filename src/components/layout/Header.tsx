@@ -7,6 +7,7 @@ import { ChevronDownIcon, MenuIcon, CloseIcon, SearchIcon } from "@/components/u
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { MegaMenu } from "@/components/layout/MegaMenu";
 import { SearchOverlay } from "@/components/layout/SearchOverlay";
+import { GovernmentBar } from "@/components/layout/GovernmentBar";
 import { NAV_SECTIONS, navItemHref, type NavSection } from "@/lib/navigation";
 
 export function Header() {
@@ -57,6 +58,7 @@ export function Header() {
 
   return (
     <header ref={navRef} className="relative border-b border-border bg-surface-raised">
+      <GovernmentBar />
       <div className="mx-auto flex h-[86px] max-w-[1380px] items-center justify-between gap-6 px-6">
         <Link href="/" className="flex shrink-0 items-center gap-3" onClick={() => setOpenSection(null)}>
           <BisLogo className="h-11 w-11 shrink-0" />
@@ -111,7 +113,7 @@ export function Header() {
         <button
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-label={mobileOpen ? t.gov.closeMenu ?? "Close menu" : t.gov.openMenu ?? "Open menu"}
           aria-expanded={mobileOpen}
           className="rounded-md p-2 text-navy lg:hidden"
         >

@@ -18,6 +18,50 @@ function extractCategory(documentType: string): string {
   return (parts.length > 1 ? parts[1] : parts[0]).replace(/_/g, " ").trim();
 }
 
+// P1-7: Collapse 46 granular categories into ~12 canonical groups.
+// The fine-grained value is preserved in documentType for display;
+// only the filter chip uses the normalised group.
+const CATEGORY_MAP: Record<string, string> = {
+  // Electrical
+  "Electrical Appliances": "Electrical",
+  "Electrical & Lighting": "Electrical",
+  "Consumer Electricals": "Electrical",
+  "Electrical Equipment": "Electrical",
+  "Electrical Infrastructure": "Electrical",
+  "Electrical Accessories": "Electrical",
+  "Household Electronics": "Electrical",
+  // Kitchen
+  "Kitchen & Domestic Appliances": "Kitchen & Domestic",
+  "Kitchenware & Domestic Appliances": "Kitchen & Domestic",
+  "Kitchenware & Utensils": "Kitchen & Domestic",
+  // Steel
+  "Steel & Metallurgy": "Steel & Metallurgy",
+  "Stainless Steel & Metallurgy": "Steel & Metallurgy",
+  // Safety / PPE
+  "PPE": "Safety & PPE",
+  "Industrial PPE": "Safety & PPE",
+  "Safety Gear": "Safety & PPE",
+  // Civil / Construction
+  "Civil Construction": "Civil & Construction",
+  "Cement & Concrete Products": "Civil & Construction",
+  "Building Materials": "Civil & Construction",
+  "Civil Engineering & Structural Design": "Civil & Construction",
+  "Civil Engineering & Building Materials": "Civil & Construction",
+  // IT / Telecom
+  "IT & Telecommunications": "IT & Telecom",
+  "IT & Consumer Electronics": "IT & Telecom",
+  "Telecommunications": "IT & Telecom",
+  "Enterprise IT": "IT & Telecom",
+  "Information Technology & Digital Public Infrastructure": "IT & Telecom",
+  // Plumbing
+  "Plumbing & Piping": "Plumbing & Piping",
+  "Piping & Infrastructure": "Plumbing & Piping",
+};
+
+function normalizeCategory(raw: string): string {
+  return CATEGORY_MAP[raw] ?? raw;
+}
+
 export function StandardsListClient({ standards }: { standards: StandardSummary[] }) {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [query, setQuery] = useState("");
@@ -28,7 +72,7 @@ export function StandardsListClient({ standards }: { standards: StandardSummary[
     const seen = new Set<string>();
     const sorted: string[] = [];
     for (const s of standards) {
-      const cat = extractCategory(s.documentType);
+      const cat = normalizeCategory(extractCategory(s.documentType));
       if (cat && !seen.has(cat)) {
         seen.add(cat);
         sorted.push(cat);
@@ -47,7 +91,8 @@ export function StandardsListClient({ standards }: { standards: StandardSummary[
         (s.standardNumber ?? "").toLowerCase().includes(q) ||
         s.documentType.toLowerCase().includes(q);
       const matchesCategory =
-        activeCategory === "All" || extractCategory(s.documentType) === activeCategory;
+        activeCategory === "All" ||
+        normalizeCategory(extractCategory(s.documentType)) === activeCategory;
       return matchesQuery && matchesCategory;
     });
   }, [standards, query, activeCategory]);
@@ -146,11 +191,12 @@ export function StandardsListClient({ standards }: { standards: StandardSummary[
             <div key={`${s.id}-${idx}`} className="flex items-start gap-4 bg-surface-raised p-4 transition-colors hover:bg-surface-alt/50">
               <label className="mt-0.5 flex items-center">
                 <span className="sr-only">Select {s.standardNumber ?? s.title} for comparison</span>
+                {/* P1-9: 24×24 px meets WCAG 2.5.8 Target Size (min 24×24) */}
                 <input
                   type="checkbox"
                   checked={selected.has(s.id)}
                   onChange={() => toggle(s.id)}
-                  className="h-4 w-4 accent-[var(--color-navy)]"
+                  className="h-6 w-6 cursor-pointer accent-[var(--color-navy)]"
                 />
               </label>
               <div className="flex-1">

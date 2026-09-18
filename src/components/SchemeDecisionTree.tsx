@@ -246,6 +246,7 @@ export function SchemeDecisionTree({
             className="h-full bg-gradient-to-r from-navy via-blue to-orange transition-all duration-500 ease-out"
             style={{ width: `${result ? 100 : progressPercent}%` }}
             role="progressbar"
+            aria-label="Certification scheme decision progress"
             aria-valuenow={result ? 100 : progressPercent}
             aria-valuemin={0}
             aria-valuemax={100}

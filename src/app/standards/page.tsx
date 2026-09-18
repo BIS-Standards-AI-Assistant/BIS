@@ -113,7 +113,7 @@ export default async function StandardsPage() {
   return (
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-14">
           <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-xs">
             <Link href="/" className="inline-flex items-center gap-1 font-semibold text-navy hover:underline">
