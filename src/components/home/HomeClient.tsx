@@ -25,6 +25,11 @@ import {
   selectedStandardNumbers,
   subscribeToSources,
 } from "@/lib/source-library";
+import {
+  getConversationServerSnapshot,
+  getConversationSnapshot,
+  subscribeToConversation,
+} from "@/lib/assistant-conversation";
 import { WorkspacePanel } from "@/components/workspace/WorkspacePanel";
 import { PanelResizeHandle } from "@/components/workspace/PanelResizeHandle";
 import { addRecentQuery } from "@/lib/recent-queries";
@@ -74,6 +79,9 @@ export function HomeClient() {
   const urlQuery = searchParams.get("q") ?? "";
 
   const [loading, setLoading] = useState(false);
+  // null = follow the conversation (see refineCollapsed below); once the
+  // reader opens or closes the panel themselves, their choice wins.
+  const [refineOverride, setRefineOverride] = useState<boolean | null>(null);
   const [showSources, setShowSources] = useState(true);
   // Reader-chosen width of the Sources column (px). Null keeps the default
   // column widths below; set only by dragging the panel's right edge.
@@ -189,6 +197,19 @@ export function HomeClient() {
     getSourcesSnapshot,
     getSourcesServerSnapshot,
   );
+  // Same store the conversation renders from, read here only to count
+  // exchanges: the refinement panel is the tallest thing between the query
+  // and the transcript, and once the reader is asking questions the
+  // transcript needs that height more than the chips do.
+  const conversation = useSyncExternalStore(
+    subscribeToConversation,
+    getConversationSnapshot,
+    getConversationServerSnapshot,
+  );
+  const hasConversation = conversation.messages.some((m) => m.id !== "greeting");
+  // Expanded while the chips are the main thing on offer, collapsed once
+  // the reader has started a conversation and the transcript needs the room.
+  const refineCollapsed = refineOverride ?? hasConversation;
   // Only standards the applicability gate passed as primary. A
   // material-mismatched candidate (the steel-query/PVC-standard case) is
   // still shown in the results under "Related but not applicable", but it
@@ -317,7 +338,7 @@ export function HomeClient() {
             >
               {/* LEFT: official sources in scope + what the search was read as */}
               {showSources && (
-                <div className="relative hidden lg:block lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
+                <div className="relative hidden lg:block lg:sticky lg:top-4 lg:h-[calc(100dvh-3rem)]">
                   <PanelResizeHandle
                     label="Resize sources panel"
                     minWidth={260}
@@ -338,7 +359,7 @@ export function HomeClient() {
               )}
 
               {/* CENTRE: the assistant itself. Same sticky+height formula as
-                  the side panels (lg:h-[calc(100vh-7rem)]) rather than a
+                  the side panels (lg:h-[calc(100dvh-3rem)]) rather than a
                   guessed value — with the chat header pinned (shrink-0) and
                   only the scrollable area below it constrained, the
                   composer's sticky bottom-0 now sticks to the bottom of
@@ -346,7 +367,7 @@ export function HomeClient() {
                   bounded height, so on a short conversation the "sticky to
                   the page" composer sat far below the last message with a
                   large empty gap above it. */}
-              <div className="flex min-w-0 flex-col lg:sticky lg:top-4 lg:h-[calc(100vh-7rem)]">
+              <div className="flex min-w-0 flex-col lg:sticky lg:top-4 lg:h-[calc(100dvh-3rem)]">
                 <div className="mb-3 flex shrink-0 items-center justify-between gap-3">
                   <div className="min-w-0">
                     <h1 className="flex items-center gap-2 text-[15px] font-bold tracking-tight text-navy">
@@ -408,11 +429,11 @@ export function HomeClient() {
                     the scroll region (shrink-0) so the question stays on
                     screen while the answer below it is read. */}
                 {activeQuery && (
-                  <div className="mb-3 shrink-0 rounded-lg border border-border border-l-[3px] border-l-navy bg-surface-raised px-4 py-3 shadow-xs">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-faint">
+                  <div className="mb-3 shrink-0 rounded-lg border border-border border-l-[3px] border-l-navy bg-surface-raised px-4 py-2 shadow-xs">
+                    <p className="text-[9.5px] font-bold uppercase tracking-[0.14em] text-ink-faint">
                       Your search
                     </p>
-                    <p className="mt-1 line-clamp-3 break-words text-[17px] font-semibold leading-snug text-navy">
+                    <p className="line-clamp-2 break-words text-[15.5px] font-semibold leading-snug text-navy">
                       &ldquo;{activeQuery}&rdquo;
                     </p>
                   </div>
@@ -430,13 +451,15 @@ export function HomeClient() {
                     those read as recommended specifications directly beside
                     "not found in the indexed corpus". */}
                 {result && result.isRelevant !== false && !result.outcome?.startsWith("refused_") && (
-                  <div className="shrink-0 lg:max-h-[45%] lg:overflow-y-auto">
+                  <div className="mb-3 shrink-0 lg:max-h-[45%] lg:overflow-y-auto">
                     <ClarificationPanel
                       items={result.clarificationNeeded ?? []}
                       product={result.interpretation?.product}
                       currentQuery={activeQuery}
                       onRefine={runQuery}
                       loading={loading}
+                      collapsed={refineCollapsed}
+                      onToggleCollapse={() => setRefineOverride(!refineCollapsed)}
                     />
                   </div>
                 )}
@@ -474,7 +497,7 @@ export function HomeClient() {
               {/* RIGHT: what to do next with this result, and this browser's
                   own recent searches */}
               {showWorkspace && (
-                <div className="hidden xl:block xl:sticky xl:top-4 xl:h-[calc(100vh-7rem)]">
+                <div className="hidden xl:block xl:sticky xl:top-4 xl:h-[calc(100dvh-3rem)]">
                   <WorkspacePanel
                     complianceMap={result?.complianceMap ?? null}
                     onRerun={runQuery}

@@ -9,6 +9,15 @@ interface ClarificationPanelProps {
   currentQuery?: string;
   onRefine?: (newQuery: string) => void;
   loading?: boolean;
+  /**
+   * Collapsed to a single summary row. The panel sits above the research
+   * conversation in a fixed-height column, so at full height it leaves the
+   * transcript too short to read; the caller collapses it once the reader
+   * has started asking questions instead. Omitted entirely (undefined) =
+   * not collapsible, and no toggle is rendered.
+   */
+  collapsed?: boolean;
+  onToggleCollapse?: () => void;
 }
 
 /**
@@ -25,6 +34,8 @@ export function ClarificationPanel({
   currentQuery = "",
   onRefine,
   loading = false,
+  collapsed,
+  onToggleCollapse,
 }: ClarificationPanelProps) {
   // Set of selected recommendations
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
@@ -130,6 +141,25 @@ export function ClarificationPanel({
     .map((k) => customValues[k]?.trim() || k)
     .filter(Boolean);
 
+  if (collapsed) {
+    return (
+      <button
+        type="button"
+        onClick={onToggleCollapse}
+        className="flex w-full items-center gap-2.5 rounded-xl border border-border-strong/70 bg-surface-raised px-4 py-2.5 text-left shadow-xs transition-colors hover:border-navy/40"
+        aria-expanded={false}
+      >
+        <span className="text-[11px] font-extrabold uppercase tracking-wider text-ink-faint">Refine</span>
+        <span className="min-w-0 flex-1 truncate text-[12.5px] font-semibold text-navy">
+          {selectedKeys.length > 0
+            ? finalSpecs.join(", ")
+            : `${displayItems.length} recommended specification${displayItems.length === 1 ? "" : "s"} for ${productName || "your product"}`}
+        </span>
+        <span className="shrink-0 text-[11.5px] font-bold text-blue">Show</span>
+      </button>
+    );
+  }
+
   return (
     <div className="rounded-2xl border border-border-strong/70 bg-surface-raised p-5 sm:p-6 shadow-xs transition-all hover:border-navy/30">
       <div className="flex items-start gap-3.5">
@@ -158,11 +188,23 @@ export function ClarificationPanel({
               </p>
             </div>
 
-            {selectedKeys.length > 0 && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-navy px-3 py-1 text-xs font-bold text-white shadow-2xs">
-                <span>{selectedKeys.length} selected</span>
-              </span>
-            )}
+            <div className="flex items-center gap-2">
+              {selectedKeys.length > 0 && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-navy px-3 py-1 text-xs font-bold text-white shadow-2xs">
+                  <span>{selectedKeys.length} selected</span>
+                </span>
+              )}
+              {collapsed === false && onToggleCollapse && (
+                <button
+                  type="button"
+                  onClick={onToggleCollapse}
+                  className="shrink-0 text-[11.5px] font-bold text-blue hover:underline"
+                  aria-expanded
+                >
+                  Hide
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Recommendations chips (in the exact same place) */}
