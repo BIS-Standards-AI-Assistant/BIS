@@ -419,16 +419,18 @@ export function HomeClient() {
                 )}
 
                 {/* Pinned above the scrollable chat, not inside it (shrink-0,
-                    outside the flex-1 overflow-y-auto region below) — refining
-                    the product spec is a standing action for this query, not
-                    a message in the conversation history that should scroll
-                    away. */}
+                    outside the conversation's own scroll region below) —
+                    refining the product spec is a standing action for this
+                    query, not a message in the conversation history that
+                    should scroll away. It is capped at just under half the
+                    column so a long chip list cannot squeeze the transcript
+                    out; past that the panel scrolls on its own. */}
                 {/* Hidden on any refusal: the panel falls back to
                     product-derived refinement chips even with no items, and
                     those read as recommended specifications directly beside
                     "not found in the indexed corpus". */}
                 {result && result.isRelevant !== false && !result.outcome?.startsWith("refused_") && (
-                  <div className="shrink-0">
+                  <div className="shrink-0 lg:max-h-[45%] lg:overflow-y-auto">
                     <ClarificationPanel
                       items={result.clarificationNeeded ?? []}
                       product={result.interpretation?.product}
@@ -439,20 +441,23 @@ export function HomeClient() {
                   </div>
                 )}
 
-                <div className="min-h-0 flex-1 lg:overflow-y-auto">
-            {loading && (
-              <div className="mx-auto max-w-3xl mt-8">
-                <LoadingIndicator />
-              </div>
-            )}
+                {/* These used to sit inside a `flex-1` box that claimed all the
+                    leftover height of the column whether or not it had anything
+                    in it — so on a settled result it was an empty band pushing
+                    the conversation below the fold. They are now sized by their
+                    content and the conversation takes the remaining height. */}
+                {loading && (
+                  <div className="mx-auto mt-8 w-full max-w-3xl shrink-0">
+                    <LoadingIndicator />
+                  </div>
+                )}
 
-            {error && (
-              <div className="mx-auto max-w-3xl mt-8">
-                <ErrorState title="We couldn't connect to the BIS Navigator service" body={error} />
-              </div>
-            )}
+                {error && (
+                  <div className="mx-auto mt-8 w-full max-w-3xl shrink-0">
+                    <ErrorState title="We couldn't connect to the BIS Navigator service" body={error} />
+                  </div>
+                )}
 
-              </div>
                 {/* The centre is a conversation, not a second search box.
                     This used to be a SearchHero calling runQuery, which
                     rewrote ?q= and ran the global pipeline — so a follow-up

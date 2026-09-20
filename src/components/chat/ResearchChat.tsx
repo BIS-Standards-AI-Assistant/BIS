@@ -67,9 +67,16 @@ export function ResearchChat({
   }
 
   return (
-    <section className="mt-6" aria-label="Research conversation">
+    /* At lg+ the centre column is a fixed-height flex column, so this
+       conversation owns whatever height is left below the query header and
+       the refinement panel: its context strip and composer are pinned
+       (shrink-0) and only the transcript between them scrolls. Without the
+       bounded height the transcript grew the column past 100vh and pushed
+       the composer off the bottom of the screen. Below lg the column is
+       unbounded, min-h-0/flex-1 are inert and the page scrolls as before. */
+    <section className="mt-6 flex min-h-0 flex-1 flex-col" aria-label="Research conversation">
       {/* §28: what the assistant is reading, and a way to change it. */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border/60 pt-4">
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-border/60 pt-4">
         <p className="text-[11px] font-extrabold uppercase tracking-wider text-ink-faint">
           Research context ·{" "}
           {scopeStandardNumbers.length > 0
@@ -86,7 +93,7 @@ export function ResearchChat({
       </div>
 
       {scopeStandardNumbers.length > 0 && (
-        <div className="mt-2 flex flex-wrap gap-1.5">
+        <div className="mt-2 flex shrink-0 flex-wrap gap-1.5">
           {scopeStandardNumbers.slice(0, 8).map((n) => (
             <span key={n} className="rounded bg-navy/10 px-1.5 py-0.5 font-mono text-[10.5px] font-bold text-navy">
               {n}
@@ -95,73 +102,75 @@ export function ResearchChat({
         </div>
       )}
 
-      {/* §29: the opening line depends on whether anything is in scope. */}
-      {exchanges.length === 0 && !pending && (
-        <p className="mt-4 max-w-[60ch] text-[13.5px] leading-relaxed text-ink-soft">
-          {hasSelectedSources || scopeStandardNumbers.length > 0
-            ? "Ask about the scope, testing, certification, applicability or evidence of these sources. Answers come from indexed BIS evidence and cite where they came from."
-            : "Search and select BIS sources on the left to start a source-grounded research conversation."}
-        </p>
-      )}
+      <div className="min-h-0 flex-1 lg:overflow-y-auto lg:pr-1">
+        {/* §29: the opening line depends on whether anything is in scope. */}
+        {exchanges.length === 0 && !pending && (
+          <p className="mt-4 max-w-[60ch] text-[13.5px] leading-relaxed text-ink-soft">
+            {hasSelectedSources || scopeStandardNumbers.length > 0
+              ? "Ask about the scope, testing, certification, applicability or evidence of these sources. Answers come from indexed BIS evidence and cite where they came from."
+              : "Search and select BIS sources on the left to start a source-grounded research conversation."}
+          </p>
+        )}
 
-      {/* §27: one continuous session, user and assistant visibly distinct. */}
-      {exchanges.length > 0 && (
-        <ol className="mt-4 space-y-4">
-          {exchanges.map((m) => (
-            <li key={m.id} className={m.sender === "user" ? "flex justify-end" : ""}>
-              {m.sender === "user" ? (
-                <p className="max-w-[80%] rounded-2xl rounded-br-sm bg-navy px-4 py-2.5 text-[13.5px] font-medium text-white">
-                  {m.text}
-                </p>
-              ) : (
-                <div className="max-w-[85%] rounded-2xl rounded-bl-sm border border-border/70 bg-surface-raised px-4 py-3">
-                  <div className="mb-1.5 flex flex-wrap items-center gap-2">
-                    <SourceTag provenance={m.failed ? "inference" : "ai"} />
-                    {m.scope === "global" && (
-                      <span className="rounded bg-navy/10 px-1.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-navy">
-                        Wider BIS search
-                      </span>
-                    )}
-                    {!m.failed && m.text.trim() && (
-                      <SpeakButton text={m.text} language={m.answerLanguage ?? "en"} className="ml-auto" />
-                    )}
-                  </div>
-                  <p className={`whitespace-pre-line text-[13.5px] leading-relaxed ${m.failed ? "text-danger" : "text-ink"}`}>
+        {/* §27: one continuous session, user and assistant visibly distinct. */}
+        {exchanges.length > 0 && (
+          <ol className="mt-4 space-y-4">
+            {exchanges.map((m) => (
+              <li key={m.id} className={m.sender === "user" ? "flex justify-end" : ""}>
+                {m.sender === "user" ? (
+                  <p className="max-w-[80%] break-words rounded-2xl rounded-br-sm bg-navy px-4 py-2.5 text-[13.5px] font-medium text-white">
                     {m.text}
                   </p>
-                  {m.standards && m.standards.length > 0 && (
-                    <div className="mt-2.5 border-t border-border/60 pt-2">
-                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-ink-faint">
-                        Evidence from
-                      </p>
-                      <div className="mt-1 flex flex-wrap gap-1.5">
-                        {m.standards.map((s, i) => (
-                          <Link
-                            key={i}
-                            href={s.id ? `/standards/${s.id}` : "#"}
-                            className="rounded bg-navy/10 px-1.5 py-0.5 font-mono text-[10.5px] font-bold text-navy hover:underline"
-                          >
-                            {s.number ?? s.title}
-                          </Link>
-                        ))}
-                      </div>
+                ) : (
+                  <div className="max-w-[85%] rounded-2xl rounded-bl-sm border border-border/70 bg-surface-raised px-4 py-3">
+                    <div className="mb-1.5 flex flex-wrap items-center gap-2">
+                      <SourceTag provenance={m.failed ? "inference" : "ai"} />
+                      {m.scope === "global" && (
+                        <span className="rounded bg-navy/10 px-1.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wider text-navy">
+                          Wider BIS search
+                        </span>
+                      )}
+                      {!m.failed && m.text.trim() && (
+                        <SpeakButton text={m.text} language={m.answerLanguage ?? "en"} className="ml-auto" />
+                      )}
                     </div>
-                  )}
-                </div>
-              )}
-            </li>
-          ))}
-        </ol>
-      )}
+                    <p className={`whitespace-pre-line break-words text-[13.5px] leading-relaxed ${m.failed ? "text-danger" : "text-ink"}`}>
+                      {m.text}
+                    </p>
+                    {m.standards && m.standards.length > 0 && (
+                      <div className="mt-2.5 border-t border-border/60 pt-2">
+                        <p className="text-[10px] font-extrabold uppercase tracking-wider text-ink-faint">
+                          Evidence from
+                        </p>
+                        <div className="mt-1 flex flex-wrap gap-1.5">
+                          {m.standards.map((s, i) => (
+                            <Link
+                              key={i}
+                              href={s.id ? `/standards/${s.id}` : "#"}
+                              className="rounded bg-navy/10 px-1.5 py-0.5 font-mono text-[10.5px] font-bold text-navy hover:underline"
+                            >
+                              {s.number ?? s.title}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ol>
+        )}
 
-      {/* §25: says what it is doing, and never "Searching…" — this is not search. */}
-      {pending && (
-        <p role="status" className="mt-4 text-[13px] font-medium text-ink-soft">
-          Reading selected BIS sources and preparing an evidence-backed answer…
-        </p>
-      )}
+        {/* §25: says what it is doing, and never "Searching…" — this is not search. */}
+        {pending && (
+          <p role="status" className="mt-4 text-[13px] font-medium text-ink-soft">
+            Reading selected BIS sources and preparing an evidence-backed answer…
+          </p>
+        )}
 
-      <div ref={endRef} />
+        <div ref={endRef} />
+      </div>
 
       {/* §26: a chat composer, not a search bar. */}
       <form
@@ -169,7 +178,7 @@ export function ResearchChat({
           e.preventDefault();
           void send();
         }}
-        className="sticky bottom-0 z-20 -mx-1 mt-4 border-t border-border/60 bg-surface px-1 pb-3 pt-3"
+        className="sticky bottom-0 z-20 -mx-1 mt-4 shrink-0 border-t border-border/60 bg-surface px-1 pb-3 pt-3"
       >
         <div className="flex items-end gap-2 rounded-xl border border-border-strong bg-surface-raised px-3 py-2 focus-within:border-navy">
           <ChatIcon className="mb-1.5 h-4 w-4 shrink-0 text-ink-faint" />
