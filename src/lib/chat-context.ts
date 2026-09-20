@@ -1,4 +1,4 @@
-import { eq, inArray } from "drizzle-orm";
+import { inArray } from "drizzle-orm";
 import { getDb } from "@/db";
 import { standards, documents } from "@/db/schema";
 import { getCertificationSchemeTool } from "./tools/certification-tools";
@@ -74,36 +74,108 @@ export interface ScopedStandard {
   }>;
 }
 
-/** Resolves real standard/document/chunk rows for the given canonical numbers — never trusts anything about them beyond the identifier itself. Silently drops any number that doesn't match a real row (no fabricated standards). */
+type DocumentWithChunks = {
+  id: string;
+  title: string;
+  sourceUrl: string;
+  standardNumber: string | null;
+  standardId: string | null;
+  chunks: Array<{
+    id: string;
+    section: string | null;
+    clause: string | null;
+    page: number | null;
+    text: string;
+  }>;
+};
+
+function toScopedChunks(docs: DocumentWithChunks[]): ScopedStandard["chunks"] {
+  return docs.flatMap((d) =>
+    d.chunks.map((c) => ({
+      chunkId: c.id,
+      documentId: d.id,
+      documentTitle: d.title,
+      sourceUrl: d.sourceUrl,
+      section: c.section,
+      clause: c.clause,
+      page: c.page,
+      text: c.text,
+    })),
+  );
+}
+
+/**
+ * Resolves real standard/document/chunk rows for the given canonical
+ * numbers — never trusts anything about them beyond the identifier itself.
+ * Silently drops any number that doesn't match a real row (no fabricated
+ * standards).
+ *
+ * Two tables can hold the corpus and both are consulted, because only
+ * consulting the first made every scoped follow-up unanswerable:
+ *
+ * - `standards` is the canonical "one standard, many documents" registry
+ *   (schema.ts §standards). It is populated by the data-normalization
+ *   scripts, not by ingestion, so a deployment that has only ever run
+ *   ingestion has documents and chunks but an empty registry.
+ * - `documents.standardNumber` is what ingestion writes and what retrieval
+ *   reads, so it is the number the client actually receives in a query
+ *   response — and therefore the number it sends back here.
+ *
+ * Resolving only against the registry meant that on such a deployment
+ * every follow-up returned "No standards from the current results could be
+ * resolved in the database," whatever was asked. Documents are matched on
+ * the same exact-string identifier, so nothing about the trust model
+ * changes: an unknown number still resolves to nothing.
+ */
 export async function resolveScopedContext(standardNumbers: string[]): Promise<ScopedStandard[]> {
   if (standardNumbers.length === 0) return [];
+  const wanted = standardNumbers.slice(0, 10);
   const db = getDb();
-  const standardRows = await db.query.standards.findMany({
-    where: inArray(standards.canonicalNumber, standardNumbers.slice(0, 10)),
-  });
 
+  const registryRows = await db.query.standards.findMany({
+    where: inArray(standards.canonicalNumber, wanted),
+  });
+  const registryByNumber = new Map(registryRows.map((r) => [r.canonicalNumber, r]));
+
+  // Documents reached either way: through the registry's FK, and directly
+  // by the number ingestion recorded. Merged by document id so a document
+  // linked both ways is not counted (or quoted) twice.
+  const [byNumber, byRegistryId] = await Promise.all([
+    db.query.documents.findMany({ where: inArray(documents.standardNumber, wanted), with: { chunks: true } }),
+    registryRows.length > 0
+      ? db.query.documents.findMany({
+          where: inArray(
+            documents.standardId,
+            registryRows.map((r) => r.id),
+          ),
+          with: { chunks: true },
+        })
+      : Promise.resolve([]),
+  ]);
+
+  const docsFor = new Map<string, Map<string, DocumentWithChunks>>();
+  const add = (number: string | null | undefined, doc: DocumentWithChunks) => {
+    if (!number || !wanted.includes(number)) return;
+    const existing = docsFor.get(number) ?? new Map<string, DocumentWithChunks>();
+    existing.set(doc.id, doc);
+    docsFor.set(number, existing);
+  };
+  for (const d of byNumber) add(d.standardNumber, d);
+  for (const d of byRegistryId) {
+    add(registryRows.find((r) => r.id === d.standardId)?.canonicalNumber, d);
+  }
+
+  // Input order is the order the reader saw the standards in.
   const result: ScopedStandard[] = [];
-  for (const s of standardRows) {
-    const docs = await db.query.documents.findMany({
-      where: eq(documents.standardId, s.id),
-      with: { chunks: true },
-    });
+  for (const number of wanted) {
+    const registry = registryByNumber.get(number);
+    const docs = [...(docsFor.get(number)?.values() ?? [])];
+    if (!registry && docs.length === 0) continue;
     result.push({
-      standardId: s.id,
-      standardNumber: s.canonicalNumber,
-      title: s.title,
-      chunks: docs.flatMap((d) =>
-        d.chunks.map((c) => ({
-          chunkId: c.id,
-          documentId: d.id,
-          documentTitle: d.title,
-          sourceUrl: d.sourceUrl,
-          section: c.section,
-          clause: c.clause,
-          page: c.page,
-          text: c.text,
-        })),
-      ),
+      standardId: registry?.id ?? docs[0].id,
+      standardNumber: number,
+      title: registry?.title ?? docs[0]?.title ?? null,
+      chunks: toScopedChunks(docs),
     });
   }
   return result;
@@ -245,9 +317,11 @@ export async function buildScopedAnswer(
     case "certification":
     case "testing": {
       const parts: string[] = [];
+      let anyRecord = false;
       for (const s of scoped) {
         const res = await getCertificationSchemeTool.execute({ canonicalNumber: s.standardNumber });
         if (res.status === "ok" && res.data) {
+          anyRecord = true;
           const data = res.data;
           parts.push(
             subIntent === "certification"
@@ -258,6 +332,30 @@ export async function buildScopedAnswer(
           );
         } else {
           parts.push(`${s.standardNumber}: no certification scheme record is indexed for this standard.`);
+        }
+      }
+
+      // The structured certification/testing tables are a separate
+      // reference dataset from the ingested documents, and a deployment can
+      // have the documents without it. When it has nothing, the question is
+      // still answerable from the document text — a BIS product manual
+      // states its scheme of inspection and testing in prose — so quote
+      // that rather than stopping at "no record". The "no record" line
+      // stays: it is the honest status of the reference dataset, and the
+      // reader should see which of the two they are reading.
+      if (!anyRecord) {
+        const fromText = buildEvidenceOnlyFollowUp(message, scoped);
+        if (fromText.evidence.length > 0) {
+          return {
+            answer:
+              parts.join("\n") +
+              "\n\nThe indexed document text does cover this. These passages mention what you asked about:",
+            evidence: fromText.evidence,
+            limitations: [
+              "No structured certification or testing record exists for this standard in the reference dataset — the passages above are the source document's own wording, not a structured scheme record.",
+            ],
+            answerLanguage: "en",
+          };
         }
       }
       return { answer: parts.join("\n"), evidence: [], limitations: [], answerLanguage: "en" };
@@ -320,14 +418,146 @@ function freeformLanguageInstruction(language: AnswerLanguage): string {
  * (src/lib/refusal.ts) — this keeps that property without adding a new
  * way to be wrong.
  *
- * Pinned to the "openrouter-free" provider specifically (operator
- * decision) rather than the global auto chain — this is the one path in
- * the app where a model freely phrases prose around arbitrary follow-up
- * questions, so it gets the provider best verified to follow the "stay
- * grounded, refuse cleanly" instruction, independent of whichever
- * provider LLM_PROVIDER=auto picks for the rest of the app (e.g. a local
- * model reachable via a dev tunnel).
+ * This used to be pinned to the "openrouter-free" provider specifically,
+ * on the reasoning that the one path where a model freely phrases prose
+ * deserves the provider best verified to stay grounded. The pin was a
+ * single-provider chain with no fallback, so on a deployment configured
+ * for any other provider (LLM_PROVIDER=gemini, say) every open-ended
+ * follow-up silently reached a provider that was not the configured one,
+ * failed, and came back as "I don't have enough evidence" — which reads
+ * as the corpus having nothing to say rather than as a provider outage.
+ * It now uses the app's configured chain like every other call site, so
+ * grounding is enforced by the system prompt and the evidence-only
+ * fallback below, not by which vendor answered.
  */
+/**
+ * Questions no standards corpus can answer, whoever is asked — market
+ * size, competitors, pricing, where to site a factory. They are not
+ * off-topic in the OFF_TOPIC_PATTERN sense (a reader asking where to
+ * manufacture a helmet is asking in good faith, about the product under
+ * discussion), but the indexed corpus is Indian Standards and BIS service
+ * documents, and no amount of retrieval will turn that into market
+ * intelligence. Handled deterministically, before the LLM, for two
+ * reasons: the answer is the same every time, and a model asked a
+ * market question while holding standards excerpts is exactly the setup
+ * that produces a confident, invented answer.
+ */
+const BEYOND_CORPUS_PATTERN = new RegExp(
+  [
+    // Market and commercial standing.
+    String.raw`\b(?:competitors?|competition|rivals?|market (?:share|size|leader|research|trend|demand)`,
+    String.raw`|profit|revenue|turnover|sales figures?)\b`,
+    // Where to put a factory. Deliberately requires a production word:
+    // "best place for the ISI mark" is a standards question, not this.
+    String.raw`|\b(?:manufactur\w*|production|factory|plant)\s+(?:location|hub|base|site|city|state|country)\b`,
+    String.raw`|\b(?:best|cheapest|ideal|top|good)\s+(?:\w+\s+){0,2}(?:place|location|city|state|country|region|hub|site)\s+(?:to|for)\s+(?:manufactur|produc|make|build|set)`,
+    String.raw`|\bwhere (?:should|can|do) (?:i|we) (?:manufactur|produce|set ?up|build|open)\b`,
+  ].join(""),
+  "i",
+);
+
+function beyondCorpusAnswer(scoped: ScopedStandard[]): ScopedAnswer {
+  const numbers = scoped.map((s) => s.standardNumber).join(", ");
+  return {
+    answer:
+      "That is outside what this service holds. BIS Standards Navigator indexes Indian Standards and BIS " +
+      "service documents — it has no market, competitor, pricing or site-selection data, and inventing an " +
+      `answer from the standards text would not be one. For ${numbers} it can tell you what the indexed ` +
+      "clauses actually require, what evidence supports them, the certification scheme and testing parameters " +
+      "on record, and which BIS-recognised laboratories exist by state (Testing → Laboratory Search).",
+    evidence: [],
+    limitations: ["Market, competitor, pricing and site-selection questions are outside the indexed BIS corpus."],
+    answerLanguage: "en",
+  };
+}
+
+const STOP_WORDS = new Set([
+  "about", "after", "again", "against", "along", "also", "always", "another", "because", "been", "before",
+  "being", "below", "between", "both", "does", "doing", "during", "each", "from", "have", "having", "here",
+  "into", "just", "like", "more", "most", "much", "must", "need", "needs", "only", "other", "over", "same",
+  "should", "some", "such", "than", "that", "their", "them", "then", "there", "these", "they", "this", "those",
+  "through", "under", "until", "very", "what", "when", "where", "which", "while", "will", "with", "would",
+  "your", "tell", "give", "show", "know", "want", "make", "does", "many",
+]);
+
+/**
+ * The evidence-only answer for an open-ended follow-up — what the reader
+ * gets when no LLM provider is configured or every one of them fails.
+ * Tier 0 of docs/ARCHITECTURE.md's cost tiers: the service stays useful
+ * with deterministic code and Postgres alone.
+ *
+ * It does not write prose about the evidence, because writing prose is
+ * the part that needs a model. It finds the indexed passages whose text
+ * actually contains what was asked about and hands them over verbatim,
+ * with their clause and page, for the reader to judge — which is the
+ * evidence-first path (claim → evidence → source) with the claim step
+ * left out rather than guessed at. Previously this case returned a bare
+ * "I don't have enough evidence in the current results to establish
+ * that", which said the corpus was empty-handed when the truth was that
+ * no model had been reachable to phrase the answer.
+ */
+export function buildEvidenceOnlyFollowUp(message: string, scoped: ScopedStandard[]): ScopedAnswer {
+  const terms = [
+    ...new Set(
+      message
+        .toLowerCase()
+        .split(/[^a-z0-9]+/)
+        .filter((t) => t.length >= 4 && !STOP_WORDS.has(t)),
+    ),
+  ];
+
+  const ranked = scoped
+    .flatMap((s) =>
+      s.chunks.map((c) => {
+        const text = c.text.toLowerCase();
+        return { standardNumber: s.standardNumber, chunk: c, hits: terms.filter((t) => text.includes(t)).length };
+      }),
+    )
+    .filter((c) => c.hits > 0)
+    .sort((a, b) => b.hits - a.hits)
+    .slice(0, 3);
+
+  if (ranked.length === 0) {
+    const covered = scoped
+      .map((s) => {
+        const clauses = [...new Set(s.chunks.map((c) => c.clause).filter(Boolean))].slice(0, 6);
+        const where = clauses.length > 0 ? ` (indexed clauses include ${clauses.join(", ")})` : "";
+        return `${s.standardNumber}${s.title ? ` — ${s.title}` : ""}${where}`;
+      })
+      .join("; ");
+    return {
+      answer:
+        `No passage in the indexed text for ${scoped.map((s) => s.standardNumber).join(", ")} mentions what you ` +
+        `asked about, so there is nothing here to answer it from. What is indexed: ${covered}. You can ask what ` +
+        "evidence supports a standard, its certification scheme or testing parameters on record, or ask to " +
+        "search wider BIS knowledge for a different topic.",
+      evidence: [],
+      limitations: ["Answered from indexed evidence only — no AI provider was available to interpret the question."],
+      answerLanguage: "en",
+    };
+  }
+
+  return {
+    answer:
+      "Answering from the indexed BIS text directly. These are the passages in " +
+      `${[...new Set(ranked.map((r) => r.standardNumber))].join(", ")} that mention what you asked about, quoted ` +
+      "as they appear in the source — read them and judge whether they answer it:",
+    evidence: ranked.map((r) => ({
+      chunkId: r.chunk.chunkId,
+      documentId: r.chunk.documentId,
+      document: r.chunk.documentTitle,
+      standardNumber: r.standardNumber,
+      section: r.chunk.section,
+      clause: r.chunk.clause,
+      page: r.chunk.page,
+      text: r.chunk.text,
+      sourceUrl: r.chunk.sourceUrl,
+    })),
+    limitations: ["Answered from indexed evidence only — no AI provider was available to summarise it in prose."],
+    answerLanguage: "en",
+  };
+}
+
 async function buildFreeformAnswer(
   originalQuery: string,
   message: string,
@@ -339,6 +569,8 @@ async function buildFreeformAnswer(
     return { answer: refusal.answer, evidence: [], limitations: [refusal.limitation], answerLanguage: "en" };
   }
 
+  if (BEYOND_CORPUS_PATTERN.test(message)) return beyondCorpusAnswer(scoped);
+
   const evidenceBlock = scoped
     .map((s) => {
       const excerpts = s.chunks
@@ -349,7 +581,7 @@ async function buildFreeformAnswer(
     })
     .join("\n\n");
 
-  const chain = getProviderChain("openrouter-free");
+  const chain = getProviderChain();
   const { response } = await generateTextWithFallback(chain, {
     system:
       "You are a research assistant for BIS Standards Navigator, a government service. " +
@@ -357,7 +589,11 @@ async function buildFreeformAnswer(
       "never inventing a fact, statistic, regulation, tax rule, government scheme, or standard clause that is not " +
       "literally present in the excerpts. If the excerpts do not contain information that answers the question, " +
       "say so plainly and explain what the indexed evidence does cover instead — do not fill the gap with a " +
-      "plausible-sounding guess. Keep the answer concise (2-4 sentences) and do not use markdown formatting." +
+      "plausible-sounding guess. When the question is outside what a standards corpus can answer at all (market " +
+      "size, competitors, pricing, where to site a factory), say that plainly in one sentence and point the reader " +
+      "to what this service does hold: the indexed clauses of the standards in scope, the certification scheme and " +
+      "testing parameters on record, and the BIS recognised-laboratory directory. " +
+      "Keep the answer concise (2-4 sentences) and do not use markdown formatting." +
       freeformLanguageInstruction(language),
     prompt:
       `The reader originally searched for: ${originalQuery}\n\n` +
@@ -370,12 +606,5 @@ async function buildFreeformAnswer(
     return { answer: response.text.trim(), evidence: [], limitations: [], answerLanguage: language };
   }
 
-  return {
-    answer: NO_EVIDENCE_ANSWER,
-    evidence: [],
-    limitations: [
-      "This question could not be confidently matched to the current research context, and no AI provider was available to attempt an evidence-grounded answer. Try asking about relevance, evidence, certification, or testing — or explicitly ask to search wider BIS knowledge.",
-    ],
-    answerLanguage: "en",
-  };
+  return buildEvidenceOnlyFollowUp(message, scoped);
 }

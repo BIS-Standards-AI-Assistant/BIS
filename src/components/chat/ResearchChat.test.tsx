@@ -124,6 +124,49 @@ describe("§27/§8 — one continuous conversation", () => {
     expect(screen.getByText("AI interpretation")).toBeInTheDocument();
   });
 
+  test("an answer's evidence passages are quoted with their clause and a link to the source document", async () => {
+    // The answer text can end "read them and judge whether they answer it"
+    // (the evidence-only path in chat-context.ts). Rendering only the
+    // standard-number chips made that sentence point at nothing.
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(
+      chatResponse("Answering from the indexed BIS text directly.", [
+        {
+          standardNumber: "IS 15410:2003",
+          document: "Product Manual",
+          documentId: "d1",
+          clause: "6.1",
+          section: null,
+          page: 9,
+          text: "The shell thickness shall be not less than 2.0 mm at any point.",
+          sourceUrl: "https://bis.gov.in/x.pdf",
+        },
+      ]),
+    ));
+    renderChat();
+    await userEvent.setup().type(screen.getByLabelText(/ask a follow-up/i), "thickness?{Enter}");
+
+    expect(
+      await screen.findByText(/The shell thickness shall be not less than 2.0 mm at any point./),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Clause 6.1")).toBeInTheDocument();
+    expect(screen.getByText("p. 9")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Source document" })).toHaveAttribute(
+      "href",
+      "https://bis.gov.in/x.pdf",
+    );
+  });
+
+  test("a citation with no quotable text is shown as a chip only, never as an empty quote", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(
+      chatResponse("An answer.", [{ standardNumber: "IS 15410:2003", document: "Manual", documentId: "d1" }]),
+    ));
+    renderChat();
+    await userEvent.setup().type(screen.getByLabelText(/ask a follow-up/i), "evidence?{Enter}");
+
+    await screen.findByText("An answer.");
+    expect(screen.queryByRole("link", { name: "Source document" })).not.toBeInTheDocument();
+  });
+
   test("evidence standards are shown with the answer", async () => {
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue(
       chatResponse("From the indexed evidence.", [{ standardNumber: "IS 15410:2003", document: "Manual", documentId: "d1" }]),

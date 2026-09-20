@@ -74,7 +74,7 @@ export function ResearchChat({
        bounded height the transcript grew the column past 100vh and pushed
        the composer off the bottom of the screen. Below lg the column is
        unbounded, min-h-0/flex-1 are inert and the page scrolls as before. */
-    <section className="mt-6 flex min-h-0 flex-1 flex-col" aria-label="Research conversation">
+    <section className="flex min-h-0 flex-1 flex-col" aria-label="Research conversation">
       {/* §28: what the assistant is reading, and a way to change it. */}
       <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-border/60 pt-4">
         <p className="text-[11px] font-extrabold uppercase tracking-wider text-ink-faint">
@@ -137,21 +137,63 @@ export function ResearchChat({
                     <p className={`whitespace-pre-line break-words text-[13.5px] leading-relaxed ${m.failed ? "text-danger" : "text-ink"}`}>
                       {m.text}
                     </p>
+                    {/* The passages the answer was built from, quoted as they
+                        appear in the source. The chips below say which
+                        document an answer came from; this says what it
+                        actually said — without it an answer that ends "read
+                        them and judge whether they answer it" points at
+                        nothing. */}
+                    {m.passages && m.passages.length > 0 && (
+                      <ol className="mt-2.5 space-y-2">
+                        {m.passages.map((p, i) => (
+                          <li key={i} className="rounded-lg border border-border/70 bg-surface px-3 py-2">
+                            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10.5px] text-ink-faint">
+                              {p.standardNumber && (
+                                <span className="font-mono font-bold text-navy">{p.standardNumber}</span>
+                              )}
+                              {p.clause && <span>Clause {p.clause}</span>}
+                              {p.section && <span className="max-w-[18ch] truncate">{p.section}</span>}
+                              {p.page !== null && <span>p. {p.page}</span>}
+                              <a
+                                href={p.sourceUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="ml-auto shrink-0 font-bold text-blue hover:underline"
+                              >
+                                Source document
+                              </a>
+                            </div>
+                            <p className="mt-1 line-clamp-6 break-words text-[12.5px] leading-relaxed text-ink">
+                              &ldquo;{p.text.trim()}&rdquo;
+                            </p>
+                          </li>
+                        ))}
+                      </ol>
+                    )}
+
                     {m.standards && m.standards.length > 0 && (
                       <div className="mt-2.5 border-t border-border/60 pt-2">
                         <p className="text-[10px] font-extrabold uppercase tracking-wider text-ink-faint">
                           Evidence from
                         </p>
                         <div className="mt-1 flex flex-wrap gap-1.5">
-                          {m.standards.map((s, i) => (
-                            <Link
-                              key={i}
-                              href={s.id ? `/standards/${s.id}` : "#"}
-                              className="rounded bg-navy/10 px-1.5 py-0.5 font-mono text-[10.5px] font-bold text-navy hover:underline"
-                            >
-                              {s.number ?? s.title}
-                            </Link>
-                          ))}
+                          {/* One chip per document: three passages from the
+                              same standard rendered the same chip three
+                              times. */}
+                          {m.standards
+                            .filter(
+                              (s, i, all) =>
+                                all.findIndex((o) => (o.number ?? o.title) === (s.number ?? s.title)) === i,
+                            )
+                            .map((s, i) => (
+                              <Link
+                                key={i}
+                                href={s.id ? `/standards/${s.id}` : "#"}
+                                className="rounded bg-navy/10 px-1.5 py-0.5 font-mono text-[10.5px] font-bold text-navy hover:underline"
+                              >
+                                {s.number ?? s.title}
+                              </Link>
+                            ))}
                         </div>
                       </div>
                     )}

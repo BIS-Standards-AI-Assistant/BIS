@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { classifyChatIntent, buildScopedAnswer } from "./chat-context";
+import { classifyChatIntent, buildScopedAnswer, buildEvidenceOnlyFollowUp } from "./chat-context";
 
 describe("classifyChatIntent", () => {
   test("explicit wider-search phrasing classifies as wider_search", () => {
@@ -54,15 +54,150 @@ describe("buildScopedAnswer", () => {
     expect(result.evidence).toEqual([]);
   });
 
-  test("'other' sub-intent with real scoped standards still refuses rather than guessing", async () => {
+  test("'other' sub-intent with no indexed passage to answer from says so, names what is indexed, and invents nothing", async () => {
+    // With no provider configured this lands in the evidence-only path.
+    // It used to be a flat "I don't have enough evidence", which told the
+    // reader the corpus was empty-handed when in fact no model had been
+    // reachable. It must still never answer the question itself.
     const result = await buildScopedAnswer(
       "other",
       "steel bottle",
       "what does this actually require",
       [{ standardId: "s1", standardNumber: "IS 15410:2003", title: "Plastics Bottles", chunks: [] }],
     );
-    expect(result.answer).toContain("don't have enough evidence");
+    expect(result.answer).toContain("IS 15410:2003");
+    expect(result.answer).toContain("No passage in the indexed text");
+    expect(result.evidence).toEqual([]);
     expect(result.limitations.length).toBeGreaterThan(0);
+  });
+
+  test("a market/competitor follow-up gets the corpus boundary, never invented market facts", async () => {
+    for (const message of [
+      "who are our current rival competitors",
+      "current rival competitors",
+      "what is the market share of this product",
+      "best location to manufacture this",
+      "best manufacturing location",
+      "where should I set up a factory for this",
+    ]) {
+      const result = await buildScopedAnswer("other", "helmet standards", message, [
+        { standardId: "s1", standardNumber: "IS 4151:2015", title: "Protective Helmet", chunks: [] },
+      ]);
+      expect(result.answer).toContain("no market, competitor, pricing or site-selection data");
+      expect(result.answer).toContain("IS 4151:2015");
+      expect(result.limitations[0]).toContain("outside the indexed BIS corpus");
+    }
+  });
+
+  test("an on-topic question about the product is NOT treated as a market question", async () => {
+    // "where" and "location" appear in legitimate compliance questions too
+    // — the boundary pattern must not swallow them.
+    const scoped = [{ standardId: "s1", standardNumber: "IS 4151:2015", title: "Protective Helmet", chunks: [] }];
+    for (const message of [
+      "where is the ISI mark placed on the shell",
+      "what impact absorption is required",
+      "best place for the ISI mark on the shell",
+      "what testing is required before production",
+    ]) {
+      const result = await buildScopedAnswer("other", "helmet standards", message, scoped);
+      expect(result.answer).not.toContain("no market, competitor, pricing or site-selection data");
+    }
+  });
+});
+
+describe("buildEvidenceOnlyFollowUp", () => {
+  const chunk = (id: string, text: string, clause: string | null = null) => ({
+    chunkId: id,
+    documentId: "d1",
+    documentTitle: "Product Manual",
+    sourceUrl: "https://bis.gov.in/x.pdf",
+    section: null,
+    clause,
+    page: 4,
+    text,
+  });
+
+  test("quotes the indexed passages that mention the question, verbatim and with their citation", () => {
+    const result = buildEvidenceOnlyFollowUp("what shell thickness is required", [
+      {
+        standardId: "s1",
+        standardNumber: "IS 4151:2015",
+        title: "Protective Helmet",
+        chunks: [
+          chunk("c1", "The shell thickness shall be not less than 2.0 mm at any point.", "6.1"),
+          chunk("c2", "Chin strap anchorage shall withstand the specified load.", "7.2"),
+        ],
+      },
+    ]);
+    expect(result.evidence.length).toBe(1);
+    expect(result.evidence[0].text).toBe("The shell thickness shall be not less than 2.0 mm at any point.");
+    expect(result.evidence[0].clause).toBe("6.1");
+    expect(result.evidence[0].standardNumber).toBe("IS 4151:2015");
+    expect(result.limitations[0]).toContain("indexed evidence only");
+  });
+
+  test("ranks the passage that matches most of the question first and caps at three", () => {
+    const result = buildEvidenceOnlyFollowUp("impact absorption test temperature", [
+      {
+        standardId: "s1",
+        standardNumber: "IS 4151:2015",
+        title: "Protective Helmet",
+        chunks: [
+          chunk("c1", "Temperature conditioning is specified."),
+          chunk("c2", "The impact absorption test shall be carried out at the stated temperature."),
+          chunk("c3", "Impact points are defined on the shell."),
+          chunk("c4", "Absorption of impact energy is measured."),
+          chunk("c5", "No mention of the subject here."),
+        ],
+      },
+    ]);
+    expect(result.evidence[0].chunkId).toBe("c2");
+    expect(result.evidence.length).toBe(3);
+  });
+
+  test("a testing question with no structured scheme record still answers from the document's own text", async () => {
+    // The certification/testing reference tables are a separate dataset
+    // from the ingested documents; with the tables empty this branch used
+    // to stop at "no record" even though the product manual text answers
+    // the question. It must quote the text and still disclose which of the
+    // two the reader is looking at.
+    const result = await buildScopedAnswer("testing", "helmet standards", "what testing is required", [
+      {
+        standardId: "s1",
+        standardNumber: "IS 4151:2015",
+        title: "Protective Helmet",
+        chunks: [
+          {
+            chunkId: "c1",
+            documentId: "d1",
+            documentTitle: "Product Manual",
+            sourceUrl: "https://bis.gov.in/x.pdf",
+            section: "Scheme of Inspection and Testing",
+            clause: "A-1",
+            page: 9,
+            text: "Each helmet shall be subjected to the impact absorption testing specified in the scheme.",
+          },
+        ],
+      },
+    ]);
+    expect(result.answer).toContain("no certification scheme record is indexed");
+    expect(result.evidence.length).toBe(1);
+    expect(result.evidence[0].clause).toBe("A-1");
+    expect(result.limitations[0]).toContain("No structured certification or testing record");
+  });
+
+  test("when nothing in the indexed text mentions the question it says so rather than quoting something irrelevant", () => {
+    const result = buildEvidenceOnlyFollowUp("what does the warranty period cover", [
+      {
+        standardId: "s1",
+        standardNumber: "IS 4151:2015",
+        title: "Protective Helmet",
+        chunks: [chunk("c1", "The shell shall be moulded in one piece.", "6.1")],
+      },
+    ]);
+    expect(result.evidence).toEqual([]);
+    expect(result.answer).toContain("No passage in the indexed text");
+    expect(result.answer).toContain("indexed clauses include 6.1");
   });
 
   test("'other' sub-intent checks the live follow-up message, not the original search, for off-topic content", async () => {

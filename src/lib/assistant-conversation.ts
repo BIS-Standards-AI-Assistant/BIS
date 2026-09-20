@@ -27,12 +27,41 @@ export interface AssistantMessage {
   text: string;
   timestamp: string;
   standards?: { number: string | null; title: string; id?: string }[];
+  /**
+   * The indexed passages an answer was built from, quoted as they appear
+   * in the source. The chips in `standards` say which document an answer
+   * came from; these say what it actually said, which is the difference
+   * between a citation and inspectable evidence (§ evidence-first UX).
+   * Only ever set from the server's own `evidence` array — never written
+   * or paraphrased on the client.
+   */
+  passages?: {
+    standardNumber: string | null;
+    document: string;
+    section: string | null;
+    clause: string | null;
+    page: number | null;
+    text: string;
+    sourceUrl: string;
+  }[];
   scope?: "current_results" | "global";
   /** Language `text` is actually written in (see ScopedAnswer.answerLanguage / query-pipeline's answerLanguage) — read by SpeakButton, not necessarily the UI toggle. */
   answerLanguage?: string;
   /** Set when the request itself failed, so the UI can style it as an error. */
   failed?: boolean;
 }
+
+/** One `EvidenceRef` as /api/v1/chat serialises it (src/types/api.ts). */
+type EvidencePayload = {
+  standardNumber: string | null;
+  document: string;
+  documentId: string;
+  section?: string | null;
+  clause?: string | null;
+  page?: number | null;
+  text: string;
+  sourceUrl: string;
+};
 
 export interface ConversationState {
   messages: AssistantMessage[];
@@ -137,6 +166,7 @@ export function createAssistantConversation(eventName: string) {
 
       let messageText: string;
       let standards: { number: string | null; title: string; id?: string }[] = [];
+      let passages: AssistantMessage["passages"];
       const answerLanguage: string | undefined = data.answerLanguage;
 
       if (scope === "global") {
@@ -150,12 +180,26 @@ export function createAssistantConversation(eventName: string) {
           }));
       } else {
         messageText = data.answer ?? "I don't have enough evidence in the current results to establish that.";
-        standards = (data.evidence ?? [])
+        const evidence: EvidencePayload[] = data.evidence ?? [];
+        standards = evidence.slice(0, 3).map((e) => ({
+          number: e.standardNumber,
+          title: e.document,
+          id: e.documentId,
+        }));
+        // Only passages that actually carry their text: a citation with no
+        // quotable wording is a chip, not evidence, and is already shown as
+        // one above.
+        passages = evidence
+          .filter((e) => typeof e.text === "string" && e.text.trim().length > 0)
           .slice(0, 3)
-          .map((e: { standardNumber: string | null; document: string; documentId: string }) => ({
-            number: e.standardNumber,
-            title: e.document,
-            id: e.documentId,
+          .map((e) => ({
+            standardNumber: e.standardNumber,
+            document: e.document,
+            section: e.section ?? null,
+            clause: e.clause ?? null,
+            page: e.page ?? null,
+            text: e.text,
+            sourceUrl: e.sourceUrl,
           }));
       }
 
@@ -169,6 +213,7 @@ export function createAssistantConversation(eventName: string) {
             sender: "assistant",
             text: messageText,
             standards: standards.length > 0 ? standards : undefined,
+            passages: passages && passages.length > 0 ? passages : undefined,
             scope,
             answerLanguage,
             timestamp: now(),
