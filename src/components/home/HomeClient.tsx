@@ -293,20 +293,17 @@ export function HomeClient() {
                 </span>
               </div>
 
+              {/* The query itself is no longer echoed here: it is stated in
+                  full at the top of the results column, where it reads as the
+                  heading of what is on screen rather than a corner breadcrumb. */}
               {activeQuery && (
-                <div className="flex items-center gap-2 text-xs">
-                  <span className="text-ink-faint">Showing research for:</span>
-                  <span className="max-w-[200px] truncate font-semibold text-navy sm:max-w-[380px]">
-                    &ldquo;{activeQuery}&rdquo;
-                  </span>
-                  <button
-                    type="button"
-                    onClick={handleClearResults}
-                    className="ml-1 font-semibold text-blue hover:underline"
-                  >
-                    Clear &amp; Ask New
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={handleClearResults}
+                  className="text-xs font-semibold text-blue hover:underline"
+                >
+                  Clear &amp; Ask New
+                </button>
               )}
             </div>
 
@@ -405,6 +402,21 @@ export function HomeClient() {
                     )}
                   </div>
                 </div>
+
+                {/* What the user actually asked, stated once, in full, at the
+                    top of the column the results are in. It is pinned outside
+                    the scroll region (shrink-0) so the question stays on
+                    screen while the answer below it is read. */}
+                {activeQuery && (
+                  <div className="mb-3 shrink-0 rounded-lg border border-border border-l-[3px] border-l-navy bg-surface-raised px-4 py-3 shadow-xs">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-faint">
+                      Your search
+                    </p>
+                    <p className="mt-1 line-clamp-3 break-words text-[17px] font-semibold leading-snug text-navy">
+                      &ldquo;{activeQuery}&rdquo;
+                    </p>
+                  </div>
+                )}
 
                 {/* Pinned above the scrollable chat, not inside it (shrink-0,
                     outside the flex-1 overflow-y-auto region below) — refining
