@@ -10,16 +10,18 @@ export interface LanguageOption {
 export const LANGUAGES: LanguageOption[] = [
   { code: "en", label: "English", nativeLabel: "English", available: true },
   { code: "hi", label: "Hindi", nativeLabel: "हिन्दी", available: true },
-  { code: "bn", label: "Bengali", nativeLabel: "বাংলা", available: true },
-  { code: "ta", label: "Tamil", nativeLabel: "தமிழ்", available: true },
-  { code: "te", label: "Telugu", nativeLabel: "తెలుగు", available: true },
-  { code: "mr", label: "Marathi", nativeLabel: "मराठी", available: true },
-  { code: "gu", label: "Gujarati", nativeLabel: "ગુજરાતી", available: true },
-  { code: "kn", label: "Kannada", nativeLabel: "ಕನ್ನಡ", available: true },
+  // The following 6 languages are ~22% translated (nav/gov chrome only).
+  // They are gated until results + trust + services sections are complete.
+  { code: "bn", label: "Bengali", nativeLabel: "বাংলা", available: false },
+  { code: "ta", label: "Tamil", nativeLabel: "தமிழ்", available: false },
+  { code: "te", label: "Telugu", nativeLabel: "తెలుగు", available: false },
+  { code: "mr", label: "Marathi", nativeLabel: "मराठी", available: false },
+  { code: "gu", label: "Gujarati", nativeLabel: "ગુજરાતી", available: false },
+  { code: "kn", label: "Kannada", nativeLabel: "ಕನ್ನಡ", available: false },
 ];
 
 export interface Dictionary {
-  gov: { skip: string; screenReader: string; theme: string };
+  gov: { skip: string; screenReader: string; theme: string; openMenu: string; closeMenu: string };
   header: { tagline: string };
   nav: {
     standards: string;
@@ -104,7 +106,7 @@ export interface Dictionary {
 }
 
 const en: Dictionary = {
-  gov: { skip: "Skip to main content", screenReader: "Screen Reader Access", theme: "Toggle dark mode" },
+  gov: { skip: "Skip to main content", screenReader: "Screen Reader Access", theme: "Toggle dark mode", openMenu: "Open menu", closeMenu: "Close menu" },
   header: { tagline: "The National Standards Body of India" },
   nav: {
     standards: "Standards",
@@ -202,7 +204,7 @@ const en: Dictionary = {
 };
 
 const hi: Dictionary = {
-  gov: { skip: "मुख्य सामग्री पर जाएं", screenReader: "स्क्रीन रीडर एक्सेस", theme: "डार्क मोड टॉगल करें" },
+  gov: { skip: "मुख्य सामग्री पर जाएं", screenReader: "स्क्रीन रीडर एक्सेस", theme: "डार्क मोड टॉगल करें", openMenu: "मेनू खोलें", closeMenu: "मेनू बंद करें" },
   header: { tagline: "भारत की राष्ट्रीय मानक संस्था" },
   nav: {
     standards: "मानक",
@@ -302,7 +304,7 @@ const hi: Dictionary = {
 
 const bn: Dictionary = {
   ...en,
-  gov: { skip: "মূল সামগ্রীতে যান", screenReader: "স্ক্রিন রিডার অ্যাক্সেস", theme: "ডার্ক মোড পরিবর্তন করুন" },
+  gov: { skip: "মূল সামগ্রীতে যান", screenReader: "স্ক্রিন রিডার অ্যাক্সেস", theme: "ডার্ক মোড পরিবর্তন করুন", openMenu: "Open menu", closeMenu: "Close menu" },
   header: { tagline: "ভারতের জাতীয় মানক সংস্থা" },
   nav: {
     standards: "মানকসমূহ",
@@ -333,7 +335,7 @@ const bn: Dictionary = {
 
 const ta: Dictionary = {
   ...en,
-  gov: { skip: "முக்கிய பகுதிக்கு செல்லவும்", screenReader: "திரை வாசிப்பான் வசதி", theme: "டார்க் மோட் மாற்றவும்" },
+  gov: { skip: "முக்கிய பகுதிக்கு செல்லவும்", screenReader: "திரை வாசிப்பான் வசதி", theme: "டார்க் மோட் மாற்றவும்", openMenu: "Open menu", closeMenu: "Close menu" },
   header: { tagline: "இந்தியாவின் தேசிய தர நிர்ணய அமைப்பு" },
   nav: {
     standards: "தரநிலைகள்",
@@ -364,7 +366,7 @@ const ta: Dictionary = {
 
 const te: Dictionary = {
   ...en,
-  gov: { skip: "ప్రధాన విషయానికి వెళ్లండి", screenReader: "స్క్రీన్ రీడర్ సదుపాయం", theme: "డార్క్ మోడ్ మార్చండి" },
+  gov: { skip: "ప్రధాన విషయానికి వెళ్లండి", screenReader: "స్క్రీన్ రీడర్ సదుపాయం", theme: "డార్క్ మోడ్ మార్చండి", openMenu: "Open menu", closeMenu: "Close menu" },
   header: { tagline: "భారత జాతీయ ప్రమాణాల సంస్థ" },
   nav: {
     standards: "ప్రమాణాలు",
@@ -395,7 +397,7 @@ const te: Dictionary = {
 
 const mr: Dictionary = {
   ...en,
-  gov: { skip: "मुख्य मजकुराकडे जा", screenReader: "स्क्रीन रीडर ऍक्सेस", theme: "डार्क मोड टॉगल करा" },
+  gov: { skip: "मुख्य मजकुराकडे जा", screenReader: "स्क्रीन रीडर ऍक्सेस", theme: "डार्क मोड टॉगल करा", openMenu: "Open menu", closeMenu: "Close menu" },
   header: { tagline: "भारताची राष्ट्रीय मानक संस्था" },
   nav: {
     standards: "मानके",
@@ -426,7 +428,7 @@ const mr: Dictionary = {
 
 const gu: Dictionary = {
   ...en,
-  gov: { skip: "મુખ્ય સામગ્રી પર જાઓ", screenReader: "સ્ક્રીન રીડર એક્સેસ", theme: "ડાર્ક મોડ બદલો" },
+  gov: { skip: "મુખ્ય સામગ્રી પર જાઓ", screenReader: "સ્ક્રીન રીડર એક્સેસ", theme: "ડાર્ક મોડ બદલો", openMenu: "Open menu", closeMenu: "Close menu" },
   header: { tagline: "ભારતની રાષ્ટ્રીય માનક સંસ્થા" },
   nav: {
     standards: "માનકો",
@@ -457,7 +459,7 @@ const gu: Dictionary = {
 
 const kn: Dictionary = {
   ...en,
-  gov: { skip: "ಮುಖ್ಯ ವಿಷಯಕ್ಕೆ ಹೋಗಿ", screenReader: "ಸ್ಕ್ರೀನ್ ರೀಡರ್ ಪ್ರವೇಶ", theme: "ಡಾರ್ಕ್ ಮೋಡ್ ಬದಲಿಸಿ" },
+  gov: { skip: "ಮುಖ್ಯ ವಿಷಯಕ್ಕೆ ಹೋಗಿ", screenReader: "ಸ್ಕ್ರೀನ್ ರೀಡರ್ ಪ್ರವೇಶ", theme: "ಡಾರ್ಕ್ ಮೋಡ್ ಬದಲಿಸಿ", openMenu: "Open menu", closeMenu: "Close menu" },
   header: { tagline: "ಭಾರತದ ರಾಷ್ಟ್ರೀಯ ಮಾನದಂಡಗಳ ಸಂಸ್ಥೆ" },
   nav: {
     standards: "ಮಾನದಂಡಗಳು",

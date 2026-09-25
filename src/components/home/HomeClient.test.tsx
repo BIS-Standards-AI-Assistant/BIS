@@ -75,7 +75,7 @@ afterEach(() => {
  */
 async function startAnotherQuery(value: string) {
   fireEvent.click(screen.getByRole("button", { name: /new research/i }));
-  fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value } });
+  fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value } });
   fireEvent.click(screen.getByRole("button", { name: "Search" }));
 }
 
@@ -83,7 +83,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
   test("network failure surfaces a generic error, never a raw fetch/provider error string", async () => {
     (global.fetch as ReturnType<typeof vi.fn>).mockRejectedValue(new TypeError("Failed to fetch"));
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument(), { timeout: 10000 });
@@ -98,7 +98,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
       statusText: "Payment Required — OpenRouter credits exhausted",
     });
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
@@ -114,7 +114,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
       },
     });
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
@@ -123,7 +123,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
   test("loading state clears even when the request fails (no stuck spinner)", async () => {
     (global.fetch as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("boom"));
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
@@ -138,7 +138,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
       }),
     );
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     // Submitting leaves the homepage for the research view, which has no
@@ -159,7 +159,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
       json: async () => baseResponse({ recommendations: [] }),
     });
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "made up widget" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "made up widget" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     await waitFor(() => expect(screen.getByText(/No sufficiently relevant standard found/i)).toBeInTheDocument());
@@ -168,7 +168,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
   test("clearing results after an error returns to the homepage view, not a blank/broken screen", async () => {
     (global.fetch as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("boom"));
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
     await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
 
@@ -186,7 +186,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
       json: async () => baseResponse(),
     });
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     await waitFor(() => expect(screen.getByText("test answer")).toBeInTheDocument());
@@ -201,7 +201,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
       json: async () => baseResponse(),
     });
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
 
     await waitFor(() => expect(screen.getByText("test answer")).toBeInTheDocument());
@@ -213,7 +213,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
       json: async () => baseResponse({ answer: "first answer" }),
     });
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
     await waitFor(() => expect(screen.getByText("first answer")).toBeInTheDocument());
 
@@ -226,7 +226,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
 
   test("submitting whitespace-only input is a no-op — no fetch, no crash", () => {
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "   " } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "   " } });
     expect(screen.getByRole("button", { name: "Search" })).toBeDisabled();
     expect(global.fetch).not.toHaveBeenCalled();
   });
@@ -237,7 +237,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
       .mockResolvedValueOnce({ ok: true, json: async () => baseResponse({ answer: "answer B" }) });
 
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "query A" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "query A" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
     await waitFor(() => expect(screen.getByText("answer A")).toBeInTheDocument());
 
@@ -254,7 +254,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
       }),
     );
     renderHome();
-    fireEvent.change(screen.getByLabelText(/Describe your product or compliance question/i), { target: { value: "helmet" } });
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "helmet" } });
     fireEvent.click(screen.getByRole("button", { name: "Search" }));
     await waitFor(() => expect(screen.getByText(/Searching BIS sources/i)).toBeInTheDocument());
 

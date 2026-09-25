@@ -22,7 +22,7 @@ export function PolicyPageView({ page }: { page: PolicyPage }) {
   return (
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <PolicyPageBody page={page} />
       </main>
       <Footer />

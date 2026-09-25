@@ -22,7 +22,7 @@ export default async function LaboratorySearchPage() {
   return (
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <nav aria-label="Breadcrumb" className="border-b border-border bg-surface-raised px-6 py-2.5 text-[12.5px] text-ink-faint">
           <div className="mx-auto max-w-[1100px]">
             <Link href="/" className="hover:text-blue hover:underline">Home</Link>
