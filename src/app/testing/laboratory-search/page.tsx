@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LaboratoriesDirectory } from "@/components/testing/LaboratoriesDirectory";
-import { loadLaboratories } from "@/lib/laboratories";
+import { isRecognitionExpired, loadLaboratories } from "@/lib/laboratories";
 
 // The dataset is a static, versioned JSON file (see
 // scripts/data-laboratories-convert.ts) rather than a live database table,
@@ -17,7 +17,13 @@ export const metadata = {
 };
 
 export default async function LaboratorySearchPage() {
-  const laboratories = await loadLaboratories();
+  // Expiry is decided here, on the server, once per request: the client
+  // component cannot import the fs-backed laboratories module, and deciding
+  // it in the browser could disagree with the server-rendered HTML.
+  const laboratories = (await loadLaboratories()).map((lab) => ({
+    ...lab,
+    recognitionExpired: isRecognitionExpired(lab),
+  }));
 
   return (
     <div className="flex min-h-screen flex-col bg-surface">
