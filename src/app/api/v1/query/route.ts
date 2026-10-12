@@ -39,9 +39,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(response);
   } catch (err) {
     console.error("[api/v1/query]", err);
-    return NextResponse.json(
-      { error: "Query processing failed", message: err instanceof Error ? err.message : String(err) },
-      { status: 500 },
-    );
+    // Logged above; the raw error (provider, database or network detail)
+    // is never returned to the client.
+    return NextResponse.json({ error: "Query processing failed" }, { status: 500 });
   }
 }

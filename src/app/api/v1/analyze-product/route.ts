@@ -80,9 +80,8 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     console.error("[api/v1/analyze-product]", err);
-    return NextResponse.json(
-      { error: "Product analysis failed", message: err instanceof Error ? err.message : String(err) },
-      { status: 500 },
-    );
+    // Logged above; the raw error (provider, database or network detail)
+    // is never returned to the client.
+    return NextResponse.json({ error: "Product analysis failed" }, { status: 500 });
   }
 }
