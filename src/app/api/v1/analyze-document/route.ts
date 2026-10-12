@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 import pdfParse from "pdf-parse/lib/pdf-parse.js";
 import { analyzeDocumentText } from "@/lib/document-analyzer";
 import { rateLimitOrNull } from "@/lib/rate-limit-http";
+import { declaredBodyTooLarge } from "@/lib/upload-limits";
 
 /**
  * Document Analyzer upload endpoint (pfinal.md §8.1-8.2, §8.5). Every
@@ -30,6 +31,10 @@ const RATE_LIMIT = { limit: 10, windowMs: 60_000 };
 export async function POST(req: NextRequest) {
   const limited = rateLimitOrNull(req, "analyze-document", RATE_LIMIT);
   if (limited) return limited;
+
+  if (declaredBodyTooLarge(req.headers, MAX_FILE_BYTES)) {
+    return NextResponse.json({ error: `File exceeds the ${MAX_FILE_BYTES} byte limit` }, { status: 413 });
+  }
 
   let form: FormData;
   try {
@@ -83,10 +88,8 @@ export async function POST(req: NextRequest) {
     const result = await analyzeDocumentText(text);
     return NextResponse.json(result);
   } catch (err) {
+    // Analysis queries the database; its errors are logged, never returned.
     console.error("[api/v1/analyze-document]", err);
-    return NextResponse.json(
-      { error: "Document analysis failed", message: err instanceof Error ? err.message : String(err) },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Document analysis failed" }, { status: 500 });
   }
 }
