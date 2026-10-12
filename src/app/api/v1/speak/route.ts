@@ -9,7 +9,7 @@ import { createRateLimiter, clientKeyFromHeaders } from "@/lib/rate-limit";
 const MAX_TEXT_LENGTH = 3000;
 
 const SpeakRequestSchema = z.object({
-  text: z.string().min(1).max(MAX_TEXT_LENGTH),
+  text: z.string().trim().min(1).max(MAX_TEXT_LENGTH),
   language: z.enum(["en", "hi"]).optional(),
 });
 

@@ -13,8 +13,8 @@ import { rateLimitOrNull } from "@/lib/rate-limit-http";
  */
 const FeedbackRequestSchema = z.object({
   queryLogId: z.string().uuid().optional(),
-  query: z.string().min(1).max(1000),
-  standardNumber: z.string().min(1).max(100),
+  query: z.string().trim().min(1).max(1000),
+  standardNumber: z.string().trim().min(1).max(100),
   standardTitle: z.string().max(500).optional(),
   reason: z.enum([
     "wrong_standard",

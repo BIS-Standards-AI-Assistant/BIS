@@ -26,8 +26,10 @@ import { loadLaboratories } from "@/lib/laboratories";
  * distance claim is a separate, not-yet-made decision).
  */
 const RequestSchema = z.object({
-  location: z.string().min(1).max(200),
-  standardNumber: z.string().min(1).max(50).optional(),
+  // Trimmed before the length check: a blank location used to become "",
+  // which every laboratory's state "includes", returning 50 arbitrary labs.
+  location: z.string().trim().min(1).max(200),
+  standardNumber: z.string().trim().min(1).max(50).optional(),
 });
 
 const RATE_LIMIT = { limit: 20, windowMs: 60_000 };
@@ -44,8 +46,14 @@ export async function POST(req: NextRequest) {
   const { location, standardNumber } = parsed.data;
   const laboratoryDataAvailable = true;
 
-  const q = location.trim().toLowerCase();
-  const all = await loadLaboratories();
+  const q = location.toLowerCase();
+  let all: Awaited<ReturnType<typeof loadLaboratories>>;
+  try {
+    all = await loadLaboratories();
+  } catch (err) {
+    console.error("[api/v1/find-laboratories]", err);
+    return NextResponse.json({ error: "Laboratory dataset unavailable" }, { status: 500 });
+  }
   const matches = all
     .filter((lab) => lab.state.toLowerCase().includes(q) || (lab.city ?? "").toLowerCase().includes(q))
     .slice(0, 50)

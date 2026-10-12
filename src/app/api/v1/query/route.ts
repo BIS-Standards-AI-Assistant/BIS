@@ -4,7 +4,7 @@ import { runQueryPipeline } from "@/lib/query-pipeline";
 import { rateLimitOrNull } from "@/lib/rate-limit-http";
 
 const QueryRequestSchema = z.object({
-  query: z.string().min(1).max(2000),
+  query: z.string().trim().min(1).max(2000),
   // Optional explicit language from the UI switcher (PRD FR2/FR17). When
   // absent, the pipeline detects the query's script. Unknown values are
   // ignored rather than rejected.

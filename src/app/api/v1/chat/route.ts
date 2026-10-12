@@ -41,9 +41,9 @@ async function logChatTurn(fields: {
  * `scope`, so a caller never has to guess which one produced the answer.
  */
 const ChatRequestSchema = z.object({
-  originalQuery: z.string().min(1).max(2000),
-  standardNumbers: z.array(z.string().min(1)).max(10).default([]),
-  message: z.string().min(1).max(1000),
+  originalQuery: z.string().trim().min(1).max(2000),
+  standardNumbers: z.array(z.string().trim().min(1)).max(10).default([]),
+  message: z.string().trim().min(1).max(1000),
 });
 
 // Chat can trigger a full pipeline run (wider search) or a handful of DB

@@ -15,7 +15,7 @@ import type { ApplicabilityState } from "@/types/api";
  * labeling (§8.3) on top of the existing applicability states.
  */
 const AnalyzeRequestSchema = z.object({
-  productDescription: z.string().min(1).max(2000),
+  productDescription: z.string().trim().min(1).max(2000),
 });
 
 const RATE_LIMIT = { limit: 20, windowMs: 60_000 };
