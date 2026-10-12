@@ -13,7 +13,10 @@ describe("getDb — DATABASE_URL validation", () => {
     else process.env.DATABASE_URL = original;
   });
 
-  test("throws a clear, actionable error instead of a deep driver failure when DATABASE_URL is unset", async () => {
+  // vi.resetModules() makes this a cold import of the DB module and its
+  // driver, which can exceed vitest's 5s default when the whole suite runs
+  // in parallel on a slower machine. The assertion itself is instant.
+  test("throws a clear, actionable error instead of a deep driver failure when DATABASE_URL is unset", { timeout: 30_000 }, async () => {
     delete process.env.DATABASE_URL;
     const { getDb } = await import("./index");
     expect(() => getDb()).toThrow(/DATABASE_URL is not set/);
