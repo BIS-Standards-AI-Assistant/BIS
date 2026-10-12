@@ -1,5 +1,3 @@
-import fs from "fs/promises";
-import path from "path";
 import Link from "next/link";
 import { inArray } from "drizzle-orm";
 import { Header } from "@/components/layout/Header";
@@ -7,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { StandardsListClient, type StandardSummary } from "@/components/standards/StandardsListClient";
 import { getDb } from "@/db";
 import { documents } from "@/db/schema";
+import { listReferenceStandards } from "@/lib/reference-standards";
 
 export const dynamic = "force-dynamic";
 
@@ -42,30 +41,9 @@ async function getAllStandards(): Promise<StandardSummary[]> {
     // DB unavailable — fall through to static dataset
   }
 
-  // Fallback: static QCO dataset (same as standards/page.tsx)
+  // Fallback: static QCO dataset (shared with standards/page.tsx)
   try {
-    const filePath = path.join(process.cwd(), "data/bis-standards-dataset/qco-standards.json");
-    const rawData = await fs.readFile(filePath, "utf-8");
-    const list = JSON.parse(rawData);
-    const seenSlugs = new Set<string>();
-    return list.map((item: {
-      standard_id?: string; standard_number?: string; part?: string | null;
-      section?: string | null; year?: string; full_title?: string;
-      short_title?: string; title?: string; product_category?: string;
-      category?: string; scheme?: string; mandatory_qco?: boolean;
-    }, idx: number) => {
-      const fullParts = [item.standard_number, item.part, item.section].filter(Boolean).join(" ");
-      const stdNum = fullParts ? `${fullParts}${item.year ? `:${item.year}` : ""}` : (item.standard_id ?? `Standard ${idx + 1}`);
-      const slugParts = [item.standard_number, item.part, item.section].filter(Boolean).join("-");
-      let slug = slugParts
-        ? slugParts.toLowerCase().replace(/[^a-z0-9]+/g, "-")
-        : (item.standard_id ? item.standard_id.toLowerCase().replace(/[^a-z0-9]+/g, "-") : `std-${idx + 1}`);
-      if (seenSlugs.has(slug)) slug = item.standard_id ? item.standard_id.toLowerCase().replace(/[^a-z0-9]+/g, "-") : `${slug}-${idx + 1}`;
-      seenSlugs.add(slug);
-      const cat = item.product_category || item.category || "Indian Standard";
-      const displayTitle = item.short_title || item.full_title || item.title || "Indian Standard Specification";
-      return { id: slug, standardNumber: stdNum, title: displayTitle, documentType: item.scheme ? `${item.scheme} · ${cat}` : cat, version: item.mandatory_qco ? "Mandatory QCO (Active)" : "Standard Specification", chunkCount: 4 };
-    });
+    return await listReferenceStandards();
   } catch {
     return [];
   }
