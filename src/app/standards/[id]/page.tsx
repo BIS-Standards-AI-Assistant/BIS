@@ -18,6 +18,9 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
   const askQuery = encodeURIComponent(`Tell me about ${standard.standardNumber ?? standard.title}`);
 
   const hasIndexedDocument = standard.chunks.length > 0;
+  // A reference-dataset record's passages summarise the dataset's fields;
+  // its document text is not indexed, and the page must not say it is.
+  const isReferenceRecord = standard.recordSource === "reference_dataset";
   const isMandatory = scheme?.mandatoryQco === true;
   // Without a reference-dataset entry there is no evidence either way, so
   // nothing below may claim "verified", "voluntary" or a scheme
@@ -109,7 +112,11 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
                 </div>
               )}
 
-              {hasIndexedDocument ? (
+              {isReferenceRecord ? (
+                <span className="font-mono text-xs font-medium text-amber-750 dark:text-amber-400">
+                  ● Reference Record · Document Full Text Not Indexed
+                </span>
+              ) : hasIndexedDocument ? (
                 <span className="font-mono text-xs font-medium text-ink-soft">
                   ● Full-Text Evidence Indexed ({standard.chunks.length} Passages)
                 </span>
@@ -295,7 +302,9 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
                     </h2>
                   </div>
                   <span className="font-mono text-xs font-bold text-ink-faint">
-                    {standard.chunks.length} Primary Passage{standard.chunks.length !== 1 ? "s" : ""}
+                    {isReferenceRecord
+                      ? `${standard.chunks.length} Reference Summar${standard.chunks.length !== 1 ? "ies" : "y"}`
+                      : `${standard.chunks.length} Primary Passage${standard.chunks.length !== 1 ? "s" : ""}`}
                   </span>
                 </div>
 

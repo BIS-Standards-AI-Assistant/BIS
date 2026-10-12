@@ -148,6 +148,13 @@ describe("getStandardDetail — seed manifest", () => {
   });
 });
 
+describe("getStandardDetail — record source", () => {
+  test("each source is labelled, so pages can tell document text from dataset summaries", async () => {
+    expect((await getStandardDetail("is-14543"))?.recordSource).toBe("reference_dataset");
+    expect((await getStandardDetail("is-5522-2014"))?.recordSource).toBe("seed_manifest");
+  });
+});
+
 describe("getStandardDetail — unknown ids", () => {
   test.each(["nope-123", "IS 99999:2099", ""])("%j is null, so the page 404s", async (id) => {
     expect(await getStandardDetail(id)).toBeNull();

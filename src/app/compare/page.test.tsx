@@ -47,6 +47,12 @@ describe("/compare", () => {
     }
   });
 
+  test("reference standards show 0 indexed sections, not their summary passages", async () => {
+    await renderCompare("is-13252-part-1,is-14543");
+    const row = screen.getByRole("rowheader", { name: "Indexed sections" }).closest("tr")!;
+    expect([...row.querySelectorAll("td")].map((td) => td.textContent)).toEqual(["0", "0"]);
+  });
+
   test("register slugs are never sent to the uuid document column", async () => {
     await renderCompare("is-13252-part-1,is-14543");
     expect(findMany).not.toHaveBeenCalled();

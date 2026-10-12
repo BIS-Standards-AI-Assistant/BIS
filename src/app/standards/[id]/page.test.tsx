@@ -54,6 +54,18 @@ describe("/standards/[id] — certification facts come from the record", () => {
     expect(screen.getByText(/marked as not verified rather than filled in/)).toBeInTheDocument();
   });
 
+  test("a reference-dataset record does not claim its full text is indexed", async () => {
+    await renderPage("is-13252-part-1");
+    expect(screen.getByText(/Reference Record · Document Full Text Not Indexed/)).toBeInTheDocument();
+    expect(screen.queryByText(/Full-Text Evidence Indexed/)).not.toBeInTheDocument();
+    expect(screen.getByText(/Reference Summar(y|ies)$/)).toBeInTheDocument();
+  });
+
+  test("a seed-corpus document with real text is shown as indexed", async () => {
+    await renderPage("is-14543-2016");
+    expect(screen.getByText(/Full-Text Evidence Indexed \(\d+ Passages\)/)).toBeInTheDocument();
+  });
+
   test("an unknown standard is a 404", async () => {
     await expect(StandardDetailPage({ params: Promise.resolve({ id: "nope-123" }) })).rejects.toThrow();
   });

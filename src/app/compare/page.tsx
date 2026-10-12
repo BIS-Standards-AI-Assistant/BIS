@@ -102,7 +102,8 @@ async function getComparisonRows(ids: string[]): Promise<CompareRow[] | null> {
       version: detail.version,
       publicationDate: detail.publicationDate,
       sourceUrl: detail.sourceUrl,
-      chunkCount: detail.chunks.length,
+      // Reference-dataset passages are field summaries, not indexed sections.
+      chunkCount: detail.recordSource === "reference_dataset" ? 0 : detail.chunks.length,
     });
   }
 

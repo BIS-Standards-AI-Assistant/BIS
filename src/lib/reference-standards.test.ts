@@ -23,6 +23,10 @@ describe("listReferenceStandards", () => {
     expect(rows.every((r) => !/ Part \d/.test(r.standardNumber ?? "") || /\(Part \d/.test(r.standardNumber ?? ""))).toBe(true);
   });
 
+  test("claims no indexed sections — these records are not in the retrieval index", async () => {
+    for (const row of await listReferenceStandards()) expect(row.chunkCount, row.id).toBe(0);
+  });
+
   test("shows scheme and mandatory status from the record", async () => {
     const row = (await listReferenceStandards()).find((r) => r.id === "is-13252-part-1")!;
     expect(row.documentType.startsWith("Scheme-II (CRS) · ")).toBe(true);
