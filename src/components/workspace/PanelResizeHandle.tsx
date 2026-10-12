@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Vertical drag handle for resizing a side panel by its right edge.
@@ -25,6 +25,27 @@ export function PanelResizeHandle({
   label: string;
 }) {
   const drag = useRef<{ startX: number; startWidth: number } | null>(null);
+  const handleRef = useRef<HTMLDivElement>(null);
+  // A focusable separator must expose its value (WAI-ARIA: aria-valuenow is
+  // required), so screen-reader users hear the width they are changing. The
+  // panel's width comes from CSS until first resized, so it is measured.
+  const [width, setWidth] = useState<number | null>(null);
+
+  useEffect(() => {
+    const panel = handleRef.current?.parentElement;
+    if (!panel) return;
+    const measure = () => setWidth(Math.round(panel.offsetWidth));
+    measure();
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(panel);
+    return () => observer.disconnect();
+  }, []);
+
+  function resizeTo(next: number) {
+    setWidth(next);
+    onResize(next);
+  }
 
   // The handle sits inside the panel wrapper, whose parent is the grid.
   const panelOf = (el: HTMLElement) => el.parentElement;
@@ -45,7 +66,7 @@ export function PanelResizeHandle({
 
   function handlePointerMove(e: React.PointerEvent<HTMLDivElement>) {
     if (!drag.current) return;
-    onResize(clamp(e.currentTarget, drag.current.startWidth + e.clientX - drag.current.startX));
+    resizeTo(clamp(e.currentTarget, drag.current.startWidth + e.clientX - drag.current.startX));
   }
 
   function endDrag(e: React.PointerEvent<HTMLDivElement>) {
@@ -60,9 +81,9 @@ export function PanelResizeHandle({
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     const step = e.shiftKey ? 48 : 16;
-    const width = panelOf(e.currentTarget)?.offsetWidth ?? minWidth;
-    if (e.key === "ArrowRight") onResize(clamp(e.currentTarget, width + step));
-    else if (e.key === "ArrowLeft") onResize(clamp(e.currentTarget, width - step));
+    const current = panelOf(e.currentTarget)?.offsetWidth ?? minWidth;
+    if (e.key === "ArrowRight") resizeTo(clamp(e.currentTarget, current + step));
+    else if (e.key === "ArrowLeft") resizeTo(clamp(e.currentTarget, current - step));
     else if (e.key === "Home") onReset();
     else return;
     e.preventDefault();
@@ -70,9 +91,14 @@ export function PanelResizeHandle({
 
   return (
     <div
+      ref={handleRef}
       role="separator"
       aria-orientation="vertical"
       aria-label={label}
+      aria-valuemin={minWidth}
+      aria-valuemax={maxWidth}
+      aria-valuenow={width ?? undefined}
+      aria-valuetext={width !== null ? `${width} pixels wide` : undefined}
       tabIndex={0}
       title="Drag to resize · double-click to reset"
       onPointerDown={handlePointerDown}
