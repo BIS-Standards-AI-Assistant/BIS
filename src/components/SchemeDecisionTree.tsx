@@ -13,6 +13,12 @@ export interface SchemeResult {
   title: string;
   routeSummary: string;
   scopeSummary: string;
+  /**
+   * Fee concessions are set by BIS notification and revised over time, so no
+   * percentage is stated here: an out-of-date figure presented as current
+   * would be an unsourced certification claim. Say who qualifies and where
+   * the current schedule is published instead.
+   */
   msmeBenefit: string;
   portalName: string;
   portalUrl: string;
@@ -26,7 +32,7 @@ export const SCHEME_RESULTS: Record<string, SchemeResult> = {
     title: "Foreign Manufacturers Certification Scheme (FMCS) — ISI Mark",
     routeSummary: "Nominated Authorized Indian Representative (AIR) + Mandatory BIS Factory Audit Abroad + Independent Sample Testing in BIS-Recognized Labs in India.",
     scopeSummary: "Mandatory for foreign manufacturing units exporting goods covered under Quality Control Orders (QCOs) to India. The factory premises outside India are audited by BIS inspecting officers before the Standard Mark licence is granted.",
-    msmeBenefit: "Foreign manufacturers do not qualify for domestic MSME concessions, but may utilize SAARC bilateral concessions or streamlined multi-unit documentation where applicable.",
+    msmeBenefit: "The MSME and startup fee concessions apply to Indian enterprises; foreign manufacturers pay the standard FMCS fees. Check the current fee schedule on Manakonline before applying.",
     portalName: "Manakonline (FMCS Portal)",
     portalUrl: "https://www.manakonline.in",
     badgeColorClass: "bg-blue/15 text-blue border-blue/30 dark:bg-blue/20 dark:text-blue dark:border-blue/40",
@@ -37,7 +43,7 @@ export const SCHEME_RESULTS: Record<string, SchemeResult> = {
     title: "Compulsory Registration Scheme (CRS) — Self-Declaration of Conformity",
     routeSummary: "Self-Declaration of Conformity (SDoC) based on formal test reports from BIS-recognized/NABL-accredited domestic test laboratories. No initial factory inspection required prior to grant.",
     scopeSummary: "Administered under MeitY & MNRE notifications covering electronics, IT hardware (laptops, mobile phones, tablets), solar PV inverters, and battery storage products.",
-    msmeBenefit: "80% concession on application and processing fees for DPIIT-recognized Startups and Micro/Small Enterprises (MSMEs) with valid Udyam registration.",
+    msmeBenefit: "BIS offers fee concessions to micro and small enterprises and startups, at rates set by BIS notification that change over time. Check the current CRS fee schedule on the CRS portal before applying.",
     portalName: "BIS CRS Portal (crsbis.in)",
     portalUrl: "https://www.crsbis.in",
     badgeColorClass: "bg-orange/15 text-orange border-orange/30 dark:bg-orange/20 dark:text-orange dark:border-orange/40",
@@ -48,7 +54,7 @@ export const SCHEME_RESULTS: Record<string, SchemeResult> = {
     title: "Mandatory Hallmarking Scheme — 6-Digit Alphanumeric HUID",
     routeSummary: "One-Time Jeweller Registration with BIS + Assaying & Laser Engraving at BIS-Recognized Assaying & Hallmarking Centres (AHC).",
     scopeSummary: "Mandatory purity certification for 14k, 18k, 20k, 22k, 23k, and 24k gold jewellery and artefacts under IS 1417. Each article is laser-inscribed with a unique HUID verifiable via the BIS Care App.",
-    msmeBenefit: "Zero registration fee for micro artisans and small jewellers with an annual turnover of under ₹40 Lakhs. 80% subsidized test and marking charges for artisanal cooperatives.",
+    msmeBenefit: "Jeweller registration with BIS is a one-time registration. Small jewellers below a notified annual-turnover threshold have been exempted from mandatory hallmarking; check the current fees and exemptions on Manakonline.",
     portalName: "Manakonline (Hallmarking Module)",
     portalUrl: "https://www.manakonline.in",
     badgeColorClass: "bg-gold/20 text-gold-ink border-gold/40 dark:bg-gold-soft/30 dark:text-gold dark:border-gold/50",
@@ -59,7 +65,7 @@ export const SCHEME_RESULTS: Record<string, SchemeResult> = {
     title: "Scheme-I Product Certification — Standard In-House Testing Route",
     routeSummary: "Preliminary Factory Audit by BIS Technical Officers + Verification of In-House Laboratory against Scheme of Testing & Inspection (STI) + Independent Sample Testing.",
     scopeSummary: "Applicable to industrial goods, structural steel (IS 1786, IS 2062), cement (IS 269, IS 1489), pressure cookers, helmets (IS 4151), and electrical cables covered under mandatory QCOs.",
-    msmeBenefit: "80% fee discount for Micro-enterprises and Startups on application, processing, and minimum annual marking fees, lowering initial compliance overhead.",
+    msmeBenefit: "BIS gives micro and small enterprises and startups a concession on the annual minimum marking fee, at rates set by BIS notification. Check the current rates on Manakonline before applying.",
     portalName: "Manakonline (e-BIS Portal)",
     portalUrl: "https://www.manakonline.in",
     badgeColorClass: "bg-navy/15 text-navy border-navy/30 dark:bg-navy/25 dark:text-navy dark:border-navy/40",
@@ -70,7 +76,7 @@ export const SCHEME_RESULTS: Record<string, SchemeResult> = {
     title: "Scheme-I Simplified Procedure — Fast-Track for MSMEs & Startups",
     routeSummary: "Pre-testing of sample at BIS-approved or NABL-accredited independent laboratory + Document submission with satisfactory test report + Rapid grant of licence within 30 days, followed by verification audit.",
     scopeSummary: "Engineered by BIS specifically to support domestic MSMEs lacking complete in-house testing equipment. Allows licence issuance on the basis of third-party NABL test reports, with deferred factory inspection.",
-    msmeBenefit: "80% fee discount on application & marking fees for Micro-enterprises and Startups (50% for Small Enterprises). MSMEs are permitted to utilize cluster testing centers or recognized external labs.",
+    msmeBenefit: "The same marking-fee concessions for micro and small enterprises and startups apply on this route, at rates set by BIS notification. Check the current rates on Manakonline before applying.",
     portalName: "Manakonline (Simplified Scheme-I)",
     portalUrl: "https://www.manakonline.in",
     badgeColorClass: "bg-success/15 text-success border-success/30 dark:bg-success/20 dark:text-success dark:border-success/40",
@@ -81,7 +87,7 @@ export const SCHEME_RESULTS: Record<string, SchemeResult> = {
     title: "Voluntary Standard Compliance — ISI Mark Optional",
     routeSummary: "Voluntary application for Scheme-I ISI Mark licence to demonstrate superior quality, or self-conformity to applicable Indian Standards for commercial tenders.",
     scopeSummary: "No compulsory Quality Control Order (QCO) currently prohibits manufacturing or marketing without a BIS licence for these products. Certification remains voluntary but grants GeM portal preference and consumer trust.",
-    msmeBenefit: "80% fee discount for Micro-enterprises and Startups applies if choosing voluntary Scheme-I certification. Also eligible for Central Government ZED (Zero Defect Zero Effect) scheme subsidies.",
+    msmeBenefit: "The marking-fee concessions for micro and small enterprises and startups also apply to voluntary Scheme-I certification, at rates set by BIS notification.",
     portalName: "Manakonline (Voluntary Application)",
     portalUrl: "https://www.manakonline.in",
     badgeColorClass: "bg-surface-sunken text-ink-soft border-border-strong dark:bg-surface-alt dark:text-ink-soft dark:border-border",
@@ -348,7 +354,7 @@ export function SchemeDecisionTree({
                   </span>
                   <div>
                     <h5 className="text-xs font-bold uppercase tracking-wider text-gold-ink dark:text-gold">
-                      MSME Benefit &amp; Fee Concession (80% Discount)
+                      MSME Benefit &amp; Fee Concession
                     </h5>
                     <p className="mt-1 text-xs leading-relaxed text-ink font-medium">
                       {result.msmeBenefit}
