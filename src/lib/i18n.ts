@@ -146,7 +146,8 @@ const en: Dictionary = {
     ],
   },
   recent: {
-    heading: "Recent Queries",
+    // "Example" is swapped for "Recent" once the reader has real history.
+    heading: "Example Searches",
     viewAll: "View all",
     colHash: "#",
     colQuery: "Query",
