@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 
 const REASONS = [
   { value: "wrong_standard", label: "Wrong standard" },
@@ -10,6 +10,9 @@ const REASONS = [
   { value: "outdated_information", label: "Outdated information" },
   { value: "other", label: "Other" },
 ] as const;
+
+/** Matches the /api/v1/feedback schema, so a long comment can't fail on every retry. */
+const MAX_COMMENT_LENGTH = 2000;
 
 /**
  * Reports a correction on a single query/standard pairing (prompts/final.md
@@ -31,6 +34,9 @@ export function FeedbackControl({
   const [reason, setReason] = useState<(typeof REASONS)[number]["value"]>("wrong_standard");
   const [comment, setComment] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "submitted" | "error">("idle");
+  // Not derived from standardNumber: "IS 302 (Part 2/Sec 6):2009" contains
+  // spaces (invalid in an id), and the same standard can render twice.
+  const fieldId = useId();
 
   async function submit() {
     setStatus("submitting");
@@ -65,11 +71,11 @@ export function FeedbackControl({
 
   return (
     <div className="rounded-md border border-border/70 bg-surface-alt/50 p-3 text-[12px]">
-      <label className="block font-bold text-ink-faint mb-1" htmlFor={`feedback-reason-${standardNumber}`}>
+      <label className="block font-bold text-ink-faint mb-1" htmlFor={`${fieldId}-reason`}>
         What&apos;s wrong?
       </label>
       <select
-        id={`feedback-reason-${standardNumber}`}
+        id={`${fieldId}-reason`}
         value={reason}
         onChange={(e) => setReason(e.target.value as (typeof REASONS)[number]["value"])}
         className="w-full rounded border border-border-strong bg-surface px-2 py-1.5 text-[12px]"
@@ -84,10 +90,16 @@ export function FeedbackControl({
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="Optional detail"
+        aria-label="Optional detail"
+        maxLength={MAX_COMMENT_LENGTH}
         rows={2}
         className="mt-2 w-full rounded border border-border-strong bg-surface px-2 py-1.5 text-[12px]"
       />
-      {status === "error" && <p className="mt-1.5 text-danger text-[11.5px]">Couldn&apos;t submit — try again.</p>}
+      {status === "error" && (
+        <p role="alert" className="mt-1.5 text-danger text-[11.5px]">
+          Couldn&apos;t submit — try again.
+        </p>
+      )}
       <div className="mt-2 flex gap-2">
         <button
           type="button"
