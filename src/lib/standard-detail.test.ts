@@ -1,6 +1,9 @@
 // @vitest-environment node
 import { describe, test, expect, vi, beforeEach } from "vitest";
+import fs from "fs/promises";
+import path from "path";
 import { getStandardDetail, sanitizeOfficialUrl } from "./standard-detail";
+import { findCertificationSchemeForStandard } from "./certification-schemes";
 
 // The database is mocked; the QCO dataset and seed manifest are the real
 // shipped files, so these tests also catch a dataset change that would
@@ -95,9 +98,28 @@ describe("getStandardDetail — QCO reference dataset", () => {
     expect((await getStandardDetail("is-14543"))!.sourceUrl).toBe(BIS_DEFAULT);
   });
 
-  test("records with a part number resolve by slug", async () => {
+  test("records with a part number resolve by slug, with the canonical identifier", async () => {
     const detail = await getStandardDetail("is-13252-part-1");
     expect(detail?.title).toBe("Information Technology Equipment - Safety - General Requirements");
+    expect(detail?.standardNumber).toBe("IS 13252 (Part 1):2010");
+  });
+
+  // The page looks the scheme up by standardNumber. When the two readers of
+  // qco-standards.json built that string differently, 46 of 100 records
+  // (every part/section-numbered one) missed their scheme.
+  test("every record's page finds its own certification scheme", async () => {
+    const records: { scheme?: string; mandatory_qco?: boolean }[] = JSON.parse(
+      await fs.readFile(path.join(process.cwd(), "data/bis-standards-dataset/qco-standards.json"), "utf-8"),
+    );
+    const misses: string[] = [];
+    for (const [i, record] of records.entries()) {
+      const detail = (await getStandardDetail(`std-${i + 1}`))!;
+      const scheme = await findCertificationSchemeForStandard(detail.standardNumber);
+      if (!scheme || scheme.scheme !== (record.scheme ?? null) || scheme.mandatoryQco !== (record.mandatory_qco === true)) {
+        misses.push(`std-${i + 1} ${detail.standardNumber}`);
+      }
+    }
+    expect(misses).toEqual([]);
   });
 });
 
