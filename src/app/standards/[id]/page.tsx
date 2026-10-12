@@ -19,9 +19,15 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
 
   const hasIndexedDocument = standard.chunks.length > 0;
   const isMandatory = scheme?.mandatoryQco === true;
+  // Without a reference-dataset entry there is no evidence either way, so
+  // nothing below may claim "verified", "voluntary" or a scheme
+  // (docs/ui/UI_DATA_AND_TRUTH_RULES.md: never fabricate certification
+  // requirements; say the information is not verified instead).
+  const NOT_VERIFIED = "Not verified";
   const verificationLabel = scheme?.verificationStatus
     ? (VERIFICATION_STATUS_LABELS[scheme.verificationStatus] ?? scheme.verificationStatus)
-    : "Verified Record";
+    : NOT_VERIFIED;
+  const regulatoryStatus = !scheme ? NOT_VERIFIED : isMandatory ? "Compulsory / QCO" : "Voluntary Reference";
 
   return (
     <div className="flex min-h-screen flex-col bg-surface text-ink antialiased">
@@ -85,10 +91,17 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
 
             {/* Restrained Status Stamp */}
             <div className="mt-3.5 flex flex-wrap items-center gap-3 text-xs">
-              <div className="inline-flex items-center gap-2 rounded-sm border border-emerald-700/30 bg-emerald-50 px-2.5 py-1 font-mono font-bold uppercase tracking-wider text-emerald-800 dark:bg-emerald-950/40 dark:border-emerald-600/40 dark:text-emerald-300">
-                <span className="h-2 w-2 rounded-full bg-emerald-600 dark:bg-emerald-400" />
-                <span>{verificationLabel}</span>
-              </div>
+              {scheme ? (
+                <div className="inline-flex items-center gap-2 rounded-sm border border-emerald-700/30 bg-emerald-50 px-2.5 py-1 font-mono font-bold uppercase tracking-wider text-emerald-800 dark:bg-emerald-950/40 dark:border-emerald-600/40 dark:text-emerald-300">
+                  <span className="h-2 w-2 rounded-full bg-emerald-600 dark:bg-emerald-400" />
+                  <span>{verificationLabel}</span>
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-2 rounded-sm border border-border-strong bg-surface-alt px-2.5 py-1 font-mono font-bold uppercase tracking-wider text-ink-soft">
+                  <span className="h-2 w-2 rounded-full bg-ink-faint" />
+                  <span>Certification status not verified</span>
+                </div>
+              )}
 
               {isMandatory && (
                 <div className="inline-flex items-center gap-1.5 rounded-sm border border-navy/25 bg-navy/5 px-2.5 py-1 font-mono font-bold uppercase tracking-wider text-navy dark:border-navy/40 dark:text-blue-200">
@@ -132,12 +145,12 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
 
               <div className="p-3.5 sm:p-4">
                 <p className="text-[10px] font-black uppercase tracking-widest text-ink-faint">Regulatory Status</p>
-                <p className="mt-1 font-bold text-ink">{isMandatory ? "Compulsory / QCO" : "Voluntary Reference"}</p>
+                <p className="mt-1 font-bold text-ink">{regulatoryStatus}</p>
               </div>
 
               <div className="p-3.5 sm:p-4">
                 <p className="text-[10px] font-black uppercase tracking-widest text-ink-faint">Certification</p>
-                <p className="mt-1 font-bold text-ink truncate">{scheme?.scheme ?? "Scheme-I (ISI)"}</p>
+                <p className="mt-1 font-bold text-ink truncate">{scheme?.scheme ?? NOT_VERIFIED}</p>
               </div>
 
               <div className="p-3.5 sm:p-4">
@@ -165,7 +178,7 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
                 <div className="mt-4 text-sm leading-relaxed text-ink space-y-3.5">
                   <p className="font-medium text-ink-soft">
                     {standard.scopeSummary ||
-                      "This Indian Standard establishes regulatory specifications, quality metrics, sampling procedures, and conformity criteria officially promulgated under the Bureau of Indian Standards Act."}
+                      "A scope summary is not available for this record. See the evidence passages below and the official document."}
                   </p>
 
                   {/* Verification / Archival reconciliation note if present */}
@@ -217,10 +230,14 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
                       <tr>
                         <td className="py-3 px-4 font-bold text-navy">Compulsory QCO Status</td>
                         <td className="py-3 px-4 text-ink font-semibold">
-                          {isMandatory ? "Mandatory Quality Control Order (QCO)" : "Voluntary Standard Reference"}
+                          {!scheme
+                            ? "Information not verified from the available sources"
+                            : isMandatory
+                              ? "Mandatory Quality Control Order (QCO)"
+                              : "Voluntary Standard Reference"}
                         </td>
                         <td className="py-3 px-4 text-ink-soft hidden sm:table-cell">
-                          {isMandatory ? "Section 16, BIS Act 2016" : "Voluntary Conformity"}
+                          {!scheme ? "—" : isMandatory ? "Section 16, BIS Act 2016" : "Voluntary Conformity"}
                         </td>
                       </tr>
 
@@ -351,7 +368,9 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
                     </div>
                     <div>
                       <span className="text-ink-faint block text-[10.5px] uppercase">Verification Status:</span>
-                      <span className="font-bold text-emerald-800 dark:text-emerald-300">{verificationLabel}</span>
+                      <span className={scheme ? "font-bold text-emerald-800 dark:text-emerald-300" : "font-bold text-ink-soft"}>
+                  {verificationLabel}
+                </span>
                     </div>
                     <div>
                       <span className="text-ink-faint block text-[10.5px] uppercase">Ingestion Checksum:</span>
@@ -425,8 +444,9 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
                   Record Verification Integrity
                 </p>
                 <p className="leading-normal">
-                  All factual specifications and QCO classifications presented in this dossier are directly referenced
-                  from official Bureau of Indian Standards gazette releases.
+                  Facts on this page come from indexed BIS documents and the project&apos;s fact-checked reference
+                  dataset. Anything not found there is marked as not verified rather than filled in. Confirm against
+                  the official link before relying on it.
                 </p>
               </div>
             </aside>
