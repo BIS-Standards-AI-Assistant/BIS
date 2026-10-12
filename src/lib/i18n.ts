@@ -153,7 +153,8 @@ const en: Dictionary = {
     colStandards: "Standards Found",
     colLast: "Last Searched",
   },
-  whatsnew: { heading: "What's New", viewAll: "View all" },
+  // Not "What's New": these are curated standards, not dated announcements.
+  whatsnew: { heading: "Featured Standards", viewAll: "View all" },
   placeholder: {
     headingWithSources: "Not built into this system — here's where BIS publishes it",
     headingWithoutSources: "Not covered by this system yet",
