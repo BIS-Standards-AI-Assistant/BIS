@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createHash } from "crypto";
 import { z } from "zod";
 import { getTtsProvider } from "@/lib/tts";
-import { createRateLimiter, clientKeyFromHeaders } from "@/lib/rate-limit";
+import { createRateLimiter, clientKeyFromHeaders, positiveNumberFromEnv } from "@/lib/rate-limit";
 
 // An answer is a few paragraphs at most. Bounding this bounds the bill,
 // since the upstream free tier is measured in characters.
@@ -17,8 +17,8 @@ const SpeakRequestSchema = z.object({
  * Public and metered upstream, so it gets the same throttle shape as
  * /api/v1/transcribe.
  */
-const RATE_LIMIT = Number(process.env.SPEAK_RATE_LIMIT ?? 20);
-const RATE_WINDOW_MS = Number(process.env.SPEAK_RATE_WINDOW_MS ?? 60_000);
+const RATE_LIMIT = positiveNumberFromEnv(process.env.SPEAK_RATE_LIMIT, 20);
+const RATE_WINDOW_MS = positiveNumberFromEnv(process.env.SPEAK_RATE_WINDOW_MS, 60_000);
 const limiter = createRateLimiter({ limit: RATE_LIMIT, windowMs: RATE_WINDOW_MS });
 
 /**
