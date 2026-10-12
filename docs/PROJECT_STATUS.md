@@ -607,8 +607,8 @@ option it cannot honour.
 | Results render in the assistant column | DONE | The column scrolls with the page; the prompt bar is `sticky bottom-0` so it floats at the viewport bottom at every width |
 
 `/search` (keyword Document Search) is **kept** — it is a distinct feature
-reached from the navigation, ServiceActions, and the Testing and About
-pages, and it answers nothing. Only the free-text global search and the
+reached from the navigation and the Testing and About pages, and it
+answers nothing. Only the free-text global search and the
 overlay's identifier suggestions now go to the assistant instead.
 
 Three `HomeClient` tests pin the behaviour: a `?q=` arrival runs the query
