@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { documents } from "@/db/schema";
 import { rateLimitOrNull } from "@/lib/rate-limit-http";
+import { isUuid } from "@/lib/uuid";
 
 // PRODUCTION_AUDIT.md §10: every other /api/v1/* route was rate-limited;
 // this one and two others were found without it. A single DB read is
@@ -18,7 +19,6 @@ const RATE_LIMIT = { limit: 60, windowMs: 60_000 };
  * "no such standard" from "the service is broken", and the raw failure was
  * neither logged nor explained.
  */
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const limited = rateLimitOrNull(req, "standards-id", RATE_LIMIT);
@@ -28,7 +28,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 
   // An id that cannot be a uuid cannot identify a document, so this is a
   // 404 — the resource genuinely does not exist — not a 400 about syntax.
-  if (!UUID.test(id)) {
+  if (!isUuid(id)) {
     return NextResponse.json({ error: "Standard not found" }, { status: 404 });
   }
 
