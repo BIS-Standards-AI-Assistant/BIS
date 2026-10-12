@@ -92,6 +92,13 @@ async function useDeterministicIntent(overrides: Partial<QueryIntent> = {}) {
 
 const originalDatabaseUrl = process.env.DATABASE_URL;
 
+/** Runs a query that is expected to reach retrieval, narrowing away the out-of-scope response shape. */
+async function run(...args: Parameters<typeof runQueryPipeline>) {
+  const r = await runQueryPipeline(...args);
+  if (r.outcome === "refused_out_of_scope") throw new Error("unexpected out-of-scope refusal");
+  return r;
+}
+
 beforeEach(async () => {
   for (const fn of [translateQueryToEnglish, extractQueryIntent, retrieveChunks, generateAnswer, insertValues]) fn.mockReset();
   translateQueryToEnglish.mockImplementation(async (q: string) => ({ queryForRetrieval: q, originalQuery: q, translated: false, method: "skipped-not-needed" }));
@@ -124,7 +131,7 @@ describe("runQueryPipeline — out of scope", () => {
 describe("runQueryPipeline — answered", () => {
   test("well-grounded evidence is answered with the model's prose and next steps", async () => {
     retrieveChunks.mockResolvedValue(waterEvidence(0.72));
-    const r = await runQueryPipeline("packaged drinking water");
+    const r = await run("packaged drinking water");
     expect(r.outcome).toBe("answered");
     expect(r.answer).toBe("IS 14543 covers packaged drinking water.");
     expect(r.nextSteps).toEqual(["Apply for a BIS licence."]);
@@ -134,21 +141,21 @@ describe("runQueryPipeline — answered", () => {
 
   test("a model explanation for a standard that was never retrieved is dropped", async () => {
     retrieveChunks.mockResolvedValue(waterEvidence(0.72));
-    const r = await runQueryPipeline("packaged drinking water");
+    const r = await run("packaged drinking water");
     expect(r.recommendations.map((x) => x.standardNumber)).not.toContain("IS 9999:2099");
     expect(JSON.stringify(r.recommendations)).not.toContain("invented");
   });
 
   test("every recommendation carries its evidence with source links", async () => {
     retrieveChunks.mockResolvedValue(waterEvidence(0.72));
-    const r = await runQueryPipeline("packaged drinking water");
+    const r = await run("packaged drinking water");
     expect(r.recommendations[0].evidence).toHaveLength(2);
     expect(r.recommendations[0].evidence[0]).toMatchObject({ clause: "1.1", sourceUrl: "https://www.bis.gov.in/x.pdf" });
   });
 
   test("the agent failing does not fail the query", async () => {
     retrieveChunks.mockResolvedValue(waterEvidence(0.72));
-    const r = await runQueryPipeline("packaged drinking water");
+    const r = await run("packaged drinking water");
     expect(r.outcome).toBe("answered");
     expect(r.toolEvidence).toBeNull();
   });
@@ -165,7 +172,7 @@ describe("runQueryPipeline — the applicability gate outranks the model", () =>
       recommendationExplanations: [{ standardNumber: "IS 4985:2021", reason: "Definitely the right standard for steel pipes." }],
     }));
 
-    const r = await runQueryPipeline("standard for steel pipes");
+    const r = await run("standard for steel pipes");
     const pvc = r.recommendations.find((x) => x.standardNumber === "IS 4985:2021")!;
     expect(pvc.primaryRecommendation).toBe(false);
     expect(pvc.recommendationStatus).toBe("RELATED_BUT_NOT_APPLICABLE");
@@ -177,7 +184,7 @@ describe("runQueryPipeline — the applicability gate outranks the model", () =>
 describe("runQueryPipeline — refusals", () => {
   test("below the relevance floor: fixed refusal, synthesis skipped, nothing left as primary", async () => {
     retrieveChunks.mockResolvedValue(waterEvidence(0.3));
-    const r = await runQueryPipeline("packaged drinking water");
+    const r = await run("packaged drinking water");
     expect(r.outcome).toBe("refused_insufficient_evidence");
     expect(r.answer).not.toBe("IS 14543 covers packaged drinking water.");
     expect(generateAnswer.mock.calls[0][1]).toMatchObject({ skipSynthesis: true });
@@ -190,7 +197,7 @@ describe("runQueryPipeline — refusals", () => {
 
   test("no retrieved evidence at all is a refusal with no confidence", async () => {
     retrieveChunks.mockResolvedValue([]);
-    const r = await runQueryPipeline("packaged drinking water");
+    const r = await run("packaged drinking water");
     expect(r.outcome).toBe("refused_insufficient_evidence");
     expect(r.recommendations).toEqual([]);
     expect(r.confidence).toBe("none");
@@ -199,13 +206,13 @@ describe("runQueryPipeline — refusals", () => {
 
   test("a Hindi answer language gets the reviewed Hindi refusal text", async () => {
     retrieveChunks.mockResolvedValue([]);
-    const r = await runQueryPipeline("packaged drinking water", { language: "hi" });
+    const r = await run("packaged drinking water", { language: "hi" });
     expect(/[ऀ-ॿ]/.test(r.answer)).toBe(true);
   });
 
   test("a language without reviewed refusal copy says the English text is a fallback", async () => {
     retrieveChunks.mockResolvedValue([]);
-    const r = await runQueryPipeline("packaged drinking water", { language: "ta" });
+    const r = await run("packaged drinking water", { language: "ta" });
     expect(r.limitations[0]).toMatch(/shown in English because a reviewed Tamil translation/);
   });
 });
@@ -214,7 +221,7 @@ describe("runQueryPipeline — translation", () => {
   test("when translation was needed but unavailable, the first limitation says so", async () => {
     translateQueryToEnglish.mockImplementation(async (q: string) => ({ queryForRetrieval: q, originalQuery: q, translated: false, method: "skipped-no-provider" }));
     retrieveChunks.mockResolvedValue(waterEvidence(0.72));
-    const r = await runQueryPipeline("पैकेज्ड पेयजल", { language: "hi" });
+    const r = await run("पैकेज्ड पेयजल", { language: "hi" });
     expect(r.limitations[0]).toMatch(/अनुवाद/);
     expect(r.translated).toBe(false);
   });
@@ -223,14 +230,14 @@ describe("runQueryPipeline — translation", () => {
 describe("runQueryPipeline — query log", () => {
   test("nothing is written without a database configured", async () => {
     retrieveChunks.mockResolvedValue(waterEvidence(0.72));
-    await runQueryPipeline("packaged drinking water");
+    await run("packaged drinking water");
     expect(insertValues).not.toHaveBeenCalled();
   });
 
   test("with a database, the outcome and retrieved chunk ids are logged", async () => {
     process.env.DATABASE_URL = "postgres://test";
     retrieveChunks.mockResolvedValue(waterEvidence(0.72));
-    await runQueryPipeline("packaged drinking water");
+    await run("packaged drinking water");
     expect(insertValues).toHaveBeenCalledWith(expect.objectContaining({
       query: "packaged drinking water",
       outcome: "answered",
