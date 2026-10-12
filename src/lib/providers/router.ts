@@ -65,12 +65,14 @@ const ROUTING_ORDER: ProviderName[] = ["groq", "gemini", "local", "openrouter-fr
 
 /**
  * Resolves which providers to try, and in what order, from `LLM_PROVIDER`.
- * "auto" (the default) uses local -> openrouter-free -> paid; an explicit
+ * "auto" (the default, also used when it is blank) uses ROUTING_ORDER:
+ * groq -> gemini -> local -> openrouter-free -> paid; an explicit
  * value pins to exactly that provider; "none" always returns an empty
  * chain (forcing evidence-only behavior everywhere).
  */
 export function resolveProviderChain(providers: LLMProvider[], routingEnv: string | undefined = process.env.LLM_PROVIDER): LLMProvider[] {
-  const mode = (routingEnv ?? "auto").toLowerCase();
+  // A blank `LLM_PROVIDER=` means "not set", i.e. auto — not a provider named "".
+  const mode = (routingEnv?.trim() || "auto").toLowerCase();
   if (mode === "none") return [];
 
   const byName = new Map(providers.map((p) => [p.name, p]));
