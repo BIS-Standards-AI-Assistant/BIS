@@ -26,7 +26,10 @@ interface ClarificationPanelProps {
  * - Clicking a recommendation pops up a small compact input box adjusted just below the recommendations.
  * - Only the input for the clicked recommendation is visible (all others disappear).
  * - Input has NO default text; only placeholder text is kept.
- * - On clicking "Refine Search", an animated combining phase displays all inputs being synthesized together.
+ * - "Refine Search" runs the refined query straight away. The status shown
+ *   while it runs describes the real request — there is no staged
+ *   "combining / cross-referencing" animation, because no such work happens
+ *   on the client.
  */
 export function ClarificationPanel({
   items,
@@ -43,9 +46,6 @@ export function ClarificationPanel({
   const [customValues, setCustomValues] = useState<Record<string, string>>({});
   // Which recommendation currently has its small input column open (ONLY ONE AT A TIME)
   const [activeRecommendation, setActiveRecommendation] = useState<string | null>(null);
-  // Animation state when Refine Search is clicked
-  const [isSynthesizing, setIsSynthesizing] = useState(false);
-  const [synthesisStep, setSynthesisStep] = useState(1);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -113,24 +113,10 @@ export function ClarificationPanel({
 
     if (finalSpecs.length === 0) return;
 
-    setIsSynthesizing(true);
-    setSynthesisStep(1);
-
-    setTimeout(() => {
-      setSynthesisStep(2);
-    }, 500);
-
-    setTimeout(() => {
-      setSynthesisStep(3);
-    }, 1000);
-
-    setTimeout(() => {
-      const refinedQuery = currentQuery
-        ? `${currentQuery} ${finalSpecs.join(" ")}`.trim()
-        : finalSpecs.join(" ").trim();
-      setIsSynthesizing(false);
-      onRefine(refinedQuery);
-    }, 1400);
+    const refinedQuery = currentQuery
+      ? `${currentQuery} ${finalSpecs.join(" ")}`.trim()
+      : finalSpecs.join(" ").trim();
+    onRefine(refinedQuery);
   }
 
   const productName = product?.trim()
@@ -219,7 +205,8 @@ export function ClarificationPanel({
                   key={idx}
                   type="button"
                   onClick={() => handleChipClick(item)}
-                  disabled={loading || isSynthesizing}
+                  disabled={loading}
+                  aria-pressed={isSelected}
                   className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer shadow-2xs ${
                     isCurrentlyActive
                       ? "bg-navy text-white ring-2 ring-gold/70 border border-gold"
@@ -255,6 +242,7 @@ export function ClarificationPanel({
                   onClick={() => setActiveRecommendation(null)}
                   className="text-ink-faint hover:text-navy transition-colors text-xs font-bold px-1"
                   title="Close input"
+                  aria-label="Close input"
                 >
                   ✕
                 </button>
@@ -273,6 +261,7 @@ export function ClarificationPanel({
                     }
                   }}
                   placeholder={`e.g. ${activeRecommendation}`}
+                  aria-label={`Specification for ${activeRecommendation}`}
                   className="flex-1 rounded-lg border border-border px-2.5 py-1.5 text-xs font-medium text-ink bg-surface-raised outline-none transition-all focus:border-navy focus:ring-1 focus:ring-navy placeholder:text-ink-faint"
                 />
                 <button
@@ -301,6 +290,7 @@ export function ClarificationPanel({
                     <button
                       type="button"
                       onClick={() => removeRecommendation(key)}
+                      aria-label={`Remove ${text}`}
                       className="text-navy/70 hover:text-red-600 transition-colors font-bold text-[10px] ml-0.5"
                     >
                       ✕
@@ -311,30 +301,18 @@ export function ClarificationPanel({
             </div>
           )}
 
-          {/* Synthesis / Combining Animation Overlay when Refine Search is clicked */}
-          {(isSynthesizing || loading) && (
-            <div className="mt-4 rounded-xl border border-navy/30 bg-navy/5 p-3.5 shadow-inner animate-in fade-in duration-300">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="relative flex h-4 w-4 items-center justify-center">
-                    <span className="absolute h-full w-full animate-ping rounded-full bg-navy/40" />
-                    <span className="relative h-2.5 w-2.5 rounded-full bg-navy" />
-                  </div>
-                  <span className="text-xs font-bold text-navy">
-                    {synthesisStep === 1 && "Taking all customized inputs..."}
-                    {synthesisStep === 2 && "Combining inputs and cross-referencing BIS catalog..."}
-                    {synthesisStep >= 3 && "Synthesizing refined standards output..."}
-                  </span>
+          {/* While the refined query runs: what is actually happening, and with what. */}
+          {loading && (
+            <div role="status" className="mt-4 rounded-xl border border-navy/30 bg-navy/5 p-3.5">
+              <div className="flex items-center gap-2.5">
+                <div className="relative flex h-4 w-4 items-center justify-center" aria-hidden="true">
+                  <span className="absolute h-full w-full animate-ping rounded-full bg-navy/40" />
+                  <span className="relative h-2.5 w-2.5 rounded-full bg-navy" />
                 </div>
-                <span className="text-[11px] font-mono text-ink-soft">
-                  {synthesisStep}/3
-                </span>
+                <span className="text-xs font-bold text-navy">Searching with your refined specifications…</span>
               </div>
-
-              {/* Displaying all inputs actively being combined */}
               {finalSpecs.length > 0 && (
                 <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-[11px]">
-                  <span className="text-ink-soft">Combining:</span>
                   {finalSpecs.map((spec, sIdx) => (
                     <span
                       key={sIdx}
@@ -345,25 +323,15 @@ export function ClarificationPanel({
                   ))}
                 </div>
               )}
-
-              {/* Animated Progress Bar */}
-              <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-navy/15">
-                <div
-                  className="h-full bg-gradient-to-r from-navy via-blue to-gold transition-all duration-500"
-                  style={{
-                    width: synthesisStep === 1 ? "35%" : synthesisStep === 2 ? "70%" : "100%",
-                  }}
-                />
-              </div>
             </div>
           )}
 
           {/* Refine Search Button - shows when options are selected and not currently loading */}
-          {selectedKeys.length > 0 && !isSynthesizing && !loading && (
+          {selectedKeys.length > 0 && !loading && (
             <form onSubmit={handleRefineSubmit} className="mt-4 pt-3 border-t border-border/70 flex justify-end">
               <button
                 type="submit"
-                disabled={loading || isSynthesizing}
+                disabled={loading}
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-xs hover:bg-navy-deep transition-all cursor-pointer"
               >
                 <span>Refine Search</span>
