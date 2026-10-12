@@ -66,7 +66,7 @@ export function SourcesPanel({
   const [query, setQuery] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { searching, results, searchError, runSourceSearch, resetSearch } = useSourceSearch(onResearch);
-  const { ingest, rejection } = useDocumentIngest();
+  const { ingest, rejections } = useDocumentIngest();
 
   // A manual left-panel search overrides the auto-populated list below, but
   // only until the next centre query — otherwise a stale manual search from
@@ -113,7 +113,11 @@ export function SourcesPanel({
         e.preventDefault();
         setIsDragging(true);
       }}
-      onDragLeave={() => setIsDragging(false)}
+      onDragLeave={(e) => {
+        // dragleave also fires when the pointer moves onto a child element;
+        // only clear the highlight when it actually leaves the panel.
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setIsDragging(false);
+      }}
       onDrop={(e) => {
         e.preventDefault();
         setIsDragging(false);
@@ -184,7 +188,7 @@ export function SourcesPanel({
         )}
 
         {searchError && (
-          <p className="mt-3 rounded-lg border border-danger/30 bg-danger-soft/40 px-3 py-2 text-[11.5px] text-danger">
+          <p role="alert" className="mt-3 rounded-lg border border-danger/30 bg-danger-soft/40 px-3 py-2 text-[11.5px] text-danger">
             {searchError}
           </p>
         )}
@@ -230,7 +234,8 @@ export function SourcesPanel({
           <SourceSearchResults results={displayedResults} isSelected={isSelected} onToggle={toggleSource} />
         )}
 
-        {results === null && !searching && selectedSources.length === 0 && (
+        {/* Only when nothing else is listed — not underneath auto-populated matches. */}
+        {displayedResults === null && !searching && selectedSources.length === 0 && (
           <div className="mt-5 px-1">
             <p className="text-[12.5px] font-semibold text-ink">Search BIS standards and documents</p>
             <p className="mt-1 text-[12px] leading-relaxed text-ink-faint">
@@ -246,10 +251,12 @@ export function SourcesPanel({
           </h3>
         </div>
 
-        {rejection && (
-          <p className="mt-3 rounded-lg border border-danger/30 bg-danger-soft/40 px-3 py-2 text-[11.5px] text-danger">
-            {rejection}
-          </p>
+        {rejections.length > 0 && (
+          <ul role="alert" className="mt-3 space-y-0.5 rounded-lg border border-danger/30 bg-danger-soft/40 px-3 py-2 text-[11.5px] text-danger">
+            {rejections.map((message) => (
+              <li key={message}>{message}</li>
+            ))}
+          </ul>
         )}
 
         {sources.length === 0 ? (

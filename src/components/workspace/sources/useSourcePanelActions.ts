@@ -54,17 +54,20 @@ export function useSourceSearch(onResearch: (query: string) => void) {
  * assistant, never the document's text.
  */
 export function useDocumentIngest() {
-  const [rejection, setRejection] = useState<string | null>(null);
+  // Every rejected file in a drop is reported, not only the last one.
+  const [rejections, setRejections] = useState<string[]>([]);
 
   async function ingest(files: FileList | File[]) {
-    setRejection(null);
+    const accepted: File[] = [];
+    const rejected: string[] = [];
     for (const file of Array.from(files)) {
       const problem = describeFileRejection(file);
-      if (problem) {
-        setRejection(`${file.name}: ${problem}`);
-        continue;
-      }
+      if (problem) rejected.push(`${file.name}: ${problem}`);
+      else accepted.push(file);
+    }
+    setRejections(rejected);
 
+    for (const file of accepted) {
       const id = `${file.name}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
       addSource({
         id,
@@ -82,7 +85,9 @@ export function useDocumentIngest() {
         const form = new FormData();
         form.append("file", file);
         const res = await fetch("/api/v1/analyze-document", { method: "POST", body: form });
-        const data = await res.json();
+        // An error can arrive as a non-JSON body (e.g. a proxy's HTML 413
+        // page). That is still a server answer, not an unreachable service.
+        const data = await res.json().catch(() => ({}));
 
         if (!res.ok) {
           updateSource(id, { status: "failed", error: data.error ?? `Upload failed (HTTP ${res.status})` });
@@ -106,5 +111,5 @@ export function useDocumentIngest() {
     }
   }
 
-  return { ingest, rejection };
+  return { ingest, rejections };
 }
