@@ -33,6 +33,18 @@ describe("isRecognitionExpired", () => {
     expect(isRecognitionExpired(lab("2026-10-13"), asOf)).toBe(false);
   });
 
+  test("the last day runs to midnight in India, not UTC", () => {
+    const valid = lab("2026-10-13");
+    // 05:30 IST is UTC midnight — the old cut-off.
+    expect(isRecognitionExpired(valid, new Date("2026-10-13T06:00:00+05:30"))).toBe(false);
+    expect(isRecognitionExpired(valid, new Date("2026-10-13T23:59:59+05:30"))).toBe(false);
+    expect(isRecognitionExpired(valid, new Date("2026-10-14T00:00:00+05:30"))).toBe(true);
+  });
+
+  test("an unparseable validity date is not treated as expired", () => {
+    expect(isRecognitionExpired(lab("14.02.2027"), asOf)).toBe(false);
+  });
+
   test("an unknown validity date is never reported as expired", () => {
     expect(isRecognitionExpired(lab(null), asOf)).toBe(false);
   });
