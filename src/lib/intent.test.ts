@@ -53,6 +53,14 @@ describe("OFF_TOPIC_PATTERN", () => {
     },
   );
 
+  test.each(["Who is eligible for a BIS licence?", "who is responsible for testing helmets?"])(
+    "a 'who is' question about BIS is not off-topic: %j",
+    (q) => {
+      expect(OFF_TOPIC_PATTERN.test(q)).toBe(false);
+      expect(deterministicIntentFallback(q).isRelevant).toBe(true);
+    },
+  );
+
   test("matches whole words only", () => {
     // "cooker" must not trip the "cook" keyword — pressure cookers are a core BIS product.
     expect(OFF_TOPIC_PATTERN.test("cooker")).toBe(false);
