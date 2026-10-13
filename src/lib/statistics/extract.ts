@@ -61,12 +61,31 @@ const UNIT_ALTERNATION = [
 
 /**
  * Constructions that are document metadata, never statistics (§5). Matched
- * against the text immediately preceding a number.
+ * against the text immediately preceding a number. Each keyword must start
+ * at a word boundary, so "suitable 5 kg" is not read as "table 5" and
+ * "temp. 40 °C" is not read as "p. 40".
  */
-const METADATA_PREFIX = /(?:clause|cl\.|section|sec\.|para(?:graph)?|page|p\.|pp\.|table|figure|fig\.|annex(?:ure)?|part|sec|IS|ISO|IEC|amendment|revision|rev\.)\s*$/i;
+const METADATA_PREFIX = /\b(?:clause|cl\.|section|sec\.?|para(?:graph)?|page|p\.|pp\.|table|figure|fig\.|annex(?:ure)?|part|amendment|revision|rev\.)\s*$/i;
+
+/**
+ * Standard-body prefixes are matched case-sensitively: "IS 456" is a
+ * standard, but "the voltage is 230 V" is a measurement.
+ */
+const STANDARD_PREFIX = /\b(?:IS|ISO|IEC)\s*$/;
 
 /** A standard identifier anywhere in the window, e.g. "IS 15410:2003". */
-const STANDARD_ID = /\b(?:IS|ISO|IEC|EN)\s?\d{2,5}(?:\s*\([^)]*\))?(?::\s?\d{4})?/gi;
+const STANDARD_ID = /\b(?:IS|ISO|IEC|EN)\s?\d{2,5}(?:\s*\([^)]*\))?(?::\s?\d{4})?/g;
+
+/**
+ * Single-letter units are only units in their SI case. The patterns are
+ * case-insensitive (so "Kg" and "MAXIMUM" still read), which would
+ * otherwise let "repeated 3 a second time" read as 3 amperes.
+ */
+const SINGLE_LETTER_UNITS = new Set(["%", "V", "A", "W", "N", "L", "l", "g", "m", "s", "h", "K", "t"]);
+
+function isPlausibleUnit(unit: string | null): boolean {
+  return unit === null || unit.length !== 1 || SINGLE_LETTER_UNITS.has(unit);
+}
 
 const NUM = String.raw`-?\d+(?:\.\d+)?`;
 
@@ -84,8 +103,10 @@ const PATTERNS: { type: StatisticType; re: RegExp; read: (m: RegExpExecArray) =>
   },
   {
     type: "range",
-    re: new RegExp(String.raw`(?:between\s+)?(${NUM})\s*(?:${UNIT_ALTERNATION})?\s*(?:–|—|-|to|and)\s*(${NUM})\s*(${UNIT_ALTERNATION})`, "gi"),
-    read: (m) => ({ min: Number(m[1]), max: Number(m[2]), unit: m[3], statisticType: "range" }),
+    // "and" joins a range only after "between": "5 kg and 2 kg" is two
+    // measurements, not an inverted 5–2 kg range.
+    re: new RegExp(String.raw`(?:between\s+(${NUM})\s*(?:${UNIT_ALTERNATION})?\s*and|(${NUM})\s*(?:${UNIT_ALTERNATION})?\s*(?:–|—|-|to))\s*(${NUM})\s*(${UNIT_ALTERNATION})`, "gi"),
+    read: (m) => ({ min: Number(m[1] ?? m[2]), max: Number(m[3]), unit: m[4], statisticType: "range" }),
   },
   {
     type: "maximum",
@@ -127,7 +148,7 @@ function readParameter(text: string, at: number): string | null {
 
 function isMetadataContext(text: string, at: number): boolean {
   const before = text.slice(Math.max(0, at - 24), at);
-  if (METADATA_PREFIX.test(before)) return true;
+  if (METADATA_PREFIX.test(before) || STANDARD_PREFIX.test(before)) return true;
   // Inside a standard identifier, e.g. the "15410" of "IS 15410:2003".
   STANDARD_ID.lastIndex = 0;
   const window = text.slice(Math.max(0, at - 24), at + 24);
@@ -159,7 +180,9 @@ export interface ExtractOptions {
  */
 export function extractStatistics(text: string, options: ExtractOptions = {}): ExtractedStatistic[] {
   const claimed: [number, number][] = [];
-  const out: ExtractedStatistic[] = [];
+  // Each statistic keeps the offset it was read at, so the final order is
+  // document order even when the same value is written twice.
+  const out: { at: number; stat: ExtractedStatistic }[] = [];
 
   const overlaps = (start: number, end: number) =>
     claimed.some(([s, e]) => start < e && end > s);
@@ -175,6 +198,7 @@ export function extractStatistics(text: string, options: ExtractOptions = {}): E
 
       const partial = read(m);
       const unit = partial.unit ?? null;
+      if (!isPlausibleUnit(unit)) continue;
       if (partial.value !== undefined && partial.value !== null && looksLikeYear(partial.value, unit)) continue;
 
       claimed.push([start, end]);
@@ -206,7 +230,7 @@ export function extractStatistics(text: string, options: ExtractOptions = {}): E
         stat.validationStatus = "needs_review";
         stat.reviewReason = "No unit could be read for this value.";
       }
-      out.push(stat);
+      out.push({ at: start, stat });
     }
   }
 
@@ -219,7 +243,7 @@ export function extractStatistics(text: string, options: ExtractOptions = {}): E
     if (overlaps(start, end) || isMetadataContext(text, start)) continue;
     claimed.push([start, end]);
     const value = Number(c[2] ?? c[3]);
-    out.push({
+    out.push({ at: start, stat: {
       parameter: (c[1] ?? c[4] ?? "count").trim(),
       displayValue: c[0].trim(),
       value,
@@ -228,10 +252,10 @@ export function extractStatistics(text: string, options: ExtractOptions = {}): E
       dimension: "count",
       source: { ...options, excerpt: excerptAround(text, start, end) },
       validationStatus: "extracted",
-    });
+    } });
   }
 
-  return out.sort((a, b) => text.indexOf(a.displayValue) - text.indexOf(b.displayValue));
+  return out.sort((a, b) => a.at - b.at).map(({ stat }) => stat);
 }
 
 /** A short window around the value, for §28 — not a large copied passage. */
