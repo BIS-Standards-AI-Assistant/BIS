@@ -17,18 +17,32 @@ import type { NormalizedSynthesis, SynthesisRequest, TtsProvider } from "./types
 const ENDPOINT = "https://texttospeech.googleapis.com/v1/text:synthesize";
 
 /**
- * Indian-locale voices for the two languages an answer is ever produced in
- * (see src/lib/language.ts — `AnswerLanguage` is "en" | "hi"). en-IN rather
- * than en-US: this is an Indian government service, and the Indian English
- * voice is the appropriate register for it.
+ * Indian-locale voices for every language an answer is produced in (see
+ * src/lib/language.ts — `AnswerLanguage` covers all eight UI languages).
+ * en-IN rather than en-US: this is an Indian government service, and the
+ * Indian English voice is the appropriate register for it.
+ *
+ * All Standard voices, the same free-tier bucket as before, and all "-A"
+ * (female) for a consistent voice across languages. Each name is listed
+ * in Google's published voice table (cloud.google.com/text-to-speech/docs/
+ * list-voices-and-types, checked 2026-10-13).
  */
 const VOICES: Record<string, { languageCode: string; name: string }> = {
   en: { languageCode: "en-IN", name: "en-IN-Standard-A" },
   hi: { languageCode: "hi-IN", name: "hi-IN-Standard-A" },
+  bn: { languageCode: "bn-IN", name: "bn-IN-Standard-A" },
+  ta: { languageCode: "ta-IN", name: "ta-IN-Standard-A" },
+  te: { languageCode: "te-IN", name: "te-IN-Standard-A" },
+  mr: { languageCode: "mr-IN", name: "mr-IN-Standard-A" },
+  gu: { languageCode: "gu-IN", name: "gu-IN-Standard-A" },
+  kn: { languageCode: "kn-IN", name: "kn-IN-Standard-A" },
 };
 
+/** The answer languages read-aloud has a voice for. */
+export const TTS_LANGUAGES = ["en", "hi", "bn", "ta", "te", "mr", "gu", "kn"] as const;
+
 export function voiceFor(language: string): { languageCode: string; name: string } {
-  return VOICES[language] ?? VOICES.en;
+  return Object.hasOwn(VOICES, language) ? VOICES[language] : VOICES.en;
 }
 
 export class GoogleTtsProvider implements TtsProvider {

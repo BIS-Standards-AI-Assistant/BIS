@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createHash } from "crypto";
 import { z } from "zod";
 import { getTtsProvider } from "@/lib/tts";
+import { TTS_LANGUAGES } from "@/lib/tts/google-provider";
 import { createRateLimiter, clientKeyFromHeaders } from "@/lib/rate-limit";
 
 // An answer is a few paragraphs at most. Bounding this bounds the bill,
@@ -10,7 +11,9 @@ const MAX_TEXT_LENGTH = 3000;
 
 const SpeakRequestSchema = z.object({
   text: z.string().trim().min(1).max(MAX_TEXT_LENGTH),
-  language: z.enum(["en", "hi"]).optional(),
+  // Every answer language: answers come back in all eight, and a Bengali or
+  // Tamil answer used to be refused here with a 400.
+  language: z.enum(TTS_LANGUAGES).optional(),
 });
 
 /**
