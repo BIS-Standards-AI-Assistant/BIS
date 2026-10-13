@@ -1,6 +1,6 @@
 import { getDb } from "@/db";
 import { standards } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { inArray } from "drizzle-orm";
 import { resolveStandardIds } from "./standards-id";
 import { resolveScopedContext } from "./chat-context";
 import { assessApplicability } from "./applicability";
@@ -78,10 +78,23 @@ export async function analyzeDocumentText(text: string): Promise<DocumentAnalysi
     if (!uniqueByNumber.has(r.normalized)) uniqueByNumber.set(r.normalized, r);
   }
 
-  const db = getDb();
+  // One query for every identifier, not one per identifier: a document's
+  // normative references can run to dozens of standards, and a round trip
+  // each made the upload wait on all of them in sequence. A document that
+  // cites none needs no lookup at all.
+  const numbers = [...uniqueByNumber.keys()];
+  const rows =
+    numbers.length > 0
+      ? await getDb().query.standards.findMany({
+          where: inArray(standards.canonicalNumber, numbers),
+          columns: { id: true, canonicalNumber: true, title: true },
+        })
+      : [];
+  const rowByNumber = new Map(rows.map((row) => [row.canonicalNumber, row]));
+
   const identifiersFound: DocumentIdentifierMatch[] = [];
   for (const [normalized, r] of uniqueByNumber) {
-    const row = await db.query.standards.findFirst({ where: eq(standards.canonicalNumber, normalized) });
+    const row = rowByNumber.get(normalized);
     identifiersFound.push({
       identifierText: r.raw,
       resolvedNumber: normalized,
