@@ -7,7 +7,7 @@ const push = vi.fn();
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push }) }));
 
 const STANDARDS: StandardSummary[] = [
-  { id: "is-14543", standardNumber: "IS 14543:2024", title: "Packaged Drinking Water", documentType: "Scheme-I (ISI) · Packaged Water & Beverages", version: "Mandatory QCO (Active)", chunkCount: 0 },
+  { id: "is-14543", standardNumber: "IS 14543:2016", title: "Packaged Drinking Water", documentType: "Scheme-I (ISI) · Packaged Water & Beverages", version: "Mandatory QCO (Active)", chunkCount: 0 },
   { id: "is-302-part-2-sec-6", standardNumber: "IS 302 (Part 2/Sec 6):2009", title: "Stationary Cooking Ranges", documentType: "Scheme-I (ISI) · Electrical Appliances", version: null, chunkCount: 0 },
   { id: "is-1293", standardNumber: "IS 1293:2019", title: "Plugs and Socket-Outlets", documentType: "Scheme-I (ISI) · Electrical Accessories", version: null, chunkCount: 0 },
   { id: "doc-5522", standardNumber: "IS 5522:2014", title: "Stainless Steel Sheets and Strips for Utensils", documentType: "product_manual", version: "PM/IS 5522/1", chunkCount: 14 },
@@ -64,7 +64,7 @@ describe("StandardsListClient", () => {
     render(<StandardsListClient standards={STANDARDS} />);
     const user = userEvent.setup();
 
-    await user.click(screen.getByRole("checkbox", { name: /IS 14543:2024/ }));
+    await user.click(screen.getByRole("checkbox", { name: /IS 14543:2016/ }));
     expect(screen.getByText("Select at least 2 standards to compare.")).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /compare/i })).not.toBeInTheDocument();
 
@@ -76,7 +76,7 @@ describe("StandardsListClient", () => {
   test("selection can be cleared", async () => {
     render(<StandardsListClient standards={STANDARDS} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("checkbox", { name: /IS 14543:2024/ }));
+    await user.click(screen.getByRole("checkbox", { name: /IS 14543:2016/ }));
     await user.click(screen.getByRole("checkbox", { name: /IS 1293:2019/ }));
     await user.click(screen.getByRole("button", { name: "Clear selection" }));
     expect(rows().every((r) => !(r as HTMLInputElement).checked)).toBe(true);
