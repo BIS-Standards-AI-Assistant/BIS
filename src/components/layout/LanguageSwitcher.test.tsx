@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { LanguageProvider, __resetLanguageForTests, useLanguage } from "@/components/providers/LanguageProvider";
+import { LANGUAGES, LanguageProvider, __resetLanguageForTests, useLanguage } from "@/components/providers/LanguageProvider";
 
 const HINDI = "हिन्दी";
 const TAMIL = "தமிழ்";
@@ -54,11 +54,19 @@ describe("LanguageSwitcher: what assistive tech is told", () => {
     expect(screen.getByText(HINDI)).toHaveAttribute("lang", "hi");
   });
 
-  test("languages without a translated UI are disabled", async () => {
+  test("every language with a translated UI can be chosen", async () => {
     const user = userEvent.setup();
     renderSwitcher();
     await user.click(screen.getByRole("button", { name: "Language: English" }));
-    expect(screen.getByRole("button", { name: new RegExp(TAMIL) })).toBeDisabled();
+    const list = screen.getByRole("list", { name: "Choose language" });
+    for (const button of within(list).getAllByRole("button")) {
+      expect(button).toBeEnabled();
+      expect(button).not.toHaveTextContent("Soon");
+    }
+
+    await user.click(screen.getByRole("button", { name: TAMIL }));
+    expect(screen.getByLabelText("current language")).toHaveTextContent("ta");
+    expect(document.documentElement.lang).toBe("ta");
   });
 });
 
@@ -80,10 +88,8 @@ describe("LanguageSwitcher: keyboard", () => {
     renderSwitcher();
     await user.click(screen.getByRole("button", { name: "Language: English" }));
 
-    // Through English and Hindi; the disabled languages are skipped.
-    await user.tab();
-    await user.tab();
-    await user.tab();
+    // Through every language, then out.
+    for (let i = 0; i <= LANGUAGES.length; i++) await user.tab();
     expect(screen.getByRole("link", { name: "After the switcher" })).toHaveFocus();
     expect(screen.queryByRole("list", { name: "Choose language" })).not.toBeInTheDocument();
   });
