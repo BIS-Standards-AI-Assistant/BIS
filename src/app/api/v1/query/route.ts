@@ -8,7 +8,9 @@ const QueryRequestSchema = z.object({
   // Optional explicit language from the UI switcher (PRD FR2/FR17). When
   // absent, the pipeline detects the query's script. Unknown values are
   // ignored rather than rejected.
-  language: z.enum(["en", "hi", "bn", "ta", "te", "mr", "gu", "kn"]).optional(),
+  // `.catch` is what makes that true: a bare enum rejected the whole query
+  // with a 400 for any other value (e.g. a newer client's language code).
+  language: z.enum(["en", "hi", "bn", "ta", "te", "mr", "gu", "kn"]).optional().catch(undefined),
 });
 
 /**
