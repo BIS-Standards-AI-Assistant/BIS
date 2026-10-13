@@ -39,15 +39,41 @@ function canonical(r: QcoRecord): string {
   return `${r.standard_number}${part}${r.year ? `:${r.year}` : ""}`;
 }
 
+/**
+ * Editions whose year in qco-standards.json is a documented error (see the
+ * dataset README and WhatsNew.tsx), with the reviewed value shown instead.
+ */
+const REVIEWED_EDITIONS: Record<string, string> = {
+  "is-14543": "IS 14543:2016",
+  "is-4151": "IS 4151:2015",
+};
+
+const seedManifest: { standardNumber: string }[] = JSON.parse(
+  fs.readFileSync(path.join(process.cwd(), "data/seed/manifest.json"), "utf-8"),
+);
+
 describe("FEATURED_STANDARDS mirror the reference dataset", () => {
   test.each(FEATURED_STANDARDS.map((f) => [f.standardNumber, f] as const))("%s", (_number, featured) => {
     const record = records.find((r) => registerSlug.get(r) === featured.id);
     // The link resolves: the id is a register slug the detail page knows.
     expect(record, `no reference record has register slug ${featured.id}`).toBeDefined();
-    // Current edition, scheme and mandatory status come from that record.
-    expect(featured.standardNumber).toBe(canonical(record!));
+    // Edition, scheme and mandatory status come from that record — except
+    // where its edition year is a documented error.
+    expect(featured.standardNumber).toBe(REVIEWED_EDITIONS[featured.id] ?? canonical(record!));
     expect(featured.scheme).toBe(record!.scheme);
     expect(featured.meta.startsWith("Mandatory")).toBe(record!.mandatory_qco === true);
+  });
+});
+
+describe("reviewed editions", () => {
+  test.each(Object.entries(REVIEWED_EDITIONS))("%s shows %s, the edition the official BIS manual in the seed corpus cites", (_id, edition) => {
+    expect(seedManifest.map((d) => d.standardNumber)).toContain(edition);
+  });
+
+  test("never shows the documented non-existent editions", () => {
+    const shown = FEATURED_STANDARDS.map((f) => f.standardNumber);
+    expect(shown).not.toContain("IS 14543:2024");
+    expect(shown).not.toContain("IS 4151:2020");
   });
 });
 

@@ -5,15 +5,23 @@ import { DocumentIcon, ArrowRightIcon, ShieldCheckIcon } from "@/components/ui/i
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 /**
- * A curated selection from the fact-checked reference dataset
- * (data/bis-standards-dataset/qco-standards.json). Every field mirrors that
- * dataset — current edition, title, scheme, mandatory status — and `id` is
- * the slug the Standards Register links with, so /standards/[id] resolves.
- * WhatsNew.test.tsx checks each entry against the dataset.
+ * A curated selection from the reference dataset
+ * (data/bis-standards-dataset/qco-standards.json): title, scheme and
+ * mandatory status mirror it, and `id` is the slug the Standards Register
+ * links with, so /standards/[id] resolves. WhatsNew.test.tsx checks each
+ * entry against the dataset.
+ *
+ * Edition years are the exception for IS 14543 and IS 4151. The dataset's
+ * README documents "IS 14543:2024" and "IS 4151:2020" as non-existent
+ * editions (the 2020 is the helmet QCO's year), corrected to 2016 and 2015
+ * from the official BIS product manuals — which the seed corpus also holds
+ * (data/seed/manifest.json). A 2026-09-03 catalog sync re-imported the
+ * uncorrected years into qco-standards.json; until that is resolved, this
+ * list shows the reviewed editions rather than repeat the error.
  */
 export const FEATURED_STANDARDS = [
   {
-    standardNumber: "IS 14543:2024",
+    standardNumber: "IS 14543:2016",
     title: "Packaged Drinking Water",
     category: "Packaged Water & Beverages",
     scheme: "Scheme-I (ISI)",
@@ -45,7 +53,7 @@ export const FEATURED_STANDARDS = [
     id: "is-1417",
   },
   {
-    standardNumber: "IS 4151:2020",
+    standardNumber: "IS 4151:2015",
     title: "Two-Wheeler Protective Helmets",
     category: "Safety Gear",
     scheme: "Scheme-I (ISI)",
