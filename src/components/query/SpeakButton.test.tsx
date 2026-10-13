@@ -83,7 +83,8 @@ describe("voiceFor", () => {
   });
 
   test("falls back to English for anything unexpected rather than throwing", () => {
-    expect(voiceFor("ta").languageCode).toBe("en-IN");
+    // "pa" has no voice (Tamil, once the example here, now has its own).
+    expect(voiceFor("pa").languageCode).toBe("en-IN");
   });
 });
 
