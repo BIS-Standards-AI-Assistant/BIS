@@ -35,8 +35,7 @@ import { PanelResizeHandle } from "@/components/workspace/PanelResizeHandle";
 import { addRecentQuery } from "@/lib/recent-queries";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import type { QueryResponse } from "@/types/api";
-
-const CACHE_PREFIX = "bis-query-cache:";
+import { getCachedResult, setCachedResult } from "@/lib/query-cache";
 
 function AssistantIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -44,32 +43,6 @@ function AssistantIcon(props: React.SVGProps<SVGSVGElement>) {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7h16M4 12h10M4 17h7M17 14l1.5 3 3 1.5-3 1.5L17 23l-1.5-3-3-1.5 3-1.5L17 14z" />
     </svg>
   );
-}
-
-function getCachedResult(query: string): QueryResponse | null {
-  try {
-    const raw = sessionStorage.getItem(CACHE_PREFIX + query);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    // Invalidate cached fallback answers so real AI responses are requested
-    if (parsed.answer?.includes("No AI-generated explanation")) {
-      sessionStorage.removeItem(CACHE_PREFIX + query);
-      return null;
-    }
-    return parsed;
-  } catch {
-    return null;
-  }
-}
-
-function setCachedResult(query: string, result: QueryResponse) {
-  // Never cache fallback answers where no LLM explanation was available
-  if (result.answer?.includes("No AI-generated explanation")) return;
-  try {
-    sessionStorage.setItem(CACHE_PREFIX + query, JSON.stringify(result));
-  } catch {
-    /* quota exceeded */
-  }
 }
 
 export function HomeClient() {
@@ -125,7 +98,7 @@ export function HomeClient() {
       params.set("q", trimmed);
       router.replace(`/?${params.toString()}`, { scroll: false });
 
-      const cached = getCachedResult(trimmed);
+      const cached = getCachedResult(trimmed, lang);
       if (cached) {
         // A slower search may still be in flight; it no longer owns the
         // loading state (see latestRequestRef), so end it here.
@@ -151,7 +124,7 @@ export function HomeClient() {
         const data: QueryResponse = await res.json();
         // Still a valid answer for its own query, so keep it for next time —
         // just don't show it under someone else's.
-        setCachedResult(trimmed, data);
+        setCachedResult(trimmed, lang, data);
         if (!isLatest()) return;
         setResult(data);
 
