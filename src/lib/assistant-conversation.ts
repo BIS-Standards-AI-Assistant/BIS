@@ -87,6 +87,10 @@ const EMPTY: ConversationState = { messages: [], pending: false, greetingKey: ""
 export function createAssistantConversation(eventName: string) {
   let state: ConversationState = EMPTY;
   let counter = 0;
+  // Bumped whenever the thread is replaced. A reply that was requested
+  // under an older generation belongs to a conversation that no longer
+  // exists and must not be appended to the new one.
+  let generation = 0;
 
   function nextId(prefix: string) {
     counter += 1;
@@ -128,6 +132,7 @@ export function createAssistantConversation(eventName: string) {
    */
   function resetConversation(greeting: string, key: string) {
     if (state.greetingKey === key && state.messages.length > 0) return;
+    generation += 1;
     commit({
       messages: [{ id: "greeting", sender: "assistant", text: greeting, timestamp: now() }],
       pending: false,
@@ -142,6 +147,7 @@ export function createAssistantConversation(eventName: string) {
   async function sendAssistantMessage({ message, standardNumbers, originalQuery }: SendOptions): Promise<void> {
     const text = message.trim();
     if (!text || state.pending) return;
+    const sentIn = generation;
 
     commit({
       ...state,
@@ -162,6 +168,10 @@ export function createAssistantConversation(eventName: string) {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const data = await response.json();
+      // The user started a new search while this was in flight: this answer
+      // is about the previous results, so showing it under the new ones
+      // would cite the wrong evidence.
+      if (sentIn !== generation) return;
       const scope: "current_results" | "global" = data.scope === "global" ? "global" : "current_results";
 
       let messageText: string;
@@ -221,6 +231,7 @@ export function createAssistantConversation(eventName: string) {
         ],
       });
     } catch {
+      if (sentIn !== generation) return;
       commit({
         ...state,
         pending: false,
@@ -242,6 +253,7 @@ export function createAssistantConversation(eventName: string) {
   function __resetConversationForTests() {
     state = EMPTY;
     counter = 0;
+    generation += 1;
   }
 
   return {
