@@ -44,6 +44,21 @@ const SOCIALS = [
   },
 ];
 
+/**
+ * Where each footer column's call to action goes, in the order of
+ * `t.footer.columns` (Know About BIS, Standards Development, Publications,
+ * Help & Support). Each is the in-app page on exactly that subject. These
+ * used to be chosen by index with a catch-all, which sent "Standards
+ * Development" to the indexed-standards list and both "Publications" and
+ * "Help & Support" to the certification schemes section of /about.
+ */
+export const FOOTER_COLUMN_HREFS = [
+  "/about",
+  "/about/standards-development-process",
+  "/resources/publications",
+  "/resources/faq",
+] as const;
+
 export function Footer() {
   const { t } = useLanguage();
   const year = new Date().getFullYear();
@@ -68,7 +83,7 @@ export function Footer() {
           {/* Middle Column: Link Columns */}
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
             {t.footer.columns.map((col, idx) => {
-              const href = idx === 0 ? "/about" : idx === 1 ? "/standards" : "/about#schemes";
+              const href = FOOTER_COLUMN_HREFS[idx] ?? "/about";
               return (
                 <div key={col.title} className="flex flex-col">
                   <h3 className="text-[13.5px] font-bold text-navy border-b border-border pb-2 mb-3">
