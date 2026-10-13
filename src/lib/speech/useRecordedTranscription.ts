@@ -48,6 +48,10 @@ export function useRecordedTranscription({
   const chunksRef = useRef<Blob[]>([]);
   const onResultRef = useRef(onResult);
   const languageRef = useRef(language);
+  // Set while getUserMedia is pending (the permission prompt may be open),
+  // so a second click can't open a second microphone stream.
+  const startingRef = useRef(false);
+  const unmountedRef = useRef(false);
 
   useEffect(() => {
     onResultRef.current = onResult;
@@ -65,7 +69,13 @@ export function useRecordedTranscription({
     chunksRef.current = [];
   }, []);
 
-  useEffect(() => cleanup, [cleanup]);
+  useEffect(() => {
+    unmountedRef.current = false;
+    return () => {
+      unmountedRef.current = true;
+      cleanup();
+    };
+  }, [cleanup]);
 
   const upload = useCallback(async (blob: Blob) => {
     setState({ kind: "transcribing" });
@@ -105,8 +115,17 @@ export function useRecordedTranscription({
       setState({ kind: "error", message: "This browser cannot record audio." });
       return;
     }
+    if (startingRef.current || recorderRef.current) return;
+    startingRef.current = true;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // Permission can be granted after the component has gone (the user
+      // navigated away with the prompt open). Nothing would ever stop this
+      // stream, leaving the microphone on, so release it immediately.
+      if (unmountedRef.current) {
+        stream.getTracks().forEach((t) => t.stop());
+        return;
+      }
       const recorder = new MediaRecorder(stream);
       chunksRef.current = [];
 
@@ -116,6 +135,9 @@ export function useRecordedTranscription({
       recorder.onstop = () => {
         const blob = new Blob(chunksRef.current, { type: recorder.mimeType || "audio/webm" });
         cleanup();
+        // Unmounting stops the tracks, which ends the recording — that clip
+        // was abandoned, not submitted, so don't upload and bill for it.
+        if (unmountedRef.current) return;
         if (blob.size > 0) void upload(blob);
         else setState({ kind: "error", message: "No audio was captured. Please try again." });
       };
@@ -134,6 +156,8 @@ export function useRecordedTranscription({
               ? "No microphone was found. Check that one is connected and enabled."
               : "Could not start recording. Please try again.",
       });
+    } finally {
+      startingRef.current = false;
     }
   }, [cleanup, upload]);
 
