@@ -110,6 +110,14 @@ async function getComparisonRows(ids: string[]): Promise<CompareRow[] | null> {
   return ids.flatMap((id) => byId.get(id) ?? []);
 }
 
+/**
+ * Most standards one comparison resolves. Each id is a database or dataset
+ * lookup, and the ids come straight from the URL, so the count is bounded
+ * here rather than trusted; past a handful of columns the table stops
+ * being readable anyway.
+ */
+const MAX_COMPARED = 6;
+
 const FIELDS: { key: keyof CompareRow; label: string }[] = [
   { key: "documentType", label: "Document type" },
   { key: "version", label: "Version" },
@@ -123,7 +131,9 @@ export default async function ComparePage({
   searchParams: Promise<{ ids?: string }>;
 }) {
   const { ids: idsParam } = await searchParams;
-  const ids = (idsParam ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  // Each standard once, in the order selected.
+  const requested = [...new Set((idsParam ?? "").split(",").map((s) => s.trim()).filter(Boolean))];
+  const ids = requested.slice(0, MAX_COMPARED);
 
   if (ids.length < 2) {
     const standards = await getAllStandards();
@@ -188,6 +198,13 @@ export default async function ComparePage({
     );
   }
 
+  // Ids that resolved to nothing (a stale or mistyped link) are named
+  // rather than silently dropped, so a reader never mistakes a one-column
+  // table for the comparison they asked for.
+  const found = new Set(rows.map((r) => r.id));
+  const missing = ids.filter((id) => !found.has(id));
+  const truncated = requested.length - ids.length;
+
   return (
     <div className="flex min-h-screen flex-col bg-surface">
       <Header />
@@ -207,53 +224,86 @@ export default async function ComparePage({
             ← Change selection
           </Link>
 
-          <div className="mt-8 overflow-x-auto border border-border">
-            <table className="w-full min-w-[560px] border-collapse text-sm">
-              <thead>
-                <tr className="border-b border-border bg-surface-alt text-left">
-                  <th className="p-3 text-xs font-semibold uppercase tracking-wide text-ink-faint">Standard</th>
-                  {rows.map((r) => (
-                    <th key={r.id} className="p-3 align-top">
-                      <p className="font-mono text-xs text-navy">{r.standardNumber ?? "Unnumbered"}</p>
-                      <Link href={`/standards/${encodeURIComponent(r.id)}`} className="mt-0.5 block font-medium text-ink hover:underline">
-                        {r.title}
-                      </Link>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {FIELDS.map((f) => (
-                  <tr key={f.key} className="border-b border-border last:border-b-0">
-                    <th scope="row" className="p-3 text-left text-xs font-semibold uppercase tracking-wide text-ink-faint">
-                      {f.label}
-                    </th>
-                    {rows.map((r) => {
-                      const value = r[f.key];
-                      const hasValue = typeof value === "number" ? true : Boolean(value);
-                      return (
-                        <td key={r.id} className="p-3 text-ink">
-                          {hasValue ? value : <span className="text-ink-faint">Not specified</span>}
-                        </td>
-                      );
-                    })}
+          {(missing.length > 0 || truncated > 0) && (
+            <div role="status" className="mt-6 space-y-1 rounded-lg border border-warning/30 bg-warning-soft/30 p-4 text-sm text-ink">
+              {missing.length > 0 && (
+                <p>
+                  {missing.length === 1 ? "This standard was" : "These standards were"} not found and{" "}
+                  {missing.length === 1 ? "is" : "are"} not shown:{" "}
+                  <span className="font-mono text-xs">{missing.join(", ")}</span>
+                </p>
+              )}
+              {truncated > 0 && (
+                <p>
+                  Only the first {MAX_COMPARED} selected standards are compared; {truncated} more{" "}
+                  {truncated === 1 ? "was" : "were"} left out.
+                </p>
+              )}
+            </div>
+          )}
+
+          {rows.length < 2 ? (
+            <div className="mt-8 rounded-lg border border-border-strong bg-surface-alt p-8 text-center">
+              <p className="font-medium text-ink">Not enough standards to compare</p>
+              <p className="mt-2 text-sm text-ink-soft">
+                {rows.length === 0
+                  ? "None of the selected standards could be found."
+                  : "Only one of the selected standards could be found."}{" "}
+                Choose at least two from the standards list.
+              </p>
+              <Link href="/standards" className="mt-4 inline-block text-sm text-navy hover:underline">
+                Choose standards to compare &rarr;
+              </Link>
+            </div>
+          ) : (
+            <div className="mt-8 overflow-x-auto border border-border">
+              <table className="w-full min-w-[560px] border-collapse text-sm">
+                <thead>
+                  <tr className="border-b border-border bg-surface-alt text-left">
+                    <th className="p-3 text-xs font-semibold uppercase tracking-wide text-ink-faint">Standard</th>
+                    {rows.map((r) => (
+                      <th key={r.id} className="p-3 align-top">
+                        <p className="font-mono text-xs text-navy">{r.standardNumber ?? "Unnumbered"}</p>
+                        <Link href={`/standards/${encodeURIComponent(r.id)}`} className="mt-0.5 block font-medium text-ink hover:underline">
+                          {r.title}
+                        </Link>
+                      </th>
+                    ))}
                   </tr>
-                ))}
-                <tr>
-                  <th scope="row" className="p-3 text-left text-xs font-semibold uppercase tracking-wide text-ink-faint">
-                    Source
-                  </th>
-                  {rows.map((r) => (
-                    <td key={r.id} className="p-3">
-                      <a href={r.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-navy hover:underline">
-                        Open document →
-                      </a>
-                    </td>
+                </thead>
+                <tbody>
+                  {FIELDS.map((f) => (
+                    <tr key={f.key} className="border-b border-border last:border-b-0">
+                      <th scope="row" className="p-3 text-left text-xs font-semibold uppercase tracking-wide text-ink-faint">
+                        {f.label}
+                      </th>
+                      {rows.map((r) => {
+                        const value = r[f.key];
+                        const hasValue = typeof value === "number" ? true : Boolean(value);
+                        return (
+                          <td key={r.id} className="p-3 text-ink">
+                            {hasValue ? value : <span className="text-ink-faint">Not specified</span>}
+                          </td>
+                        );
+                      })}
+                    </tr>
                   ))}
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  <tr>
+                    <th scope="row" className="p-3 text-left text-xs font-semibold uppercase tracking-wide text-ink-faint">
+                      Source
+                    </th>
+                    {rows.map((r) => (
+                      <td key={r.id} className="p-3">
+                        <a href={r.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-navy hover:underline">
+                          Open document →
+                        </a>
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </main>
       <Footer />
