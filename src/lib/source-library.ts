@@ -51,11 +51,28 @@ export interface LibrarySource {
 const STORAGE_KEY = "bis-source-library";
 const EVENT = "bis-sources-updated";
 
+/**
+ * Uploads running in this page. The library outlives a reload but a
+ * request does not, so an "analyzing" entry that isn't in this set was
+ * cut off by a reload or navigation — and would otherwise read
+ * "Reading document…" forever, with nothing left to finish it.
+ */
+const inFlight = new Set<string>();
+
+export const INTERRUPTED_UPLOAD =
+  "The upload was interrupted before it finished. Remove it and add the document again.";
+
+function settleInterrupted(sources: LibrarySource[]): LibrarySource[] {
+  return sources.map((s) =>
+    s.status === "analyzing" && !inFlight.has(s.id) ? { ...s, status: "failed", error: INTERRUPTED_UPLOAD } : s,
+  );
+}
+
 function read(): LibrarySource[] {
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY);
     const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
+    return Array.isArray(parsed) ? settleInterrupted(parsed) : [];
   } catch {
     return [];
   }
@@ -76,14 +93,17 @@ function write(sources: LibrarySource[]) {
 }
 
 export function addSource(source: LibrarySource) {
+  if (source.status === "analyzing") inFlight.add(source.id);
   write([...read(), source]);
 }
 
 export function updateSource(id: string, patch: Partial<LibrarySource>) {
+  if (patch.status && patch.status !== "analyzing") inFlight.delete(id);
   write(read().map((s) => (s.id === id ? { ...s, ...patch } : s)));
 }
 
 export function removeSource(id: string) {
+  inFlight.delete(id);
   write(read().filter((s) => s.id !== id));
 }
 
@@ -92,6 +112,7 @@ export function toggleSourceSelected(id: string) {
 }
 
 export function clearSources() {
+  inFlight.clear();
   write([]);
 }
 
@@ -146,7 +167,7 @@ export function getSourcesSnapshot(): LibrarySource[] {
     cachedRaw = raw;
     try {
       const parsed = raw ? JSON.parse(raw) : [];
-      cachedParsed = Array.isArray(parsed) ? parsed : EMPTY;
+      cachedParsed = Array.isArray(parsed) ? settleInterrupted(parsed) : EMPTY;
     } catch {
       cachedParsed = EMPTY;
     }
