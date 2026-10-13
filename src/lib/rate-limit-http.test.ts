@@ -83,6 +83,17 @@ describe("memory bound", () => {
     expect(__trackedRateLimitKeysForTests()).toBeLessThanOrEqual(5000);
   });
 
+  test("a client that keeps hitting during a flood stays limited", () => {
+    const opts = { limit: 1, windowMs: 60_000 };
+    const abuser = requestFrom("5.5.5.5");
+    checkRateLimit(abuser, "flood", opts);
+    for (let i = 0; i < 6000; i++) {
+      checkRateLimit(requestFrom(`10.3.${Math.floor(i / 250)}.${i % 250}`), "flood", opts);
+      if (i % 400 === 0) expect(checkRateLimit(abuser, "flood", opts).limited).toBe(true);
+    }
+    expect(checkRateLimit(abuser, "flood", opts).limited).toBe(true);
+  });
+
   test("a sweep expires each bucket against its own route's window", () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-10-01T00:00:00Z"));

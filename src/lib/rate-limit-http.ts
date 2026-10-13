@@ -30,11 +30,12 @@ const SWEEP_TARGET = Math.floor(MAX_TRACKED_KEYS * 0.9);
 /**
  * Drops expired buckets (each against its own route's window), then — if
  * every remaining bucket is still live, i.e. thousands of distinct clients
- * inside one window — evicts the oldest. Evicting a live bucket forgets
- * that client's count, which is the lesser harm: the alternative is a map
- * that grows for as long as the flood lasts. Map iteration is insertion
- * order and buckets are re-inserted when their window restarts, so the
- * first keys are the oldest windows.
+ * inside one window — evicts the least recently active. Evicting a live
+ * bucket forgets that client's count, which is the lesser harm: the
+ * alternative is a map that grows for as long as the flood lasts. Map
+ * iteration is insertion order and a bucket is re-inserted on every
+ * request (refused ones included), so a client that keeps hammering stays
+ * tracked and the first keys are the quietest.
  */
 function sweep(now: number): void {
   for (const [k, b] of buckets) {
@@ -79,10 +80,10 @@ export function checkRateLimit(req: NextRequest, routeName: string, opts: RateLi
   let bucket = buckets.get(key);
   if (!bucket || now - bucket.windowStart >= opts.windowMs) {
     bucket = { count: 0, windowStart: now, windowMs: opts.windowMs };
-    // Re-inserted, not updated in place, to keep the map oldest-first.
-    buckets.delete(key);
-    buckets.set(key, bucket);
   }
+  // Re-inserted on every request to keep the map least-recently-active first.
+  buckets.delete(key);
+  buckets.set(key, bucket);
 
   bucket.count += 1;
   const remaining = Math.max(0, opts.limit - bucket.count);
