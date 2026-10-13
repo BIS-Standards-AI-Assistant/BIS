@@ -25,11 +25,9 @@ describe("speech locales", () => {
     }
   });
 
-  test("voice input is offered even for languages whose UI strings are not translated yet", () => {
-    const untranslated = LANGUAGES.filter((l) => !l.available).map((l) => l.code);
-    expect(untranslated.length).toBeGreaterThan(0);
-    for (const code of untranslated) {
-      expect(VOICE_LANGUAGES.some((v) => v.code === code)).toBe(true);
+  test("voice input is offered for every language, whether or not its UI is translated", () => {
+    for (const { code } of LANGUAGES) {
+      expect(VOICE_LANGUAGES.some((v) => v.code === code), code).toBe(true);
     }
   });
 
