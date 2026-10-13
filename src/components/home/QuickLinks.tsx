@@ -9,7 +9,7 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
  */
 const LINKS = [
   { label: "BIS Official Website", href: "https://www.bis.gov.in", external: true },
-  { label: "BIS CARE App", href: "https://www.bis.gov.in/bis-apps/?lang=hi", external: true },
+  { label: "BIS CARE App", href: "https://www.bis.gov.in/bis-apps/?lang=en", external: true },
   { label: "Manak Online", href: "https://www.manakonline.in", external: true },
   { label: "Compulsory Certification (QCOs)", href: "https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=en", external: true },
   { label: "BIS Laboratory Services", href: "https://www.bis.gov.in/laboratorys/laboratory-services-overview/?lang=en", external: true },
