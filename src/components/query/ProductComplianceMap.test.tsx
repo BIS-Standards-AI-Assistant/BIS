@@ -99,4 +99,36 @@ describe("ProductComplianceMap", () => {
     await userEvent.setup().click(screen.getByRole("tab", { name: /Labs/ }));
     expect(await screen.findByText("The laboratory directory could not be loaded.")).toBeInTheDocument();
   });
+
+  test("'All states' keeps the whole directory's count after a state is selected", async () => {
+    const all = [
+      { id: "1", name: "Noida Lab", state: "Uttar Pradesh" },
+      { id: "2", name: "Delhi Lab", state: "Delhi" },
+      { id: "3", name: "Lucknow Lab", state: "Uttar Pradesh" },
+    ];
+    // As the route answers: items and total are filtered, states always cover everything.
+    const respond = (items: typeof all) => {
+      const body = labs(items);
+      return { ...body, json: async () => ({ ...(await body.json()), states: (await labs(all).json()).states }) };
+    };
+    let release: (v: unknown) => void = () => {};
+    const fetchSpy = vi.fn()
+      .mockResolvedValueOnce(respond(all))
+      .mockReturnValueOnce(new Promise((r) => (release = r)));
+    vi.stubGlobal("fetch", fetchSpy);
+    render(<ProductComplianceMap complianceMap={map()} />);
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("tab", { name: /Labs/ }));
+    await screen.findByText("3 recognised laboratories");
+    expect(screen.getByRole("option", { name: "All states (3)" })).toBeInTheDocument();
+
+    await user.selectOptions(screen.getByLabelText("Filter laboratories by state"), "Delhi");
+    // The previous list is not shown under the new state's name while it loads.
+    expect(screen.getByText("Loading directory…")).toBeInTheDocument();
+    expect(screen.queryByText("3 recognised laboratories")).not.toBeInTheDocument();
+
+    release(respond([all[1]]));
+    expect(await screen.findByText("1 recognised laboratory")).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "All states (3)" })).toBeInTheDocument();
+  });
 });

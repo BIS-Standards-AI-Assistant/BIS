@@ -195,6 +195,11 @@ function LaboratoriesTab() {
   }, [selectedState]);
 
   const states = data?.states ?? [];
+  // `data.total` counts only the current filter's results; the per-state
+  // counts always cover the whole directory, so their sum is the real
+  // "All states" figure. Using `total` made the option read, e.g.,
+  // "All states (12)" once a 12-lab state was selected.
+  const allStatesCount = states.reduce((n, s) => n + s.count, 0);
 
   return (
     <div className="space-y-3">
@@ -208,11 +213,16 @@ function LaboratoriesTab() {
 
       <select
         value={selectedState}
-        onChange={(e) => setSelectedState(e.target.value)}
+        onChange={(e) => {
+          setSelectedState(e.target.value);
+          // Until the new list arrives, the old one would be shown under the
+          // newly selected state's name.
+          setStatus("loading");
+        }}
         aria-label="Filter laboratories by state"
         className="w-full rounded-md border border-border-strong bg-surface px-2.5 py-1.5 text-[11.5px] text-ink outline-none focus:border-navy"
       >
-        <option value="All States">All states{data ? ` (${data.total})` : ""}</option>
+        <option value="All States">All states{data ? ` (${allStatesCount})` : ""}</option>
         {states.map((s) => (
           <option key={s.state} value={s.state}>
             {s.state} ({s.count})
