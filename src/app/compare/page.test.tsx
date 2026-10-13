@@ -41,9 +41,9 @@ describe("/compare", () => {
     for (const available of [true, false]) {
       dbAvailable = available;
       document.body.innerHTML = "";
-      await renderCompare("is-13252-part-1,is-14543");
+      await renderCompare("is-13252-part-1,is-2347");
       expect(screen.queryByText(/knowledge base temporarily unavailable/i)).not.toBeInTheDocument();
-      expect(headerNumbers()).toEqual(["IS 13252 Part 1:2010", "IS 14543:2024"]);
+      expect(headerNumbers()).toEqual(["IS 13252 Part 1:2010", "IS 2347:2017"]);
     }
   });
 
@@ -54,7 +54,7 @@ describe("/compare", () => {
   });
 
   test("register slugs are never sent to the uuid document column", async () => {
-    await renderCompare("is-13252-part-1,is-14543");
+    await renderCompare("is-13252-part-1,is-2347");
     expect(findMany).not.toHaveBeenCalled();
   });
 
@@ -71,8 +71,8 @@ describe("/compare", () => {
         chunks: [{ id: "a" }, { id: "b" }],
       },
     ]);
-    await renderCompare(`is-14543,${DOC_ID}`);
-    expect(headerNumbers()).toEqual(["IS 14543:2024", "IS 5522:2014"]);
+    await renderCompare(`is-2347,${DOC_ID}`);
+    expect(headerNumbers()).toEqual(["IS 2347:2017", "IS 5522:2014"]);
     // A stored non-http(s) URL never becomes a clickable link.
     for (const link of screen.getAllByRole("link", { name: /open document/i })) {
       expect(link.getAttribute("href")).toMatch(/^https:\/\//);
@@ -81,12 +81,12 @@ describe("/compare", () => {
 
   test("when ingested documents are requested and the database is down, says so", async () => {
     dbAvailable = false;
-    await renderCompare(`${DOC_ID},is-14543`);
+    await renderCompare(`${DOC_ID},is-2347`);
     expect(screen.getByText(/knowledge base temporarily unavailable/i)).toBeInTheDocument();
   });
 
   test("unknown ids are skipped rather than shown as empty columns", async () => {
-    await renderCompare("is-14543,nope-123,is-13252-part-1");
-    expect(headerNumbers()).toEqual(["IS 14543:2024", "IS 13252 Part 1:2010"]);
+    await renderCompare("is-2347,nope-123,is-13252-part-1");
+    expect(headerNumbers()).toEqual(["IS 2347:2017", "IS 13252 Part 1:2010"]);
   });
 });
