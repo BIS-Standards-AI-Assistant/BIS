@@ -72,7 +72,10 @@ export function RecentQueries({ onRerun }: { onRerun?: (query: string) => void }
     <section className="relative">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold tracking-tight text-navy">
-          {hasHistory ? t.recent.heading.replace("Example", "Recent") : t.recent.heading}
+          {/* Its own string per language: replacing the English word "Example"
+              left every other language's heading saying "example" over the
+              reader's real history. */}
+          {hasHistory ? t.recent.headingHistory : t.recent.heading}
         </h2>
         <div className="flex items-center gap-3">
           {hasHistory && (
