@@ -104,12 +104,19 @@ export function HomeClient() {
 
   // Tracks the last ?q= a run has already been started for
   const lastAutoRunQuery = useRef<string | null>(null);
+  // Identifies the newest search. A response for any older one — the user
+  // ran another search, or cleared the results, while it was in flight —
+  // must not replace what's on screen, or the results shown would belong
+  // to a different query than the one in the header.
+  const latestRequestRef = useRef(0);
 
   const runQuery = useCallback(
     async (query: string) => {
       const trimmed = query.trim();
       if (!trimmed) return;
 
+      const requestId = ++latestRequestRef.current;
+      const isLatest = () => requestId === latestRequestRef.current;
       lastAutoRunQuery.current = trimmed;
       setActiveQuery(trimmed);
       setError(null);
@@ -120,6 +127,9 @@ export function HomeClient() {
 
       const cached = getCachedResult(trimmed);
       if (cached) {
+        // A slower search may still be in flight; it no longer owns the
+        // loading state (see latestRequestRef), so end it here.
+        setLoading(false);
         setResult(cached);
         return;
       }
@@ -139,8 +149,11 @@ export function HomeClient() {
           throw new Error("service_unavailable");
         }
         const data: QueryResponse = await res.json();
-        setResult(data);
+        // Still a valid answer for its own query, so keep it for next time —
+        // just don't show it under someone else's.
         setCachedResult(trimmed, data);
+        if (!isLatest()) return;
+        setResult(data);
 
         addRecentQuery({
           query: trimmed,
@@ -155,12 +168,16 @@ export function HomeClient() {
           timestamp: Date.now(),
         });
       } catch {
+        if (!isLatest()) return;
         setError("The BIS Navigator service is temporarily unavailable. Please try again in a moment.");
       } finally {
-        setLoading(false);
-        // P1-8: shift focus to the results heading so keyboard/SR users
-        // don't remain stranded at <body> after submit.
-        setTimeout(() => resultsHeadingRef.current?.focus(), 100);
+        // An older request finishing must not end the newer one's loading state.
+        if (isLatest()) {
+          setLoading(false);
+          // P1-8: shift focus to the results heading so keyboard/SR users
+          // don't remain stranded at <body> after submit.
+          setTimeout(() => resultsHeadingRef.current?.focus(), 100);
+        }
       }
     },
     [router, searchParams, lang],
@@ -173,6 +190,8 @@ export function HomeClient() {
     if (urlQuery && urlQuery !== prev) {
       queueMicrotask(() => runQuery(urlQuery));
     } else if (!urlQuery && prev) {
+      latestRequestRef.current += 1;
+      setLoading(false);
       setResult(null);
       setError(null);
       setActiveQuery("");
@@ -180,6 +199,8 @@ export function HomeClient() {
   }, [urlQuery, runQuery]);
 
   function handleClearResults() {
+    latestRequestRef.current += 1;
+    setLoading(false);
     setResult(null);
     setError(null);
     setActiveQuery("");
