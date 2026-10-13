@@ -66,36 +66,39 @@ describe("getStandardDetail — database documents", () => {
 
   test("a database failure falls back to the reference datasets instead of failing the page", async () => {
     findFirst.mockRejectedValue(new Error("connection refused"));
-    expect((await getStandardDetail("is-14543"))?.standardNumber).toBe("IS 14543:2024");
+    expect((await getStandardDetail("is-2347"))?.standardNumber).toBe("IS 2347:2017");
   });
 });
 
+// IS 2347 is used because its record is identical in the reviewed dataset
+// and the current one; several entries (IS 14543 among them) carry edition
+// years the dataset README documents as errors, so tests don't pin them.
 describe("getStandardDetail — QCO reference dataset", () => {
-  test.each(["is-14543", "IS%2014543", "IS 14543", "BIS-STD-001", "std-1"])(
-    "%j resolves to the IS 14543 record",
+  test.each(["is-2347", "IS%202347", "IS 2347", "BIS-STD-010", "std-10"])(
+    "%j resolves to the IS 2347 record",
     async (id) => {
       const detail = await getStandardDetail(id);
-      expect(detail?.standardNumber).toBe("IS 14543:2024");
-      expect(detail?.title).toBe("Packaged Drinking Water (Other than Packaged Natural Mineral Water) - Specification");
+      expect(detail?.standardNumber).toBe("IS 2347:2017");
+      expect(detail?.title).toBe("Domestic Pressure Cookers - Specification");
     },
   );
 
   test("builds scope, testing and gazette passages from the record", async () => {
-    const detail = (await getStandardDetail("is-14543"))!;
+    const detail = (await getStandardDetail("is-2347"))!;
     expect(detail.chunks.map((c) => c.section)).toEqual([
       "Scope & Applicability",
       "Key Testing Parameters",
       "Official Gazette Notification",
     ]);
-    expect(detail.chunks[1].text).toContain("• Total Dissolved Solids (TDS)");
+    expect(detail.chunks[1].text).toContain("• Proof pressure test (2x max working pressure)");
     expect(detail.keyTestingParameters).toHaveLength(4);
     expect(detail.legalGazette).not.toBeNull();
     expect(detail.checksum).toBe("reference_dataset_sha256");
-    expect(detail.version).toBe("2024");
+    expect(detail.version).toBe("2017");
   });
 
   test("an unusable BIS_2.0 document link is replaced with the official BIS page", async () => {
-    expect((await getStandardDetail("is-14543"))!.sourceUrl).toBe(BIS_DEFAULT);
+    expect((await getStandardDetail("is-2347"))!.sourceUrl).toBe(BIS_DEFAULT);
   });
 
   test("records with a part number resolve by slug, with the canonical identifier", async () => {
