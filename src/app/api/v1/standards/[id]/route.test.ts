@@ -43,6 +43,16 @@ describe("GET /api/v1/standards/[id]", () => {
     expect((await res.json()).title).toBe("Doc");
   });
 
+  test("chunks are loaded without their embedding vectors", async () => {
+    findFirst.mockResolvedValue({ id: "11111111-2222-3333-4444-555555555555", title: "Doc", chunks: [] });
+    await GET(req(), params("11111111-2222-3333-4444-555555555555"));
+
+    const query = findFirst.mock.calls[0][0];
+    expect(query.with.chunks.columns).toEqual({ embedding: false });
+    // Still in reading order.
+    expect(typeof query.with.chunks.orderBy).toBe("function");
+  });
+
   test("a database failure is a clean 500 that leaks no schema detail", async () => {
     findFirst.mockRejectedValue(new Error('relation "documents" does not exist'));
     const res = await GET(req(), params("11111111-2222-3333-4444-555555555555"));
