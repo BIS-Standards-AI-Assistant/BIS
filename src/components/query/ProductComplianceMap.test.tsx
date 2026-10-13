@@ -8,10 +8,10 @@ afterEach(() => vi.unstubAllGlobals());
 
 function map(overrides: Partial<ComplianceMap> = {}): ComplianceMap {
   return {
-    standards: [{ standardNumber: "IS 4151:2020", title: "Helmets", confidence: "high" }],
+    standards: [{ standardNumber: "IS 4151:2015", title: "Helmets", confidence: "high" }],
     certifications: [
       {
-        standardNumber: "IS 4151:2020",
+        standardNumber: "IS 4151:2015",
         scheme: "Scheme-I (ISI)",
         mandatoryQco: true,
         certificationRoute: "Factory audit + lab testing",
@@ -19,7 +19,7 @@ function map(overrides: Partial<ComplianceMap> = {}): ComplianceMap {
         sourceUrl: "https://www.bis.gov.in/x",
       },
     ],
-    testing: [{ parameter: "Shock absorption", standardNumber: "IS 4151:2020", sourceUrl: null }],
+    testing: [{ parameter: "Shock absorption", standardNumber: "IS 4151:2015", sourceUrl: null }],
     unmatchedStandards: [],
     ...overrides,
   };
