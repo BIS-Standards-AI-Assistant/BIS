@@ -1,4 +1,4 @@
-import { describe, test, expect, vi } from "vitest";
+import { describe, test, expect, vi, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import StandardDetailPage from "./page";
 
@@ -6,14 +6,42 @@ import StandardDetailPage from "./page";
 // Header/Footer need the language provider and are irrelevant here.
 vi.mock("@/components/layout/Header", () => ({ Header: () => null }));
 vi.mock("@/components/layout/Footer", () => ({ Footer: () => null }));
-// No database in unit tests: every lookup falls through to the shipped
-// reference datasets, which is the path these pages actually take for
-// QCO standards.
+// By default there is no database: every lookup falls through to the
+// shipped reference datasets, which is the path these pages actually take
+// for QCO standards. A test can supply one ingested document instead.
+const db = vi.hoisted(() => ({ document: null as Record<string, unknown> | null }));
 vi.mock("@/db", () => ({
   getDb: () => {
-    throw new Error("no database in tests");
+    if (!db.document) throw new Error("no database in tests");
+    return { query: { documents: { findFirst: async () => db.document } } };
   },
 }));
+afterEach(() => {
+  db.document = null;
+});
+
+/**
+ * An ingested document whose number is in no reference dataset, so it has
+ * no scheme record. A seed-corpus edition can't serve here: every one of
+ * them matches some edition the reference dataset has held.
+ */
+const UNLISTED_DOC_ID = "3f2b8c1e-9a4d-4c6b-8e2f-1a2b3c4d5e6f";
+function useUnlistedDocument() {
+  db.document = {
+    id: UNLISTED_DOC_ID,
+    standardNumber: "IS 99002:2020",
+    title: "An ingested document with no scheme record",
+    documentType: "standard",
+    sourceUrl: "https://www.bis.gov.in/some-document",
+    sourceOrg: "BIS",
+    version: "2020",
+    publicationDate: null,
+    retrievedAt: new Date("2026-08-01T00:00:00Z"),
+    checksum: "abc",
+    createdAt: new Date("2026-08-02T00:00:00Z"),
+    chunks: [],
+  };
+}
 
 async function renderPage(id: string) {
   render(await StandardDetailPage({ params: Promise.resolve({ id }) }));
@@ -32,14 +60,16 @@ describe("/standards/[id] — certification facts come from the record", () => {
   });
 
   test("a part-and-section-numbered standard also finds its scheme", async () => {
-    await renderPage("is-302-part-2-sec-26");
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("IS 302 (Part 2/Sec 26):2014");
+    // Not the induction-cooker record: its "Sec 26" is a documented error
+    // in the dataset (Sec 26 is clocks; see the dataset README).
+    await renderPage("is-302-part-2-sec-3");
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("IS 302 (Part 2/Sec 3):2007");
     expect(screen.getByText("Compulsory / QCO")).toBeInTheDocument();
   });
 
   test("with no scheme record, nothing is claimed: not verified, not voluntary, no invented scheme", async () => {
-    // The seed corpus holds the 2016 edition; the reference dataset only the 2024 one.
-    await renderPage("is-14543-2016");
+    useUnlistedDocument();
+    await renderPage(UNLISTED_DOC_ID);
     expect(screen.getByText("Certification status not verified")).toBeInTheDocument();
     expect(screen.getAllByText("Not verified").length).toBeGreaterThanOrEqual(2);
     expect(screen.getByText("Information not verified from the available sources")).toBeInTheDocument();
@@ -49,7 +79,8 @@ describe("/standards/[id] — certification facts come from the record", () => {
   });
 
   test("the record-integrity note does not claim everything comes from gazette releases", async () => {
-    await renderPage("is-14543-2016");
+    useUnlistedDocument();
+    await renderPage(UNLISTED_DOC_ID);
     expect(screen.queryByText(/directly referenced\s+from official Bureau of Indian Standards gazette releases/)).not.toBeInTheDocument();
     expect(screen.getByText(/marked as not verified rather than filled in/)).toBeInTheDocument();
   });
