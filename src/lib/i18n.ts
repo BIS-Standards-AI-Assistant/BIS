@@ -55,7 +55,10 @@ export interface Dictionary {
     cards: { title: string; description: string }[];
   };
   recent: {
+    /** Shown over the example searches, before the reader has any history. */
     heading: string;
+    /** Shown once the list is the reader's own searches. */
+    headingHistory: string;
     viewAll: string;
     colHash: string;
     colQuery: string;
@@ -146,8 +149,8 @@ const en: Dictionary = {
     ],
   },
   recent: {
-    // "Example" is swapped for "Recent" once the reader has real history.
     heading: "Example Searches",
+    headingHistory: "Recent Searches",
     viewAll: "View all",
     colHash: "#",
     colQuery: "Query",
@@ -246,11 +249,12 @@ const hi: Dictionary = {
   },
   recent: {
     heading: "उदाहरण खोजें",
+    headingHistory: "हाल की खोजें",
     viewAll: "सभी देखें",
     colHash: "#",
     colQuery: "खोज",
     colStandards: "मेल खाते मानक",
-    colLast: "प्रकार",
+    colLast: "अंतिम खोज",
   },
   whatsnew: { heading: "ज्ञान आधार में शामिल मानक", viewAll: "सभी देखें" },
   placeholder: {

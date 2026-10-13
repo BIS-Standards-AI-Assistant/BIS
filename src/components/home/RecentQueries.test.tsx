@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { RecentQueries } from "./RecentQueries";
 import { addRecentQuery, clearRecentQueries } from "@/lib/recent-queries";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
+import { DICTIONARIES } from "@/lib/i18n";
 
 beforeEach(() => {
   localStorage.clear();
@@ -72,5 +73,21 @@ describe("RecentQueries — with history", () => {
     renderList();
     await userEvent.setup().click(screen.getByRole("button", { name: "Clear history" }));
     expect(screen.getByRole("heading", { name: "Example Searches" })).toBeInTheDocument();
+  });
+});
+
+describe("RecentQueries — headings in every language", () => {
+  test("in Hindi, real history is headed as recent searches, not examples", () => {
+    localStorage.setItem("bis-lang", "hi");
+    addRecentQuery({ query: "हेलमेट", standardNumbers: [], confidence: "none", timestamp: Date.now() });
+    renderList();
+    expect(screen.getByRole("heading", { name: "हाल की खोजें" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "उदाहरण खोजें" })).not.toBeInTheDocument();
+  });
+
+  test("every language heads examples and history differently", () => {
+    for (const [lang, dict] of Object.entries(DICTIONARIES)) {
+      expect(dict.recent.headingHistory, lang).not.toBe(dict.recent.heading);
+    }
   });
 });
