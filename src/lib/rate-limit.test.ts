@@ -77,6 +77,35 @@ describe("createRateLimiter", () => {
   });
 });
 
+describe("createRateLimiter: memory bound under a flood of distinct clients", () => {
+  test("past the cap, the least recently active clients are forgotten", () => {
+    const clock = fixedClock();
+    const limiter = createRateLimiter({ limit: 1, windowMs: 60_000, now: clock.now });
+
+    limiter.check("first");
+    expect(limiter.check("first").allowed).toBe(false);
+
+    // All inside one window, so nothing expires and pruning alone frees nothing.
+    for (let i = 0; i < 12_000; i++) limiter.check(`flood-${i}`);
+
+    // The oldest entry was evicted rather than the map growing to 12,001 keys.
+    expect(limiter.check("first").allowed).toBe(true);
+  });
+
+  test("a client that stays active is not the one evicted", () => {
+    const clock = fixedClock();
+    const limiter = createRateLimiter({ limit: 1, windowMs: 60_000, now: clock.now });
+
+    limiter.check("busy");
+    for (let i = 0; i < 12_000; i++) {
+      limiter.check(`flood-${i}`);
+      // Keeps hitting (and being refused) throughout the flood.
+      if (i % 500 === 0) expect(limiter.check("busy").allowed).toBe(false);
+    }
+    expect(limiter.check("busy").allowed).toBe(false);
+  });
+});
+
 describe("clientKeyFromHeaders", () => {
   test("uses the first entry of x-forwarded-for (the original client)", () => {
     const h = new Headers({ "x-forwarded-for": "203.0.113.7, 10.0.0.1, 10.0.0.2" });
