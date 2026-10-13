@@ -45,19 +45,24 @@ function synth(): SpeechSynthesis | null {
   return window.speechSynthesis ?? null;
 }
 
+/** Some Android browsers report voice languages as "hi_IN"; BCP-47 uses "hi-IN". */
+function normalizeLang(lang: string): string {
+  return lang.replace(/_/g, "-").toLowerCase();
+}
+
 /**
  * Picks the best installed voice for a locale: an exact match first
  * ("hi-IN"), then any voice for the same base language ("hi-*"). Returns
  * null rather than a wrong-language voice — see the note above.
  */
 export function pickVoice(voices: SpeechSynthesisVoice[], locale: string): SpeechSynthesisVoice | null {
-  const normalized = locale.toLowerCase();
+  const normalized = normalizeLang(locale);
   const base = normalized.split("-")[0];
 
-  const exact = voices.find((v) => v.lang.toLowerCase() === normalized);
+  const exact = voices.find((v) => normalizeLang(v.lang) === normalized);
   if (exact) return exact;
 
-  const sameLanguage = voices.find((v) => v.lang.toLowerCase().split("-")[0] === base);
+  const sameLanguage = voices.find((v) => normalizeLang(v.lang).split("-")[0] === base);
   return sameLanguage ?? null;
 }
 
@@ -91,6 +96,7 @@ export function useSpeechSynthesis({ language }: UseSpeechSynthesisOptions): Use
   const unsupportedLanguage = supported && voices.length > 0 && voice === null;
 
   const stop = useCallback(() => {
+    utteranceRef.current = null;
     synth()?.cancel();
     setState({ kind: "idle" });
   }, []);
@@ -120,8 +126,16 @@ export function useSpeechSynthesis({ language }: UseSpeechSynthesisOptions): Use
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = chosen?.lang ?? locale;
       if (chosen) utterance.voice = chosen;
-      utterance.onend = () => setState({ kind: "idle" });
+      // The cancel() above makes the previous utterance fire "interrupted"
+      // (or, in Safari, "end") asynchronously — after this one has started.
+      // Only the current utterance may change state, or that late event
+      // would flip the button back to idle mid-sentence.
+      const isCurrent = () => utteranceRef.current === utterance;
+      utterance.onend = () => {
+        if (isCurrent()) setState({ kind: "idle" });
+      };
       utterance.onerror = (ev) => {
+        if (!isCurrent()) return;
         // "interrupted"/"canceled" fire from our own cancel() calls — an
         // expected stop, not a failure worth showing the user.
         if (ev.error === "interrupted" || ev.error === "canceled") {
