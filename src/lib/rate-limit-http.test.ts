@@ -1,6 +1,11 @@
-import { describe, test, expect, beforeEach } from "vitest";
+import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
 import { NextRequest } from "next/server";
-import { checkRateLimit, rateLimitOrNull, __resetRateLimitsForTests } from "./rate-limit-http";
+import {
+  checkRateLimit,
+  rateLimitOrNull,
+  __resetRateLimitsForTests,
+  __trackedRateLimitKeysForTests,
+} from "./rate-limit-http";
 
 function requestFrom(ip: string): NextRequest {
   return new NextRequest("http://localhost/api/v1/query", {
@@ -65,5 +70,54 @@ describe("rateLimitOrNull", () => {
     expect(res!.headers.get("Retry-After")).toBeTruthy();
     const body = await res!.json();
     expect(body.error).toBe("Too many requests");
+  });
+});
+
+describe("memory bound", () => {
+  afterEach(() => vi.useRealTimers());
+
+  test("thousands of distinct clients inside one window cannot grow the table without bound", () => {
+    for (let i = 0; i < 6000; i++) {
+      checkRateLimit(requestFrom(`10.0.${Math.floor(i / 250)}.${i % 250}`), "flood", { limit: 5, windowMs: 60_000 });
+    }
+    expect(__trackedRateLimitKeysForTests()).toBeLessThanOrEqual(5000);
+  });
+
+  test("a sweep expires each bucket against its own route's window", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-10-01T00:00:00Z"));
+    const longWindow = { limit: 2, windowMs: 60_000 };
+    const shortWindow = { limit: 100, windowMs: 1_000 };
+
+    // A client at its limit on a 60-second route.
+    const client = requestFrom("9.9.9.9");
+    for (let i = 0; i < 3; i++) checkRateLimit(client, "slow-route", longWindow);
+    expect(checkRateLimit(client, "slow-route", longWindow).limited).toBe(true);
+
+    // Fill the table to the cap on a 1-second route, then force a sweep
+    // two seconds later, once those buckets have expired.
+    for (let i = 0; i < 4999; i++) {
+      checkRateLimit(requestFrom(`10.1.${Math.floor(i / 250)}.${i % 250}`), "fast-route", shortWindow);
+    }
+    vi.setSystemTime(new Date("2026-10-01T00:00:02Z"));
+    for (const ip of ["8.8.8.1", "8.8.8.2", "8.8.8.3"]) checkRateLimit(requestFrom(ip), "fast-route", shortWindow);
+
+    // Still inside its own 60-second window, so still limited.
+    expect(checkRateLimit(client, "slow-route", longWindow).limited).toBe(true);
+  });
+
+  test("expired buckets are swept before any live one is evicted", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-10-01T00:00:00Z"));
+    for (let i = 0; i < 4999; i++) {
+      checkRateLimit(requestFrom(`10.2.${Math.floor(i / 250)}.${i % 250}`), "old", { limit: 5, windowMs: 1_000 });
+    }
+    vi.setSystemTime(new Date("2026-10-01T00:00:05Z"));
+    const live = requestFrom("7.7.7.7");
+    checkRateLimit(live, "fresh", { limit: 1, windowMs: 60_000 });
+    checkRateLimit(requestFrom("6.6.6.6"), "fresh", { limit: 1, windowMs: 60_000 });
+
+    expect(__trackedRateLimitKeysForTests()).toBe(2);
+    expect(checkRateLimit(live, "fresh", { limit: 1, windowMs: 60_000 }).limited).toBe(true);
   });
 });
