@@ -132,7 +132,14 @@ export function useSpeechRecognition({ lang, onResult }: UseSpeechRecognitionOpt
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
 
+    // The abort() above makes the previous instance fire "aborted" and
+    // "end" asynchronously, after this one has started listening. Only the
+    // current instance may change state, or that late "end" would drop the
+    // new session back to idle while the microphone is still open.
+    const isCurrent = () => recognitionRef.current === recognition;
+
     recognition.onresult = (ev) => {
+      if (!isCurrent()) return;
       let finalTranscript = "";
       let interimTranscript = "";
       for (let i = ev.resultIndex; i < ev.results.length; i++) {
@@ -149,6 +156,7 @@ export function useSpeechRecognition({ lang, onResult }: UseSpeechRecognitionOpt
     };
 
     recognition.onerror = (ev) => {
+      if (!isCurrent()) return;
       // "aborted" fires on our own deliberate stop()/abort() calls (including
       // the abort() at the top of the next start()) — not a real failure,
       // so it shouldn't surface as an error state to the user.
@@ -157,12 +165,21 @@ export function useSpeechRecognition({ lang, onResult }: UseSpeechRecognitionOpt
     };
 
     recognition.onend = () => {
+      if (!isCurrent()) return;
       setState((prev) => (prev.kind === "listening" ? { kind: "idle" } : prev));
     };
 
     recognitionRef.current = recognition;
     setState({ kind: "listening", interimTranscript: "" });
-    recognition.start();
+    try {
+      recognition.start();
+    } catch {
+      // start() throws synchronously in some states (e.g. InvalidStateError).
+      // No event will follow, so without this the UI would show
+      // "listening" indefinitely.
+      recognitionRef.current = null;
+      setState({ kind: "error", code: "start-failed", message: "Voice input could not start. Please try again." });
+    }
   }, [lang]);
 
   return { supported, state, start, stop };
