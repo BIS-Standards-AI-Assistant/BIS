@@ -20,20 +20,34 @@ export function SearchPageClient({ initialQuery }: SearchPageClientProps) {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<SearchResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // The query the shown results are for — not the live input, which the
+  // user may already be editing.
+  const [searchedQuery, setSearchedQuery] = useState(initialQuery);
   // P1-8: ref to results heading for focus management
   const resultsHeadingRef = useRef<HTMLHeadingElement>(null);
   const hasRunInitial = useRef(false);
 
   async function runSearch(text: string) {
-    if (!text.trim() || loading) return;
+    const trimmed = text.trim();
+    if (!trimmed || loading) return;
     setLoading(true);
     setError(null);
     setResult(null);
+    setSearchedQuery(trimmed);
+    // Keep the URL in step with the search so a reload, a shared link or
+    // a bookmark reopens these results. replaceState rather than a router
+    // navigation: the page already has what it needs, so there's nothing
+    // to re-render on the server, and each keystroke-search shouldn't add
+    // a history entry.
+    const url = `/search?q=${encodeURIComponent(trimmed)}`;
+    if (`${window.location.pathname}${window.location.search}` !== url) {
+      window.history.replaceState(window.history.state, "", url);
+    }
     try {
       const res = await fetch("/api/v1/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: text.trim() }),
+        body: JSON.stringify({ query: trimmed }),
       });
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
       setResult(await res.json());
@@ -55,7 +69,7 @@ export function SearchPageClient({ initialQuery }: SearchPageClientProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialQuery]);
 
-  const looksLikeStandardNumber = /^IS[\s-]?\d/i.test(query.trim());
+  const looksLikeStandardNumber = /^IS[\s-]?\d/i.test(searchedQuery);
 
   return (
     <div className="flex min-h-screen flex-col bg-surface">
