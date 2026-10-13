@@ -13,6 +13,20 @@ import type { NormalizedTranscription, SttProvider, TranscriptionRequest } from 
  * against a documented HTTP contract, so no vendor SDK becomes a build
  * dependency and swapping providers is env-only.
  */
+/**
+ * The upload filename's extension for a recording's MIME type. Covers every
+ * type /api/v1/transcribe accepts — a WAV or MP3 sent as "audio.webm" is
+ * sniffed as the wrong container and fails to decode upstream.
+ */
+export function extensionForMimeType(mimeType: string): string {
+  const type = mimeType.split(";")[0].trim().toLowerCase();
+  if (type === "audio/mp4") return "mp4";
+  if (type === "audio/ogg") return "ogg";
+  if (type === "audio/mpeg") return "mp3";
+  if (type === "audio/wav" || type === "audio/x-wav") return "wav";
+  return "webm";
+}
+
 export class OpenAICompatibleSttProvider implements SttProvider {
   readonly name = "openai-compatible-stt";
 
@@ -42,8 +56,7 @@ export class OpenAICompatibleSttProvider implements SttProvider {
       const form = new FormData();
       // The extension matters: these APIs sniff the container format from
       // the filename, and MediaRecorder's default in Chromium is webm/opus.
-      const extension = req.mimeType.includes("mp4") ? "mp4" : req.mimeType.includes("ogg") ? "ogg" : "webm";
-      form.append("file", new Blob([req.audio], { type: req.mimeType }), `audio.${extension}`);
+      form.append("file", new Blob([req.audio], { type: req.mimeType }), `audio.${extensionForMimeType(req.mimeType)}`);
       form.append("model", this.modelId!);
       // Whisper autodetects language, but an explicit hint measurably
       // reduces cross-language confusion between Indian languages.
