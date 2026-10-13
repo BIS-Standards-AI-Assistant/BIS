@@ -1,6 +1,6 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
-import { SchemeExplorer } from "./SchemeExplorer";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { SchemeExplorer, SEARCH_DEBOUNCE_MS } from "./SchemeExplorer";
 
 const mockItem = {
   standardNumber: "IS 5522:2014",
@@ -63,5 +63,56 @@ describe("SchemeExplorer", () => {
     (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({ ok: false });
     render(<SchemeExplorer />);
     await waitFor(() => expect(screen.getByText(/Couldn't load the reference dataset/i)).toBeInTheDocument());
+  });
+
+  test("typing searches once after a pause, not once per keystroke", async () => {
+    vi.useFakeTimers();
+    try {
+      const fetchMock = global.fetch as ReturnType<typeof vi.fn>;
+      fetchMock.mockResolvedValue({ ok: true, json: async () => ({ items: [], total: 0, datasetSize: 100, sectors: [] }) });
+      render(<SchemeExplorer />);
+      await act(async () => {}); // the initial, unfiltered load
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      const box = screen.getByLabelText("Search certification schemes");
+      for (const value of ["s", "st", "ste", "stee", "steel"]) {
+        fireEvent.change(box, { target: { value } });
+        await act(async () => {
+          vi.advanceTimersByTime(SEARCH_DEBOUNCE_MS / 3);
+        });
+      }
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+
+      await act(async () => {
+        vi.advanceTimersByTime(SEARCH_DEBOUNCE_MS);
+      });
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+      expect(String(fetchMock.mock.calls[1][0])).toContain("q=steel");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  test("states the dataset's real size from the API, not a hard-coded count", async () => {
+    (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
+      ok: true,
+      json: async () => ({ items: [mockItem], total: 1, datasetSize: 100, sectors: ["Metals"] }),
+    });
+    render(<SchemeExplorer />);
+    expect(await screen.findByText(/a reference set of 100 entries/i)).toBeInTheDocument();
+    expect(screen.queryByText(/22 entries|22-entry/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/fact-checked/i)).not.toBeInTheDocument();
+  });
+
+  test("a standard listed twice in the dataset renders twice, without a duplicate-key warning", async () => {
+    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
+    (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
+      ok: true,
+      json: async () => ({ items: [mockItem, { ...mockItem, title: "Second entry" }], total: 2, datasetSize: 2, sectors: [] }),
+    });
+    render(<SchemeExplorer />);
+    await screen.findByText("Second entry");
+    expect(screen.getAllByText("IS 5522:2014")).toHaveLength(2);
+    expect(consoleError.mock.calls.flat().join(" ")).not.toMatch(/same key/i);
   });
 });

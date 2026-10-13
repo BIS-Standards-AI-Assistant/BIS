@@ -33,6 +33,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Reference dataset unavailable" }, { status: 500 });
   }
 
+  // The size of the whole reference set, so the UI can state it without
+  // hard-coding a count that goes stale whenever the dataset changes.
+  const datasetSize = items.length;
   const sectors = [...new Set(items.map((i) => i.category).filter((c): c is string => !!c))].sort();
 
   if (sector) {
@@ -46,5 +49,5 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  return NextResponse.json({ items, total: items.length, sectors });
+  return NextResponse.json({ items, total: items.length, datasetSize, sectors });
 }

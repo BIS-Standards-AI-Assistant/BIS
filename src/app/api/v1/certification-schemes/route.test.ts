@@ -51,4 +51,12 @@ describe("GET /api/v1/certification-schemes", () => {
       expect(item.category?.toLowerCase()).toContain(sector.toLowerCase());
     }
   });
+
+  test("datasetSize is the size of the whole reference set, whatever the filter", async () => {
+    const all = await (await GET(req("http://localhost/api/v1/certification-schemes"))).json();
+    const none = await (await GET(req("http://localhost/api/v1/certification-schemes?q=nonexistent-product-xyz"))).json();
+    expect(all.datasetSize).toBe(all.total);
+    expect(none.total).toBe(0);
+    expect(none.datasetSize).toBe(all.total);
+  });
 });

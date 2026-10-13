@@ -7,21 +7,35 @@ import type { CertificationSchemeItem } from "@/app/api/v1/certification-schemes
 import { VERIFICATION_STATUS_LABELS } from "@/lib/verification-status";
 
 /**
- * Searches the small, fact-checked reference dataset (48 entries at time
- * of writing, 22 independently verified/corrected + 26 pulled from an
- * upstream update and marked needs_review pending independent checking —
- * see data/bis-standards-dataset/README.md), never the intelligence
- * engine. Labeled honestly as a reference list, not a comprehensive
- * scheme directory — BIS Navigator does not claim to cover every
- * certification scheme BIS operates.
+ * Searches the small reference dataset (data/bis-standards-dataset/ — see
+ * its README for provenance), never the intelligence engine. Labeled
+ * honestly as a reference list, not a comprehensive scheme directory —
+ * BIS Navigator does not claim to cover every certification scheme BIS
+ * operates. Each entry carries its own verification status, so the list
+ * as a whole makes no blanket "verified" claim, and its size comes from
+ * the API rather than a number written here that goes stale.
  */
+
+/** Typing pauses this long before a search runs (the endpoint is rate limited). */
+export const SEARCH_DEBOUNCE_MS = 300;
+
 export function SchemeExplorer() {
   const [query, setQuery] = useState("");
+  // The query actually searched for. Searching on every keystroke sent a
+  // request per character to an endpoint limited to 60 a minute, so a few
+  // searches typed in a row tripped the limit and showed the error state.
+  const [searchQuery, setSearchQuery] = useState("");
   const [sector, setSector] = useState("");
   const [items, setItems] = useState<CertificationSchemeItem[]>([]);
+  const [datasetSize, setDatasetSize] = useState<number | null>(null);
   const [sectors, setSectors] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setSearchQuery(query.trim()), SEARCH_DEBOUNCE_MS);
+    return () => clearTimeout(timer);
+  }, [query]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -29,7 +43,7 @@ export function SchemeExplorer() {
     setLoading(true);
     setError(false);
     const params = new URLSearchParams();
-    if (query.trim()) params.set("q", query.trim());
+    if (searchQuery) params.set("q", searchQuery);
     if (sector) params.set("sector", sector);
 
     fetch(`/api/v1/certification-schemes?${params.toString()}`, { signal: controller.signal })
@@ -39,6 +53,7 @@ export function SchemeExplorer() {
       })
       .then((data) => {
         setItems(data.items ?? []);
+        if (typeof data.datasetSize === "number") setDatasetSize(data.datasetSize);
         setSectors(data.sectors ?? []);
         setLoading(false);
       })
@@ -49,7 +64,7 @@ export function SchemeExplorer() {
       });
 
     return () => controller.abort();
-  }, [query, sector]);
+  }, [searchQuery, sector]);
 
   return (
     <div>
@@ -77,7 +92,8 @@ export function SchemeExplorer() {
       </div>
 
       <p className="mt-2 text-[11.5px] text-ink-faint">
-        A fact-checked reference set of 22 entries — not an exhaustive list of every BIS certification scheme.
+        A reference set{datasetSize !== null ? ` of ${datasetSize} entries` : ""}, each labelled with its own
+        verification status — not an exhaustive list of every BIS certification scheme.
       </p>
 
       <div className="mt-5">
@@ -93,15 +109,17 @@ export function SchemeExplorer() {
         {!loading && !error && items.length === 0 && (
           <EmptyState
             title="No matching entries in the reference dataset"
-            body="This search term isn't in BIS Navigator's current 22-entry verified reference set — that doesn't mean no BIS certification applies to it."
+            body="This search term isn't in BIS Navigator's reference set — that doesn't mean no BIS certification applies to it."
             tips={["Try the standard number instead", "Try a broader product category", "Use the certification discovery search below instead"]}
           />
         )}
 
         {!loading && !error && items.length > 0 && (
           <ul className="space-y-3">
-            {items.map((item) => (
-              <li key={item.standardNumber} className="border border-border bg-surface-raised p-4">
+            {/* Not keyed by standard number alone: the dataset lists some
+                standards more than once (e.g. IS 13252 (Part 1):2010). */}
+            {items.map((item, i) => (
+              <li key={`${item.standardNumber}-${i}`} className="border border-border bg-surface-raised p-4">
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
                     <p className="font-mono text-sm font-medium text-navy">{item.standardNumber}</p>
