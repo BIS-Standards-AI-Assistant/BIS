@@ -27,6 +27,12 @@ interface UnitDef {
   offset?: number;
 }
 
+/**
+ * Keyed by the unit's real, case-sensitive symbol. Case carries meaning in
+ * SI prefixes — "mPa" is a millipascal and "MPa" a megapascal, a factor of
+ * 10⁹ apart — so a lookup that lowercased first read every viscosity in
+ * mPa·s as a megapascal pressure.
+ */
 const UNITS: Record<string, UnitDef> = {
   // length -> mm
   mm: { dimension: "length", factor: 1, base: "mm" },
@@ -42,7 +48,9 @@ const UNITS: Record<string, UnitDef> = {
   t: { dimension: "mass", factor: 1_000_000, base: "g" },
   // volume -> ml
   ml: { dimension: "volume", factor: 1, base: "ml" },
+  mL: { dimension: "volume", factor: 1, base: "ml" },
   l: { dimension: "volume", factor: 1000, base: "ml" },
+  L: { dimension: "volume", factor: 1000, base: "ml" },
   // time -> s
   s: { dimension: "time", factor: 1, base: "s" },
   sec: { dimension: "time", factor: 1, base: "s" },
@@ -54,33 +62,72 @@ const UNITS: Record<string, UnitDef> = {
   day: { dimension: "time", factor: 86400, base: "s" },
   days: { dimension: "time", factor: 86400, base: "s" },
   // temperature -> °C (affine)
-  "°c": { dimension: "temperature", factor: 1, base: "°C" },
-  c: { dimension: "temperature", factor: 1, base: "°C" },
-  k: { dimension: "temperature", factor: 1, base: "°C", offset: -273.15 },
+  "°C": { dimension: "temperature", factor: 1, base: "°C" },
+  C: { dimension: "temperature", factor: 1, base: "°C" },
+  K: { dimension: "temperature", factor: 1, base: "°C", offset: -273.15 },
   // electrical
-  mv: { dimension: "voltage", factor: 0.001, base: "V" },
-  v: { dimension: "voltage", factor: 1, base: "V" },
-  kv: { dimension: "voltage", factor: 1000, base: "V" },
-  ma: { dimension: "current", factor: 0.001, base: "A" },
-  a: { dimension: "current", factor: 1, base: "A" },
-  w: { dimension: "power", factor: 1, base: "W" },
-  kw: { dimension: "power", factor: 1000, base: "W" },
-  hz: { dimension: "frequency", factor: 1, base: "Hz" },
-  khz: { dimension: "frequency", factor: 1000, base: "Hz" },
+  mV: { dimension: "voltage", factor: 0.001, base: "V" },
+  V: { dimension: "voltage", factor: 1, base: "V" },
+  kV: { dimension: "voltage", factor: 1000, base: "V" },
+  MV: { dimension: "voltage", factor: 1_000_000, base: "V" },
+  mA: { dimension: "current", factor: 0.001, base: "A" },
+  A: { dimension: "current", factor: 1, base: "A" },
+  mW: { dimension: "power", factor: 0.001, base: "W" },
+  W: { dimension: "power", factor: 1, base: "W" },
+  kW: { dimension: "power", factor: 1000, base: "W" },
+  MW: { dimension: "power", factor: 1_000_000, base: "W" },
+  Hz: { dimension: "frequency", factor: 1, base: "Hz" },
+  kHz: { dimension: "frequency", factor: 1000, base: "Hz" },
+  MHz: { dimension: "frequency", factor: 1_000_000, base: "Hz" },
   // pressure / force
-  pa: { dimension: "pressure", factor: 1, base: "Pa" },
-  kpa: { dimension: "pressure", factor: 1000, base: "Pa" },
-  mpa: { dimension: "pressure", factor: 1_000_000, base: "Pa" },
+  mPa: { dimension: "pressure", factor: 0.001, base: "Pa" },
+  Pa: { dimension: "pressure", factor: 1, base: "Pa" },
+  kPa: { dimension: "pressure", factor: 1000, base: "Pa" },
+  MPa: { dimension: "pressure", factor: 1_000_000, base: "Pa" },
   bar: { dimension: "pressure", factor: 100_000, base: "Pa" },
-  n: { dimension: "force", factor: 1, base: "N" },
-  kn: { dimension: "force", factor: 1000, base: "N" },
+  N: { dimension: "force", factor: 1, base: "N" },
+  kN: { dimension: "force", factor: 1000, base: "N" },
   // dimensionless
   "%": { dimension: "percentage", factor: 1, base: "%" },
 };
 
+/** Every symbol that shares a lowercase spelling, for case-insensitive fallback. */
+const BY_LOWERCASE = new Map<string, UnitDef[]>();
+for (const [symbol, def] of Object.entries(UNITS)) {
+  const key = symbol.toLowerCase();
+  BY_LOWERCASE.set(key, [...(BY_LOWERCASE.get(key) ?? []), def]);
+}
+
+/**
+ * The symbols a written unit could mean. An exact match is the unit;
+ * otherwise a case-insensitive match covers documents set in capitals
+ * ("KG", "MM") — and returns every candidate, so a spelling like "mpa"
+ * that could be either a milli- or a mega- unit is reported as ambiguous
+ * rather than resolved by guessing.
+ */
+function candidates(unit: string): UnitDef[] {
+  const trimmed = unit.trim();
+  const exact = Object.hasOwn(UNITS, trimmed) ? UNITS[trimmed] : undefined;
+  if (exact) return [exact];
+  return BY_LOWERCASE.get(trimmed.toLowerCase()) ?? [];
+}
+
+const sameUnit = (a: UnitDef, b: UnitDef) =>
+  a.dimension === b.dimension && a.factor === b.factor && a.base === b.base && a.offset === b.offset;
+
+/** The single unit a symbol denotes, or null when it is unknown or ambiguous. */
+function lookup(unit: string): UnitDef | null {
+  const [first, ...rest] = candidates(unit);
+  // "ML" matches both "ml" and "mL", which are the same unit — not ambiguous.
+  return first && rest.every((d) => sameUnit(first, d)) ? first : null;
+}
+
 export function unitDimension(unit: string | undefined): Dimension {
   if (!unit) return "unknown";
-  return UNITS[unit.trim().toLowerCase()]?.dimension ?? "unknown";
+  const found = candidates(unit);
+  // "mpa" is ambiguous in magnitude but not in dimension: both readings are pressures.
+  const dimension = found[0]?.dimension;
+  return dimension && found.every((d) => d.dimension === dimension) ? dimension : "unknown";
 }
 
 export interface Normalised {
@@ -91,11 +138,12 @@ export interface Normalised {
 /**
  * Converts to the dimension's base unit. Returns null for an unknown unit
  * rather than guessing — an unrecognised unit must stay unnormalised, not
- * be silently treated as dimensionless.
+ * be silently treated as dimensionless. An ambiguous one ("mpa") is left
+ * unnormalised too, since its magnitude cannot be known.
  */
 export function normalise(value: number, unit: string | undefined): Normalised | null {
   if (!unit) return null;
-  const def = UNITS[unit.trim().toLowerCase()];
+  const def = lookup(unit);
   if (!def) return null;
   if (def.offset !== undefined) return { value: value + def.offset, unit: def.base };
   return { value: value * def.factor, unit: def.base };
