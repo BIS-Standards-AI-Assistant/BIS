@@ -36,7 +36,16 @@ export function isMapProviderConfigured(): boolean {
 const BLOCKED_MESSAGE =
   "No map/geocoding provider is currently configured (GOOGLE_MAPS_API_KEY is not set). Location-based search is unavailable until this is configured.";
 
-export async function geocode(address: string): Promise<MapProviderResult<GeocodeResult>> {
+// Geocoding is informational on every caller (see
+// src/app/api/v1/find-laboratories/route.ts): it must never be able to fail
+// or stall the request it decorates.
+const GEOCODE_TIMEOUT_MS = 5_000;
+
+export async function geocode(
+  address: string,
+  fetchImpl: typeof fetch = fetch,
+  timeoutMs: number = GEOCODE_TIMEOUT_MS,
+): Promise<MapProviderResult<GeocodeResult>> {
   const key = apiKey();
   if (!key) {
     return { blocked: true, reason: "MAP_PROVIDER_BLOCKED", message: BLOCKED_MESSAGE };
@@ -46,18 +55,31 @@ export async function geocode(address: string): Promise<MapProviderResult<Geocod
   url.searchParams.set("address", address);
   url.searchParams.set("key", key);
 
-  const res = await fetch(url.toString());
-  if (!res.ok) {
-    return { blocked: true, reason: "MAP_PROVIDER_BLOCKED", message: `Geocoding request failed (HTTP ${res.status}).` };
-  }
-  const body = (await res.json()) as {
-    status: string;
-    results: Array<{ formatted_address: string; geometry: { location: { lat: number; lng: number } } }>;
+  let body: {
+    status?: string;
+    results?: Array<{ formatted_address: string; geometry: { location: { lat: number; lng: number } } }>;
   };
-  if (body.status !== "OK" || body.results.length === 0) {
-    return { blocked: true, reason: "MAP_PROVIDER_BLOCKED", message: `Could not geocode "${address}" (provider status: ${body.status}).` };
+  try {
+    const res = await fetchImpl(url.toString(), { signal: AbortSignal.timeout(timeoutMs) });
+    if (!res.ok) {
+      return { blocked: true, reason: "MAP_PROVIDER_BLOCKED", message: `Geocoding request failed (HTTP ${res.status}).` };
+    }
+    const parsed: unknown = await res.json();
+    body = parsed && typeof parsed === "object" ? parsed : {};
+  } catch (err) {
+    // The URL carries the API key, so only the error's kind is reported.
+    const timedOut = err instanceof Error && (err.name === "TimeoutError" || err.name === "AbortError");
+    return {
+      blocked: true,
+      reason: "MAP_PROVIDER_BLOCKED",
+      message: timedOut ? "Geocoding request timed out." : "Geocoding request failed.",
+    };
   }
-  const top = body.results[0];
+
+  const top = body.results?.[0];
+  if (body.status !== "OK" || !top) {
+    return { blocked: true, reason: "MAP_PROVIDER_BLOCKED", message: `Could not geocode "${address}" (provider status: ${body.status ?? "unknown"}).` };
+  }
   return {
     blocked: false,
     data: {
