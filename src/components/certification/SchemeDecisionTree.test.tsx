@@ -1,7 +1,7 @@
 import { describe, test, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { SchemeDecisionTree } from "./SchemeDecisionTree";
+import { SchemeDecisionTree } from "@/components/SchemeDecisionTree";
 
 describe("SchemeDecisionTree Component", () => {
   test("renders Step 1 initially with domestic and foreign options", () => {
