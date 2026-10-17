@@ -59,7 +59,14 @@ export async function getStandardDetail(rawId: string): Promise<EnrichedStandard
       const db = getDb();
       const doc = await db.query.documents.findFirst({
         where: eq(documents.id, id),
-        with: { chunks: { orderBy: (c, { asc }) => [asc(c.createdAt)] } },
+        with: {
+          chunks: {
+            // Only the passage text and location are rendered; the
+            // 1536-float embedding (~30 KB per chunk) is never used here.
+            columns: { embedding: false },
+            orderBy: (c, { asc }) => [asc(c.createdAt)],
+          },
+        },
       });
       if (doc) {
         return {

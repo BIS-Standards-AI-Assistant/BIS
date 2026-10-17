@@ -70,6 +70,13 @@ describe("getStandardDetail — database documents", () => {
     expect(detail!.chunks[0].createdAt).toBe("2026-08-03T00:00:00.000Z");
   });
 
+  test("chunks are read without their embedding vectors, in reading order", async () => {
+    await getStandardDetail(DOC_ID);
+    const query = findFirst.mock.calls[0][0];
+    expect(query.with.chunks.columns).toEqual({ embedding: false });
+    expect(typeof query.with.chunks.orderBy).toBe("function");
+  });
+
   test("a database failure is not a page failure", async () => {
     findFirst.mockRejectedValue(new Error("connection refused"));
     await expect(getStandardDetail(DOC_ID)).resolves.toBeNull();
