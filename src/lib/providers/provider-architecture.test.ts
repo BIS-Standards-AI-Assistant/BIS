@@ -106,6 +106,18 @@ describe("4. Automatic fallback", () => {
     const paid = fakeProvider({ name: "paid" });
     expect(resolveProviderChain([paid], "auto")).toEqual([paid]);
   });
+
+  test("a blank LLM_PROVIDER (e.g. `LLM_PROVIDER=` in .env) means auto, not 'no providers'", () => {
+    const local = fakeProvider({ name: "local" });
+    const free = fakeProvider({ name: "openrouter-free" });
+    expect(resolveProviderChain([free, local], "")).toEqual([local, free]);
+    expect(resolveProviderChain([free, local], "   ")).toEqual([local, free]);
+  });
+
+  test("an explicit value is matched case-insensitively and ignoring surrounding spaces", () => {
+    const free = fakeProvider({ name: "openrouter-free" });
+    expect(resolveProviderChain([free], " OpenRouter-Free ")).toEqual([free]);
+  });
 });
 
 describe("5. Local -> OpenRouter fallback", () => {

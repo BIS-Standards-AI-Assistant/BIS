@@ -26,8 +26,10 @@ export class GroqProvider implements LLMProvider {
   private readonly modelId: string;
 
   constructor(opts: { apiKey?: string; modelId?: string } = {}) {
-    this.apiKey = opts.apiKey ?? process.env.GROQ_API_KEY;
-    this.modelId = opts.modelId ?? process.env.GROQ_MODEL ?? "openai/gpt-oss-120b";
+    // `||`, not `??`: a blank `GROQ_MODEL=` line in .env must fall back to
+    // the default model rather than becoming an empty model id.
+    this.apiKey = opts.apiKey || process.env.GROQ_API_KEY;
+    this.modelId = opts.modelId || process.env.GROQ_MODEL || "openai/gpt-oss-120b";
   }
 
   get model(): string {

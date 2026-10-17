@@ -65,8 +65,10 @@ export class OpenRouterProvider implements LLMProvider {
   ) {
     this.name = tier;
     const envPrefix = tier === "openrouter-free" ? "OPENROUTER" : "PAID_PROVIDER";
-    this.apiKey = opts.apiKey ?? process.env[`${envPrefix}_API_KEY`];
-    this.modelId = opts.modelId ?? process.env[`${envPrefix}_MODEL`];
+    // `||` so the blank `OPENROUTER_MODEL=` shipped in .env.example reads as
+    // unset (model "unknown" in traces) rather than as an empty model id.
+    this.apiKey = opts.apiKey || process.env[`${envPrefix}_API_KEY`];
+    this.modelId = opts.modelId || process.env[`${envPrefix}_MODEL`];
     this.structuredOutputOverride = opts.structuredOutputOverride;
     this.deps = opts.deps ?? defaultDeps;
   }

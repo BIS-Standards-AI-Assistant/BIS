@@ -10,8 +10,10 @@ export class GeminiProvider implements LLMProvider {
   private readonly modelId: string;
 
   constructor(opts: { apiKey?: string; modelId?: string } = {}) {
-    this.apiKey = opts.apiKey ?? process.env.GEMINI_API_KEY ?? process.env.GOOGLE_GENERATIVE_AI_API_KEY;
-    this.modelId = opts.modelId ?? process.env.GEMINI_MODEL ?? "gemini-3.6-flash";
+    // `||`, not `??`: a blank `GEMINI_API_KEY=` line in .env is "unset", and
+    // must not hide GOOGLE_GENERATIVE_AI_API_KEY or the default model.
+    this.apiKey = opts.apiKey || process.env.GEMINI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+    this.modelId = opts.modelId || process.env.GEMINI_MODEL || "gemini-3.6-flash";
   }
 
   get model(): string {
