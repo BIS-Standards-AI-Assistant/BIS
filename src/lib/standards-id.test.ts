@@ -17,6 +17,21 @@ describe("resolveStandardIds", () => {
     expect(resolveStandardIds(text)[0].raw).toBe(raw);
   });
 
+  test.each([
+    ["IS 302 Part 2 Sec 26:2014", "IS 302 (Part 2/Sec 26):2014"],
+    ["IS 302 (Part 2 Sec 26):2014", "IS 302 (Part 2/Sec 26):2014"],
+    ["IS 302 Part 2, Sec 26", "IS 302 (Part 2/Sec 26)"],
+    ["IS 302 Part 2 Section 6", "IS 302 (Part 2/Sec 6)"],
+  ])("a section written without a slash still resolves as one identifier: %j", (text, normalized) => {
+    // Regression: "IS 302 Part 2 Sec 26:2014" used to resolve to
+    // "IS 302 (Part 2)" plus an invented "IS 26:2014".
+    expect(resolveStandardIds(text).map((r) => r.normalized)).toEqual([normalized]);
+  });
+
+  test("words that merely start with 'sec' are not sections", () => {
+    expect(resolveStandardIds("IS 302 Part 2 second edition").map((r) => r.normalized)).toEqual(["IS 302 (Part 2)"]);
+  });
+
   test("a trailing colon with no year is not swallowed into raw", () => {
     expect(resolveStandardIds("IS 5522: the scope")[0]).toMatchObject({ raw: "IS 5522", normalized: "IS 5522", year: null });
   });
