@@ -13,5 +13,7 @@ export default async function SearchPage({
 }) {
   const { q } = await searchParams;
   const initialQuery = (q ?? "").trim();
-  return <SearchPageClient initialQuery={initialQuery} />;
+  // Keyed on the query so arriving at a different ?q= (a link, back/forward)
+  // starts a fresh search instead of keeping the previous one's state.
+  return <SearchPageClient key={initialQuery} initialQuery={initialQuery} />;
 }
