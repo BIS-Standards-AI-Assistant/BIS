@@ -80,12 +80,22 @@ function applyWordDictionary(
   dictionary: Record<string, string>,
 ): { text: string; expanded: ExpandedTerm[] } {
   const expanded: ExpandedTerm[] = [];
-  const result = text.replace(/[A-Za-z][A-Za-z.]*/g, (word) => {
+  const result = text.replace(/[A-Za-z][A-Za-z.]*/g, (token) => {
+    // Dotted entries such as "w.r.t." match as written. Otherwise a
+    // sentence-ending period ("What is the std.") is punctuation, not part
+    // of the word: look the bare word up and put the period back.
+    let word = token;
+    let trailing = "";
+    if (!dictionary[token.toLowerCase()]) {
+      const bare = token.replace(/\.+$/, "");
+      trailing = token.slice(bare.length);
+      word = bare;
+    }
     const key = word.toLowerCase();
     const replacement = dictionary[key];
-    if (!replacement || replacement.toLowerCase() === key) return word;
+    if (!replacement || replacement.toLowerCase() === key) return token;
     expanded.push({ term: word, expansion: replacement });
-    return replacement;
+    return replacement + trailing;
   });
   return { text: result, expanded };
 }
