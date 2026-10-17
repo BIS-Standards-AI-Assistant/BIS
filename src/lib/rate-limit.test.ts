@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { createRateLimiter, clientKeyFromHeaders } from "./rate-limit";
+import { createRateLimiter, clientKeyFromHeaders, positiveNumberFromEnv } from "./rate-limit";
 
 function fixedClock(start = 1_000_000) {
   let t = start;
@@ -125,5 +125,35 @@ describe("clientKeyFromHeaders", () => {
 
   test("ignores an empty x-forwarded-for rather than keying on empty string", () => {
     expect(clientKeyFromHeaders(new Headers({ "x-forwarded-for": "" }))).toBe("unknown");
+  });
+});
+
+describe("positiveNumberFromEnv", () => {
+  test("uses a valid positive value", () => {
+    expect(positiveNumberFromEnv("30", 20)).toBe(30);
+    expect(positiveNumberFromEnv(" 45 ", 20)).toBe(45);
+    expect(positiveNumberFromEnv("90000", 60_000)).toBe(90_000);
+  });
+
+  test("falls back when unset or blank — a blank .env line must not become a limit of 0", () => {
+    expect(positiveNumberFromEnv(undefined, 20)).toBe(20);
+    expect(positiveNumberFromEnv("", 20)).toBe(20);
+    expect(positiveNumberFromEnv("   ", 20)).toBe(20);
+  });
+
+  test("falls back on a typo — NaN would silently disable the limit", () => {
+    expect(positiveNumberFromEnv("2O", 20)).toBe(20);
+    expect(positiveNumberFromEnv("twenty", 20)).toBe(20);
+  });
+
+  test("falls back on zero, negative and infinite values", () => {
+    expect(positiveNumberFromEnv("0", 20)).toBe(20);
+    expect(positiveNumberFromEnv("-5", 20)).toBe(20);
+    expect(positiveNumberFromEnv("Infinity", 20)).toBe(20);
+  });
+
+  test("the reason this matters: a NaN limit never blocks anyone", () => {
+    const limiter = createRateLimiter({ limit: Number("2O"), windowMs: 60_000 });
+    for (let i = 0; i < 100; i++) expect(limiter.check("k").allowed).toBe(true);
   });
 });

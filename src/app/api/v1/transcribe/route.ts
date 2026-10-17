@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSttProvider } from "@/lib/stt";
 import { VOICE_LANGUAGES } from "@/lib/speech/locales";
-import { createRateLimiter, clientKeyFromHeaders } from "@/lib/rate-limit";
+import { createRateLimiter, clientKeyFromHeaders, positiveNumberFromEnv } from "@/lib/rate-limit";
 import { normalizeVoiceTranscript } from "@/lib/stt/voice-normalizer";
 
 // Roughly 60s of Opus audio. A search query is a sentence, not a lecture —
@@ -15,8 +15,8 @@ const MAX_AUDIO_BYTES = 8 * 1024 * 1024;
  * that a script pointed at the deployed URL can't drain the quota.
  * Module-scoped so the counter survives across requests.
  */
-const RATE_LIMIT = Number(process.env.TRANSCRIBE_RATE_LIMIT ?? 15);
-const RATE_WINDOW_MS = Number(process.env.TRANSCRIBE_RATE_WINDOW_MS ?? 60_000);
+const RATE_LIMIT = positiveNumberFromEnv(process.env.TRANSCRIBE_RATE_LIMIT, 15);
+const RATE_WINDOW_MS = positiveNumberFromEnv(process.env.TRANSCRIBE_RATE_WINDOW_MS, 60_000);
 const limiter = createRateLimiter({ limit: RATE_LIMIT, windowMs: RATE_WINDOW_MS });
 
 const ALLOWED_MIME_PREFIXES = ["audio/webm", "audio/ogg", "audio/mp4", "audio/mpeg", "audio/wav", "audio/x-wav"];

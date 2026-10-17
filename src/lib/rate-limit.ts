@@ -109,6 +109,18 @@ export function createRateLimiter({ limit, windowMs, now = Date.now }: RateLimit
 }
 
 /**
+ * Reads a rate-limit setting from an environment variable. A blank, zero,
+ * negative or non-numeric value falls back to the default instead of being
+ * used: `Number("")` is 0, which would block every request, and
+ * `Number("2O")` is NaN, which never compares as over the limit and so
+ * silently removes the limit from a metered endpoint.
+ */
+export function positiveNumberFromEnv(raw: string | undefined, fallback: number): number {
+  const parsed = Number(raw?.trim() || NaN);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+/**
  * Best-effort client identity for rate limiting. Behind a reverse proxy
  * (the expected deployment — see Dockerfile) the socket address is the
  * proxy's, so the forwarded headers are what distinguish callers.
