@@ -27,12 +27,13 @@ export function listTools(): string[] {
 }
 
 function withTimeout<T>(promise: Promise<T>, ms: number, toolName: string): Promise<T> {
-  return Promise.race([
-    promise,
-    new Promise<T>((_, reject) => {
-      setTimeout(() => reject(new Error(`Tool "${toolName}" timed out after ${ms}ms`)), ms);
-    }),
-  ]);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<T>((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`Tool "${toolName}" timed out after ${ms}ms`)), ms);
+  });
+  // Cleared once the race settles, so a tool that answers in 50 ms doesn't
+  // leave an 8 s timer behind for every call the agent makes.
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
 
 /**

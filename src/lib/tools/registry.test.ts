@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, vi } from "vitest";
 import { z } from "zod";
 import { registerTool, getTool, listTools, executeTool } from "./registry";
 import type { ToolDefinition } from "./types";
@@ -80,5 +80,34 @@ describe("tool registry", () => {
     const result = await executeTool(tool.name, { value: "x" }, 50);
     expect(result.status).toBe("error");
     expect(result.error).toMatch(/timed out/);
+  });
+
+  test("a tool that finishes in time leaves no timeout timer behind", async () => {
+    vi.useFakeTimers();
+    try {
+      const tool = fakeTool();
+      registerTool(tool);
+      const result = await executeTool(tool.name, { value: "x" });
+      expect(result.status).toBe("ok");
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  test("a tool that throws also leaves no timeout timer behind", async () => {
+    vi.useFakeTimers();
+    try {
+      const tool = fakeTool({
+        execute: async () => {
+          throw new Error("boom");
+        },
+      });
+      registerTool(tool);
+      expect((await executeTool(tool.name, { value: "x" })).status).toBe("error");
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });
