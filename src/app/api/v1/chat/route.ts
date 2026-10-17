@@ -111,9 +111,8 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     console.error("[api/v1/chat]", err);
-    return NextResponse.json(
-      { error: "Chat processing failed", message: err instanceof Error ? err.message : String(err) },
-      { status: 500 },
-    );
+    // Logged above; the raw error (provider, database or network detail)
+    // is never returned to the client.
+    return NextResponse.json({ error: "Chat processing failed" }, { status: 500 });
   }
 }
