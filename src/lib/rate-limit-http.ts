@@ -14,13 +14,38 @@ import { NextRequest, NextResponse } from "next/server";
 interface Bucket {
   count: number;
   windowStart: number;
+  /** The owning route's window — routes may differ, so expiry is per bucket. */
+  windowMs: number;
 }
 
 const buckets = new Map<string, Bucket>();
 
 // Bound memory: an attacker spamming distinct IPs/keys could otherwise
-// grow this map unboundedly between windows. Simple periodic sweep.
+// grow this map unboundedly between windows.
 const MAX_TRACKED_KEYS = 5000;
+// Sweeping trims to this, not to the cap, so a flood of new keys triggers a
+// sweep once per ~500 keys rather than an O(n) pass on every request.
+const SWEEP_TARGET = Math.floor(MAX_TRACKED_KEYS * 0.9);
+
+/**
+ * Drops expired buckets (each against its own route's window), then — if
+ * every remaining bucket is still live, i.e. thousands of distinct clients
+ * inside one window — evicts the least recently active. Evicting a live
+ * bucket forgets that client's count, which is the lesser harm: the
+ * alternative is a map that grows for as long as the flood lasts. Map
+ * iteration is insertion order and a bucket is re-inserted on every
+ * request (refused ones included), so a client that keeps hammering stays
+ * tracked and the first keys are the quietest.
+ */
+function sweep(now: number): void {
+  for (const [k, b] of buckets) {
+    if (now - b.windowStart >= b.windowMs) buckets.delete(k);
+  }
+  for (const k of buckets.keys()) {
+    if (buckets.size <= SWEEP_TARGET) break;
+    buckets.delete(k);
+  }
+}
 
 export interface RateLimitOptions {
   /** Requests allowed per window. */
@@ -50,17 +75,15 @@ export function checkRateLimit(req: NextRequest, routeName: string, opts: RateLi
   const key = `${routeName}:${clientKey(req)}`;
   const now = Date.now();
 
-  if (buckets.size > MAX_TRACKED_KEYS) {
-    for (const [k, b] of buckets) {
-      if (now - b.windowStart > opts.windowMs) buckets.delete(k);
-    }
-  }
+  if (buckets.size >= MAX_TRACKED_KEYS) sweep(now);
 
   let bucket = buckets.get(key);
   if (!bucket || now - bucket.windowStart >= opts.windowMs) {
-    bucket = { count: 0, windowStart: now };
-    buckets.set(key, bucket);
+    bucket = { count: 0, windowStart: now, windowMs: opts.windowMs };
   }
+  // Re-inserted on every request to keep the map least-recently-active first.
+  buckets.delete(key);
+  buckets.set(key, bucket);
 
   bucket.count += 1;
   const remaining = Math.max(0, opts.limit - bucket.count);
@@ -84,4 +107,9 @@ export function rateLimitOrNull(req: NextRequest, routeName: string, opts: RateL
 /** Exposed for tests only — clears all tracked buckets between test cases. */
 export function __resetRateLimitsForTests(): void {
   buckets.clear();
+}
+
+/** Exposed for tests only — how many client/route buckets are tracked. */
+export function __trackedRateLimitKeysForTests(): number {
+  return buckets.size;
 }
