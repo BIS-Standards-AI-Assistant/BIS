@@ -88,6 +88,10 @@ describe("OpenAICompatibleSttProvider", () => {
       ["audio/webm;codecs=opus", "webm"],
       ["audio/mp4", "mp4"],
       ["audio/ogg", "ogg"],
+      ["audio/ogg;codecs=opus", "ogg"],
+      ["audio/mpeg", "mp3"],
+      ["audio/wav", "wav"],
+      ["audio/x-wav", "wav"],
     ] as const) {
       await p.transcribe({ audio, mimeType: mime });
       const form = f.mock.calls.at(-1)![1]!.body as FormData;
