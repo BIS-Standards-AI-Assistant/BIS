@@ -4,11 +4,9 @@ import { LANGUAGES } from "@/lib/i18n";
  * BCP-47 locale tags for the Web Speech API, keyed by the same language
  * codes used throughout the app (src/lib/i18n.ts LANGUAGES). Deliberately
  * separate from `LanguageOption.available`: that flag gates UI-string
- * *translation* (only en/hi have a real Dictionary), but Chrome's
- * cloud-backed SpeechRecognition engine has native support for these Indian
- * languages regardless — so voice input can transcribe more languages than
- * the UI chrome currently displays in. A user can speak Tamil even though
- * the page itself is still shown in English.
+ * *translation*, while Chrome's cloud-backed SpeechRecognition engine has
+ * native support for these Indian languages regardless — so voice input
+ * never depends on whether the page chrome has been translated.
  */
 export const SPEECH_LOCALES: Record<string, string> = {
   en: "en-IN",

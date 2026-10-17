@@ -60,7 +60,7 @@ export function Header() {
     <header ref={navRef} className="relative border-b border-border bg-surface-raised">
       <GovernmentBar />
       <div className="mx-auto flex h-[86px] max-w-[1380px] items-center justify-between gap-6 px-6">
-        <Link href="/" className="flex shrink-0 items-center gap-3" onClick={() => setOpenSection(null)}>
+        <Link href="/" className="flex min-w-0 items-center gap-3 lg:shrink-0" onClick={() => setOpenSection(null)}>
           <BisLogo className="h-11 w-11 shrink-0" />
           <span className="leading-tight">
             <span className="block text-[17px] font-semibold tracking-tight text-navy">
@@ -115,7 +115,7 @@ export function Header() {
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? t.gov.closeMenu ?? "Close menu" : t.gov.openMenu ?? "Open menu"}
           aria-expanded={mobileOpen}
-          className="rounded-md p-2 text-navy lg:hidden"
+          className="shrink-0 rounded-md p-2 text-navy lg:hidden"
         >
           {mobileOpen ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
         </button>

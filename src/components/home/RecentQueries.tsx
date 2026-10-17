@@ -13,26 +13,33 @@ import {
   type RecentQueryEntry,
 } from "@/lib/recent-queries";
 
+/**
+ * Shown before the reader has any history. Queries only: the standards a
+ * search finds come from running it, so none are listed here — a hard-coded
+ * "standards found" column would be an unsourced claim (and the previous
+ * one paired a stainless steel bottle with a plastics-bottle standard).
+ * Each query is covered by the indexed seed corpus.
+ */
 const EXAMPLE_QUERIES: RecentQueryEntry[] = [
-  {
-    query: "Stainless steel water bottle for kids",
-    standardNumbers: ["IS 15410:2003", "IS 14756:2017"],
-    confidence: "high",
-    timestamp: 0,
-  },
-  {
-    query: "LED Bulb for domestic use",
-    standardNumbers: ["IS 16102:2012", "IS 15885:2010"],
-    confidence: "high",
-    timestamp: 0,
-  },
-  {
-    query: "Pressure cooker aluminium",
-    standardNumbers: ["IS 2347:2017", "IS 3074:2018"],
-    confidence: "medium",
-    timestamp: 0,
-  },
+  { query: "Packaged drinking water", standardNumbers: [], confidence: "none", timestamp: 0 },
+  { query: "Protective helmet for two-wheeler riders", standardNumbers: [], confidence: "none", timestamp: 0 },
+  { query: "Plugs and sockets for household use", standardNumbers: [], confidence: "none", timestamp: 0 },
 ];
+
+function StandardsCell({ standardNumbers }: { standardNumbers: string[] }) {
+  if (standardNumbers.length === 0) {
+    return <span className="text-xs italic text-ink-faint">Run to see sourced results</span>;
+  }
+  return (
+    <div className="flex flex-wrap gap-2">
+      {standardNumbers.map((s) => (
+        <Badge key={s} tone="info">
+          {s}
+        </Badge>
+      ))}
+    </div>
+  );
+}
 
 function formatRelativeTime(timestamp: number): string {
   if (timestamp === 0) return "Example";
@@ -65,7 +72,10 @@ export function RecentQueries({ onRerun }: { onRerun?: (query: string) => void }
     <section className="relative">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold tracking-tight text-navy">
-          {hasHistory ? t.recent.heading.replace("Example", "Recent") : t.recent.heading}
+          {/* Its own string per language: replacing the English word "Example"
+              left every other language's heading saying "example" over the
+              reader's real history. */}
+          {hasHistory ? t.recent.headingHistory : t.recent.heading}
         </h2>
         <div className="flex items-center gap-3">
           {hasHistory && (
@@ -106,16 +116,20 @@ export function RecentQueries({ onRerun }: { onRerun?: (query: string) => void }
               >
                 <td className="px-5 py-4 font-semibold text-ink-faint">{i + 1}</td>
                 <td className="px-5 py-4 font-bold text-navy transition-colors hover:text-blue">
-                  {row.query}
+                  {/* The row is clickable for pointers; this button is the keyboard path. */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRowClick(row.query);
+                    }}
+                    className="text-left hover:underline"
+                  >
+                    {row.query}
+                  </button>
                 </td>
                 <td className="px-5 py-4">
-                  <div className="flex flex-wrap gap-2">
-                    {row.standardNumbers.map((s) => (
-                      <Badge key={s} tone="info">
-                        {s}
-                      </Badge>
-                    ))}
-                  </div>
+                  <StandardsCell standardNumbers={row.standardNumbers} />
                 </td>
                 <td className="px-5 py-4 font-semibold text-ink-soft">{formatRelativeTime(row.timestamp)}</td>
                 <td className="px-5 py-4 text-right text-ink-faint">
@@ -137,16 +151,21 @@ export function RecentQueries({ onRerun }: { onRerun?: (query: string) => void }
             <div className="flex items-start justify-between gap-2">
               <p className="text-sm font-bold text-navy">
                 <span className="mr-1.5 text-ink-faint">{i + 1}.</span>
-                {row.query}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRowClick(row.query);
+                  }}
+                  className="text-left hover:underline"
+                >
+                  {row.query}
+                </button>
               </p>
               <ChevronRightIcon className="mt-0.5 h-4 w-4 shrink-0 text-ink-faint" />
             </div>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {row.standardNumbers.map((s) => (
-                <Badge key={s} tone="info">
-                  {s}
-                </Badge>
-              ))}
+            <div className="mt-2">
+              <StandardsCell standardNumbers={row.standardNumbers} />
             </div>
             <p className="mt-2 text-[11px] font-medium text-ink-faint">{formatRelativeTime(row.timestamp)}</p>
           </li>
