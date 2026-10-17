@@ -8,9 +8,9 @@ export async function GET() {
     await db.execute(sql`SELECT 1`);
     return NextResponse.json({ status: "ok", database: "connected" });
   } catch (err) {
-    return NextResponse.json(
-      { status: "error", database: "unreachable", message: String(err) },
-      { status: 503 },
-    );
+    // Public endpoint: the raw driver error can name hosts, users or config
+    // (e.g. a connection string problem), so it is logged, not returned.
+    console.error("[api/v1/health]", err);
+    return NextResponse.json({ status: "error", database: "unreachable" }, { status: 503 });
   }
 }
