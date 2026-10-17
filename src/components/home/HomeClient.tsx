@@ -35,8 +35,7 @@ import { PanelResizeHandle } from "@/components/workspace/PanelResizeHandle";
 import { addRecentQuery } from "@/lib/recent-queries";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import type { QueryResponse } from "@/types/api";
-
-const CACHE_PREFIX = "bis-query-cache:";
+import { getCachedResult, setCachedResult } from "@/lib/query-cache";
 
 function AssistantIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -44,32 +43,6 @@ function AssistantIcon(props: React.SVGProps<SVGSVGElement>) {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7h16M4 12h10M4 17h7M17 14l1.5 3 3 1.5-3 1.5L17 23l-1.5-3-3-1.5 3-1.5L17 14z" />
     </svg>
   );
-}
-
-function getCachedResult(query: string): QueryResponse | null {
-  try {
-    const raw = sessionStorage.getItem(CACHE_PREFIX + query);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    // Invalidate cached fallback answers so real AI responses are requested
-    if (parsed.answer?.includes("No AI-generated explanation")) {
-      sessionStorage.removeItem(CACHE_PREFIX + query);
-      return null;
-    }
-    return parsed;
-  } catch {
-    return null;
-  }
-}
-
-function setCachedResult(query: string, result: QueryResponse) {
-  // Never cache fallback answers where no LLM explanation was available
-  if (result.answer?.includes("No AI-generated explanation")) return;
-  try {
-    sessionStorage.setItem(CACHE_PREFIX + query, JSON.stringify(result));
-  } catch {
-    /* quota exceeded */
-  }
 }
 
 export function HomeClient() {
@@ -104,12 +77,19 @@ export function HomeClient() {
 
   // Tracks the last ?q= a run has already been started for
   const lastAutoRunQuery = useRef<string | null>(null);
+  // Identifies the newest search. A response for any older one — the user
+  // ran another search, or cleared the results, while it was in flight —
+  // must not replace what's on screen, or the results shown would belong
+  // to a different query than the one in the header.
+  const latestRequestRef = useRef(0);
 
   const runQuery = useCallback(
     async (query: string) => {
       const trimmed = query.trim();
       if (!trimmed) return;
 
+      const requestId = ++latestRequestRef.current;
+      const isLatest = () => requestId === latestRequestRef.current;
       lastAutoRunQuery.current = trimmed;
       setActiveQuery(trimmed);
       setError(null);
@@ -118,8 +98,11 @@ export function HomeClient() {
       params.set("q", trimmed);
       router.replace(`/?${params.toString()}`, { scroll: false });
 
-      const cached = getCachedResult(trimmed);
+      const cached = getCachedResult(trimmed, lang);
       if (cached) {
+        // A slower search may still be in flight; it no longer owns the
+        // loading state (see latestRequestRef), so end it here.
+        setLoading(false);
         setResult(cached);
         return;
       }
@@ -139,8 +122,11 @@ export function HomeClient() {
           throw new Error("service_unavailable");
         }
         const data: QueryResponse = await res.json();
+        // Still a valid answer for its own query, so keep it for next time —
+        // just don't show it under someone else's.
+        setCachedResult(trimmed, lang, data);
+        if (!isLatest()) return;
         setResult(data);
-        setCachedResult(trimmed, data);
 
         addRecentQuery({
           query: trimmed,
@@ -155,12 +141,16 @@ export function HomeClient() {
           timestamp: Date.now(),
         });
       } catch {
+        if (!isLatest()) return;
         setError("The BIS Navigator service is temporarily unavailable. Please try again in a moment.");
       } finally {
-        setLoading(false);
-        // P1-8: shift focus to the results heading so keyboard/SR users
-        // don't remain stranded at <body> after submit.
-        setTimeout(() => resultsHeadingRef.current?.focus(), 100);
+        // An older request finishing must not end the newer one's loading state.
+        if (isLatest()) {
+          setLoading(false);
+          // P1-8: shift focus to the results heading so keyboard/SR users
+          // don't remain stranded at <body> after submit.
+          setTimeout(() => resultsHeadingRef.current?.focus(), 100);
+        }
       }
     },
     [router, searchParams, lang],
@@ -173,6 +163,8 @@ export function HomeClient() {
     if (urlQuery && urlQuery !== prev) {
       queueMicrotask(() => runQuery(urlQuery));
     } else if (!urlQuery && prev) {
+      latestRequestRef.current += 1;
+      setLoading(false);
       setResult(null);
       setError(null);
       setActiveQuery("");
@@ -180,6 +172,8 @@ export function HomeClient() {
   }, [urlQuery, runQuery]);
 
   function handleClearResults() {
+    latestRequestRef.current += 1;
+    setLoading(false);
     setResult(null);
     setError(null);
     setActiveQuery("");

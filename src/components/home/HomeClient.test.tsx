@@ -1,8 +1,9 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { HomeClient } from "./HomeClient";
-import { LanguageProvider } from "@/components/providers/LanguageProvider";
+import { LanguageProvider, useLanguage } from "@/components/providers/LanguageProvider";
 import type { QueryResponse } from "@/types/api";
+import { setCachedResult } from "@/lib/query-cache";
 
 function renderHome() {
   return render(
@@ -259,13 +260,92 @@ describe("HomeClient — component breakage & flow disruption", () => {
     await waitFor(() => expect(screen.getByText(/Searching BIS sources/i)).toBeInTheDocument());
 
     fireEvent.click(screen.getByRole("button", { name: /new research/i }));
-    resolveFetch({ ok: true, json: async () => baseResponse({ answer: "late answer" }) });
+    // Leaving returns to the homepage at once, not after the request lands.
+    await waitFor(() => expect(screen.getByLabelText(/Describe your product/i)).toBeInTheDocument());
 
-    await waitFor(() => {
-      // Whichever behavior is intended, it must be deliberate, not a crash;
-      // this pins current behavior so a silent regression is caught.
-      expect(document.body).toBeInTheDocument();
-    });
+    resolveFetch({ ok: true, json: async () => baseResponse({ answer: "late answer" }) });
+    // Let the late response settle, then confirm it was not shown.
+    await new Promise((r) => setTimeout(r, 0));
+    expect(screen.queryByText("late answer")).not.toBeInTheDocument();
+    expect(screen.getByLabelText(/Describe your product/i)).toBeInTheDocument();
+  });
+
+  test("a slower earlier search finishing last does not replace the newer search's results", async () => {
+    const resolvers: Array<(v: unknown) => void> = [];
+    (global.fetch as ReturnType<typeof vi.fn>).mockImplementation(
+      () => new Promise((resolve) => resolvers.push(resolve)),
+    );
+    renderHome();
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "query A" } });
+    fireEvent.click(screen.getByRole("button", { name: "Search" }));
+    await waitFor(() => expect(resolvers).toHaveLength(1));
+
+    await startAnotherQuery("query B");
+    await waitFor(() => expect(resolvers).toHaveLength(2));
+
+    resolvers[1]({ ok: true, json: async () => baseResponse({ answer: "answer B" }) });
+    await screen.findByText("answer B");
+
+    resolvers[0]({ ok: true, json: async () => baseResponse({ answer: "answer A" }) });
+    await new Promise((r) => setTimeout(r, 0));
+    expect(screen.queryByText("answer A")).not.toBeInTheDocument();
+    expect(screen.getByText("answer B")).toBeInTheDocument();
+  });
+
+  test("an earlier search failing late does not put an error over the newer search", async () => {
+    const settle: Array<{ resolve: (v: unknown) => void; reject: (e: unknown) => void }> = [];
+    (global.fetch as ReturnType<typeof vi.fn>).mockImplementation(
+      () => new Promise((resolve, reject) => settle.push({ resolve, reject })),
+    );
+    renderHome();
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "query A" } });
+    fireEvent.click(screen.getByRole("button", { name: "Search" }));
+    await waitFor(() => expect(settle).toHaveLength(1));
+
+    await startAnotherQuery("query B");
+    await waitFor(() => expect(settle).toHaveLength(2));
+    settle[1].resolve({ ok: true, json: async () => baseResponse({ answer: "answer B" }) });
+    await screen.findByText("answer B");
+
+    settle[0].reject(new TypeError("Failed to fetch"));
+    await new Promise((r) => setTimeout(r, 0));
+    expect(screen.queryByText(/temporarily unavailable/i)).not.toBeInTheDocument();
+    expect(screen.getByText("answer B")).toBeInTheDocument();
+  });
+
+  test("switching to a cached search while another is in flight does not leave a spinner", async () => {
+    setCachedResult("query B", "en", baseResponse({ answer: "cached B" }));
+    let resolveA: (v: unknown) => void = () => {};
+    (global.fetch as ReturnType<typeof vi.fn>).mockReturnValue(new Promise((resolve) => (resolveA = resolve)));
+    renderHome();
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "query A" } });
+    fireEvent.click(screen.getByRole("button", { name: "Search" }));
+    await waitFor(() => expect(screen.getByText(/Searching BIS sources/i)).toBeInTheDocument());
+
+    await startAnotherQuery("query B");
+    await screen.findByText("cached B");
+    expect(screen.queryByText(/Searching BIS sources/i)).not.toBeInTheDocument();
+
+    resolveA({ ok: true, json: async () => baseResponse({ answer: "answer A" }) });
+    await new Promise((r) => setTimeout(r, 0));
+    expect(screen.getByText("cached B")).toBeInTheDocument();
+    expect(screen.queryByText("answer A")).not.toBeInTheDocument();
+  });
+
+  test("the late result is still cached for its own query", async () => {
+    const resolvers: Array<(v: unknown) => void> = [];
+    (global.fetch as ReturnType<typeof vi.fn>).mockImplementation(
+      () => new Promise((resolve) => resolvers.push(resolve)),
+    );
+    renderHome();
+    fireEvent.change(screen.getByLabelText(/Describe your product/i), { target: { value: "query A" } });
+    fireEvent.click(screen.getByRole("button", { name: "Search" }));
+    await waitFor(() => expect(resolvers).toHaveLength(1));
+    fireEvent.click(screen.getByRole("button", { name: /new research/i }));
+
+    resolvers[0]({ ok: true, json: async () => baseResponse({ answer: "answer A" }) });
+    await waitFor(() => expect(sessionStorage.length).toBeGreaterThan(0));
+    expect(JSON.stringify(Object.values(sessionStorage))).toContain("answer A");
   });
 
   test("auto-run from a ?q= URL on mount does not double-fire the request", async () => {
@@ -354,3 +434,42 @@ describe("HomeClient — assistant column layout", () => {
   }, 15000);
 });
 
+describe("HomeClient — cached results and language", () => {
+  afterEach(() => {
+    localStorage.removeItem("bis-lang");
+  });
+
+  function SwitchToHindi() {
+    const { setLang } = useLanguage();
+    return (
+      <button type="button" onClick={() => setLang("hi")}>
+        switch to Hindi
+      </button>
+    );
+  }
+
+  test("after switching language, the same search is asked again rather than served the old language's answer", async () => {
+    const fetchMock = global.fetch as ReturnType<typeof vi.fn>;
+    fetchMock
+      .mockResolvedValueOnce({ ok: true, json: async () => baseResponse({ answer: "English answer" }) })
+      .mockResolvedValueOnce({ ok: true, json: async () => baseResponse({ answer: "हिंदी उत्तर" }) });
+    render(
+      <LanguageProvider>
+        <HomeClient />
+        <SwitchToHindi />
+      </LanguageProvider>,
+    );
+    fireEvent.change(screen.getAllByRole("searchbox")[0], { target: { value: "helmet" } });
+    fireEvent.click(screen.getByRole("button", { name: "Search" }));
+    await screen.findByText("English answer");
+
+    fireEvent.click(screen.getByRole("button", { name: "switch to Hindi" }));
+    fireEvent.click(screen.getByRole("button", { name: /back to landing page/i }));
+    fireEvent.change(screen.getAllByRole("searchbox")[0], { target: { value: "helmet" } });
+    fireEvent.click(screen.getByRole("button", { name: "खोजें" }));
+
+    await screen.findByText("हिंदी उत्तर");
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(JSON.parse(fetchMock.mock.calls[1][1].body)).toMatchObject({ query: "helmet", language: "hi" });
+  });
+});
