@@ -12,13 +12,22 @@ const STATUS_TONE: Record<LaboratoryItem["currentStatus"], "success" | "danger" 
   Unknown: "neutral",
 };
 
+/**
+ * The dates are calendar dates ("2027-02-14"), which `new Date` reads as UTC
+ * midnight — so they are formatted in UTC too. In the viewer's own zone a
+ * date west of UTC would show the day before, and the server's render could
+ * disagree with the browser's.
+ */
 function formatDate(iso: string | null, raw: string): string {
   if (!iso) return raw || "Not available";
   const d = new Date(iso);
-  return d.toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric" });
+  return d.toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" });
 }
 
-export function LaboratoriesDirectory({ laboratories }: { laboratories: LaboratoryItem[] }) {
+/** A laboratory as listed: the source record plus whether its recognition validity date has passed (decided server-side). */
+export type DirectoryLaboratory = LaboratoryItem & { recognitionExpired?: boolean };
+
+export function LaboratoriesDirectory({ laboratories }: { laboratories: DirectoryLaboratory[] }) {
   const [query, setQuery] = useState("");
   const [state, setState] = useState("All");
   const [status, setStatus] = useState<"All" | LaboratoryItem["currentStatus"]>("All");
@@ -185,11 +194,21 @@ export function LaboratoriesDirectory({ laboratories }: { laboratories: Laborato
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
                   <Badge tone={STATUS_TONE[lab.currentStatus]}>{lab.currentStatus}</Badge>
+                  {lab.recognitionExpired && <Badge tone="warning">Validity lapsed</Badge>}
                 </div>
               </div>
 
               <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-soft">
-                <span>Recognition valid until {formatDate(lab.recognitionValidUpto, lab.recognitionValidUptoRaw)}</span>
+                {lab.recognitionExpired ? (
+                  // The source list still says "Active"; its own validity date
+                  // has passed. Both are shown — the status is not overridden.
+                  <span className="font-medium text-danger">
+                    Recognition validity lapsed on {formatDate(lab.recognitionValidUpto, lab.recognitionValidUptoRaw)} —
+                    confirm current status on the BIS portal before relying on this laboratory
+                  </span>
+                ) : (
+                  <span>Recognition valid until {formatDate(lab.recognitionValidUpto, lab.recognitionValidUptoRaw)}</span>
+                )}
                 {lab.remarks && (
                   <button
                     type="button"
