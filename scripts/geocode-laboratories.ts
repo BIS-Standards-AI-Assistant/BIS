@@ -135,7 +135,12 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Only run when executed directly (`npm run data:geocode-laboratories`) —
+// not when imported by scripts/geocode-laboratories.test.ts, which needs the
+// pure helpers above without rewriting the dataset or calling Nominatim.
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
