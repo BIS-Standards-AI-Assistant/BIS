@@ -48,8 +48,18 @@ export async function loadLaboratories(): Promise<LaboratoryItem[]> {
   return cache;
 }
 
-/** Whether a lab's recognition validity date has passed, as of `asOf` (defaults to now). */
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * Whether a lab's recognition validity date has passed, as of `asOf`
+ * (defaults to now). "Valid until 13 Oct" is an Indian calendar date and
+ * covers the whole of that day in IST; `new Date("2026-10-13")` alone is UTC
+ * midnight (05:30 IST), which expired every lab on the morning of its last
+ * valid day.
+ */
 export function isRecognitionExpired(lab: LaboratoryItem, asOf: Date = new Date()): boolean {
   if (!lab.recognitionValidUpto) return false;
-  return new Date(lab.recognitionValidUpto) < asOf;
+  const lastDayStart = Date.parse(`${lab.recognitionValidUpto}T00:00:00+05:30`);
+  if (Number.isNaN(lastDayStart)) return false;
+  return asOf.getTime() >= lastDayStart + DAY_MS;
 }
