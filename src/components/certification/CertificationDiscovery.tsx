@@ -79,11 +79,15 @@ export function CertificationDiscovery() {
           <button
             key={ex}
             type="button"
+            // runQuery ignores a click while a search is running, but the
+            // box would still change — leaving results for one product under
+            // the name of another. Disabled instead, like the submit button.
+            disabled={loading}
             onClick={() => {
               setQuery(ex);
               runQuery(ex);
             }}
-            className="rounded-full border border-border-strong px-3 py-1 text-[12.5px] font-medium text-ink-soft transition-colors hover:border-navy hover:text-navy"
+            className="rounded-full border border-border-strong px-3 py-1 text-[12.5px] font-medium text-ink-soft transition-colors hover:border-navy hover:text-navy disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border-strong disabled:hover:text-ink-soft"
           >
             {ex}
           </button>

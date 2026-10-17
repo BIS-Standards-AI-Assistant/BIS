@@ -93,3 +93,21 @@ describe("CertificationDiscovery", () => {
     await waitFor(() => expect(screen.getByText("Mandatory Scheme-I certification applies.")).toBeInTheDocument());
   });
 });
+
+describe("CertificationDiscovery: example chips while a search runs", () => {
+  test("are disabled, so the box can't name a different product than the results", async () => {
+    let resolveFetch: (v: unknown) => void = () => {};
+    (global.fetch as ReturnType<typeof vi.fn>).mockReturnValue(new Promise((resolve) => (resolveFetch = resolve)));
+    render(<CertificationDiscovery />);
+
+    fireEvent.click(screen.getByRole("button", { name: "steel product" }));
+    await waitFor(() => expect(screen.getByRole("button", { name: "cement product" })).toBeDisabled());
+
+    fireEvent.click(screen.getByRole("button", { name: "cement product" }));
+    expect(screen.getByLabelText("Describe your product")).toHaveValue("steel product");
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+
+    resolveFetch({ ok: true, json: async () => baseResponse() });
+    await waitFor(() => expect(screen.getByRole("button", { name: "cement product" })).toBeEnabled());
+  });
+});
