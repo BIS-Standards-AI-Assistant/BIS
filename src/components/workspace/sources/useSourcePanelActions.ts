@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { groupChunksIntoSources, type SourceCandidate } from "@/lib/source-search";
 import { addSource, describeFileRejection, updateSource } from "@/lib/source-library";
 import type { RetrievedChunk } from "@/types/api";
@@ -10,15 +10,25 @@ import type { RetrievedChunk } from "@/types/api";
  * never produces prose; that is the centre's job.
  */
 export function useSourceSearch(onResearch: (query: string) => void) {
-  const [searching, setSearching] = useState(false);
+  // The generation of the search in flight, or null. Cleared by that search
+  // alone, so an old search finishing can't clear a newer one's spinner.
+  const [searchingGeneration, setSearchingGeneration] = useState<number | null>(null);
+  const searching = searchingGeneration !== null;
   const [results, setResults] = useState<SourceCandidate[] | null>(null);
   const [searchError, setSearchError] = useState<string | null>(null);
+  // Bumped by every search and every reset. A response is applied only if
+  // nothing has superseded it: a search still in flight when the centre
+  // moves on to a new query must not land afterwards, re-hiding that
+  // query's sources and opening research on the old one.
+  const generationRef = useRef(0);
 
   async function runSourceSearch(raw: string) {
     const q = raw.trim();
     if (!q || searching) return;
 
-    setSearching(true);
+    const generation = ++generationRef.current;
+    const isCurrent = () => generation === generationRef.current;
+    setSearchingGeneration(generation);
     setSearchError(null);
     setResults(null);
     try {
@@ -29,17 +39,20 @@ export function useSourceSearch(onResearch: (query: string) => void) {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data: { results: RetrievedChunk[] } = await res.json();
+      if (!isCurrent()) return;
       setResults(groupChunksIntoSources(data.results ?? []));
       onResearch(q);
     } catch {
-      setSearchError("We couldn't search BIS sources just now. Please try again.");
+      if (isCurrent()) setSearchError("We couldn't search BIS sources just now. Please try again.");
     } finally {
-      setSearching(false);
+      setSearchingGeneration((g) => (g === generation ? null : g));
     }
   }
 
   /** Drops a manual search's results so the panel falls back to the centre query's sources. */
   function resetSearch() {
+    generationRef.current++;
+    setSearchingGeneration(null);
     setResults(null);
     setSearchError(null);
   }
@@ -54,17 +67,20 @@ export function useSourceSearch(onResearch: (query: string) => void) {
  * assistant, never the document's text.
  */
 export function useDocumentIngest() {
-  const [rejection, setRejection] = useState<string | null>(null);
+  // Every rejected file in a drop is reported, not only the last one.
+  const [rejections, setRejections] = useState<string[]>([]);
 
   async function ingest(files: FileList | File[]) {
-    setRejection(null);
+    const accepted: File[] = [];
+    const rejected: string[] = [];
     for (const file of Array.from(files)) {
       const problem = describeFileRejection(file);
-      if (problem) {
-        setRejection(`${file.name}: ${problem}`);
-        continue;
-      }
+      if (problem) rejected.push(`${file.name}: ${problem}`);
+      else accepted.push(file);
+    }
+    setRejections(rejected);
 
+    for (const file of accepted) {
       const id = `${file.name}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
       addSource({
         id,
@@ -82,7 +98,9 @@ export function useDocumentIngest() {
         const form = new FormData();
         form.append("file", file);
         const res = await fetch("/api/v1/analyze-document", { method: "POST", body: form });
-        const data = await res.json();
+        // An error can arrive as a non-JSON body (e.g. a proxy's HTML 413
+        // page). That is still a server answer, not an unreachable service.
+        const data = await res.json().catch(() => ({}));
 
         if (!res.ok) {
           updateSource(id, { status: "failed", error: data.error ?? `Upload failed (HTTP ${res.status})` });
@@ -106,5 +124,5 @@ export function useDocumentIngest() {
     }
   }
 
-  return { ingest, rejection };
+  return { ingest, rejections };
 }
