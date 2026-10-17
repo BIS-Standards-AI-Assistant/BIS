@@ -38,7 +38,12 @@ interface QcoEntry {
   retrieved_at?: string;
 }
 
-function canonicalNumberOf(e: QcoEntry): string | null {
+/**
+ * The canonical identifier for a dataset entry, e.g. "IS 302 (Part 2/Sec 6):2014".
+ * Exported so every reader of qco-standards.json builds the same string —
+ * findCertificationSchemeForStandard matches on it exactly.
+ */
+export function canonicalNumberOf(e: Pick<QcoEntry, "is_number" | "standard_number" | "part" | "section" | "year">): string | null {
   if (e.is_number) return e.is_number;
   if (!e.standard_number) return null;
   // e.part/e.section already read "Part 1"/"Sec 6" (confirmed against

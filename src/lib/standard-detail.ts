@@ -5,6 +5,7 @@ import { getDb } from "@/db";
 import { documents } from "@/db/schema";
 import type { StandardDetail } from "@/types/api";
 import { getLocalSeedChunks, slugifyStandardNumber } from "@/lib/retrieval";
+import { canonicalNumberOf } from "@/lib/certification-schemes";
 
 export interface EnrichedStandardDetail extends StandardDetail {
   scopeSummary?: string | null;
@@ -92,10 +93,11 @@ export async function getStandardDetail(rawId: string): Promise<EnrichedStandard
     });
 
     if (found) {
-      const fullParts = [found.standard_number, found.part, found.section].filter(Boolean).join(" ");
-      const stdNumber = fullParts
-        ? `${fullParts}${found.year ? `:${found.year}` : ""}`
-        : (found.is_number ?? "Indian Standard");
+      // The same canonical form findCertificationSchemeForStandard matches
+      // on. Building it differently here ("IS 13252 Part 1:2010" vs
+      // "IS 13252 (Part 1):2010") made every part- or section-numbered
+      // standard miss its certification scheme on its own page.
+      const stdNumber = canonicalNumberOf(found) ?? "Indian Standard";
 
       const title = found.full_title || found.short_title || found.title || "Standard Specification";
       const cat = found.product_category || found.category || null;
