@@ -143,6 +143,20 @@ describe("SpeakButton (server synthesis)", () => {
     await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
   });
 
+  test("retries the server on the next press when there is no browser voice to fall back on", async () => {
+    mockSpeakEndpoint(502);
+    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: undefined });
+    render(<SpeakButton text="some answer" language="en" />);
+
+    fireEvent.click(screen.getByLabelText(/Read this answer aloud/i));
+    await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
+
+    // The service recovers; the same button must not be dead.
+    mockSpeakEndpoint(200);
+    fireEvent.click(screen.getByLabelText(/Read this answer aloud/i));
+    await waitFor(() => expect(played).toBe(1));
+  });
+
   test("is disabled for empty answer text", () => {
     render(<SpeakButton text="   " language="en" />);
     expect(screen.getByLabelText(/Read this answer aloud/i)).toBeDisabled();

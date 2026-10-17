@@ -101,7 +101,25 @@ export function useServerTts({ language }: UseServerTtsOptions): UseServerTtsRes
           setState({ kind: "error", unavailable: false, message: "Could not play the audio." });
         };
         setState({ kind: "speaking" });
-        await el.play();
+        try {
+          await el.play();
+        } catch (playErr) {
+          // play() was interrupted by our own stop() — not a failure.
+          if (playErr instanceof DOMException && playErr.name === "AbortError") return;
+          // The audio arrived but the browser would not play it — typically
+          // an autoplay policy (iOS Safari) once the click's activation has
+          // lapsed during the fetch. The network was fine, so don't blame
+          // the connection, and release the object URL.
+          if (audioRef.current === el) cleanup();
+          setState({
+            kind: "error",
+            unavailable: false,
+            message:
+              playErr instanceof DOMException && playErr.name === "NotAllowedError"
+                ? "Your browser blocked audio playback."
+                : "Could not play the audio.",
+          });
+        }
       } catch (err) {
         // An abort is our own stop(), not a failure worth reporting.
         if (err instanceof DOMException && err.name === "AbortError") return;

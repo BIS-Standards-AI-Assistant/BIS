@@ -65,11 +65,13 @@ export function SpeakButton({
       fallback.stop();
       return;
     }
-    if (serverFailed) {
+    if (serverFailed && fallback.supported) {
       // Already known to be unavailable this session — go straight to the OS voice.
-      if (fallback.supported) fallback.speak(text);
+      fallback.speak(text);
       return;
     }
+    // With no OS voice to fall back on, retry the server rather than leaving
+    // a button that silently does nothing after one failure.
     pendingTextRef.current = text;
     server.speak(text);
   }
