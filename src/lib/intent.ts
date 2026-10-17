@@ -85,9 +85,13 @@ export function deterministicIntentFastPath(query: string): QueryIntent | null {
  * heavy chat follow-up like "how heavy is this thing allowed to be?").
  * Exported so chat-context.ts's scoped-chat guardrail can reuse the exact
  * same list instead of drifting from this one over time.
+ *
+ * Every entry must be a topic, not a question form: "who is" used to be
+ * here and refused legitimate questions like "Who is eligible for a BIS
+ * licence?".
  */
 export const OFF_TOPIC_PATTERN =
-  /\b(recipe|bake|cook|weather|forecast|movie|song|joke|cricket|football|match score|prime minister|capital of|who is|javascript|python|coding|crypto|bitcoin|horoscope)\b/i;
+  /\b(recipe|bake|cook|weather|forecast|movie|song|joke|cricket|football|match score|prime minister|capital of|javascript|python|coding|crypto|bitcoin|horoscope)\b/i;
 
 /**
  * Used only when no configured/available provider can perform structured
