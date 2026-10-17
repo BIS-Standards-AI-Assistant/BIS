@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { StandardsListClient, type StandardSummary } from "@/components/standards/StandardsListClient";
 import { getDb } from "@/db";
 import { listReferenceStandards } from "@/lib/reference-standards";
+import { getLocalSeedChunks } from "@/lib/retrieval";
 
 // This page has no dynamic route segment, so Next.js would otherwise try to
 // statically prerender it at build time — which means it would need a live
@@ -44,6 +45,7 @@ async function getStandards(): Promise<StandardSummary[]> {
       const manifestPath = path.join(process.cwd(), "data/seed/manifest.json");
       const rawManifest = await fs.readFile(manifestPath, "utf-8");
       const manifest = JSON.parse(rawManifest);
+      const seedChunks = getLocalSeedChunks();
 
       return manifest.map((item: { file: string; standardNumber: string; title: string; documentType: string; version?: string }) => ({
         id: item.file.replace(/\.txt$/, ""),
@@ -51,7 +53,7 @@ async function getStandards(): Promise<StandardSummary[]> {
         title: item.title,
         documentType: item.documentType,
         version: item.version ?? "Verified BIS Manual",
-        chunkCount: 8,
+        chunkCount: seedChunks.filter((c) => c.doc.standardNumber === item.standardNumber).length,
       }));
     } catch {
       return [];

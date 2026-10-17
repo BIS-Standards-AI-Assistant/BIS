@@ -54,7 +54,9 @@ export async function listReferenceStandards(): Promise<StandardSummary[]> {
       title: item.short_title || item.full_title || item.title || "Indian Standard Specification",
       documentType: item.scheme ? `${item.scheme} · ${category}` : category,
       version: item.mandatory_qco ? "Mandatory QCO (Active)" : "Standard Specification",
-      chunkCount: 4,
+      // These records are not documents in the retrieval index; the list
+      // shows "not yet ingested" for 0 rather than an invented count.
+      chunkCount: 0,
     };
   });
 }

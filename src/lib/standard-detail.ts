@@ -9,6 +9,13 @@ import { canonicalNumberOf } from "@/lib/certification-schemes";
 import { isUuid } from "@/lib/uuid";
 
 export interface EnrichedStandardDetail extends StandardDetail {
+  /**
+   * Where the record came from. Only "database" and "seed_manifest" records
+   * carry real document text; a "reference_dataset" record's passages are
+   * summaries built from the QCO dataset's fields (scope, testing
+   * parameters, gazette details), and its document is not in the index.
+   */
+  recordSource: "database" | "reference_dataset" | "seed_manifest";
   scopeSummary?: string | null;
   verificationNote?: string | null;
   sourceNote?: string | null;
@@ -52,11 +59,19 @@ export async function getStandardDetail(rawId: string): Promise<EnrichedStandard
       const db = getDb();
       const doc = await db.query.documents.findFirst({
         where: eq(documents.id, id),
-        with: { chunks: { orderBy: (c, { asc }) => [asc(c.createdAt)] } },
+        with: {
+          chunks: {
+            // Only the passage text and location are rendered; the
+            // 1536-float embedding (~30 KB per chunk) is never used here.
+            columns: { embedding: false },
+            orderBy: (c, { asc }) => [asc(c.createdAt)],
+          },
+        },
       });
       if (doc) {
         return {
           ...doc,
+          recordSource: "database",
           sourceUrl: sanitizeOfficialUrl(doc.sourceUrl),
           retrievedAt: doc.retrievedAt.toISOString(),
           createdAt: doc.createdAt.toISOString(),
@@ -167,6 +182,7 @@ export async function getStandardDetail(rawId: string): Promise<EnrichedStandard
 
       return {
         id,
+        recordSource: "reference_dataset",
         standardNumber: stdNumber,
         title,
         documentType: cat ?? "Indian Standard",
@@ -211,6 +227,7 @@ export async function getStandardDetail(rawId: string): Promise<EnrichedStandard
 
       return {
         id,
+        recordSource: "seed_manifest",
         standardNumber: found.standardNumber,
         title: found.title,
         documentType: found.documentType,

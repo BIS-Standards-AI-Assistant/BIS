@@ -18,6 +18,9 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
   const askQuery = encodeURIComponent(`Tell me about ${standard.standardNumber ?? standard.title}`);
 
   const hasIndexedDocument = standard.chunks.length > 0;
+  // A reference-dataset record's passages summarise the dataset's fields;
+  // its document text is not indexed, and the page must not say it is.
+  const isReferenceRecord = standard.recordSource === "reference_dataset";
   const isMandatory = scheme?.mandatoryQco === true;
   // Without a reference-dataset entry there is no evidence either way, so
   // nothing below may claim "verified", "voluntary" or a scheme
@@ -109,7 +112,11 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
                 </div>
               )}
 
-              {hasIndexedDocument ? (
+              {isReferenceRecord ? (
+                <span className="font-mono text-xs font-medium text-amber-750 dark:text-amber-400">
+                  ● Reference Record · Document Full Text Not Indexed
+                </span>
+              ) : hasIndexedDocument ? (
                 <span className="font-mono text-xs font-medium text-ink-soft">
                   ● Full-Text Evidence Indexed ({standard.chunks.length} Passages)
                 </span>
@@ -140,7 +147,7 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
 
               <div className="p-3.5 sm:p-4">
                 <p className="text-[10px] font-black uppercase tracking-widest text-ink-faint">Edition Year</p>
-                <p className="mt-1 font-bold text-ink">{standard.version || standard.publicationDate || "Gazetted"}</p>
+                <p className="mt-1 font-bold text-ink">{standard.version || standard.publicationDate || NOT_VERIFIED}</p>
               </div>
 
               <div className="p-3.5 sm:p-4">
@@ -295,7 +302,9 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
                     </h2>
                   </div>
                   <span className="font-mono text-xs font-bold text-ink-faint">
-                    {standard.chunks.length} Primary Passage{standard.chunks.length !== 1 ? "s" : ""}
+                    {isReferenceRecord
+                      ? `${standard.chunks.length} Reference Summar${standard.chunks.length !== 1 ? "ies" : "y"}`
+                      : `${standard.chunks.length} Primary Passage${standard.chunks.length !== 1 ? "s" : ""}`}
                   </span>
                 </div>
 
@@ -421,7 +430,11 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
                     rel="noopener noreferrer"
                     className="flex w-full items-center justify-center gap-2 rounded-sm border border-border-strong px-4 py-2 font-medium text-navy hover:underline transition-colors"
                   >
-                    <span>Official Gazette Link</span>
+                    {/* sourceUrl is the document's recorded source, or the BIS
+                        compulsory-certification list when none is recorded —
+                        never verified as a Gazette publication. */}
+                    <span>Open source page</span>
+                    <span className="sr-only"> (opens in a new tab)</span>
                     <ExternalLinkIcon className="h-3.5 w-3.5" />
                   </a>
                 </div>
