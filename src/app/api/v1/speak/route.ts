@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHash } from "crypto";
 import { z } from "zod";
+import { TTS_LANGUAGES } from "@/lib/tts/google-provider";
 import { getTtsProvider } from "@/lib/tts";
 import { createRateLimiter, clientKeyFromHeaders, positiveNumberFromEnv } from "@/lib/rate-limit";
 
@@ -9,8 +10,10 @@ import { createRateLimiter, clientKeyFromHeaders, positiveNumberFromEnv } from "
 const MAX_TEXT_LENGTH = 3000;
 
 const SpeakRequestSchema = z.object({
-  text: z.string().min(1).max(MAX_TEXT_LENGTH),
-  language: z.enum(["en", "hi"]).optional(),
+  text: z.string().trim().min(1).max(MAX_TEXT_LENGTH),
+  // Every answer language: answers come back in all eight, and a Bengali or
+  // Tamil answer used to be refused here with a 400.
+  language: z.enum(TTS_LANGUAGES).optional(),
 });
 
 /**

@@ -4,7 +4,7 @@ import { retrieveChunks } from "@/lib/retrieval";
 import { rateLimitOrNull } from "@/lib/rate-limit-http";
 
 const SearchRequestSchema = z.object({
-  query: z.string().min(1).max(1000),
+  query: z.string().trim().min(1).max(1000),
   limit: z.number().int().min(1).max(20).optional(),
 });
 

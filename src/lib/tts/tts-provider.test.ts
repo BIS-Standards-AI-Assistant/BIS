@@ -1,5 +1,6 @@
 import { describe, test, expect, vi } from "vitest";
-import { GoogleTtsProvider, voiceFor } from "./google-provider";
+import { GoogleTtsProvider, TTS_LANGUAGES, voiceFor } from "./google-provider";
+import { LANGUAGE_NAMES } from "@/lib/language";
 
 type Fetch = typeof fetch;
 
@@ -10,13 +11,20 @@ function ok(audioContent = Buffer.from("fake-mp3").toString("base64")) {
 }
 
 describe("voiceFor", () => {
+  test("every answer language has its own Indian-locale voice", () => {
+    for (const lang of TTS_LANGUAGES) {
+      expect(voiceFor(lang)).toEqual({ languageCode: `${lang}-IN`, name: `${lang}-IN-Standard-A` });
+    }
+  });
+
   test("maps the two answer languages to Indian-locale standard voices", () => {
     expect(voiceFor("en")).toEqual({ languageCode: "en-IN", name: "en-IN-Standard-A" });
     expect(voiceFor("hi")).toEqual({ languageCode: "hi-IN", name: "hi-IN-Standard-A" });
   });
 
   test("never throws on an unexpected language", () => {
-    expect(voiceFor("ta").name).toBe("en-IN-Standard-A");
+    expect(voiceFor("pa").name).toBe("en-IN-Standard-A");
+    expect(voiceFor("constructor").name).toBe("en-IN-Standard-A");
     expect(voiceFor("").name).toBe("en-IN-Standard-A");
   });
 });
@@ -93,4 +101,8 @@ describe("GoogleTtsProvider", () => {
     const result = await new GoogleTtsProvider("super-secret-key", f).synthesize({ text: "hello", language: "en" });
     expect(result.error).not.toContain("super-secret-key");
   });
+});
+
+test("read-aloud covers every language an answer can be in", () => {
+  expect([...TTS_LANGUAGES].sort()).toEqual(Object.keys(LANGUAGE_NAMES).sort());
 });
