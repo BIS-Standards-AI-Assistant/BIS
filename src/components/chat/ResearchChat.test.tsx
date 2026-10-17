@@ -204,3 +204,31 @@ describe("§25/§29 — honest states", () => {
     expect(screen.queryByText("AI interpretation")).not.toBeInTheDocument();
   });
 });
+
+describe("a new search starts a new conversation", () => {
+  test("exchanges about the previous results are cleared when the query changes", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(chatResponse("Migration testing applies.")));
+    const { rerender, props } = renderChat();
+    const user = userEvent.setup();
+    await user.type(screen.getByLabelText(/ask a follow-up/i), "What tests apply?{Enter}");
+    await screen.findByText("Migration testing applies.");
+
+    rerender(<ResearchChat {...props} scopeQuery="cement" scopeStandardNumbers={["IS 269:2015"]} />);
+
+    await waitFor(() => expect(screen.queryByText("Migration testing applies.")).not.toBeInTheDocument());
+    expect(screen.queryByText("What tests apply?")).not.toBeInTheDocument();
+    expect(getConversationSnapshot().messages.filter((m) => m.id !== "greeting")).toEqual([]);
+  });
+
+  test("re-rendering for the same query keeps the thread", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(chatResponse("Migration testing applies.")));
+    const { rerender, props } = renderChat();
+    const user = userEvent.setup();
+    await user.type(screen.getByLabelText(/ask a follow-up/i), "What tests apply?{Enter}");
+    await screen.findByText("Migration testing applies.");
+
+    rerender(<ResearchChat {...props} hasSelectedSources={false} />);
+
+    expect(screen.getByText("Migration testing applies.")).toBeInTheDocument();
+  });
+});

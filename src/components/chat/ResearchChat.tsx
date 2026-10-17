@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   getConversationServerSnapshot,
   getConversationSnapshot,
+  resetConversation,
   sendAssistantMessage,
   subscribeToConversation,
 } from "@/lib/assistant-conversation";
@@ -48,6 +49,15 @@ export function ResearchChat({
     getConversationSnapshot,
     getConversationServerSnapshot,
   );
+
+  // A new search is a new conversation. The thread is module-level state,
+  // so without this the exchanges about the previous results stayed on
+  // screen beside the new ones, reading as answers about them. Keyed on the
+  // query: re-rendering or remounting for the same search keeps the thread.
+  // The greeting text is unused here (only exchanges are rendered).
+  useEffect(() => {
+    resetConversation("", scopeQuery);
+  }, [scopeQuery]);
 
   const exchanges = messages.filter((m) => m.id !== "greeting");
 
