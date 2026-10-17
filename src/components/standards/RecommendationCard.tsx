@@ -120,14 +120,21 @@ export function RecommendationCard({
           )}
         </WhyPanel>
 
-        <div className="mt-3 flex flex-wrap items-start gap-x-4 gap-y-2">
-          {isPrimary && (
+        {/* Primary cards only. An excluded candidate used to get a fixed
+            "Standard information verified" badge here, but nothing verifies
+            anything about it — it showed on candidates graded
+            insufficient_evidence too — and the truth rules forbid presenting
+            an unchecked claim as verified. Its status is already stated by
+            the "Related but not applicable" banner and the applicability
+            badge below. */}
+        {isPrimary && (
+          <div className="mt-3 flex flex-wrap items-start gap-x-4 gap-y-2">
             <ConfidenceIndicator level={confidenceFromGrounding(recommendation.groundingState)} />
-          )}
-          <Badge tone={isPrimary ? GROUNDING_TONE[recommendation.groundingState] : "neutral"}>
-            {isPrimary ? GROUNDING_LABEL[recommendation.groundingState] : "Standard information verified"}
-          </Badge>
-        </div>
+            <Badge tone={GROUNDING_TONE[recommendation.groundingState]}>
+              {GROUNDING_LABEL[recommendation.groundingState]}
+            </Badge>
+          </div>
+        )}
       </div>
       {/* Applicability — separate claim from relevance/grounding above.
           "This appeared" is not "this applies"; see APPLICABILITY_LABEL. */}

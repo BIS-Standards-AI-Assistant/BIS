@@ -57,7 +57,8 @@ describe("RecommendationCard — applicability gate rendering", () => {
     expect(screen.queryByText("High relevance")).not.toBeInTheDocument();
     expect(screen.queryByText("Directly supported by evidence")).not.toBeInTheDocument();
     expect(screen.getByText("Related to your search")).toBeInTheDocument();
-    expect(screen.getByText("Standard information verified")).toBeInTheDocument();
+    // Nothing about an excluded candidate has been verified, so nothing says it has.
+    expect(screen.queryByText(/verified/i)).not.toBeInTheDocument();
     expect(screen.getByText("Related but not applicable")).toBeInTheDocument();
     expect(screen.getByText("Related standard — material mismatch")).toBeInTheDocument();
   });
@@ -85,5 +86,19 @@ describe("RecommendationCard — applicability gate rendering", () => {
       expect(screen.queryByText("High relevance")).not.toBeInTheDocument();
       unmount();
     }
+  });
+
+  test("an excluded candidate graded insufficient_evidence is never called verified", () => {
+    render(
+      <RecommendationCard
+        recommendation={recommendation({
+          groundingState: "insufficient_evidence",
+          recommendationStatus: "INSUFFICIENT_EVIDENCE",
+          primaryRecommendation: false,
+        })}
+      />,
+    );
+    expect(screen.getByText("Related but not applicable")).toBeInTheDocument();
+    expect(screen.queryByText(/verified/i)).not.toBeInTheDocument();
   });
 });
