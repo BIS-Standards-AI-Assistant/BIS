@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { groupChunksIntoSources, type SourceCandidate } from "@/lib/source-search";
 import { addSource, describeFileRejection, updateSource } from "@/lib/source-library";
 import type { RetrievedChunk } from "@/types/api";
@@ -10,15 +10,25 @@ import type { RetrievedChunk } from "@/types/api";
  * never produces prose; that is the centre's job.
  */
 export function useSourceSearch(onResearch: (query: string) => void) {
-  const [searching, setSearching] = useState(false);
+  // The generation of the search in flight, or null. Cleared by that search
+  // alone, so an old search finishing can't clear a newer one's spinner.
+  const [searchingGeneration, setSearchingGeneration] = useState<number | null>(null);
+  const searching = searchingGeneration !== null;
   const [results, setResults] = useState<SourceCandidate[] | null>(null);
   const [searchError, setSearchError] = useState<string | null>(null);
+  // Bumped by every search and every reset. A response is applied only if
+  // nothing has superseded it: a search still in flight when the centre
+  // moves on to a new query must not land afterwards, re-hiding that
+  // query's sources and opening research on the old one.
+  const generationRef = useRef(0);
 
   async function runSourceSearch(raw: string) {
     const q = raw.trim();
     if (!q || searching) return;
 
-    setSearching(true);
+    const generation = ++generationRef.current;
+    const isCurrent = () => generation === generationRef.current;
+    setSearchingGeneration(generation);
     setSearchError(null);
     setResults(null);
     try {
@@ -29,17 +39,20 @@ export function useSourceSearch(onResearch: (query: string) => void) {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data: { results: RetrievedChunk[] } = await res.json();
+      if (!isCurrent()) return;
       setResults(groupChunksIntoSources(data.results ?? []));
       onResearch(q);
     } catch {
-      setSearchError("We couldn't search BIS sources just now. Please try again.");
+      if (isCurrent()) setSearchError("We couldn't search BIS sources just now. Please try again.");
     } finally {
-      setSearching(false);
+      setSearchingGeneration((g) => (g === generation ? null : g));
     }
   }
 
   /** Drops a manual search's results so the panel falls back to the centre query's sources. */
   function resetSearch() {
+    generationRef.current++;
+    setSearchingGeneration(null);
     setResults(null);
     setSearchError(null);
   }
