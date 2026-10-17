@@ -48,7 +48,13 @@ export interface RateLimiterOptions {
  * at these small limits — a fixed window lets a caller fire 2x the limit
  * across a boundary instant.
  */
+/** Most clients tracked at once; see the eviction note in check(). */
+const MAX_TRACKED_KEYS = 10_000;
+/** Trimming below the cap means a flood triggers a sweep per ~1,000 new keys, not per request. */
+const SWEEP_TARGET = Math.floor(MAX_TRACKED_KEYS * 0.9);
+
 export function createRateLimiter({ limit, windowMs, now = Date.now }: RateLimiterOptions): RateLimiter {
+  // Kept least-recently-active first: a key is re-inserted on every hit.
   const hits = new Map<string, number[]>();
 
   function prune(at: number = now()) {
@@ -67,13 +73,25 @@ export function createRateLimiter({ limit, windowMs, now = Date.now }: RateLimit
       const cutoff = at - windowMs;
 
       // Bound memory: without this, one request each from many distinct
-      // IPs would grow the map forever.
-      if (hits.size > 10_000) prune(at);
+      // IPs would grow the map forever. Pruning alone isn't enough — inside
+      // one window nothing has expired — so if every key is still live the
+      // least recently active are dropped. That forgets their counts, which
+      // is the lesser harm next to a map that grows for the whole flood.
+      if (hits.size >= MAX_TRACKED_KEYS) {
+        prune(at);
+        for (const k of hits.keys()) {
+          if (hits.size <= SWEEP_TARGET) break;
+          hits.delete(k);
+        }
+      }
 
       const timestamps = (hits.get(key) ?? []).filter((t) => t > cutoff);
 
       if (timestamps.length >= limit) {
         const oldest = timestamps[0];
+        // A refused request is still activity: a client hammering the
+        // endpoint must stay tracked, not be the first one evicted.
+        hits.delete(key);
         hits.set(key, timestamps);
         return {
           allowed: false,
@@ -83,6 +101,7 @@ export function createRateLimiter({ limit, windowMs, now = Date.now }: RateLimit
       }
 
       timestamps.push(at);
+      hits.delete(key);
       hits.set(key, timestamps);
       return { allowed: true, remaining: limit - timestamps.length, retryAfterSeconds: 0 };
     },
