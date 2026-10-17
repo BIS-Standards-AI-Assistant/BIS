@@ -6,6 +6,8 @@ import { StandardsListClient, type StandardSummary } from "@/components/standard
 import { getDb } from "@/db";
 import { documents } from "@/db/schema";
 import { listReferenceStandards } from "@/lib/reference-standards";
+import { getStandardDetail, sanitizeOfficialUrl } from "@/lib/standard-detail";
+import { isUuid } from "@/lib/uuid";
 
 export const dynamic = "force-dynamic";
 
@@ -49,27 +51,62 @@ async function getAllStandards(): Promise<StandardSummary[]> {
   }
 }
 
+/**
+ * Rows in the order the reader selected them. Ingested documents (uuid ids)
+ * come from the database; reference-dataset standards (the register's
+ * slugs, e.g. "is-14543") are not database rows and are resolved the same
+ * way their own /standards/[id] page resolves them. Sending those slugs to
+ * the uuid column used to make Postgres throw, so comparing any reference
+ * standard showed "Knowledge base temporarily unavailable".
+ *
+ * Returns null only when ingested documents were requested and the
+ * database could not be reached.
+ */
 async function getComparisonRows(ids: string[]): Promise<CompareRow[] | null> {
-  try {
-    const db = getDb();
-    const docs = await db.query.documents.findMany({
-      where: inArray(documents.id, ids),
-      with: { chunks: { columns: { id: true } } },
-    });
-    return docs.map((d) => ({
-      id: d.id,
-      standardNumber: d.standardNumber,
-      title: d.title,
-      documentType: d.documentType,
-      version: d.version,
-      publicationDate: d.publicationDate,
-      sourceUrl: d.sourceUrl,
-      chunkCount: d.chunks.length,
-    }));
-  } catch {
-    // DB unavailable
-    return null;
+  const byId = new Map<string, CompareRow>();
+
+  const documentIds = ids.filter(isUuid);
+  if (documentIds.length > 0) {
+    try {
+      const docs = await getDb().query.documents.findMany({
+        where: inArray(documents.id, documentIds),
+        with: { chunks: { columns: { id: true } } },
+      });
+      for (const d of docs) {
+        byId.set(d.id, {
+          id: d.id,
+          standardNumber: d.standardNumber,
+          title: d.title,
+          documentType: d.documentType,
+          version: d.version,
+          publicationDate: d.publicationDate,
+          sourceUrl: sanitizeOfficialUrl(d.sourceUrl),
+          chunkCount: d.chunks.length,
+        });
+      }
+    } catch {
+      // DB unavailable
+      return null;
+    }
   }
+
+  for (const id of ids) {
+    if (isUuid(id) || byId.has(id)) continue;
+    const detail = await getStandardDetail(id);
+    if (!detail) continue;
+    byId.set(id, {
+      id,
+      standardNumber: detail.standardNumber,
+      title: detail.title,
+      documentType: detail.documentType,
+      version: detail.version,
+      publicationDate: detail.publicationDate,
+      sourceUrl: detail.sourceUrl,
+      chunkCount: detail.chunks.length,
+    });
+  }
+
+  return ids.flatMap((id) => byId.get(id) ?? []);
 }
 
 const FIELDS: { key: keyof CompareRow; label: string }[] = [
@@ -177,7 +214,7 @@ export default async function ComparePage({
                   {rows.map((r) => (
                     <th key={r.id} className="p-3 align-top">
                       <p className="font-mono text-xs text-navy">{r.standardNumber ?? "Unnumbered"}</p>
-                      <Link href={`/standards/${r.id}`} className="mt-0.5 block font-medium text-ink hover:underline">
+                      <Link href={`/standards/${encodeURIComponent(r.id)}`} className="mt-0.5 block font-medium text-ink hover:underline">
                         {r.title}
                       </Link>
                     </th>
