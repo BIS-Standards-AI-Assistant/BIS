@@ -1,8 +1,9 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { HomeClient } from "./HomeClient";
-import { LanguageProvider } from "@/components/providers/LanguageProvider";
+import { LanguageProvider, useLanguage } from "@/components/providers/LanguageProvider";
 import type { QueryResponse } from "@/types/api";
+import { setCachedResult } from "@/lib/query-cache";
 
 function renderHome() {
   return render(
@@ -313,7 +314,7 @@ describe("HomeClient — component breakage & flow disruption", () => {
   });
 
   test("switching to a cached search while another is in flight does not leave a spinner", async () => {
-    sessionStorage.setItem("bis-query-cache:query B", JSON.stringify(baseResponse({ answer: "cached B" })));
+    setCachedResult("query B", "en", baseResponse({ answer: "cached B" }));
     let resolveA: (v: unknown) => void = () => {};
     (global.fetch as ReturnType<typeof vi.fn>).mockReturnValue(new Promise((resolve) => (resolveA = resolve)));
     renderHome();
@@ -433,3 +434,42 @@ describe("HomeClient — assistant column layout", () => {
   }, 15000);
 });
 
+describe("HomeClient — cached results and language", () => {
+  afterEach(() => {
+    localStorage.removeItem("bis-lang");
+  });
+
+  function SwitchToHindi() {
+    const { setLang } = useLanguage();
+    return (
+      <button type="button" onClick={() => setLang("hi")}>
+        switch to Hindi
+      </button>
+    );
+  }
+
+  test("after switching language, the same search is asked again rather than served the old language's answer", async () => {
+    const fetchMock = global.fetch as ReturnType<typeof vi.fn>;
+    fetchMock
+      .mockResolvedValueOnce({ ok: true, json: async () => baseResponse({ answer: "English answer" }) })
+      .mockResolvedValueOnce({ ok: true, json: async () => baseResponse({ answer: "हिंदी उत्तर" }) });
+    render(
+      <LanguageProvider>
+        <HomeClient />
+        <SwitchToHindi />
+      </LanguageProvider>,
+    );
+    fireEvent.change(screen.getAllByRole("searchbox")[0], { target: { value: "helmet" } });
+    fireEvent.click(screen.getByRole("button", { name: "Search" }));
+    await screen.findByText("English answer");
+
+    fireEvent.click(screen.getByRole("button", { name: "switch to Hindi" }));
+    fireEvent.click(screen.getByRole("button", { name: /back to landing page/i }));
+    fireEvent.change(screen.getAllByRole("searchbox")[0], { target: { value: "helmet" } });
+    fireEvent.click(screen.getByRole("button", { name: "खोजें" }));
+
+    await screen.findByText("हिंदी उत्तर");
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(JSON.parse(fetchMock.mock.calls[1][1].body)).toMatchObject({ query: "helmet", language: "hi" });
+  });
+});
