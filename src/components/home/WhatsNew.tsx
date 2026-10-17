@@ -5,16 +5,28 @@ import { DocumentIcon, ArrowRightIcon, ShieldCheckIcon } from "@/components/ui/i
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 /**
- * Top verified Indian Standards from the updated official BIS dataset.
+ * A curated selection from the reference dataset
+ * (data/bis-standards-dataset/qco-standards.json): title, scheme and
+ * mandatory status mirror it, and `id` is the slug the Standards Register
+ * links with, so /standards/[id] resolves. WhatsNew.test.tsx checks each
+ * entry against the dataset.
+ *
+ * Edition years are the exception for IS 14543 and IS 4151. The dataset's
+ * README documents "IS 14543:2024" and "IS 4151:2020" as non-existent
+ * editions (the 2020 is the helmet QCO's year), corrected to 2016 and 2015
+ * from the official BIS product manuals — which the seed corpus also holds
+ * (data/seed/manifest.json). A 2026-09-03 catalog sync re-imported the
+ * uncorrected years into qco-standards.json; until that is resolved, this
+ * list shows the reviewed editions rather than repeat the error.
  */
-const FEATURED_STANDARDS = [
+export const FEATURED_STANDARDS = [
   {
     standardNumber: "IS 14543:2016",
     title: "Packaged Drinking Water",
     category: "Packaged Water & Beverages",
     scheme: "Scheme-I (ISI)",
     meta: "Mandatory QCO · Active",
-    id: "is-14543-2016",
+    id: "is-14543",
   },
   {
     standardNumber: "IS 2347:2017",
@@ -22,39 +34,39 @@ const FEATURED_STANDARDS = [
     category: "Kitchen & Domestic Appliances",
     scheme: "Scheme-I (ISI)",
     meta: "Mandatory QCO · Active",
-    id: "is-2347-2017",
+    id: "is-2347",
   },
   {
     standardNumber: "IS 16046 (Part 2):2018",
-    title: "Lithium Cells & Power Banks",
+    title: "Lithium Cells and Batteries (Power Banks)",
     category: "IT & Consumer Electronics",
     scheme: "Scheme-II (CRS)",
     meta: "Mandatory CRS · Active",
-    id: "is-16046-part-2-2018",
+    id: "is-16046-part-2",
   },
   {
     standardNumber: "IS 1417:2016",
-    title: "Gold & Silver Jewellery Hallmarking",
+    title: "Gold Jewellery and Artefacts Hallmarking",
     category: "Precious Metals",
-    scheme: "Hallmarking (HUID)",
-    meta: "Mandatory 6-Digit HUID",
-    id: "is-1417-2016",
+    scheme: "Hallmarking",
+    meta: "Mandatory Hallmarking · Active",
+    id: "is-1417",
   },
   {
     standardNumber: "IS 4151:2015",
-    title: "Protective Helmets for Two-Wheelers",
+    title: "Two-Wheeler Protective Helmets",
     category: "Safety Gear",
     scheme: "Scheme-I (ISI)",
     meta: "Mandatory QCO · Active",
-    id: "is-4151-2015",
+    id: "is-4151",
   },
   {
     standardNumber: "IS 16333 (Part 3):2022",
     title: "Mobile Phone Indian Language Support",
     category: "Telecommunications",
     scheme: "Scheme-II (CRS)",
-    meta: "22 Scheduled Languages",
-    id: "is-16333-part-3-2022",
+    meta: "Mandatory CRS · Active",
+    id: "is-16333-part-3",
   },
 ];
 
@@ -78,7 +90,7 @@ export function WhatsNew() {
       </div>
 
       <p className="mt-1 text-xs text-ink-faint">
-        22+ verified Gazette standards with testing criteria &amp; QCO status.
+        Mandatory standards from the fact-checked reference dataset, with certification scheme and QCO status.
       </p>
 
       <ul className="mt-4 space-y-2.5">
@@ -112,12 +124,12 @@ export function WhatsNew() {
       </ul>
 
       <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
-        <span className="text-[11px] text-ink-faint">Verified against Gazette Orders</span>
+        <span className="text-[11px] text-ink-faint">From the fact-checked reference dataset</span>
         <Link
           href="/standards"
           className="text-xs font-bold text-blue hover:underline flex items-center gap-1"
         >
-          <span>Browse All 22+ Standards</span>
+          <span>Browse all standards</span>
           <ArrowRightIcon className="h-3 w-3" />
         </Link>
       </div>
