@@ -43,7 +43,12 @@ describe("SchemeDecisionTree Component", () => {
     expect(screen.getByText("Scheme-II (CRS)")).toBeInTheDocument();
     expect(screen.getByText(/Compulsory Registration Scheme/i)).toBeInTheDocument();
     expect(screen.getAllByText(/Self-Declaration of Conformity/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/80% concession/i)).toBeInTheDocument();
+    // Concession rates change by BIS notification, so none is quoted; the
+    // reader is pointed at the current schedule instead.
+    expect(screen.getByText(/fee concessions to micro and small enterprises and startups/i)).toHaveTextContent(
+      /Check the current CRS fee schedule/,
+    );
+    expect(screen.getByText("MSME Benefit & Fee Concession").parentElement).not.toHaveTextContent(/\d+\s*%/);
 
     const portalLink = screen.getByRole("link", { name: /crsbis\.in/i });
     expect(portalLink).toHaveAttribute("href", "https://www.crsbis.in");
@@ -88,7 +93,8 @@ describe("SchemeDecisionTree Component", () => {
 
     expect(screen.getByText("Scheme-I (ISI Mark) — Standard Route")).toBeInTheDocument();
     expect(screen.getByText(/Preliminary Factory Audit by BIS Technical Officers/i)).toBeInTheDocument();
-    expect(screen.getByText(/80% fee discount for Micro-enterprises and Startups/i)).toBeInTheDocument();
+    expect(screen.getByText(/concession on the annual minimum marking fee/i)).toHaveTextContent(/Check the current rates on Manakonline/);
+    expect(screen.getByText("MSME Benefit & Fee Concession").parentElement).not.toHaveTextContent(/\d+\s*%/);
   });
 
   test("Step 1 Domestic -> Step 2 Industrial -> Step 3 MSME Third-Party routes to Scheme-I Simplified Fast-Track", async () => {
