@@ -3,6 +3,7 @@ import { getSttProvider } from "@/lib/stt";
 import { VOICE_LANGUAGES } from "@/lib/speech/locales";
 import { createRateLimiter, clientKeyFromHeaders, positiveNumberFromEnv } from "@/lib/rate-limit";
 import { normalizeVoiceTranscript } from "@/lib/stt/voice-normalizer";
+import { declaredBodyTooLarge } from "@/lib/upload-limits";
 
 // Roughly 60s of Opus audio. A search query is a sentence, not a lecture —
 // this bounds both the upload and the transcription bill.
@@ -49,6 +50,10 @@ export async function POST(req: NextRequest) {
       { error: "Server-side transcription is not configured on this deployment." },
       { status: 501 },
     );
+  }
+
+  if (declaredBodyTooLarge(req.headers, MAX_AUDIO_BYTES)) {
+    return NextResponse.json({ error: "Recording is too long. Keep it under about a minute." }, { status: 413 });
   }
 
   let form: FormData;
