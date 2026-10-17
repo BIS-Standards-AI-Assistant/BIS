@@ -8,6 +8,19 @@ describe("resolveStandardIds", () => {
     expect(r[0].normalized).toBe("IS 5522:2014");
   });
 
+  test.each([
+    ["IS 302 (Part 1)", "IS 302 (Part 1)"],
+    ["Does IS 302 (Part 1) apply here?", "IS 302 (Part 1)"],
+    ["IS 302 (Part 2/Sec 6) for water heaters", "IS 302 (Part 2/Sec 6)"],
+    ["IS 302 (Part 2/Sec 6):2009", "IS 302 (Part 2/Sec 6):2009"],
+  ])("raw keeps the closing parenthesis of %j", (text, raw) => {
+    expect(resolveStandardIds(text)[0].raw).toBe(raw);
+  });
+
+  test("a trailing colon with no year is not swallowed into raw", () => {
+    expect(resolveStandardIds("IS 5522: the scope")[0]).toMatchObject({ raw: "IS 5522", normalized: "IS 5522", year: null });
+  });
+
   test("resolves a bare number with year but no IS prefix", () => {
     const r = resolveStandardIds("5522:2014");
     expect(r[0].normalized).toBe("IS 5522:2014");

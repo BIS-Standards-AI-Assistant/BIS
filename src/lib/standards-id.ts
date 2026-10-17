@@ -12,8 +12,10 @@ export interface ResolvedStandardId {
 // Handles: "IS 5522:2014", "IS 5522", "5522:2014", "Indian Standard 5522",
 // "IS 14756 Part 1", "IS 302 (Part 2/Sec 6):2009", "IS 302-2-6:2009",
 // "IS 16333 (Part 3):2022".
+// Ends in (?!\w) rather than \b: after a closing ")" with no year there is
+// no word boundary, so \b made the match backtrack and drop the ")".
 const PATTERN =
-  /\b(?:IS|Indian Standard)?\s*(\d{2,6})\s*(?:\(?\s*Part\s*[-/]?\s*(\d+)\s*(?:\/\s*Sec(?:tion)?\s*[-/]?\s*(\d+))?\s*\)?)?(?:[-–]\s*(\d+)[-–](\d+))?\s*:?\s*(\d{4})?\b/gi;
+  /\b(?:IS|Indian Standard)?\s*(\d{2,6})\s*(?:\(?\s*Part\s*[-/]?\s*(\d+)\s*(?:\/\s*Sec(?:tion)?\s*[-/]?\s*(\d+))?\s*\)?)?(?:[-–]\s*(\d+)[-–](\d+))?(?:\s*:?\s*(\d{4}))?(?!\w)/gi;
 
 /**
  * Recognizes Indian Standard identifiers embedded in free text and
