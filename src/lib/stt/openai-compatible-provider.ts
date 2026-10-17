@@ -52,6 +52,10 @@ export class OpenAICompatibleSttProvider implements SttProvider {
       return this.failure(start, "not_configured: STT_BASE_URL/STT_API_KEY/STT_MODEL not set");
     }
 
+    const controller = new AbortController();
+    // Cleared only once the body has been read: a response that stalls
+    // after its headers would otherwise hang the request indefinitely.
+    const timeout = setTimeout(() => controller.abort(), this.timeoutMs);
     try {
       const form = new FormData();
       // The extension matters: these APIs sniff the container format from
@@ -63,18 +67,17 @@ export class OpenAICompatibleSttProvider implements SttProvider {
       if (req.language) form.append("language", req.language);
       form.append("response_format", "json");
 
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), this.timeoutMs);
       const res = await this.fetchImpl(`${this.baseUrl}/audio/transcriptions`, {
         method: "POST",
         headers: { Authorization: `Bearer ${this.apiKey}` },
         body: form,
         signal: controller.signal,
       });
-      clearTimeout(timeout);
 
       if (!res.ok) {
-        return this.failure(start, `HTTP ${res.status}: ${await res.text().catch(() => res.statusText)}`);
+        // Bounded: the caller logs this, and an upstream error page can be large.
+        const detail = await res.text().catch(() => res.statusText);
+        return this.failure(start, `HTTP ${res.status}: ${detail.slice(0, 300)}`);
       }
 
       const body = (await res.json()) as { text?: string };
@@ -88,6 +91,8 @@ export class OpenAICompatibleSttProvider implements SttProvider {
       };
     } catch (err) {
       return this.failure(start, err instanceof Error ? err.message : String(err));
+    } finally {
+      clearTimeout(timeout);
     }
   }
 
