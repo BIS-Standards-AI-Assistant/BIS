@@ -6,6 +6,7 @@ import { documents } from "@/db/schema";
 import type { StandardDetail } from "@/types/api";
 import { getLocalSeedChunks, slugifyStandardNumber } from "@/lib/retrieval";
 import { canonicalNumberOf } from "@/lib/certification-schemes";
+import { isUuid } from "@/lib/uuid";
 
 export interface EnrichedStandardDetail extends StandardDetail {
   scopeSummary?: string | null;
@@ -23,6 +24,9 @@ export interface EnrichedStandardDetail extends StandardDetail {
 export function sanitizeOfficialUrl(url?: string | null): string {
   const defaultUrl = "https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=en";
   if (!url) return defaultUrl;
+  // Rendered as an <a href>, so only http(s): a stored "javascript:" or
+  // "data:" URL must never become a clickable link.
+  if (!/^https?:\/\//i.test(url.trim())) return defaultUrl;
   if (url.includes("services.bis.gov.in/php/BIS_2.0") || url.includes("standardsbis.in")) {
     return defaultUrl;
   }
@@ -40,24 +44,28 @@ export async function getStandardDetail(rawId: string): Promise<EnrichedStandard
   const id = decodeURIComponent(rawId).trim();
   const idSlug = slugifyStandardNumber(id);
 
-  // 1. Database retrieval
-  try {
-    const db = getDb();
-    const doc = await db.query.documents.findFirst({
-      where: eq(documents.id, id),
-      with: { chunks: { orderBy: (c, { asc }) => [asc(c.createdAt)] } },
-    });
-    if (doc) {
-      return {
-        ...doc,
-        sourceUrl: sanitizeOfficialUrl(doc.sourceUrl),
-        retrievedAt: doc.retrievedAt.toISOString(),
-        createdAt: doc.createdAt.toISOString(),
-        chunks: doc.chunks.map((c) => ({ ...c, createdAt: c.createdAt.toISOString() })),
-      };
+  // 1. Database retrieval — only for ids that can be a document id. The
+  // register's slugs ("is-14543") would otherwise cost a failing DB
+  // round-trip on every reference-standard page view.
+  if (isUuid(id)) {
+    try {
+      const db = getDb();
+      const doc = await db.query.documents.findFirst({
+        where: eq(documents.id, id),
+        with: { chunks: { orderBy: (c, { asc }) => [asc(c.createdAt)] } },
+      });
+      if (doc) {
+        return {
+          ...doc,
+          sourceUrl: sanitizeOfficialUrl(doc.sourceUrl),
+          retrievedAt: doc.retrievedAt.toISOString(),
+          createdAt: doc.createdAt.toISOString(),
+          chunks: doc.chunks.map((c) => ({ ...c, createdAt: c.createdAt.toISOString() })),
+        };
+      }
+    } catch {
+      // Fallback to static verified dataset
     }
-  } catch {
-    // Fallback to static verified dataset
   }
 
   // 2. Fact-checked dataset (data/bis-standards-dataset/qco-standards.json)

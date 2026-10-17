@@ -408,7 +408,7 @@ export default async function StandardDetailPage({ params }: { params: Promise<{
                   </Link>
 
                   <Link
-                    href={`/compare?ids=${standard.id}`}
+                    href={`/compare?ids=${encodeURIComponent(standard.id)}`}
                     className="flex w-full items-center justify-center gap-2 rounded-sm border border-border-strong bg-surface-alt px-4 py-2.5 font-semibold text-ink hover:border-navy hover:text-navy transition-colors"
                   >
                     <CompareIcon className="h-3.5 w-3.5" />

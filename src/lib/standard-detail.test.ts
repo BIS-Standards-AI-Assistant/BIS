@@ -31,6 +31,10 @@ describe("sanitizeOfficialUrl", () => {
     [undefined],
     [null],
     [""],
+    ["javascript:alert(1)"],
+    ["JavaScript:alert(1)"],
+    ["data:text/html,<script>alert(1)</script>"],
+    ["//evil.example/x"],
     ["https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails/14543"],
     ["https://www.standardsbis.in/Gemini/search/Browse.action"],
   ])("replaces %j with the BIS compulsory-certification page", (url) => {
@@ -38,10 +42,12 @@ describe("sanitizeOfficialUrl", () => {
   });
 });
 
+const DOC_ID = "3f2b8c1e-9a4d-4c6b-8e2f-1a2b3c4d5e6f";
+
 describe("getStandardDetail — database documents", () => {
   test("an ingested document is returned with ISO dates and a sanitized source URL", async () => {
     findFirst.mockResolvedValue({
-      id: "doc-1",
+      id: DOC_ID,
       standardNumber: "IS 1293:2019",
       title: "Plugs and Socket-Outlets",
       documentType: "standard",
@@ -52,11 +58,11 @@ describe("getStandardDetail — database documents", () => {
       retrievedAt: new Date("2026-08-01T00:00:00Z"),
       checksum: "abc",
       createdAt: new Date("2026-08-02T00:00:00Z"),
-      chunks: [{ id: "c1", documentId: "doc-1", section: null, clause: "4.1", page: 2, text: "t", metadata: null, createdAt: new Date("2026-08-03T00:00:00Z") }],
+      chunks: [{ id: "c1", documentId: DOC_ID, section: null, clause: "4.1", page: 2, text: "t", metadata: null, createdAt: new Date("2026-08-03T00:00:00Z") }],
     });
-    const detail = await getStandardDetail("doc-1");
+    const detail = await getStandardDetail(DOC_ID);
     expect(detail).toMatchObject({
-      id: "doc-1",
+      id: DOC_ID,
       sourceUrl: BIS_DEFAULT,
       retrievedAt: "2026-08-01T00:00:00.000Z",
       createdAt: "2026-08-02T00:00:00.000Z",
@@ -64,9 +70,14 @@ describe("getStandardDetail — database documents", () => {
     expect(detail!.chunks[0].createdAt).toBe("2026-08-03T00:00:00.000Z");
   });
 
-  test("a database failure falls back to the reference datasets instead of failing the page", async () => {
+  test("a database failure is not a page failure", async () => {
     findFirst.mockRejectedValue(new Error("connection refused"));
-    expect((await getStandardDetail("is-2347"))?.standardNumber).toBe("IS 2347:2017");
+    await expect(getStandardDetail(DOC_ID)).resolves.toBeNull();
+  });
+
+  test("ids that cannot be a document id never reach the database", async () => {
+    for (const id of ["is-14543", "BIS-STD-001", "std-1", "IS 5522:2014", "nope-123"]) await getStandardDetail(id);
+    expect(findFirst).not.toHaveBeenCalled();
   });
 });
 
