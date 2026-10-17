@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import Link from "next/link";
+import { VERIFICATION_STATUS_LABELS } from "@/lib/verification-status";
 import type { ComplianceMap } from "@/types/api";
 import type { LaboratoryItem } from "@/lib/laboratories";
 
@@ -42,6 +43,9 @@ interface LabsResponse {
  */
 export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProps) {
   const [activeTab, setActiveTab] = useState<"certifications" | "testing" | "laboratories">("certifications");
+  const idBase = useId();
+  const tabId = (id: string) => `${idBase}-tab-${id}`;
+  const panelId = `${idBase}-panel`;
 
   const tabs = [
     { id: "certifications", label: "Certification", count: complianceMap.certifications.length },
@@ -63,13 +67,16 @@ export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProp
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-1 border-b border-border/60 bg-surface-alt/60 p-1.5">
+      <div role="tablist" aria-label="Compliance information" className="flex flex-wrap gap-1 border-b border-border/60 bg-surface-alt/60 p-1.5">
         {tabs.map((tab) => (
           <button
             key={tab.id}
+            id={tabId(tab.id)}
             type="button"
+            role="tab"
             onClick={() => setActiveTab(tab.id)}
-            aria-current={activeTab === tab.id ? "true" : undefined}
+            aria-selected={activeTab === tab.id}
+            aria-controls={panelId}
             className={`flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-bold transition-colors ${
               activeTab === tab.id ? "bg-navy text-white" : "text-ink-soft hover:bg-surface-alt hover:text-ink"
             }`}
@@ -88,7 +95,7 @@ export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProp
         ))}
       </div>
 
-      <div className="p-3">
+      <div id={panelId} role="tabpanel" aria-labelledby={tabId(activeTab)} className="p-3">
         {activeTab === "certifications" && (
           <div className="space-y-2.5">
             {complianceMap.certifications.length === 0 ? (
@@ -111,7 +118,8 @@ export function ProductComplianceMap({ complianceMap }: ProductComplianceMapProp
                   )}
                   {cert.verificationStatus && (
                     <p className="mt-1 text-[10.5px] italic leading-snug text-ink-faint">
-                      Reference-data status: {cert.verificationStatus}
+                      Reference-data status:{" "}
+                      {VERIFICATION_STATUS_LABELS[cert.verificationStatus] ?? cert.verificationStatus}
                     </p>
                   )}
                   {cert.sourceUrl && <SourceLink href={cert.sourceUrl} />}
@@ -187,6 +195,11 @@ function LaboratoriesTab() {
   }, [selectedState]);
 
   const states = data?.states ?? [];
+  // `data.total` counts only the current filter's results; the per-state
+  // counts always cover the whole directory, so their sum is the real
+  // "All states" figure. Using `total` made the option read, e.g.,
+  // "All states (12)" once a 12-lab state was selected.
+  const allStatesCount = states.reduce((n, s) => n + s.count, 0);
 
   return (
     <div className="space-y-3">
@@ -200,11 +213,16 @@ function LaboratoriesTab() {
 
       <select
         value={selectedState}
-        onChange={(e) => setSelectedState(e.target.value)}
+        onChange={(e) => {
+          setSelectedState(e.target.value);
+          // Until the new list arrives, the old one would be shown under the
+          // newly selected state's name.
+          setStatus("loading");
+        }}
         aria-label="Filter laboratories by state"
         className="w-full rounded-md border border-border-strong bg-surface px-2.5 py-1.5 text-[11.5px] text-ink outline-none focus:border-navy"
       >
-        <option value="All States">All states{data ? ` (${data.total})` : ""}</option>
+        <option value="All States">All states{data ? ` (${allStatesCount})` : ""}</option>
         {states.map((s) => (
           <option key={s.state} value={s.state}>
             {s.state} ({s.count})
