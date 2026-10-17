@@ -35,7 +35,14 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   try {
     const doc = await getDb().query.documents.findFirst({
       where: eq(documents.id, id),
-      with: { chunks: { orderBy: (c, { asc }) => [asc(c.createdAt)] } },
+      with: {
+        chunks: {
+          // The 1536-float embedding is retrieval machinery, not content:
+          // ~30 KB of JSON per chunk that no client can use.
+          columns: { embedding: false },
+          orderBy: (c, { asc }) => [asc(c.createdAt)],
+        },
+      },
     });
 
     if (!doc) {

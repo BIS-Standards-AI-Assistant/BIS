@@ -105,6 +105,13 @@ function toScopedChunks(docs: DocumentWithChunks[]): ScopedStandard["chunks"] {
 }
 
 /**
+ * Chunks are read here for their text and location only. Leaving out the
+ * 1536-dimension embedding keeps every scoped chat request from pulling
+ * ~30 KB per chunk from the database just to discard it.
+ */
+const CHUNKS_WITHOUT_EMBEDDING = { columns: { embedding: false } } as const;
+
+/**
  * Resolves real standard/document/chunk rows for the given canonical
  * numbers — never trusts anything about them beyond the identifier itself.
  * Silently drops any number that doesn't match a real row (no fabricated
@@ -141,14 +148,14 @@ export async function resolveScopedContext(standardNumbers: string[]): Promise<S
   // by the number ingestion recorded. Merged by document id so a document
   // linked both ways is not counted (or quoted) twice.
   const [byNumber, byRegistryId] = await Promise.all([
-    db.query.documents.findMany({ where: inArray(documents.standardNumber, wanted), with: { chunks: true } }),
+    db.query.documents.findMany({ where: inArray(documents.standardNumber, wanted), with: { chunks: CHUNKS_WITHOUT_EMBEDDING } }),
     registryRows.length > 0
       ? db.query.documents.findMany({
           where: inArray(
             documents.standardId,
             registryRows.map((r) => r.id),
           ),
-          with: { chunks: true },
+          with: { chunks: CHUNKS_WITHOUT_EMBEDDING },
         })
       : Promise.resolve([]),
   ]);
