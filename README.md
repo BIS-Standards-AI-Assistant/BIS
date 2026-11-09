@@ -562,7 +562,7 @@ behavior. For AI-generated prose, pick one of:
 | Path | Setup | Cost |
 |---|---|---|
 | **Local (Ollama / any OpenAI-compatible server)** | `ollama pull llama3.2:3b`, set `LOCAL_LLM_BASE_URL=http://localhost:11434/v1` + `LOCAL_LLM_MODEL=llama3.2:3b`, then `npm run ollama:smoke` to verify | Free, fully offline |
-| **OpenRouter (free tier)** | Set `OPENROUTER_API_KEY` + `OPENROUTER_MODEL` | Free tier available |
+| **OpenRouter (free tier)** | Set `OPENROUTER_API_KEY` + `OPENROUTER_MODEL` — see [`docs/OPENROUTER.md`](docs/OPENROUTER.md) | Free tier available |
 | **Paid** | Set `PAID_PROVIDER_API_KEY` + `PAID_PROVIDER_MODEL` (any OpenRouter-compatible endpoint) | Pay-as-you-go — **never required** |
 
 `LLM_PROVIDER=auto` (the default) tries them in order: `local → openrouter-free → paid →

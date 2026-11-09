@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { BisChatBot } from "@/components/chat/BisChatBot";
+import { OpenRouterKeyNotice } from "@/components/feedback/OpenRouterKeyNotice";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -64,6 +65,7 @@ export default async function RootLayout({
               no fabricated citations) rather than being a separate, looser
               chat surface. */}
           <BisChatBot />
+          <OpenRouterKeyNotice hasKey={Boolean(process.env.OPENROUTER_API_KEY)} />
         </LanguageProvider>
       </body>
     </html>
